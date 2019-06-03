@@ -8,8 +8,6 @@ package:
   individually: true
 
 functions:
-  local-authorisation-tester:
-    handler: local/handler.handler
 
   sendCandidateResults: 
     handler: src/functions/sendCandidateResults/framework/handler.handler
