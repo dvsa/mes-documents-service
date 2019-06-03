@@ -1,0 +1,22 @@
+service: mes-documents-service
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+package:
+  individually: true
+
+functions:
+  local-authorisation-tester:
+    handler: local/handler.handler
+
+  sendCandidateResults: 
+    handler: src/functions/sendCandidateResults/framework/handler.handler
+
+  webpack:
+    webpackConfig: 'webpack-sls-offline.config.js'
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
