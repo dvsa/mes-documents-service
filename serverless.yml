@@ -8,10 +8,10 @@ package:
   individually: true
 
 functions:
-
   sendCandidateResults: 
     handler: src/functions/sendCandidateResults/framework/handler.handler
 
+custom:
   webpack:
     webpackConfig: 'webpack-sls-offline.config.js'
 
