@@ -7,6 +7,7 @@ provider:
     NOTIFY_HOSTNAME: http://www.example.com
     USE_NOTIFY: false
     IS_LOCAL: true
+    NOTIFY_API_KEY: ''
 
 package:
   individually: true
