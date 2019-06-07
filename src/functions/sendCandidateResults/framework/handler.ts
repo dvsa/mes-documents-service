@@ -27,9 +27,9 @@ export async function handler() {
 
   testResults.forEach((testResult) => {
     limiter
-    .schedule(() => sendNotifyRequest(testResult))
-    .then(success => console.log('success', success)) // TODO - Tell Database test result has been sent
-    .catch(error => console.log('error', error)); // TODO - Tell Database test result has not been sent
+      .schedule(() => sendNotifyRequest(testResult))
+        .then(success => console.log('success', success)) // TODO - Tell Database test result has been sent
+        .catch(error => console.log('error', error)); // TODO - Tell Database test result has not been sent
   });
 }
 
@@ -60,7 +60,7 @@ function sendNotifyRequest(testResult: any): Promise<any>  {
   let notifyClient: any;
 
   isLocal ?
-    notifyClient = new NotifyClient(apiKey) : // TODO - Use Mock
+    notifyClient = new NotifyClientStub(apiKey) : // TODO - Use Mock
     notifyClient = new NotifyClient(apiKey);
 
   // TODO - work out how to tell post or email
@@ -103,11 +103,29 @@ function logTestResult(testResult: any) {
     // TODO - Log to cloudwatch
 }
 
-interface MessageAttributes {
-  personalisation: any;
-  reference: any;
-  emailReplyToId: any;
+interface EmailAttributes {
+  refNumber: string;
+  testDate: string;
+  testTime: string;
+  firstName: string;
 }
+
+interface LetterAttributes {
+  address: Address;
+  refNumber: string;
+  testDate: string;
+  testTime: string;
+  firstName: string;
+}
+
+type Address = {
+  addressLine1: string,
+  addressLine2: string,
+  addressLine3: string,
+  addressLine4: string,
+  addressLine5: string,
+  postcode: string,
+};
 
 class NotifyClientStub {
 
@@ -115,23 +133,23 @@ class NotifyClientStub {
 
   }
 
-  sendEmail(templateId: string, emailAddress: string, messageAttributes: MessageAttributes): Promise<any> {
+  sendEmail(templateId: string, emailAddress: string, emailAttributes: EmailAttributes): Promise<any> {
     console.log('Send Email');
 
     console.log('templateId', templateId);
     console.log('emailAddress', emailAddress);
-    console.log('messageAttributes', messageAttributes);
+    console.log('emailAttributes', emailAttributes);
 
     return new Promise((resolve) => {
       resolve({ data: 'email sent successfully' });
     });
   }
 
-  sendLetter(templateId: string, messageAttributes: MessageAttributes): Promise<any> {
+  sendLetter(templateId: string, letterAttributes: LetterAttributes): Promise<any> {
     console.log('Send Letter');
 
     console.log('templateId', templateId);
-    console.log('messageAttributes', messageAttributes);
+    console.log('letterAttributes', letterAttributes);
 
     return new Promise((resolve) => {
       resolve({ data: 'letter sent successfully' });
