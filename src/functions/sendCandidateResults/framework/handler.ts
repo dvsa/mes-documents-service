@@ -102,3 +102,40 @@ function sendNotifyRequest(testResult: any): Promise<any>  {
 function logTestResult(testResult: any) {
     // TODO - Log to cloudwatch
 }
+
+interface MessageAttributes {
+  personalisation: any;
+  reference: any;
+  emailReplyToId: any;
+}
+
+class NotifyClientStub {
+
+  constructor(private apiKey: string) {
+
+  }
+
+  sendEmail(templateId: string, emailAddress: string, messageAttributes: MessageAttributes): Promise<any> {
+    console.log('Send Email');
+
+    console.log('templateId', templateId);
+    console.log('emailAddress', emailAddress);
+    console.log('messageAttributes', messageAttributes);
+
+    return new Promise((resolve) => {
+      resolve({ data: 'email sent successfully' });
+    });
+  }
+
+  sendLetter(templateId: string, messageAttributes: MessageAttributes): Promise<any> {
+    console.log('Send Letter');
+
+    console.log('templateId', templateId);
+    console.log('messageAttributes', messageAttributes);
+
+    return new Promise((resolve) => {
+      resolve({ data: 'letter sent successfully' });
+    });
+  }
+
+}
