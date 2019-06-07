@@ -3,6 +3,10 @@ service: mes-documents-service
 provider:
   name: aws
   runtime: nodejs8.10
+  environment:
+    NOTIFY_HOSTNAME: http://www.example.com
+    USE_NOTIFY: false
+    IS_LOCAL: true
 
 package:
   individually: true
@@ -10,11 +14,23 @@ package:
 functions:
   sendCandidateResults: 
     handler: src/functions/sendCandidateResults/framework/handler.handler
+    events: 
+      - http: 
+          path: 'test'
+          method: get
+    timeout: 60
+    reservedConcurrency: 1
 
 custom:
   webpack:
     webpackConfig: 'webpack-sls-offline.config.js'
+  serverless-offline-http-mock:
+    - hostname: ${self:provider.environment.NOTIFY_HOSTNAME}
+      directory: 'mocks'
+      mocks:
+        - index.js
 
 plugins:
-  - serverless-webpack
+  - serverless-offline-http-mock
   - serverless-offline
+  - serverless-webpack
