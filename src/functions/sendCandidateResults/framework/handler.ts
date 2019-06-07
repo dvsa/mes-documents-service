@@ -4,6 +4,9 @@ export async function handler() {
     // TODO - This needs to be gotten from the post
   const testResults = [...Array(50).keys()];
 
+  // TODO - Make configurable
+  const maximumRetries: number = 2;
+
   const limiter = new bottleneck({
     maxConcurrent: null,                 // No limit on concurrent requests
     minTime: 0,                          // No time waited between each request
@@ -13,6 +16,12 @@ export async function handler() {
     reservoirRefreshInterval: 1000,      // How often to add new jobs to the queue (every second)
     reservoirRefreshAmount: 25,          // How many jobs to add to the queue each refresh
 
+  });
+
+  limiter.on('failed', (error: any, jobInfo: bottleneck.EventInfoRetryable): Promise<number> | void => {
+    if (jobInfo.retryCount < maximumRetries) {
+      return new Promise<number>(resolve => resolve(0));
+    }
   });
 
   testResults.forEach((testResult) => {
