@@ -7,9 +7,6 @@ provider:
     NOTIFY_HOSTNAME: http://www.example.com
     USE_NOTIFY: false
     IS_LOCAL: true
-    NOTIFY_API_BASE_URL: ''
-    NOTIFY_POST_TEMPLATE_ID: ''
-    NOTIFY_EMAIL_WELSH_TEMPLATE_ID: ''
 
 package:
   individually: true
