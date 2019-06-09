@@ -1,13 +1,14 @@
 import bottleneck from 'bottleneck';
 import { NotifyClient } from 'notifications-node-client';
 import { sendEmail } from '../application/service/send-email';
+import { DocumentsServiceError } from '../domain/errors/documents-service-error';
+
+// TODO - Make configurable
+const maximumRetries: number = 2;
 
 export async function handler() {
-    // TODO - This needs to be gotten from the post
+    // TODO -  Need to call Get Upload Batch and use data from there + need an object to use
   const testResults = [...Array(1).keys()];
-
-  // TODO - Make configurable
-  const maximumRetries: number = 2;
 
   const limiter = new bottleneck({
     maxConcurrent: null,                 // No limit on concurrent requests
@@ -20,25 +21,29 @@ export async function handler() {
 
   });
 
-  limiter.on('failed', (error: any, jobInfo: bottleneck.EventInfoRetryable): Promise<number> | void => {
-    if (jobInfo.retryCount < maximumRetries) {
-      return new Promise<number>(resolve => resolve(0));
-    }
-  });
+  limiter.on('failed', onFailed);
 
   testResults.forEach((testResult) => {
     limiter
     .schedule(() => sendNotifyRequest(testResult))
-    .then(success => console.log('success')) // TODO - Tell Database test result has been sent
+    .then(success => console.log('success', success)) // TODO - Tell Database test result has been sent
     .catch(error => console.log('error', error)); // TODO - Tell Database test result has not been sent
   });
 }
 
-function sendNotifyRequest(testResult: any): Promise<any>  {
+function onFailed(error: DocumentsServiceError, jobInfo: bottleneck.EventInfoRetryable): Promise<number> | void {
+  if (error.shouldRetry && jobInfo.retryCount < maximumRetries) {
+    return new Promise<number>(resolve => resolve(0));
+  }
+}
 
+function sendNotifyRequest(testResult: any): Promise<any>  {
   const isLocal = process.env.IS_LOCAL || false;
   const useNotify = process.env.USE_NOTIFY || false;
-  const apiKey = process.env.NOTIFY_API_KEY;
+  // TODO - Need to add some better saftey around these - throw 500 error if they are missing
+  const apiKey = process.env.NOTIFY_API_KEY || '';
+  const emailTemplateId = process.env.NOTIFY_EMAIL_TEMPLATE_ID || '';
+  const welshEmailTemplateId = process.env.NOTIFY_EMAIL_WELSH_TEMPLATE_ID || '' ;
 
   if (!isLocal && !useNotify) {
     logTestResult(testResult);
@@ -48,15 +53,15 @@ function sendNotifyRequest(testResult: any): Promise<any>  {
   let notifyClient: any;
 
   isLocal ?
-    notifyClient = new NotifyClient(apiKey) :
+    notifyClient = new NotifyClient(apiKey) : // TODO - Use Mock
     notifyClient = new NotifyClient(apiKey);
 
-  return sendEmail('', '', {}, notifyClient);
+  // TODO - work out how to tell post or email
+  // TODO - update to send real data + need to know if we need to send welsh or english template
+  return sendEmail('', emailTemplateId, {}, '', '', notifyClient);
 
 }
 
 function logTestResult(testResult: any) {
     // TODO - Log to cloudwatch
-  console.log('Log to CloudWatch');
-
 }
