@@ -4,7 +4,7 @@ import { sendEmail } from '../application/service/send-email';
 import { DocumentsServiceError } from '../domain/errors/documents-service-error';
 import { EmailPersonalisation, LetterPersonalisation } from '../domain/personalisation.model';
 import { sendLetter } from '../application/service/send-letter';
-import { NotifyClientStub } from './notify-client-stub';
+import { NotifyClientStub } from '../application/stub/notify-client-stub';
 
 // TODO - Make configurable
 const maximumRetries: number = 2;
