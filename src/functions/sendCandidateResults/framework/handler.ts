@@ -58,7 +58,7 @@ function sendNotifyRequest(testResult: any): Promise<any>  {
     return Promise.resolve();
   }
 
-  let notifyClient: any;
+  let notifyClient: NotifyClient | NotifyClientStub;
 
   isLocal ?
     notifyClient = new NotifyClientStub(apiKey) :
