@@ -58,7 +58,15 @@ function sendNotifyRequest(testResult: any): Promise<any>  {
 
   // TODO - work out how to tell post or email
   // TODO - update to send real data + need to know if we need to send welsh or english template
-  return sendEmail('', emailTemplateId, {}, '', '', notifyClient);
+  const data = {
+    'ref number': 'test ref',
+    'test date' : '01/01/2019',
+    'test time': '9:00',
+    'first name': 'Joe',
+    'cat dead' : 'was black and white',
+  };
+
+  return sendEmail('example@example.com', emailTemplateId, data, 'fake-id', '', notifyClient);
 
 }
 
