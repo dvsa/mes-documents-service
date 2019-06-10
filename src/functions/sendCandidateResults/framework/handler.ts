@@ -61,7 +61,7 @@ function sendNotifyRequest(testResult: any): Promise<any>  {
   let notifyClient: any;
 
   isLocal ?
-    notifyClient = new NotifyClientStub(apiKey) : // TODO - Use Mock
+    notifyClient = new NotifyClientStub(apiKey) :
     notifyClient = new NotifyClient(apiKey);
 
   // TODO - work out how to tell post or email
