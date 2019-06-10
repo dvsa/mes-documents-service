@@ -1,10 +1,11 @@
 import { NotifyClient } from 'notifications-node-client';
 import { DocumentsServiceError } from '../../domain/errors/documents-service-error';
+import { EmailPersonalisation } from '../../domain/personalisation.model';
 
 export async function sendEmail(
     emailAddress: string,
     templateId: string,
-    personalisation: any,
+    personalisation: EmailPersonalisation,
     reference: string,
     emailReplyToId: string,
     client: NotifyClient,
