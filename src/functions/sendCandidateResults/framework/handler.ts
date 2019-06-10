@@ -75,7 +75,7 @@ function sendNotifyRequest(testResult: any): Promise<any>  {
       'first name': 'Joe',
       'cat dead' : 'was black and white',
     };
-    return sendEmail('example@example.com', templateId, data, 'fake-ref', 'no-reply@example.com', notifyClient);
+    return sendEmail('example@example.com', templateId, data, 'fake-ref', '', notifyClient);
   }
 
   // TODO - work out if it should be welsh or not
