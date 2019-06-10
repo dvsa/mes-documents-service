@@ -4,6 +4,7 @@ import { sendEmail } from '../application/service/send-email';
 import { DocumentsServiceError } from '../domain/errors/documents-service-error';
 import { EmailPersonalisation, LetterPersonalisation } from '../domain/personalisation.model';
 import { sendLetter } from '../application/service/send-letter';
+import { NotifyClientStub } from './notify-client-stub';
 
 // TODO - Make configurable
 const maximumRetries: number = 2;
@@ -100,60 +101,6 @@ function sendNotifyRequest(testResult: any): Promise<any>  {
 }
 
 function logTestResult(testResult: any) {
-    // TODO - Log to cloudwatch
-}
-
-interface EmailAttributes {
-  refNumber: string;
-  testDate: string;
-  testTime: string;
-  firstName: string;
-}
-
-interface LetterAttributes {
-  address: Address;
-  refNumber: string;
-  testDate: string;
-  testTime: string;
-  firstName: string;
-}
-
-type Address = {
-  addressLine1: string,
-  addressLine2: string,
-  addressLine3: string,
-  addressLine4: string,
-  addressLine5: string,
-  postcode: string,
-};
-
-class NotifyClientStub {
-
-  constructor(private apiKey: string) {
-
-  }
-
-  sendEmail(templateId: string, emailAddress: string, emailAttributes: EmailAttributes): Promise<any> {
-    console.log('Send Email');
-
-    console.log('templateId', templateId);
-    console.log('emailAddress', emailAddress);
-    console.log('emailAttributes', emailAttributes);
-
-    return new Promise((resolve) => {
-      resolve({ data: 'email sent successfully' });
-    });
-  }
-
-  sendLetter(templateId: string, letterAttributes: LetterAttributes): Promise<any> {
-    console.log('Send Letter');
-
-    console.log('templateId', templateId);
-    console.log('letterAttributes', letterAttributes);
-
-    return new Promise((resolve) => {
-      resolve({ data: 'letter sent successfully' });
-    });
-  }
-
+  // TODO - Log to cloudwatch
+  console.log('Log to CloudWatch');
 }
