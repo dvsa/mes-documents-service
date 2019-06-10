@@ -8,9 +8,9 @@ provider:
     USE_NOTIFY: false
     IS_LOCAL: true
     NOTIFY_API_KEY: 'test'
-    NOTIFY_EMAIL_TEMPLATE_ID: ''
+    NOTIFY_EMAIL_TEMPLATE_ID: 'email_template_id'
     NOTIFY_EMAIL_WELSH_TEMPLATE_ID: ''
-    NOTIFY_POST_TEMPLATE_ID: ''
+    NOTIFY_POST_TEMPLATE_ID: 'letter_template_id'
 
 package:
   individually: true

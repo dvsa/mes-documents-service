@@ -4,6 +4,7 @@ import { sendEmail } from '../application/service/send-email';
 import { DocumentsServiceError } from '../domain/errors/documents-service-error';
 import { EmailPersonalisation, LetterPersonalisation } from '../domain/personalisation.model';
 import { sendLetter } from '../application/service/send-letter';
+import { NotifyClientStub } from '../application/stub/notify-client-stub';
 
 // TODO - Make configurable
 const maximumRetries: number = 2;
@@ -27,9 +28,9 @@ export async function handler() {
 
   testResults.forEach((testResult) => {
     limiter
-    .schedule(() => sendNotifyRequest(testResult))
-    .then(success => console.log('success', success)) // TODO - Tell Database test result has been sent
-    .catch(error => console.log('error', error)); // TODO - Tell Database test result has not been sent
+      .schedule(() => sendNotifyRequest(testResult))
+        .then(success => console.log('success', success)) // TODO - Tell Database test result has been sent
+        .catch(error => console.log('error', error)); // TODO - Tell Database test result has not been sent
   });
 }
 
@@ -57,10 +58,10 @@ function sendNotifyRequest(testResult: any): Promise<any>  {
     return Promise.resolve();
   }
 
-  let notifyClient: any;
+  let notifyClient: NotifyClient | NotifyClientStub;
 
   isLocal ?
-    notifyClient = new NotifyClient(apiKey) : // TODO - Use Mock
+    notifyClient = new NotifyClientStub(apiKey) :
     notifyClient = new NotifyClient(apiKey);
 
   // TODO - work out how to tell post or email
@@ -100,5 +101,6 @@ function sendNotifyRequest(testResult: any): Promise<any>  {
 }
 
 function logTestResult(testResult: any) {
-    // TODO - Log to cloudwatch
+  // TODO - Log to cloudwatch
+  console.log('Log to CloudWatch');
 }
