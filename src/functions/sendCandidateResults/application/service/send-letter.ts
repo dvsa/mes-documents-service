@@ -1,18 +1,16 @@
 import { NotifyClient } from 'notifications-node-client';
 import { DocumentsServiceError } from '../../domain/errors/documents-service-error';
-import { EmailPersonalisation } from '../../domain/personalisation.model';
+import { LetterPersonalisation } from '../../domain/personalisation.model';
 
-export async function sendEmail(
-    emailAddress: string,
+export async function sendLetter(
     templateId: string,
-    personalisation: EmailPersonalisation,
+    personalisation: LetterPersonalisation,
     reference: string,
-    emailReplyToId: string,
-    client: NotifyClient,
-)  : Promise <any> {
+    notifyClient: NotifyClient,
+) {
 
   try {
-    await client.sendEmail(templateId, emailAddress, { personalisation, reference, emailReplyToId });
+    await notifyClient.sendLetter(templateId, { personalisation, reference });
     return Promise.resolve();
   } catch (err) {
     const statusCode = err.error.status_code;

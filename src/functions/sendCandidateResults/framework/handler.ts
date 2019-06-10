@@ -2,6 +2,8 @@ import bottleneck from 'bottleneck';
 import { NotifyClient } from 'notifications-node-client';
 import { sendEmail } from '../application/service/send-email';
 import { DocumentsServiceError } from '../domain/errors/documents-service-error';
+import { EmailPersonalisation, LetterPersonalisation } from '../domain/personalisation.model';
+import { sendLetter } from '../application/service/send-letter';
 
 // TODO - Make configurable
 const maximumRetries: number = 2;
@@ -38,12 +40,17 @@ function onFailed(error: DocumentsServiceError, jobInfo: bottleneck.EventInfoRet
 }
 
 function sendNotifyRequest(testResult: any): Promise<any>  {
+  // TODO - Remove once we can tell the difference
+  const isEmail: boolean = true;
+  const isWelsh: boolean = false;
+
   const isLocal = process.env.IS_LOCAL || false;
   const useNotify = process.env.USE_NOTIFY || false;
   // TODO - Need to add some better saftey around these - throw 500 error if they are missing
   const apiKey = process.env.NOTIFY_API_KEY || '';
   const emailTemplateId = process.env.NOTIFY_EMAIL_TEMPLATE_ID || '';
   const welshEmailTemplateId = process.env.NOTIFY_EMAIL_WELSH_TEMPLATE_ID || '' ;
+  const postTemplateId = process.env.NOTIFY_POST_TEMPLATE_ID || '';
 
   if (!isLocal && !useNotify) {
     logTestResult(testResult);
@@ -57,8 +64,31 @@ function sendNotifyRequest(testResult: any): Promise<any>  {
     notifyClient = new NotifyClient(apiKey);
 
   // TODO - work out how to tell post or email
-  // TODO - update to send real data + need to know if we need to send welsh or english template
-  const data = {
+  if (isEmail) {
+    // TODO - work out if it should be welsh or not
+    const templateId: string = isWelsh ? welshEmailTemplateId : emailTemplateId;
+    // TODO - update to send real data
+    const data: EmailPersonalisation = {
+      'ref number': 'test ref',
+      'test date' : '01/01/2019',
+      'test time': '9:00',
+      'first name': 'Joe',
+      'cat dead' : 'was black and white',
+    };
+    return sendEmail('example@example.com', templateId, data, 'fake-ref', '', notifyClient);
+  }
+
+  // TODO - work out if it should be welsh or not
+  const templateId: string = postTemplateId;
+  // TODO - update to send real data
+  const data: LetterPersonalisation = {
+    address_line_1: 'The Occupier',
+    address_line_2: '123 High Street',
+    address_line_3: 'Richmond upon Thames',
+    address_line_4: 'London',
+    address_line_5: 'Middlesex',
+    address_line_6: 'UK',
+    postcode: 'SW14 6BH',
     'ref number': 'test ref',
     'test date' : '01/01/2019',
     'test time': '9:00',
@@ -66,8 +96,7 @@ function sendNotifyRequest(testResult: any): Promise<any>  {
     'cat dead' : 'was black and white',
   };
 
-  return sendEmail('example@example.com', emailTemplateId, data, 'fake-id', '', notifyClient);
-
+  return sendLetter(templateId, data, 'fake-ref', notifyClient);
 }
 
 function logTestResult(testResult: any) {
