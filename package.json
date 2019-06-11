@@ -10,6 +10,7 @@
     "url": "git+https://github.com/dvsa/mes-documents-service"
   },
   "dependencies": {
+    "@dvsa/mes-test-schema": "^1.0.17",
     "bottleneck": "^2.19.0",
     "notifications-node-client": "^4.6.0"
   },
