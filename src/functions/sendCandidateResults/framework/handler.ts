@@ -6,14 +6,16 @@ import { sendLetter } from '../application/service/send-letter';
 import { INotifyClient } from '../domain/notify-client.interface';
 import { container } from './di/inversify.config';
 import { TYPES } from './di/types';
+import { NotifyClientStub } from '../application/stub/notify-client-stub';
+import { getUploadBatch } from './__mocks__/get-upload-batch.mock';
+import { StandardCarTestCATBSchema } from '@dvsa/mes-test-schema/categories/B';
 
 // TODO - Make configurable
 const maximumRetries: number = 2;
 
 export async function handler() {
-
-  // TODO -  Need to call Get Upload Batch and use data from there + need an object to use
-  const testResults = [...Array(1).keys()];
+  // TODO -  Use Real Service + get batch size from config
+  const testResults: StandardCarTestCATBSchema []  = getUploadBatch(250);
 
   const limiter = new bottleneck({
     maxConcurrent: null,                 // No limit on concurrent requests
