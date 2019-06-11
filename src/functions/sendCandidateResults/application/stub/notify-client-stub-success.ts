@@ -1,5 +1,6 @@
+import { INotifyClient } from '../../domain/notify-client.interface';
 
-export class NotifyClientStub {
+export class NotifyClientStubSuccess implements INotifyClient {
 
   constructor(private apiKey: string) {
 
