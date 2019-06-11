@@ -9,6 +9,7 @@ import { TYPES } from './di/types';
 import { NotifyClientStub } from '../application/stub/notify-client-stub';
 import { getUploadBatch } from './__mocks__/get-upload-batch.mock';
 import { StandardCarTestCATBSchema } from '@dvsa/mes-test-schema/categories/B';
+import { getEmailTemplateId, getLetterTemplateId } from '../application/service/get-template-id';
 
 export async function handler() {
   // TODO -  Use Real Service + get batch size from config
@@ -54,10 +55,16 @@ function sendNotifyRequest(testResult: StandardCarTestCATBSchema, notifyClient: 
   const welshEmailTemplateId = process.env.NOTIFY_EMAIL_WELSH_TEMPLATE_ID || '' ;
   const postTemplateId = process.env.NOTIFY_POST_TEMPLATE_ID || '';
 
-  // TODO - work out how to tell post or email
-  if (isEmail) {
-    // TODO - work out if it should be welsh or not
-    const templateId: string = isWelsh ? welshEmailTemplateId : emailTemplateId;
+  if (!testResult.communicationPreferences) {
+    return Promise.reject();
+  }
+
+  if (testResult.communicationPreferences.communicationMethod === 'Email') {
+    const templateId: string =
+      getEmailTemplateId(
+        testResult.communicationPreferences.conductedLanguage,
+        testResult.activityCode,
+      );
     // TODO - update to send real data
     const data: EmailPersonalisation = {
       'ref number': 'test ref',
@@ -69,8 +76,10 @@ function sendNotifyRequest(testResult: StandardCarTestCATBSchema, notifyClient: 
     return sendEmail('example@example.com', templateId, data, 'fake-ref', '', notifyClient);
   }
 
-  // TODO - work out if it should be welsh or not
-  const templateId: string = postTemplateId;
+  const templateId: string = getLetterTemplateId(
+    testResult.communicationPreferences.conductedLanguage,
+    testResult.activityCode,
+  );
   // TODO - update to send real data
   const data: LetterPersonalisation = {
     address_line_1: 'The Occupier',
