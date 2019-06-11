@@ -10,9 +10,6 @@ import { NotifyClientStub } from '../application/stub/notify-client-stub';
 import { getUploadBatch } from './__mocks__/get-upload-batch.mock';
 import { StandardCarTestCATBSchema } from '@dvsa/mes-test-schema/categories/B';
 
-// TODO - Make configurable
-const maximumRetries: number = 2;
-
 export async function handler() {
   // TODO -  Use Real Service + get batch size from config
   const testResults: StandardCarTestCATBSchema []  = getUploadBatch(250);
@@ -32,7 +29,7 @@ export async function handler() {
 
   const notifyClient = container.get<INotifyClient>(TYPES.INotifyClient);
 
-  testResults.forEach((testResult) => {
+  testResults.forEach((testResult: StandardCarTestCATBSchema) => {
     limiter
       .schedule(() => sendNotifyRequest(testResult, notifyClient))
         .then(success => console.log('success', success)) // TODO - Tell Database test result has been sent
@@ -41,12 +38,13 @@ export async function handler() {
 }
 
 function onFailed(error: DocumentsServiceError, jobInfo: bottleneck.EventInfoRetryable): Promise<number> | void {
-  if (error.shouldRetry && jobInfo.retryCount < maximumRetries) {
+  const retryLimit = process.env.NOTIFY_RETRY_LIMIT || 0;
+  if (error.shouldRetry && jobInfo.retryCount < retryLimit) {
     return new Promise<number>(resolve => resolve(0));
   }
 }
 
-function sendNotifyRequest(testResult: any, notifyClient: INotifyClient): Promise<any>  {
+function sendNotifyRequest(testResult: StandardCarTestCATBSchema, notifyClient: INotifyClient): Promise<any>  {
   // TODO - Remove once we can tell the difference
   const isEmail: boolean = true;
   const isWelsh: boolean = false;
