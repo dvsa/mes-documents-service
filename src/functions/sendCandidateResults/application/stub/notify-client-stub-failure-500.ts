@@ -3,10 +3,10 @@ import { INotifyClient } from '../../domain/notify-client.interface';
 import { injectable } from 'inversify';
 
 @injectable()
-export class NotifyClientStubFailure400 implements INotifyClient {
+export class NotifyClientStubFailure500 implements INotifyClient {
 
   sendEmail(templateId: string, emailAddress: string, options: any): Promise<any> {
-    console.log('Fail Sending Email');
+    console.log('Fail Sending Email with internal error');
 
     console.log('templateId', templateId);
     console.log('emailAddress', emailAddress);
@@ -14,29 +14,27 @@ export class NotifyClientStubFailure400 implements INotifyClient {
 
     return Promise.reject({
       error: {
-        status_code: 400,
+        status_code: 500,
         errors: {
-          error: 'BadRequestError',
-          // tslint:disable-next-line
-          message: 'Can not send to this recipient when service is in trial mode - see www.notifications.service.gov.uk/trial-mode',
+          error: 'Exception',
+          message: 'Internal server error',
         },
       },
     });
   }
 
   sendLetter(templateId: string, options: any): Promise<any> {
-    console.log('Fail Sending Letter');
+    console.log('Fail Sending Letter with internal error');
 
     console.log('templateId', templateId);
     console.log('letterAttributes', options);
 
     return Promise.reject({
       error: {
-        status_code: 400,
+        status_code: 500,
         errors: {
-          error: 'BadRequestError',
-          // tslint:disable-next-line
-          message: 'Cannot send letters when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode',
+          error: 'Exception',
+          message: 'Internal server error',
         },
       },
     });
