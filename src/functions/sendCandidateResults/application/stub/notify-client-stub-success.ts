@@ -1,10 +1,8 @@
 import { INotifyClient } from '../../domain/notify-client.interface';
+import { injectable } from 'inversify';
 
+@injectable()
 export class NotifyClientStubSuccess implements INotifyClient {
-
-  constructor(private apiKey: string) {
-
-  }
 
   sendEmail(templateId: string, emailAddress: string, options: any): Promise<any> {
     console.log('Send Email');
