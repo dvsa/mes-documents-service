@@ -6,7 +6,7 @@ import { IRequestScheduler } from './request-scheduler';
 
 export async function handler() {
   // TODO -  Use Real Service + get batch size from config
-  const testResults: StandardCarTestCATBSchema []  = getUploadBatch(1);
+  const testResults: StandardCarTestCATBSchema []  = getUploadBatch(250);
 
   const requestScheduler: IRequestScheduler = container.get<IRequestScheduler>(TYPES.IRequestScheduler);
 
