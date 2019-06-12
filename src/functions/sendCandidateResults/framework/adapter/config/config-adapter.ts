@@ -44,10 +44,11 @@ export class ConfigAdapter implements IConfigAdapter {
   protected getBooleanFromEnv(envvarName: string) : boolean {
     const envvarVal = process.env[envvarName];
 
-    if (envvarVal === undefined || envvarVal.trim().length === 0 || envvarVal.toLowerCase() === 'false') {
-      return false;
-    }
-    return true;
+    return (
+      envvarVal !== undefined &&
+      envvarVal.trim().length > 0 &&
+      envvarVal.toLowerCase() === 'true'
+    );
   }
 
   protected getFromEnvThrowIfNotPresent(envvarName: string): string {
