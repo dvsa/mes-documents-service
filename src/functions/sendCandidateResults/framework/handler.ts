@@ -6,14 +6,14 @@ import { sendLetter } from '../application/service/send-letter';
 import { INotifyClient } from '../domain/notify-client.interface';
 import { container } from './di/inversify.config';
 import { TYPES } from './di/types';
-
-// TODO - Make configurable
-const maximumRetries: number = 2;
+import { getUploadBatch } from './__mocks__/get-upload-batch.mock';
+import { StandardCarTestCATBSchema } from '@dvsa/mes-test-schema/categories/B';
+import { getEmailTemplateId, getLetterTemplateId } from '../application/service/get-template-id';
+import { Config } from './adapter/config/config-provider';
 
 export async function handler() {
-
-  // TODO -  Need to call Get Upload Batch and use data from there + need an object to use
-  const testResults = [...Array(1).keys()];
+  // TODO -  Use Real Service + get batch size from config
+  const testResults: StandardCarTestCATBSchema []  = getUploadBatch(250);
 
   const limiter = new bottleneck({
     maxConcurrent: null,                 // No limit on concurrent requests
@@ -30,7 +30,7 @@ export async function handler() {
 
   const notifyClient = container.get<INotifyClient>(TYPES.INotifyClient);
 
-  testResults.forEach((testResult) => {
+  testResults.forEach((testResult: StandardCarTestCATBSchema) => {
     limiter
       .schedule(() => sendNotifyRequest(testResult, notifyClient))
         .then(success => console.log('success', success)) // TODO - Tell Database test result has been sent
@@ -39,25 +39,26 @@ export async function handler() {
 }
 
 function onFailed(error: DocumentsServiceError, jobInfo: bottleneck.EventInfoRetryable): Promise<number> | void {
-  if (error.shouldRetry && jobInfo.retryCount < maximumRetries) {
+  const config: Config = new Config();
+  if (error.shouldRetry && jobInfo.retryCount < config.retryLimit) {
     return new Promise<number>(resolve => resolve(0));
   }
 }
 
-function sendNotifyRequest(testResult: any, notifyClient: INotifyClient): Promise<any>  {
-  // TODO - Remove once we can tell the difference
-  const isEmail: boolean = true;
-  const isWelsh: boolean = false;
-
+function sendNotifyRequest(testResult: StandardCarTestCATBSchema, notifyClient: INotifyClient): Promise<any>  {
   // TODO - Need to add some better saftey around these - throw 500 error if they are missing
-  const emailTemplateId = process.env.NOTIFY_EMAIL_TEMPLATE_ID || '';
-  const welshEmailTemplateId = process.env.NOTIFY_EMAIL_WELSH_TEMPLATE_ID || '' ;
-  const postTemplateId = process.env.NOTIFY_POST_TEMPLATE_ID || '';
+  const apiKey = process.env.NOTIFY_API_KEY || '';
 
-  // TODO - work out how to tell post or email
-  if (isEmail) {
-    // TODO - work out if it should be welsh or not
-    const templateId: string = isWelsh ? welshEmailTemplateId : emailTemplateId;
+  if (!testResult.communicationPreferences) {
+    return Promise.reject();
+  }
+
+  if (testResult.communicationPreferences.communicationMethod === 'Email') {
+    const templateId: string =
+      getEmailTemplateId(
+        testResult.communicationPreferences.conductedLanguage,
+        testResult.activityCode,
+      );
     // TODO - update to send real data
     const data: EmailPersonalisation = {
       'ref number': 'test ref',
@@ -69,8 +70,10 @@ function sendNotifyRequest(testResult: any, notifyClient: INotifyClient): Promis
     return sendEmail('example@example.com', templateId, data, 'fake-ref', '', notifyClient);
   }
 
-  // TODO - work out if it should be welsh or not
-  const templateId: string = postTemplateId;
+  const templateId: string = getLetterTemplateId(
+    testResult.communicationPreferences.conductedLanguage,
+    testResult.activityCode,
+  );
   // TODO - update to send real data
   const data: LetterPersonalisation = {
     address_line_1: 'The Occupier',
