@@ -1,7 +1,6 @@
-import { NotifyClient } from 'notifications-node-client';
 import { DocumentsServiceError } from '../../domain/errors/documents-service-error';
 import { EmailPersonalisation } from '../../domain/personalisation.model';
-import { NotifyClientStub } from '../stub/notify-client-stub';
+import { INotifyClient } from '../../domain/notify-client.interface';
 
 export async function sendEmail(
     emailAddress: string,
@@ -9,7 +8,7 @@ export async function sendEmail(
     personalisation: EmailPersonalisation,
     reference: string,
     emailReplyToId: string,
-    client: NotifyClient | NotifyClientStub,
+    client: INotifyClient,
 )  : Promise <any> {
 
   try {

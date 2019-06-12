@@ -1,13 +1,12 @@
-import { NotifyClient } from 'notifications-node-client';
 import { DocumentsServiceError } from '../../domain/errors/documents-service-error';
 import { LetterPersonalisation } from '../../domain/personalisation.model';
-import { NotifyClientStub } from '../stub/notify-client-stub';
+import { INotifyClient } from '../../domain/notify-client.interface';
 
 export async function sendLetter(
     templateId: string,
     personalisation: LetterPersonalisation,
     reference: string,
-    notifyClient: NotifyClient | NotifyClientStub,
+    notifyClient: INotifyClient,
 ) {
 
   try {

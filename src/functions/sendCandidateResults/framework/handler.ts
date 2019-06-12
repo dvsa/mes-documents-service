@@ -1,16 +1,18 @@
 import bottleneck from 'bottleneck';
-import { NotifyClient } from 'notifications-node-client';
 import { sendEmail } from '../application/service/send-email';
 import { DocumentsServiceError } from '../domain/errors/documents-service-error';
 import { EmailPersonalisation, LetterPersonalisation } from '../domain/personalisation.model';
 import { sendLetter } from '../application/service/send-letter';
-import { NotifyClientStub } from '../application/stub/notify-client-stub';
+import { INotifyClient } from '../domain/notify-client.interface';
+import { container } from './di/inversify.config';
+import { TYPES } from './di/types';
 
 // TODO - Make configurable
 const maximumRetries: number = 2;
 
 export async function handler() {
-    // TODO -  Need to call Get Upload Batch and use data from there + need an object to use
+
+  // TODO -  Need to call Get Upload Batch and use data from there + need an object to use
   const testResults = [...Array(1).keys()];
 
   const limiter = new bottleneck({
@@ -26,9 +28,11 @@ export async function handler() {
 
   limiter.on('failed', onFailed);
 
+  const notifyClient = container.get<INotifyClient>(TYPES.INotifyClient);
+
   testResults.forEach((testResult) => {
     limiter
-      .schedule(() => sendNotifyRequest(testResult))
+      .schedule(() => sendNotifyRequest(testResult, notifyClient))
         .then(success => console.log('success', success)) // TODO - Tell Database test result has been sent
         .catch(error => console.log('error', error)); // TODO - Tell Database test result has not been sent
   });
@@ -40,29 +44,15 @@ function onFailed(error: DocumentsServiceError, jobInfo: bottleneck.EventInfoRet
   }
 }
 
-function sendNotifyRequest(testResult: any): Promise<any>  {
+function sendNotifyRequest(testResult: any, notifyClient: INotifyClient): Promise<any>  {
   // TODO - Remove once we can tell the difference
   const isEmail: boolean = true;
   const isWelsh: boolean = false;
 
-  const isLocal = process.env.IS_LOCAL || false;
-  const useNotify = process.env.USE_NOTIFY || false;
   // TODO - Need to add some better saftey around these - throw 500 error if they are missing
-  const apiKey = process.env.NOTIFY_API_KEY || '';
   const emailTemplateId = process.env.NOTIFY_EMAIL_TEMPLATE_ID || '';
   const welshEmailTemplateId = process.env.NOTIFY_EMAIL_WELSH_TEMPLATE_ID || '' ;
   const postTemplateId = process.env.NOTIFY_POST_TEMPLATE_ID || '';
-
-  if (!isLocal && !useNotify) {
-    logTestResult(testResult);
-    return Promise.resolve();
-  }
-
-  let notifyClient: NotifyClient | NotifyClientStub;
-
-  isLocal ?
-    notifyClient = new NotifyClientStub(apiKey) :
-    notifyClient = new NotifyClient(apiKey);
 
   // TODO - work out how to tell post or email
   if (isEmail) {
@@ -98,9 +88,4 @@ function sendNotifyRequest(testResult: any): Promise<any>  {
   };
 
   return sendLetter(templateId, data, 'fake-ref', notifyClient);
-}
-
-function logTestResult(testResult: any) {
-  // TODO - Log to cloudwatch
-  console.log('Log to CloudWatch');
 }
