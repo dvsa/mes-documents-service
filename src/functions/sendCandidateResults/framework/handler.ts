@@ -47,10 +47,6 @@ function onFailed(error: DocumentsServiceError, jobInfo: bottleneck.EventInfoRet
 }
 
 function sendNotifyRequest(testResult: StandardCarTestCATBSchema, notifyClient: INotifyClient): Promise<any>  {
-  // TODO - Remove once we can tell the difference
-  const isEmail: boolean = true;
-  const isWelsh: boolean = false;
-
   // TODO - Need to add some better saftey around these - throw 500 error if they are missing
   const apiKey = process.env.NOTIFY_API_KEY || '';
 
