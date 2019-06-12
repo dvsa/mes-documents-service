@@ -16,7 +16,7 @@ provider:
     NOTIFY_POST_PASS_TEMPLATE_ID: 'post-pass-template-id'
     NOTIFY_POST_FAIL_TEMPLATE_ID: 'post-fail-template-id'
     NOTIFY_POST_WELSH_PASS_TEMPLATE_ID: 'post-welsh-pass-template-id'
-    NOTIFY_POST_WELSH_FAIL_TEMPLATE_ID: ''post-welsh-fail-template-id
+    NOTIFY_POST_WELSH_FAIL_TEMPLATE_ID: 'post-welsh-fail-template-id'
 
 package:
   individually: true

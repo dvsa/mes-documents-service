@@ -6,7 +6,6 @@ import { sendLetter } from '../application/service/send-letter';
 import { INotifyClient } from '../domain/notify-client.interface';
 import { container } from './di/inversify.config';
 import { TYPES } from './di/types';
-import { NotifyClientStub } from '../application/stub/notify-client-stub';
 import { getUploadBatch } from './__mocks__/get-upload-batch.mock';
 import { StandardCarTestCATBSchema } from '@dvsa/mes-test-schema/categories/B';
 import { getEmailTemplateId, getLetterTemplateId } from '../application/service/get-template-id';
