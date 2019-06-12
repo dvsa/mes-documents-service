@@ -9,7 +9,7 @@ import { TYPES } from './di/types';
 import { getUploadBatch } from './__mocks__/get-upload-batch.mock';
 import { StandardCarTestCATBSchema } from '@dvsa/mes-test-schema/categories/B';
 import { getEmailTemplateId, getLetterTemplateId } from '../application/service/get-template-id';
-import { Config } from './adapter/config/config-provider';
+import { IConfigAdapter } from './adapter/config/config-adapter.interface';
 
 export async function handler() {
   // TODO -  Use Real Service + get batch size from config
@@ -39,15 +39,13 @@ export async function handler() {
 }
 
 function onFailed(error: DocumentsServiceError, jobInfo: bottleneck.EventInfoRetryable): Promise<number> | void {
-  const config: Config = new Config();
-  if (error.shouldRetry && jobInfo.retryCount < config.retryLimit) {
+  const configAdapter: IConfigAdapter = container.get<IConfigAdapter>(TYPES.IConfigAdapter);
+  if (error.shouldRetry && jobInfo.retryCount < configAdapter.retryLimit) {
     return new Promise<number>(resolve => resolve(0));
   }
 }
 
 function sendNotifyRequest(testResult: StandardCarTestCATBSchema, notifyClient: INotifyClient): Promise<any>  {
-  // TODO - Need to add some better saftey around these - throw 500 error if they are missing
-  const apiKey = process.env.NOTIFY_API_KEY || '';
 
   if (!testResult.communicationPreferences) {
     return Promise.reject();
