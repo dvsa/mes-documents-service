@@ -9,7 +9,6 @@ export class GovNotifyClient implements INotifyClient {
   private notifyClient: NotifyClient;
 
   constructor(@inject(TYPES.apiKey) apiKey: string) {
-    console.log('GovNotifyClient constructor - apiKey', apiKey);
     this.notifyClient = new NotifyClient(apiKey);
   }
 
