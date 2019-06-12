@@ -1,46 +1,48 @@
 import { ActivityCode, ConductedLanguage } from '@dvsa/mes-test-schema/categories/B';
 import { DocumentsServiceError } from '../../domain/errors/documents-service-error';
-import { Config } from '../../framework/adapter/config/config-provider';
+import { IConfigAdapter } from '../../framework/adapter/config/config-adapter.interface';
+import { container } from '../../framework/di/inversify.config';
+import { TYPES } from '../../framework/di/types';
 
 export function getEmailTemplateId(language : ConductedLanguage, activityCode: ActivityCode): string {
-  const config: Config = new Config();
+  const configAdapter: IConfigAdapter = container.get<IConfigAdapter>(TYPES.IConfigAdapter);
 
   if (language === 'Cymraeg') {
     if (isPass(activityCode)) {
-      return config.welshEmailPassTemplateId;
+      return configAdapter.welshEmailPassTemplateId;
     }
     if (isFail(activityCode)) {
-      return config.welshEmailFailTemplateId;
+      return configAdapter.welshEmailFailTemplateId;
     }
     isTerminated(activityCode);
   }
   if (isPass(activityCode)) {
-    return config.englishEmailPassTemplateId;
+    return configAdapter.englishEmailPassTemplateId;
   }
   if (isFail(activityCode)) {
-    return config.englishEmailFailTemplateId;
+    return configAdapter.englishEmailFailTemplateId;
   }
   isTerminated(activityCode);
   return '';
 }
 
 export function getLetterTemplateId(language: ConductedLanguage, activityCode: ActivityCode): string {
-  const config: Config = new Config();
+  const configAdapter: IConfigAdapter = container.get<IConfigAdapter>(TYPES.IConfigAdapter);
 
   if (language === 'Cymraeg') {
     if (isPass(activityCode)) {
-      return config.welshLetterPassTemplateId;
+      return configAdapter.welshLetterPassTemplateId;
     }
     if (isFail(activityCode)) {
-      return config.welshLetterFailTemplateId;
+      return configAdapter.welshLetterFailTemplateId;
     }
     isTerminated(activityCode);
   }
   if (isPass(activityCode)) {
-    return config.englishLetterPassTemplateId;
+    return configAdapter.englishLetterPassTemplateId;
   }
   if (isFail(activityCode)) {
-    return config.englishLetterFailTemplateId;
+    return configAdapter.englishLetterFailTemplateId;
   }
   isTerminated(activityCode);
   return '';
