@@ -10,6 +10,7 @@ import { NotifyClientStub } from '../application/stub/notify-client-stub';
 import { getUploadBatch } from './__mocks__/get-upload-batch.mock';
 import { StandardCarTestCATBSchema } from '@dvsa/mes-test-schema/categories/B';
 import { getEmailTemplateId, getLetterTemplateId } from '../application/service/get-template-id';
+import { Config } from './adapter/config/config-provider';
 
 export async function handler() {
   // TODO -  Use Real Service + get batch size from config
@@ -39,8 +40,8 @@ export async function handler() {
 }
 
 function onFailed(error: DocumentsServiceError, jobInfo: bottleneck.EventInfoRetryable): Promise<number> | void {
-  const retryLimit = process.env.NOTIFY_RETRY_LIMIT || 0;
-  if (error.shouldRetry && jobInfo.retryCount < retryLimit) {
+  const config: Config = new Config();
+  if (error.shouldRetry && jobInfo.retryCount < config.retryLimit) {
     return new Promise<number>(resolve => resolve(0));
   }
 }
@@ -51,9 +52,7 @@ function sendNotifyRequest(testResult: StandardCarTestCATBSchema, notifyClient: 
   const isWelsh: boolean = false;
 
   // TODO - Need to add some better saftey around these - throw 500 error if they are missing
-  const emailTemplateId = process.env.NOTIFY_EMAIL_TEMPLATE_ID || '';
-  const welshEmailTemplateId = process.env.NOTIFY_EMAIL_WELSH_TEMPLATE_ID || '' ;
-  const postTemplateId = process.env.NOTIFY_POST_TEMPLATE_ID || '';
+  const apiKey = process.env.NOTIFY_API_KEY || '';
 
   if (!testResult.communicationPreferences) {
     return Promise.reject();
