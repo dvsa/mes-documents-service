@@ -10,6 +10,7 @@ import { ConfigAdapter } from '../adapter/config/config-adapter';
 import { IConfigAdapter } from '../adapter/config/config-adapter.interface';
 import { IRequestScheduler, RequestScheduler } from '../request-scheduler';
 import { ITemplateIdProvider, TemplateIdProvider } from '../../application/service/template-id-provider';
+import { IFaultProvider, FaultProvider } from '../../application/service/fault-provider';
 
 const container = new Container();
 
@@ -29,5 +30,6 @@ if (configAdapter.isLocal) {
 
 container.bind<IRequestScheduler>(TYPES.IRequestScheduler).to(RequestScheduler);
 container.bind<ITemplateIdProvider>(TYPES.ITemplateIdProvider).to(TemplateIdProvider);
+container.bind<IFaultProvider>(TYPES.IFaultProvider).to(FaultProvider);
 
 export { container };
