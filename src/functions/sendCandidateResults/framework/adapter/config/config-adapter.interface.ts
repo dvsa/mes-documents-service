@@ -3,6 +3,8 @@ export interface IConfigAdapter {
   useNotify: boolean;
   retryLimit: number;
   apiKey: string;
+  resultsBaseApiUrl: string;
+  notifyBatchSize: number;
   // Email Template Id's
   englishEmailPassTemplateId: string;
   englishEmailFailTemplateId: string;
