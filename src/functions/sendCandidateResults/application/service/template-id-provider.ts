@@ -62,7 +62,7 @@ export function isPass(activityCode: ActivityCode): boolean {
 }
 
 export function isFail(activityCode: ActivityCode) : boolean {
-  return activityCode === '2' || activityCode === '3';
+  return activityCode === '2' || activityCode === '3' || activityCode === '4' || activityCode === '5';
 }
 
 export function isTerminated(activityCode: ActivityCode) : void {
