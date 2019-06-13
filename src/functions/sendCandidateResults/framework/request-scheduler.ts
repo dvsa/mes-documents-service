@@ -5,7 +5,7 @@ import { inject, injectable } from 'inversify';
 import { TYPES } from './di/types';
 import { StandardCarTestCATBSchema } from '@dvsa/mes-test-schema/categories/B';
 import { INotifyClient } from '../domain/notify-client.interface';
-import { getEmailTemplateId, getLetterTemplateId } from '../application/service/get-template-id';
+import { ITemplateIdProvider } from '../application/service/template-id-provider';
 import { EmailPersonalisation, LetterPersonalisation } from '../domain/personalisation.model';
 import { sendEmail } from '../application/service/send-email';
 import { sendLetter } from '../application/service/send-letter';
@@ -22,6 +22,7 @@ export class RequestScheduler implements IRequestScheduler {
   constructor(
     @inject(TYPES.IConfigAdapter) private configAdapter: IConfigAdapter,
     @inject(TYPES.INotifyClient) private notifyClient: INotifyClient,
+    @inject(TYPES.ITemplateIdProvider) private templateIdProvider: ITemplateIdProvider,
   ) {
     this.limiter = new bottleneck({
       maxConcurrent: null,                 // No limit on concurrent requests
@@ -54,7 +55,7 @@ export class RequestScheduler implements IRequestScheduler {
 
     if (testResult.communicationPreferences.communicationMethod === 'Email') {
       const templateId: string =
-        getEmailTemplateId(
+      this.templateIdProvider.getEmailTemplateId(
           testResult.communicationPreferences.conductedLanguage,
           testResult.activityCode,
         );
@@ -69,7 +70,7 @@ export class RequestScheduler implements IRequestScheduler {
       return sendEmail('example@example.com', templateId, data, 'fake-ref', '', this.notifyClient);
     }
 
-    const templateId: string = getLetterTemplateId(
+    const templateId: string = this.templateIdProvider.getLetterTemplateId(
       testResult.communicationPreferences.conductedLanguage,
       testResult.activityCode,
     );
