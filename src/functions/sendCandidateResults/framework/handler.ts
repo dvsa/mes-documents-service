@@ -18,5 +18,6 @@ export async function handler() {
   } catch (err) {
     console.log('### Error fetching next upload batch ####');
     console.log(err);
+    throw(err);
   }
 }
