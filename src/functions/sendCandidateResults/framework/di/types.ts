@@ -3,4 +3,5 @@ export const TYPES = {
   INotifyClient: Symbol.for('INotifyClient'),
   IConfigAdapter: Symbol.for('IConfigAdapter'),
   IRequestScheduler: Symbol.for('IRequestScheduler'),
+  ITemplateIdProvider: Symbol.for('ITemplateIdProvider'),
 };

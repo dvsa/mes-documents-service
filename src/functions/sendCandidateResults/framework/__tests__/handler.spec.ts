@@ -3,7 +3,8 @@ describe('handler', () => {
   beforeEach(() => {
   });
 
-  it('', async () => {
-
+  it('runs this test', async () => {
+    console.log('test are running');
+    expect(true).toBeTruthy();
   });
 });
