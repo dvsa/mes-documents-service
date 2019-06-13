@@ -8,6 +8,7 @@ import { NotifyClientStubSuccess } from '../../application/stub/notify-client-st
 import { LogNotifyClient } from '../../application/log-notify-client';
 import { ConfigAdapter } from '../adapter/config/config-adapter';
 import { IConfigAdapter } from '../adapter/config/config-adapter.interface';
+import { IRequestScheduler, RequestScheduler } from '../request-scheduler';
 
 const container = new Container();
 
@@ -24,5 +25,7 @@ if (configAdapter.isLocal) {
 } else {
   container.bind<INotifyClient>(TYPES.INotifyClient).to(LogNotifyClient);
 }
+
+container.bind<IRequestScheduler>(TYPES.IRequestScheduler).to(RequestScheduler);
 
 export { container };
