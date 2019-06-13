@@ -68,6 +68,6 @@ export function isFail(activityCode: ActivityCode) : boolean {
 export function isTerminated(activityCode: ActivityCode) : void {
   throw new DocumentsServiceError(
      0 ,
-     `Failed to get template id for activity code { activityCode }`,
+     `Failed to get template id for activity code ${ activityCode }`,
      false);
 }
