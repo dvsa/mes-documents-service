@@ -1,5 +1,6 @@
 import { TestData, ManoeuvreOutcome, VehicleChecks, QuestionOutcome } from '@dvsa/mes-test-schema/categories/B';
 import { injectable } from 'inversify';
+import 'reflect-metadata';
 
 import { CompetencyOutcome } from '../../domain/competency-outcome';
 import { Fault } from '../../domain/fault';
