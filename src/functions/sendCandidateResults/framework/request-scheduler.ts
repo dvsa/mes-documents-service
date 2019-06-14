@@ -27,11 +27,11 @@ export class RequestScheduler implements IRequestScheduler {
     this.limiter = new bottleneck({
       maxConcurrent: null,                 // No limit on concurrent requests
       minTime: 0,                          // No time waited between each request
-      highWater: 250,                      // Maximum of 250 requests in the queue (max batch size)
+      highWater: configAdapter.highwater,  // Maximum of 250 requests in the queue (max batch size)
       strategy: bottleneck.strategy.BLOCK, // Ignore any additions to the queue when we reach the max batch size
-      reservoir: 25,                       // Amount of jobs the queue can perform at the start of the queue
+      reservoir: configAdapter.batchSize,  // Amount of jobs the queue can perform at the start of the queue
       reservoirRefreshInterval: 1000,      // How often to add new jobs to the queue (every second)
-      reservoirRefreshAmount: 25,          // How many jobs to add to the queue each refresh
+      reservoirRefreshAmount: configAdapter.batchSize, // How many jobs to add to the queue each refresh
     });
 
     this.limiter.on('failed', this.onLimiterFailed);

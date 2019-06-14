@@ -8,6 +8,9 @@ provider:
     USE_NOTIFY: false
     IS_LOCAL: true
     NOTIFY_RETRY_LIMIT: 2
+    NOTIFY_BATCH_SIZE: 250
+    NOTIFY_REQUESTS_PER_BATCH: 25
+    NOTIFY_TIMEOUT_IN_MS: 10000
     NOTIFY_API_KEY: 'api-key'
     NOTIFY_EMAIL_PASS_TEMPLATE_ID: 'email-pass-template-id'
     NOTIFY_EMAIL_FAIL_TEMPLATE_ID: 'email-fail-template-id'

@@ -7,6 +7,9 @@ export class ConfigAdapterMock implements IConfigAdapter {
   isLocal: boolean = true;
   useNotify: boolean = false;
   retryLimit: number = 3;
+  highwater: number = 250;
+  batchSize: number = 25;
+  requestTimeout:  number = 10000;
   apiKey: string = 'api-key';
 
   englishEmailPassTemplateId: string = 'email-pass-template-id';
