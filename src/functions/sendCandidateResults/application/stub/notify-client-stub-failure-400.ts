@@ -15,11 +15,13 @@ export class NotifyClientStubFailure400 implements INotifyClient {
     return Promise.reject({
       error: {
         status_code: 400,
-        errors: {
-          error: 'BadRequestError',
-          // tslint:disable-next-line
-          message: 'Can not send to this recipient when service is in trial mode - see www.notifications.service.gov.uk/trial-mode',
-        },
+        errors: [
+          {
+            error: 'BadRequestError',
+            // tslint:disable-next-line
+            message: 'Can not send to this recipient when service is in trial mode - see www.notifications.service.gov.uk/trial-mode',
+          },
+        ],
       },
     });
   }
@@ -33,11 +35,13 @@ export class NotifyClientStubFailure400 implements INotifyClient {
     return Promise.reject({
       error: {
         status_code: 400,
-        errors: {
-          error: 'BadRequestError',
-          // tslint:disable-next-line
-          message: 'Cannot send letters when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode',
-        },
+        errors: [
+          {
+            error: 'BadRequestError',
+            // tslint:disable-next-line
+            message: 'Cannot send letters when service is in trial mode - see https://www.notifications.service.gov.uk/trial-mode',
+          },
+        ],
       },
     });
   }
