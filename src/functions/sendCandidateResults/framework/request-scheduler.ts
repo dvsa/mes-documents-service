@@ -71,7 +71,7 @@ export class RequestScheduler implements IRequestScheduler {
         testResult.communicationPreferences.updatedEmail,
         templateId,
         data,
-        'fake-ref',
+        testResult.journalData.applicationReference.applicationId.toString(),
         '',
         this.notifyClient,
       );
@@ -97,7 +97,11 @@ export class RequestScheduler implements IRequestScheduler {
       'cat dead' : 'was black and white',
     };
 
-    return sendLetter(templateId, data, 'fake-ref', this.notifyClient);
+    return sendLetter(
+      templateId,
+      data,
+      testResult.journalData.applicationReference.applicationId.toString(),
+      this.notifyClient);
   }
 
   private onLimiterFailed(
