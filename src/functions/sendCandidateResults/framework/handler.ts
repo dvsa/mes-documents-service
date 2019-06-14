@@ -12,11 +12,13 @@ export async function handler() {
   try {
     console.log('### handler ####');
     testResults = await nextUploadBatch.get();
+    console.log('### test results ###');
+    console.log(testResults);
 
     const requestScheduler: IRequestScheduler = container.get<IRequestScheduler>(TYPES.IRequestScheduler);
     requestScheduler.scheduleRequests(testResults);
   } catch (err) {
-    console.log('### Error fetching next upload batch ####');
+    console.log('### Error in handler ####');
     console.log(err);
     throw(err);
   }
