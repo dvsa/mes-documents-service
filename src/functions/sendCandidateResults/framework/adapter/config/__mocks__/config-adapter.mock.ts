@@ -8,6 +8,8 @@ export class ConfigAdapterMock implements IConfigAdapter {
   useNotify: boolean = false;
   retryLimit: number = 3;
   apiKey: string = 'api-key';
+  resultsBaseApiUrl: string = 'results-base-api-url';
+  notifyBatchSize: number = 250;
 
   englishEmailPassTemplateId: string = 'email-pass-template-id';
   englishEmailFailTemplateId: string = 'email-fail-template-id';
