@@ -7,15 +7,15 @@ import { INotifyClient } from '../../domain/notify-client.interface';
 import { NotifyClientStubSuccess } from '../../application/stub/notify-client-stub-success';
 import { ITemplateIdProvider, TemplateIdProvider } from '../../application/service/template-id-provider';
 import { StandardCarTestCATBSchema } from '@dvsa/mes-test-schema/categories/B';
-import { getUploadBatch } from '../__mocks__/get-upload-batch.mock';
 import { IStatusUpdater, StatusUpdater } from '../status-updater';
 import { NotifyClientStubFailure500 } from '../../application/stub/notify-client-stub-failure-500';
+import { NextUploadBatchMock } from '../__mocks__/next-upload-batch.mock';
 
 describe('RequestScheduler', () => {
 
   const totalNumberOfTests = 50;
 
-  it('should call updateToAcceptedStatus when successfully notified candidate', (done) => {
+  it('should call updateToAcceptedStatus when successfully notified candidate', async (done) => {
     const configAdapter: IConfigAdapter = new ConfigAdapterMock();
     const notifyClient: INotifyClient = new NotifyClientStubSuccess();
     const templateIdProvider: ITemplateIdProvider = new TemplateIdProvider(configAdapter);
@@ -26,7 +26,7 @@ describe('RequestScheduler', () => {
 
     const requestScheduler = new RequestScheduler(configAdapter, notifyClient, templateIdProvider, statusUpdater);
 
-    const testResults: StandardCarTestCATBSchema[] = getUploadBatch(totalNumberOfTests);
+    const testResults: StandardCarTestCATBSchema[] = await new NextUploadBatchMock().get();
 
     requestScheduler.scheduleRequests(testResults);
 
@@ -37,7 +37,7 @@ describe('RequestScheduler', () => {
     },         1000);
   });
 
-  it('should call updateToAcceptedStatus when successfully notified candidate', (done) => {
+  it('should call updateToAcceptedStatus when successfully notified candidate', async (done) => {
     const configAdapter: IConfigAdapter = new ConfigAdapterMock();
     const notifyClient: INotifyClient = new NotifyClientStubFailure500();
     const templateIdProvider: ITemplateIdProvider = new TemplateIdProvider(configAdapter);
@@ -48,7 +48,7 @@ describe('RequestScheduler', () => {
 
     const requestScheduler = new RequestScheduler(configAdapter, notifyClient, templateIdProvider, statusUpdater);
 
-    const testResults: StandardCarTestCATBSchema[] = getUploadBatch(totalNumberOfTests);
+    const testResults: StandardCarTestCATBSchema[] = await new NextUploadBatchMock().get();
 
     requestScheduler.scheduleRequests(testResults);
 
