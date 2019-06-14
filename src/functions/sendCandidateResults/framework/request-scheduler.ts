@@ -47,16 +47,12 @@ export class RequestScheduler implements IRequestScheduler {
       this.limiter
         .schedule(() => this.sendNotifyRequest(testResult))
           .then((success) => {
-            console.log('success', success);
-            this.statusUpdater.uploadAcceptedStatus(
+            return this.statusUpdater.updateToAcceptedStatus(
               testResult.journalData.applicationReference.applicationId);
-            return;
           })
           .catch((error) => {
-            console.log('error', error);
-            this.statusUpdater.uploadFailedStatus(
+            return this.statusUpdater.updateToFailedStatus(
               testResult.journalData.applicationReference.applicationId);
-            return;
           });
     });
 

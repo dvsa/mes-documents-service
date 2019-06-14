@@ -5,12 +5,6 @@ import { injectable } from 'inversify';
 export class NotifyClientStubSuccess implements INotifyClient {
 
   sendEmail(templateId: string, emailAddress: string, options: any): Promise<any> {
-    // console.log('Send Email');
-
-    // console.log('templateId', templateId);
-    // console.log('emailAddress', emailAddress);
-    // console.log('emailAttributes', options);
-
     return new Promise((resolve) => {
       resolve({
         id: 'bfb50d92-100d-4b8b-b559-14fa3b091cda',
@@ -32,11 +26,6 @@ export class NotifyClientStubSuccess implements INotifyClient {
   }
 
   sendLetter(templateId: string, options: any): Promise<any> {
-    // console.log('Send Letter');
-
-    // console.log('templateId', templateId);
-    // console.log('letterAttributes', options);
-
     return new Promise((resolve) => {
       resolve({
         id: '740e5834-3a29-46b4-9a6f-16142fde533a',

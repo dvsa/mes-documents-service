@@ -6,12 +6,6 @@ import { injectable } from 'inversify';
 export class NotifyClientStubFailure500 implements INotifyClient {
 
   sendEmail(templateId: string, emailAddress: string, options: any): Promise<any> {
-    console.log('Fail Sending Email with internal error');
-
-    console.log('templateId', templateId);
-    console.log('emailAddress', emailAddress);
-    console.log('emailAttributes', options);
-
     return Promise.reject({
       error: {
         status_code: 500,
@@ -26,11 +20,6 @@ export class NotifyClientStubFailure500 implements INotifyClient {
   }
 
   sendLetter(templateId: string, options: any): Promise<any> {
-    console.log('Fail Sending Letter with internal error');
-
-    console.log('templateId', templateId);
-    console.log('letterAttributes', options);
-
     return Promise.reject({
       error: {
         status_code: 500,

@@ -1,8 +1,8 @@
 
 export interface IStatusUpdater {
-  uploadAcceptedStatus(applicationId: number): void;
+  updateToAcceptedStatus(applicationId: number): void;
 
-  uploadFailedStatus(applicationId: number): void;
+  updateToFailedStatus(applicationId: number): void;
 }
 
 export class StatusUpdater implements IStatusUpdater {
@@ -10,12 +10,12 @@ export class StatusUpdater implements IStatusUpdater {
 
   }
 
-  uploadAcceptedStatus(applicationId: number): void {
-    console.log(`Upload test [${applicationId}] status to accepted`);
+  updateToAcceptedStatus(applicationId: number): void {
+    console.log(`Update test [${applicationId}] status to accepted`);
   }
 
-  uploadFailedStatus(applicationId: number): void {
-    console.log(`Upload test [${applicationId}] status to failed`);
+  updateToFailedStatus(applicationId: number): void {
+    console.log(`Update test [${applicationId}] status to failed`);
   }
 
 }

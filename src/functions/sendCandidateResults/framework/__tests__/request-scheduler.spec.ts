@@ -15,14 +15,14 @@ describe('RequestScheduler', () => {
 
   const totalNumberOfTests = 50;
 
-  it('should call uploadAcceptedStatus when successfully notified candidate', (done) => {
+  it('should call updateToAcceptedStatus when successfully notified candidate', (done) => {
     const configAdapter: IConfigAdapter = new ConfigAdapterMock();
     const notifyClient: INotifyClient = new NotifyClientStubSuccess();
     const templateIdProvider: ITemplateIdProvider = new TemplateIdProvider(configAdapter);
     const statusUpdater: IStatusUpdater = new StatusUpdater();
 
-    spyOn(statusUpdater, 'uploadAcceptedStatus');
-    spyOn(statusUpdater, 'uploadFailedStatus');
+    spyOn(statusUpdater, 'updateToAcceptedStatus');
+    spyOn(statusUpdater, 'updateToFailedStatus');
 
     const requestScheduler = new RequestScheduler(configAdapter, notifyClient, templateIdProvider, statusUpdater);
 
@@ -31,20 +31,20 @@ describe('RequestScheduler', () => {
     requestScheduler.scheduleRequests(testResults);
 
     setTimeout(() => {
-      expect(statusUpdater.uploadAcceptedStatus).toHaveBeenCalled();
-      expect(statusUpdater.uploadFailedStatus).not.toHaveBeenCalled();
+      expect(statusUpdater.updateToAcceptedStatus).toHaveBeenCalled();
+      expect(statusUpdater.updateToFailedStatus).not.toHaveBeenCalled();
       done();
     },         1000);
   });
 
-  it('should call uploadAcceptedStatus when successfully notified candidate', (done) => {
+  it('should call updateToAcceptedStatus when successfully notified candidate', (done) => {
     const configAdapter: IConfigAdapter = new ConfigAdapterMock();
     const notifyClient: INotifyClient = new NotifyClientStubFailure500();
     const templateIdProvider: ITemplateIdProvider = new TemplateIdProvider(configAdapter);
     const statusUpdater: IStatusUpdater = new StatusUpdater();
 
-    spyOn(statusUpdater, 'uploadAcceptedStatus');
-    spyOn(statusUpdater, 'uploadFailedStatus');
+    spyOn(statusUpdater, 'updateToAcceptedStatus');
+    spyOn(statusUpdater, 'updateToFailedStatus');
 
     const requestScheduler = new RequestScheduler(configAdapter, notifyClient, templateIdProvider, statusUpdater);
 
@@ -53,8 +53,8 @@ describe('RequestScheduler', () => {
     requestScheduler.scheduleRequests(testResults);
 
     setTimeout(() => {
-      expect(statusUpdater.uploadAcceptedStatus).not.toHaveBeenCalled();
-      expect(statusUpdater.uploadFailedStatus).toHaveBeenCalled();
+      expect(statusUpdater.updateToAcceptedStatus).not.toHaveBeenCalled();
+      expect(statusUpdater.updateToFailedStatus).toHaveBeenCalled();
       done();
     },         1000);
   });
