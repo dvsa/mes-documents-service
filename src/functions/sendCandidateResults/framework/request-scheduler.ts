@@ -67,7 +67,14 @@ export class RequestScheduler implements IRequestScheduler {
         'first name': 'Joe',
         'cat dead' : 'was black and white',
       };
-      return sendEmail('example@example.com', templateId, data, 'fake-ref', '', this.notifyClient);
+      return sendEmail(
+        testResult.communicationPreferences.updatedEmail,
+        templateId,
+        data,
+        'fake-ref',
+        '',
+        this.notifyClient,
+      );
     }
 
     const templateId: string = this.templateIdProvider.getLetterTemplateId(
