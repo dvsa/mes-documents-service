@@ -1,13 +1,15 @@
-import { sendEmail } from '../send-email';
-import { mockEmail1 } from '../../../framework/__mocks__/test-data.mock';
-import { EmailPersonalisation } from '../../../domain/personalisation.model';
+import { sendLetter } from '../send-letter';
+import { LetterPersonalisation } from '../../../domain/personalisation.model';
 import { INotifyClient } from '../../../domain/notify-client.interface';
 import { NotifyClientStubSuccess } from '../../stub/notify-client-stub-success';
 import { NotifyClientStubFailure400 } from '../../stub/notify-client-stub-failure-400';
 import { NotifyClientStubFailure500 } from '../../stub/notify-client-stub-failure-500';
 import { DocumentsServiceError } from '../../../domain/errors/documents-service-error';
 
-const personlisation : EmailPersonalisation = {
+const personlisation : LetterPersonalisation = {
+  address_line_1: 'address line 1',
+  address_line_2: 'address line 2',
+  postcode: 'postcode',
   'first name': 'Fred',
   'ref number': '12345',
   'test date': '10/10/10',
@@ -15,13 +17,12 @@ const personlisation : EmailPersonalisation = {
   'cat dead': 'it is?',
 };
 
-describe('sendEmail' , () => {
+describe('sendLetter' , () => {
 
-  it('should successfully send an email', (async() => {
+  it('should successfully send a letter', (async() => {
     const notifyClient: INotifyClient = new NotifyClientStubSuccess();
 
-    const result =
-        await sendEmail(mockEmail1,  'temp-id', personlisation,  'app-ref',  'reply-id', notifyClient);
+    const result = await sendLetter('template-id', personlisation, 'ref', notifyClient);
 
     expect(result).toBe(undefined);
 
@@ -31,7 +32,7 @@ describe('sendEmail' , () => {
     const notifyClient: INotifyClient = new NotifyClientStubFailure400();
 
     try {
-      await sendEmail(mockEmail1,  'temp-id', personlisation,  'app-ref',  'reply-id', notifyClient);
+      await sendLetter('template-id', personlisation, 'ref', notifyClient);
     } catch (err) {
 
       const documentsServiceError: DocumentsServiceError = err as DocumentsServiceError;
@@ -45,7 +46,7 @@ describe('sendEmail' , () => {
     const notifyClient: INotifyClient = new NotifyClientStubFailure500();
 
     try {
-      await sendEmail(mockEmail1,  'temp-id', personlisation,  'app-ref',  'reply-id', notifyClient);
+      await sendLetter('template-id', personlisation, 'ref', notifyClient);
     } catch (err) {
 
       const documentsServiceError: DocumentsServiceError = err as DocumentsServiceError;
