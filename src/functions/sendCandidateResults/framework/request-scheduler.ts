@@ -67,7 +67,14 @@ export class RequestScheduler implements IRequestScheduler {
         'first name': 'Joe',
         'cat dead' : 'was black and white',
       };
-      return sendEmail('example@example.com', templateId, data, 'fake-ref', '', this.notifyClient);
+      return sendEmail(
+        testResult.communicationPreferences.updatedEmail,
+        templateId,
+        data,
+        testResult.journalData.applicationReference.applicationId.toString(),
+        '',
+        this.notifyClient,
+      );
     }
 
     const templateId: string = this.templateIdProvider.getLetterTemplateId(
@@ -90,7 +97,11 @@ export class RequestScheduler implements IRequestScheduler {
       'cat dead' : 'was black and white',
     };
 
-    return sendLetter(templateId, data, 'fake-ref', this.notifyClient);
+    return sendLetter(
+      templateId,
+      data,
+      testResult.journalData.applicationReference.applicationId.toString(),
+      this.notifyClient);
   }
 
   private onLimiterFailed(

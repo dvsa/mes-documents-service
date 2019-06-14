@@ -15,10 +15,12 @@ export class NotifyClientStubFailure500 implements INotifyClient {
     return Promise.reject({
       error: {
         status_code: 500,
-        errors: {
-          error: 'Exception',
-          message: 'Internal server error',
-        },
+        errors: [
+          {
+            error: 'Exception',
+            message: 'Internal server error',
+          },
+        ],
       },
     });
   }
@@ -32,10 +34,12 @@ export class NotifyClientStubFailure500 implements INotifyClient {
     return Promise.reject({
       error: {
         status_code: 500,
-        errors: {
-          error: 'Exception',
-          message: 'Internal server error',
-        },
+        errors: [
+          {
+            error: 'Exception',
+            message: 'Internal server error',
+          },
+        ],
       },
     });
   }
