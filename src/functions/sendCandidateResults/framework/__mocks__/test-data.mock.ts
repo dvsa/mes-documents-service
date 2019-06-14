@@ -68,4 +68,71 @@ export const completedCatBTest: StandardCarTestCATBSchema = {
     conductedLanguage: 'English',
     updatedEmail: mockEmail2,
   },
+  testData: {
+    drivingFaults: {
+      ancillaryControls: 1,
+      ancillaryControlsComments: 'ancillaryControlsComments',
+      awarenessPlanning: 1,
+      awarenessPlanningComments: 'awarenessPlanningComments',
+      controlsSteering: 1,
+      controlsSteeringComments: 'controlsSteeringComments',
+      signalsCorrectly: 1,
+      signalsCorrectlyComments: 'signalsCorrectlyComments',
+    },
+    seriousFaults: {
+      ancillaryControls: true,
+      ancillaryControlsComments: 'ancillaryControlsComments',
+      awarenessPlanning: true,
+      awarenessPlanningComments: 'awarenessPlanningComments',
+      controlsSteering: false,
+      controlsSteeringComments: 'controlsSteeringComments',
+      signalsCorrectly: false,
+      signalsCorrectlyComments: 'signalsCorrectlyComments',
+    },
+    dangerousFaults: {
+      ancillaryControls: false,
+      ancillaryControlsComments: 'ancillaryControlsComments',
+      awarenessPlanning: false,
+      awarenessPlanningComments: 'awarenessPlanningComments',
+      controlsSteering: true,
+      controlsSteeringComments: 'controlsSteeringComments',
+      signalsCorrectly: true,
+      signalsCorrectlyComments: 'signalsCorrectlyComments',
+    },
+    controlledStop: {
+      selected: true,
+      fault: 'DF',
+    },
+    manoeuvres: {
+      forwardPark: {
+        selected: false,
+        controlFault: 'DF',
+        controlFaultComments: 'controlFaultComments',
+        observationFault: 'DF',
+        observationFaultComments:  'observationFaultComments',
+      },
+      reverseParkCarpark: {
+        selected: true,
+        controlFault: 'DF',
+        controlFaultComments: 'controlFaultComments',
+        observationFault: 'DF',
+        observationFaultComments:  'observationFaultComments',
+      },
+      reverseParkRoad: {
+        selected: true,
+        controlFault: 'S',
+        controlFaultComments: 'controlFaultComments',
+        observationFault: 'S',
+        observationFaultComments:  'observationFaultComments',
+      },
+    },
+    vehicleChecks: {
+      showMeQuestion: {
+        outcome: 'D',
+      },
+      tellMeQuestion: {
+        outcome: 'DF',
+      },
+    },
+  },
 };
