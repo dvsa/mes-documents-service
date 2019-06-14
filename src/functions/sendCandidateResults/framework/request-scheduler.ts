@@ -9,6 +9,7 @@ import { ITemplateIdProvider } from '../application/service/template-id-provider
 import { sendEmail } from '../application/service/send-email';
 import { sendLetter } from '../application/service/send-letter';
 import { IPersonalisationProvider } from '../application/service/personalisation-provider';
+import { IStatusUploader } from './status-uploader';
 
 export interface IRequestScheduler {
   scheduleRequests(testResults: StandardCarTestCATBSchema[]): void;
@@ -17,13 +18,14 @@ export interface IRequestScheduler {
 @injectable()
 export class RequestScheduler implements IRequestScheduler {
 
-  private limiter: bottleneck;
+  public limiter: bottleneck;
 
   constructor(
     @inject(TYPES.IConfigAdapter) private configAdapter: IConfigAdapter,
     @inject(TYPES.INotifyClient) private notifyClient: INotifyClient,
     @inject(TYPES.ITemplateIdProvider) private templateIdProvider: ITemplateIdProvider,
     @inject(TYPES.IPersonalisationProvider) private personalisationProvider: IPersonalisationProvider,
+    @inject(TYPES.IStatusUploader) private statusUploader: IStatusUploader,
   ) {
     this.limiter = new bottleneck({
       maxConcurrent: null,                 // No limit on concurrent requests
@@ -33,6 +35,7 @@ export class RequestScheduler implements IRequestScheduler {
       reservoir: 25,                       // Amount of jobs the queue can perform at the start of the queue
       reservoirRefreshInterval: 1000,      // How often to add new jobs to the queue (every second)
       reservoirRefreshAmount: 25,          // How many jobs to add to the queue each refresh
+      trackDoneStatus: true,
     });
 
     this.limiter.on('failed', this.onLimiterFailed);
@@ -43,8 +46,18 @@ export class RequestScheduler implements IRequestScheduler {
     testResults.forEach((testResult: StandardCarTestCATBSchema) => {
       this.limiter
         .schedule(() => this.sendNotifyRequest(testResult))
-          .then(success => console.log('success', success)) // TODO - Tell Database test result has been sent
-          .catch(error => console.log('error', error)); // TODO - Tell Database test result has not been sent
+          .then((success) => {
+            console.log('success', success);
+            this.statusUploader.uploadAcceptedStatus(
+              testResult.journalData.applicationReference.applicationId);
+            return;
+          })
+          .catch((error) => {
+            console.log('error', error);
+            this.statusUploader.uploadFailedStatus(
+              testResult.journalData.applicationReference.applicationId);
+            return;
+          });
     });
 
   }

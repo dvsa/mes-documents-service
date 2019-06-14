@@ -5,11 +5,11 @@ import { injectable } from 'inversify';
 export class NotifyClientStubSuccess implements INotifyClient {
 
   sendEmail(templateId: string, emailAddress: string, options: any): Promise<any> {
-    console.log('Send Email');
+    // console.log('Send Email');
 
-    console.log('templateId', templateId);
-    console.log('emailAddress', emailAddress);
-    console.log('emailAttributes', options);
+    // console.log('templateId', templateId);
+    // console.log('emailAddress', emailAddress);
+    // console.log('emailAttributes', options);
 
     return new Promise((resolve) => {
       resolve({
