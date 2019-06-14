@@ -1,17 +1,17 @@
 
-export interface IStatusUploader {
+export interface IStatusUpdater {
   uploadAcceptedStatus(applicationId: number): void;
 
   uploadFailedStatus(applicationId: number): void;
 }
 
-export class StatusUploader implements IStatusUploader {
+export class StatusUpdater implements IStatusUpdater {
   constructor() {
 
   }
 
   uploadAcceptedStatus(applicationId: number): void {
-    console.log(`Uplaod test [${applicationId}] status to accepted`);
+    console.log(`Upload test [${applicationId}] status to accepted`);
   }
 
   uploadFailedStatus(applicationId: number): void {

@@ -32,10 +32,10 @@ export class NotifyClientStubSuccess implements INotifyClient {
   }
 
   sendLetter(templateId: string, options: any): Promise<any> {
-    console.log('Send Letter');
+    // console.log('Send Letter');
 
-    console.log('templateId', templateId);
-    console.log('letterAttributes', options);
+    // console.log('templateId', templateId);
+    // console.log('letterAttributes', options);
 
     return new Promise((resolve) => {
       resolve({

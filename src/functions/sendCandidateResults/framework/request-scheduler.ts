@@ -9,7 +9,7 @@ import { ITemplateIdProvider } from '../application/service/template-id-provider
 import { sendEmail } from '../application/service/send-email';
 import { sendLetter } from '../application/service/send-letter';
 import { IPersonalisationProvider } from '../application/service/personalisation-provider';
-import { IStatusUploader } from './status-uploader';
+import { IStatusUpdater } from './status-updater';
 
 export interface IRequestScheduler {
   scheduleRequests(testResults: StandardCarTestCATBSchema[]): void;
@@ -25,7 +25,7 @@ export class RequestScheduler implements IRequestScheduler {
     @inject(TYPES.INotifyClient) private notifyClient: INotifyClient,
     @inject(TYPES.ITemplateIdProvider) private templateIdProvider: ITemplateIdProvider,
     @inject(TYPES.IPersonalisationProvider) private personalisationProvider: IPersonalisationProvider,
-    @inject(TYPES.IStatusUploader) private statusUploader: IStatusUploader,
+    @inject(TYPES.IStatusUpdater) private statusUpdater: IStatusUpdater,
   ) {
     this.limiter = new bottleneck({
       maxConcurrent: null,                 // No limit on concurrent requests
@@ -48,13 +48,13 @@ export class RequestScheduler implements IRequestScheduler {
         .schedule(() => this.sendNotifyRequest(testResult))
           .then((success) => {
             console.log('success', success);
-            this.statusUploader.uploadAcceptedStatus(
+            this.statusUpdater.uploadAcceptedStatus(
               testResult.journalData.applicationReference.applicationId);
             return;
           })
           .catch((error) => {
             console.log('error', error);
-            this.statusUploader.uploadFailedStatus(
+            this.statusUpdater.uploadFailedStatus(
               testResult.journalData.applicationReference.applicationId);
             return;
           });
