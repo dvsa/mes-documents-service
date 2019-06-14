@@ -8,6 +8,8 @@ export class ConfigAdapter implements IConfigAdapter {
   useNotify: boolean;
   retryLimit: number;
   apiKey: string;
+  resultsBaseApiUrl: string;
+  notifyBatchSize: number;
   // Email Template Id's
   englishEmailPassTemplateId: string;
   englishEmailFailTemplateId: string;
@@ -23,7 +25,9 @@ export class ConfigAdapter implements IConfigAdapter {
     this.isLocal = this.getBooleanFromEnv('IS_LOCAL');
     this.useNotify = this.getBooleanFromEnv('USE_NOTIFY');
     this.retryLimit = this.getNumberFromEnv('NOTIFY_RETRY_LIMIT') || 0;
+    this.notifyBatchSize = this.getNumberFromEnv('NOTIFY_BATCH_SIZE') || 250;
     this.apiKey = this.getFromEnvThrowIfNotPresent('NOTIFY_API_KEY');
+    this.resultsBaseApiUrl = this.getFromEnvThrowIfNotPresent('RESULTS_API_BASE_URL');
 
     this.englishEmailPassTemplateId = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_PASS_TEMPLATE_ID');
     this.englishEmailFailTemplateId = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_FAIL_TEMPLATE_ID');

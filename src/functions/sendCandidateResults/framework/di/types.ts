@@ -5,4 +5,5 @@ export const TYPES = {
   IRequestScheduler: Symbol.for('IRequestScheduler'),
   ITemplateIdProvider: Symbol.for('ITemplateIdProvider'),
   IFaultProvider: Symbol.for('IFaultProvider'),
+  INextUploadBatch: Symbol.for('INextUploadBatch'),
 };

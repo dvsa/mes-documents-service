@@ -11,6 +11,9 @@ import { IConfigAdapter } from '../adapter/config/config-adapter.interface';
 import { IRequestScheduler, RequestScheduler } from '../request-scheduler';
 import { ITemplateIdProvider, TemplateIdProvider } from '../../application/service/template-id-provider';
 import { IFaultProvider, FaultProvider } from '../../application/service/fault-provider';
+import { INextUploadBatch } from '../../domain/next-upload-batch.interface';
+import { NextUploadBatchMock } from '../__mocks__/next-upload-batch.mock';
+import { NextUploadBatch } from '../next-upload-batch';
 
 const container = new Container();
 
@@ -22,10 +25,13 @@ container.bind<string>(TYPES.apiKey).toConstantValue(configAdapter.apiKey);
 
 if (configAdapter.isLocal) {
   container.bind<INotifyClient>(TYPES.INotifyClient).to(NotifyClientStubSuccess);
+  container.bind<INextUploadBatch>(TYPES.INextUploadBatch).to(NextUploadBatchMock);
 } else if (configAdapter.useNotify) {
   container.bind<INotifyClient>(TYPES.INotifyClient).to(GovNotifyClient);
+  container.bind<INextUploadBatch>(TYPES.INextUploadBatch).to(NextUploadBatch);
 } else {
   container.bind<INotifyClient>(TYPES.INotifyClient).to(LogNotifyClient);
+  container.bind<INextUploadBatch>(TYPES.INextUploadBatch).to(NextUploadBatch);
 }
 
 container.bind<IRequestScheduler>(TYPES.IRequestScheduler).to(RequestScheduler);
