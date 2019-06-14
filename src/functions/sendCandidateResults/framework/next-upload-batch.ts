@@ -17,8 +17,9 @@ export class NextUploadBatch implements INextUploadBatch {
   }
 
   get() {
-    console.log('### axios calling get next upload batch ###');
-    // tslint:disable-next-line:max-line-length
-    return axios.get(`${this.configAdapter.resultsBaseApiUrl}/test-results/upload?interface=${this.interface}&batch_size=${this.batchSize}`);
+    const { resultsBaseApiUrl } = this.configAdapter;
+    return axios.get(
+      `${resultsBaseApiUrl}/test-results/upload?interface=${this.interface}&batch_size=${this.batchSize}`,
+    );
   }
 }
