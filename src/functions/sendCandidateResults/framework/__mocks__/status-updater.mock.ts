@@ -5,7 +5,7 @@ import { SubmissionOutcome } from '../../domain/submission-outcome.model';
 @injectable()
 export class StatusUpdaterMock implements IStatusUpdater {
 
-  updateStatus(submissionOutcome: SubmissionOutcome): void {
-    return;
+  updateStatus(submissionOutcome: SubmissionOutcome): Promise<any> {
+    return Promise.resolve();
   }
 }

@@ -5,7 +5,7 @@ import { IConfigAdapter } from './adapter/config/config-adapter.interface';
 import { SubmissionOutcome } from '../domain/submission-outcome.model';
 
 export interface IStatusUpdater {
-  updateStatus(submissionOutcome: SubmissionOutcome): void;
+  updateStatus(submissionOutcome: SubmissionOutcome): Promise<any>;
 }
 
 @injectable()
@@ -19,8 +19,8 @@ export class StatusUpdater implements IStatusUpdater {
     this.resultsBaseApiUrl = this.configAdapter.resultsBaseApiUrl;
   }
 
-  updateStatus(submissionOutcome: SubmissionOutcome): void {
-    axios.put(
+  updateStatus(submissionOutcome: SubmissionOutcome): Promise<any> {
+    return axios.put(
       `${this.resultsBaseApiUrl}/test-results/${submissionOutcome.applicationReference}/upload`,
       submissionOutcome.outcomePayload,
     );
