@@ -37,7 +37,7 @@ describe('RequestScheduler', () => {
     },         1000);
   });
 
-  it('should call updateToAcceptedStatus when successfully notified candidate', async (done) => {
+  it('should call updateToFailedStatus when failed to notified candidate', async (done) => {
     const configAdapter: IConfigAdapter = new ConfigAdapterMock();
     const notifyClient: INotifyClient = new NotifyClientStubFailure500();
     const templateIdProvider: ITemplateIdProvider = new TemplateIdProvider(configAdapter);
