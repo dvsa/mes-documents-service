@@ -7,7 +7,7 @@ export class StatusUpdaterMock implements IStatusUpdater {
 
   constructor() { }
 
-  updateStatus(submissionOutcome: SubmissionOutcome): Promise<void> {
-    return Promise.resolve();
+  updateStatus(submissionOutcome: SubmissionOutcome): void {
+    return;
   }
 }
