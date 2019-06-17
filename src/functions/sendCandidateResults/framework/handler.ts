@@ -12,7 +12,7 @@ export async function handler() {
   try {
     testResults = await nextUploadBatch.get();
     const requestScheduler: IRequestScheduler = container.get<IRequestScheduler>(TYPES.IRequestScheduler);
-    requestScheduler.scheduleRequests(testResults);
+    await Promise.all(requestScheduler.scheduleRequests(testResults));
   } catch (err) {
     console.log(`### err:  ${err}`);
     throw(err);
