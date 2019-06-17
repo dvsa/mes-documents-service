@@ -44,7 +44,9 @@ export class RequestScheduler implements IRequestScheduler {
   scheduleRequests(testResults: StandardCarTestCATBSchema[]): Promise<void>[] {
     return testResults.map((testResult: StandardCarTestCATBSchema) => {
       return this.limiter
-        .schedule(() => this.sendNotifyRequest(testResult))
+        .schedule(
+          { expiration: this.configAdapter.notifyTimeout },
+          () => this.sendNotifyRequest(testResult))
           .then((success) => {
             return this.statusUpdater.updateToAcceptedStatus(
               testResult.journalData.applicationReference.applicationId);

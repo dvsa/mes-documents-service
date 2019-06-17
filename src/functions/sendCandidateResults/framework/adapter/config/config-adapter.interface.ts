@@ -5,6 +5,7 @@ export interface IConfigAdapter {
   apiKey: string;
   resultsBaseApiUrl: string;
   notifyBatchSize: number;
+  notifyTimeout: number;
   // Email Template Id's
   englishEmailPassTemplateId: string;
   englishEmailFailTemplateId: string;
