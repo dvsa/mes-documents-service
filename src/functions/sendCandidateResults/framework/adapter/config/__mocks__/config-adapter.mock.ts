@@ -10,7 +10,7 @@ export class ConfigAdapterMock implements IConfigAdapter {
   apiKey: string = 'api-key';
   resultsBaseApiUrl: string = 'results-base-api-url';
   notifyBatchSize: number = 250;
-  notifyTimeoutLimit: number = 1000;
+  notifyTimeout: number = 1000;
 
   englishEmailPassTemplateId: string = 'email-pass-template-id';
   englishEmailFailTemplateId: string = 'email-fail-template-id';

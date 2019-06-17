@@ -10,7 +10,7 @@ export class ConfigAdapter implements IConfigAdapter {
   apiKey: string;
   resultsBaseApiUrl: string;
   notifyBatchSize: number;
-  notifyTimeoutLimit: number;
+  notifyTimeout: number;
   // Email Template Id's
   englishEmailPassTemplateId: string;
   englishEmailFailTemplateId: string;
@@ -27,7 +27,7 @@ export class ConfigAdapter implements IConfigAdapter {
     this.useNotify = this.getBooleanFromEnv('USE_NOTIFY');
     this.retryLimit = this.getNumberFromEnv('NOTIFY_RETRY_LIMIT') || 0;
     this.notifyBatchSize = this.getNumberFromEnv('NOTIFY_BATCH_SIZE') || 250;
-    this.notifyTimeoutLimit = this.getNumberFromEnv('NOTIFY_TIMEOUT_LIMIT') || 10000;
+    this.notifyTimeout = this.getNumberFromEnv('NOTIFY_TIMEOUT') || 10000;
     this.apiKey = this.getFromEnvThrowIfNotPresent('NOTIFY_API_KEY');
     this.resultsBaseApiUrl = this.getFromEnvThrowIfNotPresent('RESULTS_API_BASE_URL');
 

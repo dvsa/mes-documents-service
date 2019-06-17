@@ -13,8 +13,6 @@ export class NotifyClientStubTimeout implements INotifyClient {
 
   sendEmail(templateId: string, emailAddress: string, options: any): Promise<any> {
 
-    console.log('notifyTimeoutLimit', this.configAdapter.notifyTimeoutLimit);
-
     return new Promise((resolve) => {
       setInterval(() => {
         resolve({
@@ -33,7 +31,7 @@ export class NotifyClientStubTimeout implements INotifyClient {
             uri: 'https://api.notificaitons.service.gov.uk/service/your_service_id/templates/bfb50d92-100d-4b8b-b559-14fa3b091cda',
           },
         });
-      },          this.configAdapter.notifyTimeoutLimit + NotifyClientStubTimeout.halfSecond);
+      },          this.configAdapter.notifyTimeout + NotifyClientStubTimeout.halfSecond);
     });
   }
 
@@ -56,7 +54,7 @@ export class NotifyClientStubTimeout implements INotifyClient {
             uri: 'https://api.notificaitons.service.gov.uk/service/your_service_id/templates/bfb50d92-100d-4b8b-b559-14fa3b091cda',
           },
         });
-      },          this.configAdapter.notifyTimeoutLimit + NotifyClientStubTimeout.halfSecond);
+      },          this.configAdapter.notifyTimeout + NotifyClientStubTimeout.halfSecond);
     });
   }
 

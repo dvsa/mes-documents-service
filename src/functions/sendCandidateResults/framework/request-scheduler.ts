@@ -45,15 +45,13 @@ export class RequestScheduler implements IRequestScheduler {
     return testResults.map((testResult: StandardCarTestCATBSchema) => {
       return this.limiter
         .schedule(
-          { expiration: this.configAdapter.notifyTimeoutLimit },
+          { expiration: this.configAdapter.notifyTimeout },
           () => this.sendNotifyRequest(testResult))
           .then((success) => {
-            console.log('### here in success', success);
             return this.statusUpdater.updateToAcceptedStatus(
               testResult.journalData.applicationReference.applicationId);
           })
           .catch((error) => {
-            console.log('### here in error', error);
             return this.statusUpdater.updateToFailedStatus(
               testResult.journalData.applicationReference.applicationId);
           });
@@ -98,7 +96,6 @@ export class RequestScheduler implements IRequestScheduler {
     error: DocumentsServiceError,
     jobInfo: bottleneck.EventInfoRetryable,
   ): Promise<number> | void {
-    console.log('### here in onLimiterFailed, error', error);
     if (error.shouldRetry && jobInfo.retryCount < this.configAdapter.retryLimit) {
       return new Promise<number>(resolve => resolve(0));
     }
