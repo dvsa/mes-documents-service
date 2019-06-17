@@ -11,6 +11,7 @@ import { sendLetter } from '../application/service/send-letter';
 import { IPersonalisationProvider } from '../application/service/personalisation-provider';
 import { IStatusUpdater } from './status-updater';
 import { ProcessingStatus } from '../domain/submission-outcome.model';
+import { NOTIFY_INTERFACE } from '../domain/interface.constants';
 
 export interface IRequestScheduler {
   scheduleRequests(testResults: StandardCarTestCATBSchema[]): Promise<void>[];
@@ -52,7 +53,7 @@ export class RequestScheduler implements IRequestScheduler {
             return this.statusUpdater.updateStatus({
               applicationReference: testResult.journalData.applicationReference.applicationId,
               outcomePayload: {
-                interface: 'NOTIFY',
+                interface: NOTIFY_INTERFACE,
                 state: ProcessingStatus.ACCEPTED,
                 staff_number: testResult.journalData.examiner.staffNumber,
                 retry_count: 0, // TODO - Need to set retry count somehow
@@ -64,7 +65,7 @@ export class RequestScheduler implements IRequestScheduler {
             return this.statusUpdater.updateStatus({
               applicationReference: testResult.journalData.applicationReference.applicationId,
               outcomePayload: {
-                interface: 'NOTIFY',
+                interface: NOTIFY_INTERFACE,
                 state: ProcessingStatus.FAILED,
                 staff_number: testResult.journalData.examiner.staffNumber,
                 retry_count: 0, // TODO - Need to set retry count somehow
