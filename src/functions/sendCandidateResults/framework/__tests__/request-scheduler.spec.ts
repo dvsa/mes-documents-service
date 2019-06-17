@@ -35,7 +35,6 @@ describe('RequestScheduler', () => {
     requestScheduler.scheduleRequests(testResults);
 
     setTimeout(() => {
-      // TODO - Check passed status was sent
       expect(statusUpdater.updateStatus).toHaveBeenCalled();
       done();
     },         1000);
@@ -59,7 +58,6 @@ describe('RequestScheduler', () => {
     requestScheduler.scheduleRequests(testResults);
 
     setTimeout(() => {
-            // TODO - Check failed status was sent
       expect(statusUpdater.updateStatus).toHaveBeenCalled();
       done();
     },         1000);
