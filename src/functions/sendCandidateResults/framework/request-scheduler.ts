@@ -49,8 +49,8 @@ export class RequestScheduler implements IRequestScheduler {
         .schedule(
           { expiration: this.configAdapter.notifyTimeout },
           () => this.sendNotifyRequest(testResult))
-          .then((success) => {
-            return this.statusUpdater.updateStatus({
+          .then(async(success) => {
+            await this.statusUpdater.updateStatus({
               applicationReference: testResult.journalData.applicationReference.applicationId,
               outcomePayload: {
                 interface: NOTIFY_INTERFACE,
@@ -61,8 +61,8 @@ export class RequestScheduler implements IRequestScheduler {
               },
             });
           })
-          .catch((error) => {
-            return this.statusUpdater.updateStatus({
+          .catch(async(error) => {
+            await this.statusUpdater.updateStatus({
               applicationReference: testResult.journalData.applicationReference.applicationId,
               outcomePayload: {
                 interface: NOTIFY_INTERFACE,
