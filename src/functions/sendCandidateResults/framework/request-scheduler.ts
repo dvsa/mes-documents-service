@@ -76,8 +76,8 @@ export class RequestScheduler implements IRequestScheduler {
     });
   }
 
-  private sendNotifyRequest(testResult: StandardCarTestCATBSchema): Promise < any > {
-    if (!testResult .communicationPreferences) {
+  private sendNotifyRequest(testResult: StandardCarTestCATBSchema): Promise <any> {
+    if (!testResult.communicationPreferences) {
       return Promise.reject();
     }
 
