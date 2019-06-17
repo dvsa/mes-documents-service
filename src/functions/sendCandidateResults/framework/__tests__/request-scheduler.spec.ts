@@ -1,5 +1,3 @@
-
-const moment = require('moment');
 import { RequestScheduler } from '../request-scheduler';
 import { IConfigAdapter } from '../adapter/config/config-adapter.interface';
 import { ConfigAdapterMock } from '../adapter/config/__mocks__/config-adapter.mock';
@@ -10,21 +8,24 @@ import { StandardCarTestCATBSchema } from '@dvsa/mes-test-schema/categories/B';
 import { IStatusUpdater, StatusUpdater } from '../status-updater';
 import { NotifyClientStubFailure500 } from '../../application/stub/notify-client-stub-failure-500';
 import { NextUploadBatchMock } from '../__mocks__/next-upload-batch.mock';
+import { IPersonalisationProvider, PersonalisationProvider } from '../../application/service/personalisation-provider';
+import { IFaultProvider, FaultProvider } from '../../application/service/fault-provider';
 
 describe('RequestScheduler', () => {
-
-  const totalNumberOfTests = 50;
 
   it('should call updateToAcceptedStatus when successfully notified candidate', async (done) => {
     const configAdapter: IConfigAdapter = new ConfigAdapterMock();
     const notifyClient: INotifyClient = new NotifyClientStubSuccess();
     const templateIdProvider: ITemplateIdProvider = new TemplateIdProvider(configAdapter);
     const statusUpdater: IStatusUpdater = new StatusUpdater();
+    const faultProvider: IFaultProvider = new FaultProvider();
+    const personalisationProvider: IPersonalisationProvider = new PersonalisationProvider(faultProvider);
 
     spyOn(statusUpdater, 'updateToAcceptedStatus');
     spyOn(statusUpdater, 'updateToFailedStatus');
 
-    const requestScheduler = new RequestScheduler(configAdapter, notifyClient, templateIdProvider, statusUpdater);
+    const requestScheduler = new RequestScheduler(
+      configAdapter, notifyClient, templateIdProvider, personalisationProvider, statusUpdater);
 
     const testResults: StandardCarTestCATBSchema[] = await new NextUploadBatchMock().get();
 
@@ -37,16 +38,19 @@ describe('RequestScheduler', () => {
     },         1000);
   });
 
-  it('should call updateToFailedStatus when failed to notified candidate', async (done) => {
+  it('should call updateToAcceptedStatus when successfully notified candidate', async (done) => {
     const configAdapter: IConfigAdapter = new ConfigAdapterMock();
     const notifyClient: INotifyClient = new NotifyClientStubFailure500();
     const templateIdProvider: ITemplateIdProvider = new TemplateIdProvider(configAdapter);
     const statusUpdater: IStatusUpdater = new StatusUpdater();
+    const faultProvider: IFaultProvider = new FaultProvider();
+    const personalisationProvider: IPersonalisationProvider = new PersonalisationProvider(faultProvider);
 
     spyOn(statusUpdater, 'updateToAcceptedStatus');
     spyOn(statusUpdater, 'updateToFailedStatus');
 
-    const requestScheduler = new RequestScheduler(configAdapter, notifyClient, templateIdProvider, statusUpdater);
+    const requestScheduler = new RequestScheduler(
+      configAdapter, notifyClient, templateIdProvider, personalisationProvider, statusUpdater);
 
     const testResults: StandardCarTestCATBSchema[] = await new NextUploadBatchMock().get();
 
