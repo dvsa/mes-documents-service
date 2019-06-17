@@ -1,9 +1,13 @@
-interface Personalisation {
-  'ref number' : string;
-  'test date' : string;
-  'test time' : string;
-  'first name' : string;
-  'cat dead' : string;
+export interface Personalisation {
+  firstName: string;
+  lastName: string;
+  applicationReference: string;
+  category: string;
+  date: string;
+
+  drivingFaults: string;
+  seriousFaults: string;
+  dangerousFaults: string;
 }
 
 export interface EmailPersonalisation extends Personalisation {

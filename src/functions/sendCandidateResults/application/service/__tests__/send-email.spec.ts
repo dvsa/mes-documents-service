@@ -8,11 +8,14 @@ import { NotifyClientStubFailure500 } from '../../stub/notify-client-stub-failur
 import { DocumentsServiceError } from '../../../domain/errors/documents-service-error';
 
 const personlisation : EmailPersonalisation = {
-  'first name': 'Fred',
-  'ref number': '12345',
-  'test date': '10/10/10',
-  'test time': '10:00',
-  'cat dead': 'it is?',
+  applicationReference: 'app ref',
+  category: 'B',
+  date: '01/01/1990',
+  firstName: 'Fred',
+  lastName: 'Elliot',
+  drivingFaults: '',
+  seriousFaults: '',
+  dangerousFaults: '',
 };
 
 describe('sendEmail' , () => {

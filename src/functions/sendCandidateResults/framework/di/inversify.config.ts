@@ -14,6 +14,7 @@ import { IFaultProvider, FaultProvider } from '../../application/service/fault-p
 import { INextUploadBatch } from '../../domain/next-upload-batch.interface';
 import { NextUploadBatchMock } from '../__mocks__/next-upload-batch.mock';
 import { NextUploadBatch } from '../next-upload-batch';
+import { IPersonalisationProvider, PersonalisationProvider } from '../../application/service/personalisation-provider';
 
 const container = new Container();
 
@@ -37,5 +38,6 @@ if (configAdapter.isLocal) {
 container.bind<IRequestScheduler>(TYPES.IRequestScheduler).to(RequestScheduler);
 container.bind<ITemplateIdProvider>(TYPES.ITemplateIdProvider).to(TemplateIdProvider);
 container.bind<IFaultProvider>(TYPES.IFaultProvider).to(FaultProvider);
+container.bind<IPersonalisationProvider>(TYPES.IPersonalisationProvider).to(PersonalisationProvider);
 
 export { container };

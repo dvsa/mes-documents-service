@@ -10,11 +10,14 @@ const personlisation : LetterPersonalisation = {
   address_line_1: 'address line 1',
   address_line_2: 'address line 2',
   postcode: 'postcode',
-  'first name': 'Fred',
-  'ref number': '12345',
-  'test date': '10/10/10',
-  'test time': '10:00',
-  'cat dead': 'it is?',
+  applicationReference: 'app ref',
+  category: 'B',
+  date: '01/01/1990',
+  firstName: 'Fred',
+  lastName: 'Elliot',
+  drivingFaults: '',
+  seriousFaults: '',
+  dangerousFaults: '',
 };
 
 describe('sendLetter' , () => {

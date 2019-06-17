@@ -6,9 +6,9 @@ import { TYPES } from './di/types';
 import { StandardCarTestCATBSchema } from '@dvsa/mes-test-schema/categories/B';
 import { INotifyClient } from '../domain/notify-client.interface';
 import { ITemplateIdProvider } from '../application/service/template-id-provider';
-import { EmailPersonalisation, LetterPersonalisation } from '../domain/personalisation.model';
 import { sendEmail } from '../application/service/send-email';
 import { sendLetter } from '../application/service/send-letter';
+import { IPersonalisationProvider } from '../application/service/personalisation-provider';
 
 export interface IRequestScheduler {
   scheduleRequests(testResults: StandardCarTestCATBSchema[]): void;
@@ -23,6 +23,7 @@ export class RequestScheduler implements IRequestScheduler {
     @inject(TYPES.IConfigAdapter) private configAdapter: IConfigAdapter,
     @inject(TYPES.INotifyClient) private notifyClient: INotifyClient,
     @inject(TYPES.ITemplateIdProvider) private templateIdProvider: ITemplateIdProvider,
+    @inject(TYPES.IPersonalisationProvider) private personalisationProvider: IPersonalisationProvider,
   ) {
     this.limiter = new bottleneck({
       maxConcurrent: null,                 // No limit on concurrent requests
@@ -59,18 +60,10 @@ export class RequestScheduler implements IRequestScheduler {
           testResult.communicationPreferences.conductedLanguage,
           testResult.activityCode,
         );
-      // TODO - update to send real data
-      const data: EmailPersonalisation = {
-        'ref number': 'test ref',
-        'test date' : '01/01/2019',
-        'test time': '9:00',
-        'first name': 'Joe',
-        'cat dead' : 'was black and white',
-      };
       return sendEmail(
         testResult.communicationPreferences.updatedEmail,
         templateId,
-        data,
+        this.personalisationProvider.getEmailPersonalisation(testResult),
         testResult.journalData.applicationReference.applicationId.toString(),
         '',
         this.notifyClient,
@@ -81,25 +74,10 @@ export class RequestScheduler implements IRequestScheduler {
       testResult.communicationPreferences.conductedLanguage,
       testResult.activityCode,
     );
-    // TODO - update to send real data
-    const data: LetterPersonalisation = {
-      address_line_1: 'The Occupier',
-      address_line_2: '123 High Street',
-      address_line_3: 'Richmond upon Thames',
-      address_line_4: 'London',
-      address_line_5: 'Middlesex',
-      address_line_6: 'UK',
-      postcode: 'SW14 6BH',
-      'ref number': 'test ref',
-      'test date' : '01/01/2019',
-      'test time': '9:00',
-      'first name': 'Joe',
-      'cat dead' : 'was black and white',
-    };
 
     return sendLetter(
       templateId,
-      data,
+      this.personalisationProvider.getLetterPersonalisation(testResult),
       testResult.journalData.applicationReference.applicationId.toString(),
       this.notifyClient);
   }
