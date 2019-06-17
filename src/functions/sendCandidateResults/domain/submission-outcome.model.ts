@@ -1,4 +1,3 @@
-
 export interface SubmissionOutcome {
   applicationReference: number;
   outcomePayload: {
