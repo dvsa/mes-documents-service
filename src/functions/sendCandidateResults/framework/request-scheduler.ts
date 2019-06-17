@@ -12,7 +12,7 @@ import { IPersonalisationProvider } from '../application/service/personalisation
 import { IStatusUpdater } from './status-updater';
 
 export interface IRequestScheduler {
-  scheduleRequests(testResults: StandardCarTestCATBSchema[]): void;
+  scheduleRequests(testResults: StandardCarTestCATBSchema[]): Promise<void>[];
 }
 
 @injectable()
@@ -41,10 +41,9 @@ export class RequestScheduler implements IRequestScheduler {
     this.limiter.on('failed', this.onLimiterFailed);
   }
 
-  scheduleRequests(testResults: StandardCarTestCATBSchema[]): void {
-
-    testResults.forEach((testResult: StandardCarTestCATBSchema) => {
-      this.limiter
+  scheduleRequests(testResults: StandardCarTestCATBSchema[]): Promise<void>[] {
+    return testResults.map((testResult: StandardCarTestCATBSchema) => {
+      return this.limiter
         .schedule(() => this.sendNotifyRequest(testResult))
           .then((success) => {
             return this.statusUpdater.updateToAcceptedStatus(

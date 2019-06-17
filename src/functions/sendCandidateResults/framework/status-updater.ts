@@ -1,10 +1,11 @@
+import { injectable } from 'inversify';
 
 export interface IStatusUpdater {
   updateToAcceptedStatus(applicationId: number): void;
 
   updateToFailedStatus(applicationId: number): void;
 }
-
+@injectable()
 export class StatusUpdater implements IStatusUpdater {
   constructor() {
 
