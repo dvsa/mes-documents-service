@@ -19,8 +19,8 @@ export class StatusUpdater implements IStatusUpdater {
     this.resultsBaseApiUrl = this.configAdapter.resultsBaseApiUrl;
   }
 
-  updateStatus(submissionOutcome: SubmissionOutcome): Promise<void> {
-    return axios.put(
+  updateStatus(submissionOutcome: SubmissionOutcome): void {
+    axios.put(
       `${this.resultsBaseApiUrl}/test-results/${submissionOutcome.applicationReference}/upload`,
       submissionOutcome.outcomePayload,
     );
