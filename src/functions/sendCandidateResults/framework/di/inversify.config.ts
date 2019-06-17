@@ -16,6 +16,7 @@ import { NextUploadBatchMock } from '../__mocks__/next-upload-batch.mock';
 import { NextUploadBatch } from '../next-upload-batch';
 import { IPersonalisationProvider, PersonalisationProvider } from '../../application/service/personalisation-provider';
 import { IStatusUpdater, StatusUpdater } from '../status-updater';
+import { StatusUpdaterMock } from '../__mocks__/status-updater.mock';
 
 const container = new Container();
 
@@ -28,15 +29,18 @@ container.bind<string>(TYPES.apiKey).toConstantValue(configAdapter.apiKey);
 if (configAdapter.isLocal) {
   container.bind<INotifyClient>(TYPES.INotifyClient).to(NotifyClientStubSuccess);
   container.bind<INextUploadBatch>(TYPES.INextUploadBatch).to(NextUploadBatchMock);
+  container.bind<IStatusUpdater>(TYPES.IStatusUpdater).to(StatusUpdaterMock);
 } else if (configAdapter.useNotify) {
   container.bind<INotifyClient>(TYPES.INotifyClient).to(GovNotifyClient);
   container.bind<INextUploadBatch>(TYPES.INextUploadBatch).to(NextUploadBatch);
+  container.bind<IStatusUpdater>(TYPES.IStatusUpdater).to(StatusUpdater);
+
 } else {
   container.bind<INotifyClient>(TYPES.INotifyClient).to(LogNotifyClient);
   container.bind<INextUploadBatch>(TYPES.INextUploadBatch).to(NextUploadBatch);
+  container.bind<IStatusUpdater>(TYPES.IStatusUpdater).to(StatusUpdater);
 }
 
-container.bind<IStatusUpdater>(TYPES.IStatusUpdater).to(StatusUpdater);
 container.bind<IRequestScheduler>(TYPES.IRequestScheduler).to(RequestScheduler);
 container.bind<ITemplateIdProvider>(TYPES.ITemplateIdProvider).to(TemplateIdProvider);
 container.bind<IFaultProvider>(TYPES.IFaultProvider).to(FaultProvider);

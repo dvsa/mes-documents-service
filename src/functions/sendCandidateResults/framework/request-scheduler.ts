@@ -10,6 +10,7 @@ import { sendEmail } from '../application/service/send-email';
 import { sendLetter } from '../application/service/send-letter';
 import { IPersonalisationProvider } from '../application/service/personalisation-provider';
 import { IStatusUpdater } from './status-updater';
+import { ProcessingStatus } from '../domain/submission-outcome.model';
 
 export interface IRequestScheduler {
   scheduleRequests(testResults: StandardCarTestCATBSchema[]): Promise<void>[];
@@ -48,19 +49,34 @@ export class RequestScheduler implements IRequestScheduler {
           { expiration: this.configAdapter.notifyTimeout },
           () => this.sendNotifyRequest(testResult))
           .then((success) => {
-            return this.statusUpdater.updateToAcceptedStatus(
-              testResult.journalData.applicationReference.applicationId);
+            return this.statusUpdater.updateStatus({
+              applicationReference: testResult.journalData.applicationReference.applicationId,
+              outcomePayload: {
+                interface: 'NOTIFY',
+                state: ProcessingStatus.ACCEPTED,
+                staff_number: testResult.journalData.examiner.staffNumber,
+                retry_count: 0, // TODO - Need to set retry count somehow
+                error_message: null,
+              },
+            });
           })
           .catch((error) => {
-            return this.statusUpdater.updateToFailedStatus(
-              testResult.journalData.applicationReference.applicationId);
+            return this.statusUpdater.updateStatus({
+              applicationReference: testResult.journalData.applicationReference.applicationId,
+              outcomePayload: {
+                interface: 'NOTIFY',
+                state: ProcessingStatus.FAILED,
+                staff_number: testResult.journalData.examiner.staffNumber,
+                retry_count: 0, // TODO - Need to set retry count somehow
+                error_message: error,
+              },
+            });
           });
     });
-
   }
 
-  private sendNotifyRequest(testResult: StandardCarTestCATBSchema): Promise<any> {
-    if (!testResult.communicationPreferences) {
+  private sendNotifyRequest(testResult: StandardCarTestCATBSchema): Promise < any > {
+    if (!testResult .communicationPreferences) {
       return Promise.reject();
     }
 

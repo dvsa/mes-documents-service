@@ -11,6 +11,7 @@ import { NextUploadBatchMock } from '../__mocks__/next-upload-batch.mock';
 import { NotifyClientStubTimeout } from '../../application/stub/notify-client-stub-timeout';
 import { IPersonalisationProvider, PersonalisationProvider } from '../../application/service/personalisation-provider';
 import { IFaultProvider, FaultProvider } from '../../application/service/fault-provider';
+import { StatusUpdaterMock } from '../__mocks__/status-updater.mock';
 
 describe('RequestScheduler', () => {
 
@@ -20,23 +21,22 @@ describe('RequestScheduler', () => {
     const configAdapter: IConfigAdapter = new ConfigAdapterMock();
     const notifyClient: INotifyClient = new NotifyClientStubSuccess();
     const templateIdProvider: ITemplateIdProvider = new TemplateIdProvider(configAdapter);
-    const statusUpdater: IStatusUpdater = new StatusUpdater();
+    const statusUpdater: IStatusUpdater = new StatusUpdaterMock();
     const faultProvider: IFaultProvider = new FaultProvider();
     const personalisationProvider: IPersonalisationProvider = new PersonalisationProvider(faultProvider);
 
-    spyOn(statusUpdater, 'updateToAcceptedStatus');
-    spyOn(statusUpdater, 'updateToFailedStatus');
+    spyOn(statusUpdater, 'updateStatus');
 
-    const requestScheduler = new RequestScheduler(
-      configAdapter, notifyClient, templateIdProvider, personalisationProvider, statusUpdater);
+    const requestScheduler =
+    new RequestScheduler(configAdapter, notifyClient, templateIdProvider, personalisationProvider, statusUpdater);
 
     const testResults: StandardCarTestCATBSchema[] = await new NextUploadBatchMock().get(totalNumberOfTests);
 
     requestScheduler.scheduleRequests(testResults);
 
     setTimeout(() => {
-      expect(statusUpdater.updateToAcceptedStatus).toHaveBeenCalled();
-      expect(statusUpdater.updateToFailedStatus).not.toHaveBeenCalled();
+      // TODO - Check passed status was sent
+      expect(statusUpdater.updateStatus).toHaveBeenCalled();
       done();
     },         1000);
   });
@@ -45,23 +45,22 @@ describe('RequestScheduler', () => {
     const configAdapter: IConfigAdapter = new ConfigAdapterMock();
     const notifyClient: INotifyClient = new NotifyClientStubFailure500();
     const templateIdProvider: ITemplateIdProvider = new TemplateIdProvider(configAdapter);
-    const statusUpdater: IStatusUpdater = new StatusUpdater();
+    const statusUpdater: IStatusUpdater = new StatusUpdaterMock();
     const faultProvider: IFaultProvider = new FaultProvider();
     const personalisationProvider: IPersonalisationProvider = new PersonalisationProvider(faultProvider);
 
-    spyOn(statusUpdater, 'updateToAcceptedStatus');
-    spyOn(statusUpdater, 'updateToFailedStatus');
+    spyOn(statusUpdater, 'updateStatus');
 
-    const requestScheduler = new RequestScheduler(
-      configAdapter, notifyClient, templateIdProvider, personalisationProvider, statusUpdater);
+    const requestScheduler =
+    new RequestScheduler(configAdapter, notifyClient, templateIdProvider, personalisationProvider, statusUpdater);
 
     const testResults: StandardCarTestCATBSchema[] = await new NextUploadBatchMock().get(totalNumberOfTests);
 
     requestScheduler.scheduleRequests(testResults);
 
     setTimeout(() => {
-      expect(statusUpdater.updateToAcceptedStatus).not.toHaveBeenCalled();
-      expect(statusUpdater.updateToFailedStatus).toHaveBeenCalled();
+            // TODO - Check failed status was sent
+      expect(statusUpdater.updateStatus).toHaveBeenCalled();
       done();
     },         1000);
   });
@@ -70,12 +69,11 @@ describe('RequestScheduler', () => {
     const configAdapter: IConfigAdapter = new ConfigAdapterMock();
     const notifyClient: INotifyClient = new NotifyClientStubTimeout(configAdapter);
     const templateIdProvider: ITemplateIdProvider = new TemplateIdProvider(configAdapter);
-    const statusUpdater: IStatusUpdater = new StatusUpdater();
+    const statusUpdater: IStatusUpdater = new StatusUpdaterMock();
     const faultProvider: IFaultProvider = new FaultProvider();
     const personalisationProvider: IPersonalisationProvider = new PersonalisationProvider(faultProvider);
 
-    spyOn(statusUpdater, 'updateToAcceptedStatus');
-    spyOn(statusUpdater, 'updateToFailedStatus');
+    spyOn(statusUpdater, 'updateStatus');
 
     const requestScheduler = new RequestScheduler(
       configAdapter, notifyClient, templateIdProvider, personalisationProvider, statusUpdater);
@@ -85,8 +83,7 @@ describe('RequestScheduler', () => {
     requestScheduler.scheduleRequests(testResults);
 
     setTimeout(() => {
-      expect(statusUpdater.updateToAcceptedStatus).not.toHaveBeenCalled();
-      expect(statusUpdater.updateToFailedStatus).toHaveBeenCalled();
+      expect(statusUpdater.updateStatus).toHaveBeenCalled();
       done();
     },         4500);
   });
