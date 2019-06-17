@@ -13,6 +13,7 @@ export interface IPersonalisationProvider {
   getLetterPersonalisation (testresult: StandardCarTestCATBSchema) : LetterPersonalisation;
 }
 
+@injectable()
 export class PersonalisationProvider implements IPersonalisationProvider {
 
   constructor(
@@ -58,7 +59,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
   private buildFaultString(faults: Fault[]): string {
     let faultString = '';
 
-    faults.forEach(fault => faultString = faultString.concat(`${fault.name} - ${fault.count} <br/>`));
+    faults.forEach(fault => faultString = faultString.concat(`${fault.name} - ${fault.count}, `));
 
     return faultString;
   }

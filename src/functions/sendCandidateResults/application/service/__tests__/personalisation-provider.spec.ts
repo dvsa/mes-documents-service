@@ -22,11 +22,11 @@ describe('personalisation-provider', () => {
       expect(result.firstName).toBe('Joe');
       expect(result.lastName).toBe('Bloggs');
       // tslint:disable-next-line:max-line-length
-      expect(result.drivingFaults).toBe('ancillaryControls - 1 <br/>awarenessPlanning - 1 <br/>controlsSteering - 1 <br/>signalsCorrectly - 1 <br/>controlledStop - 1 <br/>reverseParkCarparkControlFault - 1 <br/>reverseParkCarparkObservationFault - 1 <br/>');
+      expect(result.drivingFaults).toBe('ancillaryControls - 1, awarenessPlanning - 1, controlsSteering - 1, signalsCorrectly - 1, controlledStop - 1, reverseParkCarparkControlFault - 1, reverseParkCarparkObservationFault - 1, ');
       // tslint:disable-next-line:max-line-length
-      expect(result.seriousFaults).toBe('ancillaryControls - 1 <br/>awarenessPlanning - 1 <br/>reverseParkRoadControlFault - 1 <br/>reverseParkRoadObservationFault - 1 <br/>');
+      expect(result.seriousFaults).toBe('ancillaryControls - 1, awarenessPlanning - 1, reverseParkRoadControlFault - 1, reverseParkRoadObservationFault - 1, ');
       // tslint:disable-next-line:max-line-length
-      expect(result.dangerousFaults).toBe('controlsSteering - 1 <br/>signalsCorrectly - 1 <br/>vehicleChecks - 1 <br/>');
+      expect(result.dangerousFaults).toBe('controlsSteering - 1, signalsCorrectly - 1, vehicleChecks - 1, ');
     });
   });
 
@@ -50,12 +50,11 @@ describe('personalisation-provider', () => {
       expect(result.firstName).toBe('Joe');
       expect(result.lastName).toBe('Bloggs');
       // tslint:disable-next-line:max-line-length
-      expect(result.drivingFaults).toBe('ancillaryControls - 1 <br/>awarenessPlanning - 1 <br/>controlsSteering - 1 <br/>signalsCorrectly - 1 <br/>controlledStop - 1 <br/>reverseParkCarparkControlFault - 1 <br/>reverseParkCarparkObservationFault - 1 <br/>');
+      expect(result.drivingFaults).toBe('ancillaryControls - 1, awarenessPlanning - 1, controlsSteering - 1, signalsCorrectly - 1, controlledStop - 1, reverseParkCarparkControlFault - 1, reverseParkCarparkObservationFault - 1, ');
       // tslint:disable-next-line:max-line-length
-      expect(result.seriousFaults).toBe('ancillaryControls - 1 <br/>awarenessPlanning - 1 <br/>reverseParkRoadControlFault - 1 <br/>reverseParkRoadObservationFault - 1 <br/>');
+      expect(result.seriousFaults).toBe('ancillaryControls - 1, awarenessPlanning - 1, reverseParkRoadControlFault - 1, reverseParkRoadObservationFault - 1, ');
       // tslint:disable-next-line:max-line-length
-      expect(result.dangerousFaults).toBe('controlsSteering - 1 <br/>signalsCorrectly - 1 <br/>vehicleChecks - 1 <br/>');
-
+      expect(result.dangerousFaults).toBe('controlsSteering - 1, signalsCorrectly - 1, vehicleChecks - 1, ');
     });
   });
 });
