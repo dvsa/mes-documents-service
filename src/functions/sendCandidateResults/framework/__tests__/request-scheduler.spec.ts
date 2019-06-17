@@ -14,6 +14,8 @@ import { IFaultProvider, FaultProvider } from '../../application/service/fault-p
 
 describe('RequestScheduler', () => {
 
+  const totalNumberOfTests: number = 50;
+
   it('should call updateToAcceptedStatus when successfully notified candidate', async (done) => {
     const configAdapter: IConfigAdapter = new ConfigAdapterMock();
     const notifyClient: INotifyClient = new NotifyClientStubSuccess();
