@@ -6,4 +6,5 @@ export const TYPES = {
   ITemplateIdProvider: Symbol.for('ITemplateIdProvider'),
   IFaultProvider: Symbol.for('IFaultProvider'),
   INextUploadBatch: Symbol.for('INextUploadBatch'),
+  IPersonalisationProvider: Symbol.for('IPersonalisationProvider'),
 };
