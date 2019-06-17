@@ -15,6 +15,7 @@ import { INextUploadBatch } from '../../domain/next-upload-batch.interface';
 import { NextUploadBatchMock } from '../__mocks__/next-upload-batch.mock';
 import { NextUploadBatch } from '../next-upload-batch';
 import { IPersonalisationProvider, PersonalisationProvider } from '../../application/service/personalisation-provider';
+import { IStatusUpdater, StatusUpdater } from '../status-updater';
 
 const container = new Container();
 
@@ -35,6 +36,7 @@ if (configAdapter.isLocal) {
   container.bind<INextUploadBatch>(TYPES.INextUploadBatch).to(NextUploadBatch);
 }
 
+container.bind<IStatusUpdater>(TYPES.IStatusUpdater).to(StatusUpdater);
 container.bind<IRequestScheduler>(TYPES.IRequestScheduler).to(RequestScheduler);
 container.bind<ITemplateIdProvider>(TYPES.ITemplateIdProvider).to(TemplateIdProvider);
 container.bind<IFaultProvider>(TYPES.IFaultProvider).to(FaultProvider);

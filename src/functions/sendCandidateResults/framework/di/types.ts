@@ -7,4 +7,5 @@ export const TYPES = {
   IFaultProvider: Symbol.for('IFaultProvider'),
   INextUploadBatch: Symbol.for('INextUploadBatch'),
   IPersonalisationProvider: Symbol.for('IPersonalisationProvider'),
+  IStatusUpdater: Symbol.for('IStatusUpdater'),
 };
