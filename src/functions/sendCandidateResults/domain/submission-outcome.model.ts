@@ -1,5 +1,5 @@
 export interface SubmissionOutcome {
-  applicationReference: number;
+  applicationReference: string;
   outcomePayload: {
     staff_number: string;
     interface: string;

@@ -3,7 +3,7 @@ import { IConfigAdapter } from './adapter/config/config-adapter.interface';
 import { DocumentsServiceError } from '../domain/errors/documents-service-error';
 import { inject, injectable } from 'inversify';
 import { TYPES } from './di/types';
-import { StandardCarTestCATBSchema } from '@dvsa/mes-test-schema/categories/B';
+import { StandardCarTestCATBSchema, ApplicationReference } from '@dvsa/mes-test-schema/categories/B';
 import { INotifyClient } from '../domain/notify-client.interface';
 import { ITemplateIdProvider } from '../application/service/template-id-provider';
 import { sendEmail } from '../application/service/send-email';
@@ -45,13 +45,16 @@ export class RequestScheduler implements IRequestScheduler {
 
   scheduleRequests(testResults: StandardCarTestCATBSchema[]): Promise<void>[] {
     return testResults.map((testResult: StandardCarTestCATBSchema) => {
+      const applicationReference = this.formatApplicationReference(
+        testResult.journalData.applicationReference,
+      );
       return this.limiter
         .schedule(
           { expiration: this.configAdapter.notifyTimeout },
           () => this.sendNotifyRequest(testResult))
           .then(async(success) => {
             await this.statusUpdater.updateStatus({
-              applicationReference: testResult.journalData.applicationReference.applicationId,
+              applicationReference,
               outcomePayload: {
                 interface: NOTIFY_INTERFACE,
                 state: ProcessingStatus.ACCEPTED,
@@ -63,7 +66,7 @@ export class RequestScheduler implements IRequestScheduler {
           })
           .catch(async(error) => {
             await this.statusUpdater.updateStatus({
-              applicationReference: testResult.journalData.applicationReference.applicationId,
+              applicationReference,
               outcomePayload: {
                 interface: NOTIFY_INTERFACE,
                 state: ProcessingStatus.FAILED,
@@ -116,6 +119,10 @@ export class RequestScheduler implements IRequestScheduler {
     if (error.shouldRetry && jobInfo.retryCount < this.configAdapter.retryLimit) {
       return new Promise<number>(resolve => resolve(0));
     }
+  }
+
+  private formatApplicationReference(appRef: ApplicationReference) {
+    return `${appRef.applicationId}${appRef.bookingSequence}${appRef.checkDigit}`;
   }
 
 }
