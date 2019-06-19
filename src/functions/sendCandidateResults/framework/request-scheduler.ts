@@ -50,8 +50,11 @@ export class RequestScheduler implements IRequestScheduler {
       );
       return this.limiter
         .schedule(
-          { expiration: this.configAdapter.notifyTimeout },
-          () => this.sendNotifyRequest(testResult))
+          // { expiration: this.configAdapter.notifyTimeout },
+          () => Promise.race([
+            this.sendNotifyRequest(testResult),
+            new Promise((resolve, reject) => setTimeout(reject, this.configAdapter.notifyTimeout)),
+          ]))
           .then(async(success) => {
             await this.statusUpdater.updateStatus({
               applicationReference,
