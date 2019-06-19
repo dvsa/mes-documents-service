@@ -21,6 +21,7 @@ describe('personalisation-provider', () => {
       expect(result.date).toBe('09:00');
       expect(result.firstName).toBe('Joe');
       expect(result.lastName).toBe('Bloggs');
+      expect(result.driverNumber).toBe('ABC 12345 EFG');
       // tslint:disable-next-line:max-line-length
       expect(result.drivingFaults).toBe('ancillaryControls - 1, awarenessPlanning - 1, controlsSteering - 1, signalsCorrectly - 1, controlledStop - 1, reverseParkCarparkControlFault - 1, reverseParkCarparkObservationFault - 1, ');
       // tslint:disable-next-line:max-line-length
@@ -49,6 +50,7 @@ describe('personalisation-provider', () => {
       expect(result.date).toBe('09:00');
       expect(result.firstName).toBe('Joe');
       expect(result.lastName).toBe('Bloggs');
+      expect(result.driverNumber).toBe('ABC 12345 EFG');
       // tslint:disable-next-line:max-line-length
       expect(result.drivingFaults).toBe('ancillaryControls - 1, awarenessPlanning - 1, controlsSteering - 1, signalsCorrectly - 1, controlledStop - 1, reverseParkCarparkControlFault - 1, reverseParkCarparkObservationFault - 1, ');
       // tslint:disable-next-line:max-line-length

@@ -50,6 +50,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       applicationReference: this.getApplicationRef(get(testresult, 'journalData.applicationReference')),
       category: testresult.category,
       date: get(testresult, 'journalData.testSlotAttributes.start'),
+      driverNumber: get(testresult, 'journalData.candidate.driverNumber'),
       drivingFaults: this.buildFaultString(this.faultProvider.getDrivingFaults(testresult.testData)),
       seriousFaults: this.buildFaultString(this.faultProvider.getSeriousFaults(testresult.testData)),
       dangerousFaults: this.buildFaultString(this.faultProvider.getDangerousFaults(testresult.testData)),

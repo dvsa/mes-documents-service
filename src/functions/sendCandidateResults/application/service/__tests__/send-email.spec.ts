@@ -16,6 +16,7 @@ const personlisation : EmailPersonalisation = {
   drivingFaults: '',
   seriousFaults: '',
   dangerousFaults: '',
+  driverNumber: 'ABCD',
 };
 
 describe('sendEmail' , () => {
