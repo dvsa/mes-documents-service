@@ -12,6 +12,8 @@ import { NotifyClientStubTimeout } from '../../application/stub/notify-client-st
 import { IPersonalisationProvider, PersonalisationProvider } from '../../application/service/personalisation-provider';
 import { IFaultProvider, FaultProvider } from '../../application/service/fault-provider';
 import { StatusUpdaterMock } from '../__mocks__/status-updater.mock';
+import { NOTIFY_INTERFACE } from '../../domain/interface.constants';
+import { ProcessingStatus } from '../../domain/submission-outcome.model';
 
 describe('RequestScheduler', () => {
 
@@ -35,7 +37,16 @@ describe('RequestScheduler', () => {
     requestScheduler.scheduleRequests(testResults);
 
     setTimeout(() => {
-      expect(statusUpdater.updateStatus).toHaveBeenCalled();
+      expect(statusUpdater.updateStatus).toHaveBeenCalledWith({
+        applicationReference: '1234567890',
+        outcomePayload: {
+          interface: NOTIFY_INTERFACE,
+          state: ProcessingStatus.ACCEPTED,
+          staff_number: '123456',
+          retry_count: 0, // TODO - Need to set retry count somehow
+          error_message: null,
+        },
+      });
       done();
     },         1000);
   });
@@ -81,7 +92,16 @@ describe('RequestScheduler', () => {
     requestScheduler.scheduleRequests(testResults);
 
     setTimeout(() => {
-      expect(statusUpdater.updateStatus).toHaveBeenCalled();
+      expect(statusUpdater.updateStatus).toHaveBeenCalledWith({
+        applicationReference: '1234567890',
+        outcomePayload: {
+          interface: NOTIFY_INTERFACE,
+          state: ProcessingStatus.FAILED,
+          staff_number: '123456',
+          retry_count: 0,
+          error_message: 'timed out',
+        },
+      });
       done();
     },         4500);
   });
