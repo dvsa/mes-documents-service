@@ -73,6 +73,6 @@ export class PersonalisationProvider implements IPersonalisationProvider {
   }
 
   private getApplicationRef (ref: ApplicationReference) {
-    return `${ref.applicationId }${ref.bookingSequence}${ref.checkDigit}`;
+    return `${ref.applicationId}${ref.bookingSequence}${ref.checkDigit}`;
   }
 }
