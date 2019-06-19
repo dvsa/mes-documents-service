@@ -16,7 +16,7 @@ describe('personalisation-provider', () => {
 
       const result = personalisationProvider.getEmailPersonalisation(completedCatBTest);
 
-      expect(result.applicationReference).toBe('12345');
+      expect(result.applicationReference).toBe('1234567890');
       expect(result.category).toBe('B');
       expect(result.date).toBe('09:00');
       expect(result.firstName).toBe('Joe');
@@ -44,7 +44,7 @@ describe('personalisation-provider', () => {
       expect(result.address_line_6).toBe('Middlesex');
       expect(result.postcode).toBe('SW14 6BH');
 
-      expect(result.applicationReference).toBe('12345');
+      expect(result.applicationReference).toBe('1234567890');
       expect(result.category).toBe('B');
       expect(result.date).toBe('09:00');
       expect(result.firstName).toBe('Joe');

@@ -1,5 +1,5 @@
 import { LetterPersonalisation, EmailPersonalisation, Personalisation } from '../../domain/personalisation.model';
-import { StandardCarTestCATBSchema, Candidate, Name } from '@dvsa/mes-test-schema/categories/B';
+import { StandardCarTestCATBSchema, Candidate, Name, ApplicationReference } from '@dvsa/mes-test-schema/categories/B';
 import { inject, injectable } from 'inversify';
 import { TYPES } from '../../framework/di/types';
 import { IFaultProvider } from './fault-provider';
@@ -47,7 +47,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     return {
       firstName: get(testresult, 'journalData.candidate.candidateName.firstName'),
       lastName: get(testresult,  'journalData.candidate.candidateName.lastName') ,
-      applicationReference: get(testresult, 'journalData.applicationReference.applicationId').toString(),
+      applicationReference: this.getApplicationRef(get(testresult, 'journalData.applicationReference')),
       category: testresult.category,
       date: get(testresult, 'journalData.testSlotAttributes.start'),
       drivingFaults: this.buildFaultString(this.faultProvider.getDrivingFaults(testresult.testData)),
@@ -69,5 +69,9 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       return `${name.title} ${name.firstName} ${name.lastName}`;
     }
     return '';
+  }
+
+  private getApplicationRef (ref: ApplicationReference) {
+    return `${ref.applicationId }${ref.bookingSequence}${ref.checkDigit}`;
   }
 }
