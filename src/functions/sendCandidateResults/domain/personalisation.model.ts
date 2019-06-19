@@ -4,6 +4,7 @@ export interface Personalisation {
   applicationReference: string;
   category: string;
   date: string;
+  driverNumber:string;
 
   drivingFaults: string;
   seriousFaults: string;

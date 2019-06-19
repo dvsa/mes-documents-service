@@ -18,6 +18,7 @@ const personlisation : LetterPersonalisation = {
   drivingFaults: '',
   seriousFaults: '',
   dangerousFaults: '',
+  driverNumber: 'ABCD',
 };
 
 describe('sendLetter' , () => {
