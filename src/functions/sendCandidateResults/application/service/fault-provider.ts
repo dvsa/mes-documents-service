@@ -45,10 +45,7 @@ export class FaultProvider implements IFaultProvider {
     const seriousFaults: Fault[] = [];
 
     if (activityCode === '3') {
-      return [{
-        name: 'eyesightTest',
-        count: 1,
-      }];
+      return [{ name: 'eyesightTest', count: 1 }];
     }
 
     if (!testData) {
