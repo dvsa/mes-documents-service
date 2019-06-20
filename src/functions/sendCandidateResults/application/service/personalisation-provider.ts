@@ -52,7 +52,9 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       date: get(testresult, 'journalData.testSlotAttributes.start'),
       driverNumber: get(testresult, 'journalData.candidate.driverNumber'),
       drivingFaults: this.buildFaultString(this.faultProvider.getDrivingFaults(testresult.testData)),
-      seriousFaults: this.buildFaultString(this.faultProvider.getSeriousFaults(testresult.testData)),
+      seriousFaults: this.buildFaultString(
+        this.faultProvider.getSeriousFaults(testresult.testData, testresult.activityCode),
+      ),
       dangerousFaults: this.buildFaultString(this.faultProvider.getDangerousFaults(testresult.testData)),
     };
   }

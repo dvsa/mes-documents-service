@@ -72,12 +72,20 @@ describe('fault-provider', () => {
           },
         };
 
-        const result: Fault [] = faultProvider.getSeriousFaults(data);
+        const result: Fault [] = faultProvider.getSeriousFaults(data, '2');
 
         expect(result.length).toBe(3);
         expect(result).toContain({ name: 'controlledStop', count: 1 });
         expect(result).toContain({ name: 'forwardParkControlFault', count: 1 });
         expect(result).toContain({ name: 'ancillaryControls', count: 1 });
+
+      });
+      it('should give us an eyesight fault if activty code 3', () => {
+
+        const result: Fault [] = faultProvider.getSeriousFaults(undefined, '3');
+
+        expect(result.length).toBe(1);
+        expect(result).toContain({ name: 'eyesightTest', count: 1 });
 
       });
     });
