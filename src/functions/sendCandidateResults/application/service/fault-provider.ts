@@ -10,6 +10,7 @@ import 'reflect-metadata';
 
 import { CompetencyOutcome } from '../../domain/competency-outcome';
 import { Fault } from '../../domain/fault';
+import { Competencies } from '../../domain/competencies';
 
 export interface IFaultProvider {
   getDrivingFaults(testData: TestData | undefined): Fault[];
@@ -45,7 +46,7 @@ export class FaultProvider implements IFaultProvider {
     const seriousFaults: Fault[] = [];
 
     if (activityCode === '3') {
-      return [{ name: 'eyesightTest', count: 1 }];
+      return [{ name: Competencies.eyesightTest, count: 1 }];
     }
 
     if (!testData) {
@@ -104,7 +105,7 @@ export function getNonStandardFaults(testData: TestData, faultType: CompetencyOu
   testData.controlledStop &&
   testData.controlledStop.selected &&
   testData.controlledStop.fault === faultType) {
-    faults.push({ name: 'controlledStop', count: 1 });
+    faults.push({ name: Competencies.controlledStop, count: 1 });
   }
 
 // Manoeuvres
@@ -128,10 +129,10 @@ export function getCompletedManoeuvres(manoeuvres : any, faultType: ManoeuvreOut
   Object.keys(manoeuvres).forEach((manoeuvreName) => {
     if (manoeuvres[manoeuvreName].selected === true) {
       if (manoeuvres[manoeuvreName].controlFault && manoeuvres[manoeuvreName].controlFault === faultType) {
-        result.push({ name: `${manoeuvreName}ControlFault`, count: 1 });
+        result.push({ name: `${manoeuvreName}Control` as Competencies, count: 1 });
       }
       if (manoeuvres[manoeuvreName].observationFault && manoeuvres[manoeuvreName].observationFault === faultType) {
-        result.push({ name: `${manoeuvreName}ObservationFault`, count: 1 });
+        result.push({ name: `${manoeuvreName}Observation` as Competencies, count: 1 });
       }
     }
   });
@@ -142,13 +143,13 @@ export function getCompletedManoeuvres(manoeuvres : any, faultType: ManoeuvreOut
 export function getVehicleChecksFault(vehicleChecks: VehicleChecks, faultType: QuestionOutcome) : Fault[] {
   if (faultType === 'D') {
     if (vehicleChecks.showMeQuestion && vehicleChecks.showMeQuestion.outcome === 'D') {
-      return [{ name:  'vehicleChecks', count: 1 }];
+      return [{ name: Competencies.vehicleChecks, count: 1 }];
     }
   }
 
   if (faultType === 'S') {
     if (vehicleChecks.showMeQuestion && vehicleChecks.showMeQuestion.outcome === 'S') {
-      return [{ name:  'vehicleChecks', count: 1 }];
+      return [{ name:  Competencies.vehicleChecks, count: 1 }];
     }
   }
 
@@ -161,11 +162,11 @@ export function getVehicleChecksFault(vehicleChecks: VehicleChecks, faultType: Q
     }
 
     if (vehicleChecks.showMeQuestion && vehicleChecks.showMeQuestion.outcome === 'DF') {
-      return [{ name:  'vehicleChecks', count: 1 }];
+      return [{ name: Competencies.vehicleChecks, count: 1 }];
     }
 
     if (vehicleChecks.tellMeQuestion && vehicleChecks.tellMeQuestion.outcome === 'DF') {
-      return [{ name:  'vehicleChecks', count: 1 }];
+      return [{ name: Competencies.vehicleChecks , count: 1 }];
     }
   }
   return [];

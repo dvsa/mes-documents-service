@@ -1,10 +1,15 @@
 import { LetterPersonalisation, EmailPersonalisation, Personalisation } from '../../domain/personalisation.model';
-import { StandardCarTestCATBSchema, Candidate, Name, ApplicationReference } from '@dvsa/mes-test-schema/categories/B';
+import {
+  StandardCarTestCATBSchema,
+  Name, ApplicationReference,
+  ConductedLanguage,
+} from '@dvsa/mes-test-schema/categories/B';
 import { inject, injectable } from 'inversify';
 import { TYPES } from '../../framework/di/types';
 import { IFaultProvider } from './fault-provider';
 import { get } from 'lodash';
 import { Fault } from '../../domain/fault';
+import { englishCompetencyLabels, welshCompetencyLabels } from '../../domain/competencies';
 
 export interface IPersonalisationProvider {
 
@@ -44,25 +49,54 @@ export class PersonalisationProvider implements IPersonalisationProvider {
   }
 
   private getSharedPersonalisationValues(testresult: StandardCarTestCATBSchema) : Personalisation {
+
+    const drivingFaults = this.buildFaultStringWithCount(
+      this.faultProvider.getDrivingFaults(testresult.testData),
+      get(testresult, 'communicationPreferences.conductedLanguage'));
+
+    const seriousFaults = this.buildFaultString(
+      this.faultProvider.getSeriousFaults(testresult.testData, testresult.activityCode),
+      get(testresult, 'communicationPreferences.conductedLanguage'));
+
+    const dangerousFaults = this.buildFaultString(
+        this.faultProvider.getDangerousFaults(testresult.testData),
+        get(testresult, 'communicationPreferences.conductedLanguage'));
+
     return {
+      drivingFaults,
+      seriousFaults,
+      dangerousFaults,
       firstName: get(testresult, 'journalData.candidate.candidateName.firstName'),
       lastName: get(testresult,  'journalData.candidate.candidateName.lastName') ,
       applicationReference: this.getApplicationRef(get(testresult, 'journalData.applicationReference')),
       category: testresult.category,
       date: get(testresult, 'journalData.testSlotAttributes.start'),
       driverNumber: get(testresult, 'journalData.candidate.driverNumber'),
-      drivingFaults: this.buildFaultString(this.faultProvider.getDrivingFaults(testresult.testData)),
-      seriousFaults: this.buildFaultString(
-        this.faultProvider.getSeriousFaults(testresult.testData, testresult.activityCode),
-      ),
-      dangerousFaults: this.buildFaultString(this.faultProvider.getDangerousFaults(testresult.testData)),
     };
   }
 
-  private buildFaultString(faults: Fault[]): string {
+  private buildFaultString(faults: Fault[], language: ConductedLanguage): string {
     let faultString = '';
 
-    faults.forEach(fault => faultString = faultString.concat(`${fault.name} - ${fault.count}, `));
+    if (language === 'Cymraeg') {
+      faults.forEach(fault => faultString = faultString.concat(`* ${welshCompetencyLabels[fault.name]}`));
+    } else {
+      faults.forEach(fault => faultString = faultString.concat(`* ${englishCompetencyLabels[fault.name]}`));
+    }
+
+    return faultString;
+  }
+
+  private buildFaultStringWithCount(faults: Fault[], language: ConductedLanguage): string {
+    let faultString = '';
+
+    if (language === 'Cymraeg') {
+      faults.forEach(fault =>
+        faultString = faultString.concat(`* ${welshCompetencyLabels[fault.name]} - ${fault.count}`));
+    } else {
+      faults.forEach(fault =>
+        faultString = faultString.concat(`* ${englishCompetencyLabels[fault.name]} - ${fault.count}`));
+    }
 
     return faultString;
   }

@@ -1,4 +1,6 @@
+import { Competencies } from './competencies';
+
 export interface Fault {
-  name: string;
+  name: Competencies;
   count: number;
 }
