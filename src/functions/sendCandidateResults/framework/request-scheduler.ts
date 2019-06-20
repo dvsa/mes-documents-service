@@ -53,7 +53,7 @@ export class RequestScheduler implements IRequestScheduler {
           () => Promise.race([
             this.sendNotifyRequest(testResult),
             new Promise((resolve, reject) => {
-              setTimeout(reject, this.configAdapter.notifyTimeout, { message: 'timed out' });
+              setTimeout(reject, this.configAdapter.notifyTimeout, 'timed out');
             }),
           ]))
           .then(async(success) => {
