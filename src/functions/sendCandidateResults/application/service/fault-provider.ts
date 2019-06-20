@@ -1,4 +1,10 @@
-import { TestData, ManoeuvreOutcome, VehicleChecks, QuestionOutcome } from '@dvsa/mes-test-schema/categories/B';
+import {
+  TestData,
+  ManoeuvreOutcome,
+  VehicleChecks,
+  QuestionOutcome,
+  ActivityCode,
+} from '@dvsa/mes-test-schema/categories/B';
 import { injectable } from 'inversify';
 import 'reflect-metadata';
 
@@ -8,7 +14,7 @@ import { Fault } from '../../domain/fault';
 export interface IFaultProvider {
   getDrivingFaults(testData: TestData | undefined): Fault[];
 
-  getSeriousFaults(testData: TestData | undefined): Fault[];
+  getSeriousFaults(testData: TestData | undefined, activityCode: ActivityCode): Fault[];
 
   getDangerousFaults(testData: TestData | undefined): Fault[];
 
@@ -35,8 +41,15 @@ export class FaultProvider implements IFaultProvider {
     return drivingFaults;
   }
 
-  public getSeriousFaults(testData: TestData | undefined): Fault [] {
+  public getSeriousFaults(testData: TestData | undefined, activityCode: ActivityCode): Fault [] {
     const seriousFaults: Fault[] = [];
+
+    if (activityCode === '3') {
+      return [{
+        name: 'eyesightTest',
+        count: 1,
+      }];
+    }
 
     if (!testData) {
       throw new Error('No Test Data');
