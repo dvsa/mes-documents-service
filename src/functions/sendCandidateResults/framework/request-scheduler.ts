@@ -52,7 +52,9 @@ export class RequestScheduler implements IRequestScheduler {
         .schedule(
           () => Promise.race([
             this.sendNotifyRequest(testResult),
-            new Promise((resolve, reject) => setTimeout(reject, this.configAdapter.notifyTimeout, 'timed out')),
+            new Promise((resolve, reject) => {
+              setTimeout(reject, this.configAdapter.notifyTimeout, { message: 'timed out' });
+            }),
           ]))
           .then(async(success) => {
             await this.statusUpdater.updateStatus({
@@ -67,6 +69,7 @@ export class RequestScheduler implements IRequestScheduler {
             });
           })
           .catch(async(error) => {
+            console.log('### ERROR: ', error);
             await this.statusUpdater.updateStatus({
               applicationReference,
               outcomePayload: {
@@ -74,7 +77,7 @@ export class RequestScheduler implements IRequestScheduler {
                 state: ProcessingStatus.FAILED,
                 staff_number: testResult.journalData.examiner.staffNumber,
                 retry_count: 0, // TODO - Need to set retry count somehow
-                error_message: error,
+                error_message: error.message,
               },
             });
           });
