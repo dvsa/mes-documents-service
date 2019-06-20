@@ -69,7 +69,6 @@ export class RequestScheduler implements IRequestScheduler {
             });
           })
           .catch(async(error) => {
-            console.log('### ERROR: ', error);
             await this.statusUpdater.updateStatus({
               applicationReference,
               outcomePayload: {
@@ -77,7 +76,7 @@ export class RequestScheduler implements IRequestScheduler {
                 state: ProcessingStatus.FAILED,
                 staff_number: testResult.journalData.examiner.staffNumber,
                 retry_count: 0, // TODO - Need to set retry count somehow
-                error_message: error.message,
+                error_message: error,
               },
             });
           });
