@@ -14,6 +14,7 @@ import {
 } from '../fault-provider';
 import { Fault } from '../../../domain/fault';
 import { CompetencyOutcome } from '../../../domain/competency-outcome';
+import { Competencies } from '../../../domain/competencies';
 
 describe('fault-provider', () => {
 
@@ -46,9 +47,9 @@ describe('fault-provider', () => {
         const result: Fault [] = faultProvider.getDrivingFaults(data);
 
         expect(result.length).toBe(3);
-        expect(result).toContain({ name: 'controlledStop', count: 1 });
-        expect(result).toContain({ name: 'forwardParkControlFault', count: 1 });
-        expect(result).toContain({ name: 'ancillaryControls', count: 1 });
+        expect(result).toContain({ name: Competencies.controlledStop, count: 1 });
+        expect(result).toContain({ name: Competencies.forwardParkControl, count: 1 });
+        expect(result).toContain({ name: Competencies.ancillaryControls, count: 1 });
 
       });
     });
@@ -75,17 +76,17 @@ describe('fault-provider', () => {
         const result: Fault [] = faultProvider.getSeriousFaults(data, '2');
 
         expect(result.length).toBe(3);
-        expect(result).toContain({ name: 'controlledStop', count: 1 });
-        expect(result).toContain({ name: 'forwardParkControlFault', count: 1 });
-        expect(result).toContain({ name: 'ancillaryControls', count: 1 });
+        expect(result).toContain({ name: Competencies.controlledStop, count: 1 });
+        expect(result).toContain({ name: Competencies.forwardParkControl, count: 1 });
+        expect(result).toContain({ name: Competencies.ancillaryControls, count: 1 });
 
       });
-      it('should give us an eyesight fault if activty code 3', () => {
+      it('should give us an eyesight fault if activity code 3', () => {
 
         const result: Fault [] = faultProvider.getSeriousFaults(undefined, '3');
 
         expect(result.length).toBe(1);
-        expect(result).toContain({ name: 'eyesightTest', count: 1 });
+        expect(result).toContain({ name: Competencies.eyesightTest, count: 1 });
 
       });
     });
@@ -112,9 +113,9 @@ describe('fault-provider', () => {
         const result: Fault [] = faultProvider.getDangerousFaults(data);
 
         expect(result.length).toBe(3);
-        expect(result).toContain({ name: 'controlledStop', count: 1 });
-        expect(result).toContain({ name: 'forwardParkControlFault', count: 1 });
-        expect(result).toContain({ name: 'ancillaryControls', count: 1 });
+        expect(result).toContain({ name: Competencies.controlledStop, count: 1 });
+        expect(result).toContain({ name: Competencies.forwardParkControl, count: 1 });
+        expect(result).toContain({ name: Competencies.ancillaryControls, count: 1 });
 
       });
     });
@@ -132,9 +133,9 @@ describe('fault-provider', () => {
       const result: Fault[] = convertNumericFaultObjectToArray(data);
 
       expect(result.length).toBe(3);
-      expect(result).toContain({ name: 'ancillaryControls', count: 5 });
-      expect(result).toContain({ name: 'awarenessPlanning', count: 2 });
-      expect(result).toContain({ name: 'clearance', count: 3 });
+      expect(result).toContain({ name: Competencies.ancillaryControls, count: 5 });
+      expect(result).toContain({ name: Competencies.awarenessPlanning, count: 2 });
+      expect(result).toContain({ name: Competencies.clearance, count: 3 });
 
     });
     it('should not transform any values which are not faults e.g. comments', () => {
@@ -170,9 +171,9 @@ describe('fault-provider', () => {
       const result: Fault[] = convertBooleanFaultObjectToArray(data);
 
       expect(result.length).toBe(3);
-      expect(result).toContain({ name: 'ancillaryControls', count: 1 });
-      expect(result).toContain({ name: 'awarenessPlanning', count: 1 });
-      expect(result).toContain({ name: 'clearance', count: 1 });
+      expect(result).toContain({ name: Competencies.ancillaryControls, count: 1 });
+      expect(result).toContain({ name: Competencies.awarenessPlanning, count: 1 });
+      expect(result).toContain({ name: Competencies.clearance, count: 1 });
 
     });
     it('should convert not transform values which are not faults eg Comments', () => {
@@ -210,8 +211,8 @@ describe('fault-provider', () => {
       const result: Fault[] = getCompletedManoeuvres(data, CompetencyOutcome.DF);
 
       expect(result.length).toBe(2);
-      expect(result).toContain({ name: 'forwardParkControlFault', count: 1 });
-      expect(result).toContain({ name: 'forwardParkObservationFault', count: 1 });
+      expect(result).toContain({ name: Competencies.forwardParkControl, count: 1 });
+      expect(result).toContain({ name: Competencies.forwardParkObservation, count: 1 });
 
     });
     it('should not return any driving faults for a manoeuvre if selected is not true', () => {
@@ -239,7 +240,7 @@ describe('fault-provider', () => {
       const result: Fault[] = getCompletedManoeuvres(data, CompetencyOutcome.DF);
 
       expect(result.length).toBe(1);
-      expect(result).toContain({ name: 'forwardParkObservationFault', count: 1 });
+      expect(result).toContain({ name: Competencies.forwardParkObservation, count: 1 });
 
     });
     it('should return faults for multiple manoeuvres if more then 1 exist', () => {
@@ -257,8 +258,8 @@ describe('fault-provider', () => {
       const result: Fault[] = getCompletedManoeuvres(data, CompetencyOutcome.DF);
 
       expect(result.length).toBe(2);
-      expect(result).toContain({ name: 'forwardParkControlFault', count: 1 });
-      expect(result).toContain({ name: 'reverseParkCarparkObservationFault', count: 1 });
+      expect(result).toContain({ name: Competencies.forwardParkControl, count: 1 });
+      expect(result).toContain({ name: Competencies.reverseParkCarparkObservation, count: 1 });
 
     });
     it('should return any empty array if no data is avalible', () => {
@@ -282,7 +283,7 @@ describe('fault-provider', () => {
       const result: Fault[] = getVehicleChecksFault(data, CompetencyOutcome.D);
 
       expect(result.length).toBe(1);
-      expect(result).toContain({ name: 'vehicleChecks', count: 1 });
+      expect(result).toContain({ name: Competencies.vehicleChecks, count: 1 });
 
     });
     it('should not find a dangerous fault if one exists', () => {
@@ -307,7 +308,7 @@ describe('fault-provider', () => {
       const result: Fault[] = getVehicleChecksFault(data, CompetencyOutcome.S);
 
       expect(result.length).toBe(1);
-      expect(result).toContain({ name: 'vehicleChecks', count: 1 });
+      expect(result).toContain({ name:  Competencies.vehicleChecks, count: 1 });
 
     });
     it('should not find a serious fault if one exists', () => {
@@ -332,7 +333,7 @@ describe('fault-provider', () => {
       const result: Fault[] = getVehicleChecksFault(data, CompetencyOutcome.DF);
 
       expect(result.length).toBe(1);
-      expect(result).toContain({ name: 'vehicleChecks', count: 1 });
+      expect(result).toContain({ name: Competencies.vehicleChecks, count: 1 });
 
     });
     it('should not find a serious fault if one exists', () => {
@@ -360,7 +361,7 @@ describe('fault-provider', () => {
       const result: Fault[] = getVehicleChecksFault(data, CompetencyOutcome.DF);
 
       expect(result.length).toBe(1);
-      expect(result).toContain({ name: 'vehicleChecks', count: 1 });
+      expect(result).toContain({ name: Competencies.vehicleChecks, count: 1 });
 
     });
   });
