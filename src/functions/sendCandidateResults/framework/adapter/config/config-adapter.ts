@@ -1,5 +1,6 @@
 import { IConfigAdapter } from './config-adapter.interface';
 import { injectable } from 'inversify';
+import * as awsSdk from 'aws-sdk';
 
 @injectable()
 export class ConfigAdapter implements IConfigAdapter {
@@ -7,7 +8,7 @@ export class ConfigAdapter implements IConfigAdapter {
   isLocal: boolean;
   useNotify: boolean;
   retryLimit: number;
-  apiKey: string;
+  apiKey: string = '';
   resultsBaseApiUrl: string;
   notifyBatchSize: number;
   notifyTimeout: number;
@@ -28,7 +29,7 @@ export class ConfigAdapter implements IConfigAdapter {
     this.retryLimit = this.getNumberFromEnv('NOTIFY_RETRY_LIMIT') || 0;
     this.notifyBatchSize = this.getNumberFromEnv('NOTIFY_BATCH_SIZE') || 250;
     this.notifyTimeout = this.getNumberFromEnv('NOTIFY_TIMEOUT') || 10000;
-    this.apiKey = this.getFromEnvThrowIfNotPresent('NOTIFY_API_KEY');
+    this.setApiKey();
     this.resultsBaseApiUrl = this.getFromEnvThrowIfNotPresent('RESULTS_API_BASE_URL');
 
     this.englishEmailPassTemplateId = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_PASS_TEMPLATE_ID');
@@ -40,6 +41,26 @@ export class ConfigAdapter implements IConfigAdapter {
     this.englishLetterFailTemplateId = this.getFromEnvThrowIfNotPresent('NOTIFY_POST_FAIL_TEMPLATE_ID');
     this.welshLetterPassTemplateId = this.getFromEnvThrowIfNotPresent('NOTIFY_POST_WELSH_PASS_TEMPLATE_ID');
     this.welshLetterFailTemplateId = this.getFromEnvThrowIfNotPresent('NOTIFY_POST_WELSH_FAIL_TEMPLATE_ID');
+  }
+
+  private setApiKey(): void {
+    if (this.isLocal) {
+      this.apiKey = this.getFromEnvThrowIfNotPresent('NOTIFY_API_KEY');
+      return;
+    }
+
+    const secretsmanager = new awsSdk.SecretsManager();
+    const params: awsSdk.SecretsManager.GetSecretValueRequest = {
+      SecretId: 'szabi-secret',
+    };
+    secretsmanager.getSecretValue(params, (err, data) => {
+      if (err) {
+        console.log(err, err.stack);
+        return;
+      }
+      const secrets = JSON.parse(data.SecretString || '');
+      this.apiKey = secrets['NOTIFY_API_KEY'] || '';
+    });
   }
 
   protected getNumberFromEnv(envvarName: string): number | null {
