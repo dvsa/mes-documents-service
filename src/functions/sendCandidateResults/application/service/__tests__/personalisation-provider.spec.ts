@@ -1,7 +1,8 @@
 import { IPersonalisationProvider, PersonalisationProvider } from '../personalisation-provider';
 import { IFaultProvider, FaultProvider } from '../fault-provider';
 import { completedCatBTest } from '../../../framework/__mocks__/test-data.mock';
-import { englishCompetencyLabels } from '../../../domain/competencies';
+import { englishCompetencyLabels, welshCompetencyLabels } from '../../../domain/competencies';
+import { StandardCarTestCATBSchema } from '@dvsa/mes-test-schema/categories/B';
 
 describe('personalisation-provider', () => {
 
@@ -9,6 +10,10 @@ describe('personalisation-provider', () => {
 
   beforeEach(() => {
     faultProvider = new FaultProvider();
+
+    if (completedCatBTest.communicationPreferences) {
+      completedCatBTest.communicationPreferences.conductedLanguage = 'English';
+    }
   });
 
   describe('getEmailPersonalisation', () => {
@@ -43,6 +48,24 @@ describe('personalisation-provider', () => {
       expect(result.dangerousFaults).toContain(`${englishCompetencyLabels.controlsSteering}`);
       expect(result.dangerousFaults).toContain(`${englishCompetencyLabels.signalsCorrectly}`);
       expect(result.dangerousFaults).toContain(`${englishCompetencyLabels.vehicleChecks}`);
+    });
+    it('should return welsh translations when required', () => {
+      const personalisationProvider: IPersonalisationProvider = new PersonalisationProvider(faultProvider);
+
+      if (completedCatBTest.communicationPreferences) {
+        completedCatBTest.communicationPreferences.conductedLanguage = 'Cymraeg';
+      }
+
+      const result = personalisationProvider.getEmailPersonalisation(completedCatBTest);
+
+      expect(result.drivingFaults.length).toBe(7);
+      expect(result.drivingFaults).toContain(`${welshCompetencyLabels.ancillaryControls} - 1`);
+
+      expect(result.seriousFaults.length).toBe(4);
+      expect(result.seriousFaults).toContain(`${welshCompetencyLabels.ancillaryControls}`);
+
+      expect(result.dangerousFaults.length).toBe(3);
+      expect(result.dangerousFaults).toContain(`${welshCompetencyLabels.controlsSteering}`);
     });
   });
 
@@ -86,6 +109,25 @@ describe('personalisation-provider', () => {
       expect(result.dangerousFaults).toContain(`${englishCompetencyLabels.controlsSteering}`);
       expect(result.dangerousFaults).toContain(`${englishCompetencyLabels.signalsCorrectly}`);
       expect(result.dangerousFaults).toContain(`${englishCompetencyLabels.vehicleChecks}`);
+    });
+
+    it('should return welsh translations when required', () => {
+      const personalisationProvider: IPersonalisationProvider = new PersonalisationProvider(faultProvider);
+
+      if (completedCatBTest.communicationPreferences) {
+        completedCatBTest.communicationPreferences.conductedLanguage = 'Cymraeg';
+      }
+
+      const result = personalisationProvider.getLetterPersonalisation(completedCatBTest);
+
+      expect(result.drivingFaults.length).toBe(7);
+      expect(result.drivingFaults).toContain(`${welshCompetencyLabels.ancillaryControls} - 1`);
+
+      expect(result.seriousFaults.length).toBe(4);
+      expect(result.seriousFaults).toContain(`${welshCompetencyLabels.ancillaryControls}`);
+
+      expect(result.dangerousFaults.length).toBe(3);
+      expect(result.dangerousFaults).toContain(`${welshCompetencyLabels.controlsSteering}`);
     });
   });
 });
