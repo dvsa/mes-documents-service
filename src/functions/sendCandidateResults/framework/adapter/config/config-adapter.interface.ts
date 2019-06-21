@@ -2,7 +2,6 @@ export interface IConfigAdapter {
   isLocal: boolean;
   useNotify: boolean;
   retryLimit: number;
-  apiKey: string;
   resultsBaseApiUrl: string;
   notifyBatchSize: number;
   notifyTimeout: number;
@@ -16,4 +15,6 @@ export interface IConfigAdapter {
   englishLetterFailTemplateId: string;
   welshLetterPassTemplateId: string;
   welshLetterFailTemplateId: string;
+
+  getApiKey(): Promise<string>;
 }

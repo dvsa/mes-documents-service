@@ -24,7 +24,9 @@ container.bind<IConfigAdapter>(TYPES.IConfigAdapter).to(ConfigAdapter);
 
 const configAdapter: IConfigAdapter = container.get<IConfigAdapter>(TYPES.IConfigAdapter);
 
-container.bind<string>(TYPES.apiKey).toConstantValue(configAdapter.apiKey);
+configAdapter.getApiKey()
+  .then(apiKey => container.bind<string>(TYPES.apiKey).toConstantValue(apiKey))
+  .catch(err => container.bind<string>(TYPES.apiKey).toConstantValue(''));
 
 if (configAdapter.isLocal) {
   container.bind<INotifyClient>(TYPES.INotifyClient).to(NotifyClientStubSuccess);
