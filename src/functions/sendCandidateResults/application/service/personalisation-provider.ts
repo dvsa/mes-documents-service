@@ -75,30 +75,30 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     };
   }
 
-  private buildFaultString(faults: Fault[], language: ConductedLanguage): string {
-    let faultString = '';
+  private buildFaultString(faults: Fault[], language: ConductedLanguage): string[] {
+    const faultLabels: string [] = [];
 
     if (language === 'Cymraeg') {
-      faults.forEach(fault => faultString = faultString.concat(`* ${welshCompetencyLabels[fault.name]}`));
+      faults.forEach(fault => faultLabels.push(`${welshCompetencyLabels[fault.name]}`));
     } else {
-      faults.forEach(fault => faultString = faultString.concat(`* ${englishCompetencyLabels[fault.name]}`));
+      faults.forEach(fault => faultLabels.push(`${englishCompetencyLabels[fault.name]}`));
     }
 
-    return faultString;
+    return faultLabels;
   }
 
-  private buildFaultStringWithCount(faults: Fault[], language: ConductedLanguage): string {
-    let faultString = '';
+  private buildFaultStringWithCount(faults: Fault[], language: ConductedLanguage): string[] {
+    const faultLabels: string[] = [];
 
     if (language === 'Cymraeg') {
       faults.forEach(fault =>
-        faultString = faultString.concat(`* ${welshCompetencyLabels[fault.name]} - ${fault.count}`));
+        faultLabels.push(`${welshCompetencyLabels[fault.name]} - ${fault.count}`));
     } else {
       faults.forEach(fault =>
-        faultString = faultString.concat(`* ${englishCompetencyLabels[fault.name]} - ${fault.count}`));
+        faultLabels.push(`${englishCompetencyLabels[fault.name]} - ${fault.count}`));
     }
 
-    return faultString;
+    return faultLabels;
   }
 
   private getTitledName(name: Name | undefined): string {
