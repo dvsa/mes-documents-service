@@ -1,6 +1,7 @@
 import { IPersonalisationProvider, PersonalisationProvider } from '../personalisation-provider';
 import { IFaultProvider, FaultProvider } from '../fault-provider';
 import { completedCatBTest } from '../../../framework/__mocks__/test-data.mock';
+import { englishCompetencyLabels } from '../../../domain/competencies';
 
 describe('personalisation-provider', () => {
 
@@ -22,12 +23,26 @@ describe('personalisation-provider', () => {
       expect(result.firstName).toBe('Joe');
       expect(result.lastName).toBe('Bloggs');
       expect(result.driverNumber).toBe('ABC 12345 EFG');
-      // tslint:disable-next-line:max-line-length
-      expect(result.drivingFaults).toBe('ancillaryControls - 1, awarenessPlanning - 1, controlsSteering - 1, signalsCorrectly - 1, controlledStop - 1, reverseParkCarparkControlFault - 1, reverseParkCarparkObservationFault - 1, ');
-      // tslint:disable-next-line:max-line-length
-      expect(result.seriousFaults).toBe('ancillaryControls - 1, awarenessPlanning - 1, reverseParkRoadControlFault - 1, reverseParkRoadObservationFault - 1, ');
-      // tslint:disable-next-line:max-line-length
-      expect(result.dangerousFaults).toBe('controlsSteering - 1, signalsCorrectly - 1, vehicleChecks - 1, ');
+
+      expect(result.drivingFaults.length).toBe(7);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.ancillaryControls} - 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.awarenessPlanning} - 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.controlsSteering} - 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.signalsCorrectly} - 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.controlledStop} - 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.reverseParkCarparkControl} - 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.reverseParkCarparkObservation} - 1`);
+
+      expect(result.seriousFaults.length).toBe(4);
+      expect(result.seriousFaults).toContain(`${englishCompetencyLabels.ancillaryControls}`);
+      expect(result.seriousFaults).toContain(`${englishCompetencyLabels.awarenessPlanning}`);
+      expect(result.seriousFaults).toContain(`${englishCompetencyLabels.reverseParkRoadControl}`);
+      expect(result.seriousFaults).toContain(`${englishCompetencyLabels.reverseParkRoadObservation}`);
+
+      expect(result.dangerousFaults.length).toBe(3);
+      expect(result.dangerousFaults).toContain(`${englishCompetencyLabels.controlsSteering}`);
+      expect(result.dangerousFaults).toContain(`${englishCompetencyLabels.signalsCorrectly}`);
+      expect(result.dangerousFaults).toContain(`${englishCompetencyLabels.vehicleChecks}`);
     });
   });
 
@@ -51,12 +66,26 @@ describe('personalisation-provider', () => {
       expect(result.firstName).toBe('Joe');
       expect(result.lastName).toBe('Bloggs');
       expect(result.driverNumber).toBe('ABC 12345 EFG');
-      // tslint:disable-next-line:max-line-length
-      expect(result.drivingFaults).toBe('ancillaryControls - 1, awarenessPlanning - 1, controlsSteering - 1, signalsCorrectly - 1, controlledStop - 1, reverseParkCarparkControlFault - 1, reverseParkCarparkObservationFault - 1, ');
-      // tslint:disable-next-line:max-line-length
-      expect(result.seriousFaults).toBe('ancillaryControls - 1, awarenessPlanning - 1, reverseParkRoadControlFault - 1, reverseParkRoadObservationFault - 1, ');
-      // tslint:disable-next-line:max-line-length
-      expect(result.dangerousFaults).toBe('controlsSteering - 1, signalsCorrectly - 1, vehicleChecks - 1, ');
+
+      expect(result.drivingFaults.length).toBe(7);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.ancillaryControls} - 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.awarenessPlanning} - 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.controlsSteering} - 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.signalsCorrectly} - 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.controlledStop} - 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.reverseParkCarparkControl} - 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.reverseParkCarparkObservation} - 1`);
+
+      expect(result.seriousFaults.length).toBe(4);
+      expect(result.seriousFaults).toContain(`${englishCompetencyLabels.ancillaryControls}`);
+      expect(result.seriousFaults).toContain(`${englishCompetencyLabels.awarenessPlanning}`);
+      expect(result.seriousFaults).toContain(`${englishCompetencyLabels.reverseParkRoadControl}`);
+      expect(result.seriousFaults).toContain(`${englishCompetencyLabels.reverseParkRoadObservation}`);
+
+      expect(result.dangerousFaults.length).toBe(3);
+      expect(result.dangerousFaults).toContain(`${englishCompetencyLabels.controlsSteering}`);
+      expect(result.dangerousFaults).toContain(`${englishCompetencyLabels.signalsCorrectly}`);
+      expect(result.dangerousFaults).toContain(`${englishCompetencyLabels.vehicleChecks}`);
     });
   });
 });
