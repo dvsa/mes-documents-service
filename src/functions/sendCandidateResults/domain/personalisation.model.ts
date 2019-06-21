@@ -6,9 +6,9 @@ export interface Personalisation {
   date: string;
   driverNumber:string;
 
-  drivingFaults: string;
-  seriousFaults: string;
-  dangerousFaults: string;
+  drivingFaults: string[];
+  seriousFaults: string[];
+  dangerousFaults: string[];
 }
 
 export interface EmailPersonalisation extends Personalisation {

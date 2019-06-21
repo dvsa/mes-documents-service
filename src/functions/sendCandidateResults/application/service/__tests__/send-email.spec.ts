@@ -13,9 +13,9 @@ const personlisation : EmailPersonalisation = {
   date: '01/01/1990',
   firstName: 'Fred',
   lastName: 'Elliot',
-  drivingFaults: '',
-  seriousFaults: '',
-  dangerousFaults: '',
+  drivingFaults: [],
+  seriousFaults: [],
+  dangerousFaults: [],
   driverNumber: 'ABCD',
 };
 
