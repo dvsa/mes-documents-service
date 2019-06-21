@@ -29,8 +29,8 @@ export class ConfigAdapter implements IConfigAdapter {
     this.retryLimit = this.getNumberFromEnv('NOTIFY_RETRY_LIMIT') || 0;
     this.notifyBatchSize = this.getNumberFromEnv('NOTIFY_BATCH_SIZE') || 250;
     this.notifyTimeout = this.getNumberFromEnv('NOTIFY_TIMEOUT') || 10000;
-    this.setApiKey();
     this.resultsBaseApiUrl = this.getFromEnvThrowIfNotPresent('RESULTS_API_BASE_URL');
+    this.setApiKey();
 
     this.englishEmailPassTemplateId = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_PASS_TEMPLATE_ID');
     this.englishEmailFailTemplateId = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_FAIL_TEMPLATE_ID');
@@ -51,7 +51,7 @@ export class ConfigAdapter implements IConfigAdapter {
 
     const secretsmanager = new awsSdk.SecretsManager();
     const params: awsSdk.SecretsManager.GetSecretValueRequest = {
-      SecretId: 'szabi-secret',
+      SecretId: 'mes-nonprod-api-documents-service', // TODO: Confirm that this is really the name of the secret
     };
     secretsmanager.getSecretValue(params, (err, data) => {
       if (err) {
