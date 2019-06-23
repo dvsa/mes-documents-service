@@ -22,6 +22,8 @@ export class RequestScheduler implements IRequestScheduler {
 
   public limiter: bottleneck;
 
+  private retryCountByApplicationRef: { [applicationReference: string]: number } = {};
+
   constructor(
     @inject(TYPES.IConfigAdapter) private configAdapter: IConfigAdapter,
     @inject(TYPES.INotifyClient) private notifyClient: INotifyClient,
@@ -40,7 +42,23 @@ export class RequestScheduler implements IRequestScheduler {
       trackDoneStatus: true,
     });
 
-    this.limiter.on('failed', this.onLimiterFailed);
+    this.limiter.on(
+      'failed',
+      (error: DocumentsServiceError, jobInfo: bottleneck.EventInfoRetryable): Promise<number> | void => {
+        if (error.shouldRetry && jobInfo.retryCount < this.configAdapter.retryLimit) {
+          return new Promise<number>(resolve => resolve(0));
+        }
+      });
+
+    this.limiter.on(
+      'retry',
+      (error: any, jobInfo: any): void => {
+        const oldRetryCount = jobInfo.retryCount;
+        this.retryCountByApplicationRef = {
+          ...this.retryCountByApplicationRef,
+          [jobInfo.options.id]: oldRetryCount + 1,
+        };
+      });
   }
 
   scheduleRequests(testResults: StandardCarTestCATBSchema[]): Promise<void>[] {
@@ -50,10 +68,15 @@ export class RequestScheduler implements IRequestScheduler {
       );
       return this.limiter
         .schedule(
+          { id: applicationReference },
           () => Promise.race([
             this.sendNotifyRequest(testResult),
             new Promise((resolve, reject) => {
-              setTimeout(reject, this.configAdapter.notifyTimeout, 'timed out');
+              setTimeout(
+                reject,
+                this.configAdapter.notifyTimeout,
+                new DocumentsServiceError(0 , 'timed out', true),
+              );
             }),
           ]))
           .then(async(success) => {
@@ -63,7 +86,7 @@ export class RequestScheduler implements IRequestScheduler {
                 interface: NOTIFY_INTERFACE,
                 state: ProcessingStatus.ACCEPTED,
                 staff_number: testResult.journalData.examiner.staffNumber,
-                retry_count: 0, // TODO - Need to set retry count somehow
+                retry_count: this.retryCountByApplicationRef[applicationReference] || 0,
                 error_message: null,
               },
             });
@@ -75,8 +98,8 @@ export class RequestScheduler implements IRequestScheduler {
                 interface: NOTIFY_INTERFACE,
                 state: ProcessingStatus.FAILED,
                 staff_number: testResult.journalData.examiner.staffNumber,
-                retry_count: 0, // TODO - Need to set retry count somehow
-                error_message: error,
+                retry_count: this.retryCountByApplicationRef[applicationReference] || 0,
+                error_message: error.message,
               },
             });
           });
@@ -116,17 +139,7 @@ export class RequestScheduler implements IRequestScheduler {
       this.notifyClient);
   }
 
-  private onLimiterFailed(
-    error: DocumentsServiceError,
-    jobInfo: bottleneck.EventInfoRetryable,
-  ): Promise<number> | void {
-    if (error.shouldRetry && jobInfo.retryCount < this.configAdapter.retryLimit) {
-      return new Promise<number>(resolve => resolve(0));
-    }
-  }
-
-  private formatApplicationReference(appRef: ApplicationReference) {
+  private formatApplicationReference(appRef: ApplicationReference): string {
     return `${appRef.applicationId}${appRef.bookingSequence}${appRef.checkDigit}`;
   }
-
 }
