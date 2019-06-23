@@ -14,36 +14,48 @@ import { IFaultProvider, FaultProvider } from '../../application/service/fault-p
 import { StatusUpdaterMock } from '../__mocks__/status-updater.mock';
 import { NOTIFY_INTERFACE } from '../../domain/interface.constants';
 import { ProcessingStatus } from '../../domain/submission-outcome.model';
+import { NotifyClientStubFailure400 } from '../../application/stub/notify-client-stub-failure-400';
 
 describe('RequestScheduler', () => {
 
-  const totalNumberOfTests: number = 50;
+  let configAdapter: IConfigAdapter;
+  let templateIdProvider: ITemplateIdProvider;
+  let statusUpdater: IStatusUpdater;
+  let faultProvider: IFaultProvider;
+  let personalisationProvider: IPersonalisationProvider;
 
-  it('should call updateToAcceptedStatus when successfully notified candidate', async (done) => {
-    const configAdapter: IConfigAdapter = new ConfigAdapterMock();
-    const notifyClient: INotifyClient = new NotifyClientStubSuccess();
-    const templateIdProvider: ITemplateIdProvider = new TemplateIdProvider(configAdapter);
-    const statusUpdater: IStatusUpdater = new StatusUpdaterMock();
-    const faultProvider: IFaultProvider = new FaultProvider();
-    const personalisationProvider: IPersonalisationProvider = new PersonalisationProvider(faultProvider);
+  const totalNumberOfTests: number = 1;
+
+  let testResults: StandardCarTestCATBSchema[];
+
+  beforeEach(async() => {
+    configAdapter = new ConfigAdapterMock();
+    templateIdProvider = new TemplateIdProvider(configAdapter);
+    statusUpdater = new StatusUpdaterMock();
+    faultProvider = new FaultProvider();
+    personalisationProvider = new PersonalisationProvider(faultProvider);
 
     spyOn(statusUpdater, 'updateStatus');
 
+    testResults = await new NextUploadBatchMock().get(totalNumberOfTests);
+  });
+
+  it('should call updateStatus when successfully notified candidate', async (done) => {
+    const notifyClient: INotifyClient = new NotifyClientStubSuccess();
+
     const requestScheduler =
     new RequestScheduler(configAdapter, notifyClient, templateIdProvider, personalisationProvider, statusUpdater);
-
-    const testResults: StandardCarTestCATBSchema[] = await new NextUploadBatchMock().get(totalNumberOfTests);
 
     requestScheduler.scheduleRequests(testResults);
 
     setTimeout(() => {
       expect(statusUpdater.updateStatus).toHaveBeenCalledWith({
-        applicationReference: '1234567890',
+        applicationReference: '067890',
         outcomePayload: {
           interface: NOTIFY_INTERFACE,
           state: ProcessingStatus.ACCEPTED,
           staff_number: '123456',
-          retry_count: 0, // TODO - Need to set retry count somehow
+          retry_count: 0,
           error_message: null,
         },
       });
@@ -51,32 +63,45 @@ describe('RequestScheduler', () => {
     },         1000);
   });
 
-  // TODO: Take a look into the format of the error message so that we can test the right parameter
-  xit('should call updateToAcceptedStatus when successfully notified candidate', async (done) => {
-    const configAdapter: IConfigAdapter = new ConfigAdapterMock();
-    const notifyClient: INotifyClient = new NotifyClientStubFailure500();
-    const templateIdProvider: ITemplateIdProvider = new TemplateIdProvider(configAdapter);
-    const statusUpdater: IStatusUpdater = new StatusUpdaterMock();
-    const faultProvider: IFaultProvider = new FaultProvider();
-    const personalisationProvider: IPersonalisationProvider = new PersonalisationProvider(faultProvider);
-
-    spyOn(statusUpdater, 'updateStatus');
+  it('should call updateStatus in a failed state when requests return a 400 error', async (done) => {
+    const notifyClient: INotifyClient = new NotifyClientStubFailure400();
 
     const requestScheduler =
     new RequestScheduler(configAdapter, notifyClient, templateIdProvider, personalisationProvider, statusUpdater);
-
-    const testResults: StandardCarTestCATBSchema[] = await new NextUploadBatchMock().get(totalNumberOfTests);
 
     requestScheduler.scheduleRequests(testResults);
 
     setTimeout(() => {
       expect(statusUpdater.updateStatus).toHaveBeenCalledWith({
-        applicationReference: '1234567890',
+        applicationReference: '067890',
         outcomePayload: {
           interface: NOTIFY_INTERFACE,
-          state: ProcessingStatus.ACCEPTED,
+          state: ProcessingStatus.FAILED,
           staff_number: '123456',
-          retry_count: 0, // TODO - Need to set retry count somehow
+          retry_count: 0,
+          error_message: `Can't send to this recipient using a team-only API key`,
+        },
+      });
+      done();
+    },         1000);
+  });
+
+  it('should call updateStatus in a failed state when requests return a 500 error', async (done) => {
+    const notifyClient: INotifyClient = new NotifyClientStubFailure500();
+
+    const requestScheduler =
+    new RequestScheduler(configAdapter, notifyClient, templateIdProvider, personalisationProvider, statusUpdater);
+
+    requestScheduler.scheduleRequests(testResults);
+
+    setTimeout(() => {
+      expect(statusUpdater.updateStatus).toHaveBeenCalledWith({
+        applicationReference: '067890',
+        outcomePayload: {
+          interface: NOTIFY_INTERFACE,
+          state: ProcessingStatus.FAILED,
+          staff_number: '123456',
+          retry_count: 3,
           error_message: 'Internal server error',
         },
       });
@@ -84,31 +109,22 @@ describe('RequestScheduler', () => {
     },         1000);
   });
 
-  it('should call updateToAcceptedStatus when successfully notified candidate', async (done) => {
-    const configAdapter: IConfigAdapter = new ConfigAdapterMock();
+  it('should call updateStatus in a failed state when requests time out', async (done) => {
     const notifyClient: INotifyClient = new NotifyClientStubTimeout(configAdapter);
-    const templateIdProvider: ITemplateIdProvider = new TemplateIdProvider(configAdapter);
-    const statusUpdater: IStatusUpdater = new StatusUpdaterMock();
-    const faultProvider: IFaultProvider = new FaultProvider();
-    const personalisationProvider: IPersonalisationProvider = new PersonalisationProvider(faultProvider);
-
-    spyOn(statusUpdater, 'updateStatus');
 
     const requestScheduler = new RequestScheduler(
       configAdapter, notifyClient, templateIdProvider, personalisationProvider, statusUpdater);
-
-    const testResults: StandardCarTestCATBSchema[] = await new NextUploadBatchMock().get(1);
 
     requestScheduler.scheduleRequests(testResults);
 
     setTimeout(() => {
       expect(statusUpdater.updateStatus).toHaveBeenCalledWith({
-        applicationReference: '1234567890',
+        applicationReference: '067890',
         outcomePayload: {
           interface: NOTIFY_INTERFACE,
           state: ProcessingStatus.FAILED,
           staff_number: '123456',
-          retry_count: 0,
+          retry_count: 3,
           error_message: 'timed out',
         },
       });
