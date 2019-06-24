@@ -64,6 +64,9 @@ export class ConfigAdapter implements IConfigAdapter {
     try {
       const secretValue = await secretsmanager.getSecretValue(params).promise();
       const secrets = JSON.parse(secretValue.SecretString || '');
+      if (isEmpty(secrets)) {
+        throw new Error('secret string was empty');
+      }
       return Promise.resolve(secrets['NOTIFY_API_KEY'] || '');
     } catch (err) {
       return Promise.reject(err);
