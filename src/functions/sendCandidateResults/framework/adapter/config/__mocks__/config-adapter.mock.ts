@@ -4,10 +4,11 @@ import { injectable } from 'inversify';
 @injectable()
 export class ConfigAdapterMock implements IConfigAdapter {
 
+  private apiKey: string = 'api-key';
+
   isLocal: boolean = true;
   useNotify: boolean = false;
   retryLimit: number = 3;
-  apiKey: string = 'api-key';
   resultsBaseApiUrl: string = 'results-base-api-url';
   notifyBatchSize: number = 250;
   notifyTimeout: number = 1000;
@@ -21,4 +22,8 @@ export class ConfigAdapterMock implements IConfigAdapter {
   englishLetterFailTemplateId: string = 'post-fail-template-id';
   welshLetterPassTemplateId: string = 'post-welsh-pass-template-id';
   welshLetterFailTemplateId: string = 'post-welsh-fail-template-id';
+
+  async getApiKey(): Promise<string> {
+    return Promise.resolve(this.apiKey);
+  }
 }
