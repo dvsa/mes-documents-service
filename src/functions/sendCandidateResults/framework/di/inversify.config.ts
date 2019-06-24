@@ -26,7 +26,10 @@ const configAdapter: IConfigAdapter = container.get<IConfigAdapter>(TYPES.IConfi
 
 configAdapter.getApiKey()
   .then(apiKey => container.bind<string>(TYPES.apiKey).toConstantValue(apiKey))
-  .catch(err => container.bind<string>(TYPES.apiKey).toConstantValue(''));
+  .catch((err) => {
+    console.log('No api key has been provided');
+    throw err;
+  });
 
 if (configAdapter.isLocal) {
   container.bind<INotifyClient>(TYPES.INotifyClient).to(NotifyClientStubSuccess);
