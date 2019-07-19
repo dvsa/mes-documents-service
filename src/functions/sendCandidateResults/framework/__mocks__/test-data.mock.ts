@@ -15,7 +15,6 @@ export const temporaryFailurePhoneNumber = '07700900003';
 export const permanentFailurePhoneNumber = '07700900002';
 
 export const completedCatBTest: StandardCarTestCATBSchema = {
-  id: '12345',
   category: 'B',
   activityCode: '1',
   journalData: {
@@ -56,7 +55,7 @@ export const completedCatBTest: StandardCarTestCATBSchema = {
     },
     testSlotAttributes: {
       slotId: 123456,
-      vehicleSlotType: 'B',
+      vehicleTypeCode: 'B',
       start: '09:00',
       welshTest: false,
       specialNeeds: false,
@@ -68,6 +67,7 @@ export const completedCatBTest: StandardCarTestCATBSchema = {
     conductedLanguage: 'English',
     updatedEmail: mockEmail2,
   },
+  rekey: false,
   testData: {
     drivingFaults: {
       ancillaryControls: 1,
