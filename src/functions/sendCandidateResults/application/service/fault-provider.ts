@@ -15,7 +15,7 @@ import { Competencies } from '../../domain/competencies';
 export interface IFaultProvider {
   getDrivingFaults(testData: TestData | undefined): Fault[];
 
-  getSeriousFaults(testData: TestData | undefined, activityCode: ActivityCode): Fault[];
+  getSeriousFaults(testData: TestData | undefined): Fault[];
 
   getDangerousFaults(testData: TestData | undefined): Fault[];
 
@@ -42,12 +42,8 @@ export class FaultProvider implements IFaultProvider {
     return drivingFaults;
   }
 
-  public getSeriousFaults(testData: TestData | undefined, activityCode: ActivityCode): Fault [] {
+  public getSeriousFaults(testData: TestData | undefined): Fault [] {
     const seriousFaults: Fault[] = [];
-
-    if (activityCode === '3') {
-      return [{ name: Competencies.eyesightTest, count: 1 }];
-    }
 
     if (!testData) {
       throw new Error('No Test Data');
@@ -118,6 +114,10 @@ export function getNonStandardFaults(testData: TestData, faultType: CompetencyOu
   if (testData.vehicleChecks) {
     getVehicleChecksFault(testData.vehicleChecks, faultType)
       .forEach(fault => faults.push(fault));
+  }
+
+  if (testData.eyesightTest && testData.eyesightTest.seriousFault) {
+    faults.push({ name: Competencies.eyesightTest, count: 1 });
   }
 
   return faults;

@@ -73,7 +73,7 @@ describe('fault-provider', () => {
           },
         };
 
-        const result: Fault [] = faultProvider.getSeriousFaults(data, '2');
+        const result: Fault [] = faultProvider.getSeriousFaults(data);
 
         expect(result.length).toBe(3);
         expect(result).toContain({ name: Competencies.controlledStop, count: 1 });
@@ -81,13 +81,18 @@ describe('fault-provider', () => {
         expect(result).toContain({ name: Competencies.ancillaryControls, count: 1 });
 
       });
-      it('should give us an eyesight fault if activity code 3', () => {
 
-        const result: Fault [] = faultProvider.getSeriousFaults(undefined, '3');
+      it('should give us an eyesight fault if activity code 3', () => {
+        const result: Fault [] = faultProvider.getSeriousFaults({
+          eyesightTest: {
+            seriousFault: true,
+            complete: true,
+            faultComments: 'Eyesight test comment',
+          },
+        });
 
         expect(result.length).toBe(1);
         expect(result).toContain({ name: Competencies.eyesightTest, count: 1 });
-
       });
     });
 
