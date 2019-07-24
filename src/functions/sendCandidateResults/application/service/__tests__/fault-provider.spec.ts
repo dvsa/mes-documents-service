@@ -82,7 +82,7 @@ describe('fault-provider', () => {
 
       });
 
-      it('should give us an eyesight fault if activity code 3', () => {
+      it('should give us an eyesight fault if test data contains a serious eyesight fault', () => {
         const result: Fault [] = faultProvider.getSeriousFaults({
           eyesightTest: {
             seriousFault: true,
