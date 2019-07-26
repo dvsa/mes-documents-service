@@ -107,6 +107,10 @@ describe('fault-provider', () => {
             selected: true,
             fault: CompetencyOutcome.D,
           },
+          eyesightTest: {
+            complete: true,
+            seriousFault: true,
+          },
           manoeuvres: {
             forwardPark: {
               selected: true,
