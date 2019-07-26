@@ -10,6 +10,7 @@ import { IFaultProvider } from './fault-provider';
 import { get } from 'lodash';
 import { Fault } from '../../domain/fault';
 import { englishCompetencyLabels, welshCompetencyLabels } from '../../domain/competencies';
+import { formatApplicationReference } from '@dvsa/mes-microservice-common/domain/tars';
 
 export interface IPersonalisationProvider {
 
@@ -68,7 +69,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       dangerousFaults,
       firstName: get(testresult, 'journalData.candidate.candidateName.firstName'),
       lastName: get(testresult,  'journalData.candidate.candidateName.lastName') ,
-      applicationReference: this.getApplicationRef(get(testresult, 'journalData.applicationReference')),
+      applicationReference: formatApplicationReference(get(testresult, 'journalData.applicationReference')),
       category: testresult.category,
       date: get(testresult, 'journalData.testSlotAttributes.start'),
       driverNumber: get(testresult, 'journalData.candidate.driverNumber'),
@@ -106,9 +107,5 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       return `${name.title} ${name.firstName} ${name.lastName}`;
     }
     return '';
-  }
-
-  private getApplicationRef (ref: ApplicationReference) {
-    return `${ref.applicationId}${ref.bookingSequence}${ref.checkDigit}`;
   }
 }

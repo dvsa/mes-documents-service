@@ -1,7 +1,7 @@
 export interface Personalisation {
   firstName: string;
   lastName: string;
-  applicationReference: string;
+  applicationReference: number;
   category: string;
   date: string;
   driverNumber:string;

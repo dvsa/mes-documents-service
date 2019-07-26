@@ -2,7 +2,6 @@ import { IPersonalisationProvider, PersonalisationProvider } from '../personalis
 import { IFaultProvider, FaultProvider } from '../fault-provider';
 import { completedCatBTest } from '../../../framework/__mocks__/test-data.mock';
 import { englishCompetencyLabels, welshCompetencyLabels } from '../../../domain/competencies';
-import { StandardCarTestCATBSchema } from '@dvsa/mes-test-schema/categories/B';
 
 describe('personalisation-provider', () => {
 
@@ -22,7 +21,7 @@ describe('personalisation-provider', () => {
 
       const result = personalisationProvider.getEmailPersonalisation(completedCatBTest);
 
-      expect(result.applicationReference).toBe('1234567890');
+      expect(result.applicationReference).toBe(12345671011);
       expect(result.category).toBe('B');
       expect(result.date).toBe('09:00');
       expect(result.firstName).toBe('Joe');
@@ -83,7 +82,7 @@ describe('personalisation-provider', () => {
       expect(result.address_line_6).toBe('Middlesex');
       expect(result.postcode).toBe('SW14 6BH');
 
-      expect(result.applicationReference).toBe('1234567890');
+      expect(result.applicationReference).toBe(12345671011);
       expect(result.category).toBe('B');
       expect(result.date).toBe('09:00');
       expect(result.firstName).toBe('Joe');

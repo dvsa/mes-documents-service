@@ -6,7 +6,7 @@ export async function sendEmail(
     emailAddress: string,
     templateId: string,
     personalisation: EmailPersonalisation,
-    reference: string,
+    reference: number,
     emailReplyToId: string,
     client: INotifyClient,
 )  : Promise <any> {
