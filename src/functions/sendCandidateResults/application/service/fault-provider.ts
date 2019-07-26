@@ -57,6 +57,10 @@ export class FaultProvider implements IFaultProvider {
     getNonStandardFaults(testData, CompetencyOutcome.S)
       .forEach(fault => seriousFaults.push(fault));
 
+    if (testData.eyesightTest && testData.eyesightTest.seriousFault) {
+      seriousFaults.push({ name: Competencies.eyesightTest, count: 1 });
+    }
+
     return seriousFaults;
   }
 
@@ -114,10 +118,6 @@ export function getNonStandardFaults(testData: TestData, faultType: CompetencyOu
   if (testData.vehicleChecks) {
     getVehicleChecksFault(testData.vehicleChecks, faultType)
       .forEach(fault => faults.push(fault));
-  }
-
-  if (testData.eyesightTest && testData.eyesightTest.seriousFault) {
-    faults.push({ name: Competencies.eyesightTest, count: 1 });
   }
 
   return faults;
