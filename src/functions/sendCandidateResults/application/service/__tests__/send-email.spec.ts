@@ -8,7 +8,7 @@ import { NotifyClientStubFailure500 } from '../../stub/notify-client-stub-failur
 import { DocumentsServiceError } from '../../../domain/errors/documents-service-error';
 
 const personlisation : EmailPersonalisation = {
-  applicationReference: 'app ref',
+  applicationReference: 12345678,
   category: 'B',
   date: '01/01/1990',
   firstName: 'Fred',
@@ -25,7 +25,7 @@ describe('sendEmail' , () => {
     const notifyClient: INotifyClient = new NotifyClientStubSuccess();
 
     const result =
-        await sendEmail(mockEmail1,  'temp-id', personlisation,  'app-ref',  'reply-id', notifyClient);
+        await sendEmail(mockEmail1,  'temp-id', personlisation,  12345678,  'reply-id', notifyClient);
 
     expect(result).toBe(undefined);
 
@@ -35,7 +35,7 @@ describe('sendEmail' , () => {
     const notifyClient: INotifyClient = new NotifyClientStubFailure400();
 
     try {
-      await sendEmail(mockEmail1,  'temp-id', personlisation,  'app-ref',  'reply-id', notifyClient);
+      await sendEmail(mockEmail1,  'temp-id', personlisation,  123456,  'reply-id', notifyClient);
     } catch (err) {
 
       const documentsServiceError: DocumentsServiceError = err as DocumentsServiceError;
@@ -49,7 +49,7 @@ describe('sendEmail' , () => {
     const notifyClient: INotifyClient = new NotifyClientStubFailure500();
 
     try {
-      await sendEmail(mockEmail1,  'temp-id', personlisation,  'app-ref',  'reply-id', notifyClient);
+      await sendEmail(mockEmail1,  'temp-id', personlisation,  12345678,  'reply-id', notifyClient);
     } catch (err) {
 
       const documentsServiceError: DocumentsServiceError = err as DocumentsServiceError;

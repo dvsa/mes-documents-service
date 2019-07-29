@@ -19,9 +19,9 @@ export const completedCatBTest: StandardCarTestCATBSchema = {
   activityCode: '1',
   journalData: {
     applicationReference: {
-      applicationId: 12345,
-      bookingSequence: 6789,
-      checkDigit: 0,
+      applicationId: 12345671,
+      bookingSequence: 1,
+      checkDigit: 1,
     },
     candidate: {
       candidateId: 1,

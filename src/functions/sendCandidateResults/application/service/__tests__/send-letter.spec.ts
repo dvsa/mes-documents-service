@@ -10,7 +10,7 @@ const personlisation : LetterPersonalisation = {
   address_line_1: 'address line 1',
   address_line_2: 'address line 2',
   postcode: 'postcode',
-  applicationReference: 'app ref',
+  applicationReference: 12345678,
   category: 'B',
   date: '01/01/1990',
   firstName: 'Fred',

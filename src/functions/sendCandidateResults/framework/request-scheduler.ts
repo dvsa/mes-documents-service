@@ -12,6 +12,7 @@ import { IPersonalisationProvider } from '../application/service/personalisation
 import { IStatusUpdater } from './status-updater';
 import { ProcessingStatus } from '../domain/submission-outcome.model';
 import { NOTIFY_INTERFACE } from '../domain/interface.constants';
+import { formatApplicationReference } from '@dvsa/mes-microservice-common/domain/tars';
 
 export interface IRequestScheduler {
   scheduleRequests(testResults: StandardCarTestCATBSchema[]): Promise<void>[];
@@ -63,12 +64,12 @@ export class RequestScheduler implements IRequestScheduler {
 
   scheduleRequests(testResults: StandardCarTestCATBSchema[]): Promise<void>[] {
     return testResults.map((testResult: StandardCarTestCATBSchema) => {
-      const applicationReference = this.formatApplicationReference(
+      const applicationReference = formatApplicationReference(
         testResult.journalData.applicationReference,
       );
       return this.limiter
         .schedule(
-          { id: applicationReference },
+          { id: applicationReference.toString() },
           () => Promise.race([
             this.sendNotifyRequest(testResult),
             new Promise((resolve, reject) => {
@@ -121,7 +122,7 @@ export class RequestScheduler implements IRequestScheduler {
         testResult.communicationPreferences.updatedEmail,
         templateId,
         this.personalisationProvider.getEmailPersonalisation(testResult),
-        testResult.journalData.applicationReference.applicationId.toString(),
+        testResult.journalData.applicationReference.applicationId,
         '',
         this.notifyClient,
       );
@@ -137,9 +138,5 @@ export class RequestScheduler implements IRequestScheduler {
       this.personalisationProvider.getLetterPersonalisation(testResult),
       testResult.journalData.applicationReference.applicationId.toString(),
       this.notifyClient);
-  }
-
-  private formatApplicationReference(appRef: ApplicationReference): string {
-    return `${appRef.applicationId}${appRef.bookingSequence}${appRef.checkDigit}`;
   }
 }
