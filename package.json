@@ -10,13 +10,14 @@
     "url": "git+https://github.com/dvsa/mes-documents-service"
   },
   "dependencies": {
+    "@dvsa/mes-microservice-common": "^0.1.5",
     "axios": "^0.19.0",
     "bottleneck": "^2.19.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.15",
     "notifications-node-client": "^4.6.0"
   },
   "devDependencies": {
-    "@dvsa/mes-test-schema": "^1.0.28",
+    "@dvsa/mes-test-schema": "^1.0.29",
     "@types/aws-lambda": "^8.10.18",
     "@types/aws-sdk": "^2.7.0",
     "@types/axios": "^0.14.0",
