@@ -55,7 +55,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       get(testresult, 'communicationPreferences.conductedLanguage'));
 
     const seriousFaults = this.buildFaultString(
-      this.faultProvider.getSeriousFaults(testresult.testData, testresult.activityCode),
+      this.faultProvider.getSeriousFaults(testresult.testData),
       get(testresult, 'communicationPreferences.conductedLanguage'));
 
     const dangerousFaults = this.buildFaultString(
