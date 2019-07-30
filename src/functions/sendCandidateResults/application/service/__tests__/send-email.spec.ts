@@ -17,6 +17,7 @@ const personlisation: EmailPersonalisation = {
   seriousFaults: [],
   dangerousFaults: [],
   driverNumber: 'ABCD',
+  location: 'Test Centre',
 };
 
 describe('sendEmail', () => {
