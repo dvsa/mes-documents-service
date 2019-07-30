@@ -76,45 +76,45 @@ export class RequestScheduler implements IRequestScheduler {
               setTimeout(
                 reject,
                 this.configAdapter.notifyTimeout,
-                new DocumentsServiceError(0 , 'timed out', true),
+                new DocumentsServiceError(0, 'timed out', true),
               );
             }),
           ]))
-          .then(async(success) => {
-            await this.statusUpdater.updateStatus({
-              applicationReference,
-              outcomePayload: {
-                interface: NOTIFY_INTERFACE,
-                state: ProcessingStatus.ACCEPTED,
-                staff_number: testResult.journalData.examiner.staffNumber,
-                retry_count: this.retryCountByApplicationRef[applicationReference] || 0,
-                error_message: null,
-              },
-            });
-          })
-          .catch(async(error) => {
-            await this.statusUpdater.updateStatus({
-              applicationReference,
-              outcomePayload: {
-                interface: NOTIFY_INTERFACE,
-                state: ProcessingStatus.FAILED,
-                staff_number: testResult.journalData.examiner.staffNumber,
-                retry_count: this.retryCountByApplicationRef[applicationReference] || 0,
-                error_message: error.message,
-              },
-            });
+        .then(async (success) => {
+          await this.statusUpdater.updateStatus({
+            applicationReference,
+            outcomePayload: {
+              interface: NOTIFY_INTERFACE,
+              state: ProcessingStatus.ACCEPTED,
+              staff_number: testResult.journalData.examiner.staffNumber,
+              retry_count: this.retryCountByApplicationRef[applicationReference] || 0,
+              error_message: null,
+            },
           });
+        })
+        .catch(async (error) => {
+          await this.statusUpdater.updateStatus({
+            applicationReference,
+            outcomePayload: {
+              interface: NOTIFY_INTERFACE,
+              state: ProcessingStatus.FAILED,
+              staff_number: testResult.journalData.examiner.staffNumber,
+              retry_count: this.retryCountByApplicationRef[applicationReference] || 0,
+              error_message: error.message,
+            },
+          });
+        });
     });
   }
 
-  private sendNotifyRequest(testResult: StandardCarTestCATBSchema): Promise <any> {
+  private sendNotifyRequest(testResult: StandardCarTestCATBSchema): Promise<any> {
     if (!testResult.communicationPreferences) {
       return Promise.reject();
     }
 
     if (testResult.communicationPreferences.communicationMethod === 'Email') {
       const templateId: string =
-      this.templateIdProvider.getEmailTemplateId(
+        this.templateIdProvider.getEmailTemplateId(
           testResult.communicationPreferences.conductedLanguage,
           testResult.activityCode,
         );
@@ -122,7 +122,7 @@ export class RequestScheduler implements IRequestScheduler {
         testResult.communicationPreferences.updatedEmail,
         templateId,
         this.personalisationProvider.getEmailPersonalisation(testResult),
-        testResult.journalData.applicationReference.applicationId,
+        testResult.journalData.applicationReference.applicationId.toString(),
         '',
         this.notifyClient,
       );

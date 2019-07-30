@@ -3,13 +3,13 @@ import { EmailPersonalisation } from '../../domain/personalisation.model';
 import { INotifyClient } from '../../domain/notify-client.interface';
 
 export async function sendEmail(
-    emailAddress: string,
-    templateId: string,
-    personalisation: EmailPersonalisation,
-    reference: number,
-    emailReplyToId: string,
-    client: INotifyClient,
-)  : Promise <any> {
+  emailAddress: string,
+  templateId: string,
+  personalisation: EmailPersonalisation,
+  reference: string,
+  emailReplyToId: string,
+  client: INotifyClient,
+): Promise<any> {
 
   try {
     await client.sendEmail(templateId, emailAddress, { personalisation, reference, emailReplyToId });
