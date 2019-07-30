@@ -27,6 +27,7 @@ describe('personalisation-provider', () => {
       expect(result.firstName).toBe('Joe');
       expect(result.lastName).toBe('Bloggs');
       expect(result.driverNumber).toBe('ABC 12345 EFG');
+      expect(result.location).toBe('Test Centre 001');
 
       expect(result.drivingFaults.length).toBe(7);
       expect(result.drivingFaults).toContain(`${englishCompetencyLabels.ancillaryControls} - 1`);
@@ -88,6 +89,7 @@ describe('personalisation-provider', () => {
       expect(result.firstName).toBe('Joe');
       expect(result.lastName).toBe('Bloggs');
       expect(result.driverNumber).toBe('ABC 12345 EFG');
+      expect(result.location).toBe('Test Centre 001');
 
       expect(result.drivingFaults.length).toBe(7);
       expect(result.drivingFaults).toContain(`${englishCompetencyLabels.ancillaryControls} - 1`);

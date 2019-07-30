@@ -19,6 +19,7 @@ const personlisation : LetterPersonalisation = {
   seriousFaults: [],
   dangerousFaults: [],
   driverNumber: 'ABCD',
+  location: 'Test Centre',
 };
 
 describe('sendLetter' , () => {

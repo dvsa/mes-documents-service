@@ -5,6 +5,7 @@ export interface Personalisation {
   category: string;
   date: string;
   driverNumber:string;
+  location: string;
 
   drivingFaults: string[];
   seriousFaults: string[];

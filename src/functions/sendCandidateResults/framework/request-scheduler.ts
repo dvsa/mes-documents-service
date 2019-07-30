@@ -122,7 +122,7 @@ export class RequestScheduler implements IRequestScheduler {
         testResult.communicationPreferences.updatedEmail,
         templateId,
         this.personalisationProvider.getEmailPersonalisation(testResult),
-        testResult.journalData.applicationReference.applicationId.toString(),
+        formatApplicationReference(testResult.journalData.applicationReference).toString(),
         '',
         this.notifyClient,
       );
@@ -136,7 +136,7 @@ export class RequestScheduler implements IRequestScheduler {
     return sendLetter(
       templateId,
       this.personalisationProvider.getLetterPersonalisation(testResult),
-      testResult.journalData.applicationReference.applicationId.toString(),
+      formatApplicationReference(testResult.journalData.applicationReference).toString(),
       this.notifyClient);
   }
 }

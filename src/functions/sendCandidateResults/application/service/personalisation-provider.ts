@@ -73,6 +73,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       category: testresult.category,
       date: get(testresult, 'journalData.testSlotAttributes.start'),
       driverNumber: get(testresult, 'journalData.candidate.driverNumber'),
+      location: get(testresult, 'journalData.testCentre.centreName'),
     };
   }
 

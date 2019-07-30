@@ -52,6 +52,7 @@ export const completedCatBTest: StandardCarTestCATBSchema = {
     testCentre: {
       centreId: 123456,
       costCode: '123456',
+      centreName: 'Test Centre 001',
     },
     testSlotAttributes: {
       slotId: 123456,
