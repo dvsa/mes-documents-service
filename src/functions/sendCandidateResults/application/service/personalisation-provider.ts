@@ -17,6 +17,7 @@ import { get } from 'lodash';
 import { Fault } from '../../domain/fault';
 import { englishCompetencyLabels, welshCompetencyLabels } from '../../domain/competencies';
 import { formatApplicationReference } from '@dvsa/mes-microservice-common/domain/tars';
+import * as moment from 'moment';
 
 export interface IPersonalisationProvider {
 
@@ -77,7 +78,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       lastName: get(testresult,  'journalData.candidate.candidateName.lastName') ,
       applicationReference: formatApplicationReference(get(testresult, 'journalData.applicationReference')),
       category: testresult.category,
-      date: get(testresult, 'journalData.testSlotAttributes.start'),
+      date: this.formatDate(get(testresult, 'journalData.testSlotAttributes.start')),
       driverNumber: get(testresult, 'journalData.candidate.driverNumber'),
       location: get(testresult, 'journalData.testCentre.centreName'),
       showDrivingFaults: drivingFaults.length > 0 ? BooleanText.YES : BooleanText.NO,
@@ -128,5 +129,9 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       return BooleanText.YES;
     }
     return BooleanText.NO;
+  }
+
+  private formatDate(stringDate: Date): string {
+    return moment(stringDate).format('D MMMM YYYY');
   }
 }
