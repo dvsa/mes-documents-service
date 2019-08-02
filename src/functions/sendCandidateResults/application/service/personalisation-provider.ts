@@ -1,8 +1,14 @@
-import { LetterPersonalisation, EmailPersonalisation, Personalisation } from '../../domain/personalisation.model';
+import {
+  LetterPersonalisation,
+  EmailPersonalisation,
+  Personalisation,
+  BooleanText,
+} from '../../domain/personalisation.model';
 import {
   StandardCarTestCATBSchema,
   Name, ApplicationReference,
   ConductedLanguage,
+  Eco,
 } from '@dvsa/mes-test-schema/categories/B';
 import { inject, injectable } from 'inversify';
 import { TYPES } from '../../framework/di/types';
@@ -74,6 +80,10 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       date: get(testresult, 'journalData.testSlotAttributes.start'),
       driverNumber: get(testresult, 'journalData.candidate.driverNumber'),
       location: get(testresult, 'journalData.testCentre.centreName'),
+      showDrivingFaults: drivingFaults.length > 0 ? BooleanText.YES : BooleanText.NO,
+      showSeriousFaults: seriousFaults.length > 0 ? BooleanText.YES : BooleanText.NO,
+      showDangerousFaults: dangerousFaults.length > 0 ? BooleanText.YES : BooleanText.NO,
+      showEcoText: this.shouldShowEco(get(testresult , 'testData.eco', null)),
     };
   }
 
@@ -108,5 +118,15 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       return `${name.title} ${name.firstName} ${name.lastName}`;
     }
     return '';
+  }
+
+  private shouldShowEco(eco: Eco) : BooleanText {
+    if (!eco) {
+      return BooleanText.NO;
+    }
+    if (eco.adviceGivenControl || eco.adviceGivenPlanning) {
+      return BooleanText.YES;
+    }
+    return BooleanText.NO;
   }
 }

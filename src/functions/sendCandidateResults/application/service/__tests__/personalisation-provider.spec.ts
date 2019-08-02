@@ -2,6 +2,7 @@ import { IPersonalisationProvider, PersonalisationProvider } from '../personalis
 import { IFaultProvider, FaultProvider } from '../fault-provider';
 import { completedCatBTest } from '../../../framework/__mocks__/test-data.mock';
 import { englishCompetencyLabels, welshCompetencyLabels } from '../../../domain/competencies';
+import { BooleanText } from '../../../domain/personalisation.model';
 
 describe('personalisation-provider', () => {
 
@@ -48,6 +49,11 @@ describe('personalisation-provider', () => {
       expect(result.dangerousFaults).toContain(`${englishCompetencyLabels.controlsSteering}`);
       expect(result.dangerousFaults).toContain(`${englishCompetencyLabels.signalsCorrectly}`);
       expect(result.dangerousFaults).toContain(`${englishCompetencyLabels.vehicleChecks}`);
+
+      expect(result.showDrivingFaults).toEqual(BooleanText.YES);
+      expect(result.showSeriousFaults).toEqual(BooleanText.YES);
+      expect(result.showDangerousFaults).toEqual(BooleanText.YES);
+      expect(result.showEcoText).toBe(BooleanText.NO);
     });
     it('should return welsh translations when required', () => {
       const personalisationProvider: IPersonalisationProvider = new PersonalisationProvider(faultProvider);
@@ -110,6 +116,11 @@ describe('personalisation-provider', () => {
       expect(result.dangerousFaults).toContain(`${englishCompetencyLabels.controlsSteering}`);
       expect(result.dangerousFaults).toContain(`${englishCompetencyLabels.signalsCorrectly}`);
       expect(result.dangerousFaults).toContain(`${englishCompetencyLabels.vehicleChecks}`);
+
+      expect(result.showDrivingFaults).toEqual(BooleanText.YES);
+      expect(result.showSeriousFaults).toEqual(BooleanText.YES);
+      expect(result.showDangerousFaults).toEqual(BooleanText.YES);
+      expect(result.showEcoText).toBe(BooleanText.NO);
     });
 
     it('should return welsh translations when required', () => {
