@@ -22,6 +22,9 @@ const personlisation: EmailPersonalisation = {
   showDrivingFaults: BooleanText.YES,
   showEcoText: BooleanText.YES,
   showSeriousFaults: BooleanText.YES,
+  drivingFaultsCount: '1',
+  dangerousFaultsCount: '1',
+  seriousFaultsCount: '1',
 };
 
 describe('sendEmail', () => {

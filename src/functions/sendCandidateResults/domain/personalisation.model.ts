@@ -12,13 +12,18 @@ export interface Personalisation {
   driverNumber:string;
   location: string;
 
-  drivingFaults: string[];
-  seriousFaults: string[];
-  dangerousFaults: string[];
-
+  drivingFaults: string[] | string;
+  drivingFaultsCount: string;
   showDrivingFaults: BooleanText;
+
+  seriousFaults: string[] | string;
+  seriousFaultsCount: string;
   showSeriousFaults: BooleanText;
+
+  dangerousFaults: string[] | string;
+  dangerousFaultsCount: string;
   showDangerousFaults: BooleanText;
+
   showEcoText: BooleanText;
 }
 
