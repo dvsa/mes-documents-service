@@ -22,6 +22,7 @@ describe('personalisation-provider', () => {
 
       const result = personalisationProvider.getEmailPersonalisation(completedCatBTest);
 
+      expect(result.applicationReference).toBe(12345671011);
       expect(result.category).toBe('B');
       expect(result.date).toBe('31 July 2019');
       expect(result.firstName).toBe('Joe');
@@ -80,6 +81,7 @@ describe('personalisation-provider', () => {
 
       const result = personalisationProvider.getLetterPersonalisation(completedCatBTest);
 
+      expect(result.applicationReference).toBe(12345671011);
       expect(result.address_line_1).toBe('Mr Joe Bloggs');
       expect(result.address_line_2).toBe('The Occupier');
       expect(result.address_line_3).toBe('123 High Street');

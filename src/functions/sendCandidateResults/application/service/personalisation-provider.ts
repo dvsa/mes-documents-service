@@ -16,6 +16,7 @@ import { IFaultProvider } from './fault-provider';
 import { get } from 'lodash';
 import { Fault } from '../../domain/fault';
 import { englishCompetencyLabels, welshCompetencyLabels } from '../../domain/competencies';
+import { formatApplicationReference } from '@dvsa/mes-microservice-common/domain/tars';
 import * as moment from 'moment';
 
 export interface IPersonalisationProvider {
@@ -72,6 +73,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     return {
       firstName: get(testresult, 'journalData.candidate.candidateName.firstName'),
       lastName: get(testresult,  'journalData.candidate.candidateName.lastName') ,
+      applicationReference: formatApplicationReference(get(testresult, 'journalData.applicationReference')),
       category: testresult.category,
       date: this.formatDate(get(testresult, 'journalData.testSlotAttributes.start')),
       driverNumber: get(testresult, 'journalData.candidate.driverNumber'),

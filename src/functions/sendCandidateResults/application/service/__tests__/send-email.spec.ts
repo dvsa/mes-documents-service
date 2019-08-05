@@ -8,6 +8,7 @@ import { NotifyClientStubFailure500 } from '../../stub/notify-client-stub-failur
 import { DocumentsServiceError } from '../../../domain/errors/documents-service-error';
 
 const personlisation: EmailPersonalisation = {
+  applicationReference: 12345678,
   category: 'B',
   date: '01/01/1990',
   firstName: 'Fred',

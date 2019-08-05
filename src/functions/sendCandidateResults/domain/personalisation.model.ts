@@ -6,6 +6,7 @@ export enum BooleanText {
 export interface Personalisation {
   firstName: string;
   lastName: string;
+  applicationReference: number;
   category: string;
   date: string;
   driverNumber:string;
