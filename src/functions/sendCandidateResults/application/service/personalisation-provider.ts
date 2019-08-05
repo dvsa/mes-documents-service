@@ -1,8 +1,14 @@
-import { LetterPersonalisation, EmailPersonalisation, Personalisation } from '../../domain/personalisation.model';
+import {
+  LetterPersonalisation,
+  EmailPersonalisation,
+  Personalisation,
+  BooleanText,
+} from '../../domain/personalisation.model';
 import {
   StandardCarTestCATBSchema,
-  Name, ApplicationReference,
+  Name,
   ConductedLanguage,
+  Eco,
 } from '@dvsa/mes-test-schema/categories/B';
 import { inject, injectable } from 'inversify';
 import { TYPES } from '../../framework/di/types';
@@ -11,6 +17,7 @@ import { get } from 'lodash';
 import { Fault } from '../../domain/fault';
 import { englishCompetencyLabels, welshCompetencyLabels } from '../../domain/competencies';
 import { formatApplicationReference } from '@dvsa/mes-microservice-common/domain/tars';
+import * as moment from 'moment';
 
 export interface IPersonalisationProvider {
 
@@ -64,16 +71,21 @@ export class PersonalisationProvider implements IPersonalisationProvider {
         get(testresult, 'communicationPreferences.conductedLanguage'));
 
     return {
-      drivingFaults,
-      seriousFaults,
-      dangerousFaults,
-      firstName: get(testresult, 'journalData.candidate.candidateName.firstName'),
-      lastName: get(testresult,  'journalData.candidate.candidateName.lastName') ,
       applicationReference: formatApplicationReference(get(testresult, 'journalData.applicationReference')),
       category: testresult.category,
-      date: get(testresult, 'journalData.testSlotAttributes.start'),
-      driverNumber: get(testresult, 'journalData.candidate.driverNumber'),
+      date: this.formatDate(get(testresult, 'journalData.testSlotAttributes.start')),
       location: get(testresult, 'journalData.testCentre.centreName'),
+
+      drivingFaults: drivingFaults.length > 0 ? drivingFaults  :'' ,
+      showDrivingFaults: drivingFaults.length > 0 ? BooleanText.YES : BooleanText.NO,
+
+      seriousFaults: seriousFaults.length > 0 ? seriousFaults  :'' ,
+      showSeriousFaults: seriousFaults.length > 0 ? BooleanText.YES : BooleanText.NO,
+
+      dangerousFaults: dangerousFaults.length > 0 ? dangerousFaults  :'' ,
+      showDangerousFaults: dangerousFaults.length > 0 ? BooleanText.YES : BooleanText.NO,
+
+      showEcoText: this.shouldShowEco(get(testresult , 'testData.eco', null)),
     };
   }
 
@@ -94,10 +106,10 @@ export class PersonalisationProvider implements IPersonalisationProvider {
 
     if (language === 'Cymraeg') {
       faults.forEach(fault =>
-        faultLabels.push(`${welshCompetencyLabels[fault.name]} - ${fault.count}`));
+        faultLabels.push(`${welshCompetencyLabels[fault.name]}, ${fault.count}`));
     } else {
       faults.forEach(fault =>
-        faultLabels.push(`${englishCompetencyLabels[fault.name]} - ${fault.count}`));
+        faultLabels.push(`${englishCompetencyLabels[fault.name]}, ${fault.count}`));
     }
 
     return faultLabels;
@@ -108,5 +120,19 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       return `${name.title} ${name.firstName} ${name.lastName}`;
     }
     return '';
+  }
+
+  private shouldShowEco(eco: Eco) : BooleanText {
+    if (!eco) {
+      return BooleanText.NO;
+    }
+    if (eco.adviceGivenControl || eco.adviceGivenPlanning) {
+      return BooleanText.YES;
+    }
+    return BooleanText.NO;
+  }
+
+  private formatDate(stringDate: Date): string {
+    return moment(stringDate).format('D MMMM YYYY');
   }
 }

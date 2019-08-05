@@ -57,7 +57,7 @@ export const completedCatBTest: StandardCarTestCATBSchema = {
     testSlotAttributes: {
       slotId: 123456,
       vehicleTypeCode: 'B',
-      start: '09:00',
+      start: '2019-07-31T11:48:51',
       welshTest: false,
       specialNeeds: false,
       extendedTest: false,
