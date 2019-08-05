@@ -2,6 +2,7 @@ import { IPersonalisationProvider, PersonalisationProvider } from '../personalis
 import { IFaultProvider, FaultProvider } from '../fault-provider';
 import { completedCatBTest } from '../../../framework/__mocks__/test-data.mock';
 import { englishCompetencyLabels, welshCompetencyLabels } from '../../../domain/competencies';
+import { BooleanText } from '../../../domain/personalisation.model';
 
 describe('personalisation-provider', () => {
 
@@ -23,20 +24,17 @@ describe('personalisation-provider', () => {
 
       expect(result.applicationReference).toBe(12345671011);
       expect(result.category).toBe('B');
-      expect(result.date).toBe('09:00');
-      expect(result.firstName).toBe('Joe');
-      expect(result.lastName).toBe('Bloggs');
-      expect(result.driverNumber).toBe('ABC 12345 EFG');
+      expect(result.date).toBe('31 July 2019');
       expect(result.location).toBe('Test Centre 001');
 
       expect(result.drivingFaults.length).toBe(7);
-      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.ancillaryControls} - 1`);
-      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.awarenessPlanning} - 1`);
-      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.controlsSteering} - 1`);
-      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.signalsCorrectly} - 1`);
-      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.controlledStop} - 1`);
-      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.reverseParkCarparkControl} - 1`);
-      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.reverseParkCarparkObservation} - 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.ancillaryControls}, 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.awarenessPlanning}, 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.controlsSteering}, 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.signalsCorrectly}, 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.controlledStop}, 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.reverseParkCarparkControl}, 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.reverseParkCarparkObservation}, 1`);
 
       expect(result.seriousFaults.length).toBe(4);
       expect(result.seriousFaults).toContain(`${englishCompetencyLabels.ancillaryControls}`);
@@ -48,6 +46,11 @@ describe('personalisation-provider', () => {
       expect(result.dangerousFaults).toContain(`${englishCompetencyLabels.controlsSteering}`);
       expect(result.dangerousFaults).toContain(`${englishCompetencyLabels.signalsCorrectly}`);
       expect(result.dangerousFaults).toContain(`${englishCompetencyLabels.vehicleChecks}`);
+
+      expect(result.showDrivingFaults).toEqual(BooleanText.YES);
+      expect(result.showSeriousFaults).toEqual(BooleanText.YES);
+      expect(result.showDangerousFaults).toEqual(BooleanText.YES);
+      expect(result.showEcoText).toBe(BooleanText.NO);
     });
     it('should return welsh translations when required', () => {
       const personalisationProvider: IPersonalisationProvider = new PersonalisationProvider(faultProvider);
@@ -59,7 +62,7 @@ describe('personalisation-provider', () => {
       const result = personalisationProvider.getEmailPersonalisation(completedCatBTest);
 
       expect(result.drivingFaults.length).toBe(7);
-      expect(result.drivingFaults).toContain(`${welshCompetencyLabels.ancillaryControls} - 1`);
+      expect(result.drivingFaults).toContain(`${welshCompetencyLabels.ancillaryControls}, 1`);
 
       expect(result.seriousFaults.length).toBe(4);
       expect(result.seriousFaults).toContain(`${welshCompetencyLabels.ancillaryControls}`);
@@ -75,6 +78,7 @@ describe('personalisation-provider', () => {
 
       const result = personalisationProvider.getLetterPersonalisation(completedCatBTest);
 
+      expect(result.applicationReference).toBe(12345671011);
       expect(result.address_line_1).toBe('Mr Joe Bloggs');
       expect(result.address_line_2).toBe('The Occupier');
       expect(result.address_line_3).toBe('123 High Street');
@@ -83,22 +87,18 @@ describe('personalisation-provider', () => {
       expect(result.address_line_6).toBe('Middlesex');
       expect(result.postcode).toBe('SW14 6BH');
 
-      expect(result.applicationReference).toBe(12345671011);
       expect(result.category).toBe('B');
-      expect(result.date).toBe('09:00');
-      expect(result.firstName).toBe('Joe');
-      expect(result.lastName).toBe('Bloggs');
-      expect(result.driverNumber).toBe('ABC 12345 EFG');
+      expect(result.date).toBe('31 July 2019');
       expect(result.location).toBe('Test Centre 001');
 
       expect(result.drivingFaults.length).toBe(7);
-      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.ancillaryControls} - 1`);
-      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.awarenessPlanning} - 1`);
-      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.controlsSteering} - 1`);
-      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.signalsCorrectly} - 1`);
-      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.controlledStop} - 1`);
-      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.reverseParkCarparkControl} - 1`);
-      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.reverseParkCarparkObservation} - 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.ancillaryControls}, 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.awarenessPlanning}, 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.controlsSteering}, 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.signalsCorrectly}, 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.controlledStop}, 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.reverseParkCarparkControl}, 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.reverseParkCarparkObservation}, 1`);
 
       expect(result.seriousFaults.length).toBe(4);
       expect(result.seriousFaults).toContain(`${englishCompetencyLabels.ancillaryControls}`);
@@ -110,6 +110,11 @@ describe('personalisation-provider', () => {
       expect(result.dangerousFaults).toContain(`${englishCompetencyLabels.controlsSteering}`);
       expect(result.dangerousFaults).toContain(`${englishCompetencyLabels.signalsCorrectly}`);
       expect(result.dangerousFaults).toContain(`${englishCompetencyLabels.vehicleChecks}`);
+
+      expect(result.showDrivingFaults).toEqual(BooleanText.YES);
+      expect(result.showSeriousFaults).toEqual(BooleanText.YES);
+      expect(result.showDangerousFaults).toEqual(BooleanText.YES);
+      expect(result.showEcoText).toBe(BooleanText.NO);
     });
 
     it('should return welsh translations when required', () => {
@@ -122,7 +127,7 @@ describe('personalisation-provider', () => {
       const result = personalisationProvider.getLetterPersonalisation(completedCatBTest);
 
       expect(result.drivingFaults.length).toBe(7);
-      expect(result.drivingFaults).toContain(`${welshCompetencyLabels.ancillaryControls} - 1`);
+      expect(result.drivingFaults).toContain(`${welshCompetencyLabels.ancillaryControls}, 1`);
 
       expect(result.seriousFaults.length).toBe(4);
       expect(result.seriousFaults).toContain(`${welshCompetencyLabels.ancillaryControls}`);
