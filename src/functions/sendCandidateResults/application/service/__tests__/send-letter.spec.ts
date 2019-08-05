@@ -1,5 +1,5 @@
 import { sendLetter } from '../send-letter';
-import { LetterPersonalisation } from '../../../domain/personalisation.model';
+import { LetterPersonalisation, BooleanText } from '../../../domain/personalisation.model';
 import { INotifyClient } from '../../../domain/notify-client.interface';
 import { NotifyClientStubSuccess } from '../../stub/notify-client-stub-success';
 import { NotifyClientStubFailure400 } from '../../stub/notify-client-stub-failure-400';
@@ -13,13 +13,14 @@ const personlisation : LetterPersonalisation = {
   applicationReference: 12345678,
   category: 'B',
   date: '01/01/1990',
-  firstName: 'Fred',
-  lastName: 'Elliot',
   drivingFaults: [],
   seriousFaults: [],
   dangerousFaults: [],
-  driverNumber: 'ABCD',
   location: 'Test Centre',
+  showDangerousFaults: BooleanText.YES,
+  showDrivingFaults: BooleanText.YES,
+  showEcoText: BooleanText.YES,
+  showSeriousFaults: BooleanText.YES,
 };
 
 describe('sendLetter' , () => {

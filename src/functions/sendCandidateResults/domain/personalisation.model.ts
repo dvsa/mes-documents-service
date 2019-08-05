@@ -1,15 +1,24 @@
+export enum BooleanText {
+  YES = 'yes',
+  NO = 'no',
+}
+
 export interface Personalisation {
-  firstName: string;
-  lastName: string;
   applicationReference: number;
   category: string;
   date: string;
-  driverNumber:string;
   location: string;
 
-  drivingFaults: string[];
-  seriousFaults: string[];
-  dangerousFaults: string[];
+  drivingFaults: string[] | string;
+  showDrivingFaults: BooleanText;
+
+  seriousFaults: string[] | string;
+  showSeriousFaults: BooleanText;
+
+  dangerousFaults: string[] | string;
+  showDangerousFaults: BooleanText;
+
+  showEcoText: BooleanText;
 }
 
 export interface EmailPersonalisation extends Personalisation {

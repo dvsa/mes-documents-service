@@ -1,6 +1,6 @@
 import { sendEmail } from '../send-email';
 import { mockEmail1 } from '../../../framework/__mocks__/test-data.mock';
-import { EmailPersonalisation } from '../../../domain/personalisation.model';
+import { EmailPersonalisation, BooleanText } from '../../../domain/personalisation.model';
 import { INotifyClient } from '../../../domain/notify-client.interface';
 import { NotifyClientStubSuccess } from '../../stub/notify-client-stub-success';
 import { NotifyClientStubFailure400 } from '../../stub/notify-client-stub-failure-400';
@@ -11,13 +11,14 @@ const personlisation: EmailPersonalisation = {
   applicationReference: 12345678,
   category: 'B',
   date: '01/01/1990',
-  firstName: 'Fred',
-  lastName: 'Elliot',
   drivingFaults: [],
   seriousFaults: [],
   dangerousFaults: [],
-  driverNumber: 'ABCD',
   location: 'Test Centre',
+  showDangerousFaults: BooleanText.YES,
+  showDrivingFaults: BooleanText.YES,
+  showEcoText: BooleanText.YES,
+  showSeriousFaults: BooleanText.YES,
 };
 
 describe('sendEmail', () => {
