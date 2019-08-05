@@ -16,7 +16,6 @@ import { IFaultProvider } from './fault-provider';
 import { get } from 'lodash';
 import { Fault } from '../../domain/fault';
 import { englishCompetencyLabels, welshCompetencyLabels } from '../../domain/competencies';
-import { formatApplicationReference } from '@dvsa/mes-microservice-common/domain/tars';
 import * as moment from 'moment';
 
 export interface IPersonalisationProvider {
