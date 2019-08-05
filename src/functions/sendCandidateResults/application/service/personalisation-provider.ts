@@ -71,12 +71,9 @@ export class PersonalisationProvider implements IPersonalisationProvider {
         get(testresult, 'communicationPreferences.conductedLanguage'));
 
     return {
-      firstName: get(testresult, 'journalData.candidate.candidateName.firstName'),
-      lastName: get(testresult,  'journalData.candidate.candidateName.lastName') ,
       applicationReference: formatApplicationReference(get(testresult, 'journalData.applicationReference')),
       category: testresult.category,
       date: this.formatDate(get(testresult, 'journalData.testSlotAttributes.start')),
-      driverNumber: get(testresult, 'journalData.candidate.driverNumber'),
       location: get(testresult, 'journalData.testCentre.centreName'),
 
       drivingFaults: drivingFaults.length > 0 ? drivingFaults  :'' ,

@@ -25,9 +25,6 @@ describe('personalisation-provider', () => {
       expect(result.applicationReference).toBe(12345671011);
       expect(result.category).toBe('B');
       expect(result.date).toBe('31 July 2019');
-      expect(result.firstName).toBe('Joe');
-      expect(result.lastName).toBe('Bloggs');
-      expect(result.driverNumber).toBe('ABC 12345 EFG');
       expect(result.location).toBe('Test Centre 001');
 
       expect(result.drivingFaults.length).toBe(7);
@@ -92,9 +89,6 @@ describe('personalisation-provider', () => {
 
       expect(result.category).toBe('B');
       expect(result.date).toBe('31 July 2019');
-      expect(result.firstName).toBe('Joe');
-      expect(result.lastName).toBe('Bloggs');
-      expect(result.driverNumber).toBe('ABC 12345 EFG');
       expect(result.location).toBe('Test Centre 001');
 
       expect(result.drivingFaults.length).toBe(7);
