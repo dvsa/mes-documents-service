@@ -8,7 +8,6 @@ import { NotifyClientStubFailure500 } from '../../stub/notify-client-stub-failur
 import { DocumentsServiceError } from '../../../domain/errors/documents-service-error';
 
 const personlisation: EmailPersonalisation = {
-  applicationReference: 12345678,
   category: 'B',
   date: '01/01/1990',
   firstName: 'Fred',
@@ -22,9 +21,6 @@ const personlisation: EmailPersonalisation = {
   showDrivingFaults: BooleanText.YES,
   showEcoText: BooleanText.YES,
   showSeriousFaults: BooleanText.YES,
-  drivingFaultsCount: '1',
-  dangerousFaultsCount: '1',
-  seriousFaultsCount: '1',
 };
 
 describe('sendEmail', () => {

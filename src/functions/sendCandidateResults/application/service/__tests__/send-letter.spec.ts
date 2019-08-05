@@ -10,7 +10,6 @@ const personlisation : LetterPersonalisation = {
   address_line_1: 'address line 1',
   address_line_2: 'address line 2',
   postcode: 'postcode',
-  applicationReference: 12345678,
   category: 'B',
   date: '01/01/1990',
   firstName: 'Fred',
@@ -24,9 +23,6 @@ const personlisation : LetterPersonalisation = {
   showDrivingFaults: BooleanText.YES,
   showEcoText: BooleanText.YES,
   showSeriousFaults: BooleanText.YES,
-  drivingFaultsCount: '1',
-  dangerousFaultsCount: '1',
-  seriousFaultsCount: '1',
 };
 
 describe('sendLetter' , () => {

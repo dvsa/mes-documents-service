@@ -6,22 +6,18 @@ export enum BooleanText {
 export interface Personalisation {
   firstName: string;
   lastName: string;
-  applicationReference: number;
   category: string;
   date: string;
   driverNumber:string;
   location: string;
 
   drivingFaults: string[] | string;
-  drivingFaultsCount: string;
   showDrivingFaults: BooleanText;
 
   seriousFaults: string[] | string;
-  seriousFaultsCount: string;
   showSeriousFaults: BooleanText;
 
   dangerousFaults: string[] | string;
-  dangerousFaultsCount: string;
   showDangerousFaults: BooleanText;
 
   showEcoText: BooleanText;

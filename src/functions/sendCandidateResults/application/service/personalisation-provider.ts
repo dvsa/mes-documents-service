@@ -6,7 +6,7 @@ import {
 } from '../../domain/personalisation.model';
 import {
   StandardCarTestCATBSchema,
-  Name, ApplicationReference,
+  Name,
   ConductedLanguage,
   Eco,
 } from '@dvsa/mes-test-schema/categories/B';
@@ -73,22 +73,18 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     return {
       firstName: get(testresult, 'journalData.candidate.candidateName.firstName'),
       lastName: get(testresult,  'journalData.candidate.candidateName.lastName') ,
-      applicationReference: formatApplicationReference(get(testresult, 'journalData.applicationReference')),
       category: testresult.category,
       date: this.formatDate(get(testresult, 'journalData.testSlotAttributes.start')),
       driverNumber: get(testresult, 'journalData.candidate.driverNumber'),
       location: get(testresult, 'journalData.testCentre.centreName'),
 
       drivingFaults: drivingFaults.length > 0 ? drivingFaults  :'' ,
-      drivingFaultsCount: drivingFaults.length.toString(),
       showDrivingFaults: drivingFaults.length > 0 ? BooleanText.YES : BooleanText.NO,
 
       seriousFaults: seriousFaults.length > 0 ? seriousFaults  :'' ,
-      seriousFaultsCount: seriousFaults.length.toString(),
       showSeriousFaults: seriousFaults.length > 0 ? BooleanText.YES : BooleanText.NO,
 
       dangerousFaults: dangerousFaults.length > 0 ? dangerousFaults  :'' ,
-      dangerousFaultsCount: dangerousFaults.length.toString(),
       showDangerousFaults: dangerousFaults.length > 0 ? BooleanText.YES : BooleanText.NO,
 
       showEcoText: this.shouldShowEco(get(testresult , 'testData.eco', null)),
