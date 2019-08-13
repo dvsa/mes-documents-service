@@ -6,7 +6,7 @@ import { NotifyClientStubFailure400 } from '../../stub/notify-client-stub-failur
 import { NotifyClientStubFailure500 } from '../../stub/notify-client-stub-failure-500';
 import { DocumentsServiceError } from '../../../domain/errors/documents-service-error';
 
-const personlisation : LetterPersonalisation = {
+const personlisation: LetterPersonalisation = {
   address_line_1: 'address line 1',
   address_line_2: 'address line 2',
   postcode: 'postcode',
@@ -23,18 +23,17 @@ const personlisation : LetterPersonalisation = {
   showSeriousFaults: BooleanText.YES,
 };
 
-describe('sendLetter' , () => {
+describe('sendLetter', () => {
 
-  it('should successfully send a letter', (async() => {
+  it('should successfully send a letter', (async () => {
     const notifyClient: INotifyClient = new NotifyClientStubSuccess();
 
     const result = await sendLetter('template-id', personlisation, 'ref', notifyClient);
 
     expect(result).toBe(undefined);
-
   }));
 
-  it('should return a error with a negative retry flag for a 400 error', (async() => {
+  it('should return a error with a negative retry flag for a 400 error', (async () => {
     const notifyClient: INotifyClient = new NotifyClientStubFailure400();
 
     try {
@@ -48,7 +47,7 @@ describe('sendLetter' , () => {
     }
   }));
 
-  it('should return a error with a positive retry flag for a 500 error', (async() => {
+  it('should return a error with a positive retry flag for a 500 error', (async () => {
     const notifyClient: INotifyClient = new NotifyClientStubFailure500();
 
     try {

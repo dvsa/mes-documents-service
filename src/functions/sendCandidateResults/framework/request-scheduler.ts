@@ -5,7 +5,7 @@ import { inject, injectable } from 'inversify';
 import { TYPES } from './di/types';
 import { StandardCarTestCATBSchema, ApplicationReference } from '@dvsa/mes-test-schema/categories/B';
 import { INotifyClient } from '../domain/notify-client.interface';
-import { ITemplateIdProvider } from '../application/service/template-id-provider';
+import { ITemplateIdProvider, isFail, isPass } from '../application/service/template-id-provider';
 import { sendEmail } from '../application/service/send-email';
 import { sendLetter } from '../application/service/send-letter';
 import { IPersonalisationProvider } from '../application/service/personalisation-provider';
@@ -112,12 +112,17 @@ export class RequestScheduler implements IRequestScheduler {
       return Promise.reject();
     }
 
+    if (!isFail(testResult.activityCode) && !isPass(testResult.activityCode)) {
+      return Promise.resolve();
+    }
+
     if (testResult.communicationPreferences.communicationMethod === 'Email') {
       const templateId: string =
         this.templateIdProvider.getEmailTemplateId(
           testResult.communicationPreferences.conductedLanguage,
           testResult.activityCode,
         );
+
       return sendEmail(
         testResult.communicationPreferences.updatedEmail,
         templateId,
