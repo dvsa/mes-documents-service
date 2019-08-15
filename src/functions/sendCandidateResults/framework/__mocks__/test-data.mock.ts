@@ -69,6 +69,10 @@ export const completedCatBTest: StandardCarTestCATBSchema = {
     updatedEmail: mockEmail2,
   },
   rekey: false,
+  changeMarker: false,
+  examinerBooked: 12345678,
+  examinerConducted: 12345678,
+  examinerKeyed: 12345678,
   testData: {
     drivingFaults: {
       ancillaryControls: 1,
