@@ -3,10 +3,10 @@ import { LetterPersonalisation } from '../../domain/personalisation.model';
 import { INotifyClient } from '../../domain/notify-client.interface';
 
 export async function sendLetter(
-    templateId: string,
-    personalisation: LetterPersonalisation,
-    reference: string,
-    notifyClient: INotifyClient,
+  templateId: string,
+  personalisation: LetterPersonalisation,
+  reference: string,
+  notifyClient: INotifyClient,
 ) {
 
   try {

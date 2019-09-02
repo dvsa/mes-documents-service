@@ -30,7 +30,6 @@ describe('sendEmail', () => {
       await sendEmail(mockEmail1, 'temp-id', personlisation, '12345678', 'reply-id', notifyClient);
 
     expect(result).toBe(undefined);
-
   }));
 
   it('should return a error with a negative retry flag for a 400 error', (async () => {

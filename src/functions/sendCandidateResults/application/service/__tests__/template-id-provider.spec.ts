@@ -23,6 +23,9 @@ describe('get-template-id-provider', () => {
       it('should return the welsh email fail template', () => {
         expect(templateIdProvider.getEmailTemplateId('Cymraeg', '2')).toBe('email-welsh-fail-template-id');
       });
+      it('should return empty string for terminated tests', () => {
+        expect(templateIdProvider.getEmailTemplateId('English', '51')).toBe(TemplateIdProvider.TEMPLATE_ID_NOT_SET);
+      });
     });
 
     describe('getLetterTemplateId', () => {
@@ -37,6 +40,9 @@ describe('get-template-id-provider', () => {
       });
       it('should return the welsh post fail template', () => {
         expect(templateIdProvider.getLetterTemplateId('Cymraeg', '2')).toBe('post-welsh-fail-template-id');
+      });
+      it('should return empty string for terminated tests', () => {
+        expect(templateIdProvider.getLetterTemplateId('English', '51')).toBe(TemplateIdProvider.TEMPLATE_ID_NOT_SET);
       });
     });
   });
