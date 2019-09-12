@@ -29,12 +29,17 @@ describe('personalisation-provider', () => {
 
       expect(result.drivingFaults.length).toBe(7);
       expect(result.drivingFaults).toContain(`${englishCompetencyLabels.ancillaryControls}, 1`);
-      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.awarenessPlanning}, 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.awarenessPlanning}, 2`);
       expect(result.drivingFaults).toContain(`${englishCompetencyLabels.controlsSteering}, 1`);
-      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.signalsCorrectly}, 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.signalsCorrectly}, 3`);
       expect(result.drivingFaults).toContain(`${englishCompetencyLabels.controlledStop}, 1`);
       expect(result.drivingFaults).toContain(`${englishCompetencyLabels.reverseParkCarparkControl}, 1`);
       expect(result.drivingFaults).toContain(`${englishCompetencyLabels.reverseParkCarparkObservation}, 1`);
+
+      // Extra Checks to make sure order is correct
+      expect(result.drivingFaults[0]).toContain('3');
+      expect(result.drivingFaults[1]).toContain('2');
+      expect(result.drivingFaults[2]).toContain('1');
 
       expect(result.seriousFaults.length).toBe(4);
       expect(result.seriousFaults).toContain(`${englishCompetencyLabels.ancillaryControls}`);
@@ -93,12 +98,17 @@ describe('personalisation-provider', () => {
 
       expect(result.drivingFaults.length).toBe(7);
       expect(result.drivingFaults).toContain(`${englishCompetencyLabels.ancillaryControls}, 1`);
-      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.awarenessPlanning}, 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.awarenessPlanning}, 2`);
       expect(result.drivingFaults).toContain(`${englishCompetencyLabels.controlsSteering}, 1`);
-      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.signalsCorrectly}, 1`);
+      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.signalsCorrectly}, 3`);
       expect(result.drivingFaults).toContain(`${englishCompetencyLabels.controlledStop}, 1`);
       expect(result.drivingFaults).toContain(`${englishCompetencyLabels.reverseParkCarparkControl}, 1`);
       expect(result.drivingFaults).toContain(`${englishCompetencyLabels.reverseParkCarparkObservation}, 1`);
+
+      // Extra Checks to make sure order is correct
+      expect(result.drivingFaults[0]).toContain('3');
+      expect(result.drivingFaults[1]).toContain('2');
+      expect(result.drivingFaults[2]).toContain('1');
 
       expect(result.seriousFaults.length).toBe(4);
       expect(result.seriousFaults).toContain(`${englishCompetencyLabels.ancillaryControls}`);

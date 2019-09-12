@@ -59,7 +59,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
   private getSharedPersonalisationValues(testresult: StandardCarTestCATBSchema) : Personalisation {
 
     const drivingFaults = this.buildFaultStringWithCount(
-      this.faultProvider.getDrivingFaults(testresult.testData),
+      this.faultProvider.getDrivingFaults(testresult.testData).sort((a, b) => b.count - a.count),
       get(testresult, 'communicationPreferences.conductedLanguage'));
 
     const seriousFaults = this.buildFaultString(
