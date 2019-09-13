@@ -77,11 +77,11 @@ export const completedCatBTest: StandardCarTestCATBSchema = {
     drivingFaults: {
       ancillaryControls: 1,
       ancillaryControlsComments: 'ancillaryControlsComments',
-      awarenessPlanning: 1,
+      awarenessPlanning: 2,
       awarenessPlanningComments: 'awarenessPlanningComments',
       controlsSteering: 1,
       controlsSteeringComments: 'controlsSteeringComments',
-      signalsCorrectly: 1,
+      signalsCorrectly: 3,
       signalsCorrectlyComments: 'signalsCorrectlyComments',
     },
     seriousFaults: {
