@@ -15,6 +15,7 @@ export const temporaryFailurePhoneNumber = '07700900003';
 export const permanentFailurePhoneNumber = '07700900002';
 
 export const completedCatBTest: StandardCarTestCATBSchema = {
+  version: '0.1.1',
   category: 'B',
   activityCode: '1',
   journalData: {
