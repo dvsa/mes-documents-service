@@ -49,8 +49,7 @@ export class RequestScheduler implements IRequestScheduler {
       reservoirRefreshAmount: this.configAdapter.notifyRequestsPerBatch,
       trackDoneStatus: true,
     });
-    console.log('limiter is');
-    console.log(this.limiter);
+
     this.limiter.on(
       'failed',
       (error: DocumentsServiceError, jobInfo: bottleneck.EventInfoRetryable): Promise<number> | void => {
