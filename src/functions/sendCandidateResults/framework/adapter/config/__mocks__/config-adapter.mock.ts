@@ -11,6 +11,7 @@ export class ConfigAdapterMock implements IConfigAdapter {
   retryLimit: number = 3;
   resultsBaseApiUrl: string = 'results-base-api-url';
   notifyBatchSize: number = 250;
+  notifyRequestsPerBatch: number = 25;
   notifyTimeout: number = 1000;
 
   englishEmailPassTemplateId: string = 'email-pass-template-id';

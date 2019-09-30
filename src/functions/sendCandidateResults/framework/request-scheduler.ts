@@ -38,18 +38,19 @@ export class RequestScheduler implements IRequestScheduler {
       // No time waited between each request
       minTime: 0,
       // Maximum of 250 requests in the queue (max batch size)
-      highWater: this.getNumberFromEnv('NOTIFY_BATCH_SIZE') || 250,
+      highWater: this.configAdapter.notifyBatchSize,
       // Ignore any additions to the queue when we reach the max batch size
       strategy: bottleneck.strategy.BLOCK,
       // Amount of jobs the queue can perform at the start of the queue
-      reservoir: this.getNumberFromEnv('NOTIFY_REQUESTS_PER_BATCH') || 25,
+      reservoir: this.configAdapter.notifyRequestsPerBatch,
       // How often to add new jobs to the queue (every second)
       reservoirRefreshInterval: 1000,
       // How many jobs to add to the queue each refresh
-      reservoirRefreshAmount: this.getNumberFromEnv('NOTIFY_REQUESTS_PER_BATCH') || 25,
+      reservoirRefreshAmount: this.configAdapter.notifyRequestsPerBatch,
       trackDoneStatus: true,
     });
-
+    console.log('limiter is');
+    console.log(this.limiter);
     this.limiter.on(
       'failed',
       (error: DocumentsServiceError, jobInfo: bottleneck.EventInfoRetryable): Promise<number> | void => {
@@ -112,11 +113,6 @@ export class RequestScheduler implements IRequestScheduler {
           });
         });
     });
-  }
-
-  protected getNumberFromEnv(envvarName: string): number | null {
-    const asNumber = Number.parseInt(process.env[envvarName] || '', 10);
-    return Number.isNaN(asNumber) ? null : asNumber;
   }
 
   private sendNotifyRequest(testResult: StandardCarTestCATBSchema): Promise<any> {

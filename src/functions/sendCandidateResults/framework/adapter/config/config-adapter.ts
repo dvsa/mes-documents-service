@@ -13,6 +13,7 @@ export class ConfigAdapter implements IConfigAdapter {
   retryLimit: number;
   resultsBaseApiUrl: string;
   notifyBatchSize: number;
+  notifyRequestsPerBatch: number;
   notifyTimeout: number;
   // Email Template Id's
   englishEmailPassTemplateId: string;
@@ -31,6 +32,7 @@ export class ConfigAdapter implements IConfigAdapter {
     this.useNotify = this.getBooleanFromEnv('USE_NOTIFY');
     this.retryLimit = this.getNumberFromEnv('NOTIFY_RETRY_LIMIT') || 0;
     this.notifyBatchSize = this.getNumberFromEnv('NOTIFY_BATCH_SIZE') || 250;
+    this.notifyRequestsPerBatch = this.getNumberFromEnv('NOTIFY_REQUESTS_PER_BATCH') || 25;
     this.notifyTimeout = this.getNumberFromEnv('NOTIFY_TIMEOUT') || 10000;
     this.resultsBaseApiUrl = this.getFromEnvThrowIfNotPresent('RESULTS_API_BASE_URL');
 
@@ -78,7 +80,7 @@ export class ConfigAdapter implements IConfigAdapter {
     return Number.isNaN(asNumber) ? null : asNumber;
   }
 
-  protected getBooleanFromEnv(envvarName: string) : boolean {
+  protected getBooleanFromEnv(envvarName: string): boolean {
     const envvarVal = process.env[envvarName];
 
     return (
