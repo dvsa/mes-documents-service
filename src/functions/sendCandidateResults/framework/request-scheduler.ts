@@ -33,13 +33,20 @@ export class RequestScheduler implements IRequestScheduler {
     @inject(TYPES.IStatusUpdater) private statusUpdater: IStatusUpdater,
   ) {
     this.limiter = new bottleneck({
-      maxConcurrent: null,                 // No limit on concurrent requests
-      minTime: 0,                          // No time waited between each request
-      highWater: 250,                      // Maximum of 250 requests in the queue (max batch size)
-      strategy: bottleneck.strategy.BLOCK, // Ignore any additions to the queue when we reach the max batch size
-      reservoir: 25,                       // Amount of jobs the queue can perform at the start of the queue
-      reservoirRefreshInterval: 1000,      // How often to add new jobs to the queue (every second)
-      reservoirRefreshAmount: 25,          // How many jobs to add to the queue each refresh
+      // No limit on concurrent requests
+      maxConcurrent: null,
+      // No time waited between each request
+      minTime: 0,
+      // Maximum of 250 requests in the queue (max batch size)
+      highWater: this.getNumberFromEnv('NOTIFY_BATCH_SIZE') || 250,
+      // Ignore any additions to the queue when we reach the max batch size
+      strategy: bottleneck.strategy.BLOCK,
+      // Amount of jobs the queue can perform at the start of the queue
+      reservoir: this.getNumberFromEnv('NOTIFY_REQUESTS_PER_BATCH') || 25,
+      // How often to add new jobs to the queue (every second)
+      reservoirRefreshInterval: 1000,
+      // How many jobs to add to the queue each refresh
+      reservoirRefreshAmount: this.getNumberFromEnv('NOTIFY_REQUESTS_PER_BATCH') || 25,
       trackDoneStatus: true,
     });
 
@@ -105,6 +112,11 @@ export class RequestScheduler implements IRequestScheduler {
           });
         });
     });
+  }
+
+  protected getNumberFromEnv(envvarName: string): number | null {
+    const asNumber = Number.parseInt(process.env[envvarName] || '', 10);
+    return Number.isNaN(asNumber) ? null : asNumber;
   }
 
   private sendNotifyRequest(testResult: StandardCarTestCATBSchema): Promise<any> {
