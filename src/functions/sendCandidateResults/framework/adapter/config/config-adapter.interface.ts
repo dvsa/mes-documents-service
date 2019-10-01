@@ -4,6 +4,7 @@ export interface IConfigAdapter {
   retryLimit: number;
   resultsBaseApiUrl: string;
   notifyBatchSize: number;
+  notifyRequestsPerBatch: number;
   notifyTimeout: number;
   // Email Template Id's
   englishEmailPassTemplateId: string;
