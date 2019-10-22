@@ -76,7 +76,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       category: testresult.category,
       date: this.formatDate(
         get(testresult, 'journalData.testSlotAttributes.start'),
-        get(testresult, 'communicationPreferences.conductedLanguage')
+        get(testresult, 'communicationPreferences.conductedLanguage'),
       ),
       location: get(testresult, 'journalData.testCentre.centreName'),
 
@@ -142,5 +142,4 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       default: return moment(stringDate).locale('en').format('D MMMM YYYY');
     }
   }
-
 }
