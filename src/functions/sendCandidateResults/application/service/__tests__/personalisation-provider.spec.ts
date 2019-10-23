@@ -144,6 +144,8 @@ describe('personalisation-provider', () => {
 
       expect(result.dangerousFaults.length).toBe(3);
       expect(result.dangerousFaults).toContain(`${welshCompetencyLabels.controlsSteering}`);
+
+      expect(result.date).toBe('31 Gorffennaf 2019');
     });
   });
 });
