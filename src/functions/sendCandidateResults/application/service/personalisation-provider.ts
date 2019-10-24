@@ -18,22 +18,23 @@ import { Fault } from '../../domain/fault';
 import { englishCompetencyLabels, welshCompetencyLabels } from '../../domain/competencies';
 import { formatApplicationReference } from '@dvsa/mes-microservice-common/domain/tars';
 import * as moment from 'moment';
+import 'moment/locale/cy';
 
 export interface IPersonalisationProvider {
 
-  getEmailPersonalisation (testresult: StandardCarTestCATBSchema) : EmailPersonalisation;
+  getEmailPersonalisation(testresult: StandardCarTestCATBSchema): EmailPersonalisation;
 
-  getLetterPersonalisation (testresult: StandardCarTestCATBSchema) : LetterPersonalisation;
+  getLetterPersonalisation(testresult: StandardCarTestCATBSchema): LetterPersonalisation;
 }
 
 @injectable()
 export class PersonalisationProvider implements IPersonalisationProvider {
 
   constructor(
-      @inject(TYPES.IFaultProvider) private faultProvider : IFaultProvider,
-  ) {}
+    @inject(TYPES.IFaultProvider) private faultProvider: IFaultProvider,
+  ) { }
 
-  public getEmailPersonalisation (testresult: StandardCarTestCATBSchema) : EmailPersonalisation {
+  public getEmailPersonalisation(testresult: StandardCarTestCATBSchema): EmailPersonalisation {
     const sharedValues: Personalisation = this.getSharedPersonalisationValues(testresult);
 
     return {
@@ -41,13 +42,13 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     };
   }
 
-  public getLetterPersonalisation (testresult: StandardCarTestCATBSchema) : LetterPersonalisation {
+  public getLetterPersonalisation(testresult: StandardCarTestCATBSchema): LetterPersonalisation {
     const sharedValues: Personalisation = this.getSharedPersonalisationValues(testresult);
 
     return {
       ...sharedValues,
       address_line_1: this.getTitledName(testresult.journalData.candidate.candidateName),
-      address_line_2:get(testresult, 'journalData.candidate.candidateAddress.addressLine1'),
+      address_line_2: get(testresult, 'journalData.candidate.candidateAddress.addressLine1'),
       address_line_3: get(testresult, 'journalData.candidate.candidateAddress.addressLine2'),
       address_line_4: get(testresult, 'journalData.candidate.candidateAddress.addressLine3'),
       address_line_5: get(testresult, 'journalData.candidate.candidateAddress.addressLine4'),
@@ -56,7 +57,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     };
   }
 
-  private getSharedPersonalisationValues(testresult: StandardCarTestCATBSchema) : Personalisation {
+  private getSharedPersonalisationValues(testresult: StandardCarTestCATBSchema): Personalisation {
 
     const drivingFaults = this.buildFaultStringWithCount(
       this.faultProvider.getDrivingFaults(testresult.testData).sort((a, b) => b.count - a.count),
@@ -67,30 +68,33 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       get(testresult, 'communicationPreferences.conductedLanguage'));
 
     const dangerousFaults = this.buildFaultString(
-        this.faultProvider.getDangerousFaults(testresult.testData),
-        get(testresult, 'communicationPreferences.conductedLanguage'));
+      this.faultProvider.getDangerousFaults(testresult.testData),
+      get(testresult, 'communicationPreferences.conductedLanguage'));
 
     return {
       applicationReference: formatApplicationReference(get(testresult, 'journalData.applicationReference')),
       category: testresult.category,
-      date: this.formatDate(get(testresult, 'journalData.testSlotAttributes.start')),
+      date: this.formatDate(
+        get(testresult, 'journalData.testSlotAttributes.start'),
+        get(testresult, 'communicationPreferences.conductedLanguage'),
+      ),
       location: get(testresult, 'journalData.testCentre.centreName'),
 
-      drivingFaults: drivingFaults.length > 0 ? drivingFaults  :'' ,
+      drivingFaults: drivingFaults.length > 0 ? drivingFaults : '',
       showDrivingFaults: drivingFaults.length > 0 ? BooleanText.YES : BooleanText.NO,
 
-      seriousFaults: seriousFaults.length > 0 ? seriousFaults  :'' ,
+      seriousFaults: seriousFaults.length > 0 ? seriousFaults : '',
       showSeriousFaults: seriousFaults.length > 0 ? BooleanText.YES : BooleanText.NO,
 
-      dangerousFaults: dangerousFaults.length > 0 ? dangerousFaults  :'' ,
+      dangerousFaults: dangerousFaults.length > 0 ? dangerousFaults : '',
       showDangerousFaults: dangerousFaults.length > 0 ? BooleanText.YES : BooleanText.NO,
 
-      showEcoText: this.shouldShowEco(get(testresult , 'testData.eco', null)),
+      showEcoText: this.shouldShowEco(get(testresult, 'testData.eco', null)),
     };
   }
 
   private buildFaultString(faults: Fault[], language: ConductedLanguage): string[] {
-    const faultLabels: string [] = [];
+    const faultLabels: string[] = [];
 
     if (language === 'Cymraeg') {
       faults.forEach(fault => faultLabels.push(`${welshCompetencyLabels[fault.name]}`));
@@ -122,7 +126,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     return '';
   }
 
-  private shouldShowEco(eco: Eco) : BooleanText {
+  private shouldShowEco(eco: Eco): BooleanText {
     if (!eco) {
       return BooleanText.NO;
     }
@@ -132,7 +136,10 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     return BooleanText.NO;
   }
 
-  private formatDate(stringDate: Date): string {
-    return moment(stringDate).format('D MMMM YYYY');
+  private formatDate(stringDate: Date, language: ConductedLanguage): string {
+    switch (language) {
+      case 'Cymraeg': return moment(stringDate).locale('cy').format('D MMMM YYYY');
+      default: return moment(stringDate).locale('en').format('D MMMM YYYY');
+    }
   }
 }
