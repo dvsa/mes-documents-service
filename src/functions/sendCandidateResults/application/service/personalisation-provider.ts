@@ -4,12 +4,12 @@ import {
   Personalisation,
   BooleanText,
 } from '../../domain/personalisation.model';
+import { CatBUniqueTypes } from '@dvsa/mes-test-schema/categories/B';
 import {
-  StandardCarTestCATBSchema,
   Name,
   ConductedLanguage,
   Eco,
-} from '@dvsa/mes-test-schema/categories/B';
+} from '@dvsa/mes-test-schema/categories/common';
 import { inject, injectable } from 'inversify';
 import { TYPES } from '../../framework/di/types';
 import { IFaultProvider } from './fault-provider';
@@ -22,9 +22,9 @@ import 'moment/locale/cy';
 
 export interface IPersonalisationProvider {
 
-  getEmailPersonalisation(testresult: StandardCarTestCATBSchema): EmailPersonalisation;
+  getEmailPersonalisation(testresult: CatBUniqueTypes.TestResult): EmailPersonalisation;
 
-  getLetterPersonalisation(testresult: StandardCarTestCATBSchema): LetterPersonalisation;
+  getLetterPersonalisation(testresult: CatBUniqueTypes.TestResult): LetterPersonalisation;
 }
 
 @injectable()
@@ -34,7 +34,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     @inject(TYPES.IFaultProvider) private faultProvider: IFaultProvider,
   ) { }
 
-  public getEmailPersonalisation(testresult: StandardCarTestCATBSchema): EmailPersonalisation {
+  public getEmailPersonalisation(testresult: CatBUniqueTypes.TestResult): EmailPersonalisation {
     const sharedValues: Personalisation = this.getSharedPersonalisationValues(testresult);
 
     return {
@@ -42,7 +42,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     };
   }
 
-  public getLetterPersonalisation(testresult: StandardCarTestCATBSchema): LetterPersonalisation {
+  public getLetterPersonalisation(testresult: CatBUniqueTypes.TestResult): LetterPersonalisation {
     const sharedValues: Personalisation = this.getSharedPersonalisationValues(testresult);
 
     return {
@@ -57,7 +57,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     };
   }
 
-  private getSharedPersonalisationValues(testresult: StandardCarTestCATBSchema): Personalisation {
+  private getSharedPersonalisationValues(testresult: CatBUniqueTypes.TestResult): Personalisation {
 
     const drivingFaults = this.buildFaultStringWithCount(
       this.faultProvider.getDrivingFaults(testresult.testData).sort((a, b) => b.count - a.count),

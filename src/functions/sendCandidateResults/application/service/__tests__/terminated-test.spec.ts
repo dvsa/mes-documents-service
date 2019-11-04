@@ -6,7 +6,7 @@ import { ITemplateIdProvider, TemplateIdProvider } from '../template-id-provider
 import { IStatusUpdater } from '../../../framework/status-updater';
 import { IFaultProvider, FaultProvider } from '../fault-provider';
 import { IPersonalisationProvider, PersonalisationProvider } from '../personalisation-provider';
-import { StandardCarTestCATBSchema } from '@dvsa/mes-test-schema/categories/B';
+import { CatBUniqueTypes } from '@dvsa/mes-test-schema/categories/B';
 import { ConfigAdapterMock } from '../../../framework/adapter/config/__mocks__/config-adapter.mock';
 import { StatusUpdaterMock } from '../../../framework/__mocks__/status-updater.mock';
 import { NextUploadBatchMock } from '../../../framework/__mocks__/next-upload-batch.mock';
@@ -22,7 +22,7 @@ describe('Test termination confirmation', () => {
 
   const totalNumberOfTests: number = 1;
 
-  let testResults: StandardCarTestCATBSchema[];
+  let testResults: CatBUniqueTypes.TestResult[];
   beforeEach(async () => {
     configAdapter = new ConfigAdapterMock();
     templateIdProvider = new TemplateIdProvider(configAdapter);

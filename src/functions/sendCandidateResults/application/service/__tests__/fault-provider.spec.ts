@@ -1,10 +1,9 @@
 import {
     DrivingFaults,
     SeriousFaults,
-    Manoeuvres,
-    VehicleChecks,
     TestData,
-} from '@dvsa/mes-test-schema/categories/B';
+} from '@dvsa/mes-test-schema/categories/common';
+import { CatBUniqueTypes } from '@dvsa/mes-test-schema/categories/B';
 import {
     convertNumericFaultObjectToArray,
     convertBooleanFaultObjectToArray,
@@ -27,7 +26,7 @@ describe('fault-provider', () => {
 
     describe('getDrivingFaults', () => {
       it('should give us a list of faults from different sections of the test data', () => {
-        const data: TestData = {
+        const data: CatBUniqueTypes.TestData = {
           drivingFaults: {
             ancillaryControls: 1,
             awarenessPlanning: 0,
@@ -56,7 +55,7 @@ describe('fault-provider', () => {
 
     describe('getSeriousFaults', () => {
       it('should give us a list of faults from different sections of the test data', () => {
-        const data: TestData = {
+        const data: CatBUniqueTypes.TestData = {
           seriousFaults: {
             ancillaryControls: true,
             awarenessPlanning: false,
@@ -98,7 +97,7 @@ describe('fault-provider', () => {
 
     describe('getDangerousFaults', () => {
       it('should give us a list of faults from different sections of the test data', () => {
-        const data: TestData = {
+        const data: CatBUniqueTypes.TestData = {
           dangerousFaults: {
             ancillaryControls: true,
             awarenessPlanning: false,
@@ -209,7 +208,7 @@ describe('fault-provider', () => {
 
   describe('getCompletedManoeuvres', () => {
     it('should return 2 driving faults if there are control and observation driving faults', () => {
-      const data: Manoeuvres = {
+      const data: CatBUniqueTypes.Manoeuvres = {
         forwardPark: {
           selected: true,
           controlFault: CompetencyOutcome.DF,
@@ -225,7 +224,7 @@ describe('fault-provider', () => {
 
     });
     it('should not return any driving faults for a manoeuvre if selected is not true', () => {
-      const data: Manoeuvres = {
+      const data: CatBUniqueTypes.Manoeuvres = {
         forwardPark: {
           controlFault: CompetencyOutcome.DF,
           observationFault: CompetencyOutcome.DF,
@@ -238,7 +237,7 @@ describe('fault-provider', () => {
 
     });
     it('should only return driving faults for the type of fault we have requested', () => {
-      const data: Manoeuvres = {
+      const data: CatBUniqueTypes.Manoeuvres = {
         forwardPark: {
           selected: true,
           controlFault: CompetencyOutcome.S,
@@ -253,7 +252,7 @@ describe('fault-provider', () => {
 
     });
     it('should return faults for multiple manoeuvres if more then 1 exist', () => {
-      const data: Manoeuvres = {
+      const data: CatBUniqueTypes.Manoeuvres = {
         forwardPark: {
           selected: true,
           controlFault: CompetencyOutcome.DF,
@@ -272,7 +271,7 @@ describe('fault-provider', () => {
 
     });
     it('should return any empty array if no data is avalible', () => {
-      const data: Manoeuvres = {};
+      const data: CatBUniqueTypes.Manoeuvres = {};
 
       const result: Fault[] = getCompletedManoeuvres(data, CompetencyOutcome.DF);
 
@@ -283,7 +282,7 @@ describe('fault-provider', () => {
 
   describe('getVehicleChecksFault', () => {
     it('should find a dangerous fault if one exists', () => {
-      const data: VehicleChecks = {
+      const data: CatBUniqueTypes.VehicleChecks = {
         showMeQuestion: {
           outcome: CompetencyOutcome.D,
         },
@@ -296,7 +295,7 @@ describe('fault-provider', () => {
 
     });
     it('should not find a dangerous fault if one exists', () => {
-      const data: VehicleChecks = {
+      const data: CatBUniqueTypes.VehicleChecks = {
         showMeQuestion: {
           outcome: CompetencyOutcome.DF,
         },
@@ -308,7 +307,7 @@ describe('fault-provider', () => {
 
     });
     it('should find a serious fault if one exists', () => {
-      const data: VehicleChecks = {
+      const data: CatBUniqueTypes.VehicleChecks = {
         showMeQuestion: {
           outcome: CompetencyOutcome.S,
         },
@@ -321,7 +320,7 @@ describe('fault-provider', () => {
 
     });
     it('should not find a serious fault if one exists', () => {
-      const data: VehicleChecks = {
+      const data: CatBUniqueTypes.VehicleChecks = {
         showMeQuestion: {
           outcome: CompetencyOutcome.DF,
         },
@@ -333,7 +332,7 @@ describe('fault-provider', () => {
 
     });
     it('should find a driving fault if one exists', () => {
-      const data: VehicleChecks = {
+      const data: CatBUniqueTypes.VehicleChecks = {
         showMeQuestion: {
           outcome: CompetencyOutcome.DF,
         },
@@ -346,7 +345,7 @@ describe('fault-provider', () => {
 
     });
     it('should not find a serious fault if one exists', () => {
-      const data: VehicleChecks = {
+      const data: CatBUniqueTypes.VehicleChecks = {
         showMeQuestion: {
           outcome: CompetencyOutcome.S,
         },
@@ -358,7 +357,7 @@ describe('fault-provider', () => {
 
     });
     it('should only return one a driving fault if two exist', () => {
-      const data: VehicleChecks = {
+      const data: CatBUniqueTypes.VehicleChecks = {
         showMeQuestion: {
           outcome: CompetencyOutcome.DF,
         },

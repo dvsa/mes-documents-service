@@ -1,10 +1,9 @@
 import {
   TestData,
   ManoeuvreOutcome,
-  VehicleChecks,
   QuestionOutcome,
-  ActivityCode,
-} from '@dvsa/mes-test-schema/categories/B';
+} from '@dvsa/mes-test-schema/categories/common';
+import { CatBUniqueTypes } from '@dvsa/mes-test-schema/categories/B';
 import { injectable } from 'inversify';
 import 'reflect-metadata';
 
@@ -24,7 +23,7 @@ export interface IFaultProvider {
 @injectable()
 export class FaultProvider implements IFaultProvider {
 
-  public getDrivingFaults(testData: TestData | undefined): Fault [] {
+  public getDrivingFaults(testData: CatBUniqueTypes.TestData | undefined): Fault [] {
     const drivingFaults: Fault[] = [];
 
     if (!testData) {
@@ -42,7 +41,7 @@ export class FaultProvider implements IFaultProvider {
     return drivingFaults;
   }
 
-  public getSeriousFaults(testData: TestData | undefined): Fault [] {
+  public getSeriousFaults(testData: CatBUniqueTypes.TestData | undefined): Fault [] {
     const seriousFaults: Fault[] = [];
 
     if (!testData) {
@@ -64,7 +63,7 @@ export class FaultProvider implements IFaultProvider {
     return seriousFaults;
   }
 
-  public getDangerousFaults(testData: TestData | undefined): Fault [] {
+  public getDangerousFaults(testData: CatBUniqueTypes.TestData | undefined): Fault [] {
     const dangerousFaults: Fault[] = [];
 
     if (!testData) {
@@ -97,7 +96,7 @@ export function  convertBooleanFaultObjectToArray(faults: any): Fault[] {
   .map((key) => { return { name: key , count: 1 } as Fault; });
 }
 
-export function getNonStandardFaults(testData: TestData, faultType: CompetencyOutcome) : Fault[] {
+export function getNonStandardFaults(testData: CatBUniqueTypes.TestData, faultType: CompetencyOutcome) : Fault[] {
   const faults: Fault[] = [];
 
 // Controlled Stop
@@ -140,7 +139,8 @@ export function getCompletedManoeuvres(manoeuvres : any, faultType: ManoeuvreOut
   return result;
 }
 
-export function getVehicleChecksFault(vehicleChecks: VehicleChecks, faultType: QuestionOutcome) : Fault[] {
+export function getVehicleChecksFault(vehicleChecks: CatBUniqueTypes.VehicleChecks,
+                                      faultType: QuestionOutcome) : Fault[] {
   if (faultType === 'D') {
     if (vehicleChecks.showMeQuestion && vehicleChecks.showMeQuestion.outcome === 'D') {
       return [{ name: Competencies.vehicleChecks, count: 1 }];
