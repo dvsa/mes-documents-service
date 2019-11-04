@@ -1,6 +1,6 @@
 import { injectable, inject } from 'inversify';
 import axios, { AxiosResponse } from 'axios';
-import { StandardCarTestCATBSchema } from '@dvsa/mes-test-schema/categories/B';
+import { CatBUniqueTypes } from '@dvsa/mes-test-schema/categories/B';
 import * as zlib from 'zlib';
 
 import { INextUploadBatch } from '../domain/next-upload-batch.interface';
@@ -24,12 +24,12 @@ export class NextUploadBatch implements INextUploadBatch {
     const { resultsBaseApiUrl } = this.configAdapter;
     return axios.get(
       `${resultsBaseApiUrl}/test-results/upload?interface=${NOTIFY_INTERFACE}&batch_size=${this.batchSize}`,
-    ).then((response: AxiosResponse): StandardCarTestCATBSchema[] => {
+    ).then((response: AxiosResponse): CatBUniqueTypes.TestResult[] => {
       const parseResult = response.data;
-      const resultList: StandardCarTestCATBSchema[] = [];
+      const resultList: CatBUniqueTypes.TestResult[] = [];
       parseResult.forEach((element: string) => {
         let uncompressedResult: string = '';
-        let test: StandardCarTestCATBSchema;
+        let test: CatBUniqueTypes.TestResult;
 
         try {
           uncompressedResult = zlib.gunzipSync(new Buffer(element, 'base64')).toString();

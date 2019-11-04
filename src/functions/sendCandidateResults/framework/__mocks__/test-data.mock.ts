@@ -1,4 +1,4 @@
-import { StandardCarTestCATBSchema } from '@dvsa/mes-test-schema/categories/B';
+import { CatBUniqueTypes } from '@dvsa/mes-test-schema/categories/B';
 
 export const mockEmail1 = 'simulate-delivered@notifications.service.gov.uk';
 export const mockEmail2 = 'simulate-delivered-2@notifications.service.gov.uk';
@@ -14,7 +14,7 @@ export const mockPhoneNumber3 = '07700900222';
 export const temporaryFailurePhoneNumber = '07700900003';
 export const permanentFailurePhoneNumber = '07700900002';
 
-export const completedCatBTest: StandardCarTestCATBSchema = {
+export const completedCatBTest: CatBUniqueTypes.TestResult = {
   version: '0.1.1',
   category: 'B',
   activityCode: '1',

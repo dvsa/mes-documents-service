@@ -1,5 +1,4 @@
-import { ActivityCode, ConductedLanguage } from '@dvsa/mes-test-schema/categories/B';
-import { DocumentsServiceError } from '../../domain/errors/documents-service-error';
+import { ActivityCode, ConductedLanguage } from '@dvsa/mes-test-schema/categories/common';
 import { IConfigAdapter } from '../../framework/adapter/config/config-adapter.interface';
 import { TYPES } from '../../framework/di/types';
 import { inject, injectable } from 'inversify';
