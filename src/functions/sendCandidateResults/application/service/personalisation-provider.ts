@@ -4,7 +4,6 @@ import {
   Personalisation,
   BooleanText,
 } from '../../domain/personalisation.model';
-import { CatBUniqueTypes } from '@dvsa/mes-test-schema/categories/B';
 import {
   Name,
   ConductedLanguage,
@@ -19,12 +18,13 @@ import { englishCompetencyLabels, welshCompetencyLabels } from '../../domain/com
 import { formatApplicationReference } from '@dvsa/mes-microservice-common/domain/tars';
 import * as moment from 'moment';
 import 'moment/locale/cy';
+import { TestResultSchemasUnion } from '@dvsa/mes-test-schema/categories';
 
 export interface IPersonalisationProvider {
 
-  getEmailPersonalisation(testresult: CatBUniqueTypes.TestResult): EmailPersonalisation;
+  getEmailPersonalisation(testresult: TestResultSchemasUnion): EmailPersonalisation;
 
-  getLetterPersonalisation(testresult: CatBUniqueTypes.TestResult): LetterPersonalisation;
+  getLetterPersonalisation(testresult: TestResultSchemasUnion): LetterPersonalisation;
 }
 
 @injectable()
@@ -34,7 +34,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     @inject(TYPES.IFaultProvider) private faultProvider: IFaultProvider,
   ) { }
 
-  public getEmailPersonalisation(testresult: CatBUniqueTypes.TestResult): EmailPersonalisation {
+  public getEmailPersonalisation(testresult: TestResultSchemasUnion): EmailPersonalisation {
     const sharedValues: Personalisation = this.getSharedPersonalisationValues(testresult);
 
     return {
@@ -42,7 +42,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     };
   }
 
-  public getLetterPersonalisation(testresult: CatBUniqueTypes.TestResult): LetterPersonalisation {
+  public getLetterPersonalisation(testresult: TestResultSchemasUnion): LetterPersonalisation {
     const sharedValues: Personalisation = this.getSharedPersonalisationValues(testresult);
 
     return {
@@ -57,18 +57,18 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     };
   }
 
-  private getSharedPersonalisationValues(testresult: CatBUniqueTypes.TestResult): Personalisation {
+  private getSharedPersonalisationValues(testresult: TestResultSchemasUnion): Personalisation {
 
     const drivingFaults = this.buildFaultStringWithCount(
-      this.faultProvider.getDrivingFaults(testresult.testData).sort((a, b) => b.count - a.count),
+      this.faultProvider.getDrivingFaults(testresult.testData, testresult.category).sort((a, b) => b.count - a.count),
       get(testresult, 'communicationPreferences.conductedLanguage'));
 
     const seriousFaults = this.buildFaultString(
-      this.faultProvider.getSeriousFaults(testresult.testData),
+      this.faultProvider.getSeriousFaults(testresult.testData, testresult.category),
       get(testresult, 'communicationPreferences.conductedLanguage'));
 
     const dangerousFaults = this.buildFaultString(
-      this.faultProvider.getDangerousFaults(testresult.testData),
+      this.faultProvider.getDangerousFaults(testresult.testData, testresult.category),
       get(testresult, 'communicationPreferences.conductedLanguage'));
 
     return {
@@ -97,9 +97,9 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     const faultLabels: string[] = [];
 
     if (language === 'Cymraeg') {
-      faults.forEach(fault => faultLabels.push(`${welshCompetencyLabels[fault.name]}`));
+      faults.forEach((fault: any) => faultLabels.push(`${welshCompetencyLabels[fault.name]}`));
     } else {
-      faults.forEach(fault => faultLabels.push(`${englishCompetencyLabels[fault.name]}`));
+      faults.forEach((fault: any) => faultLabels.push(`${englishCompetencyLabels[fault.name]}`));
     }
 
     return faultLabels;
@@ -109,10 +109,10 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     const faultLabels: string[] = [];
 
     if (language === 'Cymraeg') {
-      faults.forEach(fault =>
+      faults.forEach((fault: any) =>
         faultLabels.push(`${welshCompetencyLabels[fault.name]}, ${fault.count}`));
     } else {
-      faults.forEach(fault =>
+      faults.forEach((fault: any) =>
         faultLabels.push(`${englishCompetencyLabels[fault.name]}, ${fault.count}`));
     }
 

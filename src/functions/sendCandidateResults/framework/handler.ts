@@ -1,12 +1,11 @@
 import { container } from './di/inversify.config';
 import { TYPES } from './di/types';
-import { CatBUniqueTypes } from '@dvsa/mes-test-schema/categories/B';
 import { IRequestScheduler } from './request-scheduler';
 import { INextUploadBatch } from '../domain/next-upload-batch.interface';
+import { TestResultSchemasUnion } from '@dvsa/mes-test-schema/categories';
 
 export async function handler() {
-
-  let testResults: CatBUniqueTypes.TestResult[];
+  let testResults: TestResultSchemasUnion[];
   const nextUploadBatch = container.get<INextUploadBatch>(TYPES.INextUploadBatch);
 
   try {

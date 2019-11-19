@@ -12,6 +12,7 @@ import { StatusUpdaterMock } from '../../../framework/__mocks__/status-updater.m
 import { NextUploadBatchMock } from '../../../framework/__mocks__/next-upload-batch.mock';
 import { NOTIFY_INTERFACE } from '../../../domain/interface.constants';
 import { ProcessingStatus } from '../../../domain/submission-outcome.model';
+import { TestResultSchemasUnion } from '@dvsa/mes-test-schema/categories';
 
 describe('Test termination confirmation', () => {
   let configAdapter: IConfigAdapter;
@@ -22,7 +23,7 @@ describe('Test termination confirmation', () => {
 
   const totalNumberOfTests: number = 1;
 
-  let testResults: CatBUniqueTypes.TestResult[];
+  let testResults: TestResultSchemasUnion[];
   beforeEach(async () => {
     configAdapter = new ConfigAdapterMock();
     templateIdProvider = new TemplateIdProvider(configAdapter);

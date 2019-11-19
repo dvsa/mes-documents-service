@@ -50,7 +50,8 @@ export enum Competencies {
     forwardParkControl = 'forwardParkControl',
     controlledStop = 'controlledStop',
     eyesightTest = 'eyesightTest',
-
+    uncoupleRecouple = 'uncoupleRecouple',
+    reverseLeftControl = 'reverseLeftControl',
   }
 
 export enum englishCompetencyLabels {

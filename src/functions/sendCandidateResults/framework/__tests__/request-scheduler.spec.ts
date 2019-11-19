@@ -15,6 +15,7 @@ import { StatusUpdaterMock } from '../__mocks__/status-updater.mock';
 import { NOTIFY_INTERFACE } from '../../domain/interface.constants';
 import { ProcessingStatus } from '../../domain/submission-outcome.model';
 import { NotifyClientStubFailure400 } from '../../application/stub/notify-client-stub-failure-400';
+import { TestResultSchemasUnion } from "@dvsa/mes-test-schema/categories";
 
 describe('RequestScheduler', () => {
 
@@ -26,7 +27,7 @@ describe('RequestScheduler', () => {
 
   const totalNumberOfTests: number = 1;
 
-  let testResults: CatBUniqueTypes.TestResult[];
+  let testResults: TestResultSchemasUnion[];
 
   beforeEach(async() => {
     configAdapter = new ConfigAdapterMock();

@@ -1,6 +1,5 @@
 import { injectable, inject } from 'inversify';
 import axios, { AxiosResponse } from 'axios';
-import { CatBUniqueTypes } from '@dvsa/mes-test-schema/categories/B';
 import * as zlib from 'zlib';
 
 import { INextUploadBatch } from '../domain/next-upload-batch.interface';
@@ -8,6 +7,7 @@ import { TYPES } from './di/types';
 import { IConfigAdapter } from './adapter/config/config-adapter.interface';
 import { TestResultError } from './errors/TestResultError';
 import { NOTIFY_INTERFACE } from '../domain/interface.constants';
+import { TestResultSchemasUnion } from '@dvsa/mes-test-schema/categories';
 
 @injectable()
 export class NextUploadBatch implements INextUploadBatch {
@@ -24,12 +24,12 @@ export class NextUploadBatch implements INextUploadBatch {
     const { resultsBaseApiUrl } = this.configAdapter;
     return axios.get(
       `${resultsBaseApiUrl}/test-results/upload?interface=${NOTIFY_INTERFACE}&batch_size=${this.batchSize}`,
-    ).then((response: AxiosResponse): CatBUniqueTypes.TestResult[] => {
+    ).then((response: AxiosResponse): TestResultSchemasUnion[] => {
       const parseResult = response.data;
-      const resultList: CatBUniqueTypes.TestResult[] = [];
+      const resultList: TestResultSchemasUnion[] = [];
       parseResult.forEach((element: string) => {
         let uncompressedResult: string = '';
-        let test: CatBUniqueTypes.TestResult;
+        let test: TestResultSchemasUnion;
 
         try {
           uncompressedResult = zlib.gunzipSync(new Buffer(element, 'base64')).toString();
