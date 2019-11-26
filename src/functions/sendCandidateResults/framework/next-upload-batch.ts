@@ -32,7 +32,7 @@ export class NextUploadBatch implements INextUploadBatch {
         let test: StandardCarTestCATBSchema;
 
         try {
-          uncompressedResult = zlib.gunzipSync(new Buffer(element, 'base64')).toString();
+          uncompressedResult = zlib.gunzipSync(Buffer.from(element, 'base64')).toString();
         } catch (e) {
           return new TestResultError('failed decompressing test result');
         }
