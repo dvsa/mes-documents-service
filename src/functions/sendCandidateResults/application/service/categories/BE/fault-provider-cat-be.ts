@@ -8,7 +8,6 @@ import {
 } from '../../fault-provider';
 import { Competencies } from '../../../../domain/competencies';
 import { QuestionOutcome, QuestionResult } from '@dvsa/mes-test-schema/categories/common';
-import { KinesisVideoArchivedMedia } from 'aws-sdk';
 
 export const getDrivingFaultsCatBE = (testData: CatBEUniqueTypes.TestData | undefined): Fault [] => {
   const drivingFaults: Fault[] = [];
@@ -43,9 +42,10 @@ export const getSeriousFaultsCatBE = (testData: CatBEUniqueTypes.TestData | unde
   getNonStandardFaultsCatBE(testData, CompetencyOutcome.S)
     .forEach(fault => seriousFaults.push(fault));
 
-  if (getVehicleCheckFaultCount(testData.vehicleChecks as CatBEUniqueTypes.VehicleChecks, 'DF') === 5) {
+  if (getVehicleCheckFaultCount(testData.vehicleChecks as CatBEUniqueTypes.VehicleChecks, CompetencyOutcome.DF) === 5) {
     seriousFaults.push({ name: Competencies.vehicleChecks, count: 1 });
   }
+
   if (testData.eyesightTest && testData.eyesightTest.seriousFault) {
     seriousFaults.push({ name: Competencies.eyesightTest, count: 1 });
   }
@@ -56,16 +56,16 @@ export const getSeriousFaultsCatBE = (testData: CatBEUniqueTypes.TestData | unde
 const getVehicleCheckFaultCount = (
   vehicleChecks: CatBEUniqueTypes.VehicleChecks,
   faultType: QuestionOutcome): number => {
-  let questionCount = 0;
+  let questionCount: number = 0;
 
   if (vehicleChecks) {
     if (vehicleChecks.showMeQuestions) {
       questionCount = questionCount +
-         vehicleChecks.showMeQuestions.filter((showMe) => { return showMe.outcome === faultType; }).length;
+         vehicleChecks.showMeQuestions.filter((showMe: QuestionResult) => showMe.outcome === faultType).length;
     }
     if (vehicleChecks.tellMeQuestions) {
       questionCount = questionCount +
-         vehicleChecks.tellMeQuestions.filter((tellMe) => { return tellMe.outcome === faultType; }).length;
+         vehicleChecks.tellMeQuestions.filter((tellMe: QuestionResult) => tellMe.outcome === faultType).length;
     }
   }
   return questionCount;
@@ -123,8 +123,8 @@ export const getVehicleChecksFaultCatBE = (
   faultType: QuestionOutcome): Fault[] => {
 
   const faultArray: Fault[] = [];
+  const faultCount: number = getVehicleCheckFaultCount(vehicleChecks, faultType);
 
-  const faultCount = getVehicleCheckFaultCount(vehicleChecks, faultType);
   if (faultCount > 0) {
     faultArray.push({ name: Competencies.vehicleChecks, count: faultCount });
   }
