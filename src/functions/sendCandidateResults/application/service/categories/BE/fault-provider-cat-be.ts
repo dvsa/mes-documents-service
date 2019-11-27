@@ -121,12 +121,11 @@ export const getNonStandardFaultsCatBE = (
 export const getVehicleChecksFaultCatBE = (
   vehicleChecks: CatBEUniqueTypes.VehicleChecks,
   faultType: QuestionOutcome): Fault[] => {
-
   const faultArray: Fault[] = [];
-  const faultCount: number = getVehicleCheckFaultCount(vehicleChecks, faultType);
+  const faultCount = getVehicleCheckFaultCount(vehicleChecks, faultType);
 
   if (faultCount > 0) {
-    faultArray.push({ name: Competencies.vehicleChecks, count: faultCount });
+    faultArray.push({ name: Competencies.vehicleChecks, count: faultCount === 5 ? 4 : faultCount });
   }
   return faultArray;
 };
