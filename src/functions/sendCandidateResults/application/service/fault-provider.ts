@@ -19,6 +19,7 @@ import {
   getDrivingFaultsCatBE,
   getSeriousFaultsCatBE,
 } from './categories/BE/fault-provider-cat-be';
+import { TestCategory } from '../../domain/test-category';
 
 export interface IFaultProvider {
   getDrivingFaults(testData: TestData | undefined, category: string): Fault[];
@@ -35,10 +36,10 @@ export class FaultProvider implements IFaultProvider {
     let faults: Fault[] = [];
 
     switch (category) {
-      case 'B':
+      case TestCategory.B:
         faults = getDrivingFaultsCatB(testData as CatBUniqueTypes.TestData);
         break;
-      case 'BE':
+      case TestCategory.BE:
         faults = getDrivingFaultsCatBE(testData as CatBEUniqueTypes.TestData);
         break;
       default:
@@ -52,10 +53,10 @@ export class FaultProvider implements IFaultProvider {
     let faults: Fault[] = [];
 
     switch (category) {
-      case 'B':
+      case TestCategory.B:
         faults = getSeriousFaultsCatB(testData as CatBUniqueTypes.TestData);
         break;
-      case 'BE':
+      case TestCategory.BE:
         faults = getSeriousFaultsCatBE(testData as CatBEUniqueTypes.TestData);
         break;
       default:
@@ -69,10 +70,10 @@ export class FaultProvider implements IFaultProvider {
     let faults: Fault[] = [];
 
     switch (category) {
-      case 'B':
+      case TestCategory.B:
         faults = getDangerousFaultsCatB(testData as CatBUniqueTypes.TestData);
         break;
-      case 'BE':
+      case TestCategory.BE:
         faults = getDangerousFaultsCatBE(testData as CatBEUniqueTypes.TestData);
         break;
       default:

@@ -17,7 +17,7 @@ import * as catBEFaultProvider from '../categories/BE/fault-provider-cat-be';
 
 describe('fault-provider', () => {
   const catB: string = 'B';
-  const catBE: string = 'BE';
+  const catBE: string = 'B+E';
 
   describe('FaultProvider', () => {
     let faultProvider: FaultProvider;

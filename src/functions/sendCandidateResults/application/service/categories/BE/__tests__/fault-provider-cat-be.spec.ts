@@ -15,6 +15,8 @@ describe('fault-provider-cat-be', () => {
     it('should find a dangerous fault if one exists', () => {
       const data: CatBEUniqueTypes.VehicleChecks = {
         showMeQuestions: [{
+          code: 'S01',
+          description: 'S01',
           outcome: CompetencyOutcome.D,
         }],
       };
@@ -23,9 +25,11 @@ describe('fault-provider-cat-be', () => {
       expect(result).toContain({ name: Competencies.vehicleChecks, count: 1 });
     });
 
-    it('should not find a dangerous fault if one exists', () => {
+    it('should not find a dangerous fault if none exists', () => {
       const data: CatBEUniqueTypes.VehicleChecks = {
         showMeQuestions: [{
+          code: 'S01',
+          description: 'S01',
           outcome: CompetencyOutcome.DF,
         }],
       };
@@ -36,6 +40,8 @@ describe('fault-provider-cat-be', () => {
     it('should find a serious fault if one exists', () => {
       const data: CatBEUniqueTypes.VehicleChecks = {
         showMeQuestions: [{
+          code: 'S01',
+          description: 'S01',
           outcome: CompetencyOutcome.S,
         }],
       };
@@ -44,9 +50,11 @@ describe('fault-provider-cat-be', () => {
       expect(result).toContain({ name: Competencies.vehicleChecks, count: 1 });
     });
 
-    it('should not find a serious fault if one exists', () => {
+    it('should not find a serious fault if none exist', () => {
       const data: CatBEUniqueTypes.VehicleChecks = {
         showMeQuestions: [{
+          code: 'S01',
+          description: 'S01',
           outcome: CompetencyOutcome.DF,
         }],
       };
@@ -57,6 +65,8 @@ describe('fault-provider-cat-be', () => {
     it('should find a driving fault if one exists', () => {
       const data: CatBEUniqueTypes.VehicleChecks = {
         showMeQuestions: [{
+          code: 'S01',
+          description: 'S01',
           outcome: CompetencyOutcome.DF,
         }],
       };
@@ -65,33 +75,78 @@ describe('fault-provider-cat-be', () => {
       expect(result).toContain({ name: Competencies.vehicleChecks, count: 1 });
     });
 
-    it('should not find a serious fault if one exists', () => {
-      const data: CatBEUniqueTypes.VehicleChecks = {
+    it('should return a serious fault when 5 vehicle check driving faults', () => {
+      const vehicleChecks: CatBEUniqueTypes.VehicleChecks = {
         showMeQuestions: [{
-          outcome: CompetencyOutcome.S,
-        }],
+          code: 'S01',
+          description: 'S01',
+          outcome: CompetencyOutcome.DF,
+        },
+          {
+            code: 'S02',
+            description: 'S02',
+            outcome: CompetencyOutcome.DF,
+          },
+          {
+            code: 'S03',
+            description: 'S03',
+            outcome: CompetencyOutcome.DF,
+          }],
+        tellMeQuestions: [{
+          code: 'T01',
+          description: 'T01',
+          outcome: CompetencyOutcome.DF,
+        },
+          {
+            code: 'T02',
+            description: 'T02',
+            outcome: CompetencyOutcome.DF,
+          }],
       };
-      const result: Fault[] = getVehicleChecksFaultCatBE(data, CompetencyOutcome.DF);
-      expect(result.length).toBe(0);
+      const data: CatBEUniqueTypes.TestData = {
+        vehicleChecks,
+        seriousFaults: {
+          ancillaryControls: true,
+          awarenessPlanning: false,
+        },
+        manoeuvres: {
+          reverseLeft: {
+            selected: true,
+            controlFault: CompetencyOutcome.S,
+          },
+        },
+      };
+      const result: Fault[] = getSeriousFaultsCatBE(data);
+      expect(result.length).toBe(3);
+      expect(result).toContain({ name: Competencies.vehicleChecks, count: 1 });
+      expect(result).toContain({ name: Competencies.ancillaryControls, count: 1 });
+      expect(result).toContain({ name: Competencies.reverseLeftControl, count: 1 });
     });
 
-    it('should only return one a driving fault if two exist', () => {
+    it('should only return one driving fault with a count of two if two exist', () => {
       const data: CatBEUniqueTypes.VehicleChecks = {
         showMeQuestions: [{
+          code: 'S01',
+          description: 'S01',
           outcome: CompetencyOutcome.DF,
         }],
         tellMeQuestions: [{
+          code: 'T01',
+          description: 'T01',
           outcome: CompetencyOutcome.DF,
         }],
       };
+
       const result: Fault[] = getVehicleChecksFaultCatBE(data, CompetencyOutcome.DF);
       expect(result.length).toBe(1);
-      expect(result).toContain({ name: Competencies.vehicleChecks, count: 1 });
+      expect(result).toContain({ name: Competencies.vehicleChecks, count: 2 });
     });
 
     it('should return ', () => {
       const data: CatBEUniqueTypes.VehicleChecks = {
         tellMeQuestions: [{
+          code: 'T01',
+          description: 'T01',
           outcome: CompetencyOutcome.DF,
         }],
       };
