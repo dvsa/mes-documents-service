@@ -14,10 +14,11 @@ import { CompetencyOutcome } from '../../../domain/competency-outcome';
 import { Competencies } from '../../../domain/competencies';
 import * as catBFaultProvider from '../categories/B/fault-provider-cat-b';
 import * as catBEFaultProvider from '../categories/BE/fault-provider-cat-be';
+import { TestCategory } from '../../../domain/test-category';
 
 describe('fault-provider', () => {
-  const catB: string = 'B';
-  const catBE: string = 'B+E';
+  const catB: string = TestCategory.B;
+  const catBE: string = TestCategory.BE;
 
   describe('FaultProvider', () => {
     let faultProvider: FaultProvider;
