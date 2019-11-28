@@ -24,7 +24,7 @@ describe('fault-provider-cat-b', () => {
       expect(result).toContain({ name: Competencies.vehicleChecks, count: 1 });
 
     });
-    it('should not find a dangerous fault if one exists', () => {
+    it('should not find a dangerous fault if one does not exist', () => {
       const data: CatBUniqueTypes.VehicleChecks = {
         showMeQuestion: {
           outcome: CompetencyOutcome.DF,
@@ -49,7 +49,7 @@ describe('fault-provider-cat-b', () => {
       expect(result).toContain({ name: Competencies.vehicleChecks, count: 1 });
 
     });
-    it('should not find a serious fault if one exists', () => {
+    it('should not find a serious fault if one does not exist', () => {
       const data: CatBUniqueTypes.VehicleChecks = {
         showMeQuestion: {
           outcome: CompetencyOutcome.DF,

@@ -95,31 +95,31 @@ export const getNonStandardFaultsCatB = (testData: CatBUniqueTypes.TestData, fau
 
 export const getVehicleChecksFaultCatB = (vehicleChecks: CatBUniqueTypes.VehicleChecks,
                                           faultType: QuestionOutcome): Fault[] => {
-  if (faultType === 'D') {
-    if (vehicleChecks.showMeQuestion && vehicleChecks.showMeQuestion.outcome === 'D') {
+  if (faultType === CompetencyOutcome.D) {
+    if (vehicleChecks.showMeQuestion && vehicleChecks.showMeQuestion.outcome === CompetencyOutcome.D) {
       return [{ name: Competencies.vehicleChecks, count: 1 }];
     }
   }
 
-  if (faultType === 'S') {
-    if (vehicleChecks.showMeQuestion && vehicleChecks.showMeQuestion.outcome === 'S') {
+  if (faultType === CompetencyOutcome.S) {
+    if (vehicleChecks.showMeQuestion && vehicleChecks.showMeQuestion.outcome === CompetencyOutcome.S) {
       return [{ name: Competencies.vehicleChecks, count: 1 }];
     }
   }
 
-  if (faultType === 'DF') {
-    if (
-      vehicleChecks.showMeQuestion &&
-      (vehicleChecks.showMeQuestion.outcome === 'S' || vehicleChecks.showMeQuestion.outcome === 'D')
+  if (faultType === CompetencyOutcome.DF) {
+    if (vehicleChecks.showMeQuestion && (
+      vehicleChecks.showMeQuestion.outcome === CompetencyOutcome.S ||
+      vehicleChecks.showMeQuestion.outcome === CompetencyOutcome.D)
     ) {
       return [];
     }
 
-    if (vehicleChecks.showMeQuestion && vehicleChecks.showMeQuestion.outcome === 'DF') {
+    if (vehicleChecks.showMeQuestion && vehicleChecks.showMeQuestion.outcome === CompetencyOutcome.DF) {
       return [{ name: Competencies.vehicleChecks, count: 1 }];
     }
 
-    if (vehicleChecks.tellMeQuestion && vehicleChecks.tellMeQuestion.outcome === 'DF') {
+    if (vehicleChecks.tellMeQuestion && vehicleChecks.tellMeQuestion.outcome === CompetencyOutcome.DF) {
       return [{ name: Competencies.vehicleChecks, count: 1 }];
     }
   }
