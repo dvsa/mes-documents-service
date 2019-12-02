@@ -1,21 +1,24 @@
 import {
-    DrivingFaults,
-    SeriousFaults,
-    TestData,
+  DrivingFaults,
+  SeriousFaults,
 } from '@dvsa/mes-test-schema/categories/common';
 import { CatBUniqueTypes } from '@dvsa/mes-test-schema/categories/B';
 import {
-    convertNumericFaultObjectToArray,
-    convertBooleanFaultObjectToArray,
-    getCompletedManoeuvres,
-    getVehicleChecksFault,
-    FaultProvider,
+  convertNumericFaultObjectToArray,
+  convertBooleanFaultObjectToArray,
+  getCompletedManoeuvres,
+  FaultProvider,
 } from '../fault-provider';
 import { Fault } from '../../../domain/fault';
 import { CompetencyOutcome } from '../../../domain/competency-outcome';
 import { Competencies } from '../../../domain/competencies';
+import * as catBFaultProvider from '../categories/B/fault-provider-cat-b';
+import * as catBEFaultProvider from '../categories/BE/fault-provider-cat-be';
+import { TestCategory } from '../../../domain/test-category';
 
 describe('fault-provider', () => {
+  const catB: string = TestCategory.B;
+  const catBE: string = TestCategory.BE;
 
   describe('FaultProvider', () => {
     let faultProvider: FaultProvider;
@@ -25,7 +28,9 @@ describe('fault-provider', () => {
     });
 
     describe('getDrivingFaults', () => {
-      it('should give us a list of faults from different sections of the test data', () => {
+      it('should call the cat b driving faults method when category is b', () => {
+        spyOn(catBFaultProvider, 'getDrivingFaultsCatB');
+
         const data: CatBUniqueTypes.TestData = {
           drivingFaults: {
             ancillaryControls: 1,
@@ -43,18 +48,46 @@ describe('fault-provider', () => {
           },
         };
 
-        const result: Fault [] = faultProvider.getDrivingFaults(data);
+        faultProvider.getDrivingFaults(data, catB);
+        expect(catBFaultProvider.getDrivingFaultsCatB).toHaveBeenCalledWith(data);
+      });
 
-        expect(result.length).toBe(3);
-        expect(result).toContain({ name: Competencies.controlledStop, count: 1 });
-        expect(result).toContain({ name: Competencies.forwardParkControl, count: 1 });
-        expect(result).toContain({ name: Competencies.ancillaryControls, count: 1 });
+      it('should call the cat be driving faults method when category is be', () => {
+        spyOn(catBEFaultProvider, 'getDrivingFaultsCatBE');
+        const data = {};
+        faultProvider.getDrivingFaults(data, catBE);
+        expect(catBEFaultProvider.getDrivingFaultsCatBE).toHaveBeenCalledWith(data);
+      });
 
+      it('should call the cat b driving faults as default', () => {
+        spyOn(catBFaultProvider, 'getDrivingFaultsCatB');
+
+        const data: CatBUniqueTypes.TestData = {
+          drivingFaults: {
+            ancillaryControls: 1,
+            awarenessPlanning: 0,
+          },
+          controlledStop: {
+            selected: true,
+            fault: CompetencyOutcome.DF,
+          },
+          manoeuvres: {
+            forwardPark: {
+              selected: true,
+              controlFault: CompetencyOutcome.DF,
+            },
+          },
+        };
+
+        faultProvider.getDrivingFaults(data, '');
+        expect(catBFaultProvider.getDrivingFaultsCatB).toHaveBeenCalledWith(data);
       });
     });
 
     describe('getSeriousFaults', () => {
-      it('should give us a list of faults from different sections of the test data', () => {
+      it('should call the cat b serious faults method when category is b', () => {
+        spyOn(catBFaultProvider, 'getSeriousFaultsCatB');
+
         const data: CatBUniqueTypes.TestData = {
           seriousFaults: {
             ancillaryControls: true,
@@ -72,32 +105,30 @@ describe('fault-provider', () => {
           },
         };
 
-        const result: Fault [] = faultProvider.getSeriousFaults(data);
-
-        expect(result.length).toBe(3);
-        expect(result).toContain({ name: Competencies.controlledStop, count: 1 });
-        expect(result).toContain({ name: Competencies.forwardParkControl, count: 1 });
-        expect(result).toContain({ name: Competencies.ancillaryControls, count: 1 });
-
+        faultProvider.getSeriousFaults(data, catB);
+        expect(catBFaultProvider.getSeriousFaultsCatB).toHaveBeenCalledWith(data);
       });
 
-      it('should give us an eyesight fault if test data contains a serious eyesight fault', () => {
-        const result: Fault [] = faultProvider.getSeriousFaults({
-          eyesightTest: {
-            seriousFault: true,
-            complete: true,
-            faultComments: 'Eyesight test comment',
-          },
-        });
+      it('should call the cat be serious faults method when category is be', () => {
+        spyOn(catBEFaultProvider, 'getSeriousFaultsCatBE');
+        const data = {};
+        faultProvider.getSeriousFaults(data, catBE);
+        expect(catBEFaultProvider.getSeriousFaultsCatBE).toHaveBeenCalledWith(data);
+      });
 
-        expect(result.length).toBe(1);
-        expect(result).toContain({ name: Competencies.eyesightTest, count: 1 });
+      it('should call the cat b serious faults as default', () => {
+        spyOn(catBFaultProvider, 'getSeriousFaultsCatB');
+        const data = {};
+        faultProvider.getSeriousFaults(data, '');
+        expect(catBFaultProvider.getSeriousFaultsCatB).toHaveBeenCalledWith(data);
       });
     });
 
     describe('getDangerousFaults', () => {
-      it('should give us a list of faults from different sections of the test data', () => {
-        const data: CatBUniqueTypes.TestData = {
+      it('should call the cat b dangerous faults method when category is b', () => {
+        spyOn(catBFaultProvider, 'getDangerousFaultsCatB');
+
+        const data: any = {
           dangerousFaults: {
             ancillaryControls: true,
             awarenessPlanning: false,
@@ -118,16 +149,66 @@ describe('fault-provider', () => {
           },
         };
 
-        const result: Fault [] = faultProvider.getDangerousFaults(data);
+        faultProvider.getDangerousFaults(data, catB);
+        expect(catBFaultProvider.getDangerousFaultsCatB).toHaveBeenCalledWith(data);
+      });
 
-        expect(result.length).toBe(3);
-        expect(result).toContain({ name: Competencies.controlledStop, count: 1 });
-        expect(result).toContain({ name: Competencies.forwardParkControl, count: 1 });
-        expect(result).toContain({ name: Competencies.ancillaryControls, count: 1 });
+      it('should call the cat be dangerous faults method when category is be', () => {
+        spyOn(catBEFaultProvider, 'getDangerousFaultsCatBE');
 
+        const data: any = {
+          dangerousFaults: {
+            ancillaryControls: true,
+            awarenessPlanning: false,
+          },
+          controlledStop: {
+            selected: true,
+            fault: CompetencyOutcome.D,
+          },
+          eyesightTest: {
+            complete: true,
+            seriousFault: true,
+          },
+          manoeuvres: {
+            forwardPark: {
+              selected: true,
+              controlFault: CompetencyOutcome.D,
+            },
+          },
+        };
+
+        faultProvider.getDangerousFaults(data, catBE);
+        expect(catBEFaultProvider.getDangerousFaultsCatBE).toHaveBeenCalledWith(data);
+      });
+
+      it('should call the cat b dangerous faults as default', () => {
+        spyOn(catBFaultProvider, 'getDangerousFaultsCatB');
+
+        const data: any = {
+          dangerousFaults: {
+            ancillaryControls: true,
+            awarenessPlanning: false,
+          },
+          controlledStop: {
+            selected: true,
+            fault: CompetencyOutcome.D,
+          },
+          eyesightTest: {
+            complete: true,
+            seriousFault: true,
+          },
+          manoeuvres: {
+            forwardPark: {
+              selected: true,
+              controlFault: CompetencyOutcome.D,
+            },
+          },
+        };
+
+        faultProvider.getDangerousFaults(data, '');
+        expect(catBFaultProvider.getDangerousFaultsCatB).toHaveBeenCalledWith(data);
       });
     });
-
   });
 
   describe('convertNumericFaultObjectToArray', () => {
@@ -276,100 +357,6 @@ describe('fault-provider', () => {
       const result: Fault[] = getCompletedManoeuvres(data, CompetencyOutcome.DF);
 
       expect(result.length).toBe(0);
-
-    });
-  });
-
-  describe('getVehicleChecksFault', () => {
-    it('should find a dangerous fault if one exists', () => {
-      const data: CatBUniqueTypes.VehicleChecks = {
-        showMeQuestion: {
-          outcome: CompetencyOutcome.D,
-        },
-      };
-
-      const result: Fault[] = getVehicleChecksFault(data, CompetencyOutcome.D);
-
-      expect(result.length).toBe(1);
-      expect(result).toContain({ name: Competencies.vehicleChecks, count: 1 });
-
-    });
-    it('should not find a dangerous fault if one exists', () => {
-      const data: CatBUniqueTypes.VehicleChecks = {
-        showMeQuestion: {
-          outcome: CompetencyOutcome.DF,
-        },
-      };
-
-      const result: Fault[] = getVehicleChecksFault(data, CompetencyOutcome.D);
-
-      expect(result.length).toBe(0);
-
-    });
-    it('should find a serious fault if one exists', () => {
-      const data: CatBUniqueTypes.VehicleChecks = {
-        showMeQuestion: {
-          outcome: CompetencyOutcome.S,
-        },
-      };
-
-      const result: Fault[] = getVehicleChecksFault(data, CompetencyOutcome.S);
-
-      expect(result.length).toBe(1);
-      expect(result).toContain({ name:  Competencies.vehicleChecks, count: 1 });
-
-    });
-    it('should not find a serious fault if one exists', () => {
-      const data: CatBUniqueTypes.VehicleChecks = {
-        showMeQuestion: {
-          outcome: CompetencyOutcome.DF,
-        },
-      };
-
-      const result: Fault[] = getVehicleChecksFault(data, CompetencyOutcome.S);
-
-      expect(result.length).toBe(0);
-
-    });
-    it('should find a driving fault if one exists', () => {
-      const data: CatBUniqueTypes.VehicleChecks = {
-        showMeQuestion: {
-          outcome: CompetencyOutcome.DF,
-        },
-      };
-
-      const result: Fault[] = getVehicleChecksFault(data, CompetencyOutcome.DF);
-
-      expect(result.length).toBe(1);
-      expect(result).toContain({ name: Competencies.vehicleChecks, count: 1 });
-
-    });
-    it('should not find a serious fault if one exists', () => {
-      const data: CatBUniqueTypes.VehicleChecks = {
-        showMeQuestion: {
-          outcome: CompetencyOutcome.S,
-        },
-      };
-
-      const result: Fault[] = getVehicleChecksFault(data, CompetencyOutcome.DF);
-
-      expect(result.length).toBe(0);
-
-    });
-    it('should only return one a driving fault if two exist', () => {
-      const data: CatBUniqueTypes.VehicleChecks = {
-        showMeQuestion: {
-          outcome: CompetencyOutcome.DF,
-        },
-        tellMeQuestion: {
-          outcome: CompetencyOutcome.DF,
-        },
-      };
-
-      const result: Fault[] = getVehicleChecksFault(data, CompetencyOutcome.DF);
-
-      expect(result.length).toBe(1);
-      expect(result).toContain({ name: Competencies.vehicleChecks, count: 1 });
 
     });
   });

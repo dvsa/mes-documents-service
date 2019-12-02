@@ -3,7 +3,6 @@ import { IConfigAdapter } from './adapter/config/config-adapter.interface';
 import { DocumentsServiceError } from '../domain/errors/documents-service-error';
 import { inject, injectable } from 'inversify';
 import { TYPES } from './di/types';
-import { CatBUniqueTypes } from '@dvsa/mes-test-schema/categories/B';
 import { INotifyClient } from '../domain/notify-client.interface';
 import { ITemplateIdProvider, isFail, isPass } from '../application/service/template-id-provider';
 import { sendEmail } from '../application/service/send-email';
@@ -13,9 +12,10 @@ import { IStatusUpdater } from './status-updater';
 import { ProcessingStatus } from '../domain/submission-outcome.model';
 import { NOTIFY_INTERFACE } from '../domain/interface.constants';
 import { formatApplicationReference } from '@dvsa/mes-microservice-common/domain/tars';
+import { TestResultSchemasUnion } from '@dvsa/mes-test-schema/categories';
 
 export interface IRequestScheduler {
-  scheduleRequests(testResults: CatBUniqueTypes.TestResult[]): Promise<void>[];
+  scheduleRequests(testResults: TestResultSchemasUnion[]): Promise<void>[];
 }
 
 @injectable()
@@ -69,8 +69,8 @@ export class RequestScheduler implements IRequestScheduler {
       });
   }
 
-  scheduleRequests(testResults: CatBUniqueTypes.TestResult[]): Promise<void>[] {
-    return testResults.map((testResult: CatBUniqueTypes.TestResult) => {
+  scheduleRequests(testResults: TestResultSchemasUnion[]): Promise<void>[] {
+    return testResults.map((testResult: TestResultSchemasUnion) => {
       const applicationReference = formatApplicationReference(
         testResult.journalData.applicationReference,
       );
@@ -114,7 +114,7 @@ export class RequestScheduler implements IRequestScheduler {
     });
   }
 
-  private sendNotifyRequest(testResult: CatBUniqueTypes.TestResult): Promise<any> {
+  private sendNotifyRequest(testResult: TestResultSchemasUnion): Promise<any> {
     if (!testResult.communicationPreferences) {
       return Promise.reject();
     }
