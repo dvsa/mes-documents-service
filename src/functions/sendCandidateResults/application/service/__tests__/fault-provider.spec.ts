@@ -14,7 +14,7 @@ import { CompetencyOutcome } from '../../../domain/competency-outcome';
 import { Competencies } from '../../../domain/competencies';
 import * as catBFaultProvider from '../categories/B/fault-provider-cat-b';
 import * as catBEFaultProvider from '../categories/BE/fault-provider-cat-be';
-import { TestCategory } from '@dvsa/mes-test-schema/categories/Common/test-category';
+import { TestCategory } from '@dvsa/mes-test-schema/categories/common/test-category';
 describe('fault-provider', () => {
   const catB: string = TestCategory.B;
   const catBE: string = TestCategory.BE;

@@ -19,7 +19,7 @@ import {
   getDrivingFaultsCatBE,
   getSeriousFaultsCatBE,
 } from './categories/BE/fault-provider-cat-be';
-import { TestCategory } from '@dvsa/mes-test-schema/categories/Common/test-category';
+import { TestCategory } from '@dvsa/mes-test-schema/categories/common/test-category';
 export interface IFaultProvider {
   getDrivingFaults(testData: TestData | undefined, category: string): Fault[];
 
