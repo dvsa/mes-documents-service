@@ -52,6 +52,7 @@ export enum Competencies {
     eyesightTest = 'eyesightTest',
     uncoupleRecouple = 'uncoupleRecouple',
     reverseLeftControl = 'reverseLeftControl',
+    reverseLeftObservation = 'reverseLeftObservation',
   }
 
 export enum englishCompetencyLabels {
@@ -106,6 +107,8 @@ export enum englishCompetencyLabels {
     controlledStop = 'Controlled Stop',
     vehicleChecks = 'Vehicle checks',
     eyesightTest = 'Eyesight test',
+    reverseLeftControl = 'Reverse - Control',
+    reverseLeftObservation = 'Reverse - Observation',
   }
 
 export enum welshCompetencyLabels {
@@ -160,4 +163,6 @@ export enum welshCompetencyLabels {
   controlledStop = 'Stopio dan Reolaeth',
   vehicleChecks = 'Gwirio’r cerbyd',
   eyesightTest = 'Prawf Golwg',
+  reverseLeftControl = 'Reverse - Control',
+  reverseLeftObservation = 'Reverse - Observation',
   }
