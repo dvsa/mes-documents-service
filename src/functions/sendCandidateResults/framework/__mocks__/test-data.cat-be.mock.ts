@@ -105,31 +105,32 @@ export const completedCatBETest: CatBEUniqueTypes.TestResult = {
       },
     },
     vehicleChecks: {
-      showMeQuestions: [{
-        code: '1',
-        description: '',
-        outcome: 'DF',
-      },
-      {
-        code: '2',
-        description: '',
-        outcome: 'DF',
-      },
-      {
-        code: '3',
-        description: '',
-        outcome: 'DF',
-      },
-      {
-        code: '4',
-        description: '',
-        outcome: 'DF',
-      },
-      {
-        code: '5',
-        description: '',
-        outcome: 'DF',
-      }],
+      showMeQuestions: [
+        {
+          code: '1',
+          description: '',
+          outcome: 'DF',
+        },
+        {
+          code: '2',
+          description: '',
+          outcome: 'DF',
+        },
+        {
+          code: '3',
+          description: '',
+          outcome: 'DF',
+        },
+        {
+          code: '4',
+          description: '',
+          outcome: 'DF',
+        },
+        {
+          code: '5',
+          description: '',
+          outcome: 'DF',
+        }],
       showMeTellMeComments: '',
       tellMeQuestions: [],
     },
