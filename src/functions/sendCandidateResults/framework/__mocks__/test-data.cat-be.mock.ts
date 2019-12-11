@@ -86,7 +86,7 @@ export const completedCatBETest: CatBEUniqueTypes.TestResult = {
   examinerKeyed: 12345678,
   testData: {
     uncoupleRecouple: {
-      fault: 'DF',
+      fault: 'D',
       selected: true,
       faultComments: 'controlFaultComments',
     },
@@ -100,11 +100,38 @@ export const completedCatBETest: CatBEUniqueTypes.TestResult = {
     manoeuvres: {
       reverseLeft: {
         selected: true,
-        controlFault: 'DF',
+        controlFault: 'S',
         controlFaultComments: 'controlFaultComments',
-        observationFault: 'DF',
-        observationFaultComments: 'observationFaultComments',
       },
+    },
+    vehicleChecks: {
+      showMeQuestions: [{
+        code: "1",
+        description: "",
+        outcome: "DF",
+      },
+      {
+        code: "2",
+        description: "",
+        outcome: "DF",
+      },
+      {
+        code: "3",
+        description: "",
+        outcome: "DF",
+      },
+      {
+        code: "4",
+        description: "",
+        outcome: "DF",
+      },
+      {
+        code: "5",
+        description: "",
+        outcome: "DF",
+      }],
+      showMeTellMeComments: "",
+      tellMeQuestions: [],
     },
   },
 };
