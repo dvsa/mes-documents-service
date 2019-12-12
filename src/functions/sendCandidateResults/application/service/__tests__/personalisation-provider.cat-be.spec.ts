@@ -57,6 +57,8 @@ describe('personalisation-provider-cat-be', () => {
       expect(result.drivingFaults.length).toBe(1);
       expect(result.drivingFaults).toContain(`${welshCompetencyLabels.vehicleChecks}, 4`);
 
+      //TODO implement tests when welsh translations are available for cat BE
+
       // expect(result.seriousFaults.length).toBe(2);
       // expect(result.seriousFaults).toContain(`${welshCompetencyLabels.reverseLeftControl}`);
 
