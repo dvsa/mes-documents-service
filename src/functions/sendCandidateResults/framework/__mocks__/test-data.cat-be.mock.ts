@@ -121,6 +121,9 @@ export const completedCatBETest: CatBEUniqueTypes.TestResult = {
           description: '',
           outcome: 'DF',
         },
+      ],
+      showMeTellMeComments: '',
+      tellMeQuestions: [
         {
           code: '4',
           description: '',
@@ -130,9 +133,8 @@ export const completedCatBETest: CatBEUniqueTypes.TestResult = {
           code: '5',
           description: '',
           outcome: 'DF',
-        }],
-      showMeTellMeComments: '',
-      tellMeQuestions: [],
+        },
+      ],
     },
   },
 };
