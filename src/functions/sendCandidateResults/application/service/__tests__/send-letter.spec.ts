@@ -21,6 +21,9 @@ const personlisation: LetterPersonalisation = {
   showDrivingFaults: BooleanText.YES,
   showEcoText: BooleanText.YES,
   showSeriousFaults: BooleanText.YES,
+  showEtaText: BooleanText.YES,
+  showEtaPhysical: BooleanText.YES,
+  showEtaVerbal: BooleanText.NO,
 };
 
 describe('sendLetter', () => {
