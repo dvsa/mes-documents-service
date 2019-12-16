@@ -7,7 +7,7 @@ import {
 import {
   Name,
   ConductedLanguage,
-  Eco,
+  Eco, ETA,
 } from '@dvsa/mes-test-schema/categories/common';
 import { inject, injectable } from 'inversify';
 import { TYPES } from '../../framework/di/types';
@@ -71,6 +71,8 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       this.faultProvider.getDangerousFaults(testresult.testData, testresult.category),
       get(testresult, 'communicationPreferences.conductedLanguage'));
 
+    const eta = get(testresult, 'testData.ETA', null);
+
     return {
       applicationReference: formatApplicationReference(get(testresult, 'journalData.applicationReference')),
       category: testresult.category,
@@ -90,6 +92,11 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       showDangerousFaults: dangerousFaults.length > 0 ? BooleanText.YES : BooleanText.NO,
 
       showEcoText: this.shouldShowEco(get(testresult, 'testData.eco', null)),
+
+      showEtaText: this.shouldShowEta(eta),
+      showEtaVerbal: this.shouldShowEtaVerbal(eta),
+      showEtaPhysical: this.shouldShowEtaPhysical(eta),
+
     };
   }
 
@@ -134,6 +141,18 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       return BooleanText.YES;
     }
     return BooleanText.NO;
+  }
+
+  private shouldShowEta(eta: ETA): BooleanText {
+    return eta && (eta.physical || eta.verbal) ? BooleanText.YES : BooleanText.NO;
+  }
+
+  private shouldShowEtaPhysical(eta: ETA): BooleanText {
+    return eta && eta.physical ? BooleanText.YES : BooleanText.NO;
+  }
+
+  private shouldShowEtaVerbal(eta: ETA): BooleanText {
+    return eta && eta.verbal ? BooleanText.YES : BooleanText.NO;
   }
 
   private formatDate(stringDate: Date, language: ConductedLanguage): string {

@@ -19,6 +19,10 @@ export interface Personalisation {
   showDangerousFaults: BooleanText;
 
   showEcoText: BooleanText;
+
+  showEtaText: BooleanText;
+  showEtaVerbal: BooleanText;
+  showEtaPhysical: BooleanText;
 }
 
 export interface EmailPersonalisation extends Personalisation {

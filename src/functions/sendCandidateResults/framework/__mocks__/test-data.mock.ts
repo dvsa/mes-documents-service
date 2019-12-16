@@ -140,5 +140,9 @@ export const completedCatBTest: CatBUniqueTypes.TestResult = {
         outcome: 'DF',
       },
     },
+    ETA: {
+      verbal: true,
+      physical: false,
+    },
   },
 };
