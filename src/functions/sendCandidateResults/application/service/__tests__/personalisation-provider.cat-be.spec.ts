@@ -44,6 +44,9 @@ describe('personalisation-provider-cat-be', () => {
       expect(result.showSeriousFaults).toEqual(BooleanText.YES);
       expect(result.showDangerousFaults).toEqual(BooleanText.YES);
       expect(result.showEcoText).toBe(BooleanText.NO);
+      expect(result.showEtaText).toEqual(BooleanText.YES);
+      expect(result.showEtaVerbal).toEqual(BooleanText.YES);
+      expect(result.showEtaPhysical).toEqual(BooleanText.NO);
     });
     it('should return welsh translations when required', () => {
       const personalisationProvider: IPersonalisationProvider = new PersonalisationProvider(faultProvider);
@@ -103,6 +106,9 @@ describe('personalisation-provider-cat-be', () => {
       expect(result.showSeriousFaults).toEqual(BooleanText.YES);
       expect(result.showDangerousFaults).toEqual(BooleanText.YES);
       expect(result.showEcoText).toBe(BooleanText.NO);
+      expect(result.showEtaText).toEqual(BooleanText.YES);
+      expect(result.showEtaVerbal).toEqual(BooleanText.YES);
+      expect(result.showEtaPhysical).toEqual(BooleanText.NO);
     });
 
     it('should return welsh translations when required', () => {

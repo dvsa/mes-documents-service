@@ -136,5 +136,9 @@ export const completedCatBETest: CatBEUniqueTypes.TestResult = {
         },
       ],
     },
+    ETA: {
+      verbal: true,
+      physical: false,
+    },
   },
 };
