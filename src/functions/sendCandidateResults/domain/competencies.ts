@@ -109,6 +109,7 @@ export enum englishCompetencyLabels {
     eyesightTest = 'Eyesight test',
     reverseLeftControl = 'Reverse - Control',
     reverseLeftObservation = 'Reverse - Observation',
+    uncoupleRecouple = 'Uncouple / Recouple',
   }
 
 export enum welshCompetencyLabels {
