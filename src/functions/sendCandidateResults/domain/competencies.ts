@@ -164,6 +164,7 @@ export enum welshCompetencyLabels {
   controlledStop = 'Stopio dan Reolaeth',
   vehicleChecks = 'Gwirio’r cerbyd',
   eyesightTest = 'Prawf Golwg',
-  reverseLeftControl = 'Bacio – dan reolaeth',
-  reverseLeftObservation = 'Bacio – gwyliadwriaeth',
+  uncoupleRecouple = 'Dadfachu / Ailfachu',
+  reverseLeftObservation = 'Gwrthdroi - gwyliadwriaeth',
+  reverseLeftControl = 'Gwrthdroi - dan reolaeth',
   }
