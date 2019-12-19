@@ -102,6 +102,8 @@ export const completedCatBETest: CatBEUniqueTypes.TestResult = {
         selected: true,
         controlFault: 'S',
         controlFaultComments: 'controlFaultComments',
+        observationFault: 'S',
+        observationFaultComments: 'observationFaultComments',
       },
     },
     vehicleChecks: {
