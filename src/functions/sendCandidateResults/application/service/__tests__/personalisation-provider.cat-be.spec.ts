@@ -33,9 +33,10 @@ describe('personalisation-provider-cat-be', () => {
       // Extra Checks to make sure order is correct
       expect(result.drivingFaults[0]).toContain('4');
 
-      expect(result.seriousFaults.length).toBe(2);
+      expect(result.seriousFaults.length).toBe(3);
       expect(result.seriousFaults).toContain(`${englishCompetencyLabels.vehicleChecks}`);
       expect(result.seriousFaults).toContain(`${englishCompetencyLabels.reverseLeftControl}`);
+      expect(result.seriousFaults).toContain(`${englishCompetencyLabels.reverseLeftObservation}`);
 
       expect(result.dangerousFaults.length).toBe(1);
       expect(result.dangerousFaults).toContain(`${englishCompetencyLabels.uncoupleRecouple}`);
@@ -60,13 +61,13 @@ describe('personalisation-provider-cat-be', () => {
       expect(result.drivingFaults.length).toBe(1);
       expect(result.drivingFaults).toContain(`${welshCompetencyLabels.vehicleChecks}, 4`);
 
-      // TODO implement tests when welsh translations are available for cat BE
+      expect(result.seriousFaults.length).toBe(3);
+      expect(result.seriousFaults).toContain(`${welshCompetencyLabels.vehicleChecks}`);
+      expect(result.seriousFaults).toContain(`${welshCompetencyLabels.reverseLeftControl}`);
+      expect(result.seriousFaults).toContain(`${welshCompetencyLabels.reverseLeftObservation}`);
 
-      // expect(result.seriousFaults.length).toBe(2);
-      // expect(result.seriousFaults).toContain(`${welshCompetencyLabels.reverseLeftControl}`);
-
-      // expect(result.dangerousFaults.length).toBe(1);
-      // expect(result.dangerousFaults).toContain(`${welshCompetencyLabels.uncoupleRecouple}`);
+      expect(result.dangerousFaults.length).toBe(1);
+      expect(result.dangerousFaults).toContain(`${welshCompetencyLabels.uncoupleRecouple}`);
     });
   });
 
@@ -95,9 +96,10 @@ describe('personalisation-provider-cat-be', () => {
       // Extra Checks to make sure order is correct
       expect(result.drivingFaults[0]).toContain('4');
 
-      expect(result.seriousFaults.length).toBe(2);
+      expect(result.seriousFaults.length).toBe(3);
       expect(result.seriousFaults).toContain(`${englishCompetencyLabels.vehicleChecks}`);
       expect(result.seriousFaults).toContain(`${englishCompetencyLabels.reverseLeftControl}`);
+      expect(result.seriousFaults).toContain(`${englishCompetencyLabels.reverseLeftObservation}`);
 
       expect(result.dangerousFaults.length).toBe(1);
       expect(result.dangerousFaults).toContain(`${englishCompetencyLabels.uncoupleRecouple}`);
@@ -123,11 +125,13 @@ describe('personalisation-provider-cat-be', () => {
       expect(result.drivingFaults.length).toBe(1);
       expect(result.drivingFaults).toContain(`${welshCompetencyLabels.vehicleChecks}, 4`);
 
-      // expect(result.seriousFaults.length).toBe(2);
-      // expect(result.seriousFaults).toContain(`${welshCompetencyLabels.reverseLeftControl}`);
+      expect(result.seriousFaults.length).toBe(3);
+      expect(result.seriousFaults).toContain(`${welshCompetencyLabels.reverseLeftControl}`);
+      expect(result.seriousFaults).toContain(`${welshCompetencyLabels.reverseLeftObservation}`);
+      expect(result.seriousFaults).toContain(`${welshCompetencyLabels.vehicleChecks}`);
 
-      // expect(result.dangerousFaults.length).toBe(1);
-      // expect(result.dangerousFaults).toContain(`${welshCompetencyLabels.uncoupleRecouple}`);
+      expect(result.dangerousFaults.length).toBe(1);
+      expect(result.dangerousFaults).toContain(`${welshCompetencyLabels.uncoupleRecouple}`);
 
       expect(result.date).toBe('31 Gorffennaf 2019');
     });
