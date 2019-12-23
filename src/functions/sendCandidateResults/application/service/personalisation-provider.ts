@@ -104,9 +104,9 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     const faultLabels: string[] = [];
 
     if (language === 'Cymraeg') {
-      faults.forEach((fault: any) => faultLabels.push(`${welshCompetencyLabels[fault.name]}`));
+      faults.forEach((fault: any) => faultLabels.push(`${(<any>welshCompetencyLabels)[fault.name]}`));
     } else {
-      faults.forEach((fault: any) => faultLabels.push(`${englishCompetencyLabels[fault.name]}`));
+      faults.forEach((fault: any) => faultLabels.push(`${(<any>englishCompetencyLabels)[fault.name]}`));
     }
 
     return faultLabels;
@@ -117,10 +117,10 @@ export class PersonalisationProvider implements IPersonalisationProvider {
 
     if (language === 'Cymraeg') {
       faults.forEach((fault: any) =>
-        faultLabels.push(`${welshCompetencyLabels[fault.name]}, ${fault.count}`));
+        faultLabels.push(`${(<any>welshCompetencyLabels)[fault.name]}, ${fault.count}`));
     } else {
       faults.forEach((fault: any) =>
-        faultLabels.push(`${englishCompetencyLabels[fault.name]}, ${fault.count}`));
+        faultLabels.push(`${(<any>englishCompetencyLabels)[fault.name]}, ${fault.count}`));
     }
 
     return faultLabels;
