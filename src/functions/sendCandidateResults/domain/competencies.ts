@@ -1,4 +1,3 @@
-
 export enum Competencies {
     controlsAccelerator = 'controlsAccelerator',
     controlsClutch = 'controlsClutch',
@@ -53,7 +52,7 @@ export enum Competencies {
     uncoupleRecouple = 'uncoupleRecouple',
     reverseLeftControl = 'reverseLeftControl',
     reverseLeftObservation = 'reverseLeftObservation',
-  }
+}
 
 export enum englishCompetencyLabels {
     controlsAccelerator = 'Controls - Accelerator',
@@ -110,7 +109,7 @@ export enum englishCompetencyLabels {
     reverseLeftControl = 'Reverse - Control',
     reverseLeftObservation = 'Reverse - Observation',
     uncoupleRecouple = 'Uncouple / Recouple',
-  }
+}
 
 export enum welshCompetencyLabels {
   controlsAccelerator = 'Rheolaeth - sbardun',
@@ -167,4 +166,4 @@ export enum welshCompetencyLabels {
   uncoupleRecouple = 'Dadfachu / Ailfachu',
   reverseLeftObservation = 'Gwrthdroi - gwyliadwriaeth',
   reverseLeftControl = 'Gwrthdroi - dan reolaeth',
-  }
+}
