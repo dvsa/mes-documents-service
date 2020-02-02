@@ -7,6 +7,7 @@ import {
 import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 
 import { IConfigAdapter } from '../../framework/adapter/config/config-adapter.interface';
+import { Correspondence, CorrespondenceMethod, Language, TestType } from '../../domain/template-id.model';
 import { TYPES } from '../../framework/di/types';
 import { inject, injectable } from 'inversify';
 import { get } from 'lodash';
@@ -14,16 +15,6 @@ import { get } from 'lodash';
 export interface ITemplateIdProvider {
   getTemplateId(
     communicationPreferences: CommunicationPreferences, activityCode: ActivityCode, category: CategoryCode): string;
-}
-
-type CorrespondenceMethod = 'Email' | 'Letter';
-enum Language {
-  ENGLISH = 'english',
-  WELSH = 'welsh',
-  CYMRAEG = 'Cymraeg',
-}
-enum TestType {
-  VOCATIONAL = 'Vocational',
 }
 
 @injectable()
@@ -69,8 +60,11 @@ export function isVocationalCategory(category: CategoryCode): boolean {
 export function getTemplateString(
   conductedLanguage: ConductedLanguage, communicationMethod: CommunicationMethod, activityCode: ActivityCode): string {
 
-  const languageOfTemplate: Language = (conductedLanguage === Language.CYMRAEG) ? Language.WELSH : Language.ENGLISH;
-  const correspondenceMethod: CorrespondenceMethod = (communicationMethod === 'Post') ? 'Letter' : 'Email';
+  const languageOfTemplate: Language =
+    (conductedLanguage === Language.CYMRAEG) ? Language.WELSH : Language.ENGLISH;
+
+  const correspondenceMethod: CorrespondenceMethod =
+    (communicationMethod === Correspondence.POST) ? Correspondence.LETTER : Correspondence.EMAIL;
 
   if (isPass(activityCode)) {
     return `${languageOfTemplate}${correspondenceMethod}PassTemplateId`;
