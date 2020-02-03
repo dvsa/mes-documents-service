@@ -7,7 +7,13 @@ import {
 import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 
 import { IConfigAdapter } from '../../framework/adapter/config/config-adapter.interface';
-import { Correspondence, CorrespondenceMethod, Language, TestType } from '../../domain/template-id.model';
+import {
+  Correspondence,
+  CorrespondenceMethod,
+  Language,
+  TemplateLanguage,
+  TestType,
+} from '../../domain/template-id.model';
 import { TYPES } from '../../framework/di/types';
 import { inject, injectable } from 'inversify';
 import { get } from 'lodash';
@@ -60,8 +66,8 @@ export function isVocationalCategory(category: CategoryCode): boolean {
 export function getTemplateString(
   conductedLanguage: ConductedLanguage, communicationMethod: CommunicationMethod, activityCode: ActivityCode): string {
 
-  const languageOfTemplate: Language =
-    (conductedLanguage === Language.CYMRAEG) ? Language.WELSH : Language.ENGLISH;
+  const languageOfTemplate: TemplateLanguage =
+    (conductedLanguage === Language.CYMRAEG) ? TemplateLanguage.WELSH : TemplateLanguage.ENGLISH;
 
   const correspondenceMethod: CorrespondenceMethod =
     (communicationMethod === Correspondence.POST) ? Correspondence.LETTER : Correspondence.EMAIL;

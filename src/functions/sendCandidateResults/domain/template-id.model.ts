@@ -1,9 +1,12 @@
 export type CorrespondenceMethod = 'Email' | 'Letter';
 
 export enum Language {
+  CYMRAEG = 'Cymraeg',
+}
+
+export enum TemplateLanguage {
   ENGLISH = 'english',
   WELSH = 'welsh',
-  CYMRAEG = 'Cymraeg',
 }
 
 export enum TestType {
