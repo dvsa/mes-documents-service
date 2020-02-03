@@ -173,49 +173,63 @@ describe('get-template-id-provider', () => {
   });
 
   describe('getTemplateString', () => {
-    it('should return true if category is in vocational category array', () => {
+    it('should return an english email pass template string', () => {
       const conductedLanguage: ConductedLanguage = 'English';
       const communicationMethod: CommunicationMethod = 'Email';
       const activityCode: ActivityCode = '1';
       expect(getTemplateString(conductedLanguage, communicationMethod, activityCode))
         .toBe('englishEmailPassTemplateId');
     });
-    it('should return true if category is in vocational category array', () => {
+    it('should return a welsh email pass template string', () => {
       const conductedLanguage: ConductedLanguage = 'Cymraeg';
       const communicationMethod: CommunicationMethod = 'Email';
       const activityCode: ActivityCode = '1';
       expect(getTemplateString(conductedLanguage, communicationMethod, activityCode))
         .toBe('welshEmailPassTemplateId');
     });
-    it('should return true if category is in vocational category array', () => {
+    it('should return an english letter pass template string', () => {
       const conductedLanguage: ConductedLanguage = 'English';
       const communicationMethod: CommunicationMethod = 'Post';
       const activityCode: ActivityCode = '1';
       expect(getTemplateString(conductedLanguage, communicationMethod, activityCode))
         .toBe('englishLetterPassTemplateId');
     });
-    it('should return true if category is in vocational category array', () => {
+    it('should return a welsh letter pass template string', () => {
       const conductedLanguage: ConductedLanguage = 'Cymraeg';
       const communicationMethod: CommunicationMethod = 'Post';
       const activityCode: ActivityCode = '1';
       expect(getTemplateString(conductedLanguage, communicationMethod, activityCode))
         .toBe('welshLetterPassTemplateId');
     });
-    it('should return true if category is in vocational category array', () => {
+    it('should return an english email fail template string', () => {
       const conductedLanguage: ConductedLanguage = 'English';
       const communicationMethod: CommunicationMethod = 'Email';
       const activityCode: ActivityCode = '2';
       expect(getTemplateString(conductedLanguage, communicationMethod, activityCode))
         .toBe('englishEmailFailTemplateId');
     });
-    it('should return true if category is in vocational category array', () => {
+    it('should return a welsh email fail template string', () => {
+      const conductedLanguage: ConductedLanguage = 'Cymraeg';
+      const communicationMethod: CommunicationMethod = 'Email';
+      const activityCode: ActivityCode = '2';
+      expect(getTemplateString(conductedLanguage, communicationMethod, activityCode))
+        .toBe('welshEmailFailTemplateId');
+    });
+    it('should return an english letter fail template string', () => {
+      const conductedLanguage: ConductedLanguage = 'English';
+      const communicationMethod: CommunicationMethod = 'Post';
+      const activityCode: ActivityCode = '2';
+      expect(getTemplateString(conductedLanguage, communicationMethod, activityCode))
+        .toBe('englishLetterFailTemplateId');
+    });
+    it('should return a welsh letter fail template string', () => {
       const conductedLanguage: ConductedLanguage = 'Cymraeg';
       const communicationMethod: CommunicationMethod = 'Post';
       const activityCode: ActivityCode = '2';
       expect(getTemplateString(conductedLanguage, communicationMethod, activityCode))
         .toBe('welshLetterFailTemplateId');
     });
-    it('should return true if category is in vocational category array', () => {
+    it('should return a template id not message set when activity code is 51', () => {
       const conductedLanguage: ConductedLanguage = 'English';
       const communicationMethod: CommunicationMethod = 'Post';
       const activityCode: ActivityCode = '51';
