@@ -25,6 +25,16 @@ export class ConfigAdapter implements IConfigAdapter {
   englishLetterFailTemplateId: string;
   welshLetterPassTemplateId: string;
   welshLetterFailTemplateId: string;
+  // Email Template Id's Vocational
+  englishEmailPassTemplateIdVocational: string;
+  englishEmailFailTemplateIdVocational: string;
+  welshEmailPassTemplateIdVocational: string;
+  welshEmailFailTemplateIdVocational: string;
+  // Letter Template Id's Vocational
+  englishLetterPassTemplateIdVocational: string;
+  englishLetterFailTemplateIdVocational: string;
+  welshLetterPassTemplateIdVocational: string;
+  welshLetterFailTemplateIdVocational: string;
 
   constructor() {
     this.apiKey = '';
@@ -45,6 +55,24 @@ export class ConfigAdapter implements IConfigAdapter {
     this.englishLetterFailTemplateId = this.getFromEnvThrowIfNotPresent('NOTIFY_POST_FAIL_TEMPLATE_ID');
     this.welshLetterPassTemplateId = this.getFromEnvThrowIfNotPresent('NOTIFY_POST_WELSH_PASS_TEMPLATE_ID');
     this.welshLetterFailTemplateId = this.getFromEnvThrowIfNotPresent('NOTIFY_POST_WELSH_FAIL_TEMPLATE_ID');
+
+    this.englishEmailPassTemplateIdVocational =
+      this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_PASS_TEMPLATE_ID_VOCATIONAL');
+    this.englishEmailFailTemplateIdVocational =
+      this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_FAIL_TEMPLATE_ID_VOCATIONAL');
+    this.welshEmailPassTemplateIdVocational =
+      this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_WELSH_PASS_TEMPLATE_ID_VOCATIONAL');
+    this.welshEmailFailTemplateIdVocational =
+      this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_WELSH_FAIL_TEMPLATE_ID_VOCATIONAL');
+
+    this.englishLetterPassTemplateIdVocational =
+      this.getFromEnvThrowIfNotPresent('NOTIFY_POST_PASS_TEMPLATE_ID_VOCATIONAL');
+    this.englishLetterFailTemplateIdVocational =
+      this.getFromEnvThrowIfNotPresent('NOTIFY_POST_FAIL_TEMPLATE_ID_VOCATIONAL');
+    this.welshLetterPassTemplateIdVocational =
+      this.getFromEnvThrowIfNotPresent('NOTIFY_POST_WELSH_PASS_TEMPLATE_ID_VOCATIONAL');
+    this.welshLetterFailTemplateIdVocational =
+      this.getFromEnvThrowIfNotPresent('NOTIFY_POST_WELSH_FAIL_TEMPLATE_ID_VOCATIONAL');
   }
 
   public async getApiKey(): Promise<string> {

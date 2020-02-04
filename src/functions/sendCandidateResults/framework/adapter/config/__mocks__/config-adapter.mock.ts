@@ -14,15 +14,25 @@ export class ConfigAdapterMock implements IConfigAdapter {
   notifyRequestsPerBatch: number = 25;
   notifyTimeout: number = 1000;
 
-  englishEmailPassTemplateId: string = 'email-pass-template-id';
-  englishEmailFailTemplateId: string = 'email-fail-template-id';
+  englishEmailPassTemplateId: string = 'email-english-pass-template-id';
+  englishEmailFailTemplateId: string = 'email-english-fail-template-id';
   welshEmailPassTemplateId: string = 'email-welsh-pass-template-id';
   welshEmailFailTemplateId: string = 'email-welsh-fail-template-id';
 
-  englishLetterPassTemplateId: string = 'post-pass-template-id';
-  englishLetterFailTemplateId: string = 'post-fail-template-id';
+  englishLetterPassTemplateId: string = 'post-english-pass-template-id';
+  englishLetterFailTemplateId: string = 'post-english-fail-template-id';
   welshLetterPassTemplateId: string = 'post-welsh-pass-template-id';
   welshLetterFailTemplateId: string = 'post-welsh-fail-template-id';
+
+  englishEmailPassTemplateIdVocational: string = 'email-english-pass-template-id-vocational';
+  englishEmailFailTemplateIdVocational: string = 'email-english-fail-template-id-vocational';
+  welshEmailPassTemplateIdVocational: string = 'email-welsh-pass-template-id-vocational';
+  welshEmailFailTemplateIdVocational: string = 'email-welsh-fail-template-id-vocational';
+
+  englishLetterPassTemplateIdVocational: string = 'post-english-pass-template-id-vocational';
+  englishLetterFailTemplateIdVocational: string = 'post-english-fail-template-id-vocational';
+  welshLetterPassTemplateIdVocational: string = 'post-welsh-pass-template-id-vocational';
+  welshLetterFailTemplateIdVocational: string = 'post-welsh-fail-template-id-vocational';
 
   async getApiKey(): Promise<string> {
     return Promise.resolve(this.apiKey);

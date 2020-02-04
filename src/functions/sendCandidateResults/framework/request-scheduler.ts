@@ -115,6 +115,8 @@ export class RequestScheduler implements IRequestScheduler {
   }
 
   private sendNotifyRequest(testResult: TestResultSchemasUnion): Promise<any> {
+    const { category } = testResult;
+
     if (!testResult.communicationPreferences) {
       return Promise.reject();
     }
@@ -123,13 +125,10 @@ export class RequestScheduler implements IRequestScheduler {
       return Promise.resolve();
     }
 
-    if (testResult.communicationPreferences.communicationMethod === 'Email') {
-      const templateId: string =
-        this.templateIdProvider.getEmailTemplateId(
-          testResult.communicationPreferences.conductedLanguage,
-          testResult.activityCode,
-        );
+    const templateId: string =
+      this.templateIdProvider.getTemplateId(testResult.communicationPreferences, testResult.activityCode, category);
 
+    if (testResult.communicationPreferences.communicationMethod === 'Email') {
       return sendEmail(
         testResult.communicationPreferences.updatedEmail,
         templateId,
@@ -139,11 +138,6 @@ export class RequestScheduler implements IRequestScheduler {
         this.notifyClient,
       );
     }
-
-    const templateId: string = this.templateIdProvider.getLetterTemplateId(
-      testResult.communicationPreferences.conductedLanguage,
-      testResult.activityCode,
-    );
 
     return sendLetter(
       templateId,

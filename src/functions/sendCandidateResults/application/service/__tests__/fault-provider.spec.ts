@@ -1,8 +1,6 @@
-import {
-  DrivingFaults,
-  SeriousFaults,
-} from '@dvsa/mes-test-schema/categories/common';
+import { DrivingFaults, SeriousFaults } from '@dvsa/mes-test-schema/categories/common';
 import { CatBUniqueTypes } from '@dvsa/mes-test-schema/categories/B';
+import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 import {
   convertNumericFaultObjectToArray,
   convertBooleanFaultObjectToArray,
@@ -12,12 +10,11 @@ import {
 import { Fault } from '../../../domain/fault';
 import { CompetencyOutcome } from '../../../domain/competency-outcome';
 import { Competencies } from '../../../domain/competencies';
+
 import * as catBFaultProvider from '../categories/B/fault-provider-cat-b';
 import * as catBEFaultProvider from '../categories/BE/fault-provider-cat-be';
-import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
+
 describe('fault-provider', () => {
-  const catB: string = TestCategory.B;
-  const catBE: string = TestCategory.BE;
 
   describe('FaultProvider', () => {
     let faultProvider: FaultProvider;
@@ -47,14 +44,14 @@ describe('fault-provider', () => {
           },
         };
 
-        faultProvider.getDrivingFaults(data, catB);
+        faultProvider.getDrivingFaults(data, TestCategory.B);
         expect(catBFaultProvider.getDrivingFaultsCatB).toHaveBeenCalledWith(data);
       });
 
       it('should call the cat be driving faults method when category is be', () => {
         spyOn(catBEFaultProvider, 'getDrivingFaultsCatBE');
         const data = {};
-        faultProvider.getDrivingFaults(data, catBE);
+        faultProvider.getDrivingFaults(data, TestCategory.BE);
         expect(catBEFaultProvider.getDrivingFaultsCatBE).toHaveBeenCalledWith(data);
       });
 
@@ -104,14 +101,14 @@ describe('fault-provider', () => {
           },
         };
 
-        faultProvider.getSeriousFaults(data, catB);
+        faultProvider.getSeriousFaults(data, TestCategory.B);
         expect(catBFaultProvider.getSeriousFaultsCatB).toHaveBeenCalledWith(data);
       });
 
       it('should call the cat be serious faults method when category is be', () => {
         spyOn(catBEFaultProvider, 'getSeriousFaultsCatBE');
         const data = {};
-        faultProvider.getSeriousFaults(data, catBE);
+        faultProvider.getSeriousFaults(data, TestCategory.BE);
         expect(catBEFaultProvider.getSeriousFaultsCatBE).toHaveBeenCalledWith(data);
       });
 
@@ -148,7 +145,7 @@ describe('fault-provider', () => {
           },
         };
 
-        faultProvider.getDangerousFaults(data, catB);
+        faultProvider.getDangerousFaults(data, TestCategory.B);
         expect(catBFaultProvider.getDangerousFaultsCatB).toHaveBeenCalledWith(data);
       });
 
@@ -176,7 +173,7 @@ describe('fault-provider', () => {
           },
         };
 
-        faultProvider.getDangerousFaults(data, catBE);
+        faultProvider.getDangerousFaults(data, TestCategory.BE);
         expect(catBEFaultProvider.getDangerousFaultsCatBE).toHaveBeenCalledWith(data);
       });
 

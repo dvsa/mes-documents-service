@@ -1,25 +1,46 @@
-import {
-  TestData,
-  ManoeuvreOutcome,
-} from '@dvsa/mes-test-schema/categories/common';
+import { TestData, ManoeuvreOutcome } from '@dvsa/mes-test-schema/categories/common';
 import { CatBUniqueTypes } from '@dvsa/mes-test-schema/categories/B';
 import { CatBEUniqueTypes } from '@dvsa/mes-test-schema/categories/BE';
-import { injectable } from 'inversify';
-import 'reflect-metadata';
+import { CatCUniqueTypes } from '@dvsa/mes-test-schema/categories/C';
+import { CatCEUniqueTypes } from '@dvsa/mes-test-schema/categories/CE';
+import { CatC1UniqueTypes } from '@dvsa/mes-test-schema/categories/C1';
+import { CatC1EUniqueTypes } from '@dvsa/mes-test-schema/categories/C1E';
 import { Fault } from '../../domain/fault';
 import { Competencies } from '../../domain/competencies';
+import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
+import { injectable } from 'inversify';
+import 'reflect-metadata';
 import {
   getDrivingFaultsCatB,
   getSeriousFaultsCatB,
   getDangerousFaultsCatB,
 } from './categories/B/fault-provider-cat-b';
-
 import {
   getDangerousFaultsCatBE,
   getDrivingFaultsCatBE,
   getSeriousFaultsCatBE,
 } from './categories/BE/fault-provider-cat-be';
-import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
+import {
+  getDangerousFaultsCatC,
+  getDrivingFaultsCatC,
+  getSeriousFaultsCatC,
+} from './categories/C/fault-provider-cat-c';
+import {
+  getDangerousFaultsCatCE,
+  getDrivingFaultsCatCE,
+  getSeriousFaultsCatCE,
+} from './categories/CE/fault-provider-cat-ce';
+import {
+  getDangerousFaultsCatC1,
+  getDrivingFaultsCatC1,
+  getSeriousFaultsCatC1,
+} from './categories/C1/fault-provider-cat-c1';
+import {
+  getDangerousFaultsCatC1E,
+  getDrivingFaultsCatC1E,
+  getSeriousFaultsCatC1E,
+} from './categories/C1E/fault-provider-cat-c1e';
+
 export interface IFaultProvider {
   getDrivingFaults(testData: TestData | undefined, category: string): Fault[];
 
@@ -32,54 +53,60 @@ export interface IFaultProvider {
 export class FaultProvider implements IFaultProvider {
 
   public getDrivingFaults(testData: TestData | undefined, category: string): Fault[] {
-    let faults: Fault[] = [];
-
     switch (category) {
       case TestCategory.B:
-        faults = getDrivingFaultsCatB(testData as CatBUniqueTypes.TestData);
-        break;
+        return getDrivingFaultsCatB(testData as CatBUniqueTypes.TestData);
       case TestCategory.BE:
-        faults = getDrivingFaultsCatBE(testData as CatBEUniqueTypes.TestData);
-        break;
+        return getDrivingFaultsCatBE(testData as CatBEUniqueTypes.TestData);
+      case TestCategory.C:
+        return getDrivingFaultsCatC(testData as CatCUniqueTypes.TestData);
+      case TestCategory.C1:
+        return getDrivingFaultsCatC1(testData as CatC1UniqueTypes.TestData);
+      case TestCategory.CE:
+        return getDrivingFaultsCatCE(testData as CatCEUniqueTypes.TestData);
+      case TestCategory.C1E:
+        return getDrivingFaultsCatC1E(testData as CatC1EUniqueTypes.TestData);
       default:
-        faults = getDrivingFaultsCatB(testData as CatBUniqueTypes.TestData);
-        break;
+        return getDrivingFaultsCatB(testData as CatBUniqueTypes.TestData);
     }
-    return faults;
   }
 
   public getSeriousFaults(testData: TestData | undefined, category: string): Fault[] {
-    let faults: Fault[] = [];
-
     switch (category) {
       case TestCategory.B:
-        faults = getSeriousFaultsCatB(testData as CatBUniqueTypes.TestData);
-        break;
+        return getSeriousFaultsCatB(testData as CatBUniqueTypes.TestData);
       case TestCategory.BE:
-        faults = getSeriousFaultsCatBE(testData as CatBEUniqueTypes.TestData);
-        break;
+        return getSeriousFaultsCatBE(testData as CatBEUniqueTypes.TestData);
+      case TestCategory.C:
+        return getSeriousFaultsCatC(testData as CatCUniqueTypes.TestData);
+      case TestCategory.C1:
+        return getSeriousFaultsCatC1(testData as CatC1UniqueTypes.TestData);
+      case TestCategory.CE:
+        return getSeriousFaultsCatCE(testData as CatCEUniqueTypes.TestData);
+      case TestCategory.C1E:
+        return getSeriousFaultsCatC1E(testData as CatC1EUniqueTypes.TestData);
       default:
-        faults = getSeriousFaultsCatB(testData as CatBUniqueTypes.TestData);
-        break;
+        return getSeriousFaultsCatB(testData as CatBUniqueTypes.TestData);
     }
-    return faults;
   }
 
   public getDangerousFaults(testData: TestData | undefined, category: string): Fault [] {
-    let faults: Fault[] = [];
-
     switch (category) {
       case TestCategory.B:
-        faults = getDangerousFaultsCatB(testData as CatBUniqueTypes.TestData);
-        break;
+        return getDangerousFaultsCatB(testData as CatBUniqueTypes.TestData);
       case TestCategory.BE:
-        faults = getDangerousFaultsCatBE(testData as CatBEUniqueTypes.TestData);
-        break;
+        return getDangerousFaultsCatBE(testData as CatBEUniqueTypes.TestData);
+      case TestCategory.C:
+        return getDangerousFaultsCatC(testData as CatCUniqueTypes.TestData);
+      case TestCategory.C1:
+        return getDangerousFaultsCatC1(testData as CatC1UniqueTypes.TestData);
+      case TestCategory.CE:
+        return getDangerousFaultsCatCE(testData as CatCEUniqueTypes.TestData);
+      case TestCategory.C1E:
+        return getDangerousFaultsCatC1E(testData as CatC1EUniqueTypes.TestData);
       default:
-        faults = getDangerousFaultsCatB(testData as CatBUniqueTypes.TestData);
-        break;
+        return getDangerousFaultsCatB(testData as CatBUniqueTypes.TestData);
     }
-    return faults;
   }
 }
 
