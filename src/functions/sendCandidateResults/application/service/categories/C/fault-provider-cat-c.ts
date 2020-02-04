@@ -1,5 +1,5 @@
 import { CatCUniqueTypes } from '@dvsa/mes-test-schema/categories/C';
-import { Fault } from '../../../../domain/fault';
+import { Fault, vehicleCheckDrivingFaultLimit } from '../../../../domain/fault';
 import { CompetencyOutcome } from '../../../../domain/competency-outcome';
 import {
   convertBooleanFaultObjectToArray,
@@ -42,7 +42,8 @@ export const getSeriousFaultsCatC = (testData: CatCUniqueTypes.TestData | undefi
   getNonStandardFaultsCatC(testData, CompetencyOutcome.S)
     .forEach(fault => seriousFaults.push(fault));
 
-  if (getVehicleCheckFaultCount(testData.vehicleChecks as CatCUniqueTypes.VehicleChecks, CompetencyOutcome.DF) === 5) {
+  if (getVehicleCheckFaultCount(testData.vehicleChecks as CatCUniqueTypes.VehicleChecks, CompetencyOutcome.DF) ===
+    vehicleCheckDrivingFaultLimit) {
     seriousFaults.push({ name: Competencies.vehicleChecks, count: 1 });
   }
 
@@ -54,15 +55,17 @@ const getVehicleCheckFaultCount = (
   faultType: QuestionOutcome): number => {
   let questionCount: number = 0;
 
-  if (vehicleChecks) {
-    if (vehicleChecks.showMeQuestions) {
-      questionCount = questionCount +
+  if (!vehicleChecks) {
+    return questionCount;
+  }
+
+  if (vehicleChecks.showMeQuestions) {
+    questionCount = questionCount +
         vehicleChecks.showMeQuestions.filter((showMe: QuestionResult) => showMe.outcome === faultType).length;
-    }
-    if (vehicleChecks.tellMeQuestions) {
-      questionCount = questionCount +
+  }
+  if (vehicleChecks.tellMeQuestions) {
+    questionCount = questionCount +
         vehicleChecks.tellMeQuestions.filter((tellMe: QuestionResult) => tellMe.outcome === faultType).length;
-    }
   }
   return questionCount;
 };
@@ -113,7 +116,9 @@ export const getVehicleChecksFaultCatC = (
   const faultCount = getVehicleCheckFaultCount(vehicleChecks, faultType);
 
   if (faultCount > 0) {
-    faultArray.push({ name: Competencies.vehicleChecks, count: faultCount === 5 ? 4 : faultCount });
+    faultArray.push(
+      { name: Competencies.vehicleChecks, count: faultCount === vehicleCheckDrivingFaultLimit ? 4 : faultCount },
+    );
   }
   return faultArray;
 };

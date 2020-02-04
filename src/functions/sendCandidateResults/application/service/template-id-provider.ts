@@ -67,7 +67,7 @@ export function getTemplateString(
   conductedLanguage: ConductedLanguage, communicationMethod: CommunicationMethod, activityCode: ActivityCode): string {
 
   const languageOfTemplate: TemplateLanguage =
-    (conductedLanguage === Language.CYMRAEG) ? TemplateLanguage.WELSH : TemplateLanguage.ENGLISH;
+    (conductedLanguage === Language.WELSH) ? TemplateLanguage.WELSH : TemplateLanguage.ENGLISH;
 
   const correspondenceMethod: CorrespondenceMethod =
     (communicationMethod === Correspondence.POST) ? Correspondence.LETTER : Correspondence.EMAIL;
