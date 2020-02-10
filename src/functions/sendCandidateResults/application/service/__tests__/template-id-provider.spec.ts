@@ -7,7 +7,6 @@ import {
   ConductedLanguage,
 } from '@dvsa/mes-test-schema/categories/common';
 import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
-import { sample } from 'lodash';
 
 const communicationPreferences: CommunicationPreferences = {
   updatedEmail: 'email@somewhere.com',
