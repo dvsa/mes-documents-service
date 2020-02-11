@@ -1,5 +1,5 @@
 import { CatD1UniqueTypes } from '@dvsa/mes-test-schema/categories/D1';
-import { Fault, vehicleCheckDrivingFaultLimit } from '../../../../domain/fault';
+import { Fault, FaultLimit } from '../../../../domain/fault';
 import { CompetencyOutcome } from '../../../../domain/competency-outcome';
 import {
   convertBooleanFaultObjectToArray,
@@ -43,7 +43,7 @@ export const getSeriousFaultsCatD1 = (testData: CatD1UniqueTypes.TestData | unde
     .forEach(fault => seriousFaults.push(fault));
 
   if (getVehicleCheckFaultCount(
-    testData.vehicleChecks as CatD1UniqueTypes.VehicleChecks, CompetencyOutcome.DF) === vehicleCheckDrivingFaultLimit) {
+    testData.vehicleChecks as CatD1UniqueTypes.VehicleChecks, CompetencyOutcome.DF) === FaultLimit.NON_TRAILER) {
     seriousFaults.push({ name: Competencies.vehicleChecks, count: 1 });
   }
 
@@ -117,7 +117,7 @@ export const getVehicleChecksFaultCatD1 = (
 
   if (faultCount > 0) {
     faultArray.push(
-      { name: Competencies.vehicleChecks, count: faultCount === vehicleCheckDrivingFaultLimit ? 4 : faultCount },
+      { name: Competencies.vehicleChecks, count: faultCount === FaultLimit.NON_TRAILER ? 4 : faultCount },
     );
   }
   return faultArray;
