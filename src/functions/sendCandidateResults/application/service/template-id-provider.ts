@@ -60,6 +60,10 @@ export function isVocationalCategory(category: CategoryCode): boolean {
     TestCategory.CE,
     TestCategory.C1,
     TestCategory.C1E,
+    TestCategory.D,
+    TestCategory.DE,
+    TestCategory.D1,
+    TestCategory.D1E,
   ].includes(category as TestCategory);
 }
 

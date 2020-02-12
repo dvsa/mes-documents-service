@@ -164,6 +164,10 @@ describe('get-template-id-provider', () => {
       expect(isVocationalCategory(TestCategory.C1)).toBe(true);
       expect(isVocationalCategory(TestCategory.CE)).toBe(true);
       expect(isVocationalCategory(TestCategory.C1E)).toBe(true);
+      expect(isVocationalCategory(TestCategory.D)).toBe(true);
+      expect(isVocationalCategory(TestCategory.D1)).toBe(true);
+      expect(isVocationalCategory(TestCategory.DE)).toBe(true);
+      expect(isVocationalCategory(TestCategory.D1E)).toBe(true);
     });
 
     it('should return false when category is not in the vocational category array', () => {
