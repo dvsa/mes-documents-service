@@ -5,4 +5,7 @@ export interface Fault {
   count: number;
 }
 
-export const vehicleCheckDrivingFaultLimit: number = 5;
+export enum FaultLimit {
+  TRAILER = 2,
+  NON_TRAILER = 5,
+}
