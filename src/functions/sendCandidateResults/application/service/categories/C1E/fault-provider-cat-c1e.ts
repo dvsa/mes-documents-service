@@ -1,6 +1,6 @@
 import { CatC1EUniqueTypes } from '@dvsa/mes-test-schema/categories/C1E';
 import { QuestionOutcome, QuestionResult } from '@dvsa/mes-test-schema/categories/common';
-import { Fault } from '../../../../domain/fault';
+import { Fault, FaultLimit } from '../../../../domain/fault';
 import { CompetencyOutcome } from '../../../../domain/competency-outcome';
 import {
   convertBooleanFaultObjectToArray,
@@ -43,7 +43,8 @@ export const getSeriousFaultsCatC1E = (testData: CatC1EUniqueTypes.TestData | un
     .forEach(fault => seriousFaults.push(fault));
 
   if (
-    getVehicleCheckFaultCount(testData.vehicleChecks as CatC1EUniqueTypes.VehicleChecks, CompetencyOutcome.DF) === 5) {
+    getVehicleCheckFaultCount(testData.vehicleChecks as CatC1EUniqueTypes.VehicleChecks, CompetencyOutcome.DF)
+    === FaultLimit.TRAILER) {
     seriousFaults.push({ name: Competencies.vehicleChecks, count: 1 });
   }
 
@@ -122,7 +123,7 @@ export const getVehicleChecksFaultCatC1E = (
   const faultCount = getVehicleCheckFaultCount(vehicleChecks, faultType);
 
   if (faultCount > 0) {
-    faultArray.push({ name: Competencies.vehicleChecks, count: faultCount === 5 ? 4 : faultCount });
+    faultArray.push({ name: Competencies.vehicleChecks, count: faultCount === FaultLimit.TRAILER ? 1 : faultCount });
   }
   return faultArray;
 };

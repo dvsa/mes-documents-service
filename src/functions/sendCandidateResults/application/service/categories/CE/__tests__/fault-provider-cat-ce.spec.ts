@@ -81,27 +81,12 @@ describe('fault-provider-cat-ce', () => {
           code: 'S01',
           description: 'S01',
           outcome: CompetencyOutcome.DF,
-        },
-          {
-            code: 'S02',
-            description: 'S02',
-            outcome: CompetencyOutcome.DF,
-          },
-          {
-            code: 'S03',
-            description: 'S03',
-            outcome: CompetencyOutcome.DF,
-          }],
+        }],
         tellMeQuestions: [{
           code: 'T01',
           description: 'T01',
           outcome: CompetencyOutcome.DF,
-        },
-          {
-            code: 'T02',
-            description: 'T02',
-            outcome: CompetencyOutcome.DF,
-          }],
+        }],
       };
       const data: CatCEUniqueTypes.TestData = {
         vehicleChecks,
@@ -139,7 +124,7 @@ describe('fault-provider-cat-ce', () => {
 
       const result: Fault[] = getVehicleChecksFaultCatCE(data, CompetencyOutcome.DF);
       expect(result.length).toBe(1);
-      expect(result).toContain({ name: Competencies.vehicleChecks, count: 2 });
+      expect(result).toContain({ name: Competencies.vehicleChecks, count: 1 });
     });
 
     it('should return one driving fault with a count of 1', () => {
