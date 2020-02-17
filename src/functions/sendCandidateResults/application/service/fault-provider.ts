@@ -10,6 +10,7 @@ import { CatDUniqueTypes } from '@dvsa/mes-test-schema/categories/D';
 import { CatDEUniqueTypes } from '@dvsa/mes-test-schema/categories/DE';
 import { CatD1UniqueTypes } from '@dvsa/mes-test-schema/categories/D1';
 import { CatD1EUniqueTypes } from '@dvsa/mes-test-schema/categories/D1E';
+import { TestData as CatAMod1TestData } from '@dvsa/mes-test-schema/categories/AM1';
 import { Fault } from '../../domain/fault';
 import { Competencies } from '../../domain/competencies';
 import { injectable } from 'inversify';
@@ -64,6 +65,7 @@ import {
   getDrivingFaultsCatD1E,
   getSeriousFaultsCatD1E,
 } from './categories/D1E/fault-provider-cat-d1e';
+import { getDrivingFaultsCatAMod1 } from './categories/AM1/fault-provider-cat-a-mod1';
 
 export interface IFaultProvider {
   getDrivingFaults(testData: TestData | undefined, category: string): Fault[];
@@ -88,6 +90,10 @@ export class FaultProvider implements IFaultProvider {
       case TestCategory.D1: return getDrivingFaultsCatD1(testData as CatD1UniqueTypes.TestData);
       case TestCategory.DE: return getDrivingFaultsCatDE(testData as CatDEUniqueTypes.TestData);
       case TestCategory.D1E: return getDrivingFaultsCatD1E(testData as CatD1EUniqueTypes.TestData);
+      case TestCategory.EUAM1:
+      case TestCategory.EUA1M1:
+      case TestCategory.EUA2M1:
+      case TestCategory.EUAMM1: return getDrivingFaultsCatAMod1(testData as CatAMod1TestData);
       default: return getDrivingFaultsCatB(testData as CatBUniqueTypes.TestData);
     }
   }
