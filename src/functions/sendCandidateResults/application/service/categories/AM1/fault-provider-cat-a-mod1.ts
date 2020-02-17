@@ -11,8 +11,8 @@ export const getDrivingFaultsCatAMod1 = (testData: CatAMod1TestData | undefined)
 
   return [
     ...convertNumericFaultObjectToArray(testData.drivingFaults),
-    ...getSingleFaultCompetencyFaults(testData.singleFaultCompetencies),
-    ...getSpeedCheckCompetencyFaults(testData.emergencyStop, testData.avoidance),
+    // ...getSingleFaultCompetencyFaults(testData.singleFaultCompetencies),
+    // ...getSpeedCheckCompetencyFaults(testData.emergencyStop, testData.avoidance),
   ];
 };
 
@@ -42,4 +42,4 @@ export const getDangerousFaultsCatAMod1 = (testData: CatAMod1TestData | undefine
   ];
 };
 
-export const getSingleFaultCompetencyFaults()
+// export const getSingleFaultCompetencyFaults()

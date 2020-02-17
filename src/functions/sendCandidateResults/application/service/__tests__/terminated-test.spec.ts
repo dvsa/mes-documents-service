@@ -5,6 +5,7 @@ import { IConfigAdapter } from '../../../framework/adapter/config/config-adapter
 import { ITemplateIdProvider, TemplateIdProvider } from '../template-id-provider';
 import { IStatusUpdater } from '../../../framework/status-updater';
 import { IFaultProvider, FaultProvider } from '../fault-provider';
+import { ICustomPropertyProvider, CustomPropertyProvider } from '../custom-property-provider';
 import { IPersonalisationProvider, PersonalisationProvider } from '../personalisation-provider';
 import { CatBUniqueTypes } from '@dvsa/mes-test-schema/categories/B';
 import { ConfigAdapterMock } from '../../../framework/adapter/config/__mocks__/config-adapter.mock';
@@ -19,6 +20,7 @@ describe('Test termination confirmation', () => {
   let templateIdProvider: ITemplateIdProvider;
   let statusUpdater: IStatusUpdater;
   let faultProvider: IFaultProvider;
+  let customPropertyProvider: ICustomPropertyProvider;
   let personalisationProvider: IPersonalisationProvider;
 
   const totalNumberOfTests: number = 1;
@@ -29,7 +31,11 @@ describe('Test termination confirmation', () => {
     templateIdProvider = new TemplateIdProvider(configAdapter);
     statusUpdater = new StatusUpdaterMock();
     faultProvider = new FaultProvider();
-    personalisationProvider = new PersonalisationProvider(faultProvider);
+    customPropertyProvider = new CustomPropertyProvider();
+    personalisationProvider = new PersonalisationProvider(
+      faultProvider,
+      customPropertyProvider,
+    );
 
     spyOn(statusUpdater, 'updateStatus');
 

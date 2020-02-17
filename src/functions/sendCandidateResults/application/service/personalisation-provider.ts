@@ -12,6 +12,7 @@ import {
 import { inject, injectable } from 'inversify';
 import { TYPES } from '../../framework/di/types';
 import { IFaultProvider } from './fault-provider';
+import { ICustomPropertyProvider } from './custom-property-provider';
 import { get } from 'lodash';
 import { Fault } from '../../domain/fault';
 import { englishCompetencyLabels, welshCompetencyLabels } from '../../domain/competencies';
@@ -32,6 +33,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
 
   constructor(
     @inject(TYPES.IFaultProvider) private faultProvider: IFaultProvider,
+    @inject(TYPES.ICustomPropertyProvider) private customPropertyProvider: ICustomPropertyProvider,
   ) { }
 
   public getEmailPersonalisation(testresult: TestResultSchemasUnion): EmailPersonalisation {
@@ -58,7 +60,13 @@ export class PersonalisationProvider implements IPersonalisationProvider {
   }
 
   private getSharedPersonalisationValues(testresult: TestResultSchemasUnion): Personalisation {
+    return {
+      ...this.getCommonPersonalisationValues(testresult),
+      ...this.customPropertyProvider.getCustomProperties(testresult.testData, testresult.category),
+    };
+  }
 
+  private getCommonPersonalisationValues(testresult: TestResultSchemasUnion): Personalisation {
     const drivingFaults = this.buildFaultStringWithCount(
       this.faultProvider.getDrivingFaults(testresult.testData, testresult.category).sort((a, b) => b.count - a.count),
       get(testresult, 'communicationPreferences.conductedLanguage'));
