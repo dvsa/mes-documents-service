@@ -65,7 +65,11 @@ import {
   getDrivingFaultsCatD1E,
   getSeriousFaultsCatD1E,
 } from './categories/D1E/fault-provider-cat-d1e';
-import { getDrivingFaultsCatAMod1, getSeriousFaultsCatAMod1, getDangerousFaultsCatAMod1 } from './categories/AM1/fault-provider-cat-a-mod1';
+import {
+  getDrivingFaultsCatAMod1,
+  getSeriousFaultsCatAMod1,
+  getDangerousFaultsCatAMod1,
+} from './categories/AM1/fault-provider-cat-a-mod1';
 
 export interface IFaultProvider {
   getDrivingFaults(testData: TestData | undefined, category: string): Fault[];
