@@ -65,7 +65,7 @@ import {
   getDrivingFaultsCatD1E,
   getSeriousFaultsCatD1E,
 } from './categories/D1E/fault-provider-cat-d1e';
-import { getDrivingFaultsCatAMod1 } from './categories/AM1/fault-provider-cat-a-mod1';
+import { getDrivingFaultsCatAMod1, getSeriousFaultsCatAMod1, getDangerousFaultsCatAMod1 } from './categories/AM1/fault-provider-cat-a-mod1';
 
 export interface IFaultProvider {
   getDrivingFaults(testData: TestData | undefined, category: string): Fault[];
@@ -110,6 +110,10 @@ export class FaultProvider implements IFaultProvider {
       case TestCategory.D1: return getSeriousFaultsCatD1(testData as CatD1UniqueTypes.TestData);
       case TestCategory.DE: return getSeriousFaultsCatDE(testData as CatDEUniqueTypes.TestData);
       case TestCategory.D1E: return getSeriousFaultsCatD1E(testData as CatD1EUniqueTypes.TestData);
+      case TestCategory.EUAM1:
+      case TestCategory.EUA1M1:
+      case TestCategory.EUA2M1:
+      case TestCategory.EUAMM1: return getSeriousFaultsCatAMod1(testData as CatAMod1TestData);
       default: return getSeriousFaultsCatB(testData as CatBUniqueTypes.TestData);
     }
   }
@@ -126,6 +130,10 @@ export class FaultProvider implements IFaultProvider {
       case TestCategory.D1: return getDangerousFaultsCatD1(testData as CatD1UniqueTypes.TestData);
       case TestCategory.DE: return getDangerousFaultsCatDE(testData as CatDEUniqueTypes.TestData);
       case TestCategory.D1E: return getDangerousFaultsCatD1E(testData as CatD1EUniqueTypes.TestData);
+      case TestCategory.EUAM1:
+      case TestCategory.EUA1M1:
+      case TestCategory.EUA2M1:
+      case TestCategory.EUAMM1: return getDangerousFaultsCatAMod1(testData as CatAMod1TestData);
       default: return getDangerousFaultsCatB(testData as CatBUniqueTypes.TestData);
     }
   }
