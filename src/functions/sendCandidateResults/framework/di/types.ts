@@ -5,7 +5,7 @@ export const TYPES = {
   IRequestScheduler: Symbol.for('IRequestScheduler'),
   ITemplateIdProvider: Symbol.for('ITemplateIdProvider'),
   IFaultProvider: Symbol.for('IFaultProvider'),
-  ICustomPropertyProvider: Symbol.for('IFaultProvider'),
+  ICustomPropertyProvider: Symbol.for('ICustomPropertyProvider'),
   INextUploadBatch: Symbol.for('INextUploadBatch'),
   IPersonalisationProvider: Symbol.for('IPersonalisationProvider'),
   IStatusUpdater: Symbol.for('IStatusUpdater'),

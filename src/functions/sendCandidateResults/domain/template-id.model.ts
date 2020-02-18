@@ -11,6 +11,7 @@ export enum TemplateLanguage {
 
 export enum TestType {
   VOCATIONAL = 'Vocational',
+  AMOD1 = 'AMod1',
 }
 
 export enum Correspondence {

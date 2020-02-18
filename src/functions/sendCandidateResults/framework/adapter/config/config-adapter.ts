@@ -35,6 +35,11 @@ export class ConfigAdapter implements IConfigAdapter {
   englishLetterFailTemplateIdVocational: string;
   welshLetterPassTemplateIdVocational: string;
   welshLetterFailTemplateIdVocational: string;
+  // Email Template Id's A Mod1
+  englishEmailPassTemplateIdAMod1: string;
+  englishEmailFailTemplateIdAMod1: string;
+  welshEmailPassTemplateIdAMod1: string;
+  welshEmailFailTemplateIdAMod1: string;
 
   constructor() {
     this.apiKey = '';
@@ -73,6 +78,11 @@ export class ConfigAdapter implements IConfigAdapter {
       this.getFromEnvThrowIfNotPresent('NOTIFY_POST_WELSH_PASS_TEMPLATE_ID_VOCATIONAL');
     this.welshLetterFailTemplateIdVocational =
       this.getFromEnvThrowIfNotPresent('NOTIFY_POST_WELSH_FAIL_TEMPLATE_ID_VOCATIONAL');
+
+    this.englishEmailPassTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_PASS_TEMPLATE_ID_AMOD1');
+    this.englishEmailFailTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_FAIL_TEMPLATE_ID_AMOD1');
+    this.welshEmailPassTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_WELSH_PASS_TEMPLATE_ID_AMOD1');
+    this.welshEmailFailTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_WELSH_FAIL_TEMPLATE_ID_AMOD1');
   }
 
   public async getApiKey(): Promise<string> {
