@@ -52,6 +52,15 @@ export enum Competencies {
     uncoupleRecouple = 'uncoupleRecouple',
     reverseLeftControl = 'reverseLeftControl',
     reverseLeftObservation = 'reverseLeftObservation',
+
+    useOfStand = 'useOfStand',
+    manualHandling = 'manualHandling',
+    slalom = 'slalom',
+    slowControl = 'slowControl',
+    uTurn = 'uTurn',
+
+    speedCheckAvoidance = 'speedCheckAvoidance',
+    speedCheckEmergencyStop = 'speedCheckEmergencyStop',
 }
 
 export enum englishCompetencyLabels {
