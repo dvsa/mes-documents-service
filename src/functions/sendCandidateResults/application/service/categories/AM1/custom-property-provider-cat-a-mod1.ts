@@ -1,5 +1,6 @@
 import { TestData as CatAMod1TestData } from '@dvsa/mes-test-schema/categories/AM1';
 import { CustomProperties } from '../../../../domain/custom-properties';
+import { isInteger } from 'lodash';
 import {
   BooleanText,
 } from '../../../../domain/personalisation.model';
@@ -46,22 +47,16 @@ const getEmergencyStopAttempts = (
     emergencySecondAttempt: '',
   };
 
-  if (!!emergencyStopData) {
-    if (
-      !!emergencyStopData.firstAttempt &&
-      typeof emergencyStopData.firstAttempt === 'number'
-    ) {
+  if (emergencyStopData) {
+    if (isInteger(emergencyStopData.firstAttempt)) {
       emergencyStopAttempts.showEmergencyStop = BooleanText.YES;
       emergencyStopAttempts.showEmergencyFirstAttempt = BooleanText.YES;
-      emergencyStopAttempts.emergencyFirstAttempt = emergencyStopData.firstAttempt.toString();
+      emergencyStopAttempts.emergencyFirstAttempt = emergencyStopData.firstAttempt!.toString();
     }
 
-    if (
-      !!emergencyStopData.secondAttempt &&
-      typeof emergencyStopData.firstAttempt === 'number'
-    ) {
+    if (isInteger(emergencyStopData.secondAttempt)) {
       emergencyStopAttempts.showEmergencySecondAttempt = BooleanText.YES;
-      emergencyStopAttempts.emergencySecondAttempt = emergencyStopData.secondAttempt.toString();
+      emergencyStopAttempts.emergencySecondAttempt = emergencyStopData.secondAttempt!.toString();
     }
   }
 
