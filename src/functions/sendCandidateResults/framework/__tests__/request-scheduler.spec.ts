@@ -11,6 +11,7 @@ import { NextUploadBatchMock } from '../__mocks__/next-upload-batch.mock';
 import { NotifyClientStubTimeout } from '../../application/stub/notify-client-stub-timeout';
 import { IPersonalisationProvider, PersonalisationProvider } from '../../application/service/personalisation-provider';
 import { IFaultProvider, FaultProvider } from '../../application/service/fault-provider';
+import { ICustomPropertyProvider, CustomPropertyProvider } from '../../application/service/custom-property-provider';
 import { StatusUpdaterMock } from '../__mocks__/status-updater.mock';
 import { NOTIFY_INTERFACE } from '../../domain/interface.constants';
 import { ProcessingStatus } from '../../domain/submission-outcome.model';
@@ -23,6 +24,7 @@ describe('RequestScheduler', () => {
   let templateIdProvider: ITemplateIdProvider;
   let statusUpdater: IStatusUpdater;
   let faultProvider: IFaultProvider;
+  let customPropertyProvider: ICustomPropertyProvider;
   let personalisationProvider: IPersonalisationProvider;
 
   const totalNumberOfTests: number = 1;
@@ -34,7 +36,11 @@ describe('RequestScheduler', () => {
     templateIdProvider = new TemplateIdProvider(configAdapter);
     statusUpdater = new StatusUpdaterMock();
     faultProvider = new FaultProvider();
-    personalisationProvider = new PersonalisationProvider(faultProvider);
+    customPropertyProvider = new CustomPropertyProvider();
+    personalisationProvider = new PersonalisationProvider(
+      faultProvider,
+      customPropertyProvider,
+    );
 
     spyOn(statusUpdater, 'updateStatus');
 

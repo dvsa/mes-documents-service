@@ -1,5 +1,6 @@
 import { IPersonalisationProvider, PersonalisationProvider } from '../personalisation-provider';
 import { IFaultProvider, FaultProvider } from '../fault-provider';
+import { ICustomPropertyProvider, CustomPropertyProvider } from '../custom-property-provider';
 import { completedCatBTest } from '../../../framework/__mocks__/test-data.mock';
 import { englishCompetencyLabels, welshCompetencyLabels } from '../../../domain/competencies';
 import { BooleanText } from '../../../domain/personalisation.model';
@@ -7,9 +8,11 @@ import { BooleanText } from '../../../domain/personalisation.model';
 describe('personalisation-provider', () => {
 
   let faultProvider: IFaultProvider;
+  let customPropertyProvider: ICustomPropertyProvider;
 
   beforeEach(() => {
     faultProvider = new FaultProvider();
+    customPropertyProvider = new CustomPropertyProvider();
 
     if (completedCatBTest.communicationPreferences) {
       completedCatBTest.communicationPreferences.conductedLanguage = 'English';
@@ -18,7 +21,10 @@ describe('personalisation-provider', () => {
 
   describe('getEmailPersonalisation', () => {
     it('should return the correct data', () => {
-      const personalisationProvider: IPersonalisationProvider = new PersonalisationProvider(faultProvider);
+      const personalisationProvider: IPersonalisationProvider = new PersonalisationProvider(
+        faultProvider,
+        customPropertyProvider,
+      );
 
       const result = personalisationProvider.getEmailPersonalisation(completedCatBTest);
 
@@ -61,7 +67,10 @@ describe('personalisation-provider', () => {
       expect(result.showEtaPhysical).toEqual(BooleanText.NO);
     });
     it('should return welsh translations when required', () => {
-      const personalisationProvider: IPersonalisationProvider = new PersonalisationProvider(faultProvider);
+      const personalisationProvider: IPersonalisationProvider = new PersonalisationProvider(
+        faultProvider,
+        customPropertyProvider,
+      );
 
       if (completedCatBTest.communicationPreferences) {
         completedCatBTest.communicationPreferences.conductedLanguage = 'Cymraeg';
@@ -82,7 +91,10 @@ describe('personalisation-provider', () => {
 
   describe('getLetterPersonalisation', () => {
     it('should return the correct data', () => {
-      const personalisationProvider: IPersonalisationProvider = new PersonalisationProvider(faultProvider);
+      const personalisationProvider: IPersonalisationProvider = new PersonalisationProvider(
+        faultProvider,
+        customPropertyProvider,
+      );
 
       const result = personalisationProvider.getLetterPersonalisation(completedCatBTest);
 
@@ -134,7 +146,10 @@ describe('personalisation-provider', () => {
     });
 
     it('should return welsh translations when required', () => {
-      const personalisationProvider: IPersonalisationProvider = new PersonalisationProvider(faultProvider);
+      const personalisationProvider: IPersonalisationProvider = new PersonalisationProvider(
+        faultProvider,
+        customPropertyProvider,
+      );
 
       if (completedCatBTest.communicationPreferences) {
         completedCatBTest.communicationPreferences.conductedLanguage = 'Cymraeg';
