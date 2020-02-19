@@ -25,8 +25,19 @@ export interface Personalisation {
   showEtaPhysical: BooleanText;
 }
 
-export interface EmailPersonalisation extends Personalisation {
+export interface EmailPersonalisation extends Personalisation {}
 
+export interface CatAMod1Personalisation extends EmailPersonalisation {
+  showEmergencyStop: BooleanText;
+  showEmergencyFirstAttempt: BooleanText;
+  emergencyFirstAttempt: string;
+  showEmergencySecondAttempt: BooleanText;
+  emergencySecondAttempt: string;
+  showAvoidanceExercise: BooleanText;
+  showAvoidanceFirstAttempt: BooleanText;
+  avoidanceFirstAttempt: string;
+  showAvoidanceSecondAttempt: BooleanText;
+  avoidanceSecondAttempt: string;
 }
 
 export interface LetterPersonalisation extends Personalisation {

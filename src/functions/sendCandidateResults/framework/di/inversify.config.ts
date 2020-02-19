@@ -17,6 +17,7 @@ import { NextUploadBatch } from '../next-upload-batch';
 import { IPersonalisationProvider, PersonalisationProvider } from '../../application/service/personalisation-provider';
 import { IStatusUpdater, StatusUpdater } from '../status-updater';
 import { StatusUpdaterMock } from '../__mocks__/status-updater.mock';
+import { CustomPropertyProvider, ICustomPropertyProvider } from '../../application/service/custom-property-provider';
 
 const container = new Container();
 
@@ -50,5 +51,6 @@ container.bind<IRequestScheduler>(TYPES.IRequestScheduler).to(RequestScheduler);
 container.bind<ITemplateIdProvider>(TYPES.ITemplateIdProvider).to(TemplateIdProvider);
 container.bind<IFaultProvider>(TYPES.IFaultProvider).to(FaultProvider);
 container.bind<IPersonalisationProvider>(TYPES.IPersonalisationProvider).to(PersonalisationProvider);
+container.bind<ICustomPropertyProvider>(TYPES.ICustomPropertyProvider).to(CustomPropertyProvider);
 
 export { container };

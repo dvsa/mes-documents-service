@@ -52,6 +52,15 @@ export enum Competencies {
     uncoupleRecouple = 'uncoupleRecouple',
     reverseLeftControl = 'reverseLeftControl',
     reverseLeftObservation = 'reverseLeftObservation',
+
+    useOfStand = 'useOfStand',
+    manualHandling = 'manualHandling',
+    slalom = 'slalom',
+    slowControl = 'slowControl',
+    uTurn = 'uTurn',
+
+    speedCheckAvoidance = 'speedCheckAvoidance',
+    speedCheckEmergencyStop = 'speedCheckEmergencyStop',
 }
 
 export enum englishCompetencyLabels {
@@ -109,6 +118,15 @@ export enum englishCompetencyLabels {
     reverseLeftControl = 'Reverse - Control',
     reverseLeftObservation = 'Reverse - Observation',
     uncoupleRecouple = 'Uncouple / Recouple',
+
+    useOfStand = 'Use of stand',
+    manualHandling = 'Manual handling',
+    slalom = 'Slalom / Figure 8',
+    slowControl = 'Slow control',
+    uTurn = 'U Turn Exercise',
+
+    speedCheckAvoidance = 'Avoidance Ex. Control Stop',
+    speedCheckEmergencyStop = 'Emergency stop',
 }
 
 export enum welshCompetencyLabels {
@@ -166,4 +184,13 @@ export enum welshCompetencyLabels {
   uncoupleRecouple = 'Dadfachu / Ailfachu',
   reverseLeftObservation = 'Gwrthdroi - gwyliadwriaeth',
   reverseLeftControl = 'Gwrthdroi - dan reolaeth',
+
+  useOfStand = 'Use of stand',
+  manualHandling = 'Manual handling',
+  slalom = 'Slalom / Figure 8',
+  slowControl = 'Slow control',
+  uTurn = 'U Turn Exercise',
+
+  speedCheckAvoidance = 'Avoidance Ex. Control Stop',
+  speedCheckEmergencyStop = 'Emergency stop',
 }

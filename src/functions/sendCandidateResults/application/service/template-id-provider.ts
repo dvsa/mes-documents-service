@@ -39,9 +39,15 @@ export class TemplateIdProvider implements ITemplateIdProvider {
     if (baseTemplate === TemplateIdProvider.TEMPLATE_ID_NOT_SET) {
       return TemplateIdProvider.TEMPLATE_ID_NOT_SET;
     }
+
     if (isVocationalCategory(category)) {
       return get(this.configAdapter, `${baseTemplate}${TestType.VOCATIONAL}`);
     }
+
+    if (isAmod1Category(category)) {
+      return get(this.configAdapter, `${baseTemplate}${TestType.AMOD1}`);
+    }
+
     return get(this.configAdapter, baseTemplate);
   }
 }
@@ -64,6 +70,15 @@ export function isVocationalCategory(category: CategoryCode): boolean {
     TestCategory.DE,
     TestCategory.D1,
     TestCategory.D1E,
+  ].includes(category as TestCategory);
+}
+
+export function isAmod1Category(category: CategoryCode): boolean {
+  return [
+    TestCategory.EUAM1,
+    TestCategory.EUA1M1,
+    TestCategory.EUA2M1,
+    TestCategory.EUAMM1,
   ].includes(category as TestCategory);
 }
 
