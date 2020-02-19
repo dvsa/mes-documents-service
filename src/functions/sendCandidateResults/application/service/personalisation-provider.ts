@@ -39,7 +39,6 @@ export class PersonalisationProvider implements IPersonalisationProvider {
   public getEmailPersonalisation(testresult: TestResultSchemasUnion): EmailPersonalisation {
     const sharedValues: Personalisation = this.getSharedPersonalisationValues(testresult);
 
-    console.log('##### Shared Values:', JSON.stringify(sharedValues));
     return {
       ...sharedValues,
     };

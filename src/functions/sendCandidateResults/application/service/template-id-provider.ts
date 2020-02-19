@@ -39,7 +39,7 @@ export class TemplateIdProvider implements ITemplateIdProvider {
     if (baseTemplate === TemplateIdProvider.TEMPLATE_ID_NOT_SET) {
       return TemplateIdProvider.TEMPLATE_ID_NOT_SET;
     }
-    
+
     if (isVocationalCategory(category)) {
       return get(this.configAdapter, `${baseTemplate}${TestType.VOCATIONAL}`);
     }
