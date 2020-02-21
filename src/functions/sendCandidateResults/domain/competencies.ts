@@ -61,6 +61,9 @@ export enum Competencies {
 
     speedCheckAvoidance = 'speedCheckAvoidance',
     speedCheckEmergencyStop = 'speedCheckEmergencyStop',
+
+    avoidanceSpeedNotMet = 'avoidanceSpeedNotMet',
+    emergencyStopSpeedNotMet = 'emergencyStopSpeedNotMet',
 }
 
 export enum englishCompetencyLabels {
@@ -127,6 +130,9 @@ export enum englishCompetencyLabels {
 
     speedCheckAvoidance = 'Avoidance Ex. Control Stop',
     speedCheckEmergencyStop = 'Emergency stop',
+
+    avoidanceSpeedNotMet = 'Avoidance Ex. Control Stop - Speed requirement not met',
+    emergencyStopSpeedNotMet = 'Emergency Stop - Speed requirement not met',
 }
 
 export enum welshCompetencyLabels {
@@ -193,4 +199,7 @@ export enum welshCompetencyLabels {
 
   speedCheckAvoidance = 'Avoidance Ex. Control Stop',
   speedCheckEmergencyStop = 'Emergency stop',
+
+  avoidanceSpeedNotMet = 'Avoidance Ex. Control Stop - Speed requirement not met',
+  emergencyStopSpeedNotMet = 'Emergency Stop - Speed requirement not met',
 }
