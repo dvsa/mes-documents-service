@@ -191,15 +191,15 @@ export enum welshCompetencyLabels {
   reverseLeftObservation = 'Gwrthdroi - gwyliadwriaeth',
   reverseLeftControl = 'Gwrthdroi - dan reolaeth',
 
-  useOfStand = 'Use of stand',
-  manualHandling = 'Manual handling',
-  slalom = 'Slalom / Figure 8',
-  slowControl = 'Slow control',
-  uTurn = 'U Turn Exercise',
+  useOfStand = '[cy] Use of stand',
+  manualHandling = '[cy] Manual handling',
+  slalom = '[cy] Slalom / Figure 8',
+  slowControl = '[cy] Slow control',
+  uTurn = '[cy] U Turn Exercise',
 
-  speedCheckAvoidance = 'Avoidance Ex. Control Stop',
-  speedCheckEmergencyStop = 'Emergency stop',
+  speedCheckAvoidance = '[cy] Avoidance Ex. Control Stop',
+  speedCheckEmergencyStop = '[cy] Emergency stop',
 
-  avoidanceSpeedNotMet = 'Avoidance Ex. Control Stop - Speed requirement not met',
-  emergencyStopSpeedNotMet = 'Emergency Stop - Speed requirement not met',
+  avoidanceSpeedNotMet = '[cy] Avoidance Ex. Control Stop - Speed requirement not met',
+  emergencyStopSpeedNotMet = '[cy] Emergency Stop - Speed requirement not met',
 }
