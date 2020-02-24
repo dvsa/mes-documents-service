@@ -61,6 +61,9 @@ export enum Competencies {
 
     speedCheckAvoidance = 'speedCheckAvoidance',
     speedCheckEmergencyStop = 'speedCheckEmergencyStop',
+
+    avoidanceSpeedNotMet = 'avoidanceSpeedNotMet',
+    emergencyStopSpeedNotMet = 'emergencyStopSpeedNotMet',
 }
 
 export enum englishCompetencyLabels {
@@ -127,6 +130,9 @@ export enum englishCompetencyLabels {
 
     speedCheckAvoidance = 'Avoidance Ex. Control Stop',
     speedCheckEmergencyStop = 'Emergency stop',
+
+    avoidanceSpeedNotMet = 'Avoidance Ex. Control Stop - Speed requirement not met',
+    emergencyStopSpeedNotMet = 'Emergency Stop - Speed requirement not met',
 }
 
 export enum welshCompetencyLabels {
@@ -185,12 +191,23 @@ export enum welshCompetencyLabels {
   reverseLeftObservation = 'Gwrthdroi - gwyliadwriaeth',
   reverseLeftControl = 'Gwrthdroi - dan reolaeth',
 
-  useOfStand = 'Use of stand',
-  manualHandling = 'Manual handling',
-  slalom = 'Slalom / Figure 8',
-  slowControl = 'Slow control',
-  uTurn = 'U Turn Exercise',
+  useOfStand = '[cy] Use of stand',
+  manualHandling = '[cy] Manual handling',
+  slalom = '[cy] Slalom / Figure 8',
+  slowControl = '[cy] Slow control',
+  uTurn = '[cy] U Turn Exercise',
 
-  speedCheckAvoidance = 'Avoidance Ex. Control Stop',
-  speedCheckEmergencyStop = 'Emergency stop',
+  speedCheckAvoidance = '[cy] Avoidance Ex. Control Stop',
+  speedCheckEmergencyStop = '[cy] Emergency stop',
+
+  avoidanceSpeedNotMet = '[cy] Avoidance Ex. Control Stop - Speed requirement not met',
+  emergencyStopSpeedNotMet = '[cy] Emergency Stop - Speed requirement not met',
+}
+
+export enum englishTexts {
+  abortedAttempt = 'Aborted attempt',
+}
+
+export enum welshTexts {
+  abortedAttempt = '[cy] Aborted attempt',
 }

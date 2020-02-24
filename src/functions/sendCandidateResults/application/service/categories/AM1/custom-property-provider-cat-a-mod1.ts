@@ -1,9 +1,16 @@
-import { TestData as CatAMod1TestData } from '@dvsa/mes-test-schema/categories/AM1';
+import {
+  TestData as CatAMod1TestData,
+  EmergencyStop,
+  Avoidance,
+  ConductedLanguage,
+} from '@dvsa/mes-test-schema/categories/AM1';
 import { CustomProperties } from '../../../../domain/custom-properties';
-import { isInteger } from 'lodash';
+import { get } from 'lodash';
 import {
   BooleanText,
 } from '../../../../domain/personalisation.model';
+import { Language } from '../../../../domain/template-id.model';
+import { welshTexts, englishTexts } from '../../../../domain/competencies';
 
 export interface CatAMod1ICustomProperties extends CustomProperties {
   showEmergencyStop: BooleanText;
@@ -18,19 +25,23 @@ export interface CatAMod1ICustomProperties extends CustomProperties {
   avoidanceSecondAttempt: string;
 }
 
-export const getCustomPropertiesCatAMod1 = (testData: CatAMod1TestData | undefined): CatAMod1ICustomProperties => {
+export const getCustomPropertiesCatAMod1 = (
+  testData: CatAMod1TestData | undefined,
+  language: ConductedLanguage,
+): CatAMod1ICustomProperties => {
   if (!testData) {
     throw new Error('No Test Data');
   }
 
   return {
-    ...getEmergencyStopAttempts(testData.emergencyStop),
-    ...getAvoidanceAttempts(testData.avoidance),
+    ...getEmergencyStopAttempts(testData.emergencyStop, language),
+    ...getAvoidanceAttempts(testData.avoidance, language),
   };
 };
 
 const getEmergencyStopAttempts = (
-  emergencyStopData: CatAMod1TestData['emergencyStop'],
+  emergencyStopData: EmergencyStop | undefined,
+  language: ConductedLanguage,
 ): Pick<
   CatAMod1ICustomProperties,
   | 'showEmergencyStop'
@@ -47,24 +58,27 @@ const getEmergencyStopAttempts = (
     emergencySecondAttempt: '',
   };
 
-  if (emergencyStopData) {
-    if (isInteger(emergencyStopData.firstAttempt)) {
-      emergencyStopAttempts.showEmergencyStop = BooleanText.YES;
-      emergencyStopAttempts.showEmergencyFirstAttempt = BooleanText.YES;
-      emergencyStopAttempts.emergencyFirstAttempt = emergencyStopData.firstAttempt!.toString();
-    }
+  if (!emergencyStopData) {
+    return emergencyStopAttempts;
+  }
 
-    if (isInteger(emergencyStopData.secondAttempt)) {
-      emergencyStopAttempts.showEmergencySecondAttempt = BooleanText.YES;
-      emergencyStopAttempts.emergencySecondAttempt = emergencyStopData.secondAttempt!.toString();
-    }
+  if (get(emergencyStopData, 'firstAttempt') !== undefined) {
+    emergencyStopAttempts.showEmergencyStop = BooleanText.YES;
+    emergencyStopAttempts.showEmergencyFirstAttempt = BooleanText.YES;
+    emergencyStopAttempts.emergencyFirstAttempt = getFirstAttemptText(emergencyStopData.firstAttempt, language);
+  }
+
+  if (get(emergencyStopData, 'secondAttempt') !== undefined) {
+    emergencyStopAttempts.showEmergencySecondAttempt = BooleanText.YES;
+    emergencyStopAttempts.emergencySecondAttempt = `${emergencyStopData.secondAttempt} km/h`;
   }
 
   return emergencyStopAttempts;
 };
 
 const getAvoidanceAttempts = (
-  avoidanceData: CatAMod1TestData['avoidance'],
+  avoidanceData: Avoidance | undefined,
+  language: ConductedLanguage,
 ): Pick<
   CatAMod1ICustomProperties,
   | 'showAvoidanceExercise'
@@ -81,18 +95,32 @@ const getAvoidanceAttempts = (
     avoidanceSecondAttempt: '',
   };
 
-  if (!!avoidanceData) {
-    if (!!avoidanceData.firstAttempt && typeof avoidanceData.firstAttempt === 'number') {
-      avoidanceAttempts.showAvoidanceExercise = BooleanText.YES;
-      avoidanceAttempts.showAvoidanceFirstAttempt = BooleanText.YES;
-      avoidanceAttempts.avoidanceFirstAttempt = avoidanceData.firstAttempt.toString();
-    }
+  if (!avoidanceData) {
+    return avoidanceAttempts;
+  }
 
-    if (!!avoidanceData.secondAttempt && typeof avoidanceData.firstAttempt === 'number') {
-      avoidanceAttempts.showAvoidanceSecondAttempt = BooleanText.YES;
-      avoidanceAttempts.avoidanceSecondAttempt = avoidanceData.secondAttempt.toString();
-    }
+  if (get(avoidanceData, 'firstAttempt') !== undefined) {
+    avoidanceAttempts.showAvoidanceExercise = BooleanText.YES;
+    avoidanceAttempts.showAvoidanceFirstAttempt = BooleanText.YES;
+    avoidanceAttempts.avoidanceFirstAttempt = getFirstAttemptText(avoidanceData.firstAttempt, language);
+  }
+
+  if (get(avoidanceData, 'secondAttempt') !== undefined) {
+    avoidanceAttempts.showAvoidanceSecondAttempt = BooleanText.YES;
+    avoidanceAttempts.avoidanceSecondAttempt = `${avoidanceData.secondAttempt} km/h`;
   }
 
   return avoidanceAttempts;
+};
+
+export const getFirstAttemptText = (firstAttempt: number | undefined, language: ConductedLanguage) => {
+  if (firstAttempt === undefined) {
+    return '';
+  }
+
+  if (firstAttempt === 0) {
+    return language === Language.WELSH ? welshTexts.abortedAttempt : englishTexts.abortedAttempt;
+  }
+
+  return `${firstAttempt} km/h`;
 };

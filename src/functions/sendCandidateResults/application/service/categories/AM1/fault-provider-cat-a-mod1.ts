@@ -44,8 +44,8 @@ export const getSeriousFaultsCatAMod1 = (testData: CatAMod1TestData | undefined)
     ...getSingleFaultCompetencyFaults(singleFaultCompetenciesWithSeriousFaults, CompetencyOutcome.S),
     ...getAvoidanceFaults(testData.avoidance, CompetencyOutcome.S),
     ...getEmergencyStopFaults(testData.emergencyStop, CompetencyOutcome.S),
-    ...getSpeedCheckAvoidance(testData.emergencyStop),
-    ...getSpeedCheckEmergencyStop(testData.emergencyStop),
+    ...getAvoidanceSpeedNotMet(testData.avoidance),
+    ...getEmergencyStopSpeedNotMet(testData.emergencyStop),
   ];
 };
 
@@ -56,7 +56,7 @@ export const getDangerousFaultsCatAMod1 = (testData: CatAMod1TestData | undefine
   }
 
   const singleFaultCompetenciesWithDangerousFaults: SingleFaultCompetencies = pickBy(
-    testData.singleFaultCompetencies, val => val === CompetencyOutcome.S,
+    testData.singleFaultCompetencies, val => val === CompetencyOutcome.D,
   );
 
   return [
@@ -128,7 +128,7 @@ export const getEmergencyStopFaults = (
   return [];
 };
 
-export const getSpeedCheckAvoidance = (avoidance: Avoidance | undefined): Fault[] => {
+export const getAvoidanceSpeedNotMet = (avoidance: Avoidance | undefined): Fault[] => {
   if (!avoidance) {
     throw new Error('No Avoidance');
   }
@@ -136,7 +136,7 @@ export const getSpeedCheckAvoidance = (avoidance: Avoidance | undefined): Fault[
   const result: Fault[] = [];
   if (get(avoidance, 'speedNotMetSeriousFault')) {
     result.push({
-      name: Competencies.speedCheckAvoidance,
+      name: Competencies.avoidanceSpeedNotMet,
       count: 1,
     });
   }
@@ -144,7 +144,7 @@ export const getSpeedCheckAvoidance = (avoidance: Avoidance | undefined): Fault[
   return result;
 };
 
-export const getSpeedCheckEmergencyStop = (emergencyStop: EmergencyStop | undefined): Fault[] => {
+export const getEmergencyStopSpeedNotMet = (emergencyStop: EmergencyStop | undefined): Fault[] => {
   if (!emergencyStop) {
     throw new Error('No Emergency Stop');
   }
@@ -152,7 +152,7 @@ export const getSpeedCheckEmergencyStop = (emergencyStop: EmergencyStop | undefi
   const result: Fault[] = [];
   if (get(emergencyStop, 'speedNotMetSeriousFault')) {
     result.push({
-      name: Competencies.speedCheckEmergencyStop,
+      name: Competencies.emergencyStopSpeedNotMet,
       count: 1,
     });
   }

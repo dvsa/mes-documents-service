@@ -2,6 +2,7 @@ export type CorrespondenceMethod = 'Email' | 'Letter';
 
 export enum Language {
   WELSH = 'Cymraeg',
+  ENGLISH = 'English',
 }
 
 export enum TemplateLanguage {

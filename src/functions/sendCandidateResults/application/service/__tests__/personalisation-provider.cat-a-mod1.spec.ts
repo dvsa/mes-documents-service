@@ -29,14 +29,14 @@ describe('personalisation-provider-cat-a-mod1', () => {
 
       expect(result.showEmergencyStop).toEqual(BooleanText.YES);
       expect(result.showEmergencyFirstAttempt).toEqual(BooleanText.YES);
-      expect(result.emergencyFirstAttempt).toEqual('44');
+      expect(result.emergencyFirstAttempt).toEqual('44 km/h');
       expect(result.showEmergencySecondAttempt).toBe(BooleanText.YES);
-      expect(result.emergencySecondAttempt).toEqual('47');
+      expect(result.emergencySecondAttempt).toEqual('47 km/h');
       expect(result.showAvoidanceExercise).toEqual(BooleanText.YES);
       expect(result.showAvoidanceFirstAttempt).toEqual(BooleanText.YES);
-      expect(result.avoidanceFirstAttempt).toEqual('30');
+      expect(result.avoidanceFirstAttempt).toEqual('30 km/h');
       expect(result.showAvoidanceSecondAttempt).toEqual(BooleanText.YES);
-      expect(result.avoidanceSecondAttempt).toEqual('38');
+      expect(result.avoidanceSecondAttempt).toEqual('38 km/h');
     });
   });
 });
