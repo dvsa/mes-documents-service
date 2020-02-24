@@ -2,6 +2,7 @@ import {
   getCustomPropertiesCatAMod1,
 } from '../custom-property-provider-cat-a-mod1';
 import { TestData as CatAMod1TestData } from '@dvsa/mes-test-schema/categories/AM1';
+import { Language } from '../../../../../domain/template-id.model';
 
 describe('custom-property-provider-cat-a-mod1', () => {
   describe('getCustomPropertiesCatAMod1 :: EmergencyStop', () => {
@@ -13,14 +14,14 @@ describe('custom-property-provider-cat-a-mod1', () => {
         },
       };
 
-      const result: any = getCustomPropertiesCatAMod1(data);
+      const result: any = getCustomPropertiesCatAMod1(data, Language.ENGLISH);
 
       expect(result).toEqual(jasmine.objectContaining({
         showEmergencyStop: 'yes',
         showEmergencyFirstAttempt: 'yes',
-        emergencyFirstAttempt: '55',
+        emergencyFirstAttempt: '55 km/h',
         showEmergencySecondAttempt: 'yes',
-        emergencySecondAttempt: '66',
+        emergencySecondAttempt: '66 km/h',
       }));
     });
 
@@ -31,12 +32,12 @@ describe('custom-property-provider-cat-a-mod1', () => {
         },
       };
 
-      const result: any = getCustomPropertiesCatAMod1(data);
+      const result: any = getCustomPropertiesCatAMod1(data, Language.ENGLISH);
 
       expect(result).toEqual(jasmine.objectContaining({
         showEmergencyStop: 'yes',
         showEmergencyFirstAttempt: 'yes',
-        emergencyFirstAttempt: '55',
+        emergencyFirstAttempt: '55 km/h',
         showEmergencySecondAttempt: 'no',
         emergencySecondAttempt: '',
       }));
@@ -47,7 +48,7 @@ describe('custom-property-provider-cat-a-mod1', () => {
         emergencyStop: {},
       };
 
-      const result: any = getCustomPropertiesCatAMod1(data);
+      const result: any = getCustomPropertiesCatAMod1(data, Language.ENGLISH);
 
       expect(result).toEqual(jasmine.objectContaining({
         showEmergencyStop: 'no',
@@ -68,14 +69,14 @@ describe('custom-property-provider-cat-a-mod1', () => {
         },
       };
 
-      const result: any = getCustomPropertiesCatAMod1(data);
+      const result: any = getCustomPropertiesCatAMod1(data, Language.ENGLISH);
 
       expect(result).toEqual(jasmine.objectContaining({
         showAvoidanceExercise: 'yes',
         showAvoidanceFirstAttempt: 'yes',
-        avoidanceFirstAttempt: '55',
+        avoidanceFirstAttempt: '55 km/h',
         showAvoidanceSecondAttempt: 'yes',
-        avoidanceSecondAttempt: '66',
+        avoidanceSecondAttempt: '66 km/h',
       }));
     });
 
@@ -86,12 +87,12 @@ describe('custom-property-provider-cat-a-mod1', () => {
         },
       };
 
-      const result: any = getCustomPropertiesCatAMod1(data);
+      const result: any = getCustomPropertiesCatAMod1(data, Language.ENGLISH);
 
       expect(result).toEqual(jasmine.objectContaining({
         showAvoidanceExercise: 'yes',
         showAvoidanceFirstAttempt: 'yes',
-        avoidanceFirstAttempt: '55',
+        avoidanceFirstAttempt: '55 km/h',
         showAvoidanceSecondAttempt: 'no',
         avoidanceSecondAttempt: '',
       }));
@@ -102,7 +103,7 @@ describe('custom-property-provider-cat-a-mod1', () => {
         avoidance: {},
       };
 
-      const result: any = getCustomPropertiesCatAMod1(data);
+      const result: any = getCustomPropertiesCatAMod1(data, Language.ENGLISH);
 
       expect(result).toEqual(jasmine.objectContaining({
         showAvoidanceExercise: 'no',

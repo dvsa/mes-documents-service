@@ -62,7 +62,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
   private getSharedPersonalisationValues(testresult: TestResultSchemasUnion): Personalisation {
     return {
       ...this.getCommonPersonalisationValues(testresult),
-      ...this.customPropertyProvider.getCustomProperties(testresult.testData, testresult.category),
+      ...this.customPropertyProvider.getCustomProperties(testresult),
     };
   }
 

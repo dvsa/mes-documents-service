@@ -203,3 +203,11 @@ export enum welshCompetencyLabels {
   avoidanceSpeedNotMet = '[cy] Avoidance Ex. Control Stop - Speed requirement not met',
   emergencyStopSpeedNotMet = '[cy] Emergency Stop - Speed requirement not met',
 }
+
+export enum englishTexts {
+  abortedAttempt = 'Aborted attempt',
+}
+
+export enum welshTexts {
+  abortedAttempt = '[cy] Aborted attempt',
+}
