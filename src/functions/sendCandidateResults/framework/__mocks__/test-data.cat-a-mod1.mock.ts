@@ -85,12 +85,10 @@ export const completedCatAMod1Test: TestResultCatAM1Schema = {
     dangerousFaults: {},
     seriousFaults: {},
     emergencyStop: {
-      speedNotMetSeriousFault: false,
       firstAttempt: 44,
       secondAttempt: 47,
     },
     avoidance: {
-      speedNotMetSeriousFault: false,
       firstAttempt: 30,
       secondAttempt: 38,
     },
@@ -98,7 +96,6 @@ export const completedCatAMod1Test: TestResultCatAM1Schema = {
   },
   passCompletion: {
     passCertificateNumber: '',
-    provisionalLicenceProvided: true,
   },
   postTestDeclarations: {
     healthDeclarationAccepted: false,
