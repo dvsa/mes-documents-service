@@ -24,8 +24,6 @@ export const getDrivingFaultsCatAMod1 = (testData: CatAMod1TestData | undefined)
   return [
     ...convertNumericFaultObjectToArray(testData.drivingFaults),
     ...getSingleFaultCompetencyFaults(singleFaultCompetenciesWithDrivingFaults, CompetencyOutcome.DF),
-    ...getAvoidanceFaults(testData.avoidance, CompetencyOutcome.DF),
-    ...getEmergencyStopFaults(testData.emergencyStop, CompetencyOutcome.DF),
   ];
 };
 
@@ -42,8 +40,6 @@ export const getSeriousFaultsCatAMod1 = (testData: CatAMod1TestData | undefined)
   return [
     ...convertBooleanFaultObjectToArray(testData.seriousFaults),
     ...getSingleFaultCompetencyFaults(singleFaultCompetenciesWithSeriousFaults, CompetencyOutcome.S),
-    ...getAvoidanceFaults(testData.avoidance, CompetencyOutcome.S),
-    ...getEmergencyStopFaults(testData.emergencyStop, CompetencyOutcome.S),
     ...getAvoidanceSpeedNotMet(testData.avoidance),
     ...getEmergencyStopSpeedNotMet(testData.emergencyStop),
   ];
@@ -62,8 +58,6 @@ export const getDangerousFaultsCatAMod1 = (testData: CatAMod1TestData | undefine
   return [
     ...convertBooleanFaultObjectToArray(testData.dangerousFaults),
     ...getSingleFaultCompetencyFaults(singleFaultCompetenciesWithDangerousFaults, CompetencyOutcome.D),
-    ...getAvoidanceFaults(testData.avoidance, CompetencyOutcome.D),
-    ...getEmergencyStopFaults(testData.emergencyStop, CompetencyOutcome.D),
   ];
 };
 
@@ -81,6 +75,8 @@ export const getSingleFaultCompetencyFaults = (
     ...getSingleFaultCompetencyFault(singleFaultCompetencies, 'slalom', outcome),
     ...getSingleFaultCompetencyFault(singleFaultCompetencies, 'slowControl', outcome),
     ...getSingleFaultCompetencyFault(singleFaultCompetencies, 'uTurn', outcome),
+    ...getSingleFaultCompetencyFault(singleFaultCompetencies, 'emergencyStop', outcome),
+    ...getSingleFaultCompetencyFault(singleFaultCompetencies, 'avoidance', outcome),
   ];
 };
 
@@ -96,52 +92,19 @@ export const getSingleFaultCompetencyFault = (
   return [];
 };
 
-export const getAvoidanceFaults = (
-  avoidance: Avoidance | undefined, outcome: CompetencyOutcome): Fault[] => {
-  if (!avoidance) {
-    throw new Error('No Avoidance');
-  }
-
-  if (get(avoidance, 'outcome') === outcome) {
-    return [{
-      name: Competencies.speedCheckAvoidance,
-      count: 1,
-    }] as Fault[];
-  }
-
-  return [];
-};
-
-export const getEmergencyStopFaults = (
-  emergencyStop: EmergencyStop | undefined, outcome: CompetencyOutcome): Fault[] => {
-  if (!emergencyStop) {
-    throw new Error('No Emergency Stop');
-  }
-
-  if (get(emergencyStop, 'outcome') === outcome) {
-    return [{
-      name: Competencies.speedCheckEmergencyStop,
-      count: 1,
-    }] as Fault[];
-  }
-
-  return [];
-};
-
 export const getAvoidanceSpeedNotMet = (avoidance: Avoidance | undefined): Fault[] => {
   if (!avoidance) {
     throw new Error('No Avoidance');
   }
 
-  const result: Fault[] = [];
-  if (get(avoidance, 'speedNotMetSeriousFault')) {
-    result.push({
+  if (get(avoidance, 'outcome') === CompetencyOutcome.S) {
+    return [{
       name: Competencies.avoidanceSpeedNotMet,
       count: 1,
-    });
+    }] as Fault[];
   }
 
-  return result;
+  return [];
 };
 
 export const getEmergencyStopSpeedNotMet = (emergencyStop: EmergencyStop | undefined): Fault[] => {
@@ -149,13 +112,12 @@ export const getEmergencyStopSpeedNotMet = (emergencyStop: EmergencyStop | undef
     throw new Error('No Emergency Stop');
   }
 
-  const result: Fault[] = [];
-  if (get(emergencyStop, 'speedNotMetSeriousFault')) {
-    result.push({
+  if (get(emergencyStop, 'outcome') === CompetencyOutcome.S) {
+    return [{
       name: Competencies.emergencyStopSpeedNotMet,
       count: 1,
-    });
+    }] as Fault[];
   }
 
-  return result;
+  return [];
 };
