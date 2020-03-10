@@ -59,8 +59,8 @@ export enum Competencies {
     slowControl = 'slowControl',
     uTurn = 'uTurn',
 
-    speedCheckAvoidance = 'speedCheckAvoidance',
-    speedCheckEmergencyStop = 'speedCheckEmergencyStop',
+    avoidance = 'avoidance',
+    emergencyStop = 'emergencyStop',
 
     avoidanceSpeedNotMet = 'avoidanceSpeedNotMet',
     emergencyStopSpeedNotMet = 'emergencyStopSpeedNotMet',
@@ -128,8 +128,8 @@ export enum englishCompetencyLabels {
     slowControl = 'Slow control',
     uTurn = 'U Turn Exercise',
 
-    speedCheckAvoidance = 'Avoidance Ex. Control Stop',
-    speedCheckEmergencyStop = 'Emergency stop',
+    avoidance = 'Avoidance Ex. Control Stop',
+    emergencyStop = 'Emergency stop',
 
     avoidanceSpeedNotMet = 'Avoidance Ex. Control Stop - Speed requirement not met',
     emergencyStopSpeedNotMet = 'Emergency Stop - Speed requirement not met',
@@ -197,8 +197,8 @@ export enum welshCompetencyLabels {
   slowControl = '[cy] Slow control',
   uTurn = '[cy] U Turn Exercise',
 
-  speedCheckAvoidance = '[cy] Avoidance Ex. Control Stop',
-  speedCheckEmergencyStop = '[cy] Emergency stop',
+  avoidance = '[cy] Avoidance Ex. Control Stop',
+  emergencyStop = '[cy] Emergency stop',
 
   avoidanceSpeedNotMet = '[cy] Avoidance Ex. Control Stop - Speed requirement not met',
   emergencyStopSpeedNotMet = '[cy] Emergency Stop - Speed requirement not met',
