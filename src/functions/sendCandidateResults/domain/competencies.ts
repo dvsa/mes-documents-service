@@ -191,17 +191,17 @@ export enum welshCompetencyLabels {
   reverseLeftObservation = 'Gwrthdroi - gwyliadwriaeth',
   reverseLeftControl = 'Gwrthdroi - dan reolaeth',
 
-  useOfStand = '[cy] Use of stand',
-  manualHandling = '[cy] Manual handling',
-  slalom = '[cy] Slalom / Figure 8',
-  slowControl = '[cy] Slow control',
-  uTurn = '[cy] U Turn Exercise',
+  useOfStand = 'Defnyddio stondin',
+  manualHandling = 'Codi a chario',
+  slalom = 'Slalom / Ffigwr 8',
+  slowControl = 'Rheolydd araf',
+  uTurn = 'Ymarfer tro \'U\'',
 
-  avoidance = '[cy] Avoidance Ex. Control Stop',
-  emergencyStop = '[cy] Emergency stop',
+  avoidance = 'Ymarfer osgoi/stop dan reolaeth',
+  emergencyStop = 'Stop brys',
 
-  avoidanceSpeedNotMet = '[cy] Avoidance Ex. Control Stop - Speed requirement not met',
-  emergencyStopSpeedNotMet = '[cy] Emergency Stop - Speed requirement not met',
+  avoidanceSpeedNotMet = 'Ymarfer osgoi/stop dan reolaeth - Gofyniad Cyflymder heb ei fodloni',
+  emergencyStopSpeedNotMet = 'Stop brys - Gofyniad Cyflymder heb ei fodloni',
 }
 
 export enum englishTexts {
