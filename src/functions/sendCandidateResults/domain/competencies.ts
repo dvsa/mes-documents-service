@@ -64,6 +64,15 @@ export enum Competencies {
 
     avoidanceSpeedNotMet = 'avoidanceSpeedNotMet',
     emergencyStopSpeedNotMet = 'emergencyStopSpeedNotMet',
+    positioningNormalRiding = 'positioningNormalRiding',
+    clearanceOrObstructions = 'clearanceOrObstructions',
+    safetyAndBalance = 'safetyAndBalance',
+    controlsThrottle = 'controlsThrottle',
+
+    controlsFrontBrake = 'controlsFrontBrake',
+    controlsRearBrake = 'controlsRearBrake',
+    controlsBalanceSlowControl = 'controlsBalanceSlowControl',
+    bends = 'bends',
 }
 
 export enum englishCompetencyLabels {
@@ -133,6 +142,15 @@ export enum englishCompetencyLabels {
 
     avoidanceSpeedNotMet = 'Avoidance Ex. Control Stop - Speed requirement not met',
     emergencyStopSpeedNotMet = 'Emergency Stop - Speed requirement not met',
+    positioningNormalRiding = 'Positioning - Normal riding',
+    clearanceOrObstructions = 'Clearance / Obstructions',
+    safetyAndBalance = 'Safety and balance questions',
+    controlsThrottle = 'Controls - Throttle',
+
+    controlsFrontBrake = 'Controls - Front brake',
+    controlsRearBrake = 'Controls - Rear brake',
+    controlsBalanceSlowControl = 'Controls - Balance / Slow control',
+    bends = 'Bends',
 }
 
 export enum welshCompetencyLabels {
@@ -202,6 +220,14 @@ export enum welshCompetencyLabels {
 
   avoidanceSpeedNotMet = 'Ymarfer osgoi/stop dan reolaeth - Gofyniad Cyflymder heb ei fodloni',
   emergencyStopSpeedNotMet = 'Stop brys - Gofyniad Cyflymder heb ei fodloni',
+  positioningNormalRiding = '[CY] Positioning - Normal riding',
+  clearanceOrObstructions = '[CY] Clearance / Obstructions',
+  controlsThrottle = '[CY] Controls - Throttle',
+
+  controlsFrontBrake = '[CY] Controls - Front brake',
+  controlsRearBrake = '[CY] Controls - Rear brake',
+  controlsBalanceSlowControl = '[CY] Controls - Balance / Slow control',
+  bends = '[CY] Bends',
 }
 
 export enum englishTexts {

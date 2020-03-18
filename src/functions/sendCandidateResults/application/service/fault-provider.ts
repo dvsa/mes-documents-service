@@ -11,6 +11,7 @@ import { CatDEUniqueTypes } from '@dvsa/mes-test-schema/categories/DE';
 import { CatD1UniqueTypes } from '@dvsa/mes-test-schema/categories/D1';
 import { CatD1EUniqueTypes } from '@dvsa/mes-test-schema/categories/D1E';
 import { TestData as CatAMod1TestData } from '@dvsa/mes-test-schema/categories/AM1';
+import { TestData as CatAMod2TestData } from '@dvsa/mes-test-schema/categories/AM2';
 import { Fault } from '../../domain/fault';
 import { Competencies } from '../../domain/competencies';
 import { injectable } from 'inversify';
@@ -70,6 +71,11 @@ import {
   getSeriousFaultsCatAMod1,
   getDangerousFaultsCatAMod1,
 } from './categories/AM1/fault-provider-cat-a-mod1';
+import {
+  getDrivingFaultsCatAMod2,
+  getSeriousFaultsCatAMod2,
+  getDangerousFaultsCatAMod2,
+} from './categories/AM2/fault-provider-cat-a-mod2';
 
 export interface IFaultProvider {
   getDrivingFaults(testData: TestData | undefined, category: string): Fault[];
@@ -98,6 +104,10 @@ export class FaultProvider implements IFaultProvider {
       case TestCategory.EUA1M1:
       case TestCategory.EUA2M1:
       case TestCategory.EUAMM1: return getDrivingFaultsCatAMod1(testData as CatAMod1TestData);
+      case TestCategory.EUAM2:
+      case TestCategory.EUA1M2:
+      case TestCategory.EUA2M2:
+      case TestCategory.EUAMM2: return getDrivingFaultsCatAMod2(testData as CatAMod2TestData);
       default: return getDrivingFaultsCatB(testData as CatBUniqueTypes.TestData);
     }
   }
@@ -118,6 +128,10 @@ export class FaultProvider implements IFaultProvider {
       case TestCategory.EUA1M1:
       case TestCategory.EUA2M1:
       case TestCategory.EUAMM1: return getSeriousFaultsCatAMod1(testData as CatAMod1TestData);
+      case TestCategory.EUAM2:
+      case TestCategory.EUA1M2:
+      case TestCategory.EUA2M2:
+      case TestCategory.EUAMM2: return getSeriousFaultsCatAMod2(testData as CatAMod2TestData);
       default: return getSeriousFaultsCatB(testData as CatBUniqueTypes.TestData);
     }
   }
@@ -138,6 +152,10 @@ export class FaultProvider implements IFaultProvider {
       case TestCategory.EUA1M1:
       case TestCategory.EUA2M1:
       case TestCategory.EUAMM1: return getDangerousFaultsCatAMod1(testData as CatAMod1TestData);
+      case TestCategory.EUAM2:
+      case TestCategory.EUA1M2:
+      case TestCategory.EUA2M2:
+      case TestCategory.EUAMM2: return getDangerousFaultsCatAMod2(testData as CatAMod2TestData);
       default: return getDangerousFaultsCatB(testData as CatBUniqueTypes.TestData);
     }
   }
