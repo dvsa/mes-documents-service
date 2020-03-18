@@ -6,6 +6,7 @@ import { convertNumericFaultObjectToArray, convertBooleanFaultObjectToArray } fr
 import { Fault } from '../../../../domain/fault';
 import { CompetencyOutcome } from '../../../../domain/competency-outcome';
 import { Competencies } from '../../../../domain/competencies';
+import { get } from 'lodash';
 
 export const getDrivingFaultsCatAMod2 = (testData: CatAMod2TestData | undefined): Fault[] => {
 
@@ -57,22 +58,6 @@ export const getSafetyAndBalanceFaultCatAMod2 = (
 export const hasQuestionFault = (
   safetyAndBalanceQuestions: SafetyAndBalanceQuestions | undefined,
 ): boolean => {
-  let balanceFault = false;
-  let safetyFault = false;
-
-  if (safetyAndBalanceQuestions) {
-    if (safetyAndBalanceQuestions.balanceQuestions) {
-      balanceFault = safetyAndBalanceQuestions.balanceQuestions.some(e => e.outcome === CompetencyOutcome.DF);
-    }
-
-    if (safetyAndBalanceQuestions.safetyQuestions) {
-      safetyFault = safetyAndBalanceQuestions.safetyQuestions.some(e => e.outcome === CompetencyOutcome.DF);
-    }
-  }
-
-  if (balanceFault || safetyFault) {
-    return true;
-  }
-
-  return false;
+  return get(safetyAndBalanceQuestions, 'balanceQuestions', []).some(e => e.outcome === CompetencyOutcome.DF) ||
+    get(safetyAndBalanceQuestions, 'safetyQuestions', []).some(e => e.outcome === CompetencyOutcome.DF);
 };
