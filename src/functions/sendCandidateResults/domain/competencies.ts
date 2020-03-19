@@ -220,14 +220,14 @@ export enum welshCompetencyLabels {
 
   avoidanceSpeedNotMet = 'Ymarfer osgoi/stop dan reolaeth - Gofyniad Cyflymder heb ei fodloni',
   emergencyStopSpeedNotMet = 'Stop brys - Gofyniad Cyflymder heb ei fodloni',
-  positioningNormalRiding = '[CY] Positioning - Normal riding',
-  clearanceOrObstructions = '[CY] Clearance / Obstructions',
-  controlsThrottle = '[CY] Controls - Throttle',
+  positioningNormalRiding = 'Lleoli ar y ffordd - Beicio arferol',
+  clearanceOrObstructions = 'Clirio / Rhwystrau',
+  controlsThrottle = 'Rheolaeth - Throtl',
 
-  controlsFrontBrake = '[CY] Controls - Front brake',
-  controlsRearBrake = '[CY] Controls - Rear brake',
-  controlsBalanceSlowControl = '[CY] Controls - Balance / Slow control',
-  bends = '[CY] Bends',
+  controlsFrontBrake = 'Rheolaeth - Brêc blaen',
+  controlsRearBrake = 'Rheolaeth - Brêc ôl',
+  controlsBalanceSlowControl = 'Rheolaeth - Cydbwysedd / Rheolaeth araf',
+  bends = 'Troeon',
 }
 
 export enum englishTexts {
@@ -235,5 +235,5 @@ export enum englishTexts {
 }
 
 export enum welshTexts {
-  abortedAttempt = '[cy] Aborted attempt',
+  abortedAttempt = 'Ymgais wedi’I hatal',
 }
