@@ -4,7 +4,7 @@ import {
   isFail,
   isVocationalCategory,
   getTemplateString,
-  isHomeTestCategory
+  isHomeTestCategory,
 } from '../template-id-provider';
 import { ConfigAdapterMock } from '../../../framework/adapter/config/__mocks__/config-adapter.mock';
 import {
