@@ -13,6 +13,7 @@ export enum TemplateLanguage {
 export enum TestType {
   VOCATIONAL = 'Vocational',
   AMOD1 = 'AMod1',
+  HOME = 'Home',
 }
 
 export enum Correspondence {

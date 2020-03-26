@@ -73,6 +73,8 @@ export enum Competencies {
     controlsRearBrake = 'controlsRearBrake',
     controlsBalanceSlowControl = 'controlsBalanceSlowControl',
     bends = 'bends',
+
+    highwayCodeSafety = 'highwayCodeSafety',
 }
 
 export enum englishCompetencyLabels {
@@ -151,6 +153,8 @@ export enum englishCompetencyLabels {
     controlsRearBrake = 'Controls - Rear brake',
     controlsBalanceSlowControl = 'Controls - Balance / Slow control',
     bends = 'Bends',
+
+    highwayCodeSafety = 'H/Code / Safety',
 }
 
 export enum welshCompetencyLabels {
@@ -228,6 +232,8 @@ export enum welshCompetencyLabels {
   controlsRearBrake = 'Rheolaeth - Brêc ôl',
   controlsBalanceSlowControl = 'Rheolaeth - Cydbwysedd / Rheolaeth araf',
   bends = 'Troeon',
+
+  highwayCodeSafety = '[CY] H/Code / Safety',
 }
 
 export enum englishTexts {

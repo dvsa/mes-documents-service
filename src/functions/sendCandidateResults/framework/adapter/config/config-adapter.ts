@@ -40,6 +40,16 @@ export class ConfigAdapter implements IConfigAdapter {
   englishEmailFailTemplateIdAMod1: string;
   welshEmailPassTemplateIdAMod1: string;
   welshEmailFailTemplateIdAMod1: string;
+  // Email Template Id's A Mod1
+  englishEmailPassTemplateIdHome: string;
+  englishEmailFailTemplateIdHome: string;
+  welshEmailPassTemplateIdHome: string;
+  welshEmailFailTemplateIdHome: string;
+  // Letter Template Id's Home
+  englishLetterPassTemplateIdHome: string;
+  englishLetterFailTemplateIdHome: string;
+  welshLetterPassTemplateIdHome: string;
+  welshLetterFailTemplateIdHome: string;
 
   constructor() {
     this.apiKey = '';
@@ -83,6 +93,16 @@ export class ConfigAdapter implements IConfigAdapter {
     this.englishEmailFailTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_FAIL_TEMPLATE_ID_AMOD1');
     this.welshEmailPassTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_WELSH_PASS_TEMPLATE_ID_AMOD1');
     this.welshEmailFailTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_WELSH_FAIL_TEMPLATE_ID_AMOD1');
+
+    this.englishEmailPassTemplateIdHome = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_PASS_TEMPLATE_ID_HOME');
+    this.englishEmailFailTemplateIdHome = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_PASS_TEMPLATE_ID_HOME');
+    this.welshEmailPassTemplateIdHome = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_PASS_TEMPLATE_ID_HOME');
+    this.welshEmailFailTemplateIdHome = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_PASS_TEMPLATE_ID_HOME');
+
+    this.englishLetterPassTemplateIdHome = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_PASS_TEMPLATE_ID_HOME');
+    this.englishLetterFailTemplateIdHome = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_PASS_TEMPLATE_ID_HOME');
+    this.welshLetterPassTemplateIdHome = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_PASS_TEMPLATE_ID_HOME');
+    this.welshLetterFailTemplateIdHome = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_PASS_TEMPLATE_ID_HOME');
   }
 
   public async getApiKey(): Promise<string> {
