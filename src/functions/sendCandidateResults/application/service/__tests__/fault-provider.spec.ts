@@ -1,11 +1,11 @@
-import { DrivingFaults, SeriousFaults } from '@dvsa/mes-test-schema/categories/common';
+import { DrivingFaults, QuestionOutcome, QuestionResult, SeriousFaults } from '@dvsa/mes-test-schema/categories/common';
 import { CatBUniqueTypes } from '@dvsa/mes-test-schema/categories/B';
 import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 import {
   convertNumericFaultObjectToArray,
   convertBooleanFaultObjectToArray,
   getCompletedManoeuvres,
-  FaultProvider,
+  FaultProvider, getVehicleCheckFaultCount,
 } from '../fault-provider';
 import { Fault } from '../../../domain/fault';
 import { CompetencyOutcome } from '../../../domain/competency-outcome';
@@ -13,6 +13,7 @@ import { Competencies } from '../../../domain/competencies';
 
 import * as catBFaultProvider from '../categories/B/fault-provider-cat-b';
 import * as catBEFaultProvider from '../categories/BE/fault-provider-cat-be';
+import { CatFUniqueTypes } from '@dvsa/mes-test-schema/categories/F';
 
 describe('fault-provider', () => {
 
@@ -354,6 +355,79 @@ describe('fault-provider', () => {
 
       expect(result.length).toBe(0);
 
+    });
+  });
+
+  describe('getVehicleCheckFaultCount', () => {
+    it('should return 0 when no vehicle checks are present', () => {
+      const data: CatFUniqueTypes.VehicleChecks = {};
+      const count: number = getVehicleCheckFaultCount(data, CompetencyOutcome.DF);
+      expect(count).toEqual(0);
+    });
+
+    it('should return a count of 2 as there are two DF present in the showMeQuestions', () => {
+      const data: CatFUniqueTypes.VehicleChecks = {
+        showMeQuestions: [
+          {
+            outcome: 'DF',
+          },
+          {
+            outcome: 'P',
+          },
+          {
+            outcome: 'DF',
+          },
+        ],
+      };
+      const count: number = getVehicleCheckFaultCount(data, CompetencyOutcome.DF);
+      expect(count).toEqual(2);
+    });
+
+    it('should return a count of 2 as there are two DF present in the tellMeQuestions', () => {
+      const data: CatFUniqueTypes.VehicleChecks = {
+        tellMeQuestions: [
+          {
+            outcome: 'DF',
+          },
+          {
+            outcome: 'P',
+          },
+          {
+            outcome: 'DF',
+          },
+        ],
+      };
+      const count: number = getVehicleCheckFaultCount(data, CompetencyOutcome.DF);
+      expect(count).toEqual(2);
+    });
+
+    it('should return a count of 4 as there are two DF present in the showMeQuestions & tellMeQuestions', () => {
+      const data: CatFUniqueTypes.VehicleChecks = {
+        showMeQuestions: [
+          {
+            outcome: 'DF',
+          },
+          {
+            outcome: 'P',
+          },
+          {
+            outcome: 'DF',
+          },
+        ],
+        tellMeQuestions: [
+          {
+            outcome: 'DF',
+          },
+          {
+            outcome: 'P',
+          },
+          {
+            outcome: 'DF',
+          },
+        ],
+      };
+      const count: number = getVehicleCheckFaultCount(data, CompetencyOutcome.DF);
+      expect(count).toEqual(4);
     });
   });
 });

@@ -1,11 +1,10 @@
 import { CatHUniqueTypes } from '@dvsa/mes-test-schema/categories/H';
-import { QuestionOutcome, QuestionResult } from '@dvsa/mes-test-schema/categories/common';
 import { Fault } from '../../../../domain/fault';
 import { CompetencyOutcome } from '../../../../domain/competency-outcome';
 import {
   convertBooleanFaultObjectToArray,
   convertNumericFaultObjectToArray,
-  getCompletedManoeuvres,
+  getCompletedManoeuvres, getVehicleCheckFaultCount,
 } from '../../fault-provider';
 import { Competencies } from '../../../../domain/competencies';
 
@@ -79,43 +78,5 @@ export const getNonStandardFaultsCatH = (
       .forEach(fault => faults.push(fault));
   }
 
-// Vehicle Checks
-  if (testData.vehicleChecks) {
-    getVehicleChecksFaultCatH(testData.vehicleChecks, faultType)
-      .forEach(fault => faults.push(fault));
-  }
-
   return faults;
-};
-
-export const getVehicleChecksFaultCatH = (
-  vehicleChecks: CatHUniqueTypes.VehicleChecks,
-  faultType: QuestionOutcome): Fault[] => {
-  const faultArray: Fault[] = [];
-  const faultCount = getVehicleCheckFaultCount(vehicleChecks, faultType);
-
-  if (faultCount > 0) {
-    faultArray.push(
-      { name: Competencies.vehicleChecks, count: faultCount >= 1 ? 1 : faultCount },
-    );
-  }
-  return faultArray;
-};
-
-const getVehicleCheckFaultCount = (
-  vehicleChecks: CatHUniqueTypes.VehicleChecks,
-  faultType: QuestionOutcome): number => {
-  let questionCount: number = 0;
-
-  if (vehicleChecks) {
-    if (vehicleChecks.showMeQuestions) {
-      questionCount = questionCount +
-        vehicleChecks.showMeQuestions.filter((showMe: QuestionResult) => showMe.outcome === faultType).length;
-    }
-    if (vehicleChecks.tellMeQuestions) {
-      questionCount = questionCount +
-        vehicleChecks.tellMeQuestions.filter((tellMe: QuestionResult) => tellMe.outcome === faultType).length;
-    }
-  }
-  return questionCount;
 };

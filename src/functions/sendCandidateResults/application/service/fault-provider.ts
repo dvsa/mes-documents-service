@@ -1,7 +1,7 @@
 import { injectable } from 'inversify';
 import 'reflect-metadata';
 import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
-import { TestData, ManoeuvreOutcome } from '@dvsa/mes-test-schema/categories/common';
+import { TestData, ManoeuvreOutcome, QuestionOutcome, QuestionResult } from '@dvsa/mes-test-schema/categories/common';
 import { CatBUniqueTypes } from '@dvsa/mes-test-schema/categories/B';
 import { CatBEUniqueTypes } from '@dvsa/mes-test-schema/categories/BE';
 import { CatCUniqueTypes } from '@dvsa/mes-test-schema/categories/C';
@@ -100,6 +100,22 @@ import {
   getDrivingFaultsCatK,
   getSeriousFaultsCatK,
 } from './categories/K/fault-provider-cat-k';
+
+// No CatBUniqueTypes.VehicleChecks as the data structure differs to other categories
+type VehicleChecksUnion =
+  CatBEUniqueTypes.VehicleChecks |
+  CatCUniqueTypes.VehicleChecks |
+  CatC1UniqueTypes.VehicleChecks |
+  CatCEUniqueTypes.VehicleChecks |
+  CatC1EUniqueTypes.VehicleChecks |
+  CatDUniqueTypes.VehicleChecks |
+  CatD1UniqueTypes.VehicleChecks |
+  CatDEUniqueTypes.VehicleChecks |
+  CatD1EUniqueTypes.VehicleChecks |
+  CatFUniqueTypes.VehicleChecks |
+  CatGUniqueTypes.VehicleChecks |
+  CatHUniqueTypes.VehicleChecks |
+  CatKUniqueTypes.VehicleChecks;
 
 export interface IFaultProvider {
   getDrivingFaults(testData: TestData | undefined, category: string): Fault[];
@@ -230,4 +246,20 @@ export function getCompletedManoeuvres(manoeuvres: any, faultType: ManoeuvreOutc
   });
 
   return result;
+}
+
+export function getVehicleCheckFaultCount(vehicleChecks: VehicleChecksUnion, faultType: QuestionOutcome): number {
+  let questionCount: number = 0;
+
+  if (vehicleChecks) {
+    if (vehicleChecks.showMeQuestions) {
+      questionCount = questionCount +
+        vehicleChecks.showMeQuestions.filter((showMe: QuestionResult) => showMe.outcome === faultType).length;
+    }
+    if (vehicleChecks.tellMeQuestions) {
+      questionCount = questionCount +
+        vehicleChecks.tellMeQuestions.filter((tellMe: QuestionResult) => tellMe.outcome === faultType).length;
+    }
+  }
+  return questionCount;
 }

@@ -1,11 +1,12 @@
 import { CatD1EUniqueTypes } from '@dvsa/mes-test-schema/categories/D1E';
-import { QuestionOutcome, QuestionResult } from '@dvsa/mes-test-schema/categories/common';
+import { QuestionOutcome } from '@dvsa/mes-test-schema/categories/common';
 import { Fault, FaultLimit } from '../../../../domain/fault';
 import { CompetencyOutcome } from '../../../../domain/competency-outcome';
 import {
   convertBooleanFaultObjectToArray,
   convertNumericFaultObjectToArray,
   getCompletedManoeuvres,
+  getVehicleCheckFaultCount,
 } from '../../fault-provider';
 import { Competencies } from '../../../../domain/competencies';
 
@@ -48,24 +49,6 @@ export const getSeriousFaultsCatD1E = (testData: CatD1EUniqueTypes.TestData | un
   }
 
   return seriousFaults;
-};
-
-const getVehicleCheckFaultCount = (
-  vehicleChecks: CatD1EUniqueTypes.VehicleChecks,
-  faultType: QuestionOutcome): number => {
-  let questionCount: number = 0;
-
-  if (vehicleChecks) {
-    if (vehicleChecks.showMeQuestions) {
-      questionCount = questionCount +
-        vehicleChecks.showMeQuestions.filter((showMe: QuestionResult) => showMe.outcome === faultType).length;
-    }
-    if (vehicleChecks.tellMeQuestions) {
-      questionCount = questionCount +
-        vehicleChecks.tellMeQuestions.filter((tellMe: QuestionResult) => tellMe.outcome === faultType).length;
-    }
-  }
-  return questionCount;
 };
 
 export const getDangerousFaultsCatD1E = (testData: CatD1EUniqueTypes.TestData | undefined): Fault [] => {

@@ -1,4 +1,11 @@
-import { TemplateIdProvider, isPass, isFail, isVocationalCategory, getTemplateString } from '../template-id-provider';
+import {
+  TemplateIdProvider,
+  isPass,
+  isFail,
+  isVocationalCategory,
+  getTemplateString,
+  isHomeTestCategory
+} from '../template-id-provider';
 import { ConfigAdapterMock } from '../../../framework/adapter/config/__mocks__/config-adapter.mock';
 import {
   ActivityCode,
@@ -82,22 +89,18 @@ describe('get-template-id-provider', () => {
             communicationPreferences.communicationMethod = 'Email';
           });
           it('should return the welsh email pass template', () => {
-            communicationPreferences.communicationMethod = 'Email';
             expect(templateIdProvider.getTemplateId(communicationPreferences, '1', TestCategory.BE))
               .toBe('email-welsh-pass-template-id');
           });
           it('should return the welsh email fail template', () => {
-            communicationPreferences.communicationMethod = 'Email';
             expect(templateIdProvider.getTemplateId(communicationPreferences, '2', TestCategory.B))
               .toBe('email-welsh-fail-template-id');
           });
           it('should return the welsh post pass template', () => {
-            communicationPreferences.communicationMethod = 'Email';
             expect(templateIdProvider.getTemplateId(communicationPreferences, '1', TestCategory.CE))
               .toBe('email-welsh-pass-template-id-vocational');
           });
           it('should return the welsh post fail template', () => {
-            communicationPreferences.communicationMethod = 'Email';
             expect(templateIdProvider.getTemplateId(communicationPreferences, '2', TestCategory.C1E))
               .toBe('email-welsh-fail-template-id-vocational');
           });
@@ -108,22 +111,18 @@ describe('get-template-id-provider', () => {
             communicationPreferences.communicationMethod = 'Post';
           });
           it('should return the welsh post pass template', () => {
-            communicationPreferences.communicationMethod = 'Post';
             expect(templateIdProvider.getTemplateId(communicationPreferences, '1', TestCategory.BE))
               .toBe('post-welsh-pass-template-id');
           });
           it('should return the welsh post fail template', () => {
-            communicationPreferences.communicationMethod = 'Post';
             expect(templateIdProvider.getTemplateId(communicationPreferences, '2', TestCategory.B))
               .toBe('post-welsh-fail-template-id');
           });
           it('should return the welsh post pass template', () => {
-            communicationPreferences.communicationMethod = 'Post';
             expect(templateIdProvider.getTemplateId(communicationPreferences, '1', TestCategory.CE))
               .toBe('post-welsh-pass-template-id-vocational');
           });
           it('should return the welsh post fail template', () => {
-            communicationPreferences.communicationMethod = 'Post';
             expect(templateIdProvider.getTemplateId(communicationPreferences, '2', TestCategory.C1E))
               .toBe('post-welsh-fail-template-id-vocational');
           });
@@ -173,6 +172,22 @@ describe('get-template-id-provider', () => {
     it('should return false when category is not in the vocational category array', () => {
       expect(isVocationalCategory(TestCategory.B)).toBe(false);
       expect(isVocationalCategory(TestCategory.BE)).toBe(false);
+    });
+  });
+
+  describe('isHomeTestCategory', () => {
+    it('should return true if category is in home test category array', () => {
+      expect(isHomeTestCategory(TestCategory.F)).toBe(true);
+      expect(isHomeTestCategory(TestCategory.G)).toBe(true);
+      expect(isHomeTestCategory(TestCategory.H)).toBe(true);
+      expect(isHomeTestCategory(TestCategory.K)).toBe(true);
+    });
+
+    it('should return false when category is not in the home test category array', () => {
+      expect(isHomeTestCategory(TestCategory.B)).toBe(false);
+      expect(isHomeTestCategory(TestCategory.BE)).toBe(false);
+      expect(isHomeTestCategory(TestCategory.C)).toBe(false);
+      expect(isHomeTestCategory(TestCategory.D)).toBe(false);
     });
   });
 

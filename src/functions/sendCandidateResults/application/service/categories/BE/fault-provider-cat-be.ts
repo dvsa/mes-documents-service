@@ -5,9 +5,10 @@ import {
   convertBooleanFaultObjectToArray,
   convertNumericFaultObjectToArray,
   getCompletedManoeuvres,
+  getVehicleCheckFaultCount,
 } from '../../fault-provider';
 import { Competencies } from '../../../../domain/competencies';
-import { QuestionOutcome, QuestionResult } from '@dvsa/mes-test-schema/categories/common';
+import { QuestionOutcome } from '@dvsa/mes-test-schema/categories/common';
 
 export const getDrivingFaultsCatBE = (testData: CatBEUniqueTypes.TestData | undefined): Fault [] => {
   const drivingFaults: Fault[] = [];
@@ -51,24 +52,6 @@ export const getSeriousFaultsCatBE = (testData: CatBEUniqueTypes.TestData | unde
   }
 
   return seriousFaults;
-};
-
-const getVehicleCheckFaultCount = (
-  vehicleChecks: CatBEUniqueTypes.VehicleChecks,
-  faultType: QuestionOutcome): number => {
-  let questionCount: number = 0;
-
-  if (vehicleChecks) {
-    if (vehicleChecks.showMeQuestions) {
-      questionCount = questionCount +
-         vehicleChecks.showMeQuestions.filter((showMe: QuestionResult) => showMe.outcome === faultType).length;
-    }
-    if (vehicleChecks.tellMeQuestions) {
-      questionCount = questionCount +
-         vehicleChecks.tellMeQuestions.filter((tellMe: QuestionResult) => tellMe.outcome === faultType).length;
-    }
-  }
-  return questionCount;
 };
 
 export const getDangerousFaultsCatBE = (testData: CatBEUniqueTypes.TestData | undefined): Fault [] => {

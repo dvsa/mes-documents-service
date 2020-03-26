@@ -1,11 +1,11 @@
 import { CatFUniqueTypes } from '@dvsa/mes-test-schema/categories/F';
-import { QuestionOutcome, QuestionResult } from '@dvsa/mes-test-schema/categories/common';
 import { Fault } from '../../../../domain/fault';
 import { CompetencyOutcome } from '../../../../domain/competency-outcome';
 import {
   convertBooleanFaultObjectToArray,
   convertNumericFaultObjectToArray,
   getCompletedManoeuvres,
+  getVehicleCheckFaultCount,
 } from '../../fault-provider';
 import { Competencies } from '../../../../domain/competencies';
 
@@ -49,24 +49,6 @@ export const getSeriousFaultsCatF = (testData: CatFUniqueTypes.TestData | undefi
   return seriousFaults;
 };
 
-const getVehicleCheckFaultCount = (
-  vehicleChecks: CatFUniqueTypes.VehicleChecks,
-  faultType: QuestionOutcome): number => {
-  let questionCount: number = 0;
-
-  if (vehicleChecks) {
-    if (vehicleChecks.showMeQuestions) {
-      questionCount = questionCount +
-        vehicleChecks.showMeQuestions.filter((showMe: QuestionResult) => showMe.outcome === faultType).length;
-    }
-    if (vehicleChecks.tellMeQuestions) {
-      questionCount = questionCount +
-        vehicleChecks.tellMeQuestions.filter((tellMe: QuestionResult) => tellMe.outcome === faultType).length;
-    }
-  }
-  return questionCount;
-};
-
 export const getDangerousFaultsCatF = (testData: CatFUniqueTypes.TestData | undefined): Fault [] => {
   const dangerousFaults: Fault[] = [];
 
@@ -97,25 +79,5 @@ export const getNonStandardFaultsCatF = (
       .forEach(fault => faults.push(fault));
   }
 
-// Vehicle Checks
-  if (testData.vehicleChecks) {
-    getVehicleChecksFaultCatF(testData.vehicleChecks, faultType)
-      .forEach(fault => faults.push(fault));
-  }
-
   return faults;
-};
-
-export const getVehicleChecksFaultCatF = (
-  vehicleChecks: CatFUniqueTypes.VehicleChecks,
-  faultType: QuestionOutcome): Fault[] => {
-  const faultArray: Fault[] = [];
-  const faultCount = getVehicleCheckFaultCount(vehicleChecks, faultType);
-
-  if (faultCount > 0) {
-    faultArray.push(
-      { name: Competencies.vehicleChecks, count: faultCount >= 1 ? 1 : faultCount },
-    );
-  }
-  return faultArray;
 };

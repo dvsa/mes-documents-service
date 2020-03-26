@@ -95,14 +95,14 @@ export class ConfigAdapter implements IConfigAdapter {
     this.welshEmailFailTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_WELSH_FAIL_TEMPLATE_ID_AMOD1');
 
     this.englishEmailPassTemplateIdHome = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_PASS_TEMPLATE_ID_HOME');
-    this.englishEmailFailTemplateIdHome = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_PASS_TEMPLATE_ID_HOME');
-    this.welshEmailPassTemplateIdHome = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_PASS_TEMPLATE_ID_HOME');
-    this.welshEmailFailTemplateIdHome = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_PASS_TEMPLATE_ID_HOME');
+    this.englishEmailFailTemplateIdHome = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_FAIL_TEMPLATE_ID_HOME');
+    this.welshEmailPassTemplateIdHome = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_PASS_WELSH_TEMPLATE_ID_HOME');
+    this.welshEmailFailTemplateIdHome = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_FAIL_WELSH_TEMPLATE_ID_HOME');
 
-    this.englishLetterPassTemplateIdHome = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_PASS_TEMPLATE_ID_HOME');
-    this.englishLetterFailTemplateIdHome = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_PASS_TEMPLATE_ID_HOME');
-    this.welshLetterPassTemplateIdHome = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_PASS_TEMPLATE_ID_HOME');
-    this.welshLetterFailTemplateIdHome = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_PASS_TEMPLATE_ID_HOME');
+    this.englishLetterPassTemplateIdHome = this.getFromEnvThrowIfNotPresent('NOTIFY_POST_PASS_TEMPLATE_ID_HOME');
+    this.englishLetterFailTemplateIdHome = this.getFromEnvThrowIfNotPresent('NOTIFY_POST_FAIL_TEMPLATE_ID_HOME');
+    this.welshLetterPassTemplateIdHome = this.getFromEnvThrowIfNotPresent('NOTIFY_POST_PASS_WELSH_TEMPLATE_ID_HOME');
+    this.welshLetterFailTemplateIdHome = this.getFromEnvThrowIfNotPresent('NOTIFY_POST_FAIL_WELSH_TEMPLATE_ID_HOME');
   }
 
   public async getApiKey(): Promise<string> {
