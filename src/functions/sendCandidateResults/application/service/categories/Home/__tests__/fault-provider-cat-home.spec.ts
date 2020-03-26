@@ -2,15 +2,15 @@ import { CatFUniqueTypes } from '@dvsa/mes-test-schema/categories/F';
 import { CompetencyOutcome } from '../../../../../domain/competency-outcome';
 import { Fault } from '../../../../../domain/fault';
 import {
-  getDangerousFaultsCatF,
-  getDrivingFaultsCatF,
-  getNonStandardFaultsCatF,
-  getSeriousFaultsCatF,
-} from '../fault-provider-cat-f';
+  getDangerousFaultsCatHome,
+  getDrivingFaultsCatHome,
+  getNonStandardFaultsCatHome,
+  getSeriousFaultsCatHome,
+} from '../fault-provider-cat-home';
 import { Competencies } from '../../../../../domain/competencies';
 
-describe('fault-provider-cat-f', () => {
-  describe('getDangerousFaultsCatF', () => {
+describe('fault-provider-cat-home', () => {
+  describe('getDangerousFaultsCatHome', () => {
     it('should give us a list of faults from different sections of the test data', () => {
       const data: CatFUniqueTypes.TestData = {
         dangerousFaults: {
@@ -24,14 +24,14 @@ describe('fault-provider-cat-f', () => {
           },
         },
       };
-      const result: Fault [] = getDangerousFaultsCatF(data);
+      const result: Fault [] = getDangerousFaultsCatHome(data);
       expect(result.length).toBe(2);
       expect(result).toContain({ name: Competencies.ancillaryControls, count: 1 });
       expect(result).toContain({ name: Competencies.reverseLeftControl, count: 1 });
     });
   });
 
-  describe('getSeriousFaultsCatF', () => {
+  describe('getSeriousFaultsCatHome', () => {
     it('should give us a list of faults from different sections of the test data', () => {
       const data: CatFUniqueTypes.TestData = {
         seriousFaults: {
@@ -46,14 +46,14 @@ describe('fault-provider-cat-f', () => {
         },
       };
 
-      const result: Fault [] = getSeriousFaultsCatF(data);
+      const result: Fault [] = getSeriousFaultsCatHome(data);
       expect(result.length).toBe(2);
       expect(result).toContain({ name: Competencies.ancillaryControls, count: 1 });
       expect(result).toContain({ name: Competencies.reverseLeftControl, count: 1 });
     });
   });
 
-  describe('getDrivingFaultsCatF', () => {
+  describe('getDrivingFaultsCatHome', () => {
     it('should give us a list of faults from different sections of the test data', () => {
       const data: CatFUniqueTypes.TestData = {
         drivingFaults: {
@@ -67,7 +67,7 @@ describe('fault-provider-cat-f', () => {
           },
         },
       };
-      const result: Fault [] = getDrivingFaultsCatF(data);
+      const result: Fault [] = getDrivingFaultsCatHome(data);
 
       expect(result.length).toBe(2);
       expect(result).toEqual([
@@ -77,13 +77,13 @@ describe('fault-provider-cat-f', () => {
     });
   });
 
-  describe('getNonStandardFaultsCatF', () => {
+  describe('getNonStandardFaultsCatHome', () => {
     it('should return an empty array when no faults recorded', () => {
       const data: CatFUniqueTypes.TestData = {
         vehicleChecks: {},
         manoeuvres: {},
       };
-      const result: Fault[] = getNonStandardFaultsCatF(data, CompetencyOutcome.DF);
+      const result: Fault[] = getNonStandardFaultsCatHome(data, CompetencyOutcome.DF);
       expect(result).toEqual([]);
     });
   });

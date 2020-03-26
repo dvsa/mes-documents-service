@@ -81,25 +81,10 @@ import {
   getDangerousFaultsCatAMod2,
 } from './categories/AM2/fault-provider-cat-a-mod2';
 import {
-  getDangerousFaultsCatF,
-  getDrivingFaultsCatF,
-  getSeriousFaultsCatF,
-} from './categories/F/fault-provider-cat-f';
-import {
-  getDangerousFaultsCatG,
-  getDrivingFaultsCatG,
-  getSeriousFaultsCatG,
-} from './categories/G/fault-provider-cat-g';
-import {
-  getDangerousFaultsCatH,
-  getDrivingFaultsCatH,
-  getSeriousFaultsCatH,
-} from './categories/H/fault-provider-cat-h';
-import {
-  getDangerousFaultsCatK,
-  getDrivingFaultsCatK,
-  getSeriousFaultsCatK,
-} from './categories/K/fault-provider-cat-k';
+  getDangerousFaultsCatHome,
+  getDrivingFaultsCatHome,
+  getSeriousFaultsCatHome,
+} from './categories/Home/fault-provider-cat-home';
 
 // No CatBUniqueTypes.VehicleChecks as the data structure differs to other categories
 type VehicleChecksUnion =
@@ -116,6 +101,12 @@ type VehicleChecksUnion =
   CatGUniqueTypes.VehicleChecks |
   CatHUniqueTypes.VehicleChecks |
   CatKUniqueTypes.VehicleChecks;
+
+export type HomeTestDataUnion =
+  CatFUniqueTypes.TestData
+  | CatGUniqueTypes.TestData
+  | CatHUniqueTypes.TestData
+  | CatKUniqueTypes.TestData;
 
 export interface IFaultProvider {
   getDrivingFaults(testData: TestData | undefined, category: string): Fault[];
@@ -148,10 +139,10 @@ export class FaultProvider implements IFaultProvider {
       case TestCategory.EUA1M2:
       case TestCategory.EUA2M2:
       case TestCategory.EUAMM2: return getDrivingFaultsCatAMod2(testData as CatAMod2TestData);
-      case TestCategory.F: return getDrivingFaultsCatF(testData as CatFUniqueTypes.TestData);
-      case TestCategory.G: return getDrivingFaultsCatG(testData as CatGUniqueTypes.TestData);
-      case TestCategory.H: return getDrivingFaultsCatH(testData as CatHUniqueTypes.TestData);
-      case TestCategory.K: return getDrivingFaultsCatK(testData as CatKUniqueTypes.TestData);
+      case TestCategory.F:
+      case TestCategory.G:
+      case TestCategory.H:
+      case TestCategory.K: return getDrivingFaultsCatHome(testData as CatKUniqueTypes.TestData);
       default: return getDrivingFaultsCatB(testData as CatBUniqueTypes.TestData);
     }
   }
@@ -176,10 +167,10 @@ export class FaultProvider implements IFaultProvider {
       case TestCategory.EUA1M2:
       case TestCategory.EUA2M2:
       case TestCategory.EUAMM2: return getSeriousFaultsCatAMod2(testData as CatAMod2TestData);
-      case TestCategory.F: return getSeriousFaultsCatF(testData as CatFUniqueTypes.TestData);
-      case TestCategory.G: return getSeriousFaultsCatG(testData as CatGUniqueTypes.TestData);
-      case TestCategory.H: return getSeriousFaultsCatH(testData as CatHUniqueTypes.TestData);
-      case TestCategory.K: return getSeriousFaultsCatK(testData as CatKUniqueTypes.TestData);
+      case TestCategory.F:
+      case TestCategory.G:
+      case TestCategory.H:
+      case TestCategory.K: return getSeriousFaultsCatHome(testData as HomeTestDataUnion);
       default: return getSeriousFaultsCatB(testData as CatBUniqueTypes.TestData);
     }
   }
@@ -204,10 +195,10 @@ export class FaultProvider implements IFaultProvider {
       case TestCategory.EUA1M2:
       case TestCategory.EUA2M2:
       case TestCategory.EUAMM2: return getDangerousFaultsCatAMod2(testData as CatAMod2TestData);
-      case TestCategory.F: return getDangerousFaultsCatF(testData as CatFUniqueTypes.TestData);
-      case TestCategory.G: return getDangerousFaultsCatG(testData as CatGUniqueTypes.TestData);
-      case TestCategory.H: return getDangerousFaultsCatH(testData as CatHUniqueTypes.TestData);
-      case TestCategory.K: return getDangerousFaultsCatK(testData as CatKUniqueTypes.TestData);
+      case TestCategory.F:
+      case TestCategory.G:
+      case TestCategory.H:
+      case TestCategory.K: return getDangerousFaultsCatHome(testData as HomeTestDataUnion);
       default: return getDangerousFaultsCatB(testData as CatBUniqueTypes.TestData);
     }
   }
