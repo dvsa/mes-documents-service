@@ -11,7 +11,7 @@ import { Competencies } from '../../../../../domain/competencies';
 
 describe('fault-provider-cat-home', () => {
   describe('getDangerousFaultsCatHome', () => {
-    it('should give us a list of faults from different sections of the test data', () => {
+    it('should return a list of dangerous faults found in the test data', () => {
       const data: CatFUniqueTypes.TestData = {
         dangerousFaults: {
           ancillaryControls: true,
@@ -32,7 +32,7 @@ describe('fault-provider-cat-home', () => {
   });
 
   describe('getSeriousFaultsCatHome', () => {
-    it('should give us a list of faults from different sections of the test data', () => {
+    it('should return a list of serious faults found in the test data', () => {
       const data: CatFUniqueTypes.TestData = {
         seriousFaults: {
           ancillaryControls: true,
@@ -54,7 +54,7 @@ describe('fault-provider-cat-home', () => {
   });
 
   describe('getDrivingFaultsCatHome', () => {
-    it('should give us a list of faults from different sections of the test data', () => {
+    it('should return a list of driving faults found in the test data', () => {
       const data: CatFUniqueTypes.TestData = {
         drivingFaults: {
           ancillaryControls: 1,
