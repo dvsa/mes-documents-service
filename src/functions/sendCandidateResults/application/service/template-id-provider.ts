@@ -48,6 +48,10 @@ export class TemplateIdProvider implements ITemplateIdProvider {
       return get(this.configAdapter, `${baseTemplate}${TestType.AMOD1}`);
     }
 
+    if (isHomeTestCategory(category)) {
+      return get(this.configAdapter, `${baseTemplate}${TestType.HOME}`);
+    }
+
     return get(this.configAdapter, baseTemplate);
   }
 }
@@ -79,6 +83,15 @@ export function isAmod1Category(category: CategoryCode): boolean {
     TestCategory.EUA1M1,
     TestCategory.EUA2M1,
     TestCategory.EUAMM1,
+  ].includes(category as TestCategory);
+}
+
+export function isHomeTestCategory(category: CategoryCode): boolean {
+  return [
+    TestCategory.F,
+    TestCategory.G,
+    TestCategory.H,
+    TestCategory.K,
   ].includes(category as TestCategory);
 }
 

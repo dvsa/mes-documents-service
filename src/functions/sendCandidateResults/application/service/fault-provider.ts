@@ -1,5 +1,7 @@
+import { injectable } from 'inversify';
+import 'reflect-metadata';
 import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
-import { TestData, ManoeuvreOutcome } from '@dvsa/mes-test-schema/categories/common';
+import { TestData, ManoeuvreOutcome, QuestionOutcome, QuestionResult } from '@dvsa/mes-test-schema/categories/common';
 import { CatBUniqueTypes } from '@dvsa/mes-test-schema/categories/B';
 import { CatBEUniqueTypes } from '@dvsa/mes-test-schema/categories/BE';
 import { CatCUniqueTypes } from '@dvsa/mes-test-schema/categories/C';
@@ -10,12 +12,14 @@ import { CatDUniqueTypes } from '@dvsa/mes-test-schema/categories/D';
 import { CatDEUniqueTypes } from '@dvsa/mes-test-schema/categories/DE';
 import { CatD1UniqueTypes } from '@dvsa/mes-test-schema/categories/D1';
 import { CatD1EUniqueTypes } from '@dvsa/mes-test-schema/categories/D1E';
+import { CatFUniqueTypes } from '@dvsa/mes-test-schema/categories/F';
+import { CatGUniqueTypes } from '@dvsa/mes-test-schema/categories/G';
+import { CatHUniqueTypes } from '@dvsa/mes-test-schema/categories/H';
+import { CatKUniqueTypes } from '@dvsa/mes-test-schema/categories/K';
 import { TestData as CatAMod1TestData } from '@dvsa/mes-test-schema/categories/AM1';
 import { TestData as CatAMod2TestData } from '@dvsa/mes-test-schema/categories/AM2';
 import { Fault } from '../../domain/fault';
 import { Competencies } from '../../domain/competencies';
-import { injectable } from 'inversify';
-import 'reflect-metadata';
 import {
   getDrivingFaultsCatB,
   getSeriousFaultsCatB,
@@ -76,6 +80,33 @@ import {
   getSeriousFaultsCatAMod2,
   getDangerousFaultsCatAMod2,
 } from './categories/AM2/fault-provider-cat-a-mod2';
+import {
+  getDangerousFaultsCatHome,
+  getDrivingFaultsCatHome,
+  getSeriousFaultsCatHome,
+} from './categories/Home/fault-provider-cat-home';
+
+// No CatBUniqueTypes.VehicleChecks as the data structure differs to other categories
+type VehicleChecksUnion =
+  CatBEUniqueTypes.VehicleChecks |
+  CatCUniqueTypes.VehicleChecks |
+  CatC1UniqueTypes.VehicleChecks |
+  CatCEUniqueTypes.VehicleChecks |
+  CatC1EUniqueTypes.VehicleChecks |
+  CatDUniqueTypes.VehicleChecks |
+  CatD1UniqueTypes.VehicleChecks |
+  CatDEUniqueTypes.VehicleChecks |
+  CatD1EUniqueTypes.VehicleChecks |
+  CatFUniqueTypes.VehicleChecks |
+  CatGUniqueTypes.VehicleChecks |
+  CatHUniqueTypes.VehicleChecks |
+  CatKUniqueTypes.VehicleChecks;
+
+export type HomeTestDataUnion =
+  CatFUniqueTypes.TestData
+  | CatGUniqueTypes.TestData
+  | CatHUniqueTypes.TestData
+  | CatKUniqueTypes.TestData;
 
 export interface IFaultProvider {
   getDrivingFaults(testData: TestData | undefined, category: string): Fault[];
@@ -108,6 +139,10 @@ export class FaultProvider implements IFaultProvider {
       case TestCategory.EUA1M2:
       case TestCategory.EUA2M2:
       case TestCategory.EUAMM2: return getDrivingFaultsCatAMod2(testData as CatAMod2TestData);
+      case TestCategory.F:
+      case TestCategory.G:
+      case TestCategory.H:
+      case TestCategory.K: return getDrivingFaultsCatHome(testData as CatKUniqueTypes.TestData);
       default: return getDrivingFaultsCatB(testData as CatBUniqueTypes.TestData);
     }
   }
@@ -132,6 +167,10 @@ export class FaultProvider implements IFaultProvider {
       case TestCategory.EUA1M2:
       case TestCategory.EUA2M2:
       case TestCategory.EUAMM2: return getSeriousFaultsCatAMod2(testData as CatAMod2TestData);
+      case TestCategory.F:
+      case TestCategory.G:
+      case TestCategory.H:
+      case TestCategory.K: return getSeriousFaultsCatHome(testData as HomeTestDataUnion);
       default: return getSeriousFaultsCatB(testData as CatBUniqueTypes.TestData);
     }
   }
@@ -156,6 +195,10 @@ export class FaultProvider implements IFaultProvider {
       case TestCategory.EUA1M2:
       case TestCategory.EUA2M2:
       case TestCategory.EUAMM2: return getDangerousFaultsCatAMod2(testData as CatAMod2TestData);
+      case TestCategory.F:
+      case TestCategory.G:
+      case TestCategory.H:
+      case TestCategory.K: return getDangerousFaultsCatHome(testData as HomeTestDataUnion);
       default: return getDangerousFaultsCatB(testData as CatBUniqueTypes.TestData);
     }
   }
@@ -194,4 +237,20 @@ export function getCompletedManoeuvres(manoeuvres: any, faultType: ManoeuvreOutc
   });
 
   return result;
+}
+
+export function getVehicleCheckFaultCount(vehicleChecks: VehicleChecksUnion, faultType: QuestionOutcome): number {
+  let questionCount: number = 0;
+
+  if (vehicleChecks) {
+    if (vehicleChecks.showMeQuestions) {
+      questionCount = questionCount +
+        vehicleChecks.showMeQuestions.filter((showMe: QuestionResult) => showMe.outcome === faultType).length;
+    }
+    if (vehicleChecks.tellMeQuestions) {
+      questionCount = questionCount +
+        vehicleChecks.tellMeQuestions.filter((tellMe: QuestionResult) => tellMe.outcome === faultType).length;
+    }
+  }
+  return questionCount;
 }
