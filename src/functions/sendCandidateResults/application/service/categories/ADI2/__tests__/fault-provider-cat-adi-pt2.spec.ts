@@ -3,7 +3,7 @@ import { CatADI2UniqueTypes } from '@dvsa/mes-test-schema/categories/ADI2';
 import Manoeuvres = CatADI2UniqueTypes.Manoeuvres;
 import { CompetencyOutcome } from '../../../../../domain/competency-outcome';
 
-fdescribe('getManoeuvresFaultsCatADI2', () => {
+describe('getManoeuvresFaultsCatADI2', () => {
   it('', () => {
     const manoeuvres: Manoeuvres[] = [
       {
