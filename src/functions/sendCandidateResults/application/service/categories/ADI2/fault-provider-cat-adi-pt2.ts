@@ -1,7 +1,7 @@
 import { CatADI2UniqueTypes } from '@dvsa/mes-test-schema/categories/ADI2';
 import { Fault } from '../../../../domain/fault';
 import { QuestionOutcome } from '@dvsa/mes-test-schema/categories/common';
-import { convertBooleanFaultObjectToArray } from '../../fault-provider';
+import { convertBooleanFaultObjectToArray, convertNumericFaultObjectToArray } from '../../fault-provider';
 import { Competencies } from '../../../../domain/competencies';
 import { CompetencyOutcome } from '../../../../domain/competency-outcome';
 import ControlledStop = CatADI2UniqueTypes.ControlledStop;
@@ -10,8 +10,9 @@ import Manoeuvres = CatADI2UniqueTypes.Manoeuvres;
 export const getDrivingFaultsCatADI2 = (testData: CatADI2UniqueTypes.TestData): Fault[] => {
   const drivingFaults: Fault[] = [];
   throwIfNotTestData(testData);
+  // standard faults
   if (testData.drivingFaults) {
-    convertBooleanFaultObjectToArray(testData.drivingFaults)
+    convertNumericFaultObjectToArray(testData.drivingFaults)
       .forEach(drivingFault => drivingFaults.push(drivingFault));
   }
   // non standard faults
@@ -25,7 +26,7 @@ export const getSeriousFaultsCatADI2 = (testData: CatADI2UniqueTypes.TestData): 
   throwIfNotTestData(testData);
   // serious standard faults
   if (testData.seriousFaults) {
-    convertBooleanFaultObjectToArray(testData.drivingFaults)
+    convertBooleanFaultObjectToArray(testData.seriousFaults)
       .forEach(drivingFault => seriousFaults.push(drivingFault));
   }
   // serious non standard faults
@@ -43,7 +44,7 @@ export const getDangerousFaultsCatADI2 = (testData: CatADI2UniqueTypes.TestData)
   throwIfNotTestData(testData);
   // dangerous standard faults
   if (testData.dangerousFaults) {
-    convertBooleanFaultObjectToArray(testData.drivingFaults)
+    convertBooleanFaultObjectToArray(testData.dangerousFaults)
       .forEach(drivingFault => dangerousFaults.push(drivingFault));
   }
   // dangerous non standard faults
@@ -61,11 +62,11 @@ export const throwIfNotTestData = (testData: CatADI2UniqueTypes.TestData): void 
 export const getNonStandardFaultsCatADI2 = (
   testData: CatADI2UniqueTypes.TestData, faultType: CompetencyOutcome): Fault[] => {
   const faults: Fault[] = [];
-  // vehicle checks
-  if (testData.vehicleChecks) {
-    getVehicleChecksFaultsCatADI2(testData.vehicleChecks, faultType)
-      .forEach(fault => faults.push(fault));
-  }
+  // @TODO - vehicle checks
+  // if (testData.vehicleChecks) {
+  //   getVehicleChecksFaultsCatADI2(testData.vehicleChecks, faultType)
+  //     .forEach(fault => faults.push(fault));
+  // }
   // controlled stop
   if (testData.controlledStop && testData.controlledStop.selected) {
     getControlledStopFaultsCatADI2(testData.controlledStop, faultType)
@@ -76,7 +77,6 @@ export const getNonStandardFaultsCatADI2 = (
     getManoeuvresFaultsCatADI2(testData.manoeuvres, faultType)
       .forEach(fault => faults.push(fault));
   }
-  // @TODO - vehicle checks
   return faults;
 };
 
