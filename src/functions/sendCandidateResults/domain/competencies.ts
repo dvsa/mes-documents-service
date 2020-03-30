@@ -74,8 +74,8 @@ export enum Competencies {
     controlsBalanceSlowControl = 'controlsBalanceSlowControl',
     bends = 'bends',
 
-    safetyQuestions = 'Safety Questions',
-    pcvDoorExercise = 'PCV Door exercise',
+    safetyQuestions = 'safetyQuestions',
+    pcvDoorExercise = 'pcvDoorExercise',
 }
 
 export enum englishCompetencyLabels {
