@@ -107,6 +107,12 @@ export type HomeTestDataUnion =
   | CatGUniqueTypes.TestData
   | CatHUniqueTypes.TestData
   | CatKUniqueTypes.TestData;
+import {
+  getDangerousFaultsCatADI2,
+  getDrivingFaultsCatADI2,
+  getSeriousFaultsCatADI2,
+} from './categories/ADI2/fault-provider-cat-adi-pt2';
+import { CatADI2UniqueTypes } from '@dvsa/mes-test-schema/categories/ADI2';
 
 export interface IFaultProvider {
   getDrivingFaults(testData: TestData | undefined, category: string): Fault[];
@@ -143,6 +149,7 @@ export class FaultProvider implements IFaultProvider {
       case TestCategory.G:
       case TestCategory.H:
       case TestCategory.K: return getDrivingFaultsCatHome(testData as CatKUniqueTypes.TestData);
+      case TestCategory.ADI2: return getDrivingFaultsCatADI2(testData as CatADI2UniqueTypes.TestData);
       default: return getDrivingFaultsCatB(testData as CatBUniqueTypes.TestData);
     }
   }
@@ -167,6 +174,7 @@ export class FaultProvider implements IFaultProvider {
       case TestCategory.EUA1M2:
       case TestCategory.EUA2M2:
       case TestCategory.EUAMM2: return getSeriousFaultsCatAMod2(testData as CatAMod2TestData);
+      case TestCategory.ADI2: return getSeriousFaultsCatADI2(testData as CatADI2UniqueTypes.TestData);
       case TestCategory.F:
       case TestCategory.G:
       case TestCategory.H:
@@ -199,6 +207,7 @@ export class FaultProvider implements IFaultProvider {
       case TestCategory.G:
       case TestCategory.H:
       case TestCategory.K: return getDangerousFaultsCatHome(testData as HomeTestDataUnion);
+      case TestCategory.ADI2: return getDangerousFaultsCatADI2(testData as CatADI2UniqueTypes.TestData);
       default: return getDangerousFaultsCatB(testData as CatBUniqueTypes.TestData);
     }
   }
