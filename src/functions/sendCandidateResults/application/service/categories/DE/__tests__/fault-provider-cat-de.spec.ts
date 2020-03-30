@@ -154,11 +154,15 @@ describe('fault-provider-cat-de', () => {
             controlFault: CompetencyOutcome.D,
           },
         },
+        pcvDoorExercise: {
+          dangerousFault: true,
+        },
       };
       const result: Fault [] = getDangerousFaultsCatDE(data);
-      expect(result.length).toBe(2);
+      expect(result.length).toBe(3);
       expect(result).toContain({ name: Competencies.ancillaryControls, count: 1 });
       expect(result).toContain({ name: Competencies.reverseLeftControl, count: 1 });
+      expect(result).toContain({ name: Competencies.pcvDoorExercise, count: 1 });
     });
   });
 
@@ -175,12 +179,16 @@ describe('fault-provider-cat-de', () => {
             controlFault: CompetencyOutcome.S,
           },
         },
+        pcvDoorExercise: {
+          seriousFault: true,
+        },
       };
 
       const result: Fault [] = getSeriousFaultsCatDE(data);
-      expect(result.length).toBe(2);
+      expect(result.length).toBe(3);
       expect(result).toContain({ name: Competencies.ancillaryControls, count: 1 });
       expect(result).toContain({ name: Competencies.reverseLeftControl, count: 1 });
+      expect(result).toContain({ name: Competencies.pcvDoorExercise, count: 1 });
     });
   });
 
@@ -197,13 +205,26 @@ describe('fault-provider-cat-de', () => {
             controlFault: CompetencyOutcome.DF,
           },
         },
+        pcvDoorExercise: {
+          drivingFault: true,
+        },
+        safetyQuestions: {
+          questions: [
+            {
+              description: 'Safety Question1',
+              outcome: 'DF',
+            },
+          ],
+        },
       };
       const result: Fault [] = getDrivingFaultsCatDE(data);
 
-      expect(result.length).toBe(2);
+      expect(result.length).toBe(4);
       expect(result).toEqual([
         { name: Competencies.ancillaryControls, count: 1 },
         { name: Competencies.reverseLeftControl, count: 1 },
+        { name: Competencies.safetyQuestions, count: 1 },
+        { name: Competencies.pcvDoorExercise, count: 1 },
       ]);
     });
   });
@@ -218,6 +239,8 @@ describe('fault-provider-cat-de', () => {
         },
         vehicleChecks: {},
         manoeuvres: {},
+        pcvDoorExercise: {},
+        safetyQuestions: {},
       };
       const result: Fault[] = getNonStandardFaultsCatDE(data, CompetencyOutcome.DF);
       expect(result).toContain({ name: Competencies.uncoupleRecouple, count: 1 });
@@ -230,6 +253,8 @@ describe('fault-provider-cat-de', () => {
           faultComments: 'some comment',
           selected: false,
         },
+        pcvDoorExercise: {},
+        safetyQuestions: {},
       };
       const result: Fault[] = getNonStandardFaultsCatDE(data, CompetencyOutcome.DF);
       expect(result).toEqual([]);
