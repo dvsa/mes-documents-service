@@ -73,6 +73,9 @@ export enum Competencies {
     controlsRearBrake = 'controlsRearBrake',
     controlsBalanceSlowControl = 'controlsBalanceSlowControl',
     bends = 'bends',
+
+    safetyQuestions = 'Safety Questions',
+    pcvDoorExercise = 'PCV Door exercise',
 }
 
 export enum englishCompetencyLabels {
@@ -151,6 +154,9 @@ export enum englishCompetencyLabels {
     controlsRearBrake = 'Controls - Rear brake',
     controlsBalanceSlowControl = 'Controls - Balance / Slow control',
     bends = 'Bends',
+
+    safetyQuestions = 'Safety Questions',
+    pcvDoorExercise = 'PCV Door exercise',
 }
 
 export enum welshCompetencyLabels {
@@ -228,6 +234,8 @@ export enum welshCompetencyLabels {
   controlsRearBrake = 'Rheolaeth - Brêc ôl',
   controlsBalanceSlowControl = 'Rheolaeth - Cydbwysedd / Rheolaeth araf',
   bends = 'Troeon',
+  safetyQuestions = 'Cwestiynau diogelwch',
+  pcvDoorExercise = 'Ymarfer Drws PCV',
 }
 
 export enum englishTexts {

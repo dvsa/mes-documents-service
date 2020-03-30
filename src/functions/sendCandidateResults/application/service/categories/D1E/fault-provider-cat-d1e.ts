@@ -8,6 +8,7 @@ import {
   getCompletedManoeuvres,
 } from '../../fault-provider';
 import { Competencies } from '../../../../domain/competencies';
+import { PcvDoorExercise, SafetyQuestionResult } from '@dvsa/mes-test-schema/categories/D1E/partial';
 
 export const getDrivingFaultsCatD1E = (testData: CatD1EUniqueTypes.TestData | undefined): Fault [] => {
   const drivingFaults: Fault[] = [];
@@ -112,6 +113,18 @@ export const getNonStandardFaultsCatD1E = (
       .forEach(fault => faults.push(fault));
   }
 
+  // Safety Questions
+  if (testData.safetyQuestions &&
+    testData.safetyQuestions.questions) {
+    getSafetyQuestionsFaultCatD1E(testData.safetyQuestions.questions, faultType)
+    .forEach(fault => faults.push(fault));
+  }
+
+// Pcv Door Exercise
+  if (testData.pcvDoorExercise) {
+    getPcvDoorExerciseFaultCatD1E(testData.pcvDoorExercise, faultType)
+    .forEach(fault => faults.push(fault));
+  }
   return faults;
 };
 
@@ -125,6 +138,64 @@ export const getVehicleChecksFaultCatD1E = (
     faultArray.push(
       { name: Competencies.vehicleChecks, count: faultCount === FaultLimit.TRAILER ? 1 : faultCount },
     );
+  }
+  return faultArray;
+};
+
+export const getSafetyQuestionsFaultCatD1E = (
+  safetyQuestions: SafetyQuestionResult[],
+  faultType: QuestionOutcome): Fault[] => {
+  const faultArray: Fault[] = [];
+
+  if (!safetyQuestions || safetyQuestions.length === 0) {
+    return faultArray;
+  }
+
+  if (faultType !== CompetencyOutcome.DF) {
+    return faultArray;
+  }
+  let gotFault: boolean = false;
+
+  safetyQuestions.forEach((question) => {
+    if (question.outcome === CompetencyOutcome.DF) {
+      gotFault = true;
+    }
+  });
+  if (gotFault) {
+    faultArray.push(
+       { name: Competencies.safetyQuestions, count: 1 },
+     );
+  }
+  return faultArray;
+};
+
+export const getPcvDoorExerciseFaultCatD1E = (
+   pcvDoorExercise: PcvDoorExercise,
+   faultType: QuestionOutcome): Fault[] => {
+  const faultArray: Fault[] = [];
+
+  if (!pcvDoorExercise) {
+    return faultArray;
+  }
+
+  let gotFault: boolean = false;
+
+  switch (faultType) {
+    case CompetencyOutcome.DF:
+      gotFault = pcvDoorExercise.drivingFault || false;
+      break;
+    case CompetencyOutcome.S:
+      gotFault = pcvDoorExercise.seriousFault || false;
+      break;
+    case CompetencyOutcome.D:
+      gotFault = pcvDoorExercise.dangerousFault || false;
+      break;
+  }
+
+  if (gotFault) {
+    faultArray.push(
+        { name: Competencies.pcvDoorExercise, count: 1 },
+      );
   }
   return faultArray;
 };
