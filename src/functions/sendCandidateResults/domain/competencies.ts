@@ -75,6 +75,8 @@ export enum Competencies {
     bends = 'bends',
 
     highwayCodeSafety = 'highwayCodeSafety',
+    safetyQuestions = 'Safety Questions',
+    pcvDoorExercise = 'PCV Door exercise',
 }
 
 export enum englishCompetencyLabels {
@@ -155,6 +157,8 @@ export enum englishCompetencyLabels {
     bends = 'Bends',
 
     highwayCodeSafety = 'H/Code / Safety',
+    safetyQuestions = 'Safety Questions',
+    pcvDoorExercise = 'PCV Door exercise',
 }
 
 export enum welshCompetencyLabels {
@@ -234,6 +238,8 @@ export enum welshCompetencyLabels {
   bends = 'Troeon',
 
   highwayCodeSafety = '[CY] H/Code / Safety',
+  safetyQuestions = 'Cwestiynau diogelwch',
+  pcvDoorExercise = 'Ymarfer Drws PCV',
 }
 
 export enum englishTexts {
