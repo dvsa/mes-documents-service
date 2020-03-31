@@ -75,8 +75,8 @@ export enum Competencies {
     bends = 'bends',
 
     highwayCodeSafety = 'highwayCodeSafety',
-    safetyQuestions = 'Safety Questions',
-    pcvDoorExercise = 'PCV Door exercise',
+    safetyQuestions = 'safetyQuestions',
+    pcvDoorExercise = 'pcvDoorExercise',
 }
 
 export enum englishCompetencyLabels {
