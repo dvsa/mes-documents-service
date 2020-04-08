@@ -62,11 +62,11 @@ export const throwIfNotTestData = (testData: CatADI2UniqueTypes.TestData): void 
 export const getNonStandardFaultsCatADI2 = (
   testData: CatADI2UniqueTypes.TestData, faultType: CompetencyOutcome): Fault[] => {
   const faults: Fault[] = [];
-  // @TODO - vehicle checks
-  // if (testData.vehicleChecks) {
-  //   getVehicleChecksFaultsCatADI2(testData.vehicleChecks, faultType)
-  //     .forEach(fault => faults.push(fault));
-  // }
+  // vehicle checks
+  if (testData.vehicleChecks) {
+    getVehicleChecksFaultsCatADI2(testData.vehicleChecks, faultType)
+      .forEach(fault => faults.push(fault));
+  }
   // controlled stop
   if (testData.controlledStop && testData.controlledStop.selected) {
     getControlledStopFaultsCatADI2(testData.controlledStop, faultType)
@@ -83,16 +83,24 @@ export const getNonStandardFaultsCatADI2 = (
 export const getVehicleChecksFaultsCatADI2 = (
   vehicleChecks: CatADI2UniqueTypes.VehicleChecks, faultType: QuestionOutcome): Fault[] => {
   let faultCount = 0;
+  // tell me questions
   if (vehicleChecks.tellMeQuestions) {
     vehicleChecks.tellMeQuestions.forEach((question) => {
       if (question.outcome && question.outcome === faultType) {
         faultCount = faultCount + 1;
       }
     });
-    if (faultCount > 0) {
-      return [{ name: Competencies.vehicleChecks, count: faultCount }];
-    }
-    return [];
+  }
+  // show me questions
+  if (vehicleChecks.showMeQuestions) {
+    vehicleChecks.showMeQuestions.forEach((question) => {
+      if (question.outcome && question.outcome === faultType) {
+        faultCount = faultCount + 1;
+      }
+    });
+  }
+  if (faultCount > 0) {
+    return [{ name: Competencies.vehicleChecks, count: faultCount }];
   }
   return [];
 };

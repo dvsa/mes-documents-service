@@ -75,8 +75,36 @@ describe('Cat ADI 2 Fault Provider', () => {
             },
           },
         ],
-        // @TODO - add vehicle checks
-        // vehicleChecks: {},
+        vehicleChecks: {
+          showMeQuestions: [
+            {
+              code: 'A15',
+              description: 'Front windscreen',
+              outcome: 'DF',
+
+            },
+            {
+              code: 'A16',
+              description: 'Dipped headlights',
+              outcome: 'P',
+
+            }],
+          tellMeQuestions: [{
+            code: 'T2',
+            description: 'Tyre pressures',
+            outcome: 'DF',
+          }, {
+            code: 'T10',
+            description: 'Rear fog light(s)',
+            outcome: 'DF',
+
+          }, {
+            code: 'T11',
+            description: 'Dipped to main beam',
+            outcome: 'DF',
+
+          }],
+        },
         controlledStop: {
           selected: true,
           fault: 'DF',
@@ -87,11 +115,13 @@ describe('Cat ADI 2 Fault Provider', () => {
         { name: Competencies.useOfMirrorsSignalling, count:2 },
         { name: Competencies.junctionsApproachSpeed, count:1 },
         { name: Competencies.positionNormalStops, count:1 },
+        { name: Competencies.vehicleChecks, count:4 },
         { name: Competencies.controlledStop, count:1 },
         { name: Competencies.reverseRightControl, count:1 },
         { name: Competencies.reverseRightObservation, count:1 },
         { name: Competencies.forwardParkControl, count:1 },
-        { name: Competencies.forwardParkObservation, count:1 }];
+        { name: Competencies.forwardParkObservation, count:1 },
+      ];
       expect(drivingFaults).toEqual(expectedDrivingFaults);
     });
   });
@@ -123,8 +153,36 @@ describe('Cat ADI 2 Fault Provider', () => {
             },
           },
         ],
-        // @TODO - add vehicle checks
-        // vehicleChecks: {},
+        vehicleChecks: {
+          showMeQuestions: [
+            {
+              code: 'A15',
+              description: 'Front windscreen',
+              outcome: 'S',
+
+            },
+            {
+              code: 'A16',
+              description: 'Dipped headlights',
+              outcome: 'P',
+
+            }],
+          tellMeQuestions: [{
+            code: 'T2',
+            description: 'Tyre pressures',
+            outcome: 'DF',
+          }, {
+            code: 'T10',
+            description: 'Rear fog light(s)',
+            outcome: 'DF',
+
+          }, {
+            code: 'T11',
+            description: 'Dipped to main beam',
+            outcome: 'DF',
+
+          }],
+        },
         controlledStop: {
           selected: true,
           fault: 'S',
@@ -133,6 +191,7 @@ describe('Cat ADI 2 Fault Provider', () => {
       const expectedSeriousFaults = [
         { name: Competencies.useOfMirrorsSignalling, count: 1 },
         { name: Competencies.junctionsApproachSpeed, count: 1 },
+        { name: Competencies.vehicleChecks, count: 1 },
         { name: Competencies.controlledStop, count: 1 },
         { name: Competencies.reverseRightControl, count: 1 },
         { name: Competencies.eyesightTest, count: 1 }];
@@ -164,8 +223,36 @@ describe('Cat ADI 2 Fault Provider', () => {
             },
           },
         ],
-        // @TODO - add vehicle checks
-        // vehicleChecks: {},
+        vehicleChecks: {
+          showMeQuestions: [
+            {
+              code: 'A15',
+              description: 'Front windscreen',
+              outcome: 'D',
+
+            },
+            {
+              code: 'A16',
+              description: 'Dipped headlights',
+              outcome: 'P',
+
+            }],
+          tellMeQuestions: [{
+            code: 'T2',
+            description: 'Tyre pressures',
+            outcome: 'DF',
+          }, {
+            code: 'T10',
+            description: 'Rear fog light(s)',
+            outcome: 'DF',
+
+          }, {
+            code: 'T11',
+            description: 'Dipped to main beam',
+            outcome: 'DF',
+
+          }],
+        },
         controlledStop: {
           selected: true,
           fault: 'D',
@@ -176,6 +263,7 @@ describe('Cat ADI 2 Fault Provider', () => {
         { name: Competencies.useOfMirrorsSignalling, count:1 },
         { name: Competencies.junctionsApproachSpeed, count:1 },
         { name: Competencies.positionNormalStops, count:1 },
+        { name: Competencies.vehicleChecks, count:1 },
         { name: Competencies.controlledStop, count:1 },
         { name: Competencies.reverseRightControl, count:1 },
         { name: Competencies.reverseRightObservation, count:1 }];
