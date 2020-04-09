@@ -112,8 +112,8 @@ export class ConfigAdapter implements IConfigAdapter {
     // AMOD1 Letter
     this.englishLetterPassTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('NOTIFY_POST_FAIL_TEMPLATE_ID_AMOD1');
     this.englishLetterFailTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('NOTIFY_POST_PASS_TEMPLATE_ID_AMOD1');
-    this.welshLetterPassTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('NOTIFY_POST_PASS_WELSH_TEMPLATE_ID_AMOD1');
-    this.welshLetterFailTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('NOTIFY_POST_FAIL_WELSH_TEMPLATE_ID_AMOD1');
+    this.welshLetterPassTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('NOTIFY_POST_WELSH_PASS_TEMPLATE_ID_AMOD1');
+    this.welshLetterFailTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('NOTIFY_POST_WELSH_FAIL_TEMPLATE_ID_AMOD1');
     // AMOD2 Email
     this.englishEmailPassTemplateIdAMod2 = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_PASS_TEMPLATE_ID_AMOD2');
     this.englishEmailFailTemplateIdAMod2 = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_FAIL_TEMPLATE_ID_AMOD2');
