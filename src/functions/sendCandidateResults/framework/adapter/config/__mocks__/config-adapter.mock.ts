@@ -39,6 +39,21 @@ export class ConfigAdapterMock implements IConfigAdapter {
   welshEmailPassTemplateIdAMod1: string = 'email-welsh-pass-template-id-amod1';
   welshEmailFailTemplateIdAMod1: string = 'email-welsh-fail-template-id-amod1';
 
+  englishLetterPassTemplateIdAMod1: string = 'post-english-pass-template-id-amod1';
+  englishLetterFailTemplateIdAMod1: string = 'post-english-fail-template-id-amod1';
+  welshLetterPassTemplateIdAMod1: string = 'post-welsh-pass-template-id-amod1';
+  welshLetterFailTemplateIdAMod1: string = 'post-welsh-fail-template-id-amod1';
+
+  englishEmailPassTemplateIdAMod2: string = 'email-english-pass-template-id-amod2';
+  englishEmailFailTemplateIdAMod2: string = 'email-english-fail-template-id-amod2';
+  welshEmailPassTemplateIdAMod2: string = 'email-welsh-pass-template-id-amod2';
+  welshEmailFailTemplateIdAMod2: string = 'email-welsh-fail-template-id-amod2';
+
+  englishLetterPassTemplateIdAMod2: string = 'post-english-pass-template-id-amod2';
+  englishLetterFailTemplateIdAMod2: string = 'post-english-pass-template-id-amod2';
+  welshLetterPassTemplateIdAMod2: string = 'post-welsh-pass-template-id-amod2';
+  welshLetterFailTemplateIdAMod2: string = 'post-welsh-pass-template-id-amod2';
+
   async getApiKey(): Promise<string> {
     return Promise.resolve(this.apiKey);
   }
