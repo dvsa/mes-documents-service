@@ -39,6 +39,16 @@ export class ConfigAdapterMock implements IConfigAdapter {
   welshEmailPassTemplateIdAMod1: string = 'email-welsh-pass-template-id-amod1';
   welshEmailFailTemplateIdAMod1: string = 'email-welsh-fail-template-id-amod1';
 
+  englishEmailPassTemplateIdAMod2: string = 'email-english-pass-template-id-amod2';
+  englishEmailFailTemplateIdAMod2: string = 'email-english-fail-template-id-amod2';
+  welshEmailPassTemplateIdAMod2: string = 'email-welsh-pass-template-id-amod2';
+  welshEmailFailTemplateIdAMod2: string = 'email-welsh-fail-template-id-amod2';
+
+  englishLetterPassTemplateIdAMod2: string = 'post-english-pass-template-id-amod2';
+  englishLetterFailTemplateIdAMod2: string = 'post-english-pass-template-id-amod2';
+  welshLetterPassTemplateIdAMod2: string = 'post-welsh-pass-template-id-amod2';
+  welshLetterFailTemplateIdAMod2: string = 'post-welsh-pass-template-id-amod2';
+
   englishEmailPassTemplateIdHome: string = 'email-english-pass-template-id-home';
   englishEmailFailTemplateIdHome: string = 'email-english-fail-template-id-home';
   welshEmailPassTemplateIdHome: string = 'email-welsh-pass-template-id-home';
