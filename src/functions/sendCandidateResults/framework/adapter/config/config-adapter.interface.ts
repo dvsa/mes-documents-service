@@ -31,6 +31,16 @@ export interface IConfigAdapter {
   englishEmailFailTemplateIdAMod1: string;
   welshEmailPassTemplateIdAMod1: string;
   welshEmailFailTemplateIdAMod1: string;
+  // AMOD2 Email
+  englishEmailPassTemplateIdAMod2: string;
+  englishEmailFailTemplateIdAMod2: string;
+  welshEmailPassTemplateIdAMod2: string;
+  welshEmailFailTemplateIdAMod2: string;
+  // AMOD2 Letter
+  englishLetterPassTemplateIdAMod2: string;
+  englishLetterFailTemplateIdAMod2: string;
+  welshLetterPassTemplateIdAMod2: string;
+  welshLetterFailTemplateIdAMod2: string;
   // Email Template Id's Home
   englishEmailPassTemplateIdHome: string;
   englishEmailFailTemplateIdHome: string;
