@@ -55,16 +55,6 @@ export class ConfigAdapter implements IConfigAdapter {
   englishLetterFailTemplateIdAMod2: string;
   welshLetterPassTemplateIdAMod2: string;
   welshLetterFailTemplateIdAMod2: string;
-  // Email Template Id's Home
-  englishEmailPassTemplateIdHome: string;
-  englishEmailFailTemplateIdHome: string;
-  welshEmailPassTemplateIdHome: string;
-  welshEmailFailTemplateIdHome: string;
-  // Letter Template Id's Home
-  englishLetterPassTemplateIdHome: string;
-  englishLetterFailTemplateIdHome: string;
-  welshLetterPassTemplateIdHome: string;
-  welshLetterFailTemplateIdHome: string;
 
   constructor() {
     this.apiKey = '';
