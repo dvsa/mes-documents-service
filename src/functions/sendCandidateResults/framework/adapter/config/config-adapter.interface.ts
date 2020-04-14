@@ -36,12 +36,12 @@ export interface IConfigAdapter {
   englishLetterFailTemplateIdAMod1: string;
   welshLetterPassTemplateIdAMod1: string;
   welshLetterFailTemplateIdAMod1: string;
-  // AMOD2 Email
+  // Email Template Id's A Mod2
   englishEmailPassTemplateIdAMod2: string;
   englishEmailFailTemplateIdAMod2: string;
   welshEmailPassTemplateIdAMod2: string;
   welshEmailFailTemplateIdAMod2: string;
-  // AMOD2 Letter
+  // Letter Template Id's A Mod2
   englishLetterPassTemplateIdAMod2: string;
   englishLetterFailTemplateIdAMod2: string;
   welshLetterPassTemplateIdAMod2: string;

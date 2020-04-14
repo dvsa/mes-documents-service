@@ -65,55 +65,46 @@ export class ConfigAdapter implements IConfigAdapter {
     this.notifyRequestsPerBatch = this.getNumberFromEnv('NOTIFY_REQUESTS_PER_BATCH') || 25;
     this.notifyTimeout = this.getNumberFromEnv('NOTIFY_TIMEOUT') || 10000;
     this.resultsBaseApiUrl = this.getFromEnvThrowIfNotPresent('RESULTS_API_BASE_URL');
-
-    this.englishEmailPassTemplateId = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_PASS_TEMPLATE_ID');
-    this.englishEmailFailTemplateId = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_FAIL_TEMPLATE_ID');
-    this.welshEmailPassTemplateId = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_WELSH_PASS_TEMPLATE_ID');
-    this.welshEmailFailTemplateId = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_WELSH_FAIL_TEMPLATE_ID');
-
-    this.englishLetterPassTemplateId = this.getFromEnvThrowIfNotPresent('NOTIFY_POST_PASS_TEMPLATE_ID');
-    this.englishLetterFailTemplateId = this.getFromEnvThrowIfNotPresent('NOTIFY_POST_FAIL_TEMPLATE_ID');
-    this.welshLetterPassTemplateId = this.getFromEnvThrowIfNotPresent('NOTIFY_POST_WELSH_PASS_TEMPLATE_ID');
-    this.welshLetterFailTemplateId = this.getFromEnvThrowIfNotPresent('NOTIFY_POST_WELSH_FAIL_TEMPLATE_ID');
-
+    // CAR Email
+    this.englishEmailPassTemplateId = this.getFromEnvThrowIfNotPresent('EMAIL_PASS_CAR');
+    this.englishEmailFailTemplateId = this.getFromEnvThrowIfNotPresent('EMAIL_FAIL_CAR');
+    this.welshEmailPassTemplateId = this.getFromEnvThrowIfNotPresent('EMAIL_W_PASS_CAR');
+    this.welshEmailFailTemplateId = this.getFromEnvThrowIfNotPresent('EMAIL_W_FAIL_CAR');
+    // CAR Letter
+    this.englishLetterPassTemplateId = this.getFromEnvThrowIfNotPresent('POST_PASS_CAR');
+    this.englishLetterFailTemplateId = this.getFromEnvThrowIfNotPresent('POST_FAIL_CAR');
+    this.welshLetterPassTemplateId = this.getFromEnvThrowIfNotPresent('POST_W_PASS_CAR');
+    this.welshLetterFailTemplateId = this.getFromEnvThrowIfNotPresent('POST_W_FAIL_CAR');
     // VOCATIONAL Email
-    this.englishEmailPassTemplateIdVocational =
-      this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_PASS_TEMPLATE_ID_VOCATIONAL');
-    this.englishEmailFailTemplateIdVocational =
-      this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_FAIL_TEMPLATE_ID_VOCATIONAL');
-    this.welshEmailPassTemplateIdVocational =
-      this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_WELSH_PASS_TEMPLATE_ID_VOCATIONAL');
-    this.welshEmailFailTemplateIdVocational =
-      this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_WELSH_FAIL_TEMPLATE_ID_VOCATIONAL');
+    this.englishEmailPassTemplateIdVocational = this.getFromEnvThrowIfNotPresent('EMAIL_PASS_VOC');
+    this.englishEmailFailTemplateIdVocational = this.getFromEnvThrowIfNotPresent('EMAIL_FAIL_VOC');
+    this.welshEmailPassTemplateIdVocational = this.getFromEnvThrowIfNotPresent('EMAIL_W_PASS_VOC');
+    this.welshEmailFailTemplateIdVocational = this.getFromEnvThrowIfNotPresent('EMAIL_W_FAIL_VOC');
     // VOCATIONAL Letter
-    this.englishLetterPassTemplateIdVocational =
-      this.getFromEnvThrowIfNotPresent('NOTIFY_POST_PASS_TEMPLATE_ID_VOCATIONAL');
-    this.englishLetterFailTemplateIdVocational =
-      this.getFromEnvThrowIfNotPresent('NOTIFY_POST_FAIL_TEMPLATE_ID_VOCATIONAL');
-    this.welshLetterPassTemplateIdVocational =
-      this.getFromEnvThrowIfNotPresent('NOTIFY_POST_WELSH_PASS_TEMPLATE_ID_VOCATIONAL');
-    this.welshLetterFailTemplateIdVocational =
-      this.getFromEnvThrowIfNotPresent('NOTIFY_POST_WELSH_FAIL_TEMPLATE_ID_VOCATIONAL');
+    this.englishLetterPassTemplateIdVocational = this.getFromEnvThrowIfNotPresent('POST_PASS_VOC');
+    this.englishLetterFailTemplateIdVocational = this.getFromEnvThrowIfNotPresent('POST_FAIL_VOC');
+    this.welshLetterPassTemplateIdVocational = this.getFromEnvThrowIfNotPresent('POST_W_PASS_VOC');
+    this.welshLetterFailTemplateIdVocational = this.getFromEnvThrowIfNotPresent('POST_W_FAIL_VOC');
     // AMOD1 Email
-    this.englishEmailPassTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_PASS_TEMPLATE_ID_AMOD1');
-    this.englishEmailFailTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_FAIL_TEMPLATE_ID_AMOD1');
-    this.welshEmailPassTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_WELSH_PASS_TEMPLATE_ID_AMOD1');
-    this.welshEmailFailTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_WELSH_FAIL_TEMPLATE_ID_AMOD1');
+    this.englishEmailPassTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('EMAIL_PASS_AMOD1');
+    this.englishEmailFailTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('EMAIL_FAIL_AMOD1');
+    this.welshEmailPassTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('EMAIL_W_PASS_AMOD1');
+    this.welshEmailFailTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('EMAIL_W_FAIL_AMOD1');
     // AMOD1 Letter
-    this.englishLetterPassTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('NOTIFY_POST_PASS_TEMPLATE_ID_AMOD1');
-    this.englishLetterFailTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('NOTIFY_POST_FAIL_TEMPLATE_ID_AMOD1');
-    this.welshLetterPassTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('NOTIFY_POST_WELSH_PASS_TEMPLATE_ID_AMOD1');
-    this.welshLetterFailTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('NOTIFY_POST_WELSH_FAIL_TEMPLATE_ID_AMOD1');
+    this.englishLetterPassTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('POST_PASS_AMOD1');
+    this.englishLetterFailTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('POST_FAIL_AMOD1');
+    this.welshLetterPassTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('POST_W_PASS_AMOD1');
+    this.welshLetterFailTemplateIdAMod1 = this.getFromEnvThrowIfNotPresent('POST_W_FAIL_AMOD1');
     // AMOD2 Email
-    this.englishEmailPassTemplateIdAMod2 = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_PASS_TEMPLATE_ID_AMOD2');
-    this.englishEmailFailTemplateIdAMod2 = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_FAIL_TEMPLATE_ID_AMOD2');
-    this.welshEmailPassTemplateIdAMod2 = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_PASS_WELSH_TEMPLATE_ID_AMOD2');
-    this.welshEmailFailTemplateIdAMod2 = this.getFromEnvThrowIfNotPresent('NOTIFY_EMAIL_FAIL_WELSH_TEMPLATE_ID_AMOD2');
+    this.englishEmailPassTemplateIdAMod2 = this.getFromEnvThrowIfNotPresent('EMAIL_PASS_AMOD2');
+    this.englishEmailFailTemplateIdAMod2 = this.getFromEnvThrowIfNotPresent('EMAIL_FAIL_AMOD2');
+    this.welshEmailPassTemplateIdAMod2 = this.getFromEnvThrowIfNotPresent('EMAIL_W_PASS_AMOD2');
+    this.welshEmailFailTemplateIdAMod2 = this.getFromEnvThrowIfNotPresent('EMAIL_W_FAIL_AMOD2');
     // AMOD2 Letter
-    this.englishLetterPassTemplateIdAMod2 = this.getFromEnvThrowIfNotPresent('NOTIFY_POST_PASS_TEMPLATE_ID_AMOD2');
-    this.englishLetterFailTemplateIdAMod2 = this.getFromEnvThrowIfNotPresent('NOTIFY_POST_FAIL_TEMPLATE_ID_AMOD2');
-    this.welshLetterPassTemplateIdAMod2 = this.getFromEnvThrowIfNotPresent('NOTIFY_POST_PASS_WELSH_TEMPLATE_ID_AMOD2');
-    this.welshLetterFailTemplateIdAMod2 = this.getFromEnvThrowIfNotPresent('NOTIFY_POST_FAIL_WELSH_TEMPLATE_ID_AMOD2');
+    this.englishLetterPassTemplateIdAMod2 = this.getFromEnvThrowIfNotPresent('POST_PASS_AMOD2');
+    this.englishLetterFailTemplateIdAMod2 = this.getFromEnvThrowIfNotPresent('POST_FAIL_AMOD2');
+    this.welshLetterPassTemplateIdAMod2 = this.getFromEnvThrowIfNotPresent('POST_W_PASS_AMOD2');
+    this.welshLetterFailTemplateIdAMod2 = this.getFromEnvThrowIfNotPresent('POST_W_FAIL_AMOD2');
   }
 
   public async getApiKey(): Promise<string> {
