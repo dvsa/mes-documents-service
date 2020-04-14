@@ -31,6 +31,21 @@ export interface IConfigAdapter {
   englishEmailFailTemplateIdAMod1: string;
   welshEmailPassTemplateIdAMod1: string;
   welshEmailFailTemplateIdAMod1: string;
+  // Letter Template Id's A Mod1
+  englishLetterPassTemplateIdAMod1: string;
+  englishLetterFailTemplateIdAMod1: string;
+  welshLetterPassTemplateIdAMod1: string;
+  welshLetterFailTemplateIdAMod1: string;
+  // Email Template Id's A Mod2
+  englishEmailPassTemplateIdAMod2: string;
+  englishEmailFailTemplateIdAMod2: string;
+  welshEmailPassTemplateIdAMod2: string;
+  welshEmailFailTemplateIdAMod2: string;
+  // Letter Template Id's A Mod2
+  englishLetterPassTemplateIdAMod2: string;
+  englishLetterFailTemplateIdAMod2: string;
+  welshLetterPassTemplateIdAMod2: string;
+  welshLetterFailTemplateIdAMod2: string;
 
   getApiKey(): Promise<string>;
 }
