@@ -56,6 +56,10 @@ export class TemplateIdProvider implements ITemplateIdProvider {
       return get(this.configAdapter, `${baseTemplate}${TestType.HOME}`);
     }
 
+    if (category === TestCategory.ADI2) {
+      return get(this.configAdapter, `${baseTemplate}${TestType.ADI2}`);
+    }
+
     return get(this.configAdapter, baseTemplate);
   }
 }

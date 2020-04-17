@@ -2,6 +2,7 @@ import { injectable } from 'inversify';
 import 'reflect-metadata';
 import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 import { TestData, ManoeuvreOutcome, QuestionOutcome, QuestionResult } from '@dvsa/mes-test-schema/categories/common';
+import { CatADI2UniqueTypes } from '@dvsa/mes-test-schema/categories/ADI2';
 import { CatBUniqueTypes } from '@dvsa/mes-test-schema/categories/B';
 import { CatBEUniqueTypes } from '@dvsa/mes-test-schema/categories/BE';
 import { CatCUniqueTypes } from '@dvsa/mes-test-schema/categories/C';
@@ -85,6 +86,11 @@ import {
   getDrivingFaultsCatHome,
   getSeriousFaultsCatHome,
 } from './categories/Home/fault-provider-cat-home';
+import {
+  getDangerousFaultsCatADI2,
+  getDrivingFaultsCatADI2,
+  getSeriousFaultsCatADI2,
+} from './categories/ADI2/fault-provider-cat-adi-pt2';
 
 // No CatBUniqueTypes.VehicleChecks as the data structure differs to other categories
 type VehicleChecksUnion =
@@ -121,6 +127,7 @@ export class FaultProvider implements IFaultProvider {
 
   public getDrivingFaults(testData: TestData | undefined, category: string): Fault[] {
     switch (category) {
+      case TestCategory.ADI2: return getDrivingFaultsCatADI2(testData as CatADI2UniqueTypes.TestData);
       case TestCategory.B: return getDrivingFaultsCatB(testData as CatBUniqueTypes.TestData);
       case TestCategory.BE: return getDrivingFaultsCatBE(testData as CatBEUniqueTypes.TestData);
       case TestCategory.C: return getDrivingFaultsCatC(testData as CatCUniqueTypes.TestData);
@@ -149,6 +156,7 @@ export class FaultProvider implements IFaultProvider {
 
   public getSeriousFaults(testData: TestData | undefined, category: string): Fault[] {
     switch (category) {
+      case TestCategory.ADI2: return getSeriousFaultsCatADI2(testData as CatADI2UniqueTypes.TestData);
       case TestCategory.B: return getSeriousFaultsCatB(testData as CatBUniqueTypes.TestData);
       case TestCategory.BE: return getSeriousFaultsCatBE(testData as CatBEUniqueTypes.TestData);
       case TestCategory.C: return getSeriousFaultsCatC(testData as CatCUniqueTypes.TestData);
@@ -177,6 +185,7 @@ export class FaultProvider implements IFaultProvider {
 
   public getDangerousFaults(testData: TestData | undefined, category: string): Fault [] {
     switch (category) {
+      case TestCategory.ADI2: return getDangerousFaultsCatADI2(testData as CatADI2UniqueTypes.TestData);
       case TestCategory.B: return getDangerousFaultsCatB(testData as CatBUniqueTypes.TestData);
       case TestCategory.BE: return getDangerousFaultsCatBE(testData as CatBEUniqueTypes.TestData);
       case TestCategory.C: return getDangerousFaultsCatC(testData as CatCUniqueTypes.TestData);
