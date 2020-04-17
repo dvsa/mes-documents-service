@@ -15,6 +15,7 @@ export enum TestType {
   AMOD1 = 'AMod1',
   AMOD2 = 'AMod2',
   HOME = 'Home',
+  ADI2 = 'Adi2',
 }
 
 export enum Correspondence {

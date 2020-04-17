@@ -65,6 +65,16 @@ export class ConfigAdapter implements IConfigAdapter {
   englishLetterFailTemplateIdHome: string;
   welshLetterPassTemplateIdHome: string;
   welshLetterFailTemplateIdHome: string;
+  // Email Template Id's ADI
+  englishEmailPassTemplateIdAdi2: string;
+  englishEmailFailTemplateIdAdi2: string;
+  welshEmailPassTemplateIdAdi2: string;
+  welshEmailFailTemplateIdAdi2: string;
+  // Letter Template Id's ADI
+  englishLetterPassTemplateIdAdi2: string;
+  englishLetterFailTemplateIdAdi2: string;
+  welshLetterPassTemplateIdAdi2: string;
+  welshLetterFailTemplateIdAdi2: string;
 
   constructor() {
     this.apiKey = '';
@@ -126,6 +136,16 @@ export class ConfigAdapter implements IConfigAdapter {
     this.englishLetterFailTemplateIdHome = this.getFromEnvThrowIfNotPresent('POST_FAIL_HOME');
     this.welshLetterPassTemplateIdHome = this.getFromEnvThrowIfNotPresent('POST_W_PASS_HOME');
     this.welshLetterFailTemplateIdHome = this.getFromEnvThrowIfNotPresent('POST_W_FAIL_HOME');
+    // ADI Email
+    this.englishEmailPassTemplateIdAdi2 = this.getFromEnvThrowIfNotPresent('EMAIL_PASS_ADI2');
+    this.englishEmailFailTemplateIdAdi2 = this.getFromEnvThrowIfNotPresent('EMAIL_FAIL_ADI2');
+    this.welshEmailPassTemplateIdAdi2 = this.getFromEnvThrowIfNotPresent('EMAIL_W_PASS_ADI2');
+    this.welshEmailFailTemplateIdAdi2 = this.getFromEnvThrowIfNotPresent('EMAIL_W_FAIL_ADI2');
+    // ADI Letter
+    this.englishLetterPassTemplateIdAdi2 = this.getFromEnvThrowIfNotPresent('POST_PASS_ADI2');
+    this.englishLetterFailTemplateIdAdi2 = this.getFromEnvThrowIfNotPresent('POST_FAIL_ADI2');
+    this.welshLetterPassTemplateIdAdi2 = this.getFromEnvThrowIfNotPresent('POST_W_PASS_ADI2');
+    this.welshLetterFailTemplateIdAdi2 = this.getFromEnvThrowIfNotPresent('POST_W_FAIL_ADI2');
   }
 
   public async getApiKey(): Promise<string> {
