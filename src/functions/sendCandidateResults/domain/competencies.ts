@@ -254,6 +254,7 @@ export enum welshCompetencyLabels {
   safetyQuestions = 'Cwestiynau diogelwch',
   pcvDoorExercise = 'Ymarfer Drws PCV',
 
+  // @TODO - MES-5185 - update with welsh translations
   rearObservationSignalling = 'Rear Observation - Signalling',
   rearObservationChangeDirection = 'Rear Observation - Change Direction',
   rearObservationChangeSpeed = 'Rear Observation - Change Speed',
