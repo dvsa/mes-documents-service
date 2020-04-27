@@ -77,19 +77,25 @@ export enum Competencies {
     highwayCodeSafety = 'highwayCodeSafety',
     safetyQuestions = 'safetyQuestions',
     pcvDoorExercise = 'pcvDoorExercise',
+
+    rearObservationSignalling = 'rearObservationSignalling',
+    rearObservationChangeDirection = 'rearObservationChangeDirection',
+    rearObservationChangeSpeed = 'rearObservationChangeSpeed',
+    positionNormalRiding = 'positionNormalRiding',
+    judgementOvertakingFiltering = 'judgementOvertakingFiltering',
 }
 
 export enum englishCompetencyLabels {
-    controlsAccelerator = 'Controls - Accelerator',
-    controlsClutch = 'Controls - Clutch',
-    controlsGears = 'Controls - Gears',
-    controlsFootbrake = 'Controls - Footbrake',
-    controlsParkingBrake = 'Controls - Parking brake',
-    controlsSteering = 'Controls - Steering',
+    controlsAccelerator = 'Control - Accelerator',
+    controlsClutch = 'Control - Clutch',
+    controlsGears = 'Control - Gears',
+    controlsFootbrake = 'Control - Footbrake',
+    controlsParkingBrake = 'Control - Parking brake',
+    controlsSteering = 'Control - Steering',
     precautions = 'Precautions',
-    ancillaryControls = 'Ancillary Controls',
-    moveOffSafety = 'Move off - Safety',
-    moveOffControl = 'Move off - Control',
+    ancillaryControls = 'Control - Ancillary Controls',
+    moveOffSafety = 'Move Away - Safety',
+    moveOffControl = 'Move Away - Control',
     useOfMirrorsSignalling = 'Use of mirrors - Signalling',
     useOfMirrorsChangeDirection = 'Use of mirrors - Change direction',
     useOfMirrorsChangeSpeed = 'Use of mirrors - Change speed',
@@ -118,7 +124,7 @@ export enum englishCompetencyLabels {
     responseToSignsOtherRoadUsers = 'Response to signs / signals - Other road users',
     pedestrianCrossings = 'Pedestrian crossings',
     positionNormalStops = 'Position/normal stop',
-    awarenessPlanning = 'Awareness planning',
+    awarenessPlanning = 'Awareness / Planning',
     outcomeControlledStop = 'Controlled stop',
     reverseRightObservation = 'Reverse right - Observation',
     reverseRightControl = 'Reverse right - Control',
@@ -149,16 +155,23 @@ export enum englishCompetencyLabels {
     positioningNormalRiding = 'Positioning - Normal riding',
     clearanceOrObstructions = 'Clearance / Obstructions',
     safetyAndBalance = 'Safety and balance questions',
-    controlsThrottle = 'Controls - Throttle',
+    controlsThrottle = 'Control - Throttle',
 
-    controlsFrontBrake = 'Controls - Front brake',
-    controlsRearBrake = 'Controls - Rear brake',
-    controlsBalanceSlowControl = 'Controls - Balance / Slow control',
+    controlsFrontBrake = 'Control - Front brake',
+    controlsRearBrake = 'Control - Rear brake',
+    controlsBalanceSlowControl = 'Control - Balance / Slow control',
     bends = 'Bends',
 
     highwayCodeSafety = 'H/Code / Safety',
     safetyQuestions = 'Safety Questions',
     pcvDoorExercise = 'PCV Door exercise',
+
+    rearObservationSignalling = 'Rear Observation - Signalling',
+    rearObservationChangeDirection = 'Rear Observation - Change Direction',
+    rearObservationChangeSpeed = 'Rear Observation - Change Speed',
+    positionNormalRiding = 'Positioning - Normal Riding',
+    judgementOvertakingFiltering = 'Judgement - Overtaking / Filtering',
+
 }
 
 export enum welshCompetencyLabels {
@@ -240,6 +253,14 @@ export enum welshCompetencyLabels {
   highwayCodeSafety = '[CY] H/Code / Safety',
   safetyQuestions = 'Cwestiynau diogelwch',
   pcvDoorExercise = 'Ymarfer Drws PCV',
+
+  // @TODO - MES-5185 - update with welsh translations
+  rearObservationSignalling = 'Rear Observation - Signalling',
+  rearObservationChangeDirection = 'Rear Observation - Change Direction',
+  rearObservationChangeSpeed = 'Rear Observation - Change Speed',
+  positionNormalRiding = 'Positioning - Normal Riding',
+  judgementOvertakingFiltering = 'Judgement - Overtaking / Filtering',
+
 }
 
 export enum englishTexts {
