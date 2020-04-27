@@ -155,11 +155,11 @@ export enum englishCompetencyLabels {
     positioningNormalRiding = 'Positioning - Normal riding',
     clearanceOrObstructions = 'Clearance / Obstructions',
     safetyAndBalance = 'Safety and balance questions',
-    controlsThrottle = 'Controls - Throttle',
+    controlsThrottle = 'Control - Throttle',
 
-    controlsFrontBrake = 'Controls - Front brake',
-    controlsRearBrake = 'Controls - Rear brake',
-    controlsBalanceSlowControl = 'Controls - Balance / Slow control',
+    controlsFrontBrake = 'Control - Front brake',
+    controlsRearBrake = 'Control - Rear brake',
+    controlsBalanceSlowControl = 'Control - Balance / Slow control',
     bends = 'Bends',
 
     highwayCodeSafety = 'H/Code / Safety',
