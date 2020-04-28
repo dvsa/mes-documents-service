@@ -254,12 +254,11 @@ export enum welshCompetencyLabels {
   safetyQuestions = 'Cwestiynau diogelwch',
   pcvDoorExercise = 'Ymarfer Drws PCV',
 
-  // @TODO - MES-5185 - update with welsh translations
-  rearObservationSignalling = 'Rear Observation - Signalling',
-  rearObservationChangeDirection = 'Rear Observation - Change Direction',
-  rearObservationChangeSpeed = 'Rear Observation - Change Speed',
-  positionNormalRiding = 'Positioning - Normal Riding',
-  judgementOvertakingFiltering = 'Judgement - Overtaking / Filtering',
+  rearObservationSignalling = 'Ôl Arsylwi - Signalau',
+  rearObservationChangeDirection = 'Ôl Arsylwi - Newid Cyfeiriad',
+  rearObservationChangeSpeed = 'Ôl Arsylwi - Newid Cyflymder',
+  positionNormalRiding = 'Lleoli - Marchogaeth Normal',
+  judgementOvertakingFiltering = 'Barnu Goddiweddyd /Hidlo',
 
 }
 
