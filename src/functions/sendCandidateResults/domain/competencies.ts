@@ -250,7 +250,7 @@ export enum welshCompetencyLabels {
   controlsBalanceSlowControl = 'Rheolaeth - Cydbwysedd / Rheolaeth araf',
   bends = 'Troeon',
 
-  highwayCodeSafety = '[CY] H/Code / Safety',
+  highwayCodeSafety = 'H/Cod / Diogelwch',
   safetyQuestions = 'Cwestiynau diogelwch',
   pcvDoorExercise = 'Ymarfer Drws PCV',
 
