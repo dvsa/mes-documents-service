@@ -44,12 +44,17 @@ describe('fault-provider-cat-home', () => {
             controlFault: CompetencyOutcome.S,
           },
         },
+        highwayCodeSafety: {
+          selected: true,
+          seriousFault: true,
+        },
       };
 
       const result: Fault [] = getSeriousFaultsCatHome(data);
-      expect(result.length).toBe(2);
+      expect(result.length).toBe(3);
       expect(result).toContain({ name: Competencies.ancillaryControls, count: 1 });
       expect(result).toContain({ name: Competencies.reverseLeftControl, count: 1 });
+      expect(result).toContain({ name: Competencies.highwayCodeSafety, count: 1 });
     });
   });
 
@@ -65,6 +70,10 @@ describe('fault-provider-cat-home', () => {
             selected: true,
             controlFault: CompetencyOutcome.DF,
           },
+        },
+        highwayCodeSafety: {
+          selected: true,
+          drivingFault: false,
         },
       };
       const result: Fault [] = getDrivingFaultsCatHome(data);
