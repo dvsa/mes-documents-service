@@ -1,6 +1,8 @@
 import { CatFUniqueTypes } from '@dvsa/mes-test-schema/categories/F';
 import { CatGUniqueTypes } from '@dvsa/mes-test-schema/categories/G';
 import { CatHUniqueTypes } from '@dvsa/mes-test-schema/categories/H';
+import { get } from 'lodash';
+
 import { Fault } from '../../../../domain/fault';
 import { CompetencyOutcome } from '../../../../domain/competency-outcome';
 import {
@@ -10,6 +12,8 @@ import {
   getVehicleCheckFaultCount, HomeTestDataUnion,
 } from '../../fault-provider';
 import { Competencies } from '../../../../domain/competencies';
+
+type HCodeSafetyFault = 'drivingFault' | 'seriousFault';
 
 export const getDrivingFaultsCatHome = (testData: HomeTestDataUnion | undefined): Fault [] => {
   const drivingFaults: Fault[] = [];
@@ -21,6 +25,10 @@ export const getDrivingFaultsCatHome = (testData: HomeTestDataUnion | undefined)
   if (testData.drivingFaults) {
     convertNumericFaultObjectToArray(testData.drivingFaults)
       .forEach(fault => drivingFaults.push(fault));
+  }
+
+  if (hasHighwayCodeSafetyFault(testData, 'drivingFault')) {
+    drivingFaults.push({ name: Competencies.highwayCodeSafety, count: 1 });
   }
 
   getNonStandardFaultsCatHome(testData, CompetencyOutcome.DF)
@@ -43,6 +51,10 @@ export const getSeriousFaultsCatHome = (testData: HomeTestDataUnion | undefined)
   if (testData.seriousFaults) {
     convertBooleanFaultObjectToArray(testData.seriousFaults)
       .forEach(fault => seriousFaults.push(fault));
+  }
+
+  if (hasHighwayCodeSafetyFault(testData, 'seriousFault')) {
+    seriousFaults.push({ name: Competencies.highwayCodeSafety, count: 1 });
   }
 
   getNonStandardFaultsCatHome(testData, CompetencyOutcome.S)
@@ -82,4 +94,16 @@ export const getNonStandardFaultsCatHome = (
   }
 
   return faults;
+};
+
+const hasHighwayCodeSafetyFault = (
+  testData: HomeTestDataUnion | undefined, faultType: HCodeSafetyFault): boolean => {
+
+  const isFault: boolean = get(testData, `highwayCodeSafety.${faultType}`, false);
+  const isSelected: boolean = get(testData, 'highwayCodeSafety.selected', false);
+
+  if (isFault && isSelected) {
+    return true;
+  }
+  return false;
 };
