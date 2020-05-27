@@ -23,11 +23,16 @@ describe('fault-provider-cat-home', () => {
             controlFault: CompetencyOutcome.D,
           },
         },
+        controlledStop: {
+          selected: true,
+          fault: CompetencyOutcome.D,
+        },
       };
       const result: Fault [] = getDangerousFaultsCatHome(data);
-      expect(result.length).toBe(2);
+      expect(result.length).toBe(3);
       expect(result).toContain({ name: Competencies.ancillaryControls, count: 1 });
       expect(result).toContain({ name: Competencies.reverseLeftControl, count: 1 });
+      expect(result).toContain({ name: Competencies.controlledStop, count: 1 });
     });
   });
 
@@ -48,13 +53,18 @@ describe('fault-provider-cat-home', () => {
           selected: true,
           seriousFault: true,
         },
+        controlledStop: {
+          selected: true,
+          fault: CompetencyOutcome.S,
+        },
       };
 
       const result: Fault [] = getSeriousFaultsCatHome(data);
-      expect(result.length).toBe(3);
+      expect(result.length).toBe(4);
       expect(result).toContain({ name: Competencies.ancillaryControls, count: 1 });
       expect(result).toContain({ name: Competencies.reverseLeftControl, count: 1 });
       expect(result).toContain({ name: Competencies.highwayCodeSafety, count: 1 });
+      expect(result).toContain({ name: Competencies.controlledStop, count: 1 });
     });
   });
 
@@ -75,13 +85,18 @@ describe('fault-provider-cat-home', () => {
           selected: true,
           drivingFault: false,
         },
+        controlledStop: {
+          selected: true,
+          fault: CompetencyOutcome.DF,
+        },
       };
       const result: Fault [] = getDrivingFaultsCatHome(data);
 
-      expect(result.length).toBe(2);
+      expect(result.length).toBe(3);
       expect(result).toEqual([
-                               { name: Competencies.ancillaryControls, count: 1 },
-                               { name: Competencies.reverseLeftControl, count: 1 },
+        { name: Competencies.ancillaryControls, count: 1 },
+        { name: Competencies.reverseLeftControl, count: 1 },
+        { name: Competencies.controlledStop, count: 1 },
       ]);
     });
   });
