@@ -9,11 +9,18 @@ import {
   convertBooleanFaultObjectToArray,
   convertNumericFaultObjectToArray,
   getCompletedManoeuvres,
-  getVehicleCheckFaultCount, HomeTestDataUnion,
+  getVehicleCheckFaultCount,
+  HomeTestDataUnion,
 } from '../../fault-provider';
 import { Competencies } from '../../../../domain/competencies';
+import { CatKUniqueTypes } from '@dvsa/mes-test-schema/categories/K';
+import { QuestionOutcome } from '@dvsa/mes-test-schema/categories/common';
 
 type HCodeSafetyFault = 'drivingFault' | 'seriousFault';
+export type ControlledStopHomeTestUnion = CatFUniqueTypes.ControlledStop
+| CatGUniqueTypes.ControlledStop
+| CatHUniqueTypes.ControlledStop
+| CatKUniqueTypes.ControlledStop;
 
 export const getDrivingFaultsCatHome = (testData: HomeTestDataUnion | undefined): Fault [] => {
   const drivingFaults: Fault[] = [];
@@ -33,6 +40,9 @@ export const getDrivingFaultsCatHome = (testData: HomeTestDataUnion | undefined)
 
   getNonStandardFaultsCatHome(testData, CompetencyOutcome.DF)
     .forEach((fault: Fault) => drivingFaults.push(fault));
+
+  getControlledStopFaultsCatHome(testData.controlledStop as ControlledStopHomeTestUnion, CompetencyOutcome.DF)
+    .forEach(fault => drivingFaults.push(fault));
 
   if (getVehicleCheckFaultCount(testData.vehicleChecks as CatFUniqueTypes.VehicleChecks, CompetencyOutcome.DF) >= 1) {
     drivingFaults.push({ name: Competencies.vehicleChecks, count: 1 });
@@ -60,6 +70,8 @@ export const getSeriousFaultsCatHome = (testData: HomeTestDataUnion | undefined)
   getNonStandardFaultsCatHome(testData, CompetencyOutcome.S)
     .forEach((fault: Fault) => seriousFaults.push(fault));
 
+  getControlledStopFaultsCatHome(testData.controlledStop as ControlledStopHomeTestUnion, CompetencyOutcome.S)
+    .forEach(fault => seriousFaults.push(fault));
   return seriousFaults;
 };
 
@@ -78,7 +90,15 @@ export const getDangerousFaultsCatHome = (testData: HomeTestDataUnion | undefine
   getNonStandardFaultsCatHome(testData, CompetencyOutcome.D)
     .forEach(fault => dangerousFaults.push(fault));
 
+  getControlledStopFaultsCatHome(testData.controlledStop as ControlledStopHomeTestUnion, CompetencyOutcome.D)
+    .forEach(fault => dangerousFaults.push(fault));
+
   return dangerousFaults;
+};
+
+export const getControlledStopFaultsCatHome = (controlledStop: ControlledStopHomeTestUnion,
+                                               faultType: QuestionOutcome): Fault[] => {
+  return (controlledStop.fault === faultType) ? [{ name: Competencies.controlledStop, count: 1 }] : [];
 };
 
 export const getNonStandardFaultsCatHome = (
