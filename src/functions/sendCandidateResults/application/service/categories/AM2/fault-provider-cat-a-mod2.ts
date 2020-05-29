@@ -22,13 +22,19 @@ export const getDrivingFaultsCatAMod2 = (testData: CatAMod2TestData | undefined)
 
 export const getSeriousFaultsCatAMod2 = (testData: CatAMod2TestData | undefined): Fault[] => {
 
+  const seriousFaults: Fault[] = [];
+
   if (!testData) {
     throw new Error('No Test Data');
   }
 
-  return [
-    ...convertBooleanFaultObjectToArray(testData.seriousFaults),
-  ];
+  convertBooleanFaultObjectToArray(testData.seriousFaults).forEach(fault => seriousFaults.push(fault));
+
+  if (testData.eyesightTest && testData.eyesightTest.seriousFault) {
+    seriousFaults.push({ name: Competencies.eyesightTest, count: 1 });
+  }
+
+  return seriousFaults;
 };
 
 export const getDangerousFaultsCatAMod2 = (testData: CatAMod2TestData | undefined): Fault[] => {
