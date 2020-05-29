@@ -1,7 +1,7 @@
 import {
+  getDangerousFaultsCatAMod2,
   getDrivingFaultsCatAMod2,
   getSeriousFaultsCatAMod2,
-  getDangerousFaultsCatAMod2,
   hasQuestionFault,
 } from '../fault-provider-cat-a-mod2';
 
@@ -81,6 +81,7 @@ describe('Fault Provider Cat A Mod2', () => {
       expect(getSeriousFaultsCatAMod2(validTestData)).toEqual([
         { name: Competencies.useOfMirrorsChangeSpeed, count: 1 },
         { name: Competencies.signalsTimed, count: 1 },
+        { name: Competencies.eyesightTest, count: 1 },
       ]);
     });
   });
