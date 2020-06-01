@@ -77,7 +77,6 @@ export const getSeriousFaultsCatHome = (testData: HomeTestDataUnion | undefined)
   if (testData.eyesightTest && testData.eyesightTest.seriousFault) {
     seriousFaults.push({ name: Competencies.eyesightTest, count: 1 });
   }
-
   return seriousFaults;
 };
 
