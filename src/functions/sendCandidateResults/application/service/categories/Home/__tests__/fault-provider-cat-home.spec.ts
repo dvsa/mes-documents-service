@@ -64,6 +64,8 @@ describe('fault-provider-cat-home', () => {
 
       const result: Fault [] = getSeriousFaultsCatHome(data);
       expect(result.length).toBe(5);
+      };
+       
       expect(result).toContain({ name: Competencies.ancillaryControls, count: 1 });
       expect(result).toContain({ name: Competencies.reverseLeftControl, count: 1 });
       expect(result).toContain({ name: Competencies.highwayCodeSafety, count: 1 });

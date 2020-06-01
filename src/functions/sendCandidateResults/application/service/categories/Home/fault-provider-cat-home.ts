@@ -72,12 +72,11 @@ export const getSeriousFaultsCatHome = (testData: HomeTestDataUnion | undefined)
 
   getControlledStopFaultsCatHome(testData.controlledStop as ControlledStopHomeTestUnion, CompetencyOutcome.S)
     .forEach(fault => seriousFaults.push(fault));
-
+  
   // eyesight test
   if (testData.eyesightTest && testData.eyesightTest.seriousFault) {
     seriousFaults.push({ name: Competencies.eyesightTest, count: 1 });
   }
-
   return seriousFaults;
 };
 
