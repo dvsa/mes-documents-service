@@ -57,14 +57,18 @@ describe('fault-provider-cat-home', () => {
           selected: true,
           fault: CompetencyOutcome.S,
         },
+        eyesightTest: {
+          seriousFault: true,
+        },
       };
 
       const result: Fault [] = getSeriousFaultsCatHome(data);
-      expect(result.length).toBe(4);
+      expect(result.length).toBe(5);
       expect(result).toContain({ name: Competencies.ancillaryControls, count: 1 });
       expect(result).toContain({ name: Competencies.reverseLeftControl, count: 1 });
       expect(result).toContain({ name: Competencies.highwayCodeSafety, count: 1 });
       expect(result).toContain({ name: Competencies.controlledStop, count: 1 });
+      expect(result).toContain({ name: Competencies.eyesightTest, count: 1 });
     });
   });
 
