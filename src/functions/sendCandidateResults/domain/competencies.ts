@@ -243,6 +243,7 @@ export enum welshCompetencyLabels {
   emergencyStopSpeedNotMet = 'Stop brys - Gofyniad Cyflymder heb ei fodloni',
   positioningNormalRiding = 'Lleoli ar y ffordd - Beicio arferol',
   clearanceOrObstructions = 'Clirio / Rhwystrau',
+  safetyAndBalance = 'Cwestiynau diogelwch a chydbwysedd',
   controlsThrottle = 'Rheolaeth - Throtl',
 
   controlsFrontBrake = 'Rheolaeth - Brêc blaen',
