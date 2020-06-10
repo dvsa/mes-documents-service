@@ -7,7 +7,9 @@ import {
 import {
   Name,
   ConductedLanguage,
-  Eco, ETA,
+  Eco,
+  ETA,
+  TestData,
 } from '@dvsa/mes-test-schema/categories/common';
 import { inject, injectable } from 'inversify';
 import { TYPES } from '../../framework/di/types';
@@ -68,15 +70,17 @@ export class PersonalisationProvider implements IPersonalisationProvider {
 
   private getCommonPersonalisationValues(testresult: TestResultSchemasUnion): Personalisation {
     const drivingFaults = this.buildFaultStringWithCount(
-      this.faultProvider.getDrivingFaults(testresult.testData, testresult.category).sort((a, b) => b.count - a.count),
+      this.faultProvider
+        .getDrivingFaults(testresult.testData as TestData, testresult.category)
+        .sort((a, b) => b.count - a.count),
       get(testresult, 'communicationPreferences.conductedLanguage'));
 
     const seriousFaults = this.buildFaultString(
-      this.faultProvider.getSeriousFaults(testresult.testData, testresult.category),
+      this.faultProvider.getSeriousFaults(testresult.testData as TestData, testresult.category),
       get(testresult, 'communicationPreferences.conductedLanguage'));
 
     const dangerousFaults = this.buildFaultString(
-      this.faultProvider.getDangerousFaults(testresult.testData, testresult.category),
+      this.faultProvider.getDangerousFaults(testresult.testData as TestData, testresult.category),
       get(testresult, 'communicationPreferences.conductedLanguage'));
 
     const eta = get(testresult, 'testData.ETA', null);
