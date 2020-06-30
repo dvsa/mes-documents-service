@@ -120,11 +120,13 @@ export const getManoeuvresFaultsCatADI2 = (
     manoeuvres.forEach((manoeuvre: Manoeuvres) => {
       const manoeuvreName = Object.getOwnPropertyNames(manoeuvre)[0];
       const manoeuvreObject = Object.values(manoeuvre)[0];
-      if (manoeuvreObject.selected && manoeuvreObject.controlFault && manoeuvreObject.controlFault === faultType) {
+      if (manoeuvreName && manoeuvreObject.selected && manoeuvreObject.controlFault
+        && manoeuvreObject.controlFault === faultType) {
         faults.push({ name: `${manoeuvreName}Control` as Competencies, count: 1 });
       }
       if (
-        manoeuvreObject.selected && manoeuvreObject.observationFault && manoeuvreObject.observationFault === faultType
+        manoeuvreName && manoeuvreObject.selected && manoeuvreObject.observationFault
+        && manoeuvreObject.observationFault === faultType
       ) {
         faults.push({ name: `${manoeuvreName}Observation` as Competencies, count: 1 });
       }
