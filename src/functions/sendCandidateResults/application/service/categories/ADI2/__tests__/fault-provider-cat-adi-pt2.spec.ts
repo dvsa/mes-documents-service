@@ -50,6 +50,13 @@ describe('Cat ADI 2 Fault Provider', () => {
       ];
       expect(seriousFaults).toEqual(expectedDangerousFaults);
     });
+
+    it('should return empty array for empty manoeuvres', () => {
+      const manoeuvres = [{}, {}];
+      const faults: Fault[] = getManoeuvresFaultsCatADI2(manoeuvres, CompetencyOutcome.D);
+      expect(faults).toEqual([]);
+    });
+
   });
   describe('getDrivingFaultsCatADI2', () => {
     it('should return all standard and non standard driving faults', () => {
