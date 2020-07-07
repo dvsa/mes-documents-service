@@ -60,6 +60,10 @@ export class TemplateIdProvider implements ITemplateIdProvider {
       return get(this.configAdapter, `${baseTemplate}${TestType.ADI2}`);
     }
 
+    if (isCPCCategory(category)) {
+      return get(this.configAdapter, `${baseTemplate}${TestType.CPC}`);
+    }
+
     return get(this.configAdapter, baseTemplate);
   }
 }
@@ -109,6 +113,13 @@ export function isHomeTestCategory(category: CategoryCode): boolean {
     TestCategory.G,
     TestCategory.H,
     TestCategory.K,
+  ].includes(category as TestCategory);
+}
+
+export function isCPCCategory(category: CategoryCode): boolean {
+  return [
+    TestCategory.CCPC,
+    TestCategory.DCPC,
   ].includes(category as TestCategory);
 }
 

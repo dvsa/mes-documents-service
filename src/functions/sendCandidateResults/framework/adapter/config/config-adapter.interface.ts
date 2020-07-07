@@ -66,6 +66,16 @@ export interface IConfigAdapter {
   englishLetterFailTemplateIdAdi2: string;
   welshLetterPassTemplateIdAdi2: string;
   welshLetterFailTemplateIdAdi2: string;
+  // Email Template Id's CPC
+  englishEmailPassTemplateIdCpc: string;
+  englishEmailFailTemplateIdCpc: string;
+  welshEmailPassTemplateIdCpc: string;
+  welshEmailFailTemplateIdCpc: string;
+  // Letter Template Id's CPC
+  englishLetterPassTemplateIdCpc: string;
+  englishLetterFailTemplateIdCpc: string;
+  welshLetterPassTemplateIdCpc: string;
+  welshLetterFailTemplateIdCpc: string;
 
   getApiKey(): Promise<string>;
 }

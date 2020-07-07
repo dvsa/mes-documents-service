@@ -40,6 +40,17 @@ export interface CatAMod1Personalisation extends EmailPersonalisation {
   avoidanceSecondAttempt: string;
 }
 
+export interface CatCPCPersonalisation extends EmailPersonalisation {
+  q1Score: string;
+  q2Score: string;
+  q3Score: string;
+  q4Score: string;
+  q5Score: string;
+  totalScore: string;
+  showLGVText: BooleanText;
+  showPCVText: BooleanText;
+}
+
 export interface LetterPersonalisation extends Personalisation {
   'address_line_1' : string;
   'address_line_2' : string;

@@ -5,6 +5,7 @@ import {
   isVocationalCategory,
   getTemplateString,
   isHomeTestCategory,
+  isCPCCategory,
 } from '../template-id-provider';
 import { ConfigAdapterMock } from '../../../framework/adapter/config/__mocks__/config-adapter.mock';
 import {
@@ -188,6 +189,18 @@ describe('get-template-id-provider', () => {
       expect(isHomeTestCategory(TestCategory.BE)).toBe(false);
       expect(isHomeTestCategory(TestCategory.C)).toBe(false);
       expect(isHomeTestCategory(TestCategory.D)).toBe(false);
+    });
+  });
+
+  describe('isCPCCategory', () => {
+    it('should return true if category is in cpc test category array', () => {
+      expect(isCPCCategory(TestCategory.CCPC)).toBe(true);
+      expect(isCPCCategory(TestCategory.DCPC)).toBe(true);
+    });
+
+    it('should return false when category is not in the cpc test category array', () => {
+      expect(isCPCCategory(TestCategory.B)).toBe(false);
+      expect(isCPCCategory(TestCategory.BE)).toBe(false);
     });
   });
 

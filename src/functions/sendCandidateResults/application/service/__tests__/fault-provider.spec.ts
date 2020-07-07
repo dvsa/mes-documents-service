@@ -1,11 +1,12 @@
-import { DrivingFaults, QuestionOutcome, QuestionResult, SeriousFaults } from '@dvsa/mes-test-schema/categories/common';
+import { DrivingFaults, SeriousFaults } from '@dvsa/mes-test-schema/categories/common';
 import { CatBUniqueTypes } from '@dvsa/mes-test-schema/categories/B';
 import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 import {
   convertNumericFaultObjectToArray,
   convertBooleanFaultObjectToArray,
   getCompletedManoeuvres,
-  FaultProvider, getVehicleCheckFaultCount,
+  FaultProvider,
+  getVehicleCheckFaultCount,
 } from '../fault-provider';
 import { Fault } from '../../../domain/fault';
 import { CompetencyOutcome } from '../../../domain/competency-outcome';
