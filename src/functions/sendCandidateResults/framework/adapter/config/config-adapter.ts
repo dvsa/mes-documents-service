@@ -157,15 +157,15 @@ export class ConfigAdapter implements IConfigAdapter {
     this.welshLetterPassTemplateIdAdi2 = this.getFromEnvThrowIfNotPresent('POST_W_PASS_ADI2');
     this.welshLetterFailTemplateIdAdi2 = this.getFromEnvThrowIfNotPresent('POST_W_FAIL_ADI2');
     // CPC Email
-    this.englishEmailPassTemplateIdCpc = this.getFromEnvThrowIfNotPresent('EMAIL_PASS_CPC');
-    this.englishEmailFailTemplateIdCpc = this.getFromEnvThrowIfNotPresent('EMAIL_FAIL_CPC');
-    this.welshEmailPassTemplateIdCpc = this.getFromEnvThrowIfNotPresent('EMAIL_W_PASS_CPC');
-    this.welshEmailFailTemplateIdCpc = this.getFromEnvThrowIfNotPresent('EMAIL_W_FAIL_CPC');
+    this.englishEmailPassTemplateIdCpc = this.getFromEnvThrowIfNotPresent('EMAIL_PASS_CPC4');
+    this.englishEmailFailTemplateIdCpc = this.getFromEnvThrowIfNotPresent('EMAIL_FAIL_CPC4');
+    this.welshEmailPassTemplateIdCpc = this.getFromEnvThrowIfNotPresent('EMAIL_W_PASS_CPC4');
+    this.welshEmailFailTemplateIdCpc = this.getFromEnvThrowIfNotPresent('EMAIL_W_FAIL_CPC4');
     // CPC Letter
-    this.englishLetterPassTemplateIdCpc = this.getFromEnvThrowIfNotPresent('POST_PASS_CPC');
-    this.englishLetterFailTemplateIdCpc = this.getFromEnvThrowIfNotPresent('POST_FAIL_CPC');
-    this.welshLetterPassTemplateIdCpc = this.getFromEnvThrowIfNotPresent('POST_W_PASS_CPC');
-    this.welshLetterFailTemplateIdCpc = this.getFromEnvThrowIfNotPresent('POST_W_FAIL_CPC');
+    this.englishLetterPassTemplateIdCpc = this.getFromEnvThrowIfNotPresent('POST_PASS_CPC4');
+    this.englishLetterFailTemplateIdCpc = this.getFromEnvThrowIfNotPresent('POST_FAIL_CPC4');
+    this.welshLetterPassTemplateIdCpc = this.getFromEnvThrowIfNotPresent('POST_W_PASS_CPC4');
+    this.welshLetterFailTemplateIdCpc = this.getFromEnvThrowIfNotPresent('POST_W_FAIL_CPC4');
   }
 
   public async getApiKey(): Promise<string> {
