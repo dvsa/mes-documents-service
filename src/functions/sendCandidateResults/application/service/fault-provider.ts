@@ -134,6 +134,8 @@ export class FaultProvider implements IFaultProvider {
       case TestCategory.C1: return getDrivingFaultsCatC1(testData as CatC1UniqueTypes.TestData);
       case TestCategory.CE: return getDrivingFaultsCatCE(testData as CatCEUniqueTypes.TestData);
       case TestCategory.C1E: return getDrivingFaultsCatC1E(testData as CatC1EUniqueTypes.TestData);
+      case TestCategory.CCPC:
+      case TestCategory.DCPC: return [];
       case TestCategory.D: return getDrivingFaultsCatD(testData as CatDUniqueTypes.TestData);
       case TestCategory.D1: return getDrivingFaultsCatD1(testData as CatD1UniqueTypes.TestData);
       case TestCategory.DE: return getDrivingFaultsCatDE(testData as CatDEUniqueTypes.TestData);
@@ -163,6 +165,8 @@ export class FaultProvider implements IFaultProvider {
       case TestCategory.C1: return getSeriousFaultsCatC1(testData as CatC1UniqueTypes.TestData);
       case TestCategory.CE: return getSeriousFaultsCatCE(testData as CatCEUniqueTypes.TestData);
       case TestCategory.C1E: return getSeriousFaultsCatC1E(testData as CatC1EUniqueTypes.TestData);
+      case TestCategory.CCPC:
+      case TestCategory.DCPC: return [];
       case TestCategory.D: return getSeriousFaultsCatD(testData as CatDUniqueTypes.TestData);
       case TestCategory.D1: return getSeriousFaultsCatD1(testData as CatD1UniqueTypes.TestData);
       case TestCategory.DE: return getSeriousFaultsCatDE(testData as CatDEUniqueTypes.TestData);
@@ -192,6 +196,8 @@ export class FaultProvider implements IFaultProvider {
       case TestCategory.C1: return getDangerousFaultsCatC1(testData as CatC1UniqueTypes.TestData);
       case TestCategory.CE: return getDangerousFaultsCatCE(testData as CatCEUniqueTypes.TestData);
       case TestCategory.C1E: return getDangerousFaultsCatC1E(testData as CatC1EUniqueTypes.TestData);
+      case TestCategory.CCPC:
+      case TestCategory.DCPC: return [];
       case TestCategory.D: return getDangerousFaultsCatD(testData as CatDUniqueTypes.TestData);
       case TestCategory.D1: return getDangerousFaultsCatD1(testData as CatD1UniqueTypes.TestData);
       case TestCategory.DE: return getDangerousFaultsCatDE(testData as CatDEUniqueTypes.TestData);
