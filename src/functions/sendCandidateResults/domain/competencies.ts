@@ -94,8 +94,8 @@ export enum englishCompetencyLabels {
     controlsSteering = 'Control - Steering',
     precautions = 'Precautions',
     ancillaryControls = 'Control - Ancillary Controls',
-    moveOffSafety = 'Move Off - Safety',
-    moveOffControl = 'Move Off - Control',
+    moveOffSafety = 'Move off - Safety',
+    moveOffControl = 'Move off - Control',
     useOfMirrorsSignalling = 'Use of mirrors - Signalling',
     useOfMirrorsChangeDirection = 'Use of mirrors - Change direction',
     useOfMirrorsChangeSpeed = 'Use of mirrors - Change speed',
@@ -264,8 +264,8 @@ export enum welshCompetencyLabels {
 }
 
 export enum modifiedEnglishCompetencyLabels {
-  moveOffSafety = 'Move Away - Safety',
-  moveOffControl = 'Move Away - Control',
+  moveOffSafety = 'Move away - Safety',
+  moveOffControl = 'Move away - Control',
 }
 
 export enum englishTexts {
