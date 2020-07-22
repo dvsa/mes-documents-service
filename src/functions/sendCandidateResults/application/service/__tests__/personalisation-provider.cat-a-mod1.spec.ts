@@ -3,6 +3,7 @@ import { IFaultProvider, FaultProvider } from '../fault-provider';
 import { ICustomPropertyProvider, CustomPropertyProvider } from '../custom-property-provider';
 import { completedCatAMod1Test } from '../../../framework/__mocks__/test-data.cat-a-mod1.mock';
 import { BooleanText, CatAMod1Personalisation } from '../../../domain/personalisation.model';
+import { modifiedEnglishCompetencyLabels } from '../../../domain/competencies';
 
 describe('personalisation-provider-cat-a-mod1', () => {
 
@@ -27,11 +28,12 @@ describe('personalisation-provider-cat-a-mod1', () => {
 
       const result = personalisationProvider.getEmailPersonalisation(completedCatAMod1Test) as CatAMod1Personalisation;
 
-      expect(result.drivingFaults).toEqual(['Move Away - Safety, 3', 'Move Away - Control, 1']);
-      expect(result.dangerousFaults).toContain('Move Away - Safety');
-      expect(result.dangerousFaults).toContain('Move Away - Control');
-      expect(result.seriousFaults).toContain('Move Away - Safety');
-      expect(result.seriousFaults).toContain('Move Away - Control');
+      expect(result.drivingFaults).toContain(`${modifiedEnglishCompetencyLabels.moveOffSafety}, 3`);
+      expect(result.drivingFaults).toContain(`${modifiedEnglishCompetencyLabels.moveOffControl}, 1`);
+      expect(result.dangerousFaults).toContain(`${modifiedEnglishCompetencyLabels.moveOffSafety}`);
+      expect(result.dangerousFaults).toContain(`${modifiedEnglishCompetencyLabels.moveOffControl}`);
+      expect(result.seriousFaults).toContain(`${modifiedEnglishCompetencyLabels.moveOffControl}`);
+      expect(result.seriousFaults).toContain(`${modifiedEnglishCompetencyLabels.moveOffControl}`);
 
       expect(result.showEmergencyStop).toEqual(BooleanText.YES);
       expect(result.showEmergencyFirstAttempt).toEqual(BooleanText.YES);
