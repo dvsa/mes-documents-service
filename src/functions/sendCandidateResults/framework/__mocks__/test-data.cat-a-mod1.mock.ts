@@ -81,9 +81,18 @@ export const completedCatAMod1Test: TestResultCatAM1Schema = {
   },
   testData: {
     singleFaultCompetencies: {},
-    drivingFaults: {},
-    dangerousFaults: {},
-    seriousFaults: {},
+    drivingFaults: {
+      moveOffControl: 1,
+      moveOffSafety: 3,
+    },
+    dangerousFaults: {
+      moveOffControl: true,
+      moveOffSafety: true,
+    },
+    seriousFaults: {
+      moveOffControl: true,
+      moveOffSafety: true,
+    },
     emergencyStop: {
       firstAttempt: 44,
       secondAttempt: 47,
