@@ -142,5 +142,17 @@ export const completedCatBETest: CatBEUniqueTypes.TestResult = {
       verbal: true,
       physical: false,
     },
+    drivingFaults: {
+      moveOffControl: 2,
+      moveOffSafety: 1,
+    },
+    seriousFaults: {
+      moveOffControl: true,
+      moveOffSafety: true,
+    },
+    dangerousFaults: {
+      moveOffControl: true,
+      moveOffSafety: true,
+    },
   },
 };
