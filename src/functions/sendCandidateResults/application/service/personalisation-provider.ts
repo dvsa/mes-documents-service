@@ -10,6 +10,7 @@ import {
   Eco,
   ETA,
   TestData,
+  CategoryCode,
 } from '@dvsa/mes-test-schema/categories/common';
 import { inject, injectable } from 'inversify';
 import { TYPES } from '../../framework/di/types';
@@ -17,11 +18,16 @@ import { IFaultProvider } from './fault-provider';
 import { ICustomPropertyProvider } from './custom-property-provider';
 import { get } from 'lodash';
 import { Fault } from '../../domain/fault';
-import { englishCompetencyLabels, welshCompetencyLabels } from '../../domain/competencies';
+import {
+  englishCompetencyLabels,
+  modifiedEnglishCompetencyLabels,
+  welshCompetencyLabels,
+} from '../../domain/competencies';
 import { formatApplicationReference } from '@dvsa/mes-microservice-common/domain/tars';
 import * as moment from 'moment';
 import 'moment/locale/cy';
 import { TestResultSchemasUnion } from '@dvsa/mes-test-schema/categories';
+import { isBikeCategory } from './template-id-provider';
 
 export interface IPersonalisationProvider {
 
@@ -73,15 +79,18 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       this.faultProvider
         .getDrivingFaults(testresult.testData as TestData, testresult.category)
         .sort((a, b) => b.count - a.count),
-      get(testresult, 'communicationPreferences.conductedLanguage'));
+      get(testresult, 'communicationPreferences.conductedLanguage'),
+      testresult.category);
 
     const seriousFaults = this.buildFaultString(
       this.faultProvider.getSeriousFaults(testresult.testData as TestData, testresult.category),
-      get(testresult, 'communicationPreferences.conductedLanguage'));
+      get(testresult, 'communicationPreferences.conductedLanguage'),
+      testresult.category);
 
     const dangerousFaults = this.buildFaultString(
       this.faultProvider.getDangerousFaults(testresult.testData as TestData, testresult.category),
-      get(testresult, 'communicationPreferences.conductedLanguage'));
+      get(testresult, 'communicationPreferences.conductedLanguage'),
+      testresult.category);
 
     const eta = get(testresult, 'testData.ETA', null);
 
@@ -112,29 +121,28 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     };
   }
 
-  private buildFaultString(faults: Fault[], language: ConductedLanguage): string[] {
+  private buildFaultString(faults: Fault[], language: ConductedLanguage, category: CategoryCode): string[] {
     const faultLabels: string[] = [];
 
     if (language === 'Cymraeg') {
       faults.forEach((fault: any) => faultLabels.push(`${(<any>welshCompetencyLabels)[fault.name]}`));
     } else {
-      faults.forEach((fault: any) => faultLabels.push(`${(<any>englishCompetencyLabels)[fault.name]}`));
+      faults.forEach((fault: any) => faultLabels.push(
+        `${this.modifyCompetencyLabel((<any>englishCompetencyLabels)[fault.name], category)}`));
     }
 
     return faultLabels;
   }
 
-  private buildFaultStringWithCount(faults: Fault[], language: ConductedLanguage): string[] {
+  private buildFaultStringWithCount(faults: Fault[], language: ConductedLanguage, category: CategoryCode): string[] {
     const faultLabels: string[] = [];
 
     if (language === 'Cymraeg') {
-      faults.forEach((fault: any) =>
-        faultLabels.push(`${(<any>welshCompetencyLabels)[fault.name]}, ${fault.count}`));
+      faults.forEach((fault: any) => faultLabels.push(`${(<any>welshCompetencyLabels)[fault.name]}, ${fault.count}`));
     } else {
-      faults.forEach((fault: any) =>
-        faultLabels.push(`${(<any>englishCompetencyLabels)[fault.name]}, ${fault.count}`));
+      faults.forEach((fault: any) => faultLabels.push(
+        `${this.modifyCompetencyLabel((<any>englishCompetencyLabels)[fault.name], category)}, ${fault.count}`));
     }
-
     return faultLabels;
   }
 
@@ -172,5 +180,16 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       case 'Cymraeg': return moment(stringDate).locale('cy').format('D MMMM YYYY');
       default: return moment(stringDate).locale('en').format('D MMMM YYYY');
     }
+  }
+
+  private modifyCompetencyLabel = (label: string, category: CategoryCode): string => {
+    if (isBikeCategory(category)) {
+      switch (label) {
+        case englishCompetencyLabels.moveOffControl: return modifiedEnglishCompetencyLabels.moveOffControl;
+        case englishCompetencyLabels.moveOffSafety: return modifiedEnglishCompetencyLabels.moveOffSafety;
+        default: return label;
+      }
+    }
+    return label;
   }
 }

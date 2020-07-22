@@ -107,6 +107,10 @@ export function isAmod2Category(category: CategoryCode): boolean {
   ].includes(category as TestCategory);
 }
 
+export function isBikeCategory(category: CategoryCode): boolean {
+  return isAmod1Category(category) || isAmod2Category(category);
+}
+
 export function isHomeTestCategory(category: CategoryCode): boolean {
   return [
     TestCategory.F,
