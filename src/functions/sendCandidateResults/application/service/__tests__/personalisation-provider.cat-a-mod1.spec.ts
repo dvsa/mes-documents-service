@@ -27,6 +27,12 @@ describe('personalisation-provider-cat-a-mod1', () => {
 
       const result = personalisationProvider.getEmailPersonalisation(completedCatAMod1Test) as CatAMod1Personalisation;
 
+      expect(result.drivingFaults).toEqual(['Move Away - Safety, 3', 'Move Away - Control, 1']);
+      expect(result.dangerousFaults).toContain('Move Away - Safety');
+      expect(result.dangerousFaults).toContain('Move Away - Control');
+      expect(result.seriousFaults).toContain('Move Away - Safety');
+      expect(result.seriousFaults).toContain('Move Away - Control');
+
       expect(result.showEmergencyStop).toEqual(BooleanText.YES);
       expect(result.showEmergencyFirstAttempt).toEqual(BooleanText.YES);
       expect(result.emergencyFirstAttempt).toEqual('44 km/h');
