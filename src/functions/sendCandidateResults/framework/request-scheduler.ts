@@ -126,13 +126,6 @@ export class RequestScheduler implements IRequestScheduler {
       return Promise.resolve();
     }
 
-    // Not all categories seem to have delegated tests
-    // the following categories have: BE, all C, all D, CPC
-
-    // Build a function that selects the test results for only the above mentioned categories
-    // And checks if the delegatedTest is true
-    // Resolve the Promise if it is true
-
     if (isDelegatedTest(testResult)) {
       return Promise.resolve();
     }
