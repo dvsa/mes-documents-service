@@ -13,6 +13,7 @@ import { ProcessingStatus } from '../domain/submission-outcome.model';
 import { NOTIFY_INTERFACE } from '../domain/interface.constants';
 import { formatApplicationReference } from '@dvsa/mes-microservice-common/domain/tars';
 import { TestResultSchemasUnion } from '@dvsa/mes-test-schema/categories';
+import isDelegatedTest from '../application/service/is-delegated-test';
 
 export interface IRequestScheduler {
   scheduleRequests(testResults: TestResultSchemasUnion[]): Promise<void>[];
@@ -122,6 +123,17 @@ export class RequestScheduler implements IRequestScheduler {
     }
 
     if (!isFail(testResult.activityCode) && !isPass(testResult.activityCode)) {
+      return Promise.resolve();
+    }
+
+    // Not all categories seem to have delegated tests
+    // the following categories have: BE, all C, all D, CPC
+
+    // Build a function that selects the test results for only the above mentioned categories
+    // And checks if the delegatedTest is true
+    // Resolve the Promise if it is true
+
+    if (isDelegatedTest(testResult)) {
       return Promise.resolve();
     }
 
