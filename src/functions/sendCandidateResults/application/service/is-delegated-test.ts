@@ -13,12 +13,12 @@ function isDelegatedTest(testResult: TestResultSchemasUnion): boolean {
     || testResult.category === 'D+E'
     || testResult.category === 'D1'
     || testResult.category === 'D1+E') {
-    return (testResult as TestResultCommonSchema).delegatedTest === true;
+    return (testResult as TestResultCommonSchema).delegatedTest || false;
   }
 
   if (testResult.category === 'CCPC'
     || testResult.category === 'DCPC') {
-    return (testResult as TestResultCatCPCSchema).delegatedTest === true;
+    return (testResult as TestResultCatCPCSchema).delegatedTest || false;
   }
 
   return false;
