@@ -13,6 +13,7 @@ import { ProcessingStatus } from '../domain/submission-outcome.model';
 import { NOTIFY_INTERFACE } from '../domain/interface.constants';
 import { formatApplicationReference } from '@dvsa/mes-microservice-common/domain/tars';
 import { TestResultSchemasUnion } from '@dvsa/mes-test-schema/categories';
+import isDelegatedTest from '../application/service/is-delegated-test';
 
 export interface IRequestScheduler {
   scheduleRequests(testResults: TestResultSchemasUnion[]): Promise<void>[];
@@ -122,6 +123,10 @@ export class RequestScheduler implements IRequestScheduler {
     }
 
     if (!isFail(testResult.activityCode) && !isPass(testResult.activityCode)) {
+      return Promise.resolve();
+    }
+
+    if (isDelegatedTest(testResult)) {
       return Promise.resolve();
     }
 
