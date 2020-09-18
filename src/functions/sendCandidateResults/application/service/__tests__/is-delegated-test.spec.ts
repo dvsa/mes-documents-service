@@ -1,10 +1,10 @@
-import { TestResultSchemasUnion } from '@dvsa/mes-test-schema/categories';
 import { CatBUniqueTypes } from '@dvsa/mes-test-schema/categories/B';
 import { CatBEUniqueTypes } from '@dvsa/mes-test-schema/categories/BE';
 import { CatCUniqueTypes } from '@dvsa/mes-test-schema/categories/C';
 import { CatC1UniqueTypes } from '@dvsa/mes-test-schema/categories/C1';
 import { CatC1EUniqueTypes } from '@dvsa/mes-test-schema/categories/C1E';
 import { CatCEUniqueTypes } from '@dvsa/mes-test-schema/categories/CE';
+import { TestResultCatCPCSchema } from '@dvsa/mes-test-schema/categories/CPC';
 import { CatDUniqueTypes } from '@dvsa/mes-test-schema/categories/D';
 import { CatD1UniqueTypes } from '@dvsa/mes-test-schema/categories/D1';
 import { CatD1EUniqueTypes } from '@dvsa/mes-test-schema/categories/D1E';
@@ -223,6 +223,52 @@ describe('is-delegated-test', () => {
     });
 
     it('should return false if delegatedTest is false', () => {
+      testResult.delegatedTest = false;
+
+      const result = isDelegatedTest(testResult);
+
+      expect(result).toBe(false);
+    });
+  });
+
+  describe('examine category CCPC test result', () => {
+    const testResult: TestResultCatCPCSchema = {
+      ...(testResultUnionMock as TestResultCatCPCSchema),
+      category: 'CCPC',
+    };
+
+    it('should return true if delegatedTest is true', () => {
+      testResult.delegatedTest = true;
+
+      const result = isDelegatedTest(testResult);
+
+      expect(result).toBe(true);
+    });
+
+    it('should return false if delegatedTes is false', () => {
+      testResult.delegatedTest = false;
+
+      const result = isDelegatedTest(testResult);
+
+      expect(result).toBe(false);
+    });
+  });
+
+  describe('examine category DCPC test result', () => {
+    const testResult: TestResultCatCPCSchema = {
+      ...(testResultUnionMock as TestResultCatCPCSchema),
+      category: 'DCPC',
+    };
+
+    it('should return true if delegatedTest is true', () => {
+      testResult.delegatedTest = true;
+
+      const result = isDelegatedTest(testResult);
+
+      expect(result).toBe(true);
+    });
+
+    it('should return false if delegatedTes is false', () => {
       testResult.delegatedTest = false;
 
       const result = isDelegatedTest(testResult);
