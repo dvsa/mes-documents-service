@@ -208,22 +208,13 @@ describe('fault-provider-cat-d1e', () => {
         pcvDoorExercise: {
           drivingFault: true,
         },
-        safetyQuestions: {
-          questions: [
-            {
-              description: 'Safety Question1',
-              outcome: 'DF',
-            },
-          ],
-        },
       };
       const result: Fault [] = getDrivingFaultsCatD1E(data);
 
-      expect(result.length).toBe(4);
+      expect(result.length).toBe(3);
       expect(result).toEqual([
                                { name: Competencies.ancillaryControls, count: 1 },
                                { name: Competencies.reverseLeftControl, count: 1 },
-                               { name: Competencies.safetyQuestions, count: 1 },
                                { name: Competencies.pcvDoorExercise, count: 1 },
       ]);
     });
@@ -240,7 +231,6 @@ describe('fault-provider-cat-d1e', () => {
         vehicleChecks: {},
         manoeuvres: {},
         pcvDoorExercise: {},
-        safetyQuestions: {},
       };
       const result: Fault[] = getNonStandardFaultsCatD1E(data, CompetencyOutcome.DF);
       expect(result).toContain({ name: Competencies.uncoupleRecouple, count: 1 });
@@ -254,7 +244,6 @@ describe('fault-provider-cat-d1e', () => {
           selected: false,
         },
         pcvDoorExercise: {},
-        safetyQuestions: {},
       };
       const result: Fault[] = getNonStandardFaultsCatD1E(data, CompetencyOutcome.DF);
       expect(result).toEqual([]);
