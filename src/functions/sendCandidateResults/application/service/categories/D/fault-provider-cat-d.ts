@@ -9,7 +9,7 @@ import {
 } from '../../fault-provider';
 import { Competencies } from '../../../../domain/competencies';
 import { QuestionOutcome } from '@dvsa/mes-test-schema/categories/common';
-import { PcvDoorExercise } from '@dvsa/mes-test-schema/categories/D/partial';
+import { SafetyQuestionResult, PcvDoorExercise } from '@dvsa/mes-test-schema/categories/D/partial';
 
 export const getDrivingFaultsCatD = (testData: CatDUniqueTypes.TestData | undefined): Fault [] => {
   const drivingFaults: Fault[] = [];
@@ -88,7 +88,14 @@ export const getNonStandardFaultsCatD = (
       .forEach(fault => faults.push(fault));
   }
 
-  // Pcv Door Exercise
+  // Safety Questions
+  if (testData.safetyQuestions &&
+    testData.safetyQuestions.questions) {
+    getSafetyQuestionsFaultCatD(testData.safetyQuestions.questions, faultType)
+    .forEach(fault => faults.push(fault));
+  }
+
+// Pcv Door Exercise
   if (testData.pcvDoorExercise) {
     getPcvDoorExerciseFaultCatD(testData.pcvDoorExercise, faultType)
     .forEach(fault => faults.push(fault));
@@ -107,6 +114,33 @@ export const getVehicleChecksFaultCatD = (
     faultArray.push(
       { name: Competencies.vehicleChecks, count: faultCount === FaultLimit.NON_TRAILER ? 4 : faultCount },
     );
+  }
+  return faultArray;
+};
+
+export const getSafetyQuestionsFaultCatD = (
+  safetyQuestions: SafetyQuestionResult[],
+  faultType: QuestionOutcome): Fault[] => {
+  const faultArray: Fault[] = [];
+
+  if (!safetyQuestions || safetyQuestions.length === 0) {
+    return faultArray;
+  }
+
+  if (faultType !== CompetencyOutcome.DF) {
+    return faultArray;
+  }
+  let gotFault: boolean = false;
+
+  safetyQuestions.forEach((question) => {
+    if (question.outcome === CompetencyOutcome.DF) {
+      gotFault = true;
+    }
+  });
+  if (gotFault) {
+    faultArray.push(
+       { name: Competencies.safetyQuestions, count: 1 },
+     );
   }
   return faultArray;
 };
