@@ -9,7 +9,7 @@ import {
   getVehicleCheckFaultCount,
 } from '../../fault-provider';
 import { Competencies } from '../../../../domain/competencies';
-import { PcvDoorExercise } from '@dvsa/mes-test-schema/categories/DE/partial';
+import { SafetyQuestionResult, PcvDoorExercise } from '@dvsa/mes-test-schema/categories/DE/partial';
 
 export const getDrivingFaultsCatDE = (testData: CatDEUniqueTypes.TestData | undefined): Fault [] => {
   const drivingFaults: Fault[] = [];
@@ -95,6 +95,12 @@ export const getNonStandardFaultsCatDE = (
     getVehicleChecksFaultCatDE(testData.vehicleChecks, faultType)
       .forEach(fault => faults.push(fault));
   }
+  // Safety Questions
+  if (testData.safetyQuestions &&
+    testData.safetyQuestions.questions) {
+    getSafetyQuestionsFaultCatDE(testData.safetyQuestions.questions, faultType)
+    .forEach(fault => faults.push(fault));
+  }
 
 // Pcv Door Exercise
   if (testData.pcvDoorExercise) {
@@ -114,6 +120,32 @@ export const getVehicleChecksFaultCatDE = (
     faultArray.push(
       { name: Competencies.vehicleChecks, count: faultCount === FaultLimit.TRAILER ? 1 : faultCount },
     );
+  }
+  return faultArray;
+};
+export const getSafetyQuestionsFaultCatDE = (
+  safetyQuestions: SafetyQuestionResult[],
+  faultType: QuestionOutcome): Fault[] => {
+  const faultArray: Fault[] = [];
+
+  if (!safetyQuestions || safetyQuestions.length === 0) {
+    return faultArray;
+  }
+
+  if (faultType !== CompetencyOutcome.DF) {
+    return faultArray;
+  }
+  let gotFault: boolean = false;
+
+  safetyQuestions.forEach((question) => {
+    if (question.outcome === CompetencyOutcome.DF) {
+      gotFault = true;
+    }
+  });
+  if (gotFault) {
+    faultArray.push(
+       { name: Competencies.safetyQuestions, count: 1 },
+     );
   }
   return faultArray;
 };
