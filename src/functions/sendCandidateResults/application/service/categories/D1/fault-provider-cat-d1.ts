@@ -9,7 +9,7 @@ import {
 } from '../../fault-provider';
 import { Competencies } from '../../../../domain/competencies';
 import { QuestionOutcome } from '@dvsa/mes-test-schema/categories/common';
-import { PcvDoorExercise } from '@dvsa/mes-test-schema/categories/D1/partial';
+import { SafetyQuestionResult, PcvDoorExercise } from '@dvsa/mes-test-schema/categories/D1/partial';
 
 export const getDrivingFaultsCatD1 = (testData: CatD1UniqueTypes.TestData | undefined): Fault [] => {
   const drivingFaults: Fault[] = [];
@@ -76,15 +76,22 @@ export const getNonStandardFaultsCatD1 = (
 
   const faults: Fault[] = [];
 
-  // Manoeuvres
+// Manoeuvres
   if (testData.manoeuvres) {
     getCompletedManoeuvres(testData.manoeuvres, faultType)
       .forEach(fault => faults.push(fault));
   }
 
-  // Vehicle Checks
+// Vehicle Checks
   if (testData.vehicleChecks) {
     getVehicleChecksFaultCatD1(testData.vehicleChecks, faultType)
+      .forEach(fault => faults.push(fault));
+  }
+
+  // Safety Questions
+  if (testData.safetyQuestions &&
+      testData.safetyQuestions.questions) {
+    getSafetyQuestionsFaultCatD1(testData.safetyQuestions.questions, faultType)
       .forEach(fault => faults.push(fault));
   }
 
@@ -105,6 +112,32 @@ export const getVehicleChecksFaultCatD1 = (
   if (faultCount > 0) {
     faultArray.push(
       { name: Competencies.vehicleChecks, count: faultCount === FaultLimit.NON_TRAILER ? 4 : faultCount },
+    );
+  }
+  return faultArray;
+};
+export const getSafetyQuestionsFaultCatD1 = (
+ safetyQuestions: SafetyQuestionResult[],
+ faultType: QuestionOutcome): Fault[] => {
+  const faultArray: Fault[] = [];
+
+  if (!safetyQuestions || safetyQuestions.length === 0) {
+    return faultArray;
+  }
+
+  if (faultType !== CompetencyOutcome.DF) {
+    return faultArray;
+  }
+  let gotFault: boolean = false;
+
+  safetyQuestions.forEach((question) => {
+    if (question.outcome === CompetencyOutcome.DF) {
+      gotFault = true;
+    }
+  });
+  if (gotFault) {
+    faultArray.push(
+      { name: Competencies.safetyQuestions, count: 1 },
     );
   }
   return faultArray;
