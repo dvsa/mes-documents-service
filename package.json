@@ -15,7 +15,7 @@
     "bottleneck": "^2.19.0",
     "lodash": "^4.17.19",
     "moment": "^2.24.0",
-    "notifications-node-client": "^4.6.0"
+    "notifications-node-client": "^4.9.0"
   },
   "devDependencies": {
     "@dvsa/mes-test-schema": "3.29.0",
