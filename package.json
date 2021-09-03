@@ -14,7 +14,7 @@
     "axios": "^0.21.1",
     "bottleneck": "^2.19.0",
     "lodash": "^4.17.19",
-    "moment": "^2.24.0",
+    "moment": "^2.29.1",
     "notifications-node-client": "^4.6.0"
   },
   "devDependencies": {
