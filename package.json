@@ -18,7 +18,7 @@
     "notifications-node-client": "^4.6.0"
   },
   "devDependencies": {
-    "@dvsa/mes-test-schema": "3.33.1",
+    "@dvsa/mes-test-schema": "3.34.0",
     "@types/aws-lambda": "^8.10.18",
     "@types/aws-sdk": "^2.7.0",
     "@types/axios": "^0.14.0",
