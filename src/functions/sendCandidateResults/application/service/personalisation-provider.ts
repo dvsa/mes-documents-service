@@ -75,20 +75,21 @@ export class PersonalisationProvider implements IPersonalisationProvider {
   }
 
   private getCommonPersonalisationValues(testresult: TestResultSchemasUnion): Personalisation {
+    const testData = get(testresult, 'testData') as TestData;
     const drivingFaults = this.buildFaultStringWithCount(
       this.faultProvider
-        .getDrivingFaults(testresult.testData as TestData, testresult.category)
+        .getDrivingFaults(testData, testresult.category)
         .sort((a, b) => b.count - a.count),
       get(testresult, 'communicationPreferences.conductedLanguage'),
       testresult.category);
 
     const seriousFaults = this.buildFaultString(
-      this.faultProvider.getSeriousFaults(testresult.testData as TestData, testresult.category),
+      this.faultProvider.getSeriousFaults(testData, testresult.category),
       get(testresult, 'communicationPreferences.conductedLanguage'),
       testresult.category);
 
     const dangerousFaults = this.buildFaultString(
-      this.faultProvider.getDangerousFaults(testresult.testData as TestData, testresult.category),
+      this.faultProvider.getDangerousFaults(testData, testresult.category),
       get(testresult, 'communicationPreferences.conductedLanguage'),
       testresult.category);
 
