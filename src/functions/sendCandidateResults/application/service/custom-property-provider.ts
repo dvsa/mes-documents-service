@@ -23,16 +23,17 @@ export class CustomPropertyProvider implements ICustomPropertyProvider {
 
     const category = testResult.category;
     const language = get(testResult, 'communicationPreferences.conductedLanguage');
+    const testData = get(testResult, 'testData');
 
     switch (category) {
       case TestCategory.CCPC:
       case TestCategory.DCPC:
-        return getCustomPropertiesCatCPC(testResult.testData as CatCPCTestData, category);
+        return getCustomPropertiesCatCPC(testData as CatCPCTestData, category);
       case TestCategory.EUAM1:
       case TestCategory.EUA1M1:
       case TestCategory.EUA2M1:
       case TestCategory.EUAMM1:
-        return getCustomPropertiesCatAMod1(testResult.testData as CatAMod1TestData, language);
+        return getCustomPropertiesCatAMod1(testData as CatAMod1TestData, language);
       default: return {};
     }
   }

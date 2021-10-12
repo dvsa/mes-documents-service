@@ -14,6 +14,7 @@ import { NOTIFY_INTERFACE } from '../domain/interface.constants';
 import { formatApplicationReference } from '@dvsa/mes-microservice-common/domain/tars';
 import { TestResultSchemasUnion } from '@dvsa/mes-test-schema/categories';
 import isDelegatedTest from '../application/service/is-delegated-test';
+import { TestResultCommonSchema } from '@dvsa/mes-test-schema/categories/common';
 
 export interface IRequestScheduler {
   scheduleRequests(testResults: TestResultSchemasUnion[]): Promise<void>[];
@@ -130,12 +131,15 @@ export class RequestScheduler implements IRequestScheduler {
       return Promise.resolve();
     }
 
-    const templateId: string =
-      this.templateIdProvider.getTemplateId(testResult.communicationPreferences, testResult.activityCode, category);
+    // check
+    const { communicationPreferences } = testResult as Required<TestResultCommonSchema>;
 
-    if (testResult.communicationPreferences.communicationMethod === 'Email') {
+    const templateId: string =
+      this.templateIdProvider.getTemplateId(communicationPreferences, testResult.activityCode, category);
+
+    if (communicationPreferences.communicationMethod === 'Email') {
       return sendEmail(
-        testResult.communicationPreferences.updatedEmail,
+        communicationPreferences.updatedEmail,
         templateId,
         this.personalisationProvider.getEmailPersonalisation(testResult),
         formatApplicationReference(testResult.journalData.applicationReference).toString(),
