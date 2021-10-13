@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@dvsa/mes-microservice-common": "0.7.0",
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "bottleneck": "^2.19.0",
     "lodash": "^4.17.21",
     "moment": "^2.29.1",
