@@ -14,6 +14,9 @@ import { NOTIFY_INTERFACE } from '../domain/interface.constants';
 import { formatApplicationReference } from '@dvsa/mes-microservice-common/domain/tars';
 import { TestResultSchemasUnion } from '@dvsa/mes-test-schema/categories';
 import isDelegatedTest from '../application/service/is-delegated-test';
+import isManoeuvreTest from '../application/service/is-manoeuvre-test';
+import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
+import { TestResultCommonSchema } from '@dvsa/mes-test-schema/categories/common';
 
 export interface IRequestScheduler {
   scheduleRequests(testResults: TestResultSchemasUnion[]): Promise<void>[];
@@ -116,7 +119,7 @@ export class RequestScheduler implements IRequestScheduler {
   }
 
   private sendNotifyRequest(testResult: TestResultSchemasUnion): Promise<any> {
-    const { category } = testResult;
+    const { category } = testResult as TestResultCommonSchema;
 
     if (!testResult.communicationPreferences) {
       return Promise.reject();
@@ -130,12 +133,18 @@ export class RequestScheduler implements IRequestScheduler {
       return Promise.resolve();
     }
 
-    const templateId: string =
-      this.templateIdProvider.getTemplateId(testResult.communicationPreferences, testResult.activityCode, category);
+    if (isManoeuvreTest(testResult.category as TestCategory)) {
+      return Promise.resolve();
+    }
 
-    if (testResult.communicationPreferences.communicationMethod === 'Email') {
+    const { communicationPreferences } = testResult as Required<TestResultCommonSchema>;
+
+    const templateId: string =
+      this.templateIdProvider.getTemplateId(communicationPreferences, testResult.activityCode, category);
+
+    if (communicationPreferences.communicationMethod === 'Email') {
       return sendEmail(
-        testResult.communicationPreferences.updatedEmail,
+        communicationPreferences.updatedEmail,
         templateId,
         this.personalisationProvider.getEmailPersonalisation(testResult),
         formatApplicationReference(testResult.journalData.applicationReference).toString(),
