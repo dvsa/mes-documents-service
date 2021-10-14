@@ -152,6 +152,14 @@ export class FaultProvider implements IFaultProvider {
       case TestCategory.G:
       case TestCategory.H:
       case TestCategory.K: return getDrivingFaultsCatHome(testData as CatKUniqueTypes.TestData);
+      case TestCategory.CM:
+      case TestCategory.C1M:
+      case TestCategory.C1E:
+      case TestCategory.C1EM:
+      case TestCategory.DM:
+      case TestCategory.D1M:
+      case TestCategory.D1E:
+      case TestCategory.D1EM: return [];
       default: return getDrivingFaultsCatB(testData as CatBUniqueTypes.TestData);
     }
   }
@@ -183,11 +191,19 @@ export class FaultProvider implements IFaultProvider {
       case TestCategory.G:
       case TestCategory.H:
       case TestCategory.K: return getSeriousFaultsCatHome(testData as HomeTestDataUnion);
+      case TestCategory.CM:
+      case TestCategory.C1M:
+      case TestCategory.C1E:
+      case TestCategory.C1EM:
+      case TestCategory.DM:
+      case TestCategory.D1M:
+      case TestCategory.D1E:
+      case TestCategory.D1EM: return [];
       default: return getSeriousFaultsCatB(testData as CatBUniqueTypes.TestData);
     }
   }
 
-  public getDangerousFaults(testData: TestData | undefined, category: string): Fault [] {
+  public getDangerousFaults(testData: TestData | undefined, category: string): Fault[] {
     switch (category) {
       case TestCategory.ADI2: return getDangerousFaultsCatADI2(testData as CatADI2UniqueTypes.TestData);
       case TestCategory.B: return getDangerousFaultsCatB(testData as CatBUniqueTypes.TestData);
@@ -214,6 +230,14 @@ export class FaultProvider implements IFaultProvider {
       case TestCategory.G:
       case TestCategory.H:
       case TestCategory.K: return getDangerousFaultsCatHome(testData as HomeTestDataUnion);
+      case TestCategory.CM:
+      case TestCategory.C1M:
+      case TestCategory.C1E:
+      case TestCategory.C1EM:
+      case TestCategory.DM:
+      case TestCategory.D1M:
+      case TestCategory.D1E:
+      case TestCategory.D1EM: return [];
       default: return getDangerousFaultsCatB(testData as CatBUniqueTypes.TestData);
     }
   }
