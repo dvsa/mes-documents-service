@@ -70,7 +70,7 @@ export const getDrivingFaultsCatB = (testData: CatBUniqueTypes.TestData | undefi
 export const getNonStandardFaultsCatB = (testData: CatBUniqueTypes.TestData, faultType: CompetencyOutcome): Fault[] => {
   const faults: Fault[] = [];
 
-// Controlled Stop
+  // Controlled Stop
   if (
     testData.controlledStop &&
     testData.controlledStop.selected &&
@@ -78,13 +78,13 @@ export const getNonStandardFaultsCatB = (testData: CatBUniqueTypes.TestData, fau
     faults.push({ name: Competencies.controlledStop, count: 1 });
   }
 
-// Manoeuvres
+  // Manoeuvres
   if (testData.manoeuvres) {
     getCompletedManoeuvres(testData.manoeuvres, faultType)
       .forEach(fault => faults.push(fault));
   }
 
-// Vehicle Checks
+  // Vehicle Checks
   if (testData.vehicleChecks) {
     getVehicleChecksFaultCatB(testData.vehicleChecks, faultType)
       .forEach(fault => faults.push(fault));

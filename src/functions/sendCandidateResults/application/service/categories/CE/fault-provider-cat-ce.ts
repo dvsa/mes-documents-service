@@ -78,7 +78,7 @@ export const getNonStandardFaultsCatCE = (
 
   const faults: Fault[] = [];
 
-// Uncouple / recouple
+  // Uncouple / recouple
   if (
     testData.uncoupleRecouple &&
     testData.uncoupleRecouple.selected &&
@@ -86,13 +86,13 @@ export const getNonStandardFaultsCatCE = (
     faults.push({ name: Competencies.uncoupleRecouple, count: 1 });
   }
 
-// Manoeuvres
+  // Manoeuvres
   if (testData.manoeuvres) {
     getCompletedManoeuvres(testData.manoeuvres, faultType)
       .forEach(fault => faults.push(fault));
   }
 
-// Vehicle Checks
+  // Vehicle Checks
   if (testData.vehicleChecks) {
     getVehicleChecksFaultCatCE(testData.vehicleChecks, faultType)
       .forEach(fault => faults.push(fault));

@@ -82,26 +82,26 @@ describe('fault-provider-cat-be', () => {
           description: 'S01',
           outcome: CompetencyOutcome.DF,
         },
-          {
-            code: 'S02',
-            description: 'S02',
-            outcome: CompetencyOutcome.DF,
-          },
-          {
-            code: 'S03',
-            description: 'S03',
-            outcome: CompetencyOutcome.DF,
-          }],
+        {
+          code: 'S02',
+          description: 'S02',
+          outcome: CompetencyOutcome.DF,
+        },
+        {
+          code: 'S03',
+          description: 'S03',
+          outcome: CompetencyOutcome.DF,
+        }],
         tellMeQuestions: [{
           code: 'T01',
           description: 'T01',
           outcome: CompetencyOutcome.DF,
         },
-          {
-            code: 'T02',
-            description: 'T02',
-            outcome: CompetencyOutcome.DF,
-          }],
+        {
+          code: 'T02',
+          description: 'T02',
+          outcome: CompetencyOutcome.DF,
+        }],
       };
       const data: CatBEUniqueTypes.TestData = {
         vehicleChecks,

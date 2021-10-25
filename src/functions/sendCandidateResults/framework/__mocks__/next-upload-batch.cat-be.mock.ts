@@ -19,5 +19,5 @@ export class NextUploadBatchMock implements INextUploadBatch {
     }
 
     return Promise.resolve(data);
-  }
+  };
 }

@@ -113,7 +113,7 @@ export const getNonStandardFaultsCatHome = (
 
   const faults: Fault[] = [];
 
-// Manoeuvres
+  // Manoeuvres
   if (testData.manoeuvres) {
     getCompletedManoeuvres(testData.manoeuvres, faultType)
       .forEach(fault => faults.push(fault));

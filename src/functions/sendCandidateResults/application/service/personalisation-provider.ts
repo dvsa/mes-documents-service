@@ -179,19 +179,19 @@ export class PersonalisationProvider implements IPersonalisationProvider {
 
   private formatDate(stringDate: Date, language: ConductedLanguage): string {
     switch (language) {
-      case 'Cymraeg': return moment(stringDate).locale('cy').format('D MMMM YYYY');
-      default: return moment(stringDate).locale('en').format('D MMMM YYYY');
+    case 'Cymraeg': return moment(stringDate).locale('cy').format('D MMMM YYYY');
+    default: return moment(stringDate).locale('en').format('D MMMM YYYY');
     }
   }
 
   private modifyCompetencyLabel = (label: string, category: CategoryCode): string => {
     if (isBikeCategory(category)) {
       switch (label) {
-        case englishCompetencyLabels.moveOffControl: return modifiedEnglishCompetencyLabels.moveOffControl;
-        case englishCompetencyLabels.moveOffSafety: return modifiedEnglishCompetencyLabels.moveOffSafety;
-        default: return label;
+      case englishCompetencyLabels.moveOffControl: return modifiedEnglishCompetencyLabels.moveOffControl;
+      case englishCompetencyLabels.moveOffSafety: return modifiedEnglishCompetencyLabels.moveOffSafety;
+      default: return label;
       }
     }
     return label;
-  }
+  };
 }
