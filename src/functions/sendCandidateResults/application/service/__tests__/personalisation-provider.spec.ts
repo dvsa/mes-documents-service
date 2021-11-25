@@ -65,7 +65,7 @@ describe('personalisation-provider', () => {
       expect(result.showEtaText).toEqual(BooleanText.YES);
       expect(result.showEtaVerbal).toEqual(BooleanText.YES);
       expect(result.showEtaPhysical).toEqual(BooleanText.NO);
-      
+
       expect(result.showProvLicenceRetainedByDriver).toEqual(BooleanText.NO);
       expect(result.showProvLicenceRetainedByDvsa).toEqual(BooleanText.YES);
     });
