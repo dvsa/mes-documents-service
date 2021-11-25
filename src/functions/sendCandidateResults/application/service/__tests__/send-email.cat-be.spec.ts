@@ -22,6 +22,8 @@ const personlisation: EmailPersonalisation = {
   showEtaText: BooleanText.YES,
   showEtaPhysical: BooleanText.YES,
   showEtaVerbal: BooleanText.NO,
+  showProvLicenceRetainedByDvsa: BooleanText.YES,
+  showProvLicenceRetainedByDriver: BooleanText.NO,
 };
 
 describe('sendEmail', () => {

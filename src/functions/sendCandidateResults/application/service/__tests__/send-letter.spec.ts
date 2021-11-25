@@ -24,6 +24,8 @@ const personlisation: LetterPersonalisation = {
   showEtaText: BooleanText.YES,
   showEtaPhysical: BooleanText.YES,
   showEtaVerbal: BooleanText.NO,
+  showProvLicenceRetainedByDvsa: BooleanText.NO,
+  showProvLicenceRetainedByDriver: BooleanText.YES,
 };
 
 describe('sendLetter', () => {

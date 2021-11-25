@@ -94,6 +94,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       testresult.category);
 
     const eta = get(testresult, 'testData.ETA', null);
+    const provisionalLicenceProvided = get(testresult, 'passCompletion.provisionalLicenceProvided', false);
 
     return {
       applicationReference: formatApplicationReference(get(testresult, 'journalData.applicationReference')),
@@ -114,11 +115,11 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       showDangerousFaults: dangerousFaults.length > 0 ? BooleanText.YES : BooleanText.NO,
 
       showEcoText: this.shouldShowEco(get(testresult, 'testData.eco', null)),
-
       showEtaText: this.shouldShowEta(eta),
       showEtaVerbal: this.shouldShowEtaVerbal(eta),
       showEtaPhysical: this.shouldShowEtaPhysical(eta),
-
+      showProvLicenceRetainedByDvsa: provisionalLicenceProvided ? BooleanText.YES : BooleanText.NO,
+      showProvLicenceRetainedByDriver: (provisionalLicenceProvided === false) ? BooleanText.YES : BooleanText.NO,
     };
   }
 
@@ -170,6 +171,10 @@ export class PersonalisationProvider implements IPersonalisationProvider {
 
   private shouldShowEtaPhysical(eta: ETA): BooleanText {
     return eta && eta.physical ? BooleanText.YES : BooleanText.NO;
+  }
+
+  private shouldShowProvisionalLicenceReceived(provisionalLicenceProvided: boolean): BooleanText {
+    return provisionalLicenceProvided ? BooleanText.YES : BooleanText.NO;
   }
 
   private shouldShowEtaVerbal(eta: ETA): BooleanText {

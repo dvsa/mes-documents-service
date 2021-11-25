@@ -23,6 +23,9 @@ export interface Personalisation {
   showEtaText: BooleanText;
   showEtaVerbal: BooleanText;
   showEtaPhysical: BooleanText;
+
+  showProvLicenceRetainedByDvsa: BooleanText;
+  showProvLicenceRetainedByDriver: BooleanText;
 }
 
 export interface EmailPersonalisation extends Personalisation {}

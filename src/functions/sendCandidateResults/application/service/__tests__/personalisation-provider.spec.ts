@@ -65,6 +65,9 @@ describe('personalisation-provider', () => {
       expect(result.showEtaText).toEqual(BooleanText.YES);
       expect(result.showEtaVerbal).toEqual(BooleanText.YES);
       expect(result.showEtaPhysical).toEqual(BooleanText.NO);
+      
+      expect(result.showProvLicenceRetainedByDriver).toEqual(BooleanText.NO);
+      expect(result.showProvLicenceRetainedByDvsa).toEqual(BooleanText.YES);
     });
     it('should return welsh translations when required', () => {
       const personalisationProvider: IPersonalisationProvider = new PersonalisationProvider(
@@ -143,6 +146,9 @@ describe('personalisation-provider', () => {
       expect(result.showEtaText).toEqual(BooleanText.YES);
       expect(result.showEtaVerbal).toEqual(BooleanText.YES);
       expect(result.showEtaPhysical).toEqual(BooleanText.NO);
+
+      expect(result.showProvLicenceRetainedByDriver).toEqual(BooleanText.NO);
+      expect(result.showProvLicenceRetainedByDvsa).toEqual(BooleanText.YES);
     });
 
     it('should return welsh translations when required', () => {
