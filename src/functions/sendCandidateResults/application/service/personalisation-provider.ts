@@ -119,7 +119,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       showEtaVerbal: this.shouldShowEtaVerbal(eta),
       showEtaPhysical: this.shouldShowEtaPhysical(eta),
       showProvLicenceRetainedByDvsa: provisionalLicenceProvided ? BooleanText.YES : BooleanText.NO,
-      showProvLicenceRetainedByDriver: !provisionalLicenceProvided ? BooleanText.YES : BooleanText.NO,
+      showProvLicenceRetainedByDriver: (provisionalLicenceProvided === false) ? BooleanText.YES : BooleanText.NO,
     };
   }
 
@@ -171,6 +171,10 @@ export class PersonalisationProvider implements IPersonalisationProvider {
 
   private shouldShowEtaPhysical(eta: ETA): BooleanText {
     return eta && eta.physical ? BooleanText.YES : BooleanText.NO;
+  }
+
+  private shouldShowProvisionalLicenceReceived(provisionalLicenceProvided: boolean): BooleanText {
+    return provisionalLicenceProvided ? BooleanText.YES : BooleanText.NO;
   }
 
   private shouldShowEtaVerbal(eta: ETA): BooleanText {
