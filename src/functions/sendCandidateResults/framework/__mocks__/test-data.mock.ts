@@ -64,6 +64,10 @@ export const completedCatBTest: CatBUniqueTypes.TestResult = {
       extendedTest: false,
     },
   },
+  passCompletion: {
+    passCertificateNumber: '1233',
+    provisionalLicenceProvided: true,
+  },
   communicationPreferences: {
     communicationMethod: 'Email',
     conductedLanguage: 'English',
