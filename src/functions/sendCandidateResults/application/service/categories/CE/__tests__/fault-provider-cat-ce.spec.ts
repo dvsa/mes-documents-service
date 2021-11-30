@@ -87,6 +87,7 @@ describe('fault-provider-cat-ce', () => {
           description: 'T01',
           outcome: CompetencyOutcome.DF,
         }],
+        fullLicenceHeld: true,
       };
       const data: CatCEUniqueTypes.TestData = {
         vehicleChecks,
@@ -120,11 +121,32 @@ describe('fault-provider-cat-ce', () => {
           description: 'T01',
           outcome: CompetencyOutcome.DF,
         }],
+        fullLicenceHeld: true,
       };
 
       const result: Fault[] = getVehicleChecksFaultCatCE(data, CompetencyOutcome.DF);
       expect(result.length).toBe(1);
       expect(result).toContain({ name: Competencies.vehicleChecks, count: 1 });
+    });
+
+    it('should return one driving fault with a count of two if two exist when no full licence held', () => {
+      const data: CatCEUniqueTypes.VehicleChecks = {
+        showMeQuestions: [{
+          code: 'S01',
+          description: 'S01',
+          outcome: CompetencyOutcome.DF,
+        }],
+        tellMeQuestions: [{
+          code: 'T01',
+          description: 'T01',
+          outcome: CompetencyOutcome.DF,
+        }],
+        fullLicenceHeld: false,
+      };
+
+      const result: Fault[] = getVehicleChecksFaultCatCE(data, CompetencyOutcome.DF);
+      expect(result.length).toBe(1);
+      expect(result).toContain({ name: Competencies.vehicleChecks, count: 2 });
     });
 
     it('should return one driving fault with a count of 1', () => {

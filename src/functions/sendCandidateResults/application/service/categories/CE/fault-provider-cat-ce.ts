@@ -9,6 +9,7 @@ import {
   getVehicleCheckFaultCount,
 } from '../../fault-provider';
 import { Competencies } from '../../../../domain/competencies';
+import { getVehicleCheckFaultLimit } from '../C/fault-provider-cat-c';
 
 export const getDrivingFaultsCatCE = (testData: CatCEUniqueTypes.TestData | undefined): Fault [] => {
   const drivingFaults: Fault[] = [];
@@ -43,8 +44,10 @@ export const getSeriousFaultsCatCE = (testData: CatCEUniqueTypes.TestData | unde
   getNonStandardFaultsCatCE(testData, CompetencyOutcome.S)
     .forEach(fault => seriousFaults.push(fault));
 
+  const faultLimit = getVehicleCheckFaultLimit(testData.vehicleChecks as CatCEUniqueTypes.VehicleChecks);
+
   if (getVehicleCheckFaultCount(testData.vehicleChecks as CatCEUniqueTypes.VehicleChecks, CompetencyOutcome.DF) ===
-    FaultLimit.TRAILER) {
+    faultLimit) {
     seriousFaults.push({ name: Competencies.vehicleChecks, count: 1 });
   }
 
@@ -105,8 +108,10 @@ export const getVehicleChecksFaultCatCE = (
   const faultCount = getVehicleCheckFaultCount(vehicleChecks, faultType);
 
   if (faultCount > 0) {
+    const faultLimit = getVehicleCheckFaultLimit(vehicleChecks);
+
     faultArray.push(
-      { name: Competencies.vehicleChecks, count: faultCount === FaultLimit.TRAILER ? 1 : faultCount },
+      { name: Competencies.vehicleChecks, count: (faultCount === faultLimit) ? (faultCount - 1) : faultCount },
     );
   }
   return faultArray;
