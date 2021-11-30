@@ -9,6 +9,7 @@ import {
 } from '../../fault-provider';
 import { Competencies } from '../../../../domain/competencies';
 import { QuestionOutcome } from '@dvsa/mes-test-schema/categories/common';
+import { get } from 'lodash';
 
 export const getDrivingFaultsCatC = (testData: CatCUniqueTypes.TestData | undefined): Fault [] => {
   const drivingFaults: Fault[] = [];
@@ -102,4 +103,10 @@ export const getVehicleChecksFaultCatC = (
     );
   }
   return faultArray;
+};
+
+export const getVehicleCheckFaultLimit = (vehicleChecks: CatCUniqueTypes.VehicleChecks): FaultLimit => {
+  const fullLicenceHeld: boolean = get(vehicleChecks, 'fullLicenceHeld', false);
+
+  return fullLicenceHeld ? FaultLimit.TRAILER : FaultLimit.NON_TRAILER;
 };
