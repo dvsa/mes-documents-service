@@ -112,7 +112,7 @@ export const getVehicleChecksFaultCatC1E = (
     const faultLimit = getVehicleCheckFaultLimit(vehicleChecks);
 
     faultArray.push(
-      { name: Competencies.vehicleChecks, count: (faultCount === faultLimit) ? (faultCount - 1) : faultCount }
+      { name: Competencies.vehicleChecks, count: (faultCount === faultLimit) ? (faultCount - 1) : faultCount },
     );
   }
   return faultArray;
