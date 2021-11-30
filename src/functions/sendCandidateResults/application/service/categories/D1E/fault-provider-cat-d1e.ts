@@ -10,6 +10,7 @@ import {
 } from '../../fault-provider';
 import { Competencies } from '../../../../domain/competencies';
 import { PcvDoorExercise, SafetyQuestionResult } from '@dvsa/mes-test-schema/categories/D1E/partial';
+import { getVehicleCheckFaultLimit } from '../C/fault-provider-cat-c';
 
 export const getDrivingFaultsCatD1E = (testData: CatD1EUniqueTypes.TestData | undefined): Fault [] => {
   const drivingFaults: Fault[] = [];
@@ -44,8 +45,10 @@ export const getSeriousFaultsCatD1E = (testData: CatD1EUniqueTypes.TestData | un
   getNonStandardFaultsCatD1E(testData, CompetencyOutcome.S)
     .forEach(fault => seriousFaults.push(fault));
 
+  const faultLimit = getVehicleCheckFaultLimit(testData.vehicleChecks as CatD1EUniqueTypes.VehicleChecks);
+
   if (getVehicleCheckFaultCount(testData.vehicleChecks as CatD1EUniqueTypes.VehicleChecks, CompetencyOutcome.DF)
-    === FaultLimit.TRAILER) {
+    === faultLimit) {
     seriousFaults.push({ name: Competencies.vehicleChecks, count: 1 });
   }
 
@@ -118,8 +121,10 @@ export const getVehicleChecksFaultCatD1E = (
   const faultCount = getVehicleCheckFaultCount(vehicleChecks, faultType);
 
   if (faultCount > 0) {
+    const faultLimit = getVehicleCheckFaultLimit(vehicleChecks);
+
     faultArray.push(
-      { name: Competencies.vehicleChecks, count: faultCount === FaultLimit.TRAILER ? 1 : faultCount },
+      { name: Competencies.vehicleChecks, count: (faultCount === faultLimit) ? (faultCount - 1) : faultCount },
     );
   }
   return faultArray;
