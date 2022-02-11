@@ -144,7 +144,7 @@ export class RequestScheduler implements IRequestScheduler {
 
     if (communicationPreferences.communicationMethod === 'Email') {
       return sendEmail(
-        communicationPreferences.updatedEmail,
+        communicationPreferences.updatedEmail as string,
         templateId,
         this.personalisationProvider.getEmailPersonalisation(testResult),
         formatApplicationReference(testResult.journalData.applicationReference).toString(),
