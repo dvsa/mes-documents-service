@@ -34,7 +34,8 @@ export class TemplateIdProvider implements ITemplateIdProvider {
     communicationPreferences: CommunicationPreferences, activityCode: ActivityCode, category: CategoryCode): string {
 
     const { conductedLanguage, communicationMethod } = communicationPreferences;
-    const baseTemplate: string = getTemplateString(conductedLanguage, communicationMethod, activityCode);
+    const baseTemplate: string =
+     getTemplateString(conductedLanguage, communicationMethod as CommunicationMethod, activityCode);
 
     if (baseTemplate === TemplateIdProvider.TEMPLATE_ID_NOT_SET) {
       return TemplateIdProvider.TEMPLATE_ID_NOT_SET;
@@ -128,7 +129,10 @@ export function isCPCCategory(category: CategoryCode): boolean {
 }
 
 export function getTemplateString(
-  conductedLanguage: ConductedLanguage, communicationMethod: CommunicationMethod, activityCode: ActivityCode): string {
+  conductedLanguage: ConductedLanguage,
+  communicationMethod: CommunicationMethod,
+  activityCode: ActivityCode,
+): string {
 
   const languageOfTemplate: TemplateLanguage =
     (conductedLanguage === Language.WELSH) ? TemplateLanguage.WELSH : TemplateLanguage.ENGLISH;
