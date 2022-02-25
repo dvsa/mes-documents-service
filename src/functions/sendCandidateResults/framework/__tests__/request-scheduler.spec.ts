@@ -31,7 +31,7 @@ describe('RequestScheduler', () => {
 
   let testResults: TestResultSchemasUnion[];
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     configAdapter = new ConfigAdapterMock();
     templateIdProvider = new TemplateIdProvider(configAdapter);
     statusUpdater = new StatusUpdaterMock();
@@ -47,11 +47,11 @@ describe('RequestScheduler', () => {
     testResults = await new NextUploadBatchMock().get(totalNumberOfTests);
   });
 
-  it('should call updateStatus when successfully notified candidate', async (done) => {
+  it('should call updateStatus when successfully notified candidate', async () => {
     const notifyClient: INotifyClient = new NotifyClientStubSuccess();
 
     const requestScheduler =
-    new RequestScheduler(configAdapter, notifyClient, templateIdProvider, personalisationProvider, statusUpdater);
+      new RequestScheduler(configAdapter, notifyClient, templateIdProvider, personalisationProvider, statusUpdater);
 
     requestScheduler.scheduleRequests(testResults);
 
@@ -66,15 +66,14 @@ describe('RequestScheduler', () => {
           error_message: null,
         },
       });
-      done();
-    },         1000);
+    }, 1000);
   });
 
-  it('should call updateStatus in a failed state when requests return a 400 error', async (done) => {
+  it('should call updateStatus in a failed state when requests return a 400 error', async () => {
     const notifyClient: INotifyClient = new NotifyClientStubFailure400();
 
     const requestScheduler =
-    new RequestScheduler(configAdapter, notifyClient, templateIdProvider, personalisationProvider, statusUpdater);
+      new RequestScheduler(configAdapter, notifyClient, templateIdProvider, personalisationProvider, statusUpdater);
 
     requestScheduler.scheduleRequests(testResults);
 
@@ -86,18 +85,17 @@ describe('RequestScheduler', () => {
           state: ProcessingStatus.FAILED,
           staff_number: '123456',
           retry_count: 0,
-          error_message: `Can't send to this recipient using a team-only API key`,
+          error_message: 'Can\'t send to this recipient using a team-only API key',
         },
       });
-      done();
-    },         1000);
+    }, 1000);
   });
 
-  it('should call updateStatus in a failed state when requests return a 500 error', async (done) => {
+  it('should call updateStatus in a failed state when requests return a 500 error', async () => {
     const notifyClient: INotifyClient = new NotifyClientStubFailure500();
 
     const requestScheduler =
-    new RequestScheduler(configAdapter, notifyClient, templateIdProvider, personalisationProvider, statusUpdater);
+      new RequestScheduler(configAdapter, notifyClient, templateIdProvider, personalisationProvider, statusUpdater);
 
     requestScheduler.scheduleRequests(testResults);
 
@@ -112,11 +110,10 @@ describe('RequestScheduler', () => {
           error_message: 'Internal server error',
         },
       });
-      done();
-    },         1000);
+    }, 1000);
   });
 
-  it('should call updateStatus in a failed state when requests time out', async (done) => {
+  it('should call updateStatus in a failed state when requests time out', async () => {
     const notifyClient: INotifyClient = new NotifyClientStubTimeout(configAdapter);
 
     const requestScheduler = new RequestScheduler(
@@ -135,8 +132,7 @@ describe('RequestScheduler', () => {
           error_message: 'timed out',
         },
       });
-      done();
-    },         4500);
+    }, 4500);
   });
 
 });

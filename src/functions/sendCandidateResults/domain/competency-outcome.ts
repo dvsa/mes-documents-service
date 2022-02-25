@@ -1,5 +1,5 @@
 export enum CompetencyOutcome {
-    DF = 'DF',
-    S = 'S',
-    D = 'D',
-  }
+  DF = 'DF',
+  S = 'S',
+  D = 'D',
+}

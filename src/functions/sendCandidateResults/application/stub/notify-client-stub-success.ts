@@ -18,7 +18,7 @@ export class NotifyClientStubSuccess implements INotifyClient {
         template: {
           id: 'ceb50d92-100d-4b8b-b559-14fa3b091cda',
           version: 1,
-          // tslint:disable-next-line
+          // eslint-disable-next-line max-len
           uri: 'https://api.notificaitons.service.gov.uk/service/your_service_id/templates/bfb50d92-100d-4b8b-b559-14fa3b091cda',
         },
       });

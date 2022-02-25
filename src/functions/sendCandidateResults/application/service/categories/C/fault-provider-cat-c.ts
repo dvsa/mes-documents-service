@@ -76,13 +76,13 @@ export const getNonStandardFaultsCatC = (
 
   const faults: Fault[] = [];
 
-// Manoeuvres
+  // Manoeuvres
   if (testData.manoeuvres) {
     getCompletedManoeuvres(testData.manoeuvres, faultType)
       .forEach(fault => faults.push(fault));
   }
 
-// Vehicle Checks
+  // Vehicle Checks
   if (testData.vehicleChecks) {
     getVehicleChecksFaultCatC(testData.vehicleChecks, faultType)
       .forEach(fault => faults.push(fault));

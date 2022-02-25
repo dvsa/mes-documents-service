@@ -7,7 +7,6 @@ import { IStatusUpdater } from '../../../framework/status-updater';
 import { IFaultProvider, FaultProvider } from '../fault-provider';
 import { ICustomPropertyProvider, CustomPropertyProvider } from '../custom-property-provider';
 import { IPersonalisationProvider, PersonalisationProvider } from '../personalisation-provider';
-import { CatBUniqueTypes } from '@dvsa/mes-test-schema/categories/B';
 import { ConfigAdapterMock } from '../../../framework/adapter/config/__mocks__/config-adapter.mock';
 import { StatusUpdaterMock } from '../../../framework/__mocks__/status-updater.mock';
 import { NextUploadBatchMock } from '../../../framework/__mocks__/next-upload-batch.mock';
@@ -43,7 +42,7 @@ describe('Test termination confirmation', () => {
   });
 
   describe('Terminated test sendEmail handling', () => {
-    it('should not send an email when templateId is empty', async (done) => {
+    it('should not send an email when templateId is empty', async () => {
       const notifyClient: INotifyClient = new NotifyClientStubSuccess();
       testResults.forEach(result => result.activityCode = '11');
       const requestScheduler =
@@ -64,11 +63,10 @@ describe('Test termination confirmation', () => {
             error_message: null,
           },
         });
-        done();
-      },         1000);
+      }, 1000);
     });
 
-    it('should send an email for terminated activity code 4', async (done) => {
+    it('should send an email for terminated activity code 4', async () => {
       const notifyClient: INotifyClient = new NotifyClientStubSuccess();
       testResults.forEach(result => result.activityCode = '4');
       const requestScheduler =
@@ -89,11 +87,10 @@ describe('Test termination confirmation', () => {
             error_message: null,
           },
         });
-        done();
-      },         1000);
+      }, 1000);
     });
 
-    it('should send an email for terminated activity code 5', async (done) => {
+    it('should send an email for terminated activity code 5', async () => {
       const notifyClient: INotifyClient = new NotifyClientStubSuccess();
       testResults.forEach(result => result.activityCode = '5');
       const requestScheduler =
@@ -114,13 +111,12 @@ describe('Test termination confirmation', () => {
             error_message: null,
           },
         });
-        done();
-      },         1000);
+      }, 1000);
     });
   });
 
   describe('Terminated test sendLetter handling', () => {
-    it('should not send an email when templateId is empty', async (done) => {
+    it('should not send an email when templateId is empty', async () => {
       const notifyClient: INotifyClient = new NotifyClientStubSuccess();
       testResults.forEach(result => result.activityCode = '11');
       const requestScheduler =
@@ -141,11 +137,10 @@ describe('Test termination confirmation', () => {
             error_message: null,
           },
         });
-        done();
-      },         1000);
+      }, 1000);
     });
 
-    it('should send a letter for terminated activity code 4', async (done) => {
+    it('should send a letter for terminated activity code 4', async () => {
       const notifyClient: INotifyClient = new NotifyClientStubSuccess();
       testResults.forEach((result) => {
         result.activityCode = '4';
@@ -173,11 +168,10 @@ describe('Test termination confirmation', () => {
             error_message: null,
           },
         });
-        done();
-      },         1000);
+      }, 1000);
     });
 
-    it('should send a letter for terminated activity code 5', async (done) => {
+    it('should send a letter for terminated activity code 5', async () => {
       const notifyClient: INotifyClient = new NotifyClientStubSuccess();
       testResults.forEach((result) => {
         result.activityCode = '5';
@@ -205,8 +199,7 @@ describe('Test termination confirmation', () => {
             error_message: null,
           },
         });
-        done();
-      },         1000);
+      }, 1000);
     });
   });
 });

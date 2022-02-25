@@ -43,12 +43,12 @@ const getEmergencyStopAttempts = (
   emergencyStopData: EmergencyStop | undefined,
   language: ConductedLanguage,
 ): Pick<
-  CatAMod1ICustomProperties,
-  | 'showEmergencyStop'
-  | 'showEmergencyFirstAttempt'
-  | 'emergencyFirstAttempt'
-  | 'showEmergencySecondAttempt'
-  | 'emergencySecondAttempt'
+CatAMod1ICustomProperties,
+| 'showEmergencyStop'
+| 'showEmergencyFirstAttempt'
+| 'emergencyFirstAttempt'
+| 'showEmergencySecondAttempt'
+| 'emergencySecondAttempt'
 > => {
   const emergencyStopAttempts = {
     showEmergencyStop: BooleanText.NO,
@@ -80,12 +80,12 @@ const getAvoidanceAttempts = (
   avoidanceData: Avoidance | undefined,
   language: ConductedLanguage,
 ): Pick<
-  CatAMod1ICustomProperties,
-  | 'showAvoidanceExercise'
-  | 'showAvoidanceFirstAttempt'
-  | 'avoidanceFirstAttempt'
-  | 'showAvoidanceSecondAttempt'
-  | 'avoidanceSecondAttempt'
+CatAMod1ICustomProperties,
+| 'showAvoidanceExercise'
+| 'showAvoidanceFirstAttempt'
+| 'avoidanceFirstAttempt'
+| 'showAvoidanceSecondAttempt'
+| 'avoidanceSecondAttempt'
 > => {
   const avoidanceAttempts = {
     showAvoidanceExercise: BooleanText.NO,

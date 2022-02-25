@@ -82,26 +82,26 @@ describe('fault-provider-cat-d1', () => {
           description: 'S01',
           outcome: CompetencyOutcome.DF,
         },
-          {
-            code: 'S02',
-            description: 'S02',
-            outcome: CompetencyOutcome.DF,
-          },
-          {
-            code: 'S03',
-            description: 'S03',
-            outcome: CompetencyOutcome.DF,
-          }],
+        {
+          code: 'S02',
+          description: 'S02',
+          outcome: CompetencyOutcome.DF,
+        },
+        {
+          code: 'S03',
+          description: 'S03',
+          outcome: CompetencyOutcome.DF,
+        }],
         tellMeQuestions: [{
           code: 'T01',
           description: 'T01',
           outcome: CompetencyOutcome.DF,
         },
-          {
-            code: 'T02',
-            description: 'T02',
-            outcome: CompetencyOutcome.DF,
-          }],
+        {
+          code: 'T02',
+          description: 'T02',
+          outcome: CompetencyOutcome.DF,
+        }],
       };
       const data: CatD1UniqueTypes.TestData = {
         vehicleChecks,
@@ -236,10 +236,10 @@ describe('fault-provider-cat-d1', () => {
 
       expect(result.length).toBe(4);
       expect(result).toEqual([
-                               { name: Competencies.ancillaryControls, count: 1 },
-                               { name: Competencies.reverseLeftControl, count: 1 },
-                               { name: Competencies.safetyQuestions, count: 1 },
-                               { name: Competencies.pcvDoorExercise, count: 1 },
+        { name: Competencies.ancillaryControls, count: 1 },
+        { name: Competencies.reverseLeftControl, count: 1 },
+        { name: Competencies.safetyQuestions, count: 1 },
+        { name: Competencies.pcvDoorExercise, count: 1 },
       ]);
     });
   });

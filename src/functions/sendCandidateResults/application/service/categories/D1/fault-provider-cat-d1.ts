@@ -76,13 +76,13 @@ export const getNonStandardFaultsCatD1 = (
 
   const faults: Fault[] = [];
 
-// Manoeuvres
+  // Manoeuvres
   if (testData.manoeuvres) {
     getCompletedManoeuvres(testData.manoeuvres, faultType)
       .forEach(fault => faults.push(fault));
   }
 
-// Vehicle Checks
+  // Vehicle Checks
   if (testData.vehicleChecks) {
     getVehicleChecksFaultCatD1(testData.vehicleChecks, faultType)
       .forEach(fault => faults.push(fault));
@@ -117,8 +117,8 @@ export const getVehicleChecksFaultCatD1 = (
   return faultArray;
 };
 export const getSafetyQuestionsFaultCatD1 = (
- safetyQuestions: SafetyQuestionResult[],
- faultType: QuestionOutcome): Fault[] => {
+  safetyQuestions: SafetyQuestionResult[],
+  faultType: QuestionOutcome): Fault[] => {
   const faultArray: Fault[] = [];
 
   if (!safetyQuestions || safetyQuestions.length === 0) {
@@ -155,21 +155,21 @@ export const getPcvDoorExerciseFaultCatD1 = (
   let gotFault: boolean = false;
 
   switch (faultType) {
-    case CompetencyOutcome.DF:
-      gotFault = pcvDoorExercise.drivingFault || false;
-      break;
-    case CompetencyOutcome.S:
-      gotFault = pcvDoorExercise.seriousFault || false;
-      break;
-    case CompetencyOutcome.D:
-      gotFault = pcvDoorExercise.dangerousFault || false;
-      break;
+  case CompetencyOutcome.DF:
+    gotFault = pcvDoorExercise.drivingFault || false;
+    break;
+  case CompetencyOutcome.S:
+    gotFault = pcvDoorExercise.seriousFault || false;
+    break;
+  case CompetencyOutcome.D:
+    gotFault = pcvDoorExercise.dangerousFault || false;
+    break;
   }
 
   if (gotFault) {
     faultArray.push(
-       { name: Competencies.pcvDoorExercise, count: 1 },
-     );
+      { name: Competencies.pcvDoorExercise, count: 1 },
+    );
   }
   return faultArray;
 };

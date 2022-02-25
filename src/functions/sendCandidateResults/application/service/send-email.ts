@@ -14,7 +14,7 @@ export async function sendEmail(
   try {
     await client.sendEmail(templateId, emailAddress, { personalisation, reference, emailReplyToId });
     return Promise.resolve();
-  } catch (err) {
+  } catch (err: any) {
     const statusCode = err.error.status_code;
     const message = err.error.errors[0].message;
 

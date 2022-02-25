@@ -12,7 +12,7 @@ export async function sendLetter(
   try {
     await notifyClient.sendLetter(templateId, { personalisation, reference });
     return Promise.resolve();
-  } catch (err) {
+  } catch (err: any) {
     const statusCode = err.error.status_code;
     const message = err.error.errors[0].message;
 

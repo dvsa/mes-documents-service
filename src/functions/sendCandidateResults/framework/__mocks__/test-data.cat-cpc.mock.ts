@@ -12,17 +12,17 @@ export const completedCPCTest: TestResultCatCPCSchema = {
       answer2: { label: 'Selects correct restraint item - load tensioning bar/webbing straps', selected: true },
       answer3: { label: 'Demonstrates competence in use of load tensioning bar/webbing straps', selected: false },
       answer4: { label: 'Demonstrates how to release the restraining device', selected: false },
-      // tslint:disable-next-line:max-line-length
+      // eslint-disable-next-line max-len
       subtitle: 'You\'ve delivered part of your load and are left with half a load of empty roller cages inside your box van. Show me:',
       questionCode: 'Q14',
-      // tslint:disable-next-line:max-line-length
+      // eslint-disable-next-line max-len
       additionalItems: ['a) by pointing to the correct distribution area(s) on this vehicle, where this load should be placed', 'b) which restraining device you\'d use to secure the load', 'c) how you\'d secure the load with the restraining device', 'd) how you\'d release the restraining device'],
     },
     question2: {
       score: 0,
       title: 'Security of vehicle and contents ',
       answer1: {
-        // tslint:disable-next-line:max-line-length
+        // eslint-disable-next-line max-len
         label: 'Only park in secure, well lit vehicle parks. Where possible, park with the rear doors against a wall or backed up to another vehicle',
         selected: false,
       },
@@ -46,7 +46,7 @@ export const completedCPCTest: TestResultCatCPCSchema = {
         selected: false,
       },
       answer4: { label: 'Check fuel cap in place (not tampered with). Visual check', selected: false },
-      // tslint:disable-next-line:max-line-length
+      // eslint-disable-next-line max-len
       subtitle: 'You\'ve had a comfort break just before boarding a cross channel ferry. Show me what checks you\'d make to this vehicle before driving through customs.',
       questionCode: 'Q07',
       additionalItems: [''],

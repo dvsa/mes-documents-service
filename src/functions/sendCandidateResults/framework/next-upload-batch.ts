@@ -25,7 +25,7 @@ export class NextUploadBatch implements INextUploadBatch {
     return axios.get(
       `${resultsBaseApiUrl}/test-results/upload?interface=${NOTIFY_INTERFACE}&batch_size=${this.batchSize}`,
     ).then((response: AxiosResponse): TestResultSchemasUnion[] => {
-      const parseResult = response.data;
+      const parseResult = response.data as string[];
       const resultList: TestResultSchemasUnion[] = [];
       parseResult.forEach((element: string) => {
         let uncompressedResult: string = '';

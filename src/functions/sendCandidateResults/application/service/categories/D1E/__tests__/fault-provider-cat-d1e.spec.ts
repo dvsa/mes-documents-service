@@ -243,10 +243,10 @@ describe('fault-provider-cat-d1e', () => {
 
       expect(result.length).toBe(4);
       expect(result).toEqual([
-                               { name: Competencies.ancillaryControls, count: 1 },
-                               { name: Competencies.reverseLeftControl, count: 1 },
-                               { name: Competencies.safetyQuestions, count: 1 },
-                               { name: Competencies.pcvDoorExercise, count: 1 },
+        { name: Competencies.ancillaryControls, count: 1 },
+        { name: Competencies.reverseLeftControl, count: 1 },
+        { name: Competencies.safetyQuestions, count: 1 },
+        { name: Competencies.pcvDoorExercise, count: 1 },
       ]);
     });
   });
