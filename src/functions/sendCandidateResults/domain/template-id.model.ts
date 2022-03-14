@@ -17,6 +17,7 @@ export enum TestType {
   HOME = 'Home',
   ADI2 = 'Adi2',
   CPC = 'Cpc',
+  MANOEUVRE = 'Man',
 }
 
 export enum Correspondence {

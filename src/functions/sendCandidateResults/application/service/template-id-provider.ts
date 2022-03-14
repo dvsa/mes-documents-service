@@ -31,7 +31,10 @@ export class TemplateIdProvider implements ITemplateIdProvider {
   }
 
   getTemplateId(
-    communicationPreferences: CommunicationPreferences, activityCode: ActivityCode, category: CategoryCode): string {
+    communicationPreferences: CommunicationPreferences,
+    activityCode: ActivityCode,
+    category: CategoryCode,
+  ): string {
 
     const { conductedLanguage, communicationMethod } = communicationPreferences;
     const baseTemplate: string =
@@ -63,6 +66,10 @@ export class TemplateIdProvider implements ITemplateIdProvider {
 
     if (isCPCCategory(category)) {
       return get(this.configAdapter, `${baseTemplate}${TestType.CPC}`);
+    }
+
+    if (isManoeuvreCategory(category)) {
+      return get(this.configAdapter, `${baseTemplate}${TestType.MANOEUVRE}`);
     }
 
     return get(this.configAdapter, baseTemplate);
@@ -125,6 +132,19 @@ export function isCPCCategory(category: CategoryCode): boolean {
   return [
     TestCategory.CCPC,
     TestCategory.DCPC,
+  ].includes(category as TestCategory);
+}
+
+export function isManoeuvreCategory(category: CategoryCode): boolean {
+  return [
+    TestCategory.CM,
+    TestCategory.C1M,
+    TestCategory.CEM,
+    TestCategory.C1EM,
+    TestCategory.DM,
+    TestCategory.D1M,
+    TestCategory.DEM,
+    TestCategory.D1EM,
   ].includes(category as TestCategory);
 }
 

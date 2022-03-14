@@ -52,7 +52,8 @@ export enum Competencies {
   uncoupleRecouple = 'uncoupleRecouple',
   reverseLeftControl = 'reverseLeftControl',
   reverseLeftObservation = 'reverseLeftObservation',
-
+  reverseManoeuvreControl = 'reverseManoeuvreControl',
+  reverseManoeuvreObservation = 'reverseManoeuvreObservation',
   useOfStand = 'useOfStand',
   manualHandling = 'manualHandling',
   slalom = 'slalom',
@@ -139,6 +140,8 @@ export enum englishCompetencyLabels {
   eyesightTest = 'Eyesight test',
   reverseLeftControl = 'Reverse - Control',
   reverseLeftObservation = 'Reverse - Observation',
+  reverseManoeuvreControl = 'Reverse - Control',
+  reverseManoeuvreObservation = 'Reverse - Observation',
   uncoupleRecouple = 'Uncouple / Recouple',
 
   useOfStand = 'Use of stand',
@@ -229,7 +232,8 @@ export enum welshCompetencyLabels {
   uncoupleRecouple = 'Dadfachu / Ailfachu',
   reverseLeftObservation = 'Gwrthdroi - gwyliadwriaeth',
   reverseLeftControl = 'Gwrthdroi - dan reolaeth',
-
+  reverseManoeuvreControl = 'Gwrthdroi - gwyliadwriaeth',
+  reverseManoeuvreObservation = 'Gwrthdroi - dan reolaeth',
   useOfStand = 'Defnyddio stondin',
   manualHandling = 'Codi a chario',
   slalom = 'Slalom / Ffigwr 8',
