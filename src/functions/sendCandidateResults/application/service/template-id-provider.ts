@@ -37,6 +37,7 @@ export class TemplateIdProvider implements ITemplateIdProvider {
   ): string {
 
     const { conductedLanguage, communicationMethod } = communicationPreferences;
+
     const baseTemplate: string =
      getTemplateString(conductedLanguage, communicationMethod as CommunicationMethod, activityCode);
 
