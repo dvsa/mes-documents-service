@@ -14,7 +14,7 @@ import { NOTIFY_INTERFACE } from '../domain/interface.constants';
 import { formatApplicationReference } from '@dvsa/mes-microservice-common/domain/tars';
 import { TestResultSchemasUnion } from '@dvsa/mes-test-schema/categories';
 import isDelegatedTest from '../application/service/is-delegated-test';
-import isManoeuvreTest from '../application/service/is-manoeuvre-test';
+import { isDES3ManoeuvreTest } from '../application/service/is-manoeuvre-test';
 import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 import { TestResultCommonSchema } from '@dvsa/mes-test-schema/categories/common';
 
@@ -133,7 +133,7 @@ export class RequestScheduler implements IRequestScheduler {
       return Promise.resolve();
     }
 
-    if (isManoeuvreTest(testResult.category as TestCategory)) {
+    if (isDES3ManoeuvreTest(testResult.category as TestCategory, testResult?.appVersion)) {
       return Promise.resolve();
     }
 

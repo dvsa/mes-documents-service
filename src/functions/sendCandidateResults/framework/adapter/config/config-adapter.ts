@@ -85,6 +85,16 @@ export class ConfigAdapter implements IConfigAdapter {
   englishLetterFailTemplateIdCpc: string;
   welshLetterPassTemplateIdCpc: string;
   welshLetterFailTemplateIdCpc: string;
+  // Email Template Id's Manoeuvre
+  englishEmailPassTemplateIdMan: string;
+  englishEmailFailTemplateIdMan: string;
+  welshEmailPassTemplateIdMan: string;
+  welshEmailFailTemplateIdMan: string;
+  // Letter Template Id's Manoeuvre
+  englishLetterPassTemplateIdMan: string;
+  englishLetterFailTemplateIdMan: string;
+  welshLetterPassTemplateIdMan: string;
+  welshLetterFailTemplateIdMan: string;
 
   constructor() {
     this.apiKey = '';
@@ -166,6 +176,16 @@ export class ConfigAdapter implements IConfigAdapter {
     this.englishLetterFailTemplateIdCpc = this.getFromEnvThrowIfNotPresent('POST_FAIL_CPC4');
     this.welshLetterPassTemplateIdCpc = this.getFromEnvThrowIfNotPresent('POST_W_PASS_CPC4');
     this.welshLetterFailTemplateIdCpc = this.getFromEnvThrowIfNotPresent('POST_W_FAIL_CPC4');
+    // Manoeuvre Email
+    this.englishEmailPassTemplateIdMan = this.getFromEnvThrowIfNotPresent('EMAIL_PASS_MAN');
+    this.englishEmailFailTemplateIdMan = this.getFromEnvThrowIfNotPresent('EMAIL_FAIL_MAN');
+    this.welshEmailPassTemplateIdMan = this.getFromEnvThrowIfNotPresent('EMAIL_W_PASS_MAN');
+    this.welshEmailFailTemplateIdMan = this.getFromEnvThrowIfNotPresent('EMAIL_W_FAIL_MAN');
+    // Manoeuvre Letter
+    this.englishLetterPassTemplateIdMan = this.getFromEnvThrowIfNotPresent('POST_PASS_MAN');
+    this.englishLetterFailTemplateIdMan = this.getFromEnvThrowIfNotPresent('POST_FAIL_MAN');
+    this.welshLetterPassTemplateIdMan = this.getFromEnvThrowIfNotPresent('POST_W_PASS_MAN');
+    this.welshLetterFailTemplateIdMan = this.getFromEnvThrowIfNotPresent('POST_W_FAIL_MAN');
   }
 
   public async getApiKey(): Promise<string> {

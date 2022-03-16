@@ -91,6 +91,9 @@ import {
   getDrivingFaultsCatADI2,
   getSeriousFaultsCatADI2,
 } from './categories/ADI2/fault-provider-cat-adi-pt2';
+import {
+  getDangerousFaultsCatManoeuvre, getSeriousFaultsCatManoeuvre,
+} from './categories/manoeuvres/fault-provider-cat-manoeuvre';
 
 // No CatBUniqueTypes.VehicleChecks as the data structure differs to other categories
 type VehicleChecksUnion =
@@ -154,11 +157,11 @@ export class FaultProvider implements IFaultProvider {
     case TestCategory.K: return getDrivingFaultsCatHome(testData as CatKUniqueTypes.TestData);
     case TestCategory.CM:
     case TestCategory.C1M:
-    case TestCategory.C1E:
+    case TestCategory.CEM:
     case TestCategory.C1EM:
     case TestCategory.DM:
     case TestCategory.D1M:
-    case TestCategory.D1E:
+    case TestCategory.DEM:
     case TestCategory.D1EM: return [];
     default: return getDrivingFaultsCatB(testData as CatBUniqueTypes.TestData);
     }
@@ -193,12 +196,12 @@ export class FaultProvider implements IFaultProvider {
     case TestCategory.K: return getSeriousFaultsCatHome(testData as HomeTestDataUnion);
     case TestCategory.CM:
     case TestCategory.C1M:
-    case TestCategory.C1E:
+    case TestCategory.CEM:
     case TestCategory.C1EM:
     case TestCategory.DM:
     case TestCategory.D1M:
-    case TestCategory.D1E:
-    case TestCategory.D1EM: return [];
+    case TestCategory.DEM:
+    case TestCategory.D1EM: return getSeriousFaultsCatManoeuvre(testData);
     default: return getSeriousFaultsCatB(testData as CatBUniqueTypes.TestData);
     }
   }
@@ -232,12 +235,12 @@ export class FaultProvider implements IFaultProvider {
     case TestCategory.K: return getDangerousFaultsCatHome(testData as HomeTestDataUnion);
     case TestCategory.CM:
     case TestCategory.C1M:
-    case TestCategory.C1E:
+    case TestCategory.CEM:
     case TestCategory.C1EM:
     case TestCategory.DM:
     case TestCategory.D1M:
-    case TestCategory.D1E:
-    case TestCategory.D1EM: return [];
+    case TestCategory.DEM:
+    case TestCategory.D1EM: return getDangerousFaultsCatManoeuvre(testData);
     default: return getDangerousFaultsCatB(testData as CatBUniqueTypes.TestData);
     }
   }
