@@ -31,7 +31,7 @@
     "notifications-node-client": "^5.1.1"
   },
   "devDependencies": {
-    "@dvsa/mes-test-schema": "3.38.1",
+    "@dvsa/mes-test-schema": "3.38.2",
     "@types/aws-lambda": "^8.10.92",
     "@types/jasmine": "^3.10.3",
     "@types/node": "^14.17.5",
