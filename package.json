@@ -27,7 +27,7 @@
     "bottleneck": "^2.19.5",
     "inversify": "6.0.1",
     "lodash": "^4.17.21",
-    "moment": "^2.29.1",
+    "moment": "^2.29.2",
     "notifications-node-client": "^5.1.1"
   },
   "devDependencies": {
