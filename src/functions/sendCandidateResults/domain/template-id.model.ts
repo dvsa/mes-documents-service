@@ -16,6 +16,7 @@ export enum TestType {
   AMOD2 = 'AMod2',
   HOME = 'Home',
   ADI2 = 'Adi2',
+  ADI3 = 'Adi3',
   CPC = 'Cpc',
   MANOEUVRE = 'Man',
 }

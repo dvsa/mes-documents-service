@@ -2,11 +2,13 @@ import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/
 import { TestResultSchemasUnion } from '@dvsa/mes-test-schema/categories';
 import { TestData as CatAMod1TestData } from '@dvsa/mes-test-schema/categories/AM1';
 import { TestData as CatCPCTestData } from '@dvsa/mes-test-schema/categories/CPC';
+import { TestData as CatADI3TestData } from '@dvsa/mes-test-schema/categories/ADI3';
 import { get } from 'lodash';
 import { injectable } from 'inversify';
 import { CustomProperties } from '../../domain/custom-properties';
 import { getCustomPropertiesCatAMod1 } from './categories/AM1/custom-property-provider-cat-a-mod1';
 import { getCustomPropertiesCatCPC } from './categories/CPC/custom-property-provider-cat-cpc';
+import { getCustomPropertiesCatADI3 } from './categories/ADI3/custom-property-provider-cat-adi3';
 export interface ICustomPropertyProvider {
   getCustomProperties(testData: TestResultSchemasUnion | undefined): any;
 }
@@ -22,7 +24,11 @@ export class CustomPropertyProvider implements ICustomPropertyProvider {
     const category = testResult.category;
     const language = get(testResult, 'communicationPreferences.conductedLanguage');
     const testData = get(testResult, 'testData');
+    const activityCode = get(testResult, 'activityCode');
+
     switch (category) {
+    case TestCategory.ADI3:
+      return getCustomPropertiesCatADI3(testData as CatADI3TestData, activityCode);
     case TestCategory.CCPC:
     case TestCategory.DCPC:
       return getCustomPropertiesCatCPC(testData as CatCPCTestData, category);

@@ -209,63 +209,63 @@ describe('get-template-id-provider', () => {
       const conductedLanguage: ConductedLanguage = 'English';
       const communicationMethod: CommunicationMethod = 'Email';
       const activityCode: ActivityCode = '1';
-      expect(getTemplateString(conductedLanguage, communicationMethod, activityCode))
+      expect(getTemplateString(conductedLanguage, communicationMethod, activityCode, TestCategory.B))
         .toBe('englishEmailPassTemplateId');
     });
     it('should return a welsh email pass template string', () => {
       const conductedLanguage: ConductedLanguage = 'Cymraeg';
       const communicationMethod: CommunicationMethod = 'Email';
       const activityCode: ActivityCode = '1';
-      expect(getTemplateString(conductedLanguage, communicationMethod, activityCode))
+      expect(getTemplateString(conductedLanguage, communicationMethod, activityCode, TestCategory.B))
         .toBe('welshEmailPassTemplateId');
     });
     it('should return an english letter pass template string', () => {
       const conductedLanguage: ConductedLanguage = 'English';
       const communicationMethod: CommunicationMethod = 'Post';
       const activityCode: ActivityCode = '1';
-      expect(getTemplateString(conductedLanguage, communicationMethod, activityCode))
+      expect(getTemplateString(conductedLanguage, communicationMethod, activityCode, TestCategory.B))
         .toBe('englishLetterPassTemplateId');
     });
     it('should return a welsh letter pass template string', () => {
       const conductedLanguage: ConductedLanguage = 'Cymraeg';
       const communicationMethod: CommunicationMethod = 'Post';
       const activityCode: ActivityCode = '1';
-      expect(getTemplateString(conductedLanguage, communicationMethod, activityCode))
+      expect(getTemplateString(conductedLanguage, communicationMethod, activityCode, TestCategory.B))
         .toBe('welshLetterPassTemplateId');
     });
     it('should return an english email fail template string', () => {
       const conductedLanguage: ConductedLanguage = 'English';
       const communicationMethod: CommunicationMethod = 'Email';
       const activityCode: ActivityCode = '2';
-      expect(getTemplateString(conductedLanguage, communicationMethod, activityCode))
+      expect(getTemplateString(conductedLanguage, communicationMethod, activityCode, TestCategory.B))
         .toBe('englishEmailFailTemplateId');
     });
     it('should return a welsh email fail template string', () => {
       const conductedLanguage: ConductedLanguage = 'Cymraeg';
       const communicationMethod: CommunicationMethod = 'Email';
       const activityCode: ActivityCode = '2';
-      expect(getTemplateString(conductedLanguage, communicationMethod, activityCode))
+      expect(getTemplateString(conductedLanguage, communicationMethod, activityCode, TestCategory.B))
         .toBe('welshEmailFailTemplateId');
     });
     it('should return an english letter fail template string', () => {
       const conductedLanguage: ConductedLanguage = 'English';
       const communicationMethod: CommunicationMethod = 'Post';
       const activityCode: ActivityCode = '2';
-      expect(getTemplateString(conductedLanguage, communicationMethod, activityCode))
+      expect(getTemplateString(conductedLanguage, communicationMethod, activityCode, TestCategory.B))
         .toBe('englishLetterFailTemplateId');
     });
     it('should return a welsh letter fail template string', () => {
       const conductedLanguage: ConductedLanguage = 'Cymraeg';
       const communicationMethod: CommunicationMethod = 'Post';
       const activityCode: ActivityCode = '2';
-      expect(getTemplateString(conductedLanguage, communicationMethod, activityCode))
+      expect(getTemplateString(conductedLanguage, communicationMethod, activityCode, TestCategory.B))
         .toBe('welshLetterFailTemplateId');
     });
     it('should return a template id not message set when activity code is 51', () => {
       const conductedLanguage: ConductedLanguage = 'English';
       const communicationMethod: CommunicationMethod = 'Post';
       const activityCode: ActivityCode = '51';
-      expect(getTemplateString(conductedLanguage, communicationMethod, activityCode))
+      expect(getTemplateString(conductedLanguage, communicationMethod, activityCode, TestCategory.B))
         .toBe('Template Id not set');
     });
   });
