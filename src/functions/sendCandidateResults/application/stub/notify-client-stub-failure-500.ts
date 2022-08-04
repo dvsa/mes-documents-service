@@ -16,7 +16,7 @@ export class NotifyClientStubFailure500 implements INotifyClient {
               error: 'Exception',
               message: 'Internal server error',
             },
-          ]
+          ],
         },
       },
     } as AxiosError);
@@ -32,7 +32,7 @@ export class NotifyClientStubFailure500 implements INotifyClient {
               error: 'Exception',
               message: 'Internal server error',
             },
-          ]
+          ],
         },
       },
     } as AxiosError);

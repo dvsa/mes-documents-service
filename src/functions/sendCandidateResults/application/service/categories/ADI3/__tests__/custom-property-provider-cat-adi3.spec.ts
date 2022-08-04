@@ -139,7 +139,7 @@ describe('Custom-property-provider-cat-adi3', () => {
       grade: 'A',
       showGrade: 'yes',
       result: 'UNSUCCESSFUL',
-      feedback: ''
+      feedback: '',
     } as CatADI3CustomProperties);
   });
 
