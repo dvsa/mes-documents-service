@@ -44,6 +44,8 @@ export const getCustomPropertiesCatADI3 = (
     throw new Error('No Test Data');
   }
 
+  const grade = toString(get(testData, 'review.grade'));
+
   return {
     lessonPlanningScore: toString(get(testData, 'lessonPlanning.score')) || DEFAULT_SCORE,
     lp1Score: toString(get(testData, 'lessonPlanning.q1.score')) || DEFAULT_SCORE,
@@ -70,9 +72,9 @@ export const getCustomPropertiesCatADI3 = (
       get(testData, 'teachingLearningStrategies.score')) || DEFAULT_SCORE,
     studentLevel: studentValues[testData?.lessonAndTheme?.studentLevel as StudentLevel],
     lessonThemes: testData?.lessonAndTheme?.lessonThemes?.map((theme) => lessonThemeValues[theme]) as LessonTheme[],
-    grade: toString(get(testData, 'review.grade')),
-    showGrade: get(testData, 'review.grade') ? BooleanText.YES : BooleanText.NO,
-    result: activityCode === '1' ? 'PASSED' : 'UNSUCCESSFUL',
+    grade: (activityCode === '1' && grade) ? grade : '',
+    showGrade: (activityCode === '1' && get(testData, 'review.grade')) ? BooleanText.YES : BooleanText.NO,
+    result: (activityCode === '1') ? 'PASSED' : 'were UNSUCCESSFUL',
     feedback: get(testData, 'review.feedback'),
   };
 };

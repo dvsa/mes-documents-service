@@ -43,11 +43,11 @@ describe('Custom-property-provider-cat-adi3', () => {
         q8: getQuestion(4, 0),
         score: 0,
       },
-      review: { grade: undefined, feedback: 'Mock feedback' },
+      review: { grade: 'B', feedback: 'Mock feedback' },
       lessonAndTheme: { studentLevel: 'beginner', lessonThemes: ['junctions', 'motorways'] },
     } as CatADI3TestData;
 
-    expect(getCustomPropertiesCatADI3(td, '1')).toEqual({
+    expect(getCustomPropertiesCatADI3(td, '3')).toEqual({
       lessonPlanningScore: '0',
       lp1Score: '0',
       lp2Score: '0',
@@ -73,7 +73,7 @@ describe('Custom-property-provider-cat-adi3', () => {
       lessonThemes: ['Junctions', 'Motorways'],
       grade: '',
       showGrade: 'no',
-      result: 'PASSED',
+      result: 'were UNSUCCESSFUL',
       feedback: 'Mock feedback',
     } as unknown as CatADI3CustomProperties);
   });
@@ -109,10 +109,11 @@ describe('Custom-property-provider-cat-adi3', () => {
       review: { grade: 'A', feedback: '' },
       lessonAndTheme: {
         studentLevel: 'flhNew',
-        lessonThemes: ['interactionWithOtherRoadUsers', 'dualCarriagewayFasterRoads', 'commentary'] },
+        lessonThemes: ['interactionWithOtherRoadUsers', 'dualCarriagewayFasterRoads', 'commentary'],
+      },
     } as CatADI3TestData;
 
-    expect(getCustomPropertiesCatADI3(td, '3')).toEqual({
+    expect(getCustomPropertiesCatADI3(td, '1')).toEqual({
       lessonPlanningScore: '8',
       lp1Score: '2',
       lp2Score: '2',
@@ -138,7 +139,7 @@ describe('Custom-property-provider-cat-adi3', () => {
       lessonThemes: ['Interaction with other road users', 'Dual carriageway / faster moving roads', 'Commentary'],
       grade: 'A',
       showGrade: 'yes',
-      result: 'UNSUCCESSFUL',
+      result: 'PASSED',
       feedback: '',
     } as CatADI3CustomProperties);
   });
