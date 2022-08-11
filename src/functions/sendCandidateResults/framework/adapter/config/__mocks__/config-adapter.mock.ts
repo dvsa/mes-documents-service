@@ -74,6 +74,10 @@ export class ConfigAdapterMock implements IConfigAdapter {
   welshLetterPassTemplateIdAdi2: string = 'post-welsh-pass-template-id-adi2';
   welshLetterFailTemplateIdAdi2: string = 'post-welsh-fail-template-id-adi2';
 
+  englishEmailTemplateIdAdi3: string = 'email-english-template-id-adi3';
+
+  englishLetterTemplateIdAdi3: string = 'post-english-template-id-adi3';
+
   englishEmailPassTemplateIdCpc: string = 'email-english-pass-template-id-cpc';
   englishEmailFailTemplateIdCpc: string = 'email-english-fail-template-id-cpc';
   welshEmailPassTemplateIdCpc: string = 'email-welsh-pass-template-id-cpc';

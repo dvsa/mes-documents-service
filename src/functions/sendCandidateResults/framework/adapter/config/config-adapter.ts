@@ -65,16 +65,20 @@ export class ConfigAdapter implements IConfigAdapter {
   englishLetterFailTemplateIdHome: string;
   welshLetterPassTemplateIdHome: string;
   welshLetterFailTemplateIdHome: string;
-  // Email Template Id's ADI
+  // Email Template Id's ADI2
   englishEmailPassTemplateIdAdi2: string;
   englishEmailFailTemplateIdAdi2: string;
   welshEmailPassTemplateIdAdi2: string;
   welshEmailFailTemplateIdAdi2: string;
-  // Letter Template Id's ADI
+  // Letter Template Id's ADI2
   englishLetterPassTemplateIdAdi2: string;
   englishLetterFailTemplateIdAdi2: string;
   welshLetterPassTemplateIdAdi2: string;
   welshLetterFailTemplateIdAdi2: string;
+  // Email Template Id's ADI3
+  englishEmailTemplateIdAdi3: string;
+  // Letter Template Id's ADI3
+  englishLetterTemplateIdAdi3: string;
   // Email Template Id's CPC
   englishEmailPassTemplateIdCpc: string;
   englishEmailFailTemplateIdCpc: string;
@@ -186,6 +190,10 @@ export class ConfigAdapter implements IConfigAdapter {
     this.englishLetterFailTemplateIdMan = this.getFromEnvThrowIfNotPresent('POST_FAIL_MAN');
     this.welshLetterPassTemplateIdMan = this.getFromEnvThrowIfNotPresent('POST_W_PASS_MAN');
     this.welshLetterFailTemplateIdMan = this.getFromEnvThrowIfNotPresent('POST_W_FAIL_MAN');
+    // ADI3 Email
+    this.englishEmailTemplateIdAdi3 = this.getFromEnvThrowIfNotPresent('EMAIL_ADI3');
+    // ADI3 Letter
+    this.englishLetterTemplateIdAdi3 = this.getFromEnvThrowIfNotPresent('POST_ADI3');
   }
 
   public async getApiKey(): Promise<string> {

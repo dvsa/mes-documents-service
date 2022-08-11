@@ -162,7 +162,9 @@ export class FaultProvider implements IFaultProvider {
     case TestCategory.DM:
     case TestCategory.D1M:
     case TestCategory.DEM:
-    case TestCategory.D1EM: return [];
+    case TestCategory.D1EM:
+    case TestCategory.ADI3:
+      return [];
     default: return getDrivingFaultsCatB(testData as CatBUniqueTypes.TestData);
     }
   }
@@ -176,6 +178,7 @@ export class FaultProvider implements IFaultProvider {
     case TestCategory.C1: return getSeriousFaultsCatC1(testData as CatC1UniqueTypes.TestData);
     case TestCategory.CE: return getSeriousFaultsCatCE(testData as CatCEUniqueTypes.TestData);
     case TestCategory.C1E: return getSeriousFaultsCatC1E(testData as CatC1EUniqueTypes.TestData);
+    case TestCategory.ADI3:
     case TestCategory.CCPC:
     case TestCategory.DCPC: return [];
     case TestCategory.D: return getSeriousFaultsCatD(testData as CatDUniqueTypes.TestData);
@@ -215,6 +218,7 @@ export class FaultProvider implements IFaultProvider {
     case TestCategory.C1: return getDangerousFaultsCatC1(testData as CatC1UniqueTypes.TestData);
     case TestCategory.CE: return getDangerousFaultsCatCE(testData as CatCEUniqueTypes.TestData);
     case TestCategory.C1E: return getDangerousFaultsCatC1E(testData as CatC1EUniqueTypes.TestData);
+    case TestCategory.ADI3:
     case TestCategory.CCPC:
     case TestCategory.DCPC: return [];
     case TestCategory.D: return getDangerousFaultsCatD(testData as CatDUniqueTypes.TestData);

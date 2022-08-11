@@ -38,8 +38,12 @@ export class TemplateIdProvider implements ITemplateIdProvider {
 
     const { conductedLanguage, communicationMethod } = communicationPreferences;
 
-    const baseTemplate: string =
-     getTemplateString(conductedLanguage, communicationMethod as CommunicationMethod, activityCode);
+    const baseTemplate: string = getTemplateString(
+      conductedLanguage,
+      communicationMethod as CommunicationMethod,
+      activityCode,
+      category,
+    );
 
     if (baseTemplate === TemplateIdProvider.TEMPLATE_ID_NOT_SET) {
       return TemplateIdProvider.TEMPLATE_ID_NOT_SET;
@@ -63,6 +67,10 @@ export class TemplateIdProvider implements ITemplateIdProvider {
 
     if (category === TestCategory.ADI2) {
       return get(this.configAdapter, `${baseTemplate}${TestType.ADI2}`);
+    }
+
+    if (category === TestCategory.ADI3) {
+      return get(this.configAdapter, `${baseTemplate}${TestType.ADI3}`);
     }
 
     if (isCPCCategory(category)) {
@@ -153,6 +161,7 @@ export function getTemplateString(
   conductedLanguage: ConductedLanguage,
   communicationMethod: CommunicationMethod,
   activityCode: ActivityCode,
+  category: CategoryCode,
 ): string {
 
   const languageOfTemplate: TemplateLanguage =
@@ -162,10 +171,14 @@ export function getTemplateString(
     (communicationMethod === Correspondence.POST) ? Correspondence.LETTER : Correspondence.EMAIL;
 
   if (isPass(activityCode)) {
-    return `${languageOfTemplate}${correspondenceMethod}PassTemplateId`;
+    return (category === TestCategory.ADI3)
+      ? `${languageOfTemplate}${correspondenceMethod}TemplateId`
+      : `${languageOfTemplate}${correspondenceMethod}PassTemplateId`;
   }
   if (isFail(activityCode)) {
-    return `${languageOfTemplate}${correspondenceMethod}FailTemplateId`;
+    return (category === TestCategory.ADI3)
+      ? `${languageOfTemplate}${correspondenceMethod}TemplateId`
+      : `${languageOfTemplate}${correspondenceMethod}FailTemplateId`;
   }
   return TemplateIdProvider.TEMPLATE_ID_NOT_SET;
 }
