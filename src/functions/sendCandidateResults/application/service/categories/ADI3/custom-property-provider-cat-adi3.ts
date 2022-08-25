@@ -71,7 +71,10 @@ export const getCustomPropertiesCatADI3 = (
       get(testData, 'riskManagement.score') +
       get(testData, 'teachingLearningStrategies.score')) || DEFAULT_SCORE,
     studentLevel: studentValues[testData?.lessonAndTheme?.studentLevel as StudentLevel],
-    lessonThemes: testData?.lessonAndTheme?.lessonThemes?.map((theme) => lessonThemeValues[theme]) as LessonTheme[],
+    lessonThemes: testData?.lessonAndTheme?.lessonThemes
+      ?.map((theme) => lessonThemeValues[theme])
+      .concat(get(testData, 'lessonAndTheme.other', null))
+      .filter((theme) => !!theme) as LessonTheme[],
     grade: (activityCode === '1' && grade) ? grade : '',
     showGrade: (activityCode === '1' && get(testData, 'review.grade')) ? BooleanText.YES : BooleanText.NO,
     result: (activityCode === '1') ? 'PASSED' : 'were UNSUCCESSFUL',

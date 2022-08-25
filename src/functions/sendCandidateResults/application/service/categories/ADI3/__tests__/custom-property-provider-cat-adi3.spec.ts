@@ -44,7 +44,7 @@ describe('Custom-property-provider-cat-adi3', () => {
         score: 0,
       },
       review: { grade: 'B', feedback: 'Mock feedback' },
-      lessonAndTheme: { studentLevel: 'beginner', lessonThemes: ['junctions', 'motorways'] },
+      lessonAndTheme: { studentLevel: 'beginner', lessonThemes: [], other: 'Mock Lesson Theme' },
     } as CatADI3TestData;
 
     expect(getCustomPropertiesCatADI3(td, '3')).toEqual({
@@ -70,7 +70,7 @@ describe('Custom-property-provider-cat-adi3', () => {
       tls8Score: '0',
       totalScore: '0',
       studentLevel: 'Beginner',
-      lessonThemes: ['Junctions', 'Motorways'],
+      lessonThemes: ['Mock Lesson Theme'],
       grade: '',
       showGrade: 'no',
       result: 'were UNSUCCESSFUL',
@@ -110,6 +110,7 @@ describe('Custom-property-provider-cat-adi3', () => {
       lessonAndTheme: {
         studentLevel: 'flhNew',
         lessonThemes: ['interactionWithOtherRoadUsers', 'dualCarriagewayFasterRoads', 'commentary'],
+        other: 'Another Mock Lesson Theme',
       },
     } as CatADI3TestData;
 
@@ -136,7 +137,12 @@ describe('Custom-property-provider-cat-adi3', () => {
       tls8Score: '3',
       totalScore: '31',
       studentLevel: 'FLH New',
-      lessonThemes: ['Interaction with other road users', 'Dual carriageway / faster moving roads', 'Commentary'],
+      lessonThemes: [
+        'Interaction with other road users',
+        'Dual carriageway / faster moving roads',
+        'Commentary',
+        'Another Mock Lesson Theme',
+      ],
       grade: 'A',
       showGrade: 'yes',
       result: 'PASSED',
