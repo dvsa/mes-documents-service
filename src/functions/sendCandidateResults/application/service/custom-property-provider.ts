@@ -28,7 +28,8 @@ export class CustomPropertyProvider implements ICustomPropertyProvider {
 
     switch (category) {
     case TestCategory.ADI3:
-      return getCustomPropertiesCatADI3(testData as CatADI3TestData, activityCode);
+      const prn = get(testResult, 'journalData.candidate.prn');
+      return getCustomPropertiesCatADI3(testData as CatADI3TestData, activityCode, prn);
     case TestCategory.CCPC:
     case TestCategory.DCPC:
       return getCustomPropertiesCatCPC(testData as CatCPCTestData, category);

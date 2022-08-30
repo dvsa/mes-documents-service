@@ -17,6 +17,7 @@ import isDelegatedTest from '../application/service/is-delegated-test';
 import { isDES3ManoeuvreTest } from '../application/service/is-manoeuvre-test';
 import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 import { TestResultCommonSchema } from '@dvsa/mes-test-schema/categories/common';
+import { get } from 'lodash';
 
 export interface IRequestScheduler {
   scheduleRequests(testResults: TestResultSchemasUnion[]): Promise<void>[];
@@ -143,20 +144,45 @@ export class RequestScheduler implements IRequestScheduler {
       this.templateIdProvider.getTemplateId(communicationPreferences, testResult.activityCode, category);
 
     if (communicationPreferences.communicationMethod === 'Email') {
-      return sendEmail(
-        communicationPreferences.updatedEmail as string,
+      return Promise.all([
+        this.sendEmailToPADI(testResult),
+        sendEmail(
+          communicationPreferences.updatedEmail as string,
+          templateId,
+          this.personalisationProvider.getEmailPersonalisation(testResult),
+          formatApplicationReference(testResult.journalData.applicationReference).toString(),
+          '',
+          this.notifyClient,
+        )]
+      );
+    }
+
+    return Promise.all([
+      this.sendEmailToPADI(testResult),
+      sendLetter(
         templateId,
+        this.personalisationProvider.getLetterPersonalisation(testResult),
+        formatApplicationReference(testResult.journalData.applicationReference).toString(),
+        this.notifyClient,
+      )]
+    );
+  }
+
+  private sendEmailToPADI = (testResult: TestResultSchemasUnion) => {
+    if (
+      testResult.category === 'ADI3'
+      && get(testResult, 'journalData.candidate.previousADITests') === 3
+      && isFail(testResult.activityCode)
+    ) {
+      return sendEmail(
+        process.env.PADI_EMAIL || '',
+        process.env.PADI_TEMPLATE_ID || '',
         this.personalisationProvider.getEmailPersonalisation(testResult),
         formatApplicationReference(testResult.journalData.applicationReference).toString(),
         '',
         this.notifyClient,
       );
     }
-
-    return sendLetter(
-      templateId,
-      this.personalisationProvider.getLetterPersonalisation(testResult),
-      formatApplicationReference(testResult.journalData.applicationReference).toString(),
-      this.notifyClient);
-  }
+    return Promise.resolve();
+  };
 }
