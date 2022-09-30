@@ -18,6 +18,7 @@ import { isDES3ManoeuvreTest } from '../application/service/is-manoeuvre-test';
 import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 import { TestResultCommonSchema } from '@dvsa/mes-test-schema/categories/common';
 import { get } from 'lodash';
+import { EmailPersonalisation } from '../domain/personalisation.model';
 
 export interface IRequestScheduler {
   scheduleRequests(testResults: TestResultSchemasUnion[]): Promise<void>[];
@@ -145,7 +146,7 @@ export class RequestScheduler implements IRequestScheduler {
 
     if (communicationPreferences.communicationMethod === 'Email') {
       return Promise.all([
-        this.sendEmailToPADI(testResult),
+        ...this.sendEmailToPADI(testResult),
         sendEmail(
           communicationPreferences.updatedEmail as string,
           templateId,
@@ -158,7 +159,7 @@ export class RequestScheduler implements IRequestScheduler {
     }
 
     return Promise.all([
-      this.sendEmailToPADI(testResult),
+      ...this.sendEmailToPADI(testResult),
       sendLetter(
         templateId,
         this.personalisationProvider.getLetterPersonalisation(testResult),
@@ -168,21 +169,27 @@ export class RequestScheduler implements IRequestScheduler {
     );
   }
 
-  private sendEmailToPADI = (testResult: TestResultSchemasUnion) => {
+  private sendEmailToPADI = (testResult: TestResultSchemasUnion): Promise<any>[] => {
     if (
       testResult.category === 'ADI3'
       && get(testResult, 'journalData.candidate.previousADITests') === 3
       && isFail(testResult.activityCode)
     ) {
-      return sendEmail(
-        process.env.PADI_EMAIL || '',
-        process.env.PADI_TEMPLATE_ID || '',
-        this.personalisationProvider.getEmailPersonalisation(testResult),
-        formatApplicationReference(testResult.journalData.applicationReference).toString(),
-        '',
-        this.notifyClient,
-      );
+      const recipients: string[] = (process.env.PADI_EMAIL || '').split(',');
+      const personalisation: EmailPersonalisation = this.personalisationProvider.getEmailPersonalisation(testResult);
+      const appRef: string = formatApplicationReference(testResult.journalData.applicationReference).toString();
+
+      return recipients.map((recipient) => {
+        return sendEmail(
+          recipient,
+          process.env.PADI_TEMPLATE_ID || '',
+          personalisation,
+          appRef,
+          '',
+          this.notifyClient,
+        );
+      });
     }
-    return Promise.resolve();
+    return [];
   };
 }
