@@ -36,10 +36,14 @@ export interface CatADI3CustomProperties extends CustomProperties {
   showGrade: BooleanText;
   result: string;
   feedback: string;
+  prn: string;
 }
 
 export const getCustomPropertiesCatADI3 = (
-  testData: TestData | undefined, activityCode: ActivityCode): CatADI3CustomProperties => {
+  testData: TestData | undefined,
+  activityCode: ActivityCode,
+  prn: string,
+): CatADI3CustomProperties => {
   if (!testData) {
     throw new Error('No Test Data');
   }
@@ -79,5 +83,6 @@ export const getCustomPropertiesCatADI3 = (
     showGrade: (activityCode === '1' && get(testData, 'review.grade')) ? BooleanText.YES : BooleanText.NO,
     result: (activityCode === '1') ? 'PASSED' : 'were UNSUCCESSFUL',
     feedback: get(testData, 'review.feedback'),
+    prn,
   };
 };

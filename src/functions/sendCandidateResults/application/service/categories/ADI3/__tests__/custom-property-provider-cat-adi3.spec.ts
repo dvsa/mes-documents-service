@@ -47,7 +47,8 @@ describe('Custom-property-provider-cat-adi3', () => {
       lessonAndTheme: { studentLevel: 'beginner', lessonThemes: [], other: 'Mock Lesson Theme' },
     } as CatADI3TestData;
 
-    expect(getCustomPropertiesCatADI3(td, '3')).toEqual({
+    expect(getCustomPropertiesCatADI3(td, '3', '123')).toEqual({
+      prn: '123',
       lessonPlanningScore: '0',
       lp1Score: '0',
       lp2Score: '0',
@@ -114,7 +115,8 @@ describe('Custom-property-provider-cat-adi3', () => {
       },
     } as CatADI3TestData;
 
-    expect(getCustomPropertiesCatADI3(td, '1')).toEqual({
+    expect(getCustomPropertiesCatADI3(td, '1', '123')).toEqual({
+      prn: '123',
       lessonPlanningScore: '8',
       lp1Score: '2',
       lp2Score: '2',
@@ -153,7 +155,7 @@ describe('Custom-property-provider-cat-adi3', () => {
   it('should throw error when undefined test data', () => {
     const td = undefined;
     expect(() => {
-      getCustomPropertiesCatADI3(td, '4');
+      getCustomPropertiesCatADI3(td, '4', '');
     }).toThrowError('No Test Data');
   });
 });

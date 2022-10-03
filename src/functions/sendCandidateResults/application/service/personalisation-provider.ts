@@ -49,6 +49,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
 
     return {
       ...sharedValues,
+      candidateName: this.getTitledName(testresult.journalData.candidate.candidateName),
     };
   }
 

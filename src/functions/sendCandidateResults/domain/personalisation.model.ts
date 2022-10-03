@@ -28,7 +28,9 @@ export interface Personalisation {
   showProvLicenceRetainedByDriver: BooleanText;
 }
 
-export interface EmailPersonalisation extends Personalisation {}
+export interface EmailPersonalisation extends Personalisation {
+  candidateName: string;
+}
 
 export interface CatAMod1Personalisation extends EmailPersonalisation {
   showEmergencyStop: BooleanText;
