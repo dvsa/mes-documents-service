@@ -22,7 +22,7 @@
     "start": "npm run compile && sls offline start"
   },
   "dependencies": {
-    "@dvsa/mes-microservice-common": "0.7.0",
+    "@dvsa/mes-microservice-common": "0.8.1",
     "axios": "^0.23.0",
     "bottleneck": "^2.19.5",
     "inversify": "6.0.1",
