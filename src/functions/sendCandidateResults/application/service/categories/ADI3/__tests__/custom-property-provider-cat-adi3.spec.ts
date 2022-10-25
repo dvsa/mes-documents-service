@@ -78,7 +78,7 @@ describe('Custom-property-provider-cat-adi3', () => {
       feedback: 'Mock feedback',
       categoryDescriptor: 'ADI Part 3',
       RMFail: 'yes',
-      code4: false,
+      code4: 'no',
     } as unknown as CatADI3CustomProperties);
   });
 
@@ -154,7 +154,7 @@ describe('Custom-property-provider-cat-adi3', () => {
       feedback: '',
       categoryDescriptor: 'ADI Part 3',
       RMFail: 'no',
-      code4: false,
+      code4: 'no',
     } as CatADI3CustomProperties);
   });
 

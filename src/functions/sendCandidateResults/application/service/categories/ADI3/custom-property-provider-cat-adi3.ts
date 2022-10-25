@@ -38,7 +38,7 @@ export interface CatADI3CustomProperties extends CustomProperties {
   feedback: string;
   prn: string;
   categoryDescriptor: string;
-  code4: boolean;
+  code4: string;
   RMFail: string;
 }
 
@@ -55,7 +55,7 @@ export const getCustomPropertiesCatADI3 = (
 
   return {
     RMFail: get(testData, 'riskManagement.score') <= 7 ? BooleanText.YES : BooleanText.NO,
-    code4: activityCode === '4',
+    code4: activityCode === '4' ? BooleanText.YES : BooleanText.NO,
     categoryDescriptor: 'ADI Part 3',
     lessonPlanningScore: toString(get(testData, 'lessonPlanning.score')) || DEFAULT_SCORE,
     lp1Score: toString(get(testData, 'lessonPlanning.q1.score')) || DEFAULT_SCORE,
