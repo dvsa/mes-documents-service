@@ -43,8 +43,8 @@ describe('Custom-property-provider-cat-adi3', () => {
         q8: getQuestion(4, 0),
         score: 0,
       },
-      review: {grade: 'B', feedback: 'Mock feedback'},
-      lessonAndTheme: {studentLevel: 'beginner', lessonThemes: [], other: 'Mock Lesson Theme'},
+      review: { grade: 'B', feedback: 'Mock feedback' },
+      lessonAndTheme: { studentLevel: 'beginner', lessonThemes: [], other: 'Mock Lesson Theme' },
     } as CatADI3TestData;
 
     expect(getCustomPropertiesCatADI3(td, '3', '123')).toEqual({
@@ -97,7 +97,7 @@ describe('Custom-property-provider-cat-adi3', () => {
         q3: getQuestion(3, 0),
         q4: getQuestion(4, 1),
         q5: getQuestion(4, 3),
-        score: 8,
+        score:8,
       },
       teachingLearningStrategies: {
         q1: getQuestion(1, 3),
@@ -110,7 +110,7 @@ describe('Custom-property-provider-cat-adi3', () => {
         q8: getQuestion(4, 3),
         score: 15,
       },
-      review: {grade: 'A', feedback: ''},
+      review: { grade: 'A', feedback: '' },
       lessonAndTheme: {
         studentLevel: 'flhNew',
         lessonThemes: ['interactionWithOtherRoadUsers', 'dualCarriagewayFasterRoads', 'commentary'],
