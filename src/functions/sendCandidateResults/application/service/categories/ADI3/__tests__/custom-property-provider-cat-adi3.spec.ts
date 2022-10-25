@@ -6,6 +6,7 @@ import {
 import {
   CatADI3CustomProperties, getCustomPropertiesCatADI3,
 } from '../custom-property-provider-cat-adi3';
+import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 
 const getQuestion = (questionNumber: number, score: number) => {
   return {
@@ -43,11 +44,11 @@ describe('Custom-property-provider-cat-adi3', () => {
         q8: getQuestion(4, 0),
         score: 0,
       },
-      review: { grade: 'B', feedback: 'Mock feedback' },
-      lessonAndTheme: { studentLevel: 'beginner', lessonThemes: [], other: 'Mock Lesson Theme' },
+      review: {grade: 'B', feedback: 'Mock feedback'},
+      lessonAndTheme: {studentLevel: 'beginner', lessonThemes: [], other: 'Mock Lesson Theme'},
     } as CatADI3TestData;
 
-    expect(getCustomPropertiesCatADI3(td, '3', '123')).toEqual({
+    expect(getCustomPropertiesCatADI3(td, '3', '123', 'ADI3' as TestCategory)).toEqual({
       prn: '123',
       lessonPlanningScore: '0',
       lp1Score: '0',
@@ -76,6 +77,9 @@ describe('Custom-property-provider-cat-adi3', () => {
       showGrade: 'no',
       result: 'were UNSUCCESSFUL',
       feedback: 'Mock feedback',
+      category: 'ADI3',
+      RMFail: 'yes',
+      code4: false,
     } as unknown as CatADI3CustomProperties);
   });
 
@@ -94,7 +98,7 @@ describe('Custom-property-provider-cat-adi3', () => {
         q3: getQuestion(3, 0),
         q4: getQuestion(4, 1),
         q5: getQuestion(4, 3),
-        score:8,
+        score: 8,
       },
       teachingLearningStrategies: {
         q1: getQuestion(1, 3),
@@ -107,7 +111,7 @@ describe('Custom-property-provider-cat-adi3', () => {
         q8: getQuestion(4, 3),
         score: 15,
       },
-      review: { grade: 'A', feedback: '' },
+      review: {grade: 'A', feedback: ''},
       lessonAndTheme: {
         studentLevel: 'flhNew',
         lessonThemes: ['interactionWithOtherRoadUsers', 'dualCarriagewayFasterRoads', 'commentary'],
@@ -115,7 +119,7 @@ describe('Custom-property-provider-cat-adi3', () => {
       },
     } as CatADI3TestData;
 
-    expect(getCustomPropertiesCatADI3(td, '1', '123')).toEqual({
+    expect(getCustomPropertiesCatADI3(td, '1', '123', 'ADI3' as TestCategory)).toEqual({
       prn: '123',
       lessonPlanningScore: '8',
       lp1Score: '2',
@@ -149,13 +153,16 @@ describe('Custom-property-provider-cat-adi3', () => {
       showGrade: 'yes',
       result: 'PASSED',
       feedback: '',
+      category: 'ADI3',
+      RMFail: 'no',
+      code4: false,
     } as CatADI3CustomProperties);
   });
 
   it('should throw error when undefined test data', () => {
     const td = undefined;
     expect(() => {
-      getCustomPropertiesCatADI3(td, '4', '');
+      getCustomPropertiesCatADI3(td, '4', '', 'ADI3' as TestCategory);
     }).toThrowError('No Test Data');
   });
 });

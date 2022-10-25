@@ -5,6 +5,7 @@ import { CustomProperties } from '../../../../domain/custom-properties';
 import { lessonThemeValues, studentValues } from '../../../../domain/competencies';
 import { BooleanText } from '../../../../domain/personalisation.model';
 import { ActivityCode } from '@dvsa/mes-test-schema/categories/common';
+import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 
 const DEFAULT_SCORE: string = '0';
 
@@ -37,12 +38,16 @@ export interface CatADI3CustomProperties extends CustomProperties {
   result: string;
   feedback: string;
   prn: string;
+  category: TestCategory;
+  code4: boolean;
+  RMFail: string;
 }
 
 export const getCustomPropertiesCatADI3 = (
   testData: TestData | undefined,
   activityCode: ActivityCode,
   prn: string,
+  testCategory: TestCategory
 ): CatADI3CustomProperties => {
   if (!testData) {
     throw new Error('No Test Data');
@@ -51,6 +56,9 @@ export const getCustomPropertiesCatADI3 = (
   const grade = toString(get(testData, 'review.grade'));
 
   return {
+    RMFail: get(testData, 'riskManagement.score') <= 7 ? BooleanText.YES : BooleanText.NO,
+    code4: activityCode === '4',
+    category: testCategory,
     lessonPlanningScore: toString(get(testData, 'lessonPlanning.score')) || DEFAULT_SCORE,
     lp1Score: toString(get(testData, 'lessonPlanning.q1.score')) || DEFAULT_SCORE,
     lp2Score: toString(get(testData, 'lessonPlanning.q2.score')) || DEFAULT_SCORE,
