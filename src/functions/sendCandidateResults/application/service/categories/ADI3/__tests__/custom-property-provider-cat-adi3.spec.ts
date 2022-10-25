@@ -6,7 +6,6 @@ import {
 import {
   CatADI3CustomProperties, getCustomPropertiesCatADI3,
 } from '../custom-property-provider-cat-adi3';
-import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 
 const getQuestion = (questionNumber: number, score: number) => {
   return {
@@ -48,7 +47,7 @@ describe('Custom-property-provider-cat-adi3', () => {
       lessonAndTheme: {studentLevel: 'beginner', lessonThemes: [], other: 'Mock Lesson Theme'},
     } as CatADI3TestData;
 
-    expect(getCustomPropertiesCatADI3(td, '3', '123', 'ADI3' as TestCategory)).toEqual({
+    expect(getCustomPropertiesCatADI3(td, '3', '123')).toEqual({
       prn: '123',
       lessonPlanningScore: '0',
       lp1Score: '0',
@@ -77,7 +76,7 @@ describe('Custom-property-provider-cat-adi3', () => {
       showGrade: 'no',
       result: 'were UNSUCCESSFUL',
       feedback: 'Mock feedback',
-      category: 'ADI3',
+      categoryDescriptor: 'ADI Part 3',
       RMFail: 'yes',
       code4: false,
     } as unknown as CatADI3CustomProperties);
@@ -119,7 +118,7 @@ describe('Custom-property-provider-cat-adi3', () => {
       },
     } as CatADI3TestData;
 
-    expect(getCustomPropertiesCatADI3(td, '1', '123', 'ADI3' as TestCategory)).toEqual({
+    expect(getCustomPropertiesCatADI3(td, '1', '123')).toEqual({
       prn: '123',
       lessonPlanningScore: '8',
       lp1Score: '2',
@@ -153,7 +152,7 @@ describe('Custom-property-provider-cat-adi3', () => {
       showGrade: 'yes',
       result: 'PASSED',
       feedback: '',
-      category: 'ADI3',
+      categoryDescriptor: 'ADI Part 3',
       RMFail: 'no',
       code4: false,
     } as CatADI3CustomProperties);
@@ -162,7 +161,7 @@ describe('Custom-property-provider-cat-adi3', () => {
   it('should throw error when undefined test data', () => {
     const td = undefined;
     expect(() => {
-      getCustomPropertiesCatADI3(td, '4', '', 'ADI3' as TestCategory);
+      getCustomPropertiesCatADI3(td, '4', '');
     }).toThrowError('No Test Data');
   });
 });
