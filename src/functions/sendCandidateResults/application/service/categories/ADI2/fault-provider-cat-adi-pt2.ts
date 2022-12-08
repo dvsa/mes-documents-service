@@ -36,11 +36,6 @@ export const getSeriousFaultsCatADI2 = (testData: CatADI2UniqueTypes.TestData): 
   if (testData.eyesightTest && testData.eyesightTest.seriousFault) {
     seriousFaults.push({ name: Competencies.eyesightTest, count: 1 });
   }
-
-  // vehicleChecks fault
-  if (testData.vehicleChecks && testData.vehicleChecks.seriousFault) {
-    seriousFaults.push({ name: Competencies.vehicleChecks, count: 1 });
-  }
   return seriousFaults;
 };
 
@@ -55,11 +50,6 @@ export const getDangerousFaultsCatADI2 = (testData: CatADI2UniqueTypes.TestData)
   // dangerous non standard faults
   getNonStandardFaultsCatADI2(testData, CompetencyOutcome.D)
     .forEach(fault => dangerousFaults.push(fault));
-
-  // vehicleChecks fault
-  if (testData.vehicleChecks && testData.vehicleChecks.dangerousFault) {
-    dangerousFaults.push({ name: Competencies.vehicleChecks, count: 1 });
-  }
   return dangerousFaults;
 };
 
@@ -93,6 +83,7 @@ export const getNonStandardFaultsCatADI2 = (
 export const getVehicleChecksFaultsCatADI2 = (
   vehicleChecks: CatADI2UniqueTypes.VehicleChecks, faultType: QuestionOutcome): Fault[] => {
   let faultCount = 0;
+
   // tell me questions
   if (vehicleChecks.tellMeQuestions) {
     vehicleChecks.tellMeQuestions.forEach((question) => {
@@ -101,6 +92,7 @@ export const getVehicleChecksFaultsCatADI2 = (
       }
     });
   }
+
   // show me questions
   if (vehicleChecks.showMeQuestions) {
     vehicleChecks.showMeQuestions.forEach((question) => {
@@ -109,6 +101,17 @@ export const getVehicleChecksFaultsCatADI2 = (
       }
     });
   }
+
+  // serious vehicle check marked on journal
+  if (vehicleChecks.seriousFault && faultType === CompetencyOutcome.S) {
+    faultCount = faultCount + 1;
+  }
+
+  // dangerous vehicle check marked on journal
+  if (vehicleChecks.dangerousFault && faultType === CompetencyOutcome.D) {
+    faultCount = faultCount + 1;
+  }
+
   if (faultCount > 0) {
     return [{ name: Competencies.vehicleChecks, count: faultCount }];
   }
