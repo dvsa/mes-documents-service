@@ -29,7 +29,8 @@
     "inversify": "6.0.1",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
-    "notifications-node-client": "^5.1.2"
+    "notifications-node-client": "^5.1.2",
+    "reflect-metadata": "0.1.13"
   },
   "devDependencies": {
     "@dvsa/mes-test-schema": "3.41.0",
