@@ -1,7 +1,9 @@
 export const TYPES = {
   apiKey: Symbol.for('apiKey'),
+  templateIDs: Symbol.for('templateIDs'),
   INotifyClient: Symbol.for('INotifyClient'),
   IConfigAdapter: Symbol.for('IConfigAdapter'),
+  ITemplateAdapter: Symbol.for('ITemplateAdapter'),
   IRequestScheduler: Symbol.for('IRequestScheduler'),
   ITemplateIdProvider: Symbol.for('ITemplateIdProvider'),
   IFaultProvider: Symbol.for('IFaultProvider'),

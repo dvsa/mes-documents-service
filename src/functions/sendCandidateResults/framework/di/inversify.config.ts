@@ -18,39 +18,66 @@ import { IPersonalisationProvider, PersonalisationProvider } from '../../applica
 import { IStatusUpdater, StatusUpdater } from '../status-updater';
 import { StatusUpdaterMock } from '../__mocks__/status-updater.mock';
 import { CustomPropertyProvider, ICustomPropertyProvider } from '../../application/service/custom-property-provider';
+import { ITemplateAdapter, TemplateAdapter } from '../adapter/config/template-adapter';
 
 const container = new Container();
 
-container.bind<IConfigAdapter>(TYPES.IConfigAdapter).to(ConfigAdapter);
+const bindContainer = async (): Promise<void> => {
+  try {
+    container.bind<ITemplateAdapter>(TYPES.ITemplateAdapter).to(TemplateAdapter);
 
-const configAdapter: IConfigAdapter = container.get<IConfigAdapter>(TYPES.IConfigAdapter);
+    const templateAdapter: ITemplateAdapter = container.get<ITemplateAdapter>(TYPES.ITemplateAdapter);
+    const templateIDs = await templateAdapter.getTemplateIDsJson();
 
-configAdapter.getApiKey()
-  .then(apiKey => container.bind<string>(TYPES.apiKey).toConstantValue(apiKey))
-  .catch((err) => {
+    // Merge Template IDs from SecretsManager into `process.env` or throw if missing
+    process.env = { ...process.env, ...templateIDs };
+
+    container.bind<object>(TYPES.templateIDs).toConstantValue(templateIDs);
+  } catch (err) {
+    console.log('No template json was found');
+    throw err;
+  }
+
+  let configAdapter: IConfigAdapter;
+
+  try {
+    // Once we know templates exist, then retrieve the api key from SecretsManager
+    container.bind<IConfigAdapter>(TYPES.IConfigAdapter).to(ConfigAdapter);
+
+    configAdapter = container.get<IConfigAdapter>(TYPES.IConfigAdapter);
+    const apiKey = await configAdapter.getApiKey();
+
+    container.bind<string>(TYPES.apiKey).toConstantValue(apiKey);
+  } catch (err) {
     console.log('No api key has been provided');
     throw err;
+  }
+
+  return new Promise((resolve) => {
+    if (configAdapter.isLocal) {
+      container.bind<INotifyClient>(TYPES.INotifyClient).to(NotifyClientStubSuccess);
+      container.bind<INextUploadBatch>(TYPES.INextUploadBatch).to(NextUploadBatchMock);
+      container.bind<IStatusUpdater>(TYPES.IStatusUpdater).to(StatusUpdaterMock);
+    } else if (configAdapter.useNotify) {
+      container.bind<INotifyClient>(TYPES.INotifyClient).to(GovNotifyClient);
+      container.bind<INextUploadBatch>(TYPES.INextUploadBatch).to(NextUploadBatch);
+      container.bind<IStatusUpdater>(TYPES.IStatusUpdater).to(StatusUpdater);
+
+    } else {
+      container.bind<INotifyClient>(TYPES.INotifyClient).to(LogNotifyClient);
+      container.bind<INextUploadBatch>(TYPES.INextUploadBatch).to(NextUploadBatch);
+      container.bind<IStatusUpdater>(TYPES.IStatusUpdater).to(StatusUpdater);
+    }
+
+    container.bind<IRequestScheduler>(TYPES.IRequestScheduler).to(RequestScheduler);
+    container.bind<ITemplateIdProvider>(TYPES.ITemplateIdProvider).to(TemplateIdProvider);
+    container.bind<IFaultProvider>(TYPES.IFaultProvider).to(FaultProvider);
+    container.bind<IPersonalisationProvider>(TYPES.IPersonalisationProvider).to(PersonalisationProvider);
+    container.bind<ICustomPropertyProvider>(TYPES.ICustomPropertyProvider).to(CustomPropertyProvider);
+
+    // Wait for all container.bind's to have run before resolving promise
+    resolve();
   });
+};
 
-if (configAdapter.isLocal) {
-  container.bind<INotifyClient>(TYPES.INotifyClient).to(NotifyClientStubSuccess);
-  container.bind<INextUploadBatch>(TYPES.INextUploadBatch).to(NextUploadBatchMock);
-  container.bind<IStatusUpdater>(TYPES.IStatusUpdater).to(StatusUpdaterMock);
-} else if (configAdapter.useNotify) {
-  container.bind<INotifyClient>(TYPES.INotifyClient).to(GovNotifyClient);
-  container.bind<INextUploadBatch>(TYPES.INextUploadBatch).to(NextUploadBatch);
-  container.bind<IStatusUpdater>(TYPES.IStatusUpdater).to(StatusUpdater);
-
-} else {
-  container.bind<INotifyClient>(TYPES.INotifyClient).to(LogNotifyClient);
-  container.bind<INextUploadBatch>(TYPES.INextUploadBatch).to(NextUploadBatch);
-  container.bind<IStatusUpdater>(TYPES.IStatusUpdater).to(StatusUpdater);
-}
-
-container.bind<IRequestScheduler>(TYPES.IRequestScheduler).to(RequestScheduler);
-container.bind<ITemplateIdProvider>(TYPES.ITemplateIdProvider).to(TemplateIdProvider);
-container.bind<IFaultProvider>(TYPES.IFaultProvider).to(FaultProvider);
-container.bind<IPersonalisationProvider>(TYPES.IPersonalisationProvider).to(PersonalisationProvider);
-container.bind<ICustomPropertyProvider>(TYPES.ICustomPropertyProvider).to(CustomPropertyProvider);
-
-export { container };
+export { bindContainer, container };
