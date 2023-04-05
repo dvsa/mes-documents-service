@@ -2,7 +2,7 @@ service: mes-documents-service
 
 provider:
   name: aws
-  runtime: nodejs14
+  runtime: nodejs14.x
   environment:
     NOTIFY_HOSTNAME: http://www.example.com
     USE_NOTIFY: false
@@ -21,7 +21,7 @@ provider:
     NOTIFY_EMAIL_PASS_TEMPLATE_ID_VOCATIONAL: 'email-vocational-pass-template-id'
     NOTIFY_EMAIL_FAIL_TEMPLATE_ID_VOCATIONAL: 'email-vocational-fail-template-id'
     NOTIFY_EMAIL_WELSH_PASS_TEMPLATE_ID_VOCATIONAL: 'email-welsh-vocational-pass-template-id'
-    NOTIFY_EMAIL_WELSH_FAIL_TEMPLATE_ID_VOCATIONAL: 'email-welsh-vocational-fail-template-id' 
+    NOTIFY_EMAIL_WELSH_FAIL_TEMPLATE_ID_VOCATIONAL: 'email-welsh-vocational-fail-template-id'
     NOTIFY_POST_PASS_TEMPLATE_ID_VOCATIONAL:  'post-vocational-pass-template-id'
     NOTIFY_POST_FAIL_TEMPLATE_ID_VOCATIONAL: 'post-vocational-fail-template-id'
     NOTIFY_POST_WELSH_PASS_TEMPLATE_ID_VOCATIONAL: 'post-welsh-vocational-pass-template-id'
@@ -40,10 +40,10 @@ package:
   individually: true
 
 functions:
-  sendCandidateResults: 
+  sendCandidateResults:
     handler: src/functions/sendCandidateResults/framework/handler.handler
-    events: 
-      - http: 
+    events:
+      - http:
           path: 'test'
           method: get
     timeout: 60
