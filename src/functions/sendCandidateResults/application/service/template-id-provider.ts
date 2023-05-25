@@ -50,35 +50,35 @@ export class TemplateIdProvider implements ITemplateIdProvider {
     }
 
     if (isVocationalCategory(category)) {
-      return get(this.configAdapter, `${baseTemplate}${TestType.VOCATIONAL}`);
+      return get(this.configAdapter, `${baseTemplate}${TestType.VOCATIONAL}`) as unknown as string;
     }
 
     if (isAmod1Category(category)) {
-      return get(this.configAdapter, `${baseTemplate}${TestType.AMOD1}`);
+      return get(this.configAdapter, `${baseTemplate}${TestType.AMOD1}`) as unknown as string;
     }
 
     if (isAmod2Category(category)) {
-      return get(this.configAdapter, `${baseTemplate}${TestType.AMOD2}`);
+      return get(this.configAdapter, `${baseTemplate}${TestType.AMOD2}`) as unknown as string;
     }
 
     if (isHomeTestCategory(category)) {
-      return get(this.configAdapter, `${baseTemplate}${TestType.HOME}`);
+      return get(this.configAdapter, `${baseTemplate}${TestType.HOME}`) as unknown as string;
     }
 
     if (category === TestCategory.ADI2) {
-      return get(this.configAdapter, `${baseTemplate}${TestType.ADI2}`);
+      return get(this.configAdapter, `${baseTemplate}${TestType.ADI2}`) as unknown as string;
     }
 
     if (category === TestCategory.ADI3) {
-      return get(this.configAdapter, `${baseTemplate}${TestType.ADI3}`);
+      return get(this.configAdapter, `${baseTemplate}${TestType.ADI3}`) as unknown as string;
     }
 
     if (isCPCCategory(category)) {
-      return get(this.configAdapter, `${baseTemplate}${TestType.CPC}`);
+      return get(this.configAdapter, `${baseTemplate}${TestType.CPC}`) as unknown as string;
     }
 
     if (isManoeuvreCategory(category)) {
-      return get(this.configAdapter, `${baseTemplate}${TestType.MANOEUVRE}`);
+      return get(this.configAdapter, `${baseTemplate}${TestType.MANOEUVRE}`) as unknown as string;
     }
 
     return get(this.configAdapter, baseTemplate);

@@ -16,7 +16,7 @@ import { inject, injectable } from 'inversify';
 import { TYPES } from '../../framework/di/types';
 import { IFaultProvider } from './fault-provider';
 import { ICustomPropertyProvider } from './custom-property-provider';
-import { get } from 'lodash';
+import { get, toString } from 'lodash';
 import { Fault } from '../../domain/fault';
 import {
   englishCompetencyLabels,
@@ -59,12 +59,12 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     return {
       ...sharedValues,
       address_line_1: this.getTitledName(testresult.journalData.candidate.candidateName),
-      address_line_2: get(testresult, 'journalData.candidate.candidateAddress.addressLine1'),
+      address_line_2: toString(get(testresult, 'journalData.candidate.candidateAddress.addressLine1')),
       address_line_3: get(testresult, 'journalData.candidate.candidateAddress.addressLine2'),
       address_line_4: get(testresult, 'journalData.candidate.candidateAddress.addressLine3'),
       address_line_5: get(testresult, 'journalData.candidate.candidateAddress.addressLine4'),
       address_line_6: get(testresult, 'journalData.candidate.candidateAddress.addressLine5'),
-      postcode: get(testresult, 'journalData.candidate.candidateAddress.postcode'),
+      postcode: toString(get(testresult, 'journalData.candidate.candidateAddress.postcode')),
     };
   }
 
@@ -77,24 +77,31 @@ export class PersonalisationProvider implements IPersonalisationProvider {
 
   private getCommonPersonalisationValues(testresult: TestResultSchemasUnion): Personalisation {
     const testData = get(testresult, 'testData') as TestData;
+    const conductedLanguage = toString(
+      get(testresult, 'communicationPreferences.conductedLanguage')
+    ) as ConductedLanguage;
+
     const drivingFaults = this.buildFaultStringWithCount(
       this.faultProvider
         .getDrivingFaults(testData, testresult.category)
         .sort((a, b) => b.count - a.count),
-      get(testresult, 'communicationPreferences.conductedLanguage'),
-      testresult.category);
+      conductedLanguage,
+      testresult.category
+    );
 
     const seriousFaults = this.buildFaultString(
       this.faultProvider.getSeriousFaults(testData, testresult.category),
-      get(testresult, 'communicationPreferences.conductedLanguage'),
-      testresult.category);
+      conductedLanguage,
+      testresult.category
+    );
 
     const dangerousFaults = this.buildFaultString(
       this.faultProvider.getDangerousFaults(testData, testresult.category),
-      get(testresult, 'communicationPreferences.conductedLanguage'),
-      testresult.category);
-
-    const eta = get(testresult, 'testData.ETA', null);
+      conductedLanguage,
+      testresult.category
+    );
+    const eta = get(testresult, 'testData.ETA', null) as ETA | null;
+    const eco = get(testresult, 'testData.Eco', null) as Eco | null;
     const provisionalLicenceProvided = get(testresult, 'passCompletion.provisionalLicenceProvided', false);
 
     return {
@@ -102,9 +109,9 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       category: testresult.category,
       date: this.formatDate(
         get(testresult, 'journalData.testSlotAttributes.start'),
-        get(testresult, 'communicationPreferences.conductedLanguage'),
+        toString(get(testresult, 'communicationPreferences.conductedLanguage')) as ConductedLanguage,
       ),
-      location: get(testresult, 'journalData.testCentre.centreName'),
+      location: toString(get(testresult, 'journalData.testCentre.centreName')),
 
       drivingFaults: drivingFaults.length > 0 ? drivingFaults : '',
       showDrivingFaults: drivingFaults.length > 0 ? BooleanText.YES : BooleanText.NO,
@@ -115,10 +122,10 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       dangerousFaults: dangerousFaults.length > 0 ? dangerousFaults : '',
       showDangerousFaults: dangerousFaults.length > 0 ? BooleanText.YES : BooleanText.NO,
 
-      showEcoText: this.shouldShowEco(get(testresult, 'testData.eco', null)),
-      showEtaText: this.shouldShowEta(eta),
-      showEtaVerbal: this.shouldShowEtaVerbal(eta),
-      showEtaPhysical: this.shouldShowEtaPhysical(eta),
+      showEcoText: this.shouldShowEco(eco as Eco),
+      showEtaText: this.shouldShowEta(eta as ETA),
+      showEtaVerbal: this.shouldShowEtaVerbal(eta as ETA),
+      showEtaPhysical: this.shouldShowEtaPhysical(eta as ETA),
       showProvLicenceRetainedByDvsa: provisionalLicenceProvided ? BooleanText.YES : BooleanText.NO,
       showProvLicenceRetainedByDriver: !provisionalLicenceProvided ? BooleanText.YES : BooleanText.NO,
     };
@@ -178,7 +185,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     return eta && eta.verbal ? BooleanText.YES : BooleanText.NO;
   }
 
-  private formatDate(stringDate: Date, language: ConductedLanguage): string {
+  private formatDate(stringDate: string, language: ConductedLanguage): string {
     switch (language) {
     case 'Cymraeg': return moment(stringDate).locale('cy').format('D MMMM YYYY');
     default: return moment(stringDate).locale('en').format('D MMMM YYYY');
@@ -188,9 +195,12 @@ export class PersonalisationProvider implements IPersonalisationProvider {
   private modifyCompetencyLabel = (label: string, category: CategoryCode): string => {
     if (isBikeCategory(category)) {
       switch (label) {
-      case englishCompetencyLabels.moveOffControl: return modifiedEnglishCompetencyLabels.moveOffControl;
-      case englishCompetencyLabels.moveOffSafety: return modifiedEnglishCompetencyLabels.moveOffSafety;
-      default: return label;
+      case englishCompetencyLabels.moveOffControl:
+        return modifiedEnglishCompetencyLabels.moveOffControl;
+      case englishCompetencyLabels.moveOffSafety:
+        return modifiedEnglishCompetencyLabels.moveOffSafety;
+      default:
+        return label;
       }
     }
     return label;

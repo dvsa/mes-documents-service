@@ -1,5 +1,5 @@
 import { LessonTheme, StudentLevel, TestData } from '@dvsa/mes-test-schema/categories/ADI3';
-import { get, toString } from 'lodash';
+import {get, toNumber, toString} from 'lodash';
 
 import { CustomProperties } from '../../../../domain/custom-properties';
 import { lessonThemeValues, studentValues } from '../../../../domain/competencies';
@@ -35,7 +35,7 @@ export interface CatADI3CustomProperties extends CustomProperties {
   grade: string;
   showGrade: BooleanText;
   result: string;
-  feedback: string;
+  feedback: string | undefined;
   prn: string;
   categoryDescriptor: string;
   code4: string;
@@ -52,10 +52,15 @@ export const getCustomPropertiesCatADI3 = (
   }
 
   const grade = toString(get(testData, 'review.grade'));
+  const failScore = toNumber(get(testData, 'riskManagement.score'));
+  const lpScore = toNumber(get(testData, 'lessonPlanning.score'));
+  const rmScore = toNumber(get(testData, 'riskManagement.score'));
+  const tlsScore = toNumber(get(testData, 'teachingLearningStrategies.score'));
+  const other = toString(get(testData, 'lessonAndTheme.other'));
 
   return {
-    RMFail: get(testData, 'riskManagement.score') <= 7 ? BooleanText.YES : BooleanText.NO,
-    code4: activityCode === '4' ? BooleanText.YES : BooleanText.NO,
+    RMFail: (failScore <= 7) ? BooleanText.YES : BooleanText.NO,
+    code4: (activityCode === '4') ? BooleanText.YES : BooleanText.NO,
     categoryDescriptor: 'ADI Part 3',
     lessonPlanningScore: toString(get(testData, 'lessonPlanning.score')) || DEFAULT_SCORE,
     lp1Score: toString(get(testData, 'lessonPlanning.q1.score')) || DEFAULT_SCORE,
@@ -77,18 +82,16 @@ export const getCustomPropertiesCatADI3 = (
     tls6Score: toString(get(testData, 'teachingLearningStrategies.q6.score')) || DEFAULT_SCORE,
     tls7Score: toString(get(testData, 'teachingLearningStrategies.q7.score')) || DEFAULT_SCORE,
     tls8Score: toString(get(testData, 'teachingLearningStrategies.q8.score')) || DEFAULT_SCORE,
-    totalScore: toString(get(testData, 'lessonPlanning.score') +
-      get(testData, 'riskManagement.score') +
-      get(testData, 'teachingLearningStrategies.score')) || DEFAULT_SCORE,
+    totalScore: toString(lpScore + rmScore + tlsScore) || DEFAULT_SCORE,
     studentLevel: studentValues[testData?.lessonAndTheme?.studentLevel as StudentLevel],
     lessonThemes: testData?.lessonAndTheme?.lessonThemes
       ?.map((theme) => lessonThemeValues[theme])
-      .concat(get(testData, 'lessonAndTheme.other', null))
+      .concat(other)
       .filter((theme) => !!theme) as LessonTheme[],
     grade: (activityCode === '1' && grade) ? grade : '',
     showGrade: (activityCode === '1' && get(testData, 'review.grade')) ? BooleanText.YES : BooleanText.NO,
     result: (activityCode === '1') ? 'PASSED' : 'were UNSUCCESSFUL',
-    feedback: get(testData, 'review.feedback'),
+    feedback: get(testData, 'review.feedback', undefined),
     prn,
   };
 };

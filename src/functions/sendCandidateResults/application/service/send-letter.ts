@@ -2,7 +2,7 @@ import { DocumentsServiceError } from '../../domain/errors/documents-service-err
 import { LetterPersonalisation } from '../../domain/personalisation.model';
 import { INotifyClient } from '../../domain/notify-client.interface';
 import { AxiosError } from 'axios';
-import { get } from 'lodash';
+import { get, toNumber, toString } from 'lodash';
 
 export async function sendLetter(
   templateId: string,
@@ -16,8 +16,8 @@ export async function sendLetter(
     return Promise.resolve();
   } catch (err: any) {
     const axiosError = err as unknown as AxiosError;
-    const statusCode = get(axiosError, 'response.status');
-    const message = get(axiosError, 'response.data.errors[0].message');
+    const statusCode = toNumber(get(axiosError, 'response.status'));
+    const message = toString(get(axiosError, 'response.data.errors[0].message'));
 
     if (statusCode === 400 || statusCode === 403 || statusCode === 429) {
       return Promise.reject(new DocumentsServiceError(statusCode, message, false));
