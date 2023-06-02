@@ -69,7 +69,7 @@ export class TemplateIdProvider implements ITemplateIdProvider {
       return get(this.configAdapter, `${baseTemplate}${TestType.ADI2}`);
     }
 
-    if (category === TestCategory.ADI3) {
+    if (category === TestCategory.ADI3 || category === TestCategory.SC) {
       return get(this.configAdapter, `${baseTemplate}${TestType.ADI3}`);
     }
 
@@ -171,12 +171,12 @@ export function getTemplateString(
     (communicationMethod === Correspondence.POST) ? Correspondence.LETTER : Correspondence.EMAIL;
 
   if (isPass(activityCode)) {
-    return (category === TestCategory.ADI3)
+    return (category === TestCategory.ADI3 || category === TestCategory.SC)
       ? `${languageOfTemplate}${correspondenceMethod}TemplateId`
       : `${languageOfTemplate}${correspondenceMethod}PassTemplateId`;
   }
   if (isFail(activityCode)) {
-    return (category === TestCategory.ADI3)
+    return (category === TestCategory.ADI3 || category === TestCategory.SC)
       ? `${languageOfTemplate}${correspondenceMethod}TemplateId`
       : `${languageOfTemplate}${correspondenceMethod}FailTemplateId`;
   }
