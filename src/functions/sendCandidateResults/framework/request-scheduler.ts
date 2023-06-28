@@ -1,7 +1,14 @@
 import bottleneck from 'bottleneck';
+import { debug, error } from '@dvsa/mes-microservice-common/application/utils/logger';
+import { get } from 'lodash';
+import { inject, injectable } from 'inversify';
+import { TestResultSchemasUnion } from '@dvsa/mes-test-schema/categories';
+import { formatApplicationReference } from '@dvsa/mes-microservice-common/domain/tars';
+import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
+import { TestResultCommonSchema } from '@dvsa/mes-test-schema/categories/common';
+
 import { IConfigAdapter } from './adapter/config/config-adapter.interface';
 import { DocumentsServiceError } from '../domain/errors/documents-service-error';
-import { inject, injectable } from 'inversify';
 import { TYPES } from './di/types';
 import { INotifyClient } from '../domain/notify-client.interface';
 import { ITemplateIdProvider, isFail, isPass } from '../application/service/template-id-provider';
@@ -11,13 +18,8 @@ import { IPersonalisationProvider } from '../application/service/personalisation
 import { IStatusUpdater } from './status-updater';
 import { ProcessingStatus } from '../domain/submission-outcome.model';
 import { NOTIFY_INTERFACE } from '../domain/interface.constants';
-import { formatApplicationReference } from '@dvsa/mes-microservice-common/domain/tars';
-import { TestResultSchemasUnion } from '@dvsa/mes-test-schema/categories';
 import isDelegatedTest from '../application/service/is-delegated-test';
 import { isDES3ManoeuvreTest } from '../application/service/is-manoeuvre-test';
-import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
-import { TestResultCommonSchema } from '@dvsa/mes-test-schema/categories/common';
-import { get } from 'lodash';
 import { EmailPersonalisation } from '../domain/personalisation.model';
 
 export interface IRequestScheduler {
@@ -77,9 +79,8 @@ export class RequestScheduler implements IRequestScheduler {
 
   scheduleRequests(testResults: TestResultSchemasUnion[]): Promise<void>[] {
     return testResults.map((testResult: TestResultSchemasUnion) => {
-      const applicationReference = formatApplicationReference(
-        testResult.journalData.applicationReference,
-      );
+      const applicationReference = formatApplicationReference(testResult.journalData.applicationReference);
+
       return this.limiter
         .schedule(
           { id: applicationReference.toString() },
@@ -93,7 +94,9 @@ export class RequestScheduler implements IRequestScheduler {
               );
             }),
           ]))
-        .then(async (success) => {
+        .then(async () => {
+          debug('SendNotifyRequest success - calling update status', applicationReference);
+
           await this.statusUpdater.updateStatus({
             applicationReference,
             outcomePayload: {
@@ -105,7 +108,9 @@ export class RequestScheduler implements IRequestScheduler {
             },
           });
         })
-        .catch(async (error) => {
+        .catch(async (err) => {
+          error('SendNotifyRequest failure - calling update status', applicationReference, err);
+
           await this.statusUpdater.updateStatus({
             applicationReference,
             outcomePayload: {
@@ -113,7 +118,7 @@ export class RequestScheduler implements IRequestScheduler {
               state: ProcessingStatus.FAILED,
               staff_number: testResult.journalData.examiner.staffNumber,
               retry_count: this.retryCountByApplicationRef[applicationReference] || 0,
-              error_message: error.message,
+              error_message: err.message,
             },
           });
         });
