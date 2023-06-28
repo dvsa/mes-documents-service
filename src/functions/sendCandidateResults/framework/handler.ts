@@ -3,17 +3,24 @@ import { TYPES } from './di/types';
 import { IRequestScheduler } from './request-scheduler';
 import { INextUploadBatch } from '../domain/next-upload-batch.interface';
 import { TestResultSchemasUnion } from '@dvsa/mes-test-schema/categories';
+import { bootstrapLogging, error, info } from '@dvsa/mes-microservice-common/application/utils/logger';
+import { ScheduledEvent } from 'aws-lambda';
 
-export async function handler() {
-  let testResults: TestResultSchemasUnion[];
-  const nextUploadBatch = container.get<INextUploadBatch>(TYPES.INextUploadBatch);
-
+export async function handler(event: ScheduledEvent) {
   try {
-    testResults = await nextUploadBatch.get();
+    bootstrapLogging('send-candidate-results', event);
+
+    info('Getting nextUploadBatch');
+    const nextUploadBatch = container.get<INextUploadBatch>(TYPES.INextUploadBatch);
+    const testResults: TestResultSchemasUnion[] = await nextUploadBatch.get();
+
+    info('Calling scheduleRequests');
     const requestScheduler: IRequestScheduler = container.get<IRequestScheduler>(TYPES.IRequestScheduler);
     await Promise.all(requestScheduler.scheduleRequests(testResults));
+
+    info('Processed successfully');
   } catch (err) {
-    console.log(`### err:  ${err}`);
+    error(`### err:  ${err}`);
     throw(err);
   }
 }
