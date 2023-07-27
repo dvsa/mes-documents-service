@@ -1,6 +1,6 @@
 import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 import { TestResultSchemasUnion } from '@dvsa/mes-test-schema/categories';
-import { TestData as CatAMod1TestData } from '@dvsa/mes-test-schema/categories/AM1';
+import { CategoryCode, TestData as CatAMod1TestData } from '@dvsa/mes-test-schema/categories/AM1';
 import { TestData as CatCPCTestData } from '@dvsa/mes-test-schema/categories/CPC';
 import { TestData as CatADI3TestData } from '@dvsa/mes-test-schema/categories/ADI3';
 import { get } from 'lodash';
@@ -30,7 +30,7 @@ export class CustomPropertyProvider implements ICustomPropertyProvider {
     case TestCategory.ADI3:
     case TestCategory.SC:
       const prn = get(testResult, 'journalData.candidate.prn');
-      return getCustomPropertiesCatADI3(testData as CatADI3TestData, activityCode, prn);
+      return getCustomPropertiesCatADI3(testData as CatADI3TestData, activityCode, prn, category as CategoryCode);
     case TestCategory.CCPC:
     case TestCategory.DCPC:
       return getCustomPropertiesCatCPC(testData as CatCPCTestData, category);

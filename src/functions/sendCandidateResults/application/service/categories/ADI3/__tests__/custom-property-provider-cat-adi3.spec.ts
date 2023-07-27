@@ -47,7 +47,7 @@ describe('Custom-property-provider-cat-adi3', () => {
       lessonAndTheme: { studentLevel: 'beginner', lessonThemes: [], other: 'Mock Lesson Theme' },
     } as CatADI3TestData;
 
-    expect(getCustomPropertiesCatADI3(td, '3', '123')).toEqual({
+    expect(getCustomPropertiesCatADI3(td, '3', '123', 'ADI3')).toEqual({
       prn: '123',
       lessonPlanningScore: '0',
       lp1Score: '0',
@@ -74,11 +74,13 @@ describe('Custom-property-provider-cat-adi3', () => {
       lessonThemes: ['Mock Lesson Theme'],
       grade: '',
       showGrade: 'no',
-      result: 'were UNSUCCESSFUL',
+      result: 'were unsuccessful',
       feedback: 'Mock feedback',
       categoryDescriptor: 'ADI Part 3',
       RMFail: 'yes',
       code4: 'no',
+      isNotSC: 'yes',
+      positionType: 'in',
     } as unknown as CatADI3CustomProperties);
   });
 
@@ -118,7 +120,7 @@ describe('Custom-property-provider-cat-adi3', () => {
       },
     } as CatADI3TestData;
 
-    expect(getCustomPropertiesCatADI3(td, '1', '123')).toEqual({
+    expect(getCustomPropertiesCatADI3(td, '1', '123', 'SC')).toEqual({
       prn: '123',
       lessonPlanningScore: '8',
       lp1Score: '2',
@@ -150,18 +152,98 @@ describe('Custom-property-provider-cat-adi3', () => {
       ],
       grade: 'A',
       showGrade: 'yes',
-      result: 'PASSED',
+      result: 'passed',
       feedback: '',
-      categoryDescriptor: 'ADI Part 3',
+      categoryDescriptor: 'Standards Check',
       RMFail: 'no',
       code4: 'no',
+      isNotSC: 'no',
+      positionType: 'on',
+    } as CatADI3CustomProperties);
+  });
+
+  it('should return all SC data fields needed for notify template', () => {
+    const td = {
+      lessonPlanning: {
+        q1: getQuestion(1, 2),
+        q2: getQuestion(2, 2),
+        q3: getQuestion(3, 3),
+        q4: getQuestion(4, 1),
+        score: 8,
+      },
+      riskManagement: {
+        q1: getQuestion(1, 2),
+        q2: getQuestion(2, 2),
+        q3: getQuestion(3, 0),
+        q4: getQuestion(4, 1),
+        q5: getQuestion(4, 3),
+        score:8,
+      },
+      teachingLearningStrategies: {
+        q1: getQuestion(1, 3),
+        q2: getQuestion(2, 2),
+        q3: getQuestion(3, 3),
+        q4: getQuestion(4, 1),
+        q5: getQuestion(4, 2),
+        q6: getQuestion(4, 0),
+        q7: getQuestion(4, 1),
+        q8: getQuestion(4, 3),
+        score: 15,
+      },
+      review: { grade: 'A', feedback: '' },
+      lessonAndTheme: {
+        studentLevel: 'flhNew',
+        lessonThemes: ['interactionWithOtherRoadUsers', 'dualCarriagewayFasterRoads', 'commentary'],
+        other: 'Another Mock Lesson Theme',
+      },
+    } as CatADI3TestData;
+
+    expect(getCustomPropertiesCatADI3(td, '1', '123', 'SC')).toEqual({
+      prn: '123',
+      lessonPlanningScore: '8',
+      lp1Score: '2',
+      lp2Score: '2',
+      lp3Score: '3',
+      lp4Score: '1',
+      riskManagementScore: '8',
+      rm1Score: '2',
+      rm2Score: '2',
+      rm3Score: '0',
+      rm4Score: '1',
+      rm5Score: '3',
+      teachingLearningStrategiesScore: '15',
+      tls1Score: '3',
+      tls2Score: '2',
+      tls3Score: '3',
+      tls4Score: '1',
+      tls5Score: '2',
+      tls6Score: '0',
+      tls7Score: '1',
+      tls8Score: '3',
+      totalScore: '31',
+      studentLevel: 'FLH New',
+      lessonThemes: [
+        'Interaction with other road users',
+        'Dual carriageway / faster moving roads',
+        'Commentary',
+        'Another Mock Lesson Theme',
+      ],
+      grade: 'A',
+      showGrade: 'yes',
+      result: 'passed',
+      feedback: '',
+      categoryDescriptor: 'Standards Check',
+      RMFail: 'no',
+      code4: 'no',
+      isNotSC: 'no',
+      positionType: 'on',
     } as CatADI3CustomProperties);
   });
 
   it('should throw error when undefined test data', () => {
     const td = undefined;
     expect(() => {
-      getCustomPropertiesCatADI3(td, '4', '');
+      getCustomPropertiesCatADI3(td, '4', '', 'ADI3');
     }).toThrowError('No Test Data');
   });
 });

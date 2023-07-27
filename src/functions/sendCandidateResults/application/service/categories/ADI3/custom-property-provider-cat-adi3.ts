@@ -3,12 +3,15 @@ import { get, toString } from 'lodash';
 
 import { CustomProperties } from '../../../../domain/custom-properties';
 import { lessonThemeValues, studentValues } from '../../../../domain/competencies';
-import { BooleanText } from '../../../../domain/personalisation.model';
+import { BooleanText, PositionText } from '../../../../domain/personalisation.model';
 import { ActivityCode } from '@dvsa/mes-test-schema/categories/common';
+import { CategoryCode } from '@dvsa/mes-test-schema/categories/AM1';
+import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 
 const DEFAULT_SCORE: string = '0';
 
 export interface CatADI3CustomProperties extends CustomProperties {
+  isNotSC: string;
   lessonPlanningScore: string;
   lp1Score: string;
   lp2Score: string;
@@ -40,12 +43,14 @@ export interface CatADI3CustomProperties extends CustomProperties {
   categoryDescriptor: string;
   code4: string;
   RMFail: string;
+  positionType: string;
 }
 
 export const getCustomPropertiesCatADI3 = (
   testData: TestData | undefined,
   activityCode: ActivityCode,
   prn: string,
+  category: CategoryCode
 ): CatADI3CustomProperties => {
   if (!testData) {
     throw new Error('No Test Data');
@@ -54,9 +59,10 @@ export const getCustomPropertiesCatADI3 = (
   const grade = toString(get(testData, 'review.grade'));
 
   return {
+    isNotSC: (category === TestCategory.SC) ? BooleanText.NO : BooleanText.YES,
     RMFail: get(testData, 'riskManagement.score') <= 7 ? BooleanText.YES : BooleanText.NO,
     code4: activityCode === '4' ? BooleanText.YES : BooleanText.NO,
-    categoryDescriptor: 'ADI Part 3',
+    categoryDescriptor: (category === TestCategory.SC) ? 'Standards Check' : 'ADI Part 3',
     lessonPlanningScore: toString(get(testData, 'lessonPlanning.score')) || DEFAULT_SCORE,
     lp1Score: toString(get(testData, 'lessonPlanning.q1.score')) || DEFAULT_SCORE,
     lp2Score: toString(get(testData, 'lessonPlanning.q2.score')) || DEFAULT_SCORE,
@@ -87,8 +93,9 @@ export const getCustomPropertiesCatADI3 = (
       .filter((theme) => !!theme) as LessonTheme[],
     grade: (activityCode === '1' && grade) ? grade : '',
     showGrade: (activityCode === '1' && get(testData, 'review.grade')) ? BooleanText.YES : BooleanText.NO,
-    result: (activityCode === '1') ? 'PASSED' : 'were UNSUCCESSFUL',
+    result: (activityCode === '1') ? 'passed' : 'were unsuccessful',
     feedback: get(testData, 'review.feedback'),
+    positionType: (category === TestCategory.SC) ? PositionText.ON : PositionText.IN,
     prn,
   };
 };
