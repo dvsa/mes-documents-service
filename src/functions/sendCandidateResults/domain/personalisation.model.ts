@@ -3,6 +3,11 @@ export enum BooleanText {
   NO = 'no',
 }
 
+export enum PositionText {
+  IN = 'in',
+  ON = 'on',
+}
+
 export interface Personalisation {
   applicationReference: number;
   category: string;
