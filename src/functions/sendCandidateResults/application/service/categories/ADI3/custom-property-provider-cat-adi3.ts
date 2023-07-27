@@ -6,6 +6,7 @@ import { lessonThemeValues, studentValues } from '../../../../domain/competencie
 import { BooleanText, PositionText } from '../../../../domain/personalisation.model';
 import { ActivityCode } from '@dvsa/mes-test-schema/categories/common';
 import { CategoryCode } from '@dvsa/mes-test-schema/categories/AM1';
+import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 
 const DEFAULT_SCORE: string = '0';
 
@@ -58,10 +59,10 @@ export const getCustomPropertiesCatADI3 = (
   const grade = toString(get(testData, 'review.grade'));
 
   return {
-    isNotSC: (category === 'SC') ? BooleanText.NO : BooleanText.YES,
+    isNotSC: (category === TestCategory.SC) ? BooleanText.NO : BooleanText.YES,
     RMFail: get(testData, 'riskManagement.score') <= 7 ? BooleanText.YES : BooleanText.NO,
     code4: activityCode === '4' ? BooleanText.YES : BooleanText.NO,
-    categoryDescriptor: (category === 'SC') ? 'Standards Check' : 'ADI Part 3',
+    categoryDescriptor: (category === TestCategory.SC) ? 'Standards Check' : 'ADI Part 3',
     lessonPlanningScore: toString(get(testData, 'lessonPlanning.score')) || DEFAULT_SCORE,
     lp1Score: toString(get(testData, 'lessonPlanning.q1.score')) || DEFAULT_SCORE,
     lp2Score: toString(get(testData, 'lessonPlanning.q2.score')) || DEFAULT_SCORE,
@@ -94,7 +95,7 @@ export const getCustomPropertiesCatADI3 = (
     showGrade: (activityCode === '1' && get(testData, 'review.grade')) ? BooleanText.YES : BooleanText.NO,
     result: (activityCode === '1') ? 'passed' : 'were unsuccessful',
     feedback: get(testData, 'review.feedback'),
-    positionType: (category === 'SC') ? PositionText.ON : PositionText.IN,
+    positionType: (category === TestCategory.SC) ? PositionText.ON : PositionText.IN,
     prn,
   };
 };
