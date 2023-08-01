@@ -79,9 +79,10 @@ describe('Custom-property-provider-cat-adi3', () => {
       categoryDescriptor: 'ADI Part 3',
       RMFail: 'yes',
       code4: 'no',
-      isNotSC: 'yes',
+      isADI3: 'yes',
+      isSC: 'no',
       positionType: 'in',
-    } as unknown as CatADI3CustomProperties);
+    } as CatADI3CustomProperties);
   });
 
   it('should return all ADI3 data fields needed for notify template', () => {
@@ -157,7 +158,8 @@ describe('Custom-property-provider-cat-adi3', () => {
       categoryDescriptor: 'Standards Check',
       RMFail: 'no',
       code4: 'no',
-      isNotSC: 'no',
+      isADI3: 'no',
+      isSC: 'yes',
       positionType: 'on',
     } as CatADI3CustomProperties);
   });
@@ -235,7 +237,8 @@ describe('Custom-property-provider-cat-adi3', () => {
       categoryDescriptor: 'Standards Check',
       RMFail: 'no',
       code4: 'no',
-      isNotSC: 'no',
+      isADI3: 'no',
+      isSC: 'yes',
       positionType: 'on',
     } as CatADI3CustomProperties);
   });

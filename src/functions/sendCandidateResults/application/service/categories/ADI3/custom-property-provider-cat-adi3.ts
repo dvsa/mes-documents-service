@@ -11,7 +11,8 @@ import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/
 const DEFAULT_SCORE: string = '0';
 
 export interface CatADI3CustomProperties extends CustomProperties {
-  isNotSC: string;
+  isADI3: string;
+  isSC: string;
   lessonPlanningScore: string;
   lp1Score: string;
   lp2Score: string;
@@ -59,7 +60,8 @@ export const getCustomPropertiesCatADI3 = (
   const grade = toString(get(testData, 'review.grade'));
 
   return {
-    isNotSC: (category === TestCategory.SC) ? BooleanText.NO : BooleanText.YES,
+    isADI3: (category === TestCategory.ADI3) ? BooleanText.YES : BooleanText.NO,
+    isSC: (category === TestCategory.SC) ? BooleanText.YES : BooleanText.NO,
     RMFail: get(testData, 'riskManagement.score') <= 7 ? BooleanText.YES : BooleanText.NO,
     code4: activityCode === '4' ? BooleanText.YES : BooleanText.NO,
     categoryDescriptor: (category === TestCategory.SC) ? 'Standards Check' : 'ADI Part 3',
