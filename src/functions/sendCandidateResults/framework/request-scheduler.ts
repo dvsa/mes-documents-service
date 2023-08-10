@@ -176,8 +176,9 @@ export class RequestScheduler implements IRequestScheduler {
 
   private sendEmailToPADI = (testResult: TestResultSchemasUnion): Promise<any>[] => {
     if (
-      testResult.category === 'ADI3'
-      && get(testResult, 'journalData.candidate.previousADITests') === 3
+      (testResult.category === TestCategory.ADI3 || testResult.category === TestCategory.SC)
+      // Due to FE now displaying 'Current' attempt instead of 'Previous', we are decreasing the rule from 3 -> 2
+      && get(testResult, 'journalData.candidate.previousADITests') === 2
       && isFail(testResult.activityCode)
     ) {
       const recipients: string[] = (process.env.PADI_EMAIL || '').split(',');
