@@ -59,12 +59,18 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     return {
       ...sharedValues,
       address_line_1: this.getTitledName(testresult.journalData.candidate.candidateName),
-      address_line_2: get(testresult, 'journalData.candidate.candidateAddress.addressLine1'),
+      address_line_2: get<TestResultSchemasUnion, string>(
+        testresult,
+        'journalData.candidate.candidateAddress.addressLine1',
+      ),
       address_line_3: get(testresult, 'journalData.candidate.candidateAddress.addressLine2'),
       address_line_4: get(testresult, 'journalData.candidate.candidateAddress.addressLine3'),
       address_line_5: get(testresult, 'journalData.candidate.candidateAddress.addressLine4'),
       address_line_6: get(testresult, 'journalData.candidate.candidateAddress.addressLine5'),
-      postcode: get(testresult, 'journalData.candidate.candidateAddress.postcode'),
+      postcode: get<TestResultSchemasUnion, string>(
+        testresult,
+        'journalData.candidate.candidateAddress.postcode',
+      ),
     };
   }
 
@@ -77,24 +83,29 @@ export class PersonalisationProvider implements IPersonalisationProvider {
 
   private getCommonPersonalisationValues(testresult: TestResultSchemasUnion): Personalisation {
     const testData = get(testresult, 'testData') as TestData;
+
     const drivingFaults = this.buildFaultStringWithCount(
       this.faultProvider
         .getDrivingFaults(testData, testresult.category)
         .sort((a, b) => b.count - a.count),
-      get(testresult, 'communicationPreferences.conductedLanguage'),
-      testresult.category);
+      get(testresult, 'communicationPreferences.conductedLanguage') as ConductedLanguage,
+      testresult.category,
+    );
 
     const seriousFaults = this.buildFaultString(
       this.faultProvider.getSeriousFaults(testData, testresult.category),
-      get(testresult, 'communicationPreferences.conductedLanguage'),
-      testresult.category);
+      get(testresult, 'communicationPreferences.conductedLanguage') as ConductedLanguage,
+      testresult.category,
+    );
 
     const dangerousFaults = this.buildFaultString(
       this.faultProvider.getDangerousFaults(testData, testresult.category),
-      get(testresult, 'communicationPreferences.conductedLanguage'),
-      testresult.category);
+      get(testresult, 'communicationPreferences.conductedLanguage') as ConductedLanguage,
+      testresult.category,
+    );
 
-    const eta = get(testresult, 'testData.ETA', null);
+    const eta = get(testresult, 'testData.ETA', null) as unknown as ETA;
+    const eco = get(testresult, 'testData.eco', null) as unknown as Eco;
     const provisionalLicenceProvided = get(testresult, 'passCompletion.provisionalLicenceProvided', false);
 
     return {
@@ -102,20 +113,16 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       category: testresult.category,
       date: this.formatDate(
         get(testresult, 'journalData.testSlotAttributes.start'),
-        get(testresult, 'communicationPreferences.conductedLanguage'),
+        get(testresult, 'communicationPreferences.conductedLanguage') as ConductedLanguage,
       ),
-      location: get(testresult, 'journalData.testCentre.centreName'),
-
+      location: get(testresult, 'journalData.testCentre.centreName') as string,
       drivingFaults: drivingFaults.length > 0 ? drivingFaults : '',
       showDrivingFaults: drivingFaults.length > 0 ? BooleanText.YES : BooleanText.NO,
-
       seriousFaults: seriousFaults.length > 0 ? seriousFaults : '',
       showSeriousFaults: seriousFaults.length > 0 ? BooleanText.YES : BooleanText.NO,
-
       dangerousFaults: dangerousFaults.length > 0 ? dangerousFaults : '',
       showDangerousFaults: dangerousFaults.length > 0 ? BooleanText.YES : BooleanText.NO,
-
-      showEcoText: this.shouldShowEco(get(testresult, 'testData.eco', null)),
+      showEcoText: this.shouldShowEco(eco),
       showEtaText: this.shouldShowEta(eta),
       showEtaVerbal: this.shouldShowEtaVerbal(eta),
       showEtaPhysical: this.shouldShowEtaPhysical(eta),
@@ -178,7 +185,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     return eta && eta.verbal ? BooleanText.YES : BooleanText.NO;
   }
 
-  private formatDate(stringDate: Date, language: ConductedLanguage): string {
+  private formatDate(stringDate: string, language: ConductedLanguage): string {
     switch (language) {
     case 'Cymraeg': return moment(stringDate).locale('cy').format('D MMMM YYYY');
     default: return moment(stringDate).locale('en').format('D MMMM YYYY');
