@@ -4,9 +4,11 @@ import {
   CommunicationPreferences,
   ConductedLanguage,
 } from '@dvsa/mes-test-schema/categories/common';
-import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
+import {TestCategory} from '@dvsa/mes-test-schema/category-definitions/common/test-category';
+import {inject, injectable} from 'inversify';
+import {get} from 'lodash';
 
-import { IConfigAdapter } from '../../framework/adapter/config/config-adapter.interface';
+import {IConfigAdapter} from '../../framework/adapter/config/config-adapter.interface';
 import {
   Correspondence,
   CorrespondenceMethod,
@@ -14,20 +16,22 @@ import {
   TemplateLanguage,
   TestType,
 } from '../../domain/template-id.model';
-import { TYPES } from '../../framework/di/types';
-import { inject, injectable } from 'inversify';
-import { get } from 'lodash';
+import {TYPES} from '../../framework/di/types';
 
 export interface ITemplateIdProvider {
   getTemplateId(
-    communicationPreferences: CommunicationPreferences, activityCode: ActivityCode, category: CategoryCode): string;
+    communicationPreferences: CommunicationPreferences,
+    activityCode: ActivityCode,
+    category: CategoryCode
+  ): string;
 }
 
 @injectable()
 export class TemplateIdProvider implements ITemplateIdProvider {
   static TEMPLATE_ID_NOT_SET = 'Template Id not set';
 
-  constructor(@inject(TYPES.IConfigAdapter) public configAdapter: IConfigAdapter) {
+  constructor(
+    @inject(TYPES.IConfigAdapter) public configAdapter: IConfigAdapter) {
   }
 
   getTemplateId(
@@ -50,38 +54,38 @@ export class TemplateIdProvider implements ITemplateIdProvider {
     }
 
     if (isVocationalCategory(category)) {
-      return get(this.configAdapter, `${baseTemplate}${TestType.VOCATIONAL}`);
+      return get<IConfigAdapter, string>(this.configAdapter, `${baseTemplate}${TestType.VOCATIONAL}`);
     }
 
     if (isAmod1Category(category)) {
-      return get(this.configAdapter, `${baseTemplate}${TestType.AMOD1}`);
+      return get<IConfigAdapter, string>(this.configAdapter, `${baseTemplate}${TestType.AMOD1}`);
     }
 
     if (isAmod2Category(category)) {
-      return get(this.configAdapter, `${baseTemplate}${TestType.AMOD2}`);
+      return get<IConfigAdapter, string>(this.configAdapter, `${baseTemplate}${TestType.AMOD2}`);
     }
 
     if (isHomeTestCategory(category)) {
-      return get(this.configAdapter, `${baseTemplate}${TestType.HOME}`);
+      return get<IConfigAdapter, string>(this.configAdapter, `${baseTemplate}${TestType.HOME}`);
     }
 
     if (category === TestCategory.ADI2) {
-      return get(this.configAdapter, `${baseTemplate}${TestType.ADI2}`);
+      return get<IConfigAdapter, string>(this.configAdapter, `${baseTemplate}${TestType.ADI2}`);
     }
 
     if (category === TestCategory.ADI3 || category === TestCategory.SC) {
-      return get(this.configAdapter, `${baseTemplate}${TestType.ADI3}`);
+      return get<IConfigAdapter, string>(this.configAdapter, `${baseTemplate}${TestType.ADI3}`);
     }
 
     if (isCPCCategory(category)) {
-      return get(this.configAdapter, `${baseTemplate}${TestType.CPC}`);
+      return get<IConfigAdapter, string>(this.configAdapter, `${baseTemplate}${TestType.CPC}`);
     }
 
     if (isManoeuvreCategory(category)) {
-      return get(this.configAdapter, `${baseTemplate}${TestType.MANOEUVRE}`);
+      return get<IConfigAdapter, string>(this.configAdapter, `${baseTemplate}${TestType.MANOEUVRE}`);
     }
 
-    return get(this.configAdapter, baseTemplate);
+    return get<IConfigAdapter, string>(this.configAdapter, baseTemplate);
   }
 }
 
@@ -165,10 +169,10 @@ export function getTemplateString(
 ): string {
 
   const languageOfTemplate: TemplateLanguage =
-    (conductedLanguage === Language.WELSH) ? TemplateLanguage.WELSH : TemplateLanguage.ENGLISH;
+        (conductedLanguage === Language.WELSH) ? TemplateLanguage.WELSH : TemplateLanguage.ENGLISH;
 
   const correspondenceMethod: CorrespondenceMethod =
-    (communicationMethod === Correspondence.POST) ? Correspondence.LETTER : Correspondence.EMAIL;
+        (communicationMethod === Correspondence.POST) ? Correspondence.LETTER : Correspondence.EMAIL;
 
   if (isPass(activityCode)) {
     return (category === TestCategory.ADI3 || category === TestCategory.SC)
