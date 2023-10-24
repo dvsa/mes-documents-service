@@ -2,7 +2,7 @@ service: mes-documents-service
 
 provider:
   name: aws
-  runtime: nodejs14.x
+  runtime: nodejs18.x
   environment:
     NOTIFY_HOSTNAME: http://www.example.com
     USE_NOTIFY: false
