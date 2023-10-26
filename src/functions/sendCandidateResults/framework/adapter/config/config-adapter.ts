@@ -1,7 +1,7 @@
-import { IConfigAdapter } from './config-adapter.interface';
 import { injectable } from 'inversify';
-import * as awsSdk from 'aws-sdk';
+import { GetSecretValueCommand, GetSecretValueCommandInput, SecretsManager } from '@aws-sdk/client-secrets-manager';
 import { isEmpty } from 'lodash';
+import { IConfigAdapter } from './config-adapter.interface';
 
 @injectable()
 export class ConfigAdapter implements IConfigAdapter {
@@ -207,13 +207,14 @@ export class ConfigAdapter implements IConfigAdapter {
 
     const documentServiceSecretName = this.getFromEnvThrowIfNotPresent('SECRET_NAME');
 
-    const secretsmanager = new awsSdk.SecretsManager();
-    const params: awsSdk.SecretsManager.GetSecretValueRequest = {
+    const params: GetSecretValueCommandInput = {
       SecretId: documentServiceSecretName,
     };
 
     try {
-      const secretValue = await secretsmanager.getSecretValue(params).promise();
+      const secretValue = await new SecretsManager().send(
+        new GetSecretValueCommand(params)
+      );
       const secrets = JSON.parse(secretValue.SecretString || '');
       if (isEmpty(secrets)) {
         throw new Error('secret string was empty');
