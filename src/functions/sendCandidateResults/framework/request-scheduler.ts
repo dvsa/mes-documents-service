@@ -1,5 +1,5 @@
 import bottleneck from 'bottleneck';
-import { debug, error } from '@dvsa/mes-microservice-common/application/utils/logger';
+import { debug, error, warn } from '@dvsa/mes-microservice-common/application/utils/logger';
 import { get } from 'lodash';
 import { inject, injectable } from 'inversify';
 import { TestResultSchemasUnion } from '@dvsa/mes-test-schema/categories';
@@ -19,7 +19,6 @@ import { IStatusUpdater } from './status-updater';
 import { ProcessingStatus } from '../domain/submission-outcome.model';
 import { NOTIFY_INTERFACE } from '../domain/interface.constants';
 import isDelegatedTest from '../application/service/is-delegated-test';
-import { isDES3ManoeuvreTest } from '../application/service/is-manoeuvre-test';
 import { EmailPersonalisation } from '../domain/personalisation.model';
 
 export interface IRequestScheduler {
@@ -126,28 +125,29 @@ export class RequestScheduler implements IRequestScheduler {
   }
 
   private sendNotifyRequest(testResult: TestResultSchemasUnion): Promise<any> {
-    const { category } = testResult as TestResultCommonSchema;
+    const appRef = formatApplicationReference(testResult.journalData?.applicationReference).toString();
 
     if (!testResult.communicationPreferences) {
+      warn('Notify request rejected: Missing communicationPreferences', appRef);
       return Promise.reject();
     }
 
     if (!isFail(testResult.activityCode) && !isPass(testResult.activityCode)) {
+      debug('Notify not required: Terminated test', appRef);
       return Promise.resolve();
     }
 
     if (isDelegatedTest(testResult)) {
+      debug('Notify not required: Delegated test', appRef);
       return Promise.resolve();
     }
 
-    if (isDES3ManoeuvreTest(testResult.category as TestCategory, testResult?.appVersion)) {
-      return Promise.resolve();
-    }
-
-    const { communicationPreferences } = testResult as Required<TestResultCommonSchema>;
+    const { category, communicationPreferences } = testResult as Required<TestResultCommonSchema>;
 
     const templateId: string =
       this.templateIdProvider.getTemplateId(communicationPreferences, testResult.activityCode, category);
+
+    debug('Using templateId', templateId, appRef);
 
     if (communicationPreferences.communicationMethod === 'Email') {
       return Promise.all([
@@ -156,7 +156,7 @@ export class RequestScheduler implements IRequestScheduler {
           communicationPreferences.updatedEmail as string,
           templateId,
           this.personalisationProvider.getEmailPersonalisation(testResult),
-          formatApplicationReference(testResult.journalData.applicationReference).toString(),
+          appRef,
           '',
           this.notifyClient,
         )]
@@ -168,7 +168,7 @@ export class RequestScheduler implements IRequestScheduler {
       sendLetter(
         templateId,
         this.personalisationProvider.getLetterPersonalisation(testResult),
-        formatApplicationReference(testResult.journalData.applicationReference).toString(),
+        appRef,
         this.notifyClient,
       )]
     );
@@ -184,6 +184,8 @@ export class RequestScheduler implements IRequestScheduler {
       const recipients: string[] = (process.env.PADI_EMAIL || '').split(',');
       const personalisation: EmailPersonalisation = this.personalisationProvider.getEmailPersonalisation(testResult);
       const appRef: string = formatApplicationReference(testResult.journalData.applicationReference).toString();
+
+      debug('Sending Email to PADI', appRef);
 
       return recipients.map((recipient) => {
         return sendEmail(

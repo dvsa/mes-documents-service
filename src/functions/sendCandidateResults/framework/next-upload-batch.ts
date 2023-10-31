@@ -1,7 +1,7 @@
 import { injectable, inject } from 'inversify';
 import axios, { AxiosResponse } from 'axios';
 import * as zlib from 'zlib';
-import { error, info } from '@dvsa/mes-microservice-common/application/utils/logger';
+import { debug, error, info } from '@dvsa/mes-microservice-common/application/utils/logger';
 import { TestResultSchemasUnion } from '@dvsa/mes-test-schema/categories';
 
 import { INextUploadBatch } from '../domain/next-upload-batch.interface';
@@ -21,7 +21,9 @@ export class NextUploadBatch implements INextUploadBatch {
     this.batchSize = configAdapter.notifyBatchSize;
   }
 
-  get(): Promise<TestResultSchemasUnion[]> {
+  async get(): Promise<TestResultSchemasUnion[]> {
+    debug('Invoking GetNextUploadBatch');
+
     const { resultsBaseApiUrl } = this.configAdapter;
     return axios.get(
       `${resultsBaseApiUrl}/test-results/upload?interface=${NOTIFY_INTERFACE}&batch_size=${this.batchSize}`,
