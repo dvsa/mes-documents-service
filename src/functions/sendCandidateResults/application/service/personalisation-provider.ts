@@ -71,23 +71,23 @@ export class PersonalisationProvider implements IPersonalisationProvider {
   private getCommonPersonalisationValues(testresult: TestResultSchemasUnion): Personalisation {
     const testData = get(testresult, 'testData') as TestData;
 
+    const lang = get(testresult, 'communicationPreferences.conductedLanguage') as ConductedLanguage;
+
     const drivingFaults = this.buildFaultStringWithCount(
-      this.faultProvider
-        .getDrivingFaults(testData, testresult.category)
-        .sort((a, b) => b.count - a.count),
-      get(testresult, 'communicationPreferences.conductedLanguage') as ConductedLanguage,
+      this.faultProvider.getDrivingFaults(testData, testresult.category).sort((a, b) => b.count - a.count),
+      lang,
       testresult.category,
     );
 
     const seriousFaults = this.buildFaultString(
       this.faultProvider.getSeriousFaults(testData, testresult.category),
-      get(testresult, 'communicationPreferences.conductedLanguage') as ConductedLanguage,
+      lang,
       testresult.category,
     );
 
     const dangerousFaults = this.buildFaultString(
       this.faultProvider.getDangerousFaults(testData, testresult.category),
-      get(testresult, 'communicationPreferences.conductedLanguage') as ConductedLanguage,
+      lang,
       testresult.category,
     );
 
@@ -122,10 +122,10 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     const faultLabels: string[] = [];
 
     if (language === 'Cymraeg') {
-      faults.forEach((fault: any) => faultLabels.push(`${(<any>welshCompetencyLabels)[fault.name]}`));
+      faults.forEach((fault) => faultLabels.push(`${(welshCompetencyLabels)[fault.name]}`));
     } else {
-      faults.forEach((fault: any) => faultLabels.push(
-        `${this.modifyCompetencyLabel((<any>englishCompetencyLabels)[fault.name], category)}`));
+      faults.forEach((fault) => faultLabels.push(
+        `${this.modifyCompetencyLabel((englishCompetencyLabels)[fault.name], category)}`));
     }
 
     return faultLabels;
@@ -135,10 +135,10 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     const faultLabels: string[] = [];
 
     if (language === 'Cymraeg') {
-      faults.forEach((fault: any) => faultLabels.push(`${(<any>welshCompetencyLabels)[fault.name]}, ${fault.count}`));
+      faults.forEach((fault) => faultLabels.push(`${(welshCompetencyLabels)[fault.name]}, ${fault.count}`));
     } else {
-      faults.forEach((fault: any) => faultLabels.push(
-        `${this.modifyCompetencyLabel((<any>englishCompetencyLabels)[fault.name], category)}, ${fault.count}`));
+      faults.forEach((fault) => faultLabels.push(
+        `${this.modifyCompetencyLabel((englishCompetencyLabels)[fault.name], category)}, ${fault.count}`));
     }
     return faultLabels;
   }
@@ -172,17 +172,22 @@ export class PersonalisationProvider implements IPersonalisationProvider {
 
   private formatDate(stringDate: string, language: ConductedLanguage): string {
     switch (language) {
-    case 'Cymraeg': return moment(stringDate).locale('cy').format('D MMMM YYYY');
-    default: return moment(stringDate).locale('en').format('D MMMM YYYY');
+    case 'Cymraeg':
+      return moment(stringDate).locale('cy').format('D MMMM YYYY');
+    default:
+      return moment(stringDate).locale('en').format('D MMMM YYYY');
     }
   }
 
   private modifyCompetencyLabel = (label: string, category: CategoryCode): string => {
     if (isBikeCategory(category)) {
       switch (label) {
-      case englishCompetencyLabels.moveOffControl: return modifiedEnglishCompetencyLabels.moveOffControl;
-      case englishCompetencyLabels.moveOffSafety: return modifiedEnglishCompetencyLabels.moveOffSafety;
-      default: return label;
+      case englishCompetencyLabels.moveOffControl:
+        return modifiedEnglishCompetencyLabels.moveOffControl;
+      case englishCompetencyLabels.moveOffSafety:
+        return modifiedEnglishCompetencyLabels.moveOffSafety;
+      default:
+        return label;
       }
     }
     return label;
