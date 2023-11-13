@@ -1,4 +1,5 @@
 import { CatCUniqueTypes } from '@dvsa/mes-test-schema/categories/C';
+import { CatC1UniqueTypes } from '@dvsa/mes-test-schema/categories/C1';
 import { Fault, FaultLimit } from '../../../../domain/fault';
 import { CompetencyOutcome } from '../../../../domain/competency-outcome';
 import {
@@ -11,12 +12,14 @@ import { Competencies } from '../../../../domain/competencies';
 import { QuestionOutcome } from '@dvsa/mes-test-schema/categories/common';
 import { get } from 'lodash';
 
-export const getDrivingFaultsCatC = (testData: CatCUniqueTypes.TestData | undefined): Fault [] => {
-  const drivingFaults: Fault[] = [];
+type CatCTestData = CatCUniqueTypes.TestData | CatC1UniqueTypes.TestData | undefined;
 
+export const getDrivingFaultsCatC = (testData: CatCTestData): Fault [] => {
   if (!testData) {
     throw new Error('No Test Data');
   }
+
+  const drivingFaults: Fault[] = [];
 
   if (testData.drivingFaults) {
     convertNumericFaultObjectToArray(testData.drivingFaults)
@@ -29,12 +32,12 @@ export const getDrivingFaultsCatC = (testData: CatCUniqueTypes.TestData | undefi
   return drivingFaults;
 };
 
-export const getSeriousFaultsCatC = (testData: CatCUniqueTypes.TestData | undefined): Fault [] => {
-  const seriousFaults: Fault[] = [];
-
+export const getSeriousFaultsCatC = (testData: CatCTestData): Fault [] => {
   if (!testData) {
     throw new Error('No Test Data');
   }
+
+  const seriousFaults: Fault[] = [];
 
   if (testData.seriousFaults) {
     convertBooleanFaultObjectToArray(testData.seriousFaults)
@@ -52,12 +55,12 @@ export const getSeriousFaultsCatC = (testData: CatCUniqueTypes.TestData | undefi
   return seriousFaults;
 };
 
-export const getDangerousFaultsCatC = (testData: CatCUniqueTypes.TestData | undefined): Fault [] => {
-  const dangerousFaults: Fault[] = [];
-
+export const getDangerousFaultsCatC = (testData: CatCTestData): Fault [] => {
   if (!testData) {
     throw new Error('No Test Data');
   }
+
+  const dangerousFaults: Fault[] = [];
 
   if (testData.dangerousFaults) {
     convertBooleanFaultObjectToArray(testData.dangerousFaults)
@@ -71,8 +74,9 @@ export const getDangerousFaultsCatC = (testData: CatCUniqueTypes.TestData | unde
 };
 
 export const getNonStandardFaultsCatC = (
-  testData: CatCUniqueTypes.TestData,
-  faultType: CompetencyOutcome): Fault[] => {
+  testData: Exclude<CatCTestData, undefined>,
+  faultType: CompetencyOutcome,
+): Fault[] => {
 
   const faults: Fault[] = [];
 
@@ -92,8 +96,9 @@ export const getNonStandardFaultsCatC = (
 };
 
 export const getVehicleChecksFaultCatC = (
-  vehicleChecks: CatCUniqueTypes.VehicleChecks,
-  faultType: QuestionOutcome): Fault[] => {
+  vehicleChecks: CatCUniqueTypes.VehicleChecks | CatC1UniqueTypes.VehicleChecks,
+  faultType: QuestionOutcome
+): Fault[] => {
   const faultArray: Fault[] = [];
   const faultCount = getVehicleCheckFaultCount(vehicleChecks, faultType);
 
