@@ -30,6 +30,7 @@
     "@dvsa/mes-microservice-common": "1.1.0",
     "axios": "^1.6.0",
     "bottleneck": "^2.19.5",
+    "handlebars": "^4.7.8",
     "inversify": "6.0.2",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",

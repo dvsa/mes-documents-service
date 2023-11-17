@@ -111,13 +111,13 @@ export class ConfigAdapter implements IConfigAdapter {
     this.resultsBaseApiUrl = this.getFromEnvThrowIfNotPresent('RESULTS_API_BASE_URL');
 
     // Car Email
-    this.englishEmailPassTemplateId = this.getFromEnvThrowIfNotPresent('E_PASS_CAR');
-    this.englishEmailFailTemplateId = this.getFromEnvThrowIfNotPresent('E_FAIL_CAR');
+    this.englishEmailPassTemplateId = this.getFromEnvThrowIfNotPresent('E_ANDY');
+    this.englishEmailFailTemplateId = this.getFromEnvThrowIfNotPresent('E_ANDY');
     this.welshEmailPassTemplateId = this.getFromEnvThrowIfNotPresent('E_W_PASS_CAR');
     this.welshEmailFailTemplateId = this.getFromEnvThrowIfNotPresent('E_W_FAIL_CAR');
     // Car Letter
-    this.englishLetterPassTemplateId = this.getFromEnvThrowIfNotPresent('P_PASS_CAR');
-    this.englishLetterFailTemplateId = this.getFromEnvThrowIfNotPresent('P_FAIL_CAR');
+    this.englishLetterPassTemplateId = this.getFromEnvThrowIfNotPresent('P_ANDY');
+    this.englishLetterFailTemplateId = this.getFromEnvThrowIfNotPresent('P_ANDY');
     this.welshLetterPassTemplateId = this.getFromEnvThrowIfNotPresent('P_W_PASS_CAR');
     this.welshLetterFailTemplateId = this.getFromEnvThrowIfNotPresent('P_W_FAIL_CAR');
     // VOCATIONAL Email

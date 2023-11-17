@@ -1,30 +1,31 @@
 import { sendEmail } from '../send-email';
 import { mockEmail1 } from '../../../framework/__mocks__/test-data.cat-be.mock';
-import { EmailPersonalisation, BooleanText } from '../../../domain/personalisation.model';
+import { EmailPersonalisation } from '../../../domain/personalisation.model';
 import { INotifyClient } from '../../../domain/notify-client.interface';
 import { NotifyClientStubSuccess } from '../../stub/notify-client-stub-success';
 import { NotifyClientStubFailure400 } from '../../stub/notify-client-stub-failure-400';
 import { NotifyClientStubFailure500 } from '../../stub/notify-client-stub-failure-500';
 import { DocumentsServiceError } from '../../../domain/errors/documents-service-error';
+import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 
 const personlisation: EmailPersonalisation = {
   candidateName: 'some name',
   applicationReference: 12345678,
-  category: 'B+E',
+  category: TestCategory.BE,
   date: '01/01/1990',
   drivingFaults: [],
   seriousFaults: [],
   dangerousFaults: [],
   location: 'Test Centre',
-  showDangerousFaults: BooleanText.YES,
-  showDrivingFaults: BooleanText.YES,
-  showEcoText: BooleanText.YES,
-  showSeriousFaults: BooleanText.YES,
-  showEtaText: BooleanText.YES,
-  showEtaPhysical: BooleanText.YES,
-  showEtaVerbal: BooleanText.NO,
-  showProvLicenceRetainedByDvsa: BooleanText.YES,
-  showProvLicenceRetainedByDriver: BooleanText.NO,
+  showDangerousFaults: true,
+  showDrivingFaults: true,
+  showEcoText: true,
+  showSeriousFaults: true,
+  showEtaText: true,
+  showEtaPhysical: true,
+  showEtaVerbal: false,
+  showProvLicenceRetainedByDvsa: true,
+  showProvLicenceRetainedByDriver: false,
 };
 
 describe('sendEmail', () => {
