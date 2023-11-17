@@ -108,7 +108,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     const eco = get(testresult, 'testData.eco', null) as unknown as Eco;
     const provisionalLicenceProvided = get(testresult, 'passCompletion.provisionalLicenceProvided', false);
 
-    return {
+    return <Personalisation>{
       applicationReference: formatApplicationReference(get(testresult, 'journalData.applicationReference')),
       category: testresult.category,
       date: this.formatDate(
@@ -117,17 +117,17 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       ),
       location: get(testresult, 'journalData.testCentre.centreName') as string,
       drivingFaults: drivingFaults.length > 0 ? drivingFaults : '',
-      showDrivingFaults: drivingFaults.length > 0 ? BooleanText.YES : BooleanText.NO,
+      showDrivingFaults: drivingFaults.length > 0,
       seriousFaults: seriousFaults.length > 0 ? seriousFaults : '',
-      showSeriousFaults: seriousFaults.length > 0 ? BooleanText.YES : BooleanText.NO,
+      showSeriousFaults: seriousFaults.length > 0,
       dangerousFaults: dangerousFaults.length > 0 ? dangerousFaults : '',
-      showDangerousFaults: dangerousFaults.length > 0 ? BooleanText.YES : BooleanText.NO,
+      showDangerousFaults: dangerousFaults.length > 0,
       showEcoText: this.shouldShowEco(eco),
       showEtaText: this.shouldShowEta(eta),
       showEtaVerbal: this.shouldShowEtaVerbal(eta),
       showEtaPhysical: this.shouldShowEtaPhysical(eta),
-      showProvLicenceRetainedByDvsa: provisionalLicenceProvided ? BooleanText.YES : BooleanText.NO,
-      showProvLicenceRetainedByDriver: !provisionalLicenceProvided ? BooleanText.YES : BooleanText.NO,
+      showProvLicenceRetainedByDvsa: provisionalLicenceProvided,
+      showProvLicenceRetainedByDriver: !provisionalLicenceProvided,
     };
   }
 
@@ -163,26 +163,24 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     return '';
   }
 
-  private shouldShowEco(eco: Eco): BooleanText {
+  private shouldShowEco(eco: Eco): boolean {
     if (!eco) {
-      return BooleanText.NO;
+      return false;
     }
-    if (eco.adviceGivenControl || eco.adviceGivenPlanning) {
-      return BooleanText.YES;
-    }
-    return BooleanText.NO;
+    return !!(eco.adviceGivenControl || eco.adviceGivenPlanning);
+
   }
 
-  private shouldShowEta(eta: ETA): BooleanText {
-    return eta && (eta.physical || eta.verbal) ? BooleanText.YES : BooleanText.NO;
+  private shouldShowEta(eta: ETA): boolean {
+    return !!(eta && (eta.physical || eta.verbal));
   }
 
-  private shouldShowEtaPhysical(eta: ETA): BooleanText {
-    return eta && eta.physical ? BooleanText.YES : BooleanText.NO;
+  private shouldShowEtaPhysical(eta: ETA): boolean {
+    return !!(eta && eta.physical);
   }
 
-  private shouldShowEtaVerbal(eta: ETA): BooleanText {
-    return eta && eta.verbal ? BooleanText.YES : BooleanText.NO;
+  private shouldShowEtaVerbal(eta: ETA): boolean {
+    return !!(eta && eta.verbal);
   }
 
   private formatDate(stringDate: string, language: ConductedLanguage): string {

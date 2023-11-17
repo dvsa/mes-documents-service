@@ -1,31 +1,32 @@
 import { sendLetter } from '../send-letter';
-import { LetterPersonalisation, BooleanText } from '../../../domain/personalisation.model';
+import { LetterPersonalisation } from '../../../domain/personalisation.model';
 import { INotifyClient } from '../../../domain/notify-client.interface';
 import { NotifyClientStubSuccess } from '../../stub/notify-client-stub-success';
 import { NotifyClientStubFailure400 } from '../../stub/notify-client-stub-failure-400';
 import { NotifyClientStubFailure500 } from '../../stub/notify-client-stub-failure-500';
 import { DocumentsServiceError } from '../../../domain/errors/documents-service-error';
+import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 
 const personlisation: LetterPersonalisation = {
   address_line_1: 'address line 1',
   address_line_2: 'address line 2',
   postcode: 'postcode',
   applicationReference: 12345678,
-  category: 'B',
+  category: TestCategory.B,
   date: '01/01/1990',
   drivingFaults: [],
   seriousFaults: [],
   dangerousFaults: [],
   location: 'Test Centre',
-  showDangerousFaults: BooleanText.YES,
-  showDrivingFaults: BooleanText.YES,
-  showEcoText: BooleanText.YES,
-  showSeriousFaults: BooleanText.YES,
-  showEtaText: BooleanText.YES,
-  showEtaPhysical: BooleanText.YES,
-  showEtaVerbal: BooleanText.NO,
-  showProvLicenceRetainedByDvsa: BooleanText.NO,
-  showProvLicenceRetainedByDriver: BooleanText.YES,
+  showDangerousFaults: true,
+  showDrivingFaults: true,
+  showEcoText: true,
+  showSeriousFaults: true,
+  showEtaText: true,
+  showEtaPhysical: true,
+  showEtaVerbal: false,
+  showProvLicenceRetainedByDvsa: false,
+  showProvLicenceRetainedByDriver: true,
 };
 
 describe('sendLetter', () => {
