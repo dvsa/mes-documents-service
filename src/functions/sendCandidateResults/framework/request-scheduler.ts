@@ -5,13 +5,13 @@ import { inject, injectable } from 'inversify';
 import { TestResultSchemasUnion } from '@dvsa/mes-test-schema/categories';
 import { formatApplicationReference } from '@dvsa/mes-microservice-common/domain/tars';
 import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
-import { TestResultCommonSchema } from '@dvsa/mes-test-schema/categories/common';
+import { CommunicationMethod, TestResultCommonSchema } from '@dvsa/mes-test-schema/categories/common';
 
 import { IConfigAdapter } from './adapter/config/config-adapter.interface';
 import { DocumentsServiceError } from '../domain/errors/documents-service-error';
 import { TYPES } from './di/types';
 import { INotifyClient } from '../domain/notify-client.interface';
-import { ITemplateIdProvider, isFail, isPass } from '../application/service/template-id-provider';
+import { ITemplateIdProvider } from '../application/service/template-id-provider';
 import { sendEmail } from '../application/service/send-email';
 import { sendLetter } from '../application/service/send-letter';
 import { IPersonalisationProvider } from '../application/service/personalisation-provider';
@@ -20,6 +20,7 @@ import { ProcessingStatus } from '../domain/submission-outcome.model';
 import { NOTIFY_INTERFACE } from '../domain/interface.constants';
 import isDelegatedTest from '../application/service/is-delegated-test';
 import { EmailPersonalisation } from '../domain/personalisation.model';
+import { isFail, isPass } from '../application/service/test-outcome';
 
 export interface IRequestScheduler {
   scheduleRequests(testResults: TestResultSchemasUnion[]): Promise<void>[];
@@ -132,6 +133,11 @@ export class RequestScheduler implements IRequestScheduler {
       return Promise.reject();
     }
 
+    if (!testResult.communicationPreferences.communicationMethod) {
+      warn('Notify request rejected: Missing communicationMethod', appRef);
+      return Promise.reject();
+    }
+
     if (!isFail(testResult.activityCode) && !isPass(testResult.activityCode)) {
       debug('Notify not required: Terminated test', appRef);
       return Promise.resolve();
@@ -142,10 +148,10 @@ export class RequestScheduler implements IRequestScheduler {
       return Promise.resolve();
     }
 
-    const { category, communicationPreferences } = testResult as Required<TestResultCommonSchema>;
+    const { communicationPreferences } = testResult as Required<TestResultCommonSchema>;
 
     const templateId: string =
-      this.templateIdProvider.getTemplateId(communicationPreferences, testResult.activityCode, category);
+      this.templateIdProvider.getTemplateId(communicationPreferences?.communicationMethod as CommunicationMethod);
 
     debug('Using templateId', templateId, appRef);
 
