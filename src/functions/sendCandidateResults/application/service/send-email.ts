@@ -7,7 +7,6 @@ import * as Handlebars from 'handlebars';
 import { templateMapper } from './template-selector';
 import { ConductedLanguage } from '../../domain/conducted-language';
 import { TestOutcome } from '../../domain/test-outcome';
-import { CommunicationType } from '../../domain/communication-type';
 import { emailDrivingTestSubject } from '../templates/common/email-subject';
 
 export async function sendEmail(

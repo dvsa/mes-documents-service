@@ -2,7 +2,6 @@ import {
   LetterPersonalisation,
   EmailPersonalisation,
   Personalisation,
-  BooleanText,
 } from '../../domain/personalisation.model';
 import {
   Name,
@@ -27,7 +26,7 @@ import { formatApplicationReference } from '@dvsa/mes-microservice-common/domain
 import * as moment from 'moment';
 import 'moment/locale/cy';
 import { TestResultSchemasUnion } from '@dvsa/mes-test-schema/categories';
-import { isBikeCategory } from './template-id-provider';
+import { isBikeCategory } from './category-provider';
 
 export interface IPersonalisationProvider {
 
