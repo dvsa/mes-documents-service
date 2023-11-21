@@ -4,10 +4,9 @@ import { INotifyClient } from '../../domain/notify-client.interface';
 import { get } from 'lodash';
 import { AxiosError } from 'axios';
 import * as Handlebars from 'handlebars';
-import { templateMapper } from './template-selector';
+import { subjectMapper, templateMapper } from './template-selector';
 import { ConductedLanguage } from '../../domain/conducted-language';
 import { TestOutcome } from '../../domain/test-outcome';
-import { emailDrivingTestSubject } from '../templates/common/email-subject';
 
 export async function sendEmail(
   emailAddress: string,
@@ -30,9 +29,10 @@ export async function sendEmail(
     let renderedText;
 
     try {
-      const compileSubject = Handlebars.compile(`
-        ${emailDrivingTestSubject}
-    `);
+      const compileSubject = Handlebars.compile(
+        subjectMapper(emailPersonalisation.category, ConductedLanguage.ENGLISH)
+      );
+
       renderedSubject = compileSubject(emailPersonalisation);
       console.log('renderedSubject', renderedSubject);
     } catch (error) {

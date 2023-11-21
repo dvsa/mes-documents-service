@@ -14,3 +14,19 @@ Sylwodd yr archolwr gyrru y gallech wella rheoli ac/neu gynllunio eich gyrru. Dy
 
 {{/if}}
 `;
+
+export const EcoRidingTemplate = `
+{{#if showEcoText}}
+#Fuel-efficient riding
+The motorcycle examiner observed that you could improve the control of your riding. You should aim to ride in a fuel-efficient manner, considering your impact on the environment.
+
+{{/if}}
+`;
+
+export const EcoRidingWelshTemplate = `
+{{#if showEcoText}}
+#Reidio sy’n rhad ar danwydd
+Sylwodd yr archwiliwr beiciau modur y gallech wella rheolaeth ar eich reidio. Dylech geisio reidio mewn modd sy’n rhad ar danwydd, gan ystyried eich effaith ar yr amgylchedd.
+
+{{/if}}
+`;
