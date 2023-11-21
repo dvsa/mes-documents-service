@@ -1,31 +1,18 @@
-
 import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 import { CategoryCode } from '@dvsa/mes-test-schema/categories/common';
+import { TestType } from '../../domain/template-id.model';
+import { CategoryType } from '../../domain/category-type';
 
-export function isVocationalCategory(category: CategoryCode): boolean {
-  return [
-    TestCategory.C,
-    TestCategory.CE,
-    TestCategory.C1,
-    TestCategory.C1E,
-    TestCategory.D,
-    TestCategory.DE,
-    TestCategory.D1,
-    TestCategory.D1E,
-  ].includes(category as TestCategory);
-}
-
-export function isAmod1Category(category: CategoryCode): boolean {
+/**
+ * Determine if test was performed on a bike for labeling
+ * @param category
+ */
+export function isBikeCategory(category: CategoryCode): boolean {
   return [
     TestCategory.EUAM1,
     TestCategory.EUA1M1,
     TestCategory.EUA2M1,
     TestCategory.EUAMM1,
-  ].includes(category as TestCategory);
-}
-
-export function isAmod2Category(category: CategoryCode): boolean {
-  return [
     TestCategory.EUAM2,
     TestCategory.EUA1M2,
     TestCategory.EUA2M2,
@@ -33,35 +20,76 @@ export function isAmod2Category(category: CategoryCode): boolean {
   ].includes(category as TestCategory);
 }
 
-export function isBikeCategory(category: CategoryCode): boolean {
-  return isAmod1Category(category) || isAmod2Category(category);
-}
-
-export function isHomeTestCategory(category: CategoryCode): boolean {
+/**
+ * Determine if test was performed and ADI3 or SC
+ * @param category
+ */
+export function isADI3Category(category: CategoryCode): boolean {
   return [
-    TestCategory.F,
-    TestCategory.G,
-    TestCategory.H,
-    TestCategory.K,
+    TestCategory.ADI3,
+    TestCategory.SC,
   ].includes(category as TestCategory);
 }
 
-export function isCPCCategory(category: CategoryCode): boolean {
-  return [
-    TestCategory.CCPC,
-    TestCategory.DCPC,
-  ].includes(category as TestCategory);
-}
+/**
+ * Return test type based upon category
+ * @param category
+ */
+export function getCategorySubject(category: TestCategory): CategoryType {
+  if (isADI3Category(category)) return CategoryType.ADI;
+  return isBikeCategory(category) ? CategoryType.RIDING : CategoryType.DRIVING;
+};
 
-export function isManoeuvreCategory(category: CategoryCode): boolean {
-  return [
-    TestCategory.CM,
-    TestCategory.C1M,
-    TestCategory.CEM,
-    TestCategory.C1EM,
-    TestCategory.DM,
-    TestCategory.D1M,
-    TestCategory.DEM,
-    TestCategory.D1EM,
-  ].includes(category as TestCategory);
+/**
+ * Return test type based upon category
+ * @param category
+ */
+export function getCategoryType(category: TestCategory): TestType {
+  switch (category) {
+  case TestCategory.ADI2:
+    return TestType.ADI2;
+  case TestCategory.ADI3:
+  case TestCategory.SC:
+    return TestType.ADI3;
+  case TestCategory.B:
+    return TestType.B;
+  case TestCategory.C:
+  case TestCategory.C1:
+  case TestCategory.CE:
+  case TestCategory.C1E:
+  case TestCategory.D:
+  case TestCategory.D1:
+  case TestCategory.DE:
+  case TestCategory.D1E:
+    return TestType.VOCATIONAL;
+  case TestCategory.CCPC:
+  case TestCategory.DCPC:
+    return TestType.CPC;
+  case TestCategory.F:
+  case TestCategory.G:
+  case TestCategory.H:
+  case TestCategory.K:
+    return TestType.HOME;
+  case TestCategory.EUA1M1:
+  case TestCategory.EUA2M1:
+  case TestCategory.EUAM1:
+  case TestCategory.EUAMM1:
+    return TestType.AMOD1;
+  case TestCategory.EUA1M2:
+  case TestCategory.EUA2M2:
+  case TestCategory.EUAM2:
+  case TestCategory.EUAMM2:
+    return TestType.AMOD2;
+  case TestCategory.CM:
+  case TestCategory.C1M:
+  case TestCategory.CEM:
+  case TestCategory.C1EM:
+  case TestCategory.DM:
+  case TestCategory.D1M:
+  case TestCategory.DEM:
+  case TestCategory.D1EM:
+    return TestType.MANOEUVRE;
+  default:
+    return TestType.B;
+  }
 }

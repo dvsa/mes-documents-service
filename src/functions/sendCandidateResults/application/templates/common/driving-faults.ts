@@ -1,14 +1,15 @@
+/* eslint-disable max-len */
 export const DrivingFaultsTemplate = `
 {{#if showDrivingFaults}}
 #Your driving faults:
 {{ drivingFaults }}
 
-{{/if}}
 Find out more about driving faults:
 
 Car
 https://www.gov.uk/guidance/understanding-your-driving-test-result/car-driving-test
 
+{{/if}}
 `;
 
 export const DrivingFaultsWelshTemplate = `
@@ -16,10 +17,82 @@ export const DrivingFaultsWelshTemplate = `
 Eich beiau gyrru:
 {{ drivingFaults }}
 
-{{/if}}
 Dysgwch ragor am feiau gyrru:
 
 Car
 https://www.gov.uk/guidance/understanding-your-driving-test-result/car-driving-test
 
+{{/if}}
+`;
+
+export const DrivingFaultsVocationalTemplate = `
+{{#if showDrivingFaults}}
+#Your driving faults:
+{{ drivingFaults }}
+
+Find out more about driving faults:
+
+https://www.gov.uk/guidance/understanding-your-driving-test-result/lorry-bus-or-coach-driving-test
+
+{{/if}}
+`;
+
+export const DrivingFaultsVocationalWelshTemplate = `
+{{#if showDrivingFaults}}
+Eich beiau gyrru:
+{{ drivingFaults }}
+
+Dysgwch ragor am feiau gyrru:
+
+https://www.gov.uk/guidance/understanding-your-driving-test-result/lorry-bus-or-coach-driving-test
+
+{{/if}}
+`;
+
+export const RidingFaultsTemplate = `
+{{#if showDrivingFaults}}
+#Your riding faults:
+{{ drivingFaults }}
+
+Find out more about riding faults at:
+
+https://www.gov.uk/guidance/understanding-your-driving-test-result/motorcycle-module-1-off-road-test
+
+{{/if}}
+`;
+
+export const RidingFaultsWelshTemplate = `
+{{#if showDrivingFaults}}
+Eich beiau gyrru:
+{{ drivingFaults }}
+
+Dysgwch ragor am feiau reidio yn:
+
+https://www.gov.uk/guidance/understanding-your-driving-test-result/motorcycle-module-1-off-road-test
+
+{{/if}}
+`;
+
+export const DrivingFaultsADI2Template = `
+{{#if showDrivingFaults}}
+#Your driving faults:
+{{ drivingFaults }}
+
+Find out more about driving faults:
+
+https://www.gov.uk/guidance/understanding-your-driving-test-result/approved-driving-instructor-adi-part-2-driving-ability-test
+
+{{/if}}
+`;
+
+export const DrivingFaultsADI2WelshTemplate = `
+{{#if showDrivingFaults}}
+Eich beiau gyrru:
+{{ drivingFaults }}
+
+Dysgwch ragor am feiau gyrru:
+
+https://www.gov.uk/guidance/understanding-your-driving-test-result/approved-driving-instructor-adi-part-2-driving-ability-test
+
+{{/if}}
 `;
