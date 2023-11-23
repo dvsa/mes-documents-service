@@ -96,3 +96,25 @@ https://www.gov.uk/guidance/understanding-your-driving-test-result/approved-driv
 
 {{/if}}
 `;
+
+export const DrivingFaultsHomeTemplate = `
+{{#if showDrivingFaults}}
+#Your driving faults:
+{{ drivingFaults }}
+
+Find out more about driving faults:
+https://www.gov.uk/guidance/understanding-your-driving-test-result/tractor-or-specialist-vehicle-driving-test
+
+{{/if}}
+`;
+
+export const DrivingFaultsHomeWelshTemplate = `
+{{#if showDrivingFaults}}
+Eich beiau gyrru:
+{{ drivingFaults }}
+
+Dysgwch ragor am feiau gyrru:
+https://www.gov.uk/guidance/understanding-your-driving-test-result/tractor-or-specialist-vehicle-driving-test))t
+
+{{/if}}
+`;

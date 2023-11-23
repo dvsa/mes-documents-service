@@ -21,7 +21,7 @@ export function isBikeCategory(category: CategoryCode): boolean {
 }
 
 /**
- * Determine if test was performed and ADI3 or SC
+ * Determine if test was performed of type ADI3 or SC
  * @param category
  */
 export function isADI3Category(category: CategoryCode): boolean {
@@ -32,13 +32,26 @@ export function isADI3Category(category: CategoryCode): boolean {
 }
 
 /**
+ * Determine if test was performed of type CPC
+ * @param category
+ */
+export function isCPCCategory(category: CategoryCode): boolean {
+  return [
+    TestCategory.CCPC,
+    TestCategory.DCPC,
+  ].includes(category as TestCategory);
+}
+
+/**
  * Return test type based upon category
  * @param category
  */
 export function getCategorySubject(category: TestCategory): CategoryType {
-  if (isADI3Category(category)) return CategoryType.ADI;
-  return isBikeCategory(category) ? CategoryType.RIDING : CategoryType.DRIVING;
-};
+  return isADI3Category(category) ? CategoryType.ADI :
+    isCPCCategory(category) ? CategoryType.CPC :
+      isBikeCategory(category) ? CategoryType.RIDING :
+        CategoryType.DRIVING;
+}
 
 /**
  * Return test type based upon category
