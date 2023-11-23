@@ -1,5 +1,6 @@
 export enum CategoryType {
   RIDING = 'riding',
   DRIVING = 'driving',
-  ADI = 'adi'
+  ADI = 'adi',
+  CPC = 'cpc',
 }

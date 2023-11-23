@@ -11,13 +11,13 @@ Gallwch ddilyn cwrs hyfforddi ymarferol Pass Plus i wella'ch sgiliau a gyrru'n f
 
 `;
 
-export const improveYourDrivingVocationalTemplate = `
+export const improveYourDrivingVocationalManTemplate = `
 #Improve your driving skills
 You can find out how to improve your skills, drive more safely and keep up to date at https://www.safedrivingforlife.info
 
 `;
 
-export const improveYourDrivingVocationalWelshTemplate = `
+export const improveYourDrivingVocationalManWelshTemplate = `
 #Gwella'ch sgiliau gyrru
 Gallwch ganfod sut i wella eich sgiliau, gyrru’n fwy diogel a chadw’n gyfredol arhttps://www.safedrivingforlife.info
 
