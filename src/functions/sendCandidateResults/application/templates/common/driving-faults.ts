@@ -2,7 +2,9 @@
 export const DrivingFaultsTemplate = `
 {{#if showDrivingFaults}}
 #Your driving faults:
-{{ drivingFaults }}
+  {{#each drivingFaults}}
+  - {{ this }}
+  {{/each}}
 
 Find out more about driving faults:
 
@@ -15,7 +17,9 @@ https://www.gov.uk/guidance/understanding-your-driving-test-result/car-driving-t
 export const DrivingFaultsWelshTemplate = `
 {{#if showDrivingFaults}}
 Eich beiau gyrru:
-{{ drivingFaults }}
+  {{#each drivingFaults}}
+  - {{ this }}
+  {{/each}}
 
 Dysgwch ragor am feiau gyrru:
 
@@ -28,7 +32,9 @@ https://www.gov.uk/guidance/understanding-your-driving-test-result/car-driving-t
 export const DrivingFaultsVocationalTemplate = `
 {{#if showDrivingFaults}}
 #Your driving faults:
-{{ drivingFaults }}
+  {{#each drivingFaults}}
+  - {{ this }}
+  {{/each}}
 
 Find out more about driving faults:
 
@@ -40,7 +46,9 @@ https://www.gov.uk/guidance/understanding-your-driving-test-result/lorry-bus-or-
 export const DrivingFaultsVocationalWelshTemplate = `
 {{#if showDrivingFaults}}
 Eich beiau gyrru:
-{{ drivingFaults }}
+  {{#each drivingFaults}}
+  - {{ this }}
+  {{/each}}
 
 Dysgwch ragor am feiau gyrru:
 
@@ -49,10 +57,12 @@ https://www.gov.uk/guidance/understanding-your-driving-test-result/lorry-bus-or-
 {{/if}}
 `;
 
-export const RidingFaultsTemplate = `
+export const RidingFaultsMod1Template = `
 {{#if showDrivingFaults}}
 #Your riding faults:
-{{ drivingFaults }}
+  {{#each drivingFaults}}
+  - {{ this }}
+  {{/each}}
 
 Find out more about riding faults at:
 
@@ -61,10 +71,26 @@ https://www.gov.uk/guidance/understanding-your-driving-test-result/motorcycle-mo
 {{/if}}
 `;
 
-export const RidingFaultsWelshTemplate = `
+export const RidingFaultsMod2Template = `
+{{#if showDrivingFaults}}
+#Your riding faults:
+  {{#each drivingFaults}}
+  - {{ this }}
+  {{/each}}
+
+Find out more about riding faults at:
+
+https://www.gov.uk/guidance/understanding-your-driving-test-result/motorcycle-module-1-off-road-test
+
+{{/if}}
+`;
+
+export const RidingFaultsMod1WelshTemplate = `
 {{#if showDrivingFaults}}
 Eich beiau gyrru:
-{{ drivingFaults }}
+  {{#each drivingFaults}}
+  - {{ this }}
+  {{/each}}
 
 Dysgwch ragor am feiau reidio yn:
 
@@ -73,10 +99,26 @@ https://www.gov.uk/guidance/understanding-your-driving-test-result/motorcycle-mo
 {{/if}}
 `;
 
+export const RidingFaultsMod2WelshTemplate = `
+{{#if showDrivingFaults}}
+Eich beiau gyrru:
+  {{#each drivingFaults}}
+  - {{ this }}
+  {{/each}}
+
+Dysgwch ragor am feiau reidio yn:
+
+https://www.gov.uk/guidance/understanding-your-driving-test-result/motorcycle-module-2-on-road-test
+
+{{/if}}
+`;
+
 export const DrivingFaultsADI2Template = `
 {{#if showDrivingFaults}}
 #Your driving faults:
-{{ drivingFaults }}
+  {{#each drivingFaults}}
+  - {{ this }}
+  {{/each}}
 
 Find out more about driving faults:
 
@@ -88,7 +130,9 @@ https://www.gov.uk/guidance/understanding-your-driving-test-result/approved-driv
 export const DrivingFaultsADI2WelshTemplate = `
 {{#if showDrivingFaults}}
 Eich beiau gyrru:
-{{ drivingFaults }}
+  {{#each drivingFaults}}
+  - {{ this }}
+  {{/each}}
 
 Dysgwch ragor am feiau gyrru:
 
@@ -100,7 +144,9 @@ https://www.gov.uk/guidance/understanding-your-driving-test-result/approved-driv
 export const DrivingFaultsHomeTemplate = `
 {{#if showDrivingFaults}}
 #Your driving faults:
-{{ drivingFaults }}
+  {{#each drivingFaults}}
+  - {{ this }}
+  {{/each}}
 
 Find out more about driving faults:
 https://www.gov.uk/guidance/understanding-your-driving-test-result/tractor-or-specialist-vehicle-driving-test
@@ -111,7 +157,9 @@ https://www.gov.uk/guidance/understanding-your-driving-test-result/tractor-or-sp
 export const DrivingFaultsHomeWelshTemplate = `
 {{#if showDrivingFaults}}
 Eich beiau gyrru:
-{{ drivingFaults }}
+  {{#each drivingFaults}}
+  - {{ this }}
+  {{/each}}
 
 Dysgwch ragor am feiau gyrru:
 https://www.gov.uk/guidance/understanding-your-driving-test-result/tractor-or-specialist-vehicle-driving-test))t

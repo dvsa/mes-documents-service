@@ -12,15 +12,16 @@ import { DocumentsServiceError } from '../domain/errors/documents-service-error'
 import { TYPES } from './di/types';
 import { INotifyClient } from '../domain/notify-client.interface';
 import { ITemplateIdProvider } from '../application/service/template-id-provider';
-import { sendEmail } from '../application/service/send-email';
-import { sendLetter } from '../application/service/send-letter';
+import { sendNotification } from '../application/service/send-notification';
 import { IPersonalisationProvider } from '../application/service/personalisation-provider';
 import { IStatusUpdater } from './status-updater';
 import { ProcessingStatus } from '../domain/submission-outcome.model';
 import { NOTIFY_INTERFACE } from '../domain/interface.constants';
 import isDelegatedTest from '../application/service/is-delegated-test';
-import { EmailPersonalisation } from '../domain/personalisation.model';
-import { isFail, isPass } from '../application/service/test-outcome';
+import { getTestOutcome, isFail, isPass } from '../application/service/test-outcome';
+import { Language } from '../domain/conducted-language';
+import { PersonalisationDetails } from '../domain/personalisation.model';
+import { Correspondence } from '../domain/template-id.model';
 
 export interface IRequestScheduler {
   scheduleRequests(testResults: TestResultSchemasUnion[]): Promise<void>[];
@@ -83,7 +84,7 @@ export class RequestScheduler implements IRequestScheduler {
 
       return this.limiter
         .schedule(
-          { id: applicationReference.toString() },
+          {id: applicationReference.toString()},
           () => Promise.race([
             this.sendNotifyRequest(testResult),
             new Promise((resolve, reject) => {
@@ -148,39 +149,30 @@ export class RequestScheduler implements IRequestScheduler {
       return Promise.resolve();
     }
 
-    const { communicationPreferences } = testResult as Required<TestResultCommonSchema>;
+    const {communicationPreferences} = testResult as Required<TestResultCommonSchema>;
 
     const templateId: string =
       this.templateIdProvider.getTemplateId(communicationPreferences?.communicationMethod as CommunicationMethod);
 
     debug('Using templateId', templateId, appRef);
 
-    if (communicationPreferences.communicationMethod === 'Email') {
-      return Promise.all([
-        ...this.sendEmailToPADI(testResult),
-        sendEmail(
-          communicationPreferences.updatedEmail as string,
-          templateId,
-          this.personalisationProvider.getEmailPersonalisation(testResult),
-          appRef,
-          '',
-          this.notifyClient,
-        )]
-      );
-    }
-
     return Promise.all([
-      ...this.sendEmailToPADI(testResult),
-      sendLetter(
+      ...this.sendEmailToPADI(testResult, templateId),
+      sendNotification(
+        communicationPreferences.updatedEmail as string,
+        <CommunicationMethod>communicationPreferences.communicationMethod,
         templateId,
-        this.personalisationProvider.getLetterPersonalisation(testResult),
+        this.personalisationProvider.getPersonalisationDetails(testResult),
         appRef,
+        '',
         this.notifyClient,
+        testResult?.communicationPreferences?.conductedLanguage === 'Cymraeg' ? Language.WELSH : Language.ENGLISH,
+        getTestOutcome(testResult.activityCode),
       )]
     );
   }
 
-  private sendEmailToPADI = (testResult: TestResultSchemasUnion): Promise<any>[] => {
+  private sendEmailToPADI = (testResult: TestResultSchemasUnion, templateId: string): Promise<any>[] => {
     if (
       (testResult.category === TestCategory.ADI3 || testResult.category === TestCategory.SC)
       // Due to FE now displaying 'Current' attempt instead of 'Previous', we are decreasing the rule from 3 -> 2
@@ -188,19 +180,24 @@ export class RequestScheduler implements IRequestScheduler {
       && isFail(testResult.activityCode)
     ) {
       const recipients: string[] = (process.env.PADI_EMAIL || '').split(',');
-      const personalisation: EmailPersonalisation = this.personalisationProvider.getEmailPersonalisation(testResult);
+      const personalisation: PersonalisationDetails =
+        this.personalisationProvider.getPersonalisationDetails(testResult);
       const appRef: string = formatApplicationReference(testResult.journalData.applicationReference).toString();
 
       debug('Sending Email to PADI', appRef);
 
       return recipients.map((recipient) => {
-        return sendEmail(
+        return sendNotification(
           recipient,
-          process.env.PADI_TEMPLATE_ID || '',
+          Correspondence.EMAIL,
+          templateId,
           personalisation,
           appRef,
           '',
           this.notifyClient,
+          testResult?.communicationPreferences?.conductedLanguage === 'Cymraeg' ? Language.WELSH : Language.ENGLISH,
+          getTestOutcome(testResult.activityCode),
+          true,
         );
       });
     }

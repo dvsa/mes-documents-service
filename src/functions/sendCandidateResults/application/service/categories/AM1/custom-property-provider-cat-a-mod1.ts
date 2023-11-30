@@ -6,22 +6,19 @@ import {
 } from '@dvsa/mes-test-schema/categories/AM1';
 import { CustomProperties } from '../../../../domain/custom-properties';
 import { get } from 'lodash';
-import {
-  BooleanText,
-} from '../../../../domain/personalisation.model';
 import { Language } from '../../../../domain/template-id.model';
 import { welshTexts, englishTexts } from '../../../../domain/competencies';
 
 export interface CatAMod1ICustomProperties extends CustomProperties {
-  showEmergencyStop: BooleanText;
-  showEmergencyFirstAttempt: BooleanText;
+  showEmergencyStop: boolean;
+  showEmergencyFirstAttempt: boolean;
   emergencyFirstAttempt: string;
-  showEmergencySecondAttempt: BooleanText;
+  showEmergencySecondAttempt: boolean;
   emergencySecondAttempt: string;
-  showAvoidanceExercise: BooleanText;
-  showAvoidanceFirstAttempt: BooleanText;
+  showAvoidanceExercise: boolean;
+  showAvoidanceFirstAttempt: boolean;
   avoidanceFirstAttempt: string;
-  showAvoidanceSecondAttempt: BooleanText;
+  showAvoidanceSecondAttempt: boolean;
   avoidanceSecondAttempt: string;
 }
 
@@ -51,10 +48,10 @@ CatAMod1ICustomProperties,
 | 'emergencySecondAttempt'
 > => {
   const emergencyStopAttempts = {
-    showEmergencyStop: BooleanText.NO,
-    showEmergencyFirstAttempt: BooleanText.NO,
+    showEmergencyStop: false,
+    showEmergencyFirstAttempt: false,
     emergencyFirstAttempt: '',
-    showEmergencySecondAttempt: BooleanText.NO,
+    showEmergencySecondAttempt: false,
     emergencySecondAttempt: '',
   };
 
@@ -63,13 +60,13 @@ CatAMod1ICustomProperties,
   }
 
   if (get(emergencyStopData, 'firstAttempt') !== undefined) {
-    emergencyStopAttempts.showEmergencyStop = BooleanText.YES;
-    emergencyStopAttempts.showEmergencyFirstAttempt = BooleanText.YES;
+    emergencyStopAttempts.showEmergencyStop = true;
+    emergencyStopAttempts.showEmergencyFirstAttempt = true;
     emergencyStopAttempts.emergencyFirstAttempt = getFirstAttemptText(emergencyStopData.firstAttempt, language);
   }
 
   if (get(emergencyStopData, 'secondAttempt') !== undefined) {
-    emergencyStopAttempts.showEmergencySecondAttempt = BooleanText.YES;
+    emergencyStopAttempts.showEmergencySecondAttempt =     emergencyStopAttempts.showEmergencyFirstAttempt = true;
     emergencyStopAttempts.emergencySecondAttempt = `${emergencyStopData.secondAttempt} km/h`;
   }
 
@@ -88,10 +85,10 @@ CatAMod1ICustomProperties,
 | 'avoidanceSecondAttempt'
 > => {
   const avoidanceAttempts = {
-    showAvoidanceExercise: BooleanText.NO,
-    showAvoidanceFirstAttempt: BooleanText.NO,
+    showAvoidanceExercise: false,
+    showAvoidanceFirstAttempt: false,
     avoidanceFirstAttempt: '',
-    showAvoidanceSecondAttempt: BooleanText.NO,
+    showAvoidanceSecondAttempt: false,
     avoidanceSecondAttempt: '',
   };
 
@@ -100,13 +97,13 @@ CatAMod1ICustomProperties,
   }
 
   if (get(avoidanceData, 'firstAttempt') !== undefined) {
-    avoidanceAttempts.showAvoidanceExercise = BooleanText.YES;
-    avoidanceAttempts.showAvoidanceFirstAttempt = BooleanText.YES;
+    avoidanceAttempts.showAvoidanceExercise = true;
+    avoidanceAttempts.showAvoidanceFirstAttempt = true;
     avoidanceAttempts.avoidanceFirstAttempt = getFirstAttemptText(avoidanceData.firstAttempt, language);
   }
 
   if (get(avoidanceData, 'secondAttempt') !== undefined) {
-    avoidanceAttempts.showAvoidanceSecondAttempt = BooleanText.YES;
+    avoidanceAttempts.showAvoidanceSecondAttempt = true;
     avoidanceAttempts.avoidanceSecondAttempt = `${avoidanceData.secondAttempt} km/h`;
   }
 

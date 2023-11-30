@@ -1,7 +1,9 @@
 export const SeriousFaultsTemplate = `
 {{#if showSeriousFaults}}
 #Your serious faults:
-{{ seriousFaults }}
+  {{#each seriousFaults}}
+  - {{ this }}
+  {{/each}}
 
 {{/if}}
 `;
@@ -9,7 +11,9 @@ export const SeriousFaultsTemplate = `
 export const SeriousFaultsWelshTemplate = `
 {{#if showSeriousFaults}}
 #Eich beiau difrifol:
-{{ seriousFaults }}
+  {{#each seriousFaults}}
+  - {{ this }}
+  {{/each}}
 
 {{/if}}
 `;
