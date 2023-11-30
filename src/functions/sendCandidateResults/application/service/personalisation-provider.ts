@@ -1,7 +1,5 @@
 import {
-  LetterPersonalisation,
-  EmailPersonalisation,
-  Personalisation,
+  Personalisation, PersonalisationDetails,
 } from '../../domain/personalisation.model';
 import {
   Name,
@@ -30,9 +28,7 @@ import { isBikeCategory } from './category-provider';
 
 export interface IPersonalisationProvider {
 
-  getEmailPersonalisation(testresult: TestResultSchemasUnion): EmailPersonalisation;
-
-  getLetterPersonalisation(testresult: TestResultSchemasUnion): LetterPersonalisation;
+  getPersonalisationDetails(testresult: TestResultSchemasUnion): PersonalisationDetails;
 }
 
 @injectable()
@@ -43,20 +39,12 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     @inject(TYPES.ICustomPropertyProvider) private customPropertyProvider: ICustomPropertyProvider,
   ) { }
 
-  public getEmailPersonalisation(testresult: TestResultSchemasUnion): EmailPersonalisation {
+  public getPersonalisationDetails(testresult: TestResultSchemasUnion): PersonalisationDetails {
     const sharedValues: Personalisation = this.getSharedPersonalisationValues(testresult);
 
     return {
       ...sharedValues,
       candidateName: this.getTitledName(testresult.journalData.candidate.candidateName),
-    };
-  }
-
-  public getLetterPersonalisation(testresult: TestResultSchemasUnion): LetterPersonalisation {
-    const sharedValues: Personalisation = this.getSharedPersonalisationValues(testresult);
-
-    return {
-      ...sharedValues,
       address_line_1: this.getTitledName(testresult.journalData.candidate.candidateName),
       address_line_2: get<TestResultSchemasUnion, string>(
         testresult,

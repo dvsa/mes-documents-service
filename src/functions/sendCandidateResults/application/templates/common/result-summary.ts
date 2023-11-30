@@ -20,12 +20,12 @@ export const passRidingWelshTemplate = `
 `;
 
 export const passCpcTemplate = `
-^#You passed your {{#if showLGVText??LGV}}LGV{{/if}}{{#if showPCVText??PCV}}PCV{{/if}} CPC Module 4 test on {{ date }} in {{ location }}.
+^#You passed your {{#if showLGVText}}LGV{{/if}}{{#if showPCVText}}PCV{{/if}} CPC Module 4 test on {{ date }} in {{ location }}.
 
 `;
 
 export const passCpcWelshTemplate = `
-^#Fe wnaethoch basio eich prawf CPC Modiwl 4 {{#if showLGVText??LGV}}LGV{{/if}}{{#if showPCVText??PCV}}PCV{{/if}} ar {{ date }} yn {{ location }}.
+^#Fe wnaethoch basio eich prawf CPC Modiwl 4 {{#if showLGVText}}LGV{{/if}}{{#if showPCVText}}PCV{{/if}} ar {{ date }} yn {{ location }}.
 
 `;
 
@@ -50,24 +50,24 @@ export const failRidingWelshTemplate = `
 `;
 
 export const adi3Template = `
-^#You {{ result }} {{ positionType }} your {{ isADI3??category }} {{ categoryDescriptor }} test on {{ date }} in {{ location }}.
+^#You {{ result }} {{ positionType }} your {{ categoryDescriptor }} test on {{ date }} in {{ location }}.
 
 `;
 
 export const adi3ResultsTemplate = `
 #Find out more about your test result
 Find out more about your test result, what to do next and information on how to appeal your test:
-{{#if isADI3??}}https://www.gov.uk/adi-part-3-test/test-result{{/if}}
-{{#if isSC??}}https://www.gov.uk/adi-standards-check/your-standards-check-grade{{/if}}
+{{#if isADI3}}https://www.gov.uk/adi-part-3-test/test-result{{/if}}
+{{#if isSC}}https://www.gov.uk/adi-standards-check/your-standards-check-grade{{/if}}
 
 `;
 
 export const failCpcTemplate = `
-^#You were unsuccessful in your {{#if showLGVText??LGV}}LGV{{/if}}{{#if showPCVText??PCV}}PCV{{/if}} CPC Module 4 test on {{ date }} in {{ location }}.
+^#You were unsuccessful in your {{#if showLGVText}}LGV{{/if}}{{#if showPCVText}}PCV{{/if}} CPC Module 4 test on {{ date }} in {{ location }}.
 
 `;
 
 export const failCpcWelshTemplate = `
-^#Roeddech yn aflwyddiannus yn eich prawf CPC Modiwl 4 {{#if showLGVText??LGV}}LGV{{/if}}{{#if showPCVText??PCV}}PCV{{/if}} ar {{ date }} yn {{ location }}.
+^#Roeddech yn aflwyddiannus yn eich prawf CPC Modiwl 4 {{#if showLGVText}}LGV{{/if}}{{#if showPCVText}}PCV{{/if}} ar {{ date }} yn {{ location }}.
 
 `;

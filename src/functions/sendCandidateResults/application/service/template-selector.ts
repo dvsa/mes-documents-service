@@ -1,5 +1,5 @@
 import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
-import { ConductedLanguage } from '../../domain/conducted-language';
+import { Language } from '../../domain/conducted-language';
 import {
   headerADITemplate, headerCpcTemplate, headerCpcWelshTemplate,
   headerManTemplate,
@@ -47,13 +47,17 @@ import { DangerousFaultsTemplate, DangerousFaultsWelshTemplate } from '../templa
 import { SeriousFaultsTemplate, SeriousFaultsWelshTemplate } from '../templates/common/serious-faults';
 import {
   DrivingFaultsADI2Template,
-  DrivingFaultsADI2WelshTemplate, DrivingFaultsHomeTemplate, DrivingFaultsHomeWelshTemplate,
+  DrivingFaultsADI2WelshTemplate,
+  DrivingFaultsHomeTemplate,
+  DrivingFaultsHomeWelshTemplate,
   DrivingFaultsTemplate,
   DrivingFaultsVocationalTemplate,
   DrivingFaultsVocationalWelshTemplate,
   DrivingFaultsWelshTemplate,
-  RidingFaultsTemplate,
-  RidingFaultsWelshTemplate,
+  RidingFaultsMod1Template,
+  RidingFaultsMod1WelshTemplate,
+  RidingFaultsMod2Template,
+  RidingFaultsMod2WelshTemplate,
 } from '../templates/common/driving-faults';
 import {
   EcoRidingTemplate,
@@ -98,7 +102,7 @@ import {
   cpcEnglishSubject,
   cpcWelshSubject,
   drivingEnglishSubject,
-  drivingWelshSubject,
+  drivingWelshSubject, padiEnglishSubject, padiWelshSubject,
   ridingEnglishSubject,
   ridingWelshSubject,
 } from '../templates/common/email-subject';
@@ -144,12 +148,13 @@ import {
   StatementOfFailureVocationalWelshTemplate,
   StatementOfFailureWelshTemplate,
 } from '../templates/common/statement-of-failure';
+import { otherEnglishpadi, otherWelshpadi } from '../templates/common/padi';
 
 export const passEnglishAMod1 =
   `
     ${headerRidingTemplate}
     ${passRidingTemplate}
-    ${RidingFaultsTemplate}
+    ${RidingFaultsMod1Template}
     ${EmergencyStopTemplate}
     ${AvoidanceExerciseTemplate}
     ${EcoRidingTemplate}
@@ -162,7 +167,7 @@ export const passWelshAMod1 =
   `
     ${headerRidingWelshTemplate}
     ${passRidingWelshTemplate}
-    ${RidingFaultsWelshTemplate}    
+    ${RidingFaultsMod1WelshTemplate}    
     ${EmergencyStopTemplateWelshTemplate}    
     ${AvoidanceExerciseWelshTemplate}    
     ${EcoRidingWelshTemplate}    
@@ -177,7 +182,7 @@ export const failEnglishAMod1 =
     ${etaTemplate}
     ${DangerousFaultsTemplate}
     ${SeriousFaultsTemplate}
-    ${RidingFaultsTemplate}
+    ${RidingFaultsMod1Template}
     ${EmergencyStopTemplate}
     ${AvoidanceExerciseTemplate}
     ${EcoRidingTemplate}
@@ -194,7 +199,7 @@ export const failWelshAMod1 =
     ${etaTemplateWelsh}
     ${DangerousFaultsWelshTemplate}
     ${SeriousFaultsWelshTemplate}
-    ${RidingFaultsWelshTemplate}   
+    ${RidingFaultsMod1WelshTemplate}   
     ${EmergencyStopTemplateWelshTemplate}    
     ${AvoidanceExerciseWelshTemplate}   
     ${EcoRidingWelshTemplate} 
@@ -207,7 +212,7 @@ export const passEnglishAMod2 =
   `
     ${headerRidingTemplate}
     ${passRidingTemplate}
-    ${RidingFaultsTemplate}
+    ${RidingFaultsMod2Template}
     ${EcoRidingTemplate}
     ${NextStepsRidingMod2PassTemplate}
     ${improveYourRidingTemplate}
@@ -219,7 +224,7 @@ export const passWelshAMod2 =
   `
     ${headerRidingWelshTemplate}
     ${passRidingWelshTemplate}
-    ${RidingFaultsWelshTemplate}    
+    ${RidingFaultsMod2WelshTemplate}    
     ${EcoRidingWelshTemplate}    
     ${NextStepsRidingMod2PassWelshTemplate}    
     ${improveYourRidingWelshTemplate}    
@@ -233,7 +238,7 @@ export const failEnglishAMod2 =
     ${etaTemplate}
     ${DangerousFaultsTemplate}
     ${SeriousFaultsTemplate}
-    ${RidingFaultsTemplate}
+    ${RidingFaultsMod2Template}
     ${EcoRidingTemplate}
     ${NextStepsRidingMod2FailTemplate}
     ${StatementOfFailureMod2Template}
@@ -248,14 +253,14 @@ export const failWelshAMod2 =
     ${etaTemplateWelsh}
     ${DangerousFaultsWelshTemplate}
     ${SeriousFaultsWelshTemplate}
-    ${RidingFaultsWelshTemplate}   
+    ${RidingFaultsMod2WelshTemplate}   
     ${EcoRidingWelshTemplate} 
     ${NextStepsFailRidingMod2WelshTemplate} 
     ${StatementOfFailureMod2WelshTemplate} 
     ${dataPrivacyWelshTemplate}
     `;
 
-export const passEnglishADI2 =
+export const passEnglishAdi2 =
   `
     ${headerTemplate}
     ${passDrivingTemplate}
@@ -265,7 +270,7 @@ export const passEnglishADI2 =
     ${dataPrivacyTemplate}
     `;
 
-export const passWelshADI2 =
+export const passWelshAdi2 =
   `
     ${headerWelshTemplate}
     ${passDrivingWelshTemplate}
@@ -275,7 +280,7 @@ export const passWelshADI2 =
     ${dataPrivacyWelshTemplate}
     `;
 
-export const failEnglishADI2 =
+export const failEnglishAdi2 =
   `
     ${headerTemplate}
     ${failDrivingTemplate}
@@ -288,7 +293,7 @@ export const failEnglishADI2 =
     ${dataPrivacyTemplate}
     `;
 
-export const failWelshADI2 =
+export const failWelshAdi2 =
   `
     ${headerWelshTemplate}
     ${failDrivingWelshTemplate}
@@ -301,7 +306,7 @@ export const failWelshADI2 =
     ${dataPrivacyWelshTemplate}
     `;
 
-export const otherEnglishADI3 =
+export const otherEnglishAdi3 =
   `
     ${headerADITemplate}
     ${adi3Template}
@@ -313,9 +318,9 @@ export const otherEnglishADI3 =
     ${dataPrivacyTemplate}
     `;
 
-export const otherWelshADI3 =
+export const otherWelshAdi3 =
   `
-    ${otherEnglishADI3}
+    ${otherEnglishAdi3}
     `;
 
 export const passEnglishB =
@@ -380,7 +385,7 @@ export const passEnglishVocational =
   `
     ${headerTemplate}
     ${passDrivingTemplate}
-    ${DrivingFaultsTemplate}
+    ${DrivingFaultsVocationalTemplate}
     ${EcoTemplate}
     ${NextStepsVocationalPassTemplate}
     ${improveYourDrivingVocationalManTemplate}
@@ -392,7 +397,7 @@ export const passWelshVocational =
   `
     ${headerWelshTemplate}
     ${passDrivingWelshTemplate}
-    ${DrivingFaultsWelshTemplate}    
+    ${DrivingFaultsVocationalWelshTemplate}    
     ${EcoWelshTemplate}    
     ${NextStepsVocationalPassWelshTemplate}    
     ${improveYourDrivingVocationalManWelshTemplate}
@@ -534,7 +539,7 @@ export const passEnglishHome =
   `
     ${headerTemplate}
     ${passDrivingTemplate}
-    ${DrivingFaultsTemplate}
+    ${DrivingFaultsHomeTemplate}
     ${EcoTemplate}
     ${NextStepsHomePassTemplate}
     ${dataPrivacyTemplate}
@@ -544,7 +549,7 @@ export const passWelshHome =
   `
     ${headerWelshTemplate}
     ${passDrivingWelshTemplate}
-    ${DrivingFaultsWelshTemplate}    
+    ${DrivingFaultsHomeWelshTemplate}    
     ${EcoWelshTemplate}    
     ${NextStepsHomePassWelshTemplate}    
     ${dataPrivacyWelshTemplate}
@@ -583,21 +588,23 @@ export const failWelshHome =
  * types: Driving | Riding | ADI3
  * @param category
  * @param language
+ * @param padi
  */
-export function subjectMapper(category: TestCategory, language: ConductedLanguage) {
-  const subjectType = getCategorySubject(category);
+export function subjectMapper(category: TestCategory, language: Language, padi?: boolean) {
+  const subjectType = padi ? 'padi' : getCategorySubject(category);
   return (emailSubjects as Record<string, string>)[`${subjectType}${language}Subject`] || '';
 }
 
 /**
  * Select template based upon category, test outcome & language
- * Note: ADI3 follows a different pattern
+ * Note: ADI3/padi follows a different pattern
  * @param testOutcome
  * @param category
  * @param language
+ * @param padi
  */
-export function templateMapper(testOutcome: TestOutcome, category: TestCategory, language: ConductedLanguage) {
-  const testType = getCategoryType(category);
+export function templateMapper(testOutcome: TestOutcome, category: TestCategory, language: Language, padi?: boolean) {
+  const testType = padi ? 'padi' : getCategoryType(category);
   const outcome = isADI3Category(category) ? TestOutcome.OTHER : testOutcome;
   return (templates as Record<string, string>)[`${outcome}${language}${testType}`] || '';
 }
@@ -611,12 +618,14 @@ const templates = {
   passWelshAMod2,
   failEnglishAMod2,
   failWelshAMod2,
-  passEnglishADI2,
-  passWelshADI2,
-  failEnglishADI2,
-  failWelshADI2,
-  otherEnglishADI3,
-  otherWelshADI3,
+  passEnglishAdi2,
+  passWelshAdi2,
+  failEnglishAdi2,
+  failWelshAdi2,
+  otherEnglishAdi3,
+  otherWelshAdi3,
+  otherEnglishpadi,
+  otherWelshpadi,
   passEnglishB,
   passWelshB,
   failEnglishB,
@@ -646,6 +655,8 @@ const emailSubjects = {
   ridingWelshSubject,
   adiEnglishSubject,
   adiWelshSubject,
+  padiEnglishSubject,
+  padiWelshSubject,
   cpcEnglishSubject,
   cpcWelshSubject,
 };
