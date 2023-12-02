@@ -33,7 +33,7 @@
     "inversify": "6.0.2",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
-    "notifications-node-client": "^7.0.3",
+    "notifications-node-client": "^7.0.4",
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
