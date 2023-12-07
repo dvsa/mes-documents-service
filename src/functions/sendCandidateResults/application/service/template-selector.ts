@@ -8,7 +8,7 @@ import {
   headerRidingWelshTemplate,
   headerTemplate,
   headerWelshTemplate,
-} from '../templates/common/header';
+} from '../templates/header';
 import {
   adi3ResultsTemplate,
   adi3Template,
@@ -24,7 +24,7 @@ import {
   passDrivingWelshTemplate,
   passRidingTemplate,
   passRidingWelshTemplate,
-} from '../templates/common/result-summary';
+} from '../templates/result-summary';
 import {
   improveYourDrivingTemplate,
   improveYourDrivingWelshTemplate,
@@ -32,19 +32,18 @@ import {
   improveYourDrivingVocationalManWelshTemplate,
   improveYourRidingTemplate,
   improveYourRidingWelshTemplate,
-} from '../templates/common/improve-your-driving';
+} from '../templates/improve-your-driving';
 import {
   testExperienceRidingSurveyTemplate,
   testExperienceSurveyTemplate,
   testExperienceSurveyVocationalTemplate,
   testExperienceSurveyWelshTemplate,
-} from '../templates/common/test-experience-survey';
-import { firstCarTemplate, firstCarWelshTemplate } from '../templates/common/firstCar';
-import { dataPrivacyTemplate, dataPrivacyWelshTemplate } from '../templates/common/data-privacy';
+} from '../templates/test-experience-survey';
+import { dataPrivacyTemplate, dataPrivacyWelshTemplate } from '../templates/data-privacy';
 import { TestOutcome } from '../../domain/test-outcome';
-import { etaTemplate, etaTemplateWelsh } from '../templates/common/eta';
-import { DangerousFaultsTemplate, DangerousFaultsWelshTemplate } from '../templates/common/dangerous-faults';
-import { SeriousFaultsTemplate, SeriousFaultsWelshTemplate } from '../templates/common/serious-faults';
+import { etaTemplate, etaTemplateWelsh } from '../templates/eta';
+import { DangerousFaultsTemplate, DangerousFaultsWelshTemplate } from '../templates/dangerous-faults';
+import { SeriousFaultsTemplate, SeriousFaultsWelshTemplate } from '../templates/serious-faults';
 import {
   DrivingFaultsADI2Template,
   DrivingFaultsADI2WelshTemplate,
@@ -58,13 +57,13 @@ import {
   RidingFaultsMod1WelshTemplate,
   RidingFaultsMod2Template,
   RidingFaultsMod2WelshTemplate,
-} from '../templates/common/driving-faults';
+} from '../templates/driving-faults';
 import {
   EcoRidingTemplate,
   EcoRidingWelshTemplate,
   EcoTemplate,
   EcoWelshTemplate,
-} from '../templates/common/eco';
+} from '../templates/eco';
 import {
   NextStepsADI2FailTemplate,
   NextStepsADI2FailWelshTemplate,
@@ -94,7 +93,7 @@ import {
   NextStepsVocationalFailWelshTemplate,
   NextStepsVocationalPassTemplate,
   NextStepsVocationalPassWelshTemplate,
-} from '../templates/common/next-steps';
+} from '../templates/next-steps';
 import { getCategorySubject, getCategoryType, isADI3Category } from './category-provider';
 import {
   adiEnglishSubject,
@@ -105,16 +104,16 @@ import {
   drivingWelshSubject, padiEnglishSubject, padiWelshSubject,
   ridingEnglishSubject,
   ridingWelshSubject,
-} from '../templates/common/email-subject';
+} from '../templates/email-subject';
 import {
   EmergencyStopTemplate,
   EmergencyStopTemplateWelshTemplate,
-} from '../templates/common/emergency-stop';
+} from '../templates/emergency-stop';
 import {
   AvoidanceExerciseTemplate,
   AvoidanceExerciseWelshTemplate,
-} from '../templates/common/avoidance-exercise';
-import { gradeTemplate } from '../templates/common/grade';
+} from '../templates/avoidance-exercise';
+import { gradeTemplate } from '../templates/grade';
 import {
   cpcAbilityToAssessEmergencyEnglishTemplate,
   cpcAbilityToAssessEmergencyWelshTemplate,
@@ -131,9 +130,9 @@ import {
   scoreCpcFailEnglishTemplate,
   scoreCpcFailWelshTemplate,
   scoreCpcWelshTemplate,
-} from '../templates/common/score';
-import { themeTemplate } from '../templates/common/theme';
-import { feedbackTemplate } from '../templates/common/feedback';
+} from '../templates/score';
+import { themeTemplate } from '../templates/theme';
+import { feedbackTemplate } from '../templates/feedback';
 import {
   StatementOfFailureCpcTemplate,
   StatementOfFailureCpcWelshTemplate,
@@ -147,8 +146,8 @@ import {
   StatementOfFailureVocationalTemplate,
   StatementOfFailureVocationalWelshTemplate,
   StatementOfFailureWelshTemplate,
-} from '../templates/common/statement-of-failure';
-import { otherEnglishpadi, otherWelshpadi } from '../templates/common/padi';
+} from '../templates/statement-of-failure';
+import { otherEnglishpadi, otherWelshpadi } from '../templates/padi';
 
 export const passEnglishAMod1 =
   `
@@ -332,7 +331,6 @@ export const passEnglishB =
     ${NextStepsPassTemplate}
     ${improveYourDrivingTemplate}
     ${testExperienceSurveyTemplate}
-    ${firstCarTemplate}
     ${dataPrivacyTemplate}
     `;
 
@@ -345,7 +343,6 @@ export const passWelshB =
     ${NextStepsPassWelshTemplate}    
     ${improveYourDrivingWelshTemplate}
     ${testExperienceSurveyWelshTemplate}
-    ${firstCarWelshTemplate}
     ${dataPrivacyWelshTemplate}
     `;
 
@@ -361,7 +358,6 @@ export const failEnglishB =
     ${NextStepsFailTemplate}
     ${StatementOfFailureTemplate}
     ${testExperienceSurveyTemplate}
-    ${firstCarTemplate}
     ${dataPrivacyTemplate}
     `;
 
@@ -377,7 +373,6 @@ export const failWelshB =
     ${NextStepsFailWelshTemplate} 
     ${StatementOfFailureWelshTemplate} 
     ${testExperienceSurveyWelshTemplate}
-    ${firstCarWelshTemplate}    
     ${dataPrivacyWelshTemplate}
     `;
 
