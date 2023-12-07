@@ -7,7 +7,6 @@ import { get } from 'lodash';
 import { IConfigAdapter } from '../../framework/adapter/config/config-adapter.interface';
 import {
   Correspondence,
-  CorrespondenceMethod,
 } from '../../domain/template-id.model';
 import { TYPES } from '../../framework/di/types';
 
@@ -45,11 +44,12 @@ export function getTemplateString(
   communicationMethod: CommunicationMethod,
 ): string {
 
-  if (communicationMethod) {
-    const correspondenceMethod: CorrespondenceMethod =
-      (communicationMethod === Correspondence.POST) ? Correspondence.LETTER : Correspondence.EMAIL;
-
-    return `${correspondenceMethod}TemplateId`;
+  switch (communicationMethod) {
+  case Correspondence.EMAIL:
+    return `${Correspondence.EMAIL}TemplateId`;
+  case Correspondence.POST:
+    return `${Correspondence.LETTER}TemplateId`;
+  default:
+    return TemplateIdProvider.TEMPLATE_ID_NOT_SET;
   }
-  return TemplateIdProvider.TEMPLATE_ID_NOT_SET;
 }

@@ -17,10 +17,10 @@ describe('custom-property-provider-cat-a-mod1', () => {
       const result: any = getCustomPropertiesCatAMod1(data, Language.ENGLISH);
 
       expect(result).toEqual(jasmine.objectContaining({
-        showEmergencyStop: 'yes',
-        showEmergencyFirstAttempt: 'yes',
+        showEmergencyStop: true,
+        showEmergencyFirstAttempt: true,
         emergencyFirstAttempt: '55 km/h',
-        showEmergencySecondAttempt: 'yes',
+        showEmergencySecondAttempt: true,
         emergencySecondAttempt: '66 km/h',
       }));
     });
@@ -35,10 +35,10 @@ describe('custom-property-provider-cat-a-mod1', () => {
       const result: any = getCustomPropertiesCatAMod1(data, Language.ENGLISH);
 
       expect(result).toEqual(jasmine.objectContaining({
-        showEmergencyStop: 'yes',
-        showEmergencyFirstAttempt: 'yes',
+        showEmergencyStop: true,
+        showEmergencyFirstAttempt: true,
         emergencyFirstAttempt: '55 km/h',
-        showEmergencySecondAttempt: 'no',
+        showEmergencySecondAttempt: false,
         emergencySecondAttempt: '',
       }));
     });
@@ -51,10 +51,10 @@ describe('custom-property-provider-cat-a-mod1', () => {
       const result: any = getCustomPropertiesCatAMod1(data, Language.ENGLISH);
 
       expect(result).toEqual(jasmine.objectContaining({
-        showEmergencyStop: 'no',
-        showEmergencyFirstAttempt: 'no',
+        showEmergencyStop: false,
+        showEmergencyFirstAttempt: false,
         emergencyFirstAttempt: '',
-        showEmergencySecondAttempt: 'no',
+        showEmergencySecondAttempt: false,
         emergencySecondAttempt: '',
       }));
     });
@@ -72,10 +72,10 @@ describe('custom-property-provider-cat-a-mod1', () => {
       const result: any = getCustomPropertiesCatAMod1(data, Language.ENGLISH);
 
       expect(result).toEqual(jasmine.objectContaining({
-        showAvoidanceExercise: 'yes',
-        showAvoidanceFirstAttempt: 'yes',
+        showAvoidanceExercise: true,
+        showAvoidanceFirstAttempt: true,
         avoidanceFirstAttempt: '55 km/h',
-        showAvoidanceSecondAttempt: 'yes',
+        showAvoidanceSecondAttempt: true,
         avoidanceSecondAttempt: '66 km/h',
       }));
     });
@@ -90,10 +90,10 @@ describe('custom-property-provider-cat-a-mod1', () => {
       const result: any = getCustomPropertiesCatAMod1(data, Language.ENGLISH);
 
       expect(result).toEqual(jasmine.objectContaining({
-        showAvoidanceExercise: 'yes',
-        showAvoidanceFirstAttempt: 'yes',
+        showAvoidanceExercise: true,
+        showAvoidanceFirstAttempt: true,
         avoidanceFirstAttempt: '55 km/h',
-        showAvoidanceSecondAttempt: 'no',
+        showAvoidanceSecondAttempt: false,
         avoidanceSecondAttempt: '',
       }));
     });
@@ -106,10 +106,10 @@ describe('custom-property-provider-cat-a-mod1', () => {
       const result: any = getCustomPropertiesCatAMod1(data, Language.ENGLISH);
 
       expect(result).toEqual(jasmine.objectContaining({
-        showAvoidanceExercise: 'no',
-        showAvoidanceFirstAttempt: 'no',
+        showAvoidanceExercise: false,
+        showAvoidanceFirstAttempt: false,
         avoidanceFirstAttempt: '',
-        showAvoidanceSecondAttempt: 'no',
+        showAvoidanceSecondAttempt: false,
         avoidanceSecondAttempt: '',
       }));
     });
