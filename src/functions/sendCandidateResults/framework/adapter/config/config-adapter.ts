@@ -31,9 +31,9 @@ export class ConfigAdapter implements IConfigAdapter {
     this.resultsBaseApiUrl = this.getFromEnvThrowIfNotPresent('RESULTS_API_BASE_URL');
 
     // Email template id
-    this.EmailTemplateId = this.getFromEnvThrowIfNotPresent('E_ANDY');
+    this.EmailTemplateId = this.getFromEnvThrowIfNotPresent('E_TEMPLATE');
     // Letter template id
-    this.LetterTemplateId = this.getFromEnvThrowIfNotPresent('P_ANDY');
+    this.LetterTemplateId = this.getFromEnvThrowIfNotPresent('P_TEMPLATE');
   }
 
   public async getApiKey(): Promise<string> {

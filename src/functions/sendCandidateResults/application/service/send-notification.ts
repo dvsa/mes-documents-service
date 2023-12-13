@@ -30,23 +30,24 @@ export async function sendNotification(
 
     let personalisation = {};
 
-    if (communicationMethod === Correspondence.EMAIL) {
-      try {
-        const compileSubject = Handlebars.compile(
-          subjectMapper(notificationPersonalisation.category, conductedLanguage, padi)
-        );
+    try {
+      const compileSubject = Handlebars.compile(
+        subjectMapper(notificationPersonalisation.category, conductedLanguage, padi)
+      );
 
-        renderedSubject = compileSubject(notificationPersonalisation);
-        personalisation = {
-          ...personalisation,
-          renderedSubject,
-        };
-      } catch (error) {
-        console.error('Error preparing renderedSubject', error);
-        return;
-      }
+      renderedSubject = compileSubject(notificationPersonalisation);
+
+      personalisation = {
+        ...personalisation,
+        renderedSubject,
+      };
+    } catch (error) {
+      console.error('Error preparing renderedSubject', error);
+      return;
     }
-    else if (communicationMethod === Correspondence.POST) {
+
+    // add address if POST
+    if (communicationMethod === Correspondence.POST) {
       address = {
         address_line_1: notificationPersonalisation.address_line_1,
         address_line_2: notificationPersonalisation.address_line_2,
@@ -66,10 +67,6 @@ export async function sendNotification(
         ...address,
       };
     }
-    else {
-      console.error('Invalid communication method:', communicationMethod);
-      return;
-    }
 
     try {
       const compileTemplate = Handlebars.compile(
@@ -85,8 +82,6 @@ export async function sendNotification(
       ...personalisation,
       renderedText,
     };
-
-    // console.log('personalisation.renderedText', JSON.stringify(personalisation));
 
     communicationMethod === Correspondence.EMAIL ?
       await client.sendEmail(templateId, emailAddress, {personalisation, reference, emailReplyToId}) :
