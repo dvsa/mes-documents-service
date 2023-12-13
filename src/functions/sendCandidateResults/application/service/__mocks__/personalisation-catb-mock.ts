@@ -1,6 +1,6 @@
 /* eslint-disable */
 export const personalisationCatbEnglishPassMock = {
-  renderedSubject: '\nYour driving test result on 01/01/1990 – Driving test reference number: 12345678\n',
+  renderedSubject: 'Your driving test result on 01/01/1990 – Driving test reference number: 12345678',
   renderedText: '\n    \n' +
     'Driving test reference number: 12345678\n\n' +
     'Dear candidate,\n\n\n    \n' +
@@ -30,7 +30,7 @@ export const personalisationCatbEnglishPassMock = {
 };
 
 export const personalisationCatbEnglishFailMock = {
-  renderedSubject: '\nYour driving test result on 01/01/1990 – Driving test reference number: 12345678\n',
+  renderedSubject: 'Your driving test result on 01/01/1990 – Driving test reference number: 12345678',
   renderedText: '\n    \n' +
     'Driving test reference number: 12345678\n\n' +
     'Dear candidate,\n\n\n    \n' +
@@ -62,8 +62,8 @@ export const personalisationCatbEnglishFailMock = {
     'Driver and Vehicle Standards Agency (DVSA)\n\n    ',
 };
 
-// @ts-ignore
 export const personalisationCatbEnglishPassLetterMock = {
+  renderedSubject: 'Your driving test result on 01/01/1990 – Driving test reference number: 12345678',
   address_line_1: 'add1',
   address_line_2: 'add2',
   postcode: 'sa1',
@@ -96,6 +96,7 @@ export const personalisationCatbEnglishPassLetterMock = {
 };
 
 export const personalisationCatbEnglishFailLetterMock = {
+  renderedSubject: 'Your driving test result on 01/01/1990 – Driving test reference number: 12345678',
   address_line_1: 'add1',
   address_line_2: 'add2',
   postcode: 'sa1',
