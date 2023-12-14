@@ -1,6 +1,6 @@
 export const DangerousFaultsTemplate = `
 {{#if showDangerousFaults}}
-#Your dangerous faults:
+# Your dangerous faults:
   {{#each dangerousFaults}}
   - {{ this }}
   {{/each}}
@@ -10,7 +10,7 @@ export const DangerousFaultsTemplate = `
 
 export const DangerousFaultsWelshTemplate = `
 {{#if showDangerousFaults}}
-#Eich beiau peryglus:
+# Eich beiau peryglus:
   {{#each dangerousFaults}}
   - {{ this }}
   {{/each}}

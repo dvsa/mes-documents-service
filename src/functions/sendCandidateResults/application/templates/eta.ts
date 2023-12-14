@@ -1,6 +1,6 @@
 export const etaTemplate = `
 {{#if showEtaText}}
-#Your examiner took action
+# Your examiner took action
 
 {{/if}}
 {{#if showEtaVerbal}}
@@ -15,7 +15,7 @@ During your test your examiner needed to take physical action.
 
 export const etaTemplateWelsh = `
 {{#if showEtaText}}
-#Cymerodd eich arholwr gamau
+# Cymerodd eich arholwr gamau
 
 {{/if}}
 {{#if showEtaVerbal}}

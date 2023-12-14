@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 export const DrivingFaultsTemplate = `
 {{#if showDrivingFaults}}
-#Your driving faults:
+# Your driving faults:
   {{#each drivingFaults}}
   - {{ this }}
   {{/each}}
@@ -16,7 +16,7 @@ https://www.gov.uk/guidance/understanding-your-driving-test-result/car-driving-t
 
 export const DrivingFaultsWelshTemplate = `
 {{#if showDrivingFaults}}
-Eich beiau gyrru:
+# Eich beiau gyrru:
   {{#each drivingFaults}}
   - {{ this }}
   {{/each}}
@@ -31,7 +31,7 @@ https://www.gov.uk/guidance/understanding-your-driving-test-result/car-driving-t
 
 export const DrivingFaultsVocationalTemplate = `
 {{#if showDrivingFaults}}
-#Your driving faults:
+# Your driving faults:
   {{#each drivingFaults}}
   - {{ this }}
   {{/each}}
@@ -45,7 +45,7 @@ https://www.gov.uk/guidance/understanding-your-driving-test-result/lorry-bus-or-
 
 export const DrivingFaultsVocationalWelshTemplate = `
 {{#if showDrivingFaults}}
-Eich beiau gyrru:
+# Eich beiau gyrru:
   {{#each drivingFaults}}
   - {{ this }}
   {{/each}}
@@ -59,7 +59,7 @@ https://www.gov.uk/guidance/understanding-your-driving-test-result/lorry-bus-or-
 
 export const RidingFaultsMod1Template = `
 {{#if showDrivingFaults}}
-#Your riding faults:
+# Your riding faults:
   {{#each drivingFaults}}
   - {{ this }}
   {{/each}}
@@ -73,7 +73,7 @@ https://www.gov.uk/guidance/understanding-your-driving-test-result/motorcycle-mo
 
 export const RidingFaultsMod2Template = `
 {{#if showDrivingFaults}}
-#Your riding faults:
+# Your riding faults:
   {{#each drivingFaults}}
   - {{ this }}
   {{/each}}
@@ -87,7 +87,7 @@ https://www.gov.uk/guidance/understanding-your-driving-test-result/motorcycle-mo
 
 export const RidingFaultsMod1WelshTemplate = `
 {{#if showDrivingFaults}}
-Eich beiau gyrru:
+# Eich beiau gyrru:
   {{#each drivingFaults}}
   - {{ this }}
   {{/each}}
@@ -101,7 +101,7 @@ https://www.gov.uk/guidance/understanding-your-driving-test-result/motorcycle-mo
 
 export const RidingFaultsMod2WelshTemplate = `
 {{#if showDrivingFaults}}
-Eich beiau gyrru:
+# Eich beiau gyrru:
   {{#each drivingFaults}}
   - {{ this }}
   {{/each}}
@@ -115,7 +115,7 @@ https://www.gov.uk/guidance/understanding-your-driving-test-result/motorcycle-mo
 
 export const DrivingFaultsADI2Template = `
 {{#if showDrivingFaults}}
-#Your driving faults:
+# Your driving faults:
   {{#each drivingFaults}}
   - {{ this }}
   {{/each}}
@@ -129,7 +129,7 @@ https://www.gov.uk/guidance/understanding-your-driving-test-result/approved-driv
 
 export const DrivingFaultsADI2WelshTemplate = `
 {{#if showDrivingFaults}}
-Eich beiau gyrru:
+# Eich beiau gyrru:
   {{#each drivingFaults}}
   - {{ this }}
   {{/each}}
@@ -143,7 +143,7 @@ https://www.gov.uk/guidance/understanding-your-driving-test-result/approved-driv
 
 export const DrivingFaultsHomeTemplate = `
 {{#if showDrivingFaults}}
-#Your driving faults:
+# Your driving faults:
   {{#each drivingFaults}}
   - {{ this }}
   {{/each}}
@@ -156,7 +156,7 @@ https://www.gov.uk/guidance/understanding-your-driving-test-result/tractor-or-sp
 
 export const DrivingFaultsHomeWelshTemplate = `
 {{#if showDrivingFaults}}
-Eich beiau gyrru:
+# Eich beiau gyrru:
   {{#each drivingFaults}}
   - {{ this }}
   {{/each}}
