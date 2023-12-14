@@ -1,5 +1,4 @@
 export const feedbackTemplate = `
-#Feedback from the examiner
+# Feedback from the examiner
 {{feedback}}
-
 `;

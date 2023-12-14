@@ -1,12 +1,12 @@
 export const gradeTemplate = `
 {{#if showGrade}}
-#Grade - {{grade}}
+# Grade - {{grade}}
 {{/if}}
 {{#if code4}}
-#Terminated
+# Terminated
 {{/if}}
 {{#if RMFail}}
-#Risk Management Fail
+# Risk Management Fail
 {{/if}}
 
 `;
