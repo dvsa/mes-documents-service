@@ -83,8 +83,6 @@ export async function sendNotification(
       renderedText,
     };
 
-    console.log('personalisation', JSON.stringify(personalisation));
-
     communicationMethod === Correspondence.EMAIL ?
       await client.sendEmail(templateId, emailAddress, {personalisation, reference, emailReplyToId}) :
       await client.sendLetter(templateId, {personalisation, reference});
