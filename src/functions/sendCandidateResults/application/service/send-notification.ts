@@ -26,7 +26,6 @@ export async function sendNotification(
   try {
     let address;
     let renderedSubject;
-    let renderedText;
 
     let personalisation = {};
 
@@ -68,15 +67,7 @@ export async function sendNotification(
       };
     }
 
-    try {
-      const compileTemplate = Handlebars.compile(
-        templateMapper(testOutcome, notificationPersonalisation.category, conductedLanguage, padi)
-      );
-      renderedText = compileTemplate(notificationPersonalisation);
-
-    } catch (error) {
-      console.error('Error preparing renderedText', error);
-    }
+    const renderedText = getRenderedText(testOutcome, notificationPersonalisation, conductedLanguage, padi);
 
     personalisation = {
       ...personalisation,
@@ -97,5 +88,22 @@ export async function sendNotification(
     }
 
     return Promise.reject(new DocumentsServiceError(statusCode, message, true));
+  }
+}
+
+export function getRenderedText(
+  testOutcome: TestOutcome,
+  notificationPersonalisation: PersonalisationDetails,
+  conductedLanguage: Language,
+  padi: boolean | undefined
+): string | undefined {
+  try {
+    const compileTemplate = Handlebars.compile(
+      templateMapper(testOutcome, notificationPersonalisation.category, conductedLanguage, padi)
+    );
+    return compileTemplate(notificationPersonalisation);
+
+  } catch (error) {
+    console.error('Error preparing renderedText', error);
   }
 }

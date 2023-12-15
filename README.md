@@ -1,6 +1,6 @@
 # mes-documents-service
 
-A serverless microservice responsible for responsible for generating documents, such as test results for Candidates.
+A serverless microservice responsible for generating documents, such as test results for Candidates.
 
 ## Dependencies
 DVSA dependencies have been moved from npm to github so in order to install/update any private @DVSA packages
@@ -27,19 +27,19 @@ To build a zip file for every function to `build/artifacts`, run:
 ```shell
 npm run package
 ```
-
-To build a subset of the functions, pass a comma separated list of function names, like so:
-
-```shell
-npm run package -- get,set
-```
-
-N.b. The build requires [jq](https://github.com/stedolan/jq).
+Note: The build requires [jq](https://github.com/stedolan/jq).
 
 ## Test
 
-To run the unit tests, simply run:
+To run the unit tests, run:
 
 ```shell
-npm test
+npm run test
 ```
+
+To run the integration tests, and generate pdf output for all templates, run:
+
+```shell
+npm run integration
+```
+Note: Not all markup will be perfectly rendered in the pdf templates as some of the markup is gov.notify specific

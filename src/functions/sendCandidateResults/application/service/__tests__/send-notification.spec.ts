@@ -1,11 +1,9 @@
 import { mockEmail1 } from '../../../framework/__mocks__/test-data.mock';
-import { PersonalisationDetails } from '../../../domain/personalisation.model';
 import { INotifyClient } from '../../../domain/notify-client.interface';
 import { NotifyClientStubFailure400 } from '../../stub/notify-client-stub-failure-400';
 import { NotifyClientStubFailure500 } from '../../stub/notify-client-stub-failure-500';
 import { DocumentsServiceError } from '../../../domain/errors/documents-service-error';
 import { sendNotification } from '../send-notification';
-import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 import { Correspondence } from '../../../domain/template-id.model';
 import { Language } from '../../../domain/conducted-language';
 import { TestOutcome } from '../../../domain/test-outcome';
@@ -14,29 +12,7 @@ import {
   personalisationCatbEnglishFailMock, personalisationCatbEnglishPassLetterMock,
   personalisationCatbEnglishPassMock,
 } from '../__mocks__/personalisation-catb-mock';
-
-const personlisationCatB: PersonalisationDetails = {
-  candidateName: 'some name',
-  address_line_1: 'add1',
-  address_line_2: 'add2',
-  postcode: 'sa1',
-  applicationReference: 12345678,
-  category: TestCategory.B,
-  date: '01/01/1990',
-  drivingFaults: [],
-  seriousFaults: [],
-  dangerousFaults: [],
-  location: 'Test Centre',
-  showDangerousFaults: true,
-  showDrivingFaults: true,
-  showEcoText: true,
-  showSeriousFaults: true,
-  showEtaText: true,
-  showEtaPhysical: true,
-  showEtaVerbal: false,
-  showProvLicenceRetainedByDvsa: true,
-  showProvLicenceRetainedByDriver: false,
-};
+import { personlisationCatBPass } from '../__mocks__/personlisation-details';
 
 describe('sendNotification', () => {
 
@@ -52,7 +28,7 @@ describe('sendNotification', () => {
         mockEmail1,
         Correspondence.EMAIL,
         'temp-id',
-        personlisationCatB,
+        personlisationCatBPass,
         '12345678',
         'reply-id',
         mockClient,
@@ -85,7 +61,7 @@ describe('sendNotification', () => {
         mockEmail1,
         Correspondence.EMAIL,
         'temp-id',
-        personlisationCatB,
+        personlisationCatBPass,
         '12345678',
         'reply-id',
         mockClient,
@@ -118,7 +94,7 @@ describe('sendNotification', () => {
         mockEmail1,
         Correspondence.POST,
         'temp-id',
-        personlisationCatB,
+        personlisationCatBPass,
         '12345678',
         'reply-id',
         mockClient,
@@ -149,7 +125,7 @@ describe('sendNotification', () => {
         mockEmail1,
         Correspondence.POST,
         'temp-id',
-        personlisationCatB,
+        personlisationCatBPass,
         '12345678',
         'reply-id',
         mockClient,
@@ -176,7 +152,7 @@ describe('sendNotification', () => {
         mockEmail1,
         Correspondence.EMAIL,
         'temp-id',
-        personlisationCatB,
+        personlisationCatBPass,
         '123456',
         'reply-id',
         notifyClient,
@@ -200,7 +176,7 @@ describe('sendNotification', () => {
         mockEmail1,
         Correspondence.EMAIL,
         'temp-id',
-        personlisationCatB,
+        personlisationCatBPass,
         '12345678',
         'reply-id',
         notifyClient,

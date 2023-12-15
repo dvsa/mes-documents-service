@@ -1,4 +1,7 @@
 import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
+import { CatCPCCustomProperties } from '../application/service/categories/CPC/custom-property-provider-cat-cpc';
+import { CatADI3CustomProperties } from '../application/service/categories/ADI3/custom-property-provider-cat-adi3';
+import { CatAMod1ICustomProperties } from '../application/service/categories/AM1/custom-property-provider-cat-a-mod1';
 
 export enum PositionText {
   IN = 'in',
@@ -30,13 +33,17 @@ export interface Personalisation {
   showProvLicenceRetainedByDriver: boolean;
 }
 
-export interface PersonalisationDetails extends Personalisation {
+export interface PersonalisationDetails extends Personalisation,
+  Partial<CatCPCCustomProperties>,
+  Partial<CatADI3CustomProperties>,
+  Partial<CatAMod1ICustomProperties>
+{
   candidateName: string;
-  'address_line_1' : string;
-  'address_line_2' : string;
-  'address_line_3' ? : string;
-  'address_line_4' ? : string;
-  'address_line_5' ? : string;
-  'address_line_6' ? : string;
-  'postcode' : string;
+  'address_line_1': string;
+  'address_line_2': string;
+  'address_line_3'?: string;
+  'address_line_4'?: string;
+  'address_line_5'?: string;
+  'address_line_6'?: string;
+  'postcode': string;
 }

@@ -6,7 +6,6 @@ export const personalisationCatbEnglishPassMock = {
     'Dear candidate,\n\n    \n' +
     '^ # You passed your category B driving test on 01/01/1990 in Test Centre.\n\n    \n' +
     '# Your driving faults:\n\nFind out more about driving faults:\n\n' +
-    'Car\n' +
     'https://www.gov.uk/guidance/understanding-your-driving-test-result/car-driving-test\n\n\n    \n' +
     '# Fuel-efficient driving\n' +
     'The driving examiner observed that you could improve the control and/or planning of your driving. You should aim to drive in a fuel-efficient manner, considering your impact on the environment.\n\n\n    \n' +
@@ -38,7 +37,6 @@ export const personalisationCatbEnglishFailMock = {
     '# Your dangerous faults:\n\n\n    \n# Your serious faults:\n\n\n    \n' +
     '# Your driving faults:\n\n' +
     'Find out more about driving faults:\n\n' +
-    'Car\n' +
     'https://www.gov.uk/guidance/understanding-your-driving-test-result/car-driving-test\n\n\n    \n' +
     '# Fuel-efficient driving\n' +
     'The driving examiner observed that you could improve the control and/or planning of your driving. You should aim to drive in a fuel-efficient manner, considering your impact on the environment.\n\n\n    \n' +
@@ -70,7 +68,6 @@ export const personalisationCatbEnglishPassLetterMock = {
     '^ # You passed your category B driving test on 01/01/1990 in Test Centre.\n\n    \n' +
     '# Your driving faults:\n\n' +
     'Find out more about driving faults:\n\n' +
-    'Car\n' +
     'https://www.gov.uk/guidance/understanding-your-driving-test-result/car-driving-test\n\n\n    \n' +
     '# Fuel-efficient driving\n' +
     'The driving examiner observed that you could improve the control and/or planning of your driving. You should aim to drive in a fuel-efficient manner, considering your impact on the environment.\n\n\n    \n' +
@@ -106,7 +103,6 @@ export const personalisationCatbEnglishFailLetterMock = {
     '# Your serious faults:\n\n\n    \n' +
     '# Your driving faults:\n\n' +
     'Find out more about driving faults:\n\n' +
-    'Car\n' +
     'https://www.gov.uk/guidance/understanding-your-driving-test-result/car-driving-test\n\n\n    \n' +
     '# Fuel-efficient driving\n' +
     'The driving examiner observed that you could improve the control and/or planning of your driving. You should aim to drive in a fuel-efficient manner, considering your impact on the environment.\n\n\n    \n' +
