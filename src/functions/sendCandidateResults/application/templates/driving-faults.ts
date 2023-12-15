@@ -8,7 +8,6 @@ export const DrivingFaultsTemplate = `
 
 Find out more about driving faults:
 
-Car
 https://www.gov.uk/guidance/understanding-your-driving-test-result/car-driving-test
 
 {{/if}}
@@ -23,7 +22,6 @@ export const DrivingFaultsWelshTemplate = `
 
 Dysgwch ragor am feiau gyrru:
 
-Car
 https://www.gov.uk/guidance/understanding-your-driving-test-result/car-driving-test
 
 {{/if}}
@@ -149,6 +147,7 @@ export const DrivingFaultsHomeTemplate = `
   {{/each}}
 
 Find out more about driving faults:
+
 https://www.gov.uk/guidance/understanding-your-driving-test-result/tractor-or-specialist-vehicle-driving-test
 
 {{/if}}
@@ -162,6 +161,7 @@ export const DrivingFaultsHomeWelshTemplate = `
   {{/each}}
 
 Dysgwch ragor am feiau gyrru:
+
 https://www.gov.uk/guidance/understanding-your-driving-test-result/tractor-or-specialist-vehicle-driving-test))t
 
 {{/if}}

@@ -7,7 +7,7 @@ import { CustomProperties } from '../../../../domain/custom-properties';
 
 const DEFAULT_SCORE: string = '0';
 
-interface CatCPCCustomProperties extends CustomProperties {
+export interface CatCPCCustomProperties extends CustomProperties {
   q1Score: string;
   q2Score: string;
   q3Score: string;
