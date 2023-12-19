@@ -2,7 +2,7 @@ import {
   CommunicationMethod,
 } from '@dvsa/mes-test-schema/categories/common';
 import { inject, injectable } from 'inversify';
-import { get } from 'lodash';
+import { get, lowerCase } from 'lodash';
 
 import { IConfigAdapter } from '../../framework/adapter/config/config-adapter.interface';
 import {
@@ -46,9 +46,9 @@ export function getTemplateString(
 
   switch (communicationMethod) {
   case Correspondence.EMAIL:
-    return `${Correspondence.EMAIL}TemplateId`;
+    return `${lowerCase(Correspondence.EMAIL)}TemplateId`;
   case Correspondence.POST:
-    return `${Correspondence.LETTER}TemplateId`;
+    return `${lowerCase(Correspondence.LETTER)}TemplateId`;
   default:
     return TemplateIdProvider.TEMPLATE_ID_NOT_SET;
   }

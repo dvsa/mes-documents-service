@@ -16,9 +16,9 @@ export class ConfigAdapter implements IConfigAdapter {
   notifyRequestsPerBatch: number;
   notifyTimeout: number;
   // Email Template id's
-  EmailTemplateId: string;
+  emailTemplateId: string;
   // Letter Template id's
-  LetterTemplateId: string;
+  letterTemplateId: string;
 
   constructor() {
     this.apiKey = '';
@@ -31,9 +31,9 @@ export class ConfigAdapter implements IConfigAdapter {
     this.resultsBaseApiUrl = this.getFromEnvThrowIfNotPresent('RESULTS_API_BASE_URL');
 
     // Email template id
-    this.EmailTemplateId = this.getFromEnvThrowIfNotPresent('E_TEMPLATE');
+    this.emailTemplateId = this.getFromEnvThrowIfNotPresent('E_TEMPLATE');
     // Letter template id
-    this.LetterTemplateId = this.getFromEnvThrowIfNotPresent('P_TEMPLATE');
+    this.letterTemplateId = this.getFromEnvThrowIfNotPresent('P_TEMPLATE');
   }
 
   public async getApiKey(): Promise<string> {

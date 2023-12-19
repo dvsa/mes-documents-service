@@ -233,7 +233,7 @@ describe('getCategoryType', () => {
     });
   });
 
-  it('should default to TestType.B for unknown categories', () => {
-    expect(getCategoryType('testDefaultCategory' as TestCategory)).toBe(TestType.B);
+  it('should throw an error for unknown categories', () => {
+    expect(() => getCategoryType(TestCategory.A)).toThrowError('Unexpected category type: A');
   });
 });

@@ -45,14 +45,14 @@ describe('TemplateIdProvider', () => {
   });
 
   describe('getTemplateString', () => {
-    it('should return EmailTemplateId for Correspondence.EMAIL', () => {
+    it('should return emailTemplateId for Correspondence.EMAIL', () => {
       const result = getTemplateString(Correspondence.EMAIL);
-      expect(result).toEqual('EmailTemplateId');
+      expect(result).toEqual('emailTemplateId');
     });
 
-    it('should return LetterTemplateId for Correspondence.POST', () => {
+    it('should return letterTemplateId for Correspondence.POST', () => {
       const result = getTemplateString(Correspondence.POST);
-      expect(result).toEqual('LetterTemplateId');
+      expect(result).toEqual('letterTemplateId');
     });
 
     it('should return TemplateIdProvider.TEMPLATE_ID_NOT_SET for not provided', () => {
