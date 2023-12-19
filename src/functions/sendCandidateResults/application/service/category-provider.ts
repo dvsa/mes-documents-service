@@ -103,6 +103,6 @@ export function getCategoryType(category: TestCategory): TestType {
   case TestCategory.D1EM:
     return TestType.MANOEUVRE;
   default:
-    return TestType.B;
+    throw new Error(`Unexpected category type: ${category}`);
   }
 }

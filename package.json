@@ -21,7 +21,7 @@
     "package": "./package.sh",
     "security-scan": "git secrets --scan && git log -p | scanrepo && snyk test",
     "test": "npm run compile && jasmine",
-    "integration": "tsc integration/templates/generateTemplates.ts && node integration/templates/generateTemplates",
+    "integration": "ts-node integration/templates/generateTemplates",
     "test:jasmine-coverage": "c8 npm run test",
     "start": "npm run compile && sls offline start",
     "prepare": "husky install"

@@ -6,8 +6,8 @@ export interface IConfigAdapter {
   notifyBatchSize: number;
   notifyRequestsPerBatch: number;
   notifyTimeout: number;
-  EmailTemplateId: string;
-  LetterTemplateId: string;
+  emailTemplateId: string;
+  letterTemplateId: string;
 
 
   getApiKey(): Promise<string>;

@@ -36,14 +36,18 @@ export interface Personalisation {
 export interface PersonalisationDetails extends Personalisation,
   Partial<CatCPCCustomProperties>,
   Partial<CatADI3CustomProperties>,
-  Partial<CatAMod1ICustomProperties>
+  Partial<CatAMod1ICustomProperties>,
+  Address
 {
   candidateName: string;
-  'address_line_1': string;
-  'address_line_2': string;
+}
+
+export interface Address {
+  'address_line_1'?: string;
+  'address_line_2'?: string;
   'address_line_3'?: string;
   'address_line_4'?: string;
   'address_line_5'?: string;
   'address_line_6'?: string;
-  'postcode': string;
+  'postcode'?: string;
 }

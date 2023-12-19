@@ -181,7 +181,7 @@ templates.push(
 );
 
 
-templates.forEach((template: any) => {
+templates.forEach((template: { filename: string; markdown: string | undefined; }) => {
     generatePdf(template.filename, template.markdown)
   }
 )

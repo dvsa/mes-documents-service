@@ -14,8 +14,8 @@ export class ConfigAdapterMock implements IConfigAdapter {
   notifyRequestsPerBatch: number = 25;
   notifyTimeout: number = 1000;
 
-  EmailTemplateId: string = 'email-template-id';
-  LetterTemplateId: string = 'letter-template-id';
+  emailTemplateId: string = 'email-template-id';
+  letterTemplateId: string = 'letter-template-id';
 
   async getApiKey(): Promise<string> {
     return Promise.resolve(this.apiKey);
