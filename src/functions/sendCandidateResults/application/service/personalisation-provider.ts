@@ -29,6 +29,7 @@ import { isBikeCategory } from './category-provider';
 export interface IPersonalisationProvider {
 
   getPersonalisationDetails(testresult: TestResultSchemasUnion): PersonalisationDetails;
+  getTitledName(name: Name | undefined): string;
 }
 
 @injectable()
@@ -143,9 +144,9 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     return faultLabels;
   }
 
-  private getTitledName(name: Name | undefined): string {
+  public getTitledName(name: Name | undefined): string {
     if (name) {
-      return `${name.title} ${name.firstName} ${name.lastName}`;
+      return name.title ? `${name.title} ${name.firstName} ${name.lastName}` : `${name.firstName} ${name.lastName}`;
     }
     return '';
   }
