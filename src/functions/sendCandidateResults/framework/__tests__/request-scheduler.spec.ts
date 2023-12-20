@@ -4,12 +4,13 @@ import { ConfigAdapterMock } from '../adapter/config/__mocks__/config-adapter.mo
 import { INotifyClient } from '../../domain/notify-client.interface';
 import { NotifyClientStubSuccess } from '../../application/stub/notify-client-stub-success';
 import { ITemplateIdProvider, TemplateIdProvider } from '../../application/service/template-id-provider';
-import { CatBUniqueTypes } from '@dvsa/mes-test-schema/categories/B';
 import { IStatusUpdater } from '../status-updater';
 import { NotifyClientStubFailure500 } from '../../application/stub/notify-client-stub-failure-500';
 import { NextUploadBatchMock } from '../__mocks__/next-upload-batch.mock';
 import { NotifyClientStubTimeout } from '../../application/stub/notify-client-stub-timeout';
-import { IPersonalisationProvider, PersonalisationProvider } from '../../application/service/personalisation-provider';
+import {
+  IPersonalisationProvider,
+  PersonalisationProvider } from '../../application/service/personalisation-provider';
 import { IFaultProvider, FaultProvider } from '../../application/service/fault-provider';
 import { ICustomPropertyProvider, CustomPropertyProvider } from '../../application/service/custom-property-provider';
 import { StatusUpdaterMock } from '../__mocks__/status-updater.mock';

@@ -1,8 +1,5 @@
 import {
-  LetterPersonalisation,
-  EmailPersonalisation,
-  Personalisation,
-  BooleanText,
+  Personalisation, PersonalisationDetails,
 } from '../../domain/personalisation.model';
 import {
   Name,
@@ -27,13 +24,12 @@ import { formatApplicationReference } from '@dvsa/mes-microservice-common/domain
 import * as moment from 'moment';
 import 'moment/locale/cy';
 import { TestResultSchemasUnion } from '@dvsa/mes-test-schema/categories';
-import { isBikeCategory } from './template-id-provider';
+import { isBikeCategory } from './category-provider';
 
 export interface IPersonalisationProvider {
 
-  getEmailPersonalisation(testresult: TestResultSchemasUnion): EmailPersonalisation;
-
-  getLetterPersonalisation(testresult: TestResultSchemasUnion): LetterPersonalisation;
+  getPersonalisationDetails(testresult: TestResultSchemasUnion): PersonalisationDetails;
+  getTitledName(name: Name | undefined): string;
 }
 
 @injectable()
@@ -44,20 +40,12 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     @inject(TYPES.ICustomPropertyProvider) private customPropertyProvider: ICustomPropertyProvider,
   ) { }
 
-  public getEmailPersonalisation(testresult: TestResultSchemasUnion): EmailPersonalisation {
+  public getPersonalisationDetails(testresult: TestResultSchemasUnion): PersonalisationDetails {
     const sharedValues: Personalisation = this.getSharedPersonalisationValues(testresult);
 
     return {
       ...sharedValues,
       candidateName: this.getTitledName(testresult.journalData.candidate.candidateName),
-    };
-  }
-
-  public getLetterPersonalisation(testresult: TestResultSchemasUnion): LetterPersonalisation {
-    const sharedValues: Personalisation = this.getSharedPersonalisationValues(testresult);
-
-    return {
-      ...sharedValues,
       address_line_1: this.getTitledName(testresult.journalData.candidate.candidateName),
       address_line_2: get<TestResultSchemasUnion, string>(
         testresult,
@@ -84,23 +72,23 @@ export class PersonalisationProvider implements IPersonalisationProvider {
   private getCommonPersonalisationValues(testresult: TestResultSchemasUnion): Personalisation {
     const testData = get(testresult, 'testData') as TestData;
 
+    const lang = get(testresult, 'communicationPreferences.conductedLanguage') as ConductedLanguage;
+
     const drivingFaults = this.buildFaultStringWithCount(
-      this.faultProvider
-        .getDrivingFaults(testData, testresult.category)
-        .sort((a, b) => b.count - a.count),
-      get(testresult, 'communicationPreferences.conductedLanguage') as ConductedLanguage,
+      this.faultProvider.getDrivingFaults(testData, testresult.category).sort((a, b) => b.count - a.count),
+      lang,
       testresult.category,
     );
 
     const seriousFaults = this.buildFaultString(
       this.faultProvider.getSeriousFaults(testData, testresult.category),
-      get(testresult, 'communicationPreferences.conductedLanguage') as ConductedLanguage,
+      lang,
       testresult.category,
     );
 
     const dangerousFaults = this.buildFaultString(
       this.faultProvider.getDangerousFaults(testData, testresult.category),
-      get(testresult, 'communicationPreferences.conductedLanguage') as ConductedLanguage,
+      lang,
       testresult.category,
     );
 
@@ -108,7 +96,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     const eco = get(testresult, 'testData.eco', null) as unknown as Eco;
     const provisionalLicenceProvided = get(testresult, 'passCompletion.provisionalLicenceProvided', false);
 
-    return {
+    return <Personalisation>{
       applicationReference: formatApplicationReference(get(testresult, 'journalData.applicationReference')),
       category: testresult.category,
       date: this.formatDate(
@@ -117,17 +105,17 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       ),
       location: get(testresult, 'journalData.testCentre.centreName') as string,
       drivingFaults: drivingFaults.length > 0 ? drivingFaults : '',
-      showDrivingFaults: drivingFaults.length > 0 ? BooleanText.YES : BooleanText.NO,
+      showDrivingFaults: drivingFaults.length > 0,
       seriousFaults: seriousFaults.length > 0 ? seriousFaults : '',
-      showSeriousFaults: seriousFaults.length > 0 ? BooleanText.YES : BooleanText.NO,
+      showSeriousFaults: seriousFaults.length > 0,
       dangerousFaults: dangerousFaults.length > 0 ? dangerousFaults : '',
-      showDangerousFaults: dangerousFaults.length > 0 ? BooleanText.YES : BooleanText.NO,
+      showDangerousFaults: dangerousFaults.length > 0,
       showEcoText: this.shouldShowEco(eco),
       showEtaText: this.shouldShowEta(eta),
       showEtaVerbal: this.shouldShowEtaVerbal(eta),
       showEtaPhysical: this.shouldShowEtaPhysical(eta),
-      showProvLicenceRetainedByDvsa: provisionalLicenceProvided ? BooleanText.YES : BooleanText.NO,
-      showProvLicenceRetainedByDriver: !provisionalLicenceProvided ? BooleanText.YES : BooleanText.NO,
+      showProvLicenceRetainedByDvsa: provisionalLicenceProvided,
+      showProvLicenceRetainedByDriver: !provisionalLicenceProvided,
     };
   }
 
@@ -135,10 +123,10 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     const faultLabels: string[] = [];
 
     if (language === 'Cymraeg') {
-      faults.forEach((fault: any) => faultLabels.push(`${(<any>welshCompetencyLabels)[fault.name]}`));
+      faults.forEach((fault) => faultLabels.push(`${(welshCompetencyLabels)[fault.name]}`));
     } else {
-      faults.forEach((fault: any) => faultLabels.push(
-        `${this.modifyCompetencyLabel((<any>englishCompetencyLabels)[fault.name], category)}`));
+      faults.forEach((fault) => faultLabels.push(
+        `${this.modifyCompetencyLabel((englishCompetencyLabels)[fault.name], category)}`));
     }
 
     return faultLabels;
@@ -148,56 +136,59 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     const faultLabels: string[] = [];
 
     if (language === 'Cymraeg') {
-      faults.forEach((fault: any) => faultLabels.push(`${(<any>welshCompetencyLabels)[fault.name]}, ${fault.count}`));
+      faults.forEach((fault) => faultLabels.push(`${(welshCompetencyLabels)[fault.name]}, ${fault.count}`));
     } else {
-      faults.forEach((fault: any) => faultLabels.push(
-        `${this.modifyCompetencyLabel((<any>englishCompetencyLabels)[fault.name], category)}, ${fault.count}`));
+      faults.forEach((fault) => faultLabels.push(
+        `${this.modifyCompetencyLabel((englishCompetencyLabels)[fault.name], category)}, ${fault.count}`));
     }
     return faultLabels;
   }
 
-  private getTitledName(name: Name | undefined): string {
+  public getTitledName(name: Name | undefined): string {
     if (name) {
-      return `${name.title} ${name.firstName} ${name.lastName}`;
+      return name.title ? `${name.title} ${name.firstName} ${name.lastName}` : `${name.firstName} ${name.lastName}`;
     }
     return '';
   }
 
-  private shouldShowEco(eco: Eco): BooleanText {
+  private shouldShowEco(eco: Eco): boolean {
     if (!eco) {
-      return BooleanText.NO;
+      return false;
     }
-    if (eco.adviceGivenControl || eco.adviceGivenPlanning) {
-      return BooleanText.YES;
-    }
-    return BooleanText.NO;
+    return !!(eco.adviceGivenControl || eco.adviceGivenPlanning);
+
   }
 
-  private shouldShowEta(eta: ETA): BooleanText {
-    return eta && (eta.physical || eta.verbal) ? BooleanText.YES : BooleanText.NO;
+  private shouldShowEta(eta: ETA): boolean {
+    return !!(eta && (eta.physical || eta.verbal));
   }
 
-  private shouldShowEtaPhysical(eta: ETA): BooleanText {
-    return eta && eta.physical ? BooleanText.YES : BooleanText.NO;
+  private shouldShowEtaPhysical(eta: ETA): boolean {
+    return !!(eta && eta.physical);
   }
 
-  private shouldShowEtaVerbal(eta: ETA): BooleanText {
-    return eta && eta.verbal ? BooleanText.YES : BooleanText.NO;
+  private shouldShowEtaVerbal(eta: ETA): boolean {
+    return !!(eta && eta.verbal);
   }
 
   private formatDate(stringDate: string, language: ConductedLanguage): string {
     switch (language) {
-    case 'Cymraeg': return moment(stringDate).locale('cy').format('D MMMM YYYY');
-    default: return moment(stringDate).locale('en').format('D MMMM YYYY');
+    case 'Cymraeg':
+      return moment(stringDate).locale('cy').format('D MMMM YYYY');
+    default:
+      return moment(stringDate).locale('en').format('D MMMM YYYY');
     }
   }
 
   private modifyCompetencyLabel = (label: string, category: CategoryCode): string => {
     if (isBikeCategory(category)) {
       switch (label) {
-      case englishCompetencyLabels.moveOffControl: return modifiedEnglishCompetencyLabels.moveOffControl;
-      case englishCompetencyLabels.moveOffSafety: return modifiedEnglishCompetencyLabels.moveOffSafety;
-      default: return label;
+      case englishCompetencyLabels.moveOffControl:
+        return modifiedEnglishCompetencyLabels.moveOffControl;
+      case englishCompetencyLabels.moveOffSafety:
+        return modifiedEnglishCompetencyLabels.moveOffSafety;
+      default:
+        return label;
       }
     }
     return label;

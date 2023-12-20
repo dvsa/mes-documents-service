@@ -4,19 +4,18 @@ import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/
 import { get, toString } from 'lodash';
 
 import { CustomProperties } from '../../../../domain/custom-properties';
-import { BooleanText } from '../../../../domain/personalisation.model';
 
 const DEFAULT_SCORE: string = '0';
 
-interface CatCPCCustomProperties extends CustomProperties {
+export interface CatCPCCustomProperties extends CustomProperties {
   q1Score: string;
   q2Score: string;
   q3Score: string;
   q4Score: string;
   q5Score: string;
   totalScore: string;
-  showLGVText: BooleanText;
-  showPCVText: BooleanText;
+  showLGVText: boolean;
+  showPCVText: boolean;
 }
 
 export const getCustomPropertiesCatCPC = (
@@ -32,7 +31,7 @@ export const getCustomPropertiesCatCPC = (
     q4Score: toString(get(testData, 'question4.score')) || DEFAULT_SCORE,
     q5Score: toString(get(testData, 'question5.score')) || DEFAULT_SCORE,
     totalScore: toString(get(testData, 'totalPercent')) || DEFAULT_SCORE,
-    showLGVText: (category === TestCategory.CCPC) ? BooleanText.YES : BooleanText.NO,
-    showPCVText: (category === TestCategory.DCPC) ? BooleanText.YES : BooleanText.NO,
+    showLGVText: (category === TestCategory.CCPC),
+    showPCVText: (category === TestCategory.DCPC),
   };
 };
