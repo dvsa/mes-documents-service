@@ -51,7 +51,15 @@ export const personalisationCatbEnglishFailMock = {
     'You can appeal if you think your examiner did not follow the regulations when they carried out your test. Find out how to appeal at https://www.gov.uk/driving-test/driving-test-faults-result#appeal-your-driving-test.  Your test result cannot be changed, but you might get a free retest if your appeal is successful. You might need to pay court costs if your appeal does not succeed.\n\n    \n' +
     '# Your experience of the driving test\n' +
     'However your test went, we’d really like your feedback about your experience of the driving test. Please complete this short survey, it should only take about 5 minutes.\n' +
-    'https://www.smartsurvey.co.uk/s/yourdrivingtest\n\n    \n' +
+    'https://www.smartsurvey.co.uk/s/yourdrivingtest\n' +
+    '\n' +
+    '    \n' +
+    '# Win 1,500 prizes worth over £30,000, including a new car!\n' +
+    'Visit FirstCar magazine online if you’ve taken the car driving test\n' +
+    '\n' +
+    'https://www.firstcar.co.uk/learning/firstcar-practical-magazine/\n' +
+    '\n' +
+    '    \n' +
     '# How we look after your data\n' +
     'Driver and Vehicle Standards Agency (DVSA) collects, uses, stores and sometimes shares your personal information for the purpose of carrying out the driving test. Your personal information is protected by law. Find out more about how DVSA uses your personal information at https://www.gov.uk/dvsa/privacy\n\n' +
     'Driver and Vehicle Standards Agency (DVSA)\n\n    '

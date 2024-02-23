@@ -12,7 +12,7 @@ import {
   personalisationCatbEnglishFailMock, personalisationCatbEnglishPassLetterMock,
   personalisationCatbEnglishPassMock,
 } from '../__mocks__/personalisation-catb-mock';
-import { personlisationCatBPass } from '../__mocks__/personlisation-details';
+import { personlisationCatBFail, personlisationCatBPass } from '../__mocks__/personlisation-details';
 
 describe('sendNotification', () => {
 
@@ -61,7 +61,7 @@ describe('sendNotification', () => {
         mockEmail1,
         Correspondence.EMAIL,
         'temp-id',
-        personlisationCatBPass,
+        personlisationCatBFail,
         '12345678',
         'reply-id',
         mockClient,

@@ -70,6 +70,7 @@ export async function sendNotification(
     };
   }
 
+  console.log('personalisation', personalisation);
 
   try {
     communicationMethod === Correspondence.EMAIL ?

@@ -148,6 +148,7 @@ import {
   StatementOfFailureWelshTemplate,
 } from '../templates/statement-of-failure';
 import { otherEnglishpadi, otherWelshpadi } from '../templates/padi';
+import { firstCarTemplate, firstCarWelshTemplate } from '../templates/firstCar';
 
 export const passEnglishAMod1 =
   `
@@ -331,6 +332,7 @@ export const passEnglishB =
     ${NextStepsPassTemplate}
     ${improveYourDrivingTemplate}
     ${testExperienceSurveyTemplate}
+    ${firstCarTemplate}
     ${dataPrivacyTemplate}
     `;
 
@@ -343,6 +345,7 @@ export const passWelshB =
     ${NextStepsPassWelshTemplate}    
     ${improveYourDrivingWelshTemplate}
     ${testExperienceSurveyWelshTemplate}
+    ${firstCarWelshTemplate}
     ${dataPrivacyWelshTemplate}
     `;
 
@@ -358,6 +361,7 @@ export const failEnglishB =
     ${NextStepsFailTemplate}
     ${StatementOfFailureTemplate}
     ${testExperienceSurveyTemplate}
+    ${firstCarTemplate}
     ${dataPrivacyTemplate}
     `;
 
@@ -373,6 +377,7 @@ export const failWelshB =
     ${NextStepsFailWelshTemplate} 
     ${StatementOfFailureWelshTemplate} 
     ${testExperienceSurveyWelshTemplate}
+    ${firstCarWelshTemplate}    
     ${dataPrivacyWelshTemplate}
     `;
 
