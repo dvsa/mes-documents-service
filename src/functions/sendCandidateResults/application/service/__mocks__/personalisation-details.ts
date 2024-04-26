@@ -1,7 +1,7 @@
 import { PersonalisationDetails } from '../../../domain/personalisation.model';
 import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 
-export const personlisationCatBPass: PersonalisationDetails = {
+export const personalisationCatBPass: PersonalisationDetails = {
   candidateName: 'some name',
   address_line_1: 'add1',
   address_line_2: 'add2',
@@ -24,7 +24,7 @@ export const personlisationCatBPass: PersonalisationDetails = {
   showProvLicenceRetainedByDriver: false,
 };
 
-export const personlisationCatBFail: PersonalisationDetails = {
+export const personalisationCatBFail: PersonalisationDetails = {
   applicationReference: 14091418816,
   category: TestCategory.B,
   date: '14 December 2023',
@@ -59,7 +59,7 @@ export const personlisationCatBFail: PersonalisationDetails = {
   postcode: 'NG1 2AS',
 };
 
-export const personlisationCatCPass: PersonalisationDetails = {
+export const personalisationCatCPass: PersonalisationDetails = {
   applicationReference: 72345622011,
   category: TestCategory.C,
   date: '27 November 2023',
@@ -90,7 +90,7 @@ export const personlisationCatCPass: PersonalisationDetails = {
   postcode: 'BR82 0DE',
 };
 
-export const personlisationCatCFail: PersonalisationDetails = {
+export const personalisationCatCFail: PersonalisationDetails = {
   applicationReference: 72345633011,
   category: TestCategory.C,
   date: '27 November 2023',
@@ -117,7 +117,7 @@ export const personlisationCatCFail: PersonalisationDetails = {
   postcode: 'BR82 0DE',
 };
 
-export const personlisationCatADI2Pass: PersonalisationDetails = {
+export const personalisationCatADI2Pass: PersonalisationDetails = {
   applicationReference: 22123400011,
   category: TestCategory.ADI2,
   date: '13 December 2023',
@@ -144,7 +144,7 @@ export const personlisationCatADI2Pass: PersonalisationDetails = {
   postcode: 'PO57 0DE',
 };
 
-export const personlisationCatADI2Fail: PersonalisationDetails = {
+export const personalisationCatADI2Fail: PersonalisationDetails = {
   applicationReference: 22123903031,
   category: TestCategory.ADI2,
   date: '27 November 2023',
@@ -175,7 +175,7 @@ export const personlisationCatADI2Fail: PersonalisationDetails = {
   postcode: 'AB12 3CD',
 };
 
-export const personlisationPADI: PersonalisationDetails = {
+export const personalisationPADI: PersonalisationDetails = {
   applicationReference: 23123427011,
   category: TestCategory.ADI3,
   date: '30 November 2023',
@@ -236,7 +236,7 @@ export const personlisationPADI: PersonalisationDetails = {
   postcode: 'PO57 0DE',
 };
 
-export const personlisationCatCPCPass: PersonalisationDetails = {
+export const personalisationCatCPCPass: PersonalisationDetails = {
   applicationReference: 22123466011,
   category: TestCategory.CCPC,
   date: '13 December 2023',
@@ -271,7 +271,7 @@ export const personlisationCatCPCPass: PersonalisationDetails = {
   postcode: 'PO57 0DE',
 };
 
-export const personlisationCatCPCFail: PersonalisationDetails = {
+export const personalisationCatCPCFail: PersonalisationDetails = {
   applicationReference: 22123470019,
   category: TestCategory.CCPC,
   date: '28 November 2023',
@@ -306,7 +306,7 @@ export const personlisationCatCPCFail: PersonalisationDetails = {
   postcode: 'AB45 6CD',
 };
 
-export const personlisationCatHomePass: PersonalisationDetails = {
+export const personalisationCatHomePass: PersonalisationDetails = {
   applicationReference: 22123412022,
   category: TestCategory.F,
   date: '28 November 2023',
@@ -337,7 +337,7 @@ export const personlisationCatHomePass: PersonalisationDetails = {
   postcode: 'AB67 8CD',
 };
 
-export const personlisationCatHomeFail: PersonalisationDetails = {
+export const personalisationCatHomeFail: PersonalisationDetails = {
   applicationReference: 22123499031,
   category: TestCategory.G,
   date: '28 November 2023',
@@ -369,7 +369,7 @@ export const personlisationCatHomeFail: PersonalisationDetails = {
   postcode: 'AB12 3CD',
 };
 
-export const personlisationCatAM1Pass: PersonalisationDetails = {
+export const personalisationCatAM1Pass: PersonalisationDetails = {
   applicationReference: 10123400011,
   category: TestCategory.EUA1M1,
   date: '14 December 2023',
@@ -406,7 +406,7 @@ export const personlisationCatAM1Pass: PersonalisationDetails = {
   postcode: 'BR82 0DE',
 };
 
-export const personlisationCatAM1Fail: PersonalisationDetails = {
+export const personalisationCatAM1Fail: PersonalisationDetails = {
   applicationReference: 10123422011,
   category: TestCategory.EUA1M1,
   date: '29 November 2023',
@@ -446,7 +446,7 @@ export const personlisationCatAM1Fail: PersonalisationDetails = {
   postcode: 'BR82 0DE',
 };
 
-export const personlisationCatAM2Pass: PersonalisationDetails = {
+export const personalisationCatAM2Pass: PersonalisationDetails = {
   applicationReference: 10123433011,
   category: TestCategory.EUAMM2,
   date: '14 December 2023',
@@ -473,7 +473,7 @@ export const personlisationCatAM2Pass: PersonalisationDetails = {
   postcode: 'BR82 0DE',
 };
 
-export const personlisationCatAM2Fail: PersonalisationDetails = {
+export const personalisationCatAM2Fail: PersonalisationDetails = {
   applicationReference: 10123444011,
   category: TestCategory.EUA1M2,
   date: '29 November 2023',
@@ -505,7 +505,7 @@ export const personlisationCatAM2Fail: PersonalisationDetails = {
   postcode: 'BR82 0DE',
 };
 
-export const personlisationCatADI3Pass: PersonalisationDetails = {
+export const personalisationCatADI3Pass: PersonalisationDetails = {
   applicationReference: 23123428013,
   category: TestCategory.ADI3,
   date: '14 December 2023',
@@ -566,7 +566,7 @@ export const personlisationCatADI3Pass: PersonalisationDetails = {
   postcode: 'PO57 0DE',
 };
 
-export const personlisationCatADI3Fail: PersonalisationDetails = {
+export const personalisationCatADI3Fail: PersonalisationDetails = {
   applicationReference: 23123427011,
   category: TestCategory.ADI3,
   date: '30 November 2023',
@@ -627,7 +627,7 @@ export const personlisationCatADI3Fail: PersonalisationDetails = {
   postcode: 'PO57 0DE',
 };
 
-export const personlisationCatSCPass: PersonalisationDetails = {
+export const personalisationCatSCPass: PersonalisationDetails = {
   applicationReference: 23150009011,
   category: TestCategory.SC,
   date: '30 November 2023',
