@@ -12,7 +12,7 @@ import {
   personalisationCatbEnglishFailMock, personalisationCatbEnglishPassLetterMock,
   personalisationCatbEnglishPassMock,
 } from '../__mocks__/personalisation-catb-mock';
-import { personlisationCatBFail, personlisationCatBPass } from '../__mocks__/personlisation-details';
+import { personalisationCatBFail, personalisationCatBPass } from '../__mocks__/personalisation-details';
 
 describe('sendNotification', () => {
 
@@ -28,7 +28,7 @@ describe('sendNotification', () => {
         mockEmail1,
         Correspondence.EMAIL,
         'temp-id',
-        personlisationCatBPass,
+        personalisationCatBPass,
         '12345678',
         'reply-id',
         mockClient,
@@ -61,7 +61,7 @@ describe('sendNotification', () => {
         mockEmail1,
         Correspondence.EMAIL,
         'temp-id',
-        personlisationCatBFail,
+        personalisationCatBFail,
         '12345678',
         'reply-id',
         mockClient,
@@ -94,7 +94,7 @@ describe('sendNotification', () => {
         mockEmail1,
         Correspondence.POST,
         'temp-id',
-        personlisationCatBPass,
+        personalisationCatBPass,
         '12345678',
         'reply-id',
         mockClient,
@@ -125,7 +125,7 @@ describe('sendNotification', () => {
         mockEmail1,
         Correspondence.POST,
         'temp-id',
-        personlisationCatBPass,
+        personalisationCatBPass,
         '12345678',
         'reply-id',
         mockClient,
@@ -152,7 +152,7 @@ describe('sendNotification', () => {
         mockEmail1,
         Correspondence.EMAIL,
         'temp-id',
-        personlisationCatBPass,
+        personalisationCatBPass,
         '123456',
         'reply-id',
         notifyClient,
@@ -176,7 +176,7 @@ describe('sendNotification', () => {
         mockEmail1,
         Correspondence.EMAIL,
         'temp-id',
-        personlisationCatBPass,
+        personalisationCatBPass,
         '12345678',
         'reply-id',
         notifyClient,

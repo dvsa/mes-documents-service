@@ -1,4 +1,4 @@
-export const SeriousFaultsTemplate = `
+export const seriousFaultsTemplate = `
 {{#if showSeriousFaults}}
 # Your serious faults:
   {{#each seriousFaults}}

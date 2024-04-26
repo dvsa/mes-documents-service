@@ -1,98 +1,67 @@
 import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 import { Language } from '../../domain/conducted-language';
+import { headerTemplate } from '../templates/header';
 import {
-  headerADITemplate, headerCpcTemplate, headerCpcWelshTemplate,
-  headerManTemplate,
-  headerManWelshTemplate,
-  headerRidingTemplate,
-  headerRidingWelshTemplate,
-  headerTemplate,
-  headerWelshTemplate,
-} from '../templates/header';
-import {
-  adi3ResultsTemplate,
-  adi3Template,
-  failCpcTemplate,
-  failCpcWelshTemplate,
+  failAdi3FirstOrSecondTemplate,
+  failAdi3ThirdTemplate, failAMod1Template,
+  failDrivingAdi2Template, failDrivingBTemplate,
   failDrivingTemplate,
-  failDrivingWelshTemplate,
-  failRidingTemplate,
-  failRidingWelshTemplate,
-  passCpcTemplate,
-  passCpcWelshTemplate,
+  failMod2Template,
+  failScFirstOrSecondTemplate, failScThirdTemplate, failTractorTemplate,
+  failVocational3bTemplate,
+  failVocational4Template,
+  passAdi3Template,
+  passDrivingAdi2Template, passDrivingBTemplate,
   passDrivingTemplate,
-  passDrivingWelshTemplate,
-  passRidingTemplate,
-  passRidingWelshTemplate,
+  passMod2Template,
+  passSCTemplate,
+  passTractorTemplate,
+  passVocational3bTemplate,
+  passVocational4Template,
 } from '../templates/result-summary';
+import { improveYourDrivingVocationalManTemplate } from '../templates/improve-your-driving';
 import {
-  improveYourDrivingTemplate,
-  improveYourDrivingWelshTemplate,
-  improveYourDrivingVocationalManTemplate,
-  improveYourDrivingVocationalManWelshTemplate,
-  improveYourRidingTemplate,
-  improveYourRidingWelshTemplate,
-} from '../templates/improve-your-driving';
-import {
-  testExperienceRidingSurveyTemplate,
+  testExperienceSurveyBTemplate,
+  testExperienceSurveyRidingTemplate,
   testExperienceSurveyTemplate,
+  testExperienceSurveyTemplate3b,
   testExperienceSurveyVocationalTemplate,
-  testExperienceSurveyWelshTemplate,
 } from '../templates/test-experience-survey';
-import { dataPrivacyTemplate, dataPrivacyWelshTemplate } from '../templates/data-privacy';
+import { dataPrivacyTemplate } from '../templates/data-privacy';
 import { TestOutcome } from '../../domain/test-outcome';
-import { etaTemplate, etaTemplateWelsh } from '../templates/eta';
-import { DangerousFaultsTemplate, DangerousFaultsWelshTemplate } from '../templates/dangerous-faults';
-import { SeriousFaultsTemplate, SeriousFaultsWelshTemplate } from '../templates/serious-faults';
+import { etaTemplate } from '../templates/eta';
+import { dangerousFaultsTemplate } from '../templates/dangerous-faults';
+import { seriousFaultsTemplate } from '../templates/serious-faults';
 import {
-  DrivingFaultsADI2Template,
-  DrivingFaultsADI2WelshTemplate,
-  DrivingFaultsHomeTemplate,
-  DrivingFaultsHomeWelshTemplate,
-  DrivingFaultsTemplate,
+  drivingFaultsADI2Template,
+  drivingFaultsTemplate,
+  drivingFaultsTractorTemplate,
   DrivingFaultsVocationalTemplate,
-  DrivingFaultsVocationalWelshTemplate,
-  DrivingFaultsWelshTemplate,
-  RidingFaultsMod1Template,
-  RidingFaultsMod1WelshTemplate,
-  RidingFaultsMod2Template,
-  RidingFaultsMod2WelshTemplate,
+  ridingFaultTemplate,
+  vocationalScoring,
+  vocationalScoringExplanation,
 } from '../templates/driving-faults';
 import {
-  EcoRidingTemplate,
-  EcoRidingWelshTemplate,
-  EcoTemplate,
-  EcoWelshTemplate,
+  ecoRidingTemplate,
+  ecoTemplate,
+  ecoTemplate3b,
+  ecoTemplateRider,
+  ecoTemplateTractor,
 } from '../templates/eco';
 import {
-  NextStepsADI2FailTemplate,
-  NextStepsADI2FailWelshTemplate,
-  NextStepsADI2PassTemplate,
-  NextStepsADI2PassWelshTemplate,
-  NextStepsCpcFailTemplate,
-  NextStepsCpcFailWelshTemplate,
-  NextStepsCpcPassTemplate,
-  NextStepsCpcPassWelshTemplate,
-  NextStepsFailRidingMod1WelshTemplate,
-  NextStepsFailRidingMod2WelshTemplate,
-  NextStepsFailTemplate,
-  NextStepsFailWelshTemplate, NextStepsHomePassTemplate, NextStepsHomePassWelshTemplate,
-  NextStepsManFailTemplate,
-  NextStepsManFailWelshTemplate,
-  NextStepsManPassTemplate,
-  NextStepsManPassWelshTemplate,
-  NextStepsPassTemplate,
-  NextStepsPassWelshTemplate,
-  NextStepsRidingMod1FailTemplate,
-  NextStepsRidingMod1PassTemplate,
-  NextStepsRidingMod1PassWelshTemplate,
-  NextStepsRidingMod2FailTemplate,
-  NextStepsRidingMod2PassTemplate,
-  NextStepsRidingMod2PassWelshTemplate,
+  nextStepsADI2FailTemplate,
+  nextStepsAdi2PassTemplate,
+  nextStepsAdi3FirstOrSecondFailTemplate,
+  nextStepsAdi3PassTemplate,
+  nextStepsAdi3ThirdFailTemplate,
+  nextStepsFailBTemplate,
+  NextStepsPass3aTemplate,
+  NextStepsPass3bTemplate,
+  nextStepsPassBTemplate,
+  nextStepsScFirstOrSecondTemplate,
+  nextStepsScThirdTemplate,
   NextStepsVocationalFailTemplate,
-  NextStepsVocationalFailWelshTemplate,
   NextStepsVocationalPassTemplate,
-  NextStepsVocationalPassWelshTemplate,
 } from '../templates/next-steps';
 import { getCategorySubject, getCategoryType, isADI3Category } from './category-provider';
 import {
@@ -101,487 +70,378 @@ import {
   cpcEnglishSubject,
   cpcWelshSubject,
   drivingEnglishSubject,
-  drivingWelshSubject, padiEnglishSubject, padiWelshSubject,
+  drivingWelshSubject,
+  padiEnglishSubject,
+  padiWelshSubject,
   ridingEnglishSubject,
   ridingWelshSubject,
 } from '../templates/email-subject';
 import {
-  EmergencyStopTemplate,
-  EmergencyStopTemplateWelshTemplate,
+  emergencyStopTemplate,
 } from '../templates/emergency-stop';
 import {
-  AvoidanceExerciseTemplate,
-  AvoidanceExerciseWelshTemplate,
+  avoidanceExerciseTemplate,
 } from '../templates/avoidance-exercise';
-import { gradeTemplate } from '../templates/grade';
 import {
-  cpcAbilityToAssessEmergencyEnglishTemplate,
-  cpcAbilityToAssessEmergencyWelshTemplate,
-  cpcAbilityToLoadEnglishTemplate,
-  cpcAbilityToLoadWelshTemplate,
-  cpcAbilityToPreventCriminalityEnglishTemplate,
-  cpcAbilityToPreventCriminalityWelshTemplate,
-  cpcAbilityToPreventPhysicalRiskEnglishTemplate,
-  cpcAbilityToPreventPhysicalRiskWelshTemplate,
-  cpcSecurityEnglishTemplate,
-  cpcSecurityWelshTemplate,
-  scoreAdi3Template,
-  scoreCpcEnglishTemplate,
-  scoreCpcFailEnglishTemplate,
-  scoreCpcFailWelshTemplate,
-  scoreCpcWelshTemplate,
-} from '../templates/score';
-import { themeTemplate } from '../templates/theme';
-import { feedbackTemplate } from '../templates/feedback';
+  adi3FirstOrSecondGradeTemplate,
+  adi3GradeTemplate,
+  scFirstOrSecondGradeTemplate,
+  scGradeTemplate,
+  scThirdGradeTemplate,
+} from '../templates/grade';
 import {
-  StatementOfFailureCpcTemplate,
-  StatementOfFailureCpcWelshTemplate,
-  StatementOfFailureManTemplate,
-  StatementOfFailureManWelshTemplate,
-  StatementOfFailureMod1Template,
-  StatementOfFailureMod1WelshTemplate,
-  StatementOfFailureMod2Template,
-  StatementOfFailureMod2WelshTemplate,
-  StatementOfFailureTemplate,
+  statementOfFailureBTemplate,
+  statementOfFailureMod1Template,
+  statementOfFailureTemplate,
+  statementOfFailureVocational3bTemplate,
   StatementOfFailureVocationalTemplate,
-  StatementOfFailureVocationalWelshTemplate,
-  StatementOfFailureWelshTemplate,
 } from '../templates/statement-of-failure';
-import { otherEnglishpadi, otherWelshpadi } from '../templates/padi';
-import { firstCarTemplate, firstCarWelshTemplate } from '../templates/firstCar';
-
-export const passEnglishAMod1 =
-  `
-    ${headerRidingTemplate}
-    ${passRidingTemplate}
-    ${RidingFaultsMod1Template}
-    ${EmergencyStopTemplate}
-    ${AvoidanceExerciseTemplate}
-    ${EcoRidingTemplate}
-    ${NextStepsRidingMod1PassTemplate}
-    ${testExperienceRidingSurveyTemplate}
-    ${dataPrivacyTemplate}
-    `;
-
-export const passWelshAMod1 =
-  `
-    ${headerRidingWelshTemplate}
-    ${passRidingWelshTemplate}
-    ${RidingFaultsMod1WelshTemplate}    
-    ${EmergencyStopTemplateWelshTemplate}    
-    ${AvoidanceExerciseWelshTemplate}    
-    ${EcoRidingWelshTemplate}    
-    ${NextStepsRidingMod1PassWelshTemplate}    
-    ${dataPrivacyWelshTemplate}
-    `;
-
-export const failEnglishAMod1 =
-  `
-    ${headerRidingTemplate}
-    ${failRidingTemplate}
-    ${etaTemplate}
-    ${DangerousFaultsTemplate}
-    ${SeriousFaultsTemplate}
-    ${RidingFaultsMod1Template}
-    ${EmergencyStopTemplate}
-    ${AvoidanceExerciseTemplate}
-    ${EcoRidingTemplate}
-    ${NextStepsRidingMod1FailTemplate}
-    ${StatementOfFailureMod1Template}
-    ${testExperienceSurveyTemplate}
-    ${dataPrivacyTemplate}
-    `;
-
-export const failWelshAMod1 =
-  `
-    ${headerRidingWelshTemplate}
-    ${failRidingWelshTemplate}
-    ${etaTemplateWelsh}
-    ${DangerousFaultsWelshTemplate}
-    ${SeriousFaultsWelshTemplate}
-    ${RidingFaultsMod1WelshTemplate}   
-    ${EmergencyStopTemplateWelshTemplate}    
-    ${AvoidanceExerciseWelshTemplate}   
-    ${EcoRidingWelshTemplate} 
-    ${NextStepsFailRidingMod1WelshTemplate} 
-    ${StatementOfFailureMod1WelshTemplate} 
-    ${dataPrivacyWelshTemplate}
-    `;
-
-export const passEnglishAMod2 =
-  `
-    ${headerRidingTemplate}
-    ${passRidingTemplate}
-    ${RidingFaultsMod2Template}
-    ${EcoRidingTemplate}
-    ${NextStepsRidingMod2PassTemplate}
-    ${improveYourRidingTemplate}
-    ${testExperienceRidingSurveyTemplate}
-    ${dataPrivacyTemplate}
-    `;
-
-export const passWelshAMod2 =
-  `
-    ${headerRidingWelshTemplate}
-    ${passRidingWelshTemplate}
-    ${RidingFaultsMod2WelshTemplate}    
-    ${EcoRidingWelshTemplate}    
-    ${NextStepsRidingMod2PassWelshTemplate}    
-    ${improveYourRidingWelshTemplate}    
-    ${dataPrivacyWelshTemplate}
-    `;
-
-export const failEnglishAMod2 =
-  `
-    ${headerRidingTemplate}
-    ${failRidingTemplate}
-    ${etaTemplate}
-    ${DangerousFaultsTemplate}
-    ${SeriousFaultsTemplate}
-    ${RidingFaultsMod2Template}
-    ${EcoRidingTemplate}
-    ${NextStepsRidingMod2FailTemplate}
-    ${StatementOfFailureMod2Template}
-    ${testExperienceSurveyTemplate}
-    ${dataPrivacyTemplate}
-    `;
-
-export const failWelshAMod2 =
-  `
-    ${headerRidingWelshTemplate}
-    ${failRidingWelshTemplate}
-    ${etaTemplateWelsh}
-    ${DangerousFaultsWelshTemplate}
-    ${SeriousFaultsWelshTemplate}
-    ${RidingFaultsMod2WelshTemplate}   
-    ${EcoRidingWelshTemplate} 
-    ${NextStepsFailRidingMod2WelshTemplate} 
-    ${StatementOfFailureMod2WelshTemplate} 
-    ${dataPrivacyWelshTemplate}
-    `;
+import {
+  understanding3aFailResultTemplate,
+  understanding3BFailResultTemplate,
+  understanding3BPassResultTemplate,
+  understandingAdi2FailResultTemplate,
+  understandingAdi2PassResultTemplate,
+  understandingBFailResultTemplate,
+  understandingBPassResultTemplate,
+  understandingMod1ResultTemplate,
+  understandingMod2ResultTemplate,
+  understandingTractorResultTemplate,
+} from '../templates/understanding-your-result';
+import {
+  appealYourAdi2TestTemplate,
+  howToAppealAdi3FirstOrSecondTemplate,
+  howToAppealAdi3ThirdTemplate,
+  howToAppealBTemplate,
+  howToAppealScFirstOrSecondTemplate,
+  howToAppealScThirdTemplate,
+  howToAppealTemplate,
+  howToAppealTractorTemplate,
+} from '../templates/appeal-your-test';
+import {signOffTemplate} from '../templates/sign-off';
+import {
+  importantInformationForHGVAndBusVocational3bTemplate,
+  importantInformationForHGVAndBusVocational4Template,
+  statementOfFailureVocational4,
+  vocationalIfYouWantToDriveTemplate3b,
+  vocationalIfYouWantToDriveTemplate4,
+} from '../templates/vocational-additional-info';
+import {
+  importantInfoForDriversB,
+  importantInfoForDriversSc,
+  importantInfoForDriversTractor,
+  importantInfoForNewDriversAdi3,
+  importantInfoForRiders,
+} from '../templates/info-for-new-drivers';
 
 export const passEnglishAdi2 =
-  `
-    ${headerTemplate}
-    ${passDrivingTemplate}
-    ${DrivingFaultsADI2Template}
-    ${EcoTemplate}
-    ${NextStepsADI2PassTemplate}
+   `${headerTemplate}
+    ${passDrivingAdi2Template}
+    ${drivingFaultsADI2Template}
+    ${ecoTemplate}
+    ${understandingAdi2PassResultTemplate}
+    ${nextStepsAdi2PassTemplate}
+    ${signOffTemplate}
     ${dataPrivacyTemplate}
-    `;
-
-export const passWelshAdi2 =
-  `
-    ${headerWelshTemplate}
-    ${passDrivingWelshTemplate}
-    ${DrivingFaultsADI2WelshTemplate}    
-    ${EcoWelshTemplate}    
-    ${NextStepsADI2PassWelshTemplate}    
-    ${dataPrivacyWelshTemplate}
     `;
 
 export const failEnglishAdi2 =
   `
     ${headerTemplate}
-    ${failDrivingTemplate}
+    ${failDrivingAdi2Template}
     ${etaTemplate}
-    ${DangerousFaultsTemplate}
-    ${SeriousFaultsTemplate}
-    ${DrivingFaultsADI2Template}
-    ${EcoTemplate}
-    ${NextStepsADI2FailTemplate}
+    ${dangerousFaultsTemplate}
+    ${seriousFaultsTemplate}
+    ${drivingFaultsADI2Template}
+    ${ecoTemplate}
+    ${understandingAdi2FailResultTemplate}
+    ${nextStepsADI2FailTemplate}
+    ${appealYourAdi2TestTemplate}
+    ${signOffTemplate}
     ${dataPrivacyTemplate}
     `;
 
-export const failWelshAdi2 =
-  `
-    ${headerWelshTemplate}
-    ${failDrivingWelshTemplate}
-    ${etaTemplateWelsh}
-    ${DangerousFaultsWelshTemplate}
-    ${SeriousFaultsWelshTemplate}
-    ${DrivingFaultsADI2WelshTemplate}
-    ${EcoWelshTemplate} 
-    ${NextStepsADI2FailWelshTemplate} 
-    ${dataPrivacyWelshTemplate}
-    `;
-
-export const otherEnglishAdi3 =
-  `
-    ${headerADITemplate}
-    ${adi3Template}
-    ${gradeTemplate}
-    ${scoreAdi3Template}
-    ${themeTemplate}
-    ${feedbackTemplate}
-    ${adi3ResultsTemplate}
+export const passEnglishAdi3 = `
+    ${headerTemplate}
+    ${passAdi3Template}
+    ${adi3GradeTemplate}
+    ${nextStepsAdi3PassTemplate}
+    ${importantInfoForNewDriversAdi3}
+    ${signOffTemplate}
     ${dataPrivacyTemplate}
-    `;
+`;
 
-export const otherWelshAdi3 =
-  `
-    ${otherEnglishAdi3}
-    `;
+export const failEnglishAdi3FirstOrSecondAttempt = `
+    ${headerTemplate}
+    ${failAdi3FirstOrSecondTemplate}
+    ${adi3FirstOrSecondGradeTemplate}
+    ${nextStepsAdi3FirstOrSecondFailTemplate}
+    ${howToAppealAdi3FirstOrSecondTemplate}
+    ${signOffTemplate}
+    ${dataPrivacyTemplate}
+`;
 
-export const passEnglishB =
+export const failEnglishAdi3ThirdAttempt = `
+    ${headerTemplate}
+    ${failAdi3ThirdTemplate}
+    ${adi3GradeTemplate}
+    ${nextStepsAdi3ThirdFailTemplate}
+    ${howToAppealAdi3ThirdTemplate}
+    ${signOffTemplate}
+    ${dataPrivacyTemplate}
+`;
+
+export const passEnglishSC = `
+    ${headerTemplate}
+    ${passSCTemplate}
+    ${scGradeTemplate}
+    ${importantInfoForDriversSc}
+    ${signOffTemplate}
+    ${dataPrivacyTemplate}
+`;
+
+export const failEnglishSCFirstOrSecondAttempt = `
+    ${headerTemplate}
+    ${failScFirstOrSecondTemplate}
+    ${scFirstOrSecondGradeTemplate}
+    ${nextStepsScFirstOrSecondTemplate}
+    ${howToAppealScFirstOrSecondTemplate}
+    ${signOffTemplate}
+    ${dataPrivacyTemplate}
+`;
+
+export const failEnglishScThirdAttempt = `
+    ${headerTemplate}
+    ${failScThirdTemplate}
+    ${scThirdGradeTemplate}
+    ${nextStepsScThirdTemplate}
+    ${howToAppealScThirdTemplate}
+    ${signOffTemplate}
+    ${dataPrivacyTemplate}
+`;
+
+export const passEnglishB = `
+    ${headerTemplate}
+    ${passDrivingBTemplate}
+    ${drivingFaultsTemplate}
+    ${ecoTemplate}
+    ${understandingBPassResultTemplate}
+    ${nextStepsPassBTemplate}
+    ${testExperienceSurveyBTemplate}
+    ${importantInfoForDriversB}
+    ${signOffTemplate}
+    ${dataPrivacyTemplate}
+`;
+
+export const failEnglishB = `
+    ${headerTemplate}
+    ${failDrivingBTemplate}
+    ${etaTemplate}
+    ${dangerousFaultsTemplate}
+    ${seriousFaultsTemplate}
+    ${drivingFaultsTemplate}
+    ${ecoTemplate}
+    ${understandingBFailResultTemplate}
+    ${nextStepsFailBTemplate}
+    ${testExperienceSurveyBTemplate}
+    ${statementOfFailureBTemplate}
+    ${howToAppealBTemplate}
+    ${signOffTemplate}
+    ${dataPrivacyTemplate}
+`;
+
+// UPDATED
+export const passEnglishVocational4 =
   `
     ${headerTemplate}
-    ${passDrivingTemplate}
-    ${DrivingFaultsTemplate}
-    ${EcoTemplate}
-    ${NextStepsPassTemplate}
-    ${improveYourDrivingTemplate}
-    ${testExperienceSurveyTemplate}
-    ${firstCarTemplate}
+    ${passVocational4Template}
+    ${vocationalScoringExplanation}
+    ${vocationalScoring}
+    ${vocationalIfYouWantToDriveTemplate4}
+    ${importantInformationForHGVAndBusVocational4Template}
+    ${signOffTemplate}
     ${dataPrivacyTemplate}
     `;
 
-export const passWelshB =
-  `
-    ${headerWelshTemplate}
-    ${passDrivingWelshTemplate}
-    ${DrivingFaultsWelshTemplate}    
-    ${EcoWelshTemplate}    
-    ${NextStepsPassWelshTemplate}    
-    ${improveYourDrivingWelshTemplate}
-    ${testExperienceSurveyWelshTemplate}
-    ${firstCarWelshTemplate}
-    ${dataPrivacyWelshTemplate}
-    `;
-
-export const failEnglishB =
+// UPDATED
+export const failEnglishVocational4 =
   `
     ${headerTemplate}
-    ${failDrivingTemplate}
-    ${etaTemplate}
-    ${DangerousFaultsTemplate}
-    ${SeriousFaultsTemplate}
-    ${DrivingFaultsTemplate}
-    ${EcoTemplate}
-    ${NextStepsFailTemplate}
-    ${StatementOfFailureTemplate}
-    ${testExperienceSurveyTemplate}
-    ${firstCarTemplate}
+    ${failVocational4Template}
+    ${vocationalScoringExplanation}
+    ${vocationalScoring}
+    ${statementOfFailureVocational4}
+    ${signOffTemplate}
+    ${dataPrivacyTemplate}
+    `;
+// UPDATED
+export const passEnglishVocational3a =
+    `
+    ${headerTemplate}
+    ${passVocational3bTemplate}
+    ${drivingFaultsTemplate}
+    ${ecoTemplate3b}
+    ${understanding3BPassResultTemplate}
+    ${NextStepsPass3aTemplate}
+    ${signOffTemplate}
     ${dataPrivacyTemplate}
     `;
 
-export const failWelshB =
+// UPDATED
+export const failEnglishTractor =
   `
-    ${headerWelshTemplate}
-    ${failDrivingWelshTemplate}
-    ${etaTemplateWelsh}
-    ${DangerousFaultsWelshTemplate}
-    ${SeriousFaultsWelshTemplate}
-    ${DrivingFaultsWelshTemplate}
-    ${EcoWelshTemplate} 
-    ${NextStepsFailWelshTemplate} 
-    ${StatementOfFailureWelshTemplate} 
-    ${testExperienceSurveyWelshTemplate}
-    ${firstCarWelshTemplate}    
-    ${dataPrivacyWelshTemplate}
+    ${headerTemplate}
+    ${failTractorTemplate}
+    ${etaTemplate}
+    ${dangerousFaultsTemplate}
+    ${seriousFaultsTemplate}
+    ${drivingFaultsTemplate}
+    ${ecoTemplateTractor}
+    ${understandingTractorResultTemplate}
+    ${statementOfFailureTemplate}
+    ${howToAppealTractorTemplate}
+    ${signOffTemplate}
+    ${dataPrivacyTemplate}
+    `;
+
+// UPDATED
+export const passEnglishTractor =
+    `
+    ${headerTemplate}
+    ${passTractorTemplate}
+    ${drivingFaultsTractorTemplate}
+    ${ecoTemplateTractor}
+    ${understandingTractorResultTemplate}
+    ${NextStepsPass3aTemplate}
+    ${importantInfoForDriversTractor}
+    ${signOffTemplate}
+    ${dataPrivacyTemplate}
+    `;
+
+// UPDATED
+export const passEnglishMod2 =
+    `
+    ${headerTemplate}
+    ${passMod2Template}
+    ${ridingFaultTemplate}
+    ${ecoTemplateRider}
+    ${understandingMod2ResultTemplate}
+    ${nextStepsPassBTemplate}
+    ${testExperienceSurveyTemplate}
+    ${importantInfoForRiders}
+    ${signOffTemplate}
+    ${dataPrivacyTemplate}
+    `;
+
+// UPDATED
+export const failEnglishMod2 =
+    `
+    ${headerTemplate}
+    ${failMod2Template}
+    ${etaTemplate}
+    ${dangerousFaultsTemplate}
+    ${seriousFaultsTemplate}
+    ${ridingFaultTemplate}
+    ${ecoRidingTemplate}
+    ${understandingMod2ResultTemplate}
+    ${testExperienceSurveyTemplate}
+    ${statementOfFailureTemplate}
+    ${signOffTemplate}
+    ${dataPrivacyTemplate}
+    `;
+
+// UPDATED
+export const failEnglishVocational3a =
+    `
+    ${headerTemplate}
+    ${failVocational3bTemplate}
+    ${dangerousFaultsTemplate}
+    ${seriousFaultsTemplate}
+    ${understanding3aFailResultTemplate}
+    ${testExperienceSurveyTemplate3b}
+    ${statementOfFailureVocational3bTemplate}
+    ${howToAppealTemplate}
+    ${signOffTemplate}
+    ${dataPrivacyTemplate}
+    `;
+
+// UPDATED
+export const passEnglishVocational3b =
+    `
+    ${headerTemplate}
+    ${passVocational3bTemplate}
+    ${drivingFaultsTemplate}
+    ${ecoTemplate3b}
+    ${understanding3BPassResultTemplate}
+    ${NextStepsPass3bTemplate}
+    ${testExperienceSurveyTemplate3b}
+    ${vocationalIfYouWantToDriveTemplate3b}
+    ${importantInformationForHGVAndBusVocational3bTemplate}
+    ${signOffTemplate}
+    ${dataPrivacyTemplate}
+    `;
+
+// UPDATED
+export const failEnglishVocational3b =
+    `
+    ${headerTemplate}
+    ${failVocational3bTemplate}
+    ${etaTemplate}
+    ${dangerousFaultsTemplate}
+    ${seriousFaultsTemplate}
+    ${drivingFaultsTemplate}
+    ${ecoTemplate3b}
+    ${understanding3BFailResultTemplate}
+    ${testExperienceSurveyTemplate3b}
+    ${statementOfFailureVocational3bTemplate}
+    ${howToAppealTemplate}
+    ${signOffTemplate}
+    ${dataPrivacyTemplate}
     `;
 
 export const passEnglishVocational =
-  `
+    `
     ${headerTemplate}
     ${passDrivingTemplate}
     ${DrivingFaultsVocationalTemplate}
-    ${EcoTemplate}
+    ${ecoTemplate}
     ${NextStepsVocationalPassTemplate}
     ${improveYourDrivingVocationalManTemplate}
     ${testExperienceSurveyVocationalTemplate}
     ${dataPrivacyTemplate}
     `;
 
-export const passWelshVocational =
-  `
-    ${headerWelshTemplate}
-    ${passDrivingWelshTemplate}
-    ${DrivingFaultsVocationalWelshTemplate}    
-    ${EcoWelshTemplate}    
-    ${NextStepsVocationalPassWelshTemplate}    
-    ${improveYourDrivingVocationalManWelshTemplate}
-    ${dataPrivacyWelshTemplate}
-    `;
-
 export const failEnglishVocational =
-  `
+    `
     ${headerTemplate}
     ${failDrivingTemplate}
     ${etaTemplate}
-    ${DangerousFaultsTemplate}
-    ${SeriousFaultsTemplate}
+    ${dangerousFaultsTemplate}
+    ${seriousFaultsTemplate}
     ${DrivingFaultsVocationalTemplate}
-    ${EcoTemplate}
+    ${ecoTemplate}
     ${NextStepsVocationalFailTemplate}
     ${StatementOfFailureVocationalTemplate}
     ${testExperienceSurveyVocationalTemplate}
     ${dataPrivacyTemplate}
     `;
 
-export const failWelshVocational =
-  `
-    ${headerWelshTemplate}
-    ${failDrivingWelshTemplate}
-    ${etaTemplateWelsh}
-    ${DangerousFaultsWelshTemplate}
-    ${SeriousFaultsWelshTemplate}
-    ${DrivingFaultsVocationalWelshTemplate}
-    ${EcoWelshTemplate} 
-    ${NextStepsVocationalFailWelshTemplate} 
-    ${StatementOfFailureVocationalWelshTemplate} 
-    ${dataPrivacyWelshTemplate}
-    `;
-
-export const passEnglishMan =
-  `
-    ${headerManTemplate}
+export const failEnglishMod1 = `
     ${headerTemplate}
-    ${passDrivingTemplate}
-    ${NextStepsManPassTemplate}
-    ${improveYourDrivingVocationalManTemplate}
-    ${dataPrivacyTemplate}
-    `;
-
-export const passWelshMan =
-  `
-    ${headerManWelshTemplate}
-    ${headerWelshTemplate}
-    ${passDrivingWelshTemplate}
-    ${NextStepsManPassWelshTemplate}    
-    ${improveYourDrivingVocationalManWelshTemplate}
-    ${dataPrivacyWelshTemplate}
-    `;
-
-export const failEnglishMan =
-  `
-    ${headerManTemplate}
-    ${headerTemplate}
-    ${failDrivingTemplate}
-    ${DangerousFaultsTemplate}
-    ${SeriousFaultsTemplate}
-    ${NextStepsManFailTemplate}
-    ${StatementOfFailureManTemplate}
-    ${dataPrivacyTemplate}
-    `;
-
-export const failWelshMan =
-  `
-    ${headerManWelshTemplate}
-    ${headerWelshTemplate}
-    ${failDrivingWelshTemplate}
-    ${DangerousFaultsWelshTemplate}
-    ${SeriousFaultsWelshTemplate}
-    ${NextStepsManFailWelshTemplate} 
-    ${StatementOfFailureManWelshTemplate} 
-    ${dataPrivacyWelshTemplate}
-    `;
-
-export const passEnglishCpc =
-  `
-    ${headerCpcTemplate}
-    ${passCpcTemplate}
-    ${scoreCpcEnglishTemplate}
-    ${cpcAbilityToLoadEnglishTemplate}
-    ${cpcSecurityEnglishTemplate}
-    ${cpcAbilityToPreventCriminalityEnglishTemplate}
-    ${cpcAbilityToAssessEmergencyEnglishTemplate}
-    ${cpcAbilityToPreventPhysicalRiskEnglishTemplate}
-    ${NextStepsCpcPassTemplate}
-    ${dataPrivacyTemplate}
-    `;
-
-export const passWelshCpc =
-  `
-    ${headerCpcWelshTemplate}
-    ${passCpcWelshTemplate}
-    ${scoreCpcWelshTemplate}
-    ${cpcAbilityToLoadWelshTemplate}
-    ${cpcSecurityWelshTemplate}
-    ${cpcAbilityToPreventCriminalityWelshTemplate}
-    ${cpcAbilityToAssessEmergencyWelshTemplate}
-    ${cpcAbilityToPreventPhysicalRiskWelshTemplate}
-    ${NextStepsCpcPassWelshTemplate}    
-    ${dataPrivacyWelshTemplate}
-    `;
-
-export const failEnglishCpc =
-  `
-    ${headerCpcTemplate}
-    ${failCpcTemplate}
-    ${scoreCpcFailEnglishTemplate}
-    ${cpcAbilityToLoadEnglishTemplate}
-    ${cpcSecurityEnglishTemplate}
-    ${cpcAbilityToPreventCriminalityEnglishTemplate}
-    ${cpcAbilityToAssessEmergencyEnglishTemplate}
-    ${cpcAbilityToPreventPhysicalRiskEnglishTemplate}
-    ${NextStepsCpcFailTemplate}
-    ${StatementOfFailureCpcTemplate}
-    ${dataPrivacyTemplate}
-    `;
-
-export const failWelshCpc =
-  `
-    ${headerCpcWelshTemplate}
-    ${failCpcWelshTemplate}
-    ${scoreCpcFailWelshTemplate}
-    ${cpcAbilityToLoadWelshTemplate}
-    ${cpcSecurityWelshTemplate}
-    ${cpcAbilityToPreventCriminalityWelshTemplate}
-    ${cpcAbilityToAssessEmergencyWelshTemplate}
-    ${cpcAbilityToPreventPhysicalRiskWelshTemplate}
-    ${NextStepsCpcFailWelshTemplate} 
-    ${StatementOfFailureCpcWelshTemplate} 
-    ${dataPrivacyWelshTemplate}
-    `;
-
-export const passEnglishHome =
-  `
-    ${headerTemplate}
-    ${passDrivingTemplate}
-    ${DrivingFaultsHomeTemplate}
-    ${EcoTemplate}
-    ${NextStepsHomePassTemplate}
-    ${dataPrivacyTemplate}
-    `;
-
-export const passWelshHome =
-  `
-    ${headerWelshTemplate}
-    ${passDrivingWelshTemplate}
-    ${DrivingFaultsHomeWelshTemplate}    
-    ${EcoWelshTemplate}    
-    ${NextStepsHomePassWelshTemplate}    
-    ${dataPrivacyWelshTemplate}
-    `;
-
-export const failEnglishHome =
-  `
-    ${headerTemplate}
-    ${failDrivingTemplate}
+    ${failAMod1Template}
     ${etaTemplate}
-    ${DangerousFaultsTemplate}
-    ${SeriousFaultsTemplate}
-    ${DrivingFaultsHomeTemplate}
-    ${EcoTemplate}
-    ${NextStepsFailTemplate}
-    ${StatementOfFailureTemplate}
+    ${dangerousFaultsTemplate}
+    ${seriousFaultsTemplate}
+    ${ridingFaultTemplate}
+    ${emergencyStopTemplate}
+    ${avoidanceExerciseTemplate}
+    ${ecoRidingTemplate}
+    ${understandingMod1ResultTemplate}
+    ${testExperienceSurveyRidingTemplate}
+    ${statementOfFailureMod1Template}
+    ${signOffTemplate}
     ${dataPrivacyTemplate}
-    `;
-
-export const failWelshHome =
-  `
-    ${headerWelshTemplate}
-    ${failDrivingWelshTemplate}
-    ${etaTemplateWelsh}
-    ${DangerousFaultsWelshTemplate}
-    ${SeriousFaultsWelshTemplate}
-    ${DrivingFaultsHomeWelshTemplate}
-    ${EcoWelshTemplate} 
-    ${NextStepsFailWelshTemplate} 
-    ${StatementOfFailureWelshTemplate} 
-    ${dataPrivacyWelshTemplate}
-    `;
+`;
 
 /**
  * Select subject based upon category & language
@@ -604,48 +464,22 @@ export function subjectMapper(category: TestCategory, language: Language, padi?:
  * @param padi
  */
 export function templateMapper(testOutcome: TestOutcome, category: TestCategory, language: Language, padi?: boolean) {
+  console.log('testOutcome:', testOutcome);
+  console.log('category:', category);
+  console.log('language:', language);
   const testType = padi ? 'padi' : getCategoryType(category);
   const outcome = isADI3Category(category) ? TestOutcome.OTHER : testOutcome;
   return (templates as Record<string, string>)[`${outcome}${language}${testType}`] || '';
 }
 
 const templates = {
-  passEnglishAMod1,
-  passWelshAMod1,
-  failEnglishAMod1,
-  failWelshAMod1,
-  passEnglishAMod2,
-  passWelshAMod2,
-  failEnglishAMod2,
-  failWelshAMod2,
   passEnglishAdi2,
-  passWelshAdi2,
   failEnglishAdi2,
-  failWelshAdi2,
-  otherEnglishAdi3,
-  otherWelshAdi3,
-  otherEnglishpadi,
-  otherWelshpadi,
-  passEnglishB,
-  passWelshB,
-  failEnglishB,
-  failWelshB,
-  passEnglishVocational,
-  passWelshVocational,
+  passEnglishAdi3,
+  failEnglishAdi3FirstOrSecondAttempt,
+  failEnglishAdi3ThirdAttempt,
+  passEnglishVocational4,
   failEnglishVocational,
-  failWelshVocational,
-  passEnglishMan,
-  passWelshMan,
-  failEnglishMan,
-  failWelshMan,
-  passEnglishCpc,
-  passWelshCpc,
-  failEnglishCpc,
-  failWelshCpc,
-  passEnglishHome,
-  passWelshHome,
-  failEnglishHome,
-  failWelshHome,
 };
 
 const emailSubjects = {

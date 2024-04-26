@@ -1,9 +1,6 @@
 /* eslint-disable max-len */
 export const dataPrivacyTemplate = `
-# How we look after your data
-Driver and Vehicle Standards Agency (DVSA) collects, uses, stores and sometimes shares your personal information for the purpose of carrying out the driving test. Your personal information is protected by law. Find out more about how DVSA uses your personal information at https://www.gov.uk/dvsa/privacy
-
-Driver and Vehicle Standards Agency (DVSA)
+Find out how we collect, use and store your personal information at [www.gov.uk/dvsa/privacy](https://www.gov.uk/dvsa/privacy). 
 `;
 
 export const dataPrivacyWelshTemplate = `

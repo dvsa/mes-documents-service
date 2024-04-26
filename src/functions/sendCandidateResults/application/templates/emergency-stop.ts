@@ -1,4 +1,4 @@
-export const EmergencyStopTemplate = `
+export const emergencyStopTemplate = `
 # Emergency stop
 First attempt: {{ emergencyFirstAttempt }}
 {{#if showEmergencySecondAttempt}}
@@ -7,7 +7,7 @@ Second attempt: {{ emergencySecondAttempt }}
 {{/if}}
 `;
 
-export const EmergencyStopTemplateWelshTemplate = `
+export const emergencyStopTemplateWelshTemplate = `
 # Stop argyfwng
 Ymgais gyntaf: {{ emergencyFirstAttempt }}
 {{#if showEmergencySecondAttempt}}
