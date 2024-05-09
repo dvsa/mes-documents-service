@@ -1,7 +1,7 @@
-import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
-import { CategoryCode } from '@dvsa/mes-test-schema/categories/common';
-import { TestType } from '../../domain/template-id.model';
-import { CategoryType } from '../../domain/category-type';
+import {TestCategory} from '@dvsa/mes-test-schema/category-definitions/common/test-category';
+import {CategoryCode} from '@dvsa/mes-test-schema/categories/common';
+import {TestType} from '../../domain/template-id.model';
+import {CategoryType} from '../../domain/category-type';
 
 /**
  * Determine if test was performed on a bike for labeling
@@ -62,8 +62,9 @@ export function getCategoryType(category: TestCategory): TestType {
   case TestCategory.ADI2:
     return TestType.ADI2;
   case TestCategory.ADI3:
-  case TestCategory.SC:
     return TestType.ADI3;
+  case TestCategory.SC:
+    return TestType.SC;
   case TestCategory.B:
     return TestType.B;
   case TestCategory.C:

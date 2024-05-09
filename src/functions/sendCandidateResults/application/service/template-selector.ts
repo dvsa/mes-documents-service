@@ -1,53 +1,23 @@
-import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
-import { Language } from '../../domain/conducted-language';
-import { headerTemplate } from '../templates/header';
+import {TestCategory} from '@dvsa/mes-test-schema/category-definitions/common/test-category';
+import {Language} from '../../domain/conducted-language';
+import {headerTemplate} from '../templates/header';
+import { failResultTemplate, passResultTemplate } from '../templates/result-summary';
 import {
-  failAdi3FirstOrSecondTemplate,
-  failAdi3ThirdTemplate, failAMod1Template,
-  failDrivingAdi2Template, failDrivingBTemplate,
-  failDrivingTemplate,
-  failMod2Template,
-  failScFirstOrSecondTemplate, failScThirdTemplate, failTractorTemplate,
-  failVocational3bTemplate,
-  failVocational4Template,
-  passAdi3Template,
-  passDrivingAdi2Template, passDrivingBTemplate,
-  passDrivingTemplate,
-  passMod2Template,
-  passSCTemplate,
-  passTractorTemplate,
-  passVocational3bTemplate,
-  passVocational4Template,
-} from '../templates/result-summary';
-import { improveYourDrivingVocationalManTemplate } from '../templates/improve-your-driving';
-import {
-  testExperienceSurveyBTemplate,
   testExperienceSurveyRidingTemplate,
   testExperienceSurveyTemplate,
   testExperienceSurveyTemplate3b,
-  testExperienceSurveyVocationalTemplate,
 } from '../templates/test-experience-survey';
-import { dataPrivacyTemplate } from '../templates/data-privacy';
-import { TestOutcome } from '../../domain/test-outcome';
-import { etaTemplate } from '../templates/eta';
-import { dangerousFaultsTemplate } from '../templates/dangerous-faults';
-import { seriousFaultsTemplate } from '../templates/serious-faults';
+import {dataPrivacyTemplate} from '../templates/data-privacy';
+import {TestOutcome} from '../../domain/test-outcome';
+import {etaTemplate} from '../templates/eta';
+import {dangerousFaultsTemplate} from '../templates/dangerous-faults';
+import {seriousFaultsTemplate} from '../templates/serious-faults';
 import {
-  drivingFaultsADI2Template,
   drivingFaultsTemplate,
-  drivingFaultsTractorTemplate,
-  DrivingFaultsVocationalTemplate,
   ridingFaultTemplate,
   vocationalScoring,
   vocationalScoringExplanation,
 } from '../templates/driving-faults';
-import {
-  ecoRidingTemplate,
-  ecoTemplate,
-  ecoTemplate3b,
-  ecoTemplateRider,
-  ecoTemplateTractor,
-} from '../templates/eco';
 import {
   nextStepsADI2FailTemplate,
   nextStepsAdi2PassTemplate,
@@ -55,15 +25,14 @@ import {
   nextStepsAdi3PassTemplate,
   nextStepsAdi3ThirdFailTemplate,
   nextStepsFailBTemplate,
+  nextStepsMod1PassTemplate,
   NextStepsPass3aTemplate,
-  NextStepsPass3bTemplate,
-  nextStepsPassBTemplate,
+  nextStepsDrivingTemplate,
+  nextStepsPassMod2Template,
   nextStepsScFirstOrSecondTemplate,
   nextStepsScThirdTemplate,
-  NextStepsVocationalFailTemplate,
-  NextStepsVocationalPassTemplate,
 } from '../templates/next-steps';
-import { getCategorySubject, getCategoryType, isADI3Category } from './category-provider';
+import {getCategorySubject, getCategoryType, isADI3Category} from './category-provider';
 import {
   adiEnglishSubject,
   adiWelshSubject,
@@ -76,46 +45,32 @@ import {
   ridingEnglishSubject,
   ridingWelshSubject,
 } from '../templates/email-subject';
-import {
-  emergencyStopTemplate,
-} from '../templates/emergency-stop';
-import {
-  avoidanceExerciseTemplate,
-} from '../templates/avoidance-exercise';
-import {
-  adi3FirstOrSecondGradeTemplate,
-  adi3GradeTemplate,
-  scFirstOrSecondGradeTemplate,
-  scGradeTemplate,
-  scThirdGradeTemplate,
-} from '../templates/grade';
+import {emergencyStopTemplate} from '../templates/emergency-stop';
+import {avoidanceExerciseTemplate} from '../templates/avoidance-exercise';
+import {gradeTemplate} from '../templates/grade';
 import {
   statementOfFailureBTemplate,
   statementOfFailureMod1Template,
-  statementOfFailureTemplate,
+  statementOfFailureMod2Template,
+  statementOfFailureTractorTemplate,
   statementOfFailureVocational3bTemplate,
-  StatementOfFailureVocationalTemplate,
 } from '../templates/statement-of-failure';
 import {
-  understanding3aFailResultTemplate,
-  understanding3BFailResultTemplate,
-  understanding3BPassResultTemplate,
-  understandingAdi2FailResultTemplate,
-  understandingAdi2PassResultTemplate,
-  understandingBFailResultTemplate,
-  understandingBPassResultTemplate,
-  understandingMod1ResultTemplate,
-  understandingMod2ResultTemplate,
-  understandingTractorResultTemplate,
+  UrlDescriptors,
+  FailUrls,
+  PassUrls,
+  understandingResultTemplate,
 } from '../templates/understanding-your-result';
 import {
   appealYourAdi2TestTemplate,
+  howToAppeal3aTemplate,
+  howToAppeal3bTemplate,
+  howToAppeal4Template,
   howToAppealAdi3FirstOrSecondTemplate,
   howToAppealAdi3ThirdTemplate,
   howToAppealBTemplate,
   howToAppealScFirstOrSecondTemplate,
   howToAppealScThirdTemplate,
-  howToAppealTemplate,
   howToAppealTractorTemplate,
 } from '../templates/appeal-your-test';
 import {signOffTemplate} from '../templates/sign-off';
@@ -133,38 +88,42 @@ import {
   importantInfoForNewDriversAdi3,
   importantInfoForRiders,
 } from '../templates/info-for-new-drivers';
+import {ecoTemplate} from '../templates/eco';
 
+// ADI2
 export const passEnglishAdi2 =
-   `${headerTemplate}
-    ${passDrivingAdi2Template}
-    ${drivingFaultsADI2Template}
-    ${ecoTemplate}
-    ${understandingAdi2PassResultTemplate}
+    `
+    ${headerTemplate}
+    ${passResultTemplate('ADI part 2 (driving ability) test', TestCategory.ADI2)}
+    ${drivingFaultsTemplate}
+    ${ecoTemplate()}
+    ${understandingResultTemplate(UrlDescriptors.ADI2, PassUrls.ADI2)}
     ${nextStepsAdi2PassTemplate}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
     `;
 
 export const failEnglishAdi2 =
-  `
+    `
     ${headerTemplate}
-    ${failDrivingAdi2Template}
+    ${failResultTemplate('ADI part 2 (driving ability) test', TestCategory.ADI2)}
     ${etaTemplate}
     ${dangerousFaultsTemplate}
     ${seriousFaultsTemplate}
-    ${drivingFaultsADI2Template}
-    ${ecoTemplate}
-    ${understandingAdi2FailResultTemplate}
+    ${drivingFaultsTemplate}
+    ${ecoTemplate()}
+    ${understandingResultTemplate(UrlDescriptors.ADI2, FailUrls.ADI2, true)}
     ${nextStepsADI2FailTemplate}
     ${appealYourAdi2TestTemplate}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
     `;
 
+// ADI3
 export const passEnglishAdi3 = `
     ${headerTemplate}
-    ${passAdi3Template}
-    ${adi3GradeTemplate}
+    ${passResultTemplate('', TestCategory.ADI3)}
+    ${gradeTemplate(false, false)}
     ${nextStepsAdi3PassTemplate}
     ${importantInfoForNewDriversAdi3}
     ${signOffTemplate}
@@ -173,8 +132,8 @@ export const passEnglishAdi3 = `
 
 export const failEnglishAdi3FirstOrSecondAttempt = `
     ${headerTemplate}
-    ${failAdi3FirstOrSecondTemplate}
-    ${adi3FirstOrSecondGradeTemplate}
+    ${failResultTemplate('ADI part 3 (instructional ability) test', TestCategory.ADI3)}
+    ${gradeTemplate(true, false)}
     ${nextStepsAdi3FirstOrSecondFailTemplate}
     ${howToAppealAdi3FirstOrSecondTemplate}
     ${signOffTemplate}
@@ -183,27 +142,28 @@ export const failEnglishAdi3FirstOrSecondAttempt = `
 
 export const failEnglishAdi3ThirdAttempt = `
     ${headerTemplate}
-    ${failAdi3ThirdTemplate}
-    ${adi3GradeTemplate}
+    ${failResultTemplate('ADI part 3 (instructional ability) test', TestCategory.ADI3, true)}
+    ${gradeTemplate(true, false)}
     ${nextStepsAdi3ThirdFailTemplate}
     ${howToAppealAdi3ThirdTemplate}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
 `;
 
-export const passEnglishSC = `
+// SC
+export const passEnglishSc = `
     ${headerTemplate}
-    ${passSCTemplate}
-    ${scGradeTemplate}
+    ${passResultTemplate('', TestCategory.SC)}
+    ${gradeTemplate(false, true)}
     ${importantInfoForDriversSc}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
 `;
 
-export const failEnglishSCFirstOrSecondAttempt = `
+export const failEnglishScFirstOrSecondAttempt = `
     ${headerTemplate}
-    ${failScFirstOrSecondTemplate}
-    ${scFirstOrSecondGradeTemplate}
+    ${failResultTemplate('ADI standards check', TestCategory.SC)}
+    ${gradeTemplate(true, true)}
     ${nextStepsScFirstOrSecondTemplate}
     ${howToAppealScFirstOrSecondTemplate}
     ${signOffTemplate}
@@ -212,22 +172,23 @@ export const failEnglishSCFirstOrSecondAttempt = `
 
 export const failEnglishScThirdAttempt = `
     ${headerTemplate}
-    ${failScThirdTemplate}
-    ${scThirdGradeTemplate}
+    ${failResultTemplate('ADI standards check', TestCategory.SC, true)}
+    ${gradeTemplate(true, true)}
     ${nextStepsScThirdTemplate}
     ${howToAppealScThirdTemplate}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
 `;
 
+// B
 export const passEnglishB = `
     ${headerTemplate}
-    ${passDrivingBTemplate}
+    ${passResultTemplate('car driving test', TestCategory.B)}
     ${drivingFaultsTemplate}
-    ${ecoTemplate}
-    ${understandingBPassResultTemplate}
-    ${nextStepsPassBTemplate}
-    ${testExperienceSurveyBTemplate}
+    ${ecoTemplate()}
+    ${understandingResultTemplate(UrlDescriptors.DRIVING, PassUrls.B)}
+    ${nextStepsDrivingTemplate}
+    ${testExperienceSurveyTemplate}
     ${importantInfoForDriversB}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
@@ -235,26 +196,175 @@ export const passEnglishB = `
 
 export const failEnglishB = `
     ${headerTemplate}
-    ${failDrivingBTemplate}
+    ${failResultTemplate('car driving test', TestCategory.B)}
     ${etaTemplate}
     ${dangerousFaultsTemplate}
     ${seriousFaultsTemplate}
     ${drivingFaultsTemplate}
-    ${ecoTemplate}
-    ${understandingBFailResultTemplate}
+    ${ecoTemplate()}
+    ${understandingResultTemplate(UrlDescriptors.DRIVING, FailUrls.B, true)}
     ${nextStepsFailBTemplate}
-    ${testExperienceSurveyBTemplate}
+    ${testExperienceSurveyTemplate}
     ${statementOfFailureBTemplate}
     ${howToAppealBTemplate}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
 `;
 
-// UPDATED
-export const passEnglishVocational4 =
-  `
+// MOD1
+export const passEnglishAMod1 = `
     ${headerTemplate}
-    ${passVocational4Template}
+    ${passResultTemplate('motorcycle module 1 (off-road) test', TestCategory.EUAM1)}
+    ${ridingFaultTemplate}
+    ${emergencyStopTemplate}
+    ${avoidanceExerciseTemplate}
+    ${ecoTemplate(true)}
+    ${understandingResultTemplate(UrlDescriptors.RIDING, PassUrls.MOD1)}
+    ${nextStepsMod1PassTemplate}
+    ${testExperienceSurveyRidingTemplate}
+    ${signOffTemplate}
+    ${dataPrivacyTemplate}
+`;
+
+export const failEnglishMod1 = `
+    ${headerTemplate}
+    ${failResultTemplate('motorcycle module 1 (off-road) test', TestCategory.EUAM1)}
+    ${etaTemplate}
+    ${dangerousFaultsTemplate}
+    ${seriousFaultsTemplate}
+    ${ridingFaultTemplate}
+    ${emergencyStopTemplate}
+    ${avoidanceExerciseTemplate}
+    ${ecoTemplate(true)}
+    ${understandingResultTemplate(UrlDescriptors.RIDING, FailUrls.MOD1, true)}
+    ${testExperienceSurveyRidingTemplate}
+    ${statementOfFailureMod1Template}
+    ${signOffTemplate}
+    ${dataPrivacyTemplate}
+`;
+
+// MOD2
+export const passEnglishAMod2 =
+    `
+    ${headerTemplate}
+    ${passResultTemplate('motorcycle module 2 (on-road) test', TestCategory.EUAM2)}
+    ${ridingFaultTemplate}
+    ${ecoTemplate(true)}
+    ${understandingResultTemplate(UrlDescriptors.RIDING, PassUrls.MOD2)}
+    ${nextStepsPassMod2Template}
+    ${testExperienceSurveyRidingTemplate}
+    ${importantInfoForRiders}
+    ${signOffTemplate}
+    ${dataPrivacyTemplate}
+    `;
+
+export const failEnglishAMod2 =
+    `
+    ${headerTemplate}
+    ${failResultTemplate('motorcycle module 2 (on-road) test', TestCategory.EUAM2)}
+    ${etaTemplate}
+    ${dangerousFaultsTemplate}
+    ${seriousFaultsTemplate}
+    ${ridingFaultTemplate}
+    ${ecoTemplate(true)}
+    ${understandingResultTemplate(UrlDescriptors.RIDING, FailUrls.MOD2, true)}
+    ${testExperienceSurveyRidingTemplate}
+    ${statementOfFailureMod2Template}
+    ${signOffTemplate}
+    ${dataPrivacyTemplate}
+    `;
+
+// Tractor
+export const passEnglishHome =
+    `
+    ${headerTemplate}
+    ${passResultTemplate('tractor or specialist vehicle driving test', TestCategory.F)}
+    ${drivingFaultsTemplate}
+    ${ecoTemplate()}
+    ${understandingResultTemplate(UrlDescriptors.DRIVING, PassUrls.TRACTOR)}
+    ${nextStepsDrivingTemplate}
+    ${importantInfoForDriversTractor}
+    ${signOffTemplate}
+    ${dataPrivacyTemplate}
+    `;
+
+export const failEnglishHome =
+    `
+    ${headerTemplate}
+    ${failResultTemplate('Tractor or specialist vehicle driving test', TestCategory.F)}
+    ${etaTemplate}
+    ${dangerousFaultsTemplate}
+    ${seriousFaultsTemplate}
+    ${drivingFaultsTemplate}
+    ${ecoTemplate()}
+    ${understandingResultTemplate(UrlDescriptors.DRIVING, FailUrls.TRACTOR, true)}
+    ${statementOfFailureTractorTemplate}
+    ${howToAppealTractorTemplate}
+    ${signOffTemplate}
+    ${dataPrivacyTemplate}
+    `;
+
+// Manoeuvres
+export const passEnglishMan =
+    `
+    ${headerTemplate}
+    ${passResultTemplate('Driver CPC part 3a (off-road exercises) test', TestCategory.C1M)}
+    ${NextStepsPass3aTemplate}
+    ${signOffTemplate}
+    ${dataPrivacyTemplate}
+    `;
+
+export const failEnglishMan =
+    `
+    ${headerTemplate}
+    ${failResultTemplate('Driver CPC part 3a (off-road exercises) test', TestCategory.C1M)}
+    ${dangerousFaultsTemplate}
+    ${seriousFaultsTemplate}
+    ${understandingResultTemplate(UrlDescriptors.DRIVING, FailUrls.MANOEUVRES, true)}
+    ${statementOfFailureVocational3bTemplate}
+    ${howToAppeal3aTemplate}
+    ${signOffTemplate}
+    ${dataPrivacyTemplate}
+    `;
+
+// Vocational
+export const passEnglishVocational =
+    `
+    ${headerTemplate}
+    ${passResultTemplate('Driver CPC part 3b (on-road driving) test', TestCategory.C)}
+    ${drivingFaultsTemplate}
+    ${ecoTemplate()}
+    ${understandingResultTemplate(UrlDescriptors.DRIVING, PassUrls.VOCATIONAL)}
+    ${nextStepsDrivingTemplate}
+    ${testExperienceSurveyTemplate3b}
+    ${vocationalIfYouWantToDriveTemplate3b}
+    ${importantInformationForHGVAndBusVocational3bTemplate}
+    ${signOffTemplate}
+    ${dataPrivacyTemplate}
+    `;
+
+export const failEnglishVocational =
+    `
+    ${headerTemplate}
+    ${failResultTemplate('Driver CPC part 3b (on-road driving) test', TestCategory.C)}
+    ${etaTemplate}
+    ${dangerousFaultsTemplate}
+    ${seriousFaultsTemplate}
+    ${drivingFaultsTemplate}
+    ${ecoTemplate()}
+    ${understandingResultTemplate(UrlDescriptors.DRIVING, FailUrls.VOCATIONAL, true)}
+    ${testExperienceSurveyTemplate3b}
+    ${statementOfFailureVocational3bTemplate}
+    ${howToAppeal3bTemplate}
+    ${signOffTemplate}
+    ${dataPrivacyTemplate}
+    `;
+
+// CPC
+export const passEnglishCpc =
+    `
+    ${headerTemplate}
+    ${passResultTemplate('Driver CPC part 4 (practical demonstration) test', TestCategory.CCPC)}
     ${vocationalScoringExplanation}
     ${vocationalScoring}
     ${vocationalIfYouWantToDriveTemplate4}
@@ -263,185 +373,17 @@ export const passEnglishVocational4 =
     ${dataPrivacyTemplate}
     `;
 
-// UPDATED
-export const failEnglishVocational4 =
-  `
+export const failEnglishCpc =
+    `
     ${headerTemplate}
-    ${failVocational4Template}
+    ${failResultTemplate('', TestCategory.CCPC)}
     ${vocationalScoringExplanation}
     ${vocationalScoring}
     ${statementOfFailureVocational4}
+    ${howToAppeal4Template}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
     `;
-// UPDATED
-export const passEnglishVocational3a =
-    `
-    ${headerTemplate}
-    ${passVocational3bTemplate}
-    ${drivingFaultsTemplate}
-    ${ecoTemplate3b}
-    ${understanding3BPassResultTemplate}
-    ${NextStepsPass3aTemplate}
-    ${signOffTemplate}
-    ${dataPrivacyTemplate}
-    `;
-
-// UPDATED
-export const failEnglishTractor =
-  `
-    ${headerTemplate}
-    ${failTractorTemplate}
-    ${etaTemplate}
-    ${dangerousFaultsTemplate}
-    ${seriousFaultsTemplate}
-    ${drivingFaultsTemplate}
-    ${ecoTemplateTractor}
-    ${understandingTractorResultTemplate}
-    ${statementOfFailureTemplate}
-    ${howToAppealTractorTemplate}
-    ${signOffTemplate}
-    ${dataPrivacyTemplate}
-    `;
-
-// UPDATED
-export const passEnglishTractor =
-    `
-    ${headerTemplate}
-    ${passTractorTemplate}
-    ${drivingFaultsTractorTemplate}
-    ${ecoTemplateTractor}
-    ${understandingTractorResultTemplate}
-    ${NextStepsPass3aTemplate}
-    ${importantInfoForDriversTractor}
-    ${signOffTemplate}
-    ${dataPrivacyTemplate}
-    `;
-
-// UPDATED
-export const passEnglishMod2 =
-    `
-    ${headerTemplate}
-    ${passMod2Template}
-    ${ridingFaultTemplate}
-    ${ecoTemplateRider}
-    ${understandingMod2ResultTemplate}
-    ${nextStepsPassBTemplate}
-    ${testExperienceSurveyTemplate}
-    ${importantInfoForRiders}
-    ${signOffTemplate}
-    ${dataPrivacyTemplate}
-    `;
-
-// UPDATED
-export const failEnglishMod2 =
-    `
-    ${headerTemplate}
-    ${failMod2Template}
-    ${etaTemplate}
-    ${dangerousFaultsTemplate}
-    ${seriousFaultsTemplate}
-    ${ridingFaultTemplate}
-    ${ecoRidingTemplate}
-    ${understandingMod2ResultTemplate}
-    ${testExperienceSurveyTemplate}
-    ${statementOfFailureTemplate}
-    ${signOffTemplate}
-    ${dataPrivacyTemplate}
-    `;
-
-// UPDATED
-export const failEnglishVocational3a =
-    `
-    ${headerTemplate}
-    ${failVocational3bTemplate}
-    ${dangerousFaultsTemplate}
-    ${seriousFaultsTemplate}
-    ${understanding3aFailResultTemplate}
-    ${testExperienceSurveyTemplate3b}
-    ${statementOfFailureVocational3bTemplate}
-    ${howToAppealTemplate}
-    ${signOffTemplate}
-    ${dataPrivacyTemplate}
-    `;
-
-// UPDATED
-export const passEnglishVocational3b =
-    `
-    ${headerTemplate}
-    ${passVocational3bTemplate}
-    ${drivingFaultsTemplate}
-    ${ecoTemplate3b}
-    ${understanding3BPassResultTemplate}
-    ${NextStepsPass3bTemplate}
-    ${testExperienceSurveyTemplate3b}
-    ${vocationalIfYouWantToDriveTemplate3b}
-    ${importantInformationForHGVAndBusVocational3bTemplate}
-    ${signOffTemplate}
-    ${dataPrivacyTemplate}
-    `;
-
-// UPDATED
-export const failEnglishVocational3b =
-    `
-    ${headerTemplate}
-    ${failVocational3bTemplate}
-    ${etaTemplate}
-    ${dangerousFaultsTemplate}
-    ${seriousFaultsTemplate}
-    ${drivingFaultsTemplate}
-    ${ecoTemplate3b}
-    ${understanding3BFailResultTemplate}
-    ${testExperienceSurveyTemplate3b}
-    ${statementOfFailureVocational3bTemplate}
-    ${howToAppealTemplate}
-    ${signOffTemplate}
-    ${dataPrivacyTemplate}
-    `;
-
-export const passEnglishVocational =
-    `
-    ${headerTemplate}
-    ${passDrivingTemplate}
-    ${DrivingFaultsVocationalTemplate}
-    ${ecoTemplate}
-    ${NextStepsVocationalPassTemplate}
-    ${improveYourDrivingVocationalManTemplate}
-    ${testExperienceSurveyVocationalTemplate}
-    ${dataPrivacyTemplate}
-    `;
-
-export const failEnglishVocational =
-    `
-    ${headerTemplate}
-    ${failDrivingTemplate}
-    ${etaTemplate}
-    ${dangerousFaultsTemplate}
-    ${seriousFaultsTemplate}
-    ${DrivingFaultsVocationalTemplate}
-    ${ecoTemplate}
-    ${NextStepsVocationalFailTemplate}
-    ${StatementOfFailureVocationalTemplate}
-    ${testExperienceSurveyVocationalTemplate}
-    ${dataPrivacyTemplate}
-    `;
-
-export const failEnglishMod1 = `
-    ${headerTemplate}
-    ${failAMod1Template}
-    ${etaTemplate}
-    ${dangerousFaultsTemplate}
-    ${seriousFaultsTemplate}
-    ${ridingFaultTemplate}
-    ${emergencyStopTemplate}
-    ${avoidanceExerciseTemplate}
-    ${ecoRidingTemplate}
-    ${understandingMod1ResultTemplate}
-    ${testExperienceSurveyRidingTemplate}
-    ${statementOfFailureMod1Template}
-    ${signOffTemplate}
-    ${dataPrivacyTemplate}
-`;
 
 /**
  * Select subject based upon category & language
@@ -462,14 +404,23 @@ export function subjectMapper(category: TestCategory, language: Language, padi?:
  * @param category
  * @param language
  * @param padi
+ * @param previousAttempts
  */
-export function templateMapper(testOutcome: TestOutcome, category: TestCategory, language: Language, padi?: boolean) {
-  console.log('testOutcome:', testOutcome);
-  console.log('category:', category);
-  console.log('language:', language);
+// eslint-disable-next-line max-len
+export function templateMapper(testOutcome: TestOutcome, category: TestCategory, language: Language, padi?: boolean, previousAttempts?: number) {
   const testType = padi ? 'padi' : getCategoryType(category);
-  const outcome = isADI3Category(category) ? TestOutcome.OTHER : testOutcome;
-  return (templates as Record<string, string>)[`${outcome}${language}${testType}`] || '';
+  let previousAttemptsText: string = '';
+  if (isADI3Category(category) && testOutcome === 'fail') {
+    if (previousAttempts && previousAttempts > 1) {
+      previousAttemptsText = 'ThirdAttempt';
+    } else previousAttemptsText = 'FirstOrSecondAttempt';
+  }
+  ;
+  console.log('========================================');
+  console.log('template identifier string:', `${testOutcome}${language}${testType}${previousAttemptsText}`);
+  // console.log('Template:', (templates as Record<string, string>)['failEnglishAdi3FirstOrSecondAttempt']);
+  console.log('========================================');
+  return (templates as Record<string, string>)[`${testOutcome}${language}${testType}${previousAttemptsText}`];
 }
 
 const templates = {
@@ -478,8 +429,23 @@ const templates = {
   passEnglishAdi3,
   failEnglishAdi3FirstOrSecondAttempt,
   failEnglishAdi3ThirdAttempt,
-  passEnglishVocational4,
+  passEnglishSc,
+  failEnglishScFirstOrSecondAttempt,
+  failEnglishScThirdAttempt,
+  passEnglishB,
+  failEnglishB,
+  passEnglishAMod1,
+  failEnglishMod1,
+  passEnglishAMod2,
+  failEnglishAMod2,
+  passEnglishHome,
+  failEnglishHome,
+  passEnglishMan,
+  failEnglishMan,
+  passEnglishVocational,
   failEnglishVocational,
+  passEnglishCpc,
+  failEnglishCpc,
 };
 
 const emailSubjects = {

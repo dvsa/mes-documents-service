@@ -41,6 +41,7 @@ export interface CatADI3CustomProperties extends CustomProperties {
   result: string;
   feedback: string;
   prn: string;
+  previousAttempts: number;
   categoryDescriptor: string;
   code4: boolean;
   RMFail: boolean;
@@ -51,7 +52,8 @@ export const getCustomPropertiesCatADI3 = (
   testData: TestData | undefined,
   activityCode: ActivityCode,
   prn: string,
-  category: CategoryCode
+  category: CategoryCode,
+  previousAttempts: number
 ): CatADI3CustomProperties => {
   if (!testData) {
     throw new Error('No Test Data');
@@ -101,5 +103,6 @@ export const getCustomPropertiesCatADI3 = (
     feedback: get(testData, 'review.feedback', ''),
     positionType: (category === TestCategory.SC) ? PositionText.ON : PositionText.IN,
     prn,
+    previousAttempts,
   };
 };

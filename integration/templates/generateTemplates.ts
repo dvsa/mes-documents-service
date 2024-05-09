@@ -1,14 +1,30 @@
 import * as markdownIt from 'markdown-it';
 import * as pdf from 'html-pdf';
 
-import { getRenderedText } from "../../src/functions/sendCandidateResults/application/service/send-notification";
-import { TestOutcome } from "../../src/functions/sendCandidateResults/domain/test-outcome";
-import { Language } from "../../src/functions/sendCandidateResults/domain/conducted-language";
+import {getRenderedText} from "../../src/functions/sendCandidateResults/application/service/send-notification";
+import {TestOutcome} from "../../src/functions/sendCandidateResults/domain/test-outcome";
+import {Language} from "../../src/functions/sendCandidateResults/domain/conducted-language";
 import {
-  personalisationCatADI2Pass,
   personalisationCatADI2Fail,
+  personalisationCatADI2Pass,
+  personalisationCatADI3FailFirstOrSecond,
+  personalisationCatADI3FailThird,
   personalisationCatADI3Pass,
-  personalisationCatADI3Fail,
+  personalisationCatBFail,
+  personalisationCatBPass,
+  personalisationCatMod1Fail,
+  personalisationCatMod1Pass,
+  personalisationCatMod2Fail,
+  personalisationCatMod2Pass,
+  personalisationCatSCFailFirstOrSecond,
+  personalisationCatSCFailThird,
+  personalisationCatSCPass, personalisationTractorFail, personalisationTractorPass,
+  personalisationVocational3aFail,
+  personalisationVocational3aPass,
+  personalisationVocational3bFail,
+  personalisationVocational3bPass,
+  personalisationVocational4Fail,
+  personalisationVocational4Pass,
 } from "../../src/functions/sendCandidateResults/application/service/__mocks__/personalisation-details";
 
 const templates = [];
@@ -31,19 +47,89 @@ templates.push(
   },
   {
     filename: 'adi3FailEnglishFirstOrSecond',
-    markdown: getRenderedText(TestOutcome.FAIL, personalisationCatADI3Fail, Language.ENGLISH, false)
+    markdown: getRenderedText(TestOutcome.FAIL, personalisationCatADI3FailFirstOrSecond, Language.ENGLISH, false)
   },
   {
     filename: 'adi3FailEnglishThird',
-    markdown: getRenderedText(TestOutcome.FAIL, personalisationCatADI3Fail, Language.ENGLISH, false)
+    markdown: getRenderedText(TestOutcome.FAIL, personalisationCatADI3FailThird, Language.ENGLISH, false)
+  },
+  // SC
+  {
+    filename: 'scPassEnglish',
+    markdown: getRenderedText(TestOutcome.PASS, personalisationCatSCPass, Language.ENGLISH, false)
+  },
+  {
+    filename: 'scFailEnglishFirstOrSecond',
+    markdown: getRenderedText(TestOutcome.FAIL, personalisationCatSCFailFirstOrSecond, Language.ENGLISH, false)
+  },
+  {
+    filename: 'scFailEnglishThird',
+    markdown: getRenderedText(TestOutcome.FAIL, personalisationCatSCFailThird, Language.ENGLISH, false)
+  },
+  // B
+  {
+    filename: 'bPassEnglish',
+    markdown: getRenderedText(TestOutcome.PASS, personalisationCatBPass, Language.ENGLISH, false)
+  },
+  {
+    filename: 'bFailEnglish',
+    markdown: getRenderedText(TestOutcome.FAIL, personalisationCatBFail, Language.ENGLISH, false)
+  },
+  // Mod1
+  {
+    filename: 'AMod1PassEnglish',
+    markdown: getRenderedText(TestOutcome.PASS, personalisationCatMod1Pass, Language.ENGLISH, false)
+  },
+  {
+    filename: 'AMod1FailEnglish',
+    markdown: getRenderedText(TestOutcome.FAIL, personalisationCatMod1Fail, Language.ENGLISH, false)
+  },
+  // Mod2
+  {
+    filename: 'AMod2PassEnglish',
+    markdown: getRenderedText(TestOutcome.PASS, personalisationCatMod2Pass, Language.ENGLISH, false)
+  },
+  {
+    filename: 'AMod2FailEnglish',
+    markdown: getRenderedText(TestOutcome.FAIL, personalisationCatMod2Fail, Language.ENGLISH, false)
+  },
+  // Tractor
+  {
+   filename: 'tractorPassEnglish',
+   markdown: getRenderedText(TestOutcome.PASS, personalisationTractorPass, Language.ENGLISH, false)
+  },
+  {
+    filename: 'tractorFailEnglish',
+    markdown: getRenderedText(TestOutcome.FAIL, personalisationTractorFail, Language.ENGLISH, false)
+  },
+  // Manoeuvres
+  {
+    filename: 'vocational3aPassEnglish',
+    markdown: getRenderedText(TestOutcome.PASS, personalisationVocational3aPass, Language.ENGLISH, false)
+  },
+  {
+    filename: 'vocational3aFailEnglish',
+    markdown: getRenderedText(TestOutcome.FAIL, personalisationVocational3aFail, Language.ENGLISH, false)
   },
   // Vocational
   {
+    filename: 'vocational3bPassEnglish',
+    markdown: getRenderedText(TestOutcome.PASS, personalisationVocational3bPass, Language.ENGLISH, false)
+  },
+  {
+    filename: 'vocational3bFailEnglish',
+    markdown: getRenderedText(TestOutcome.FAIL, personalisationVocational3bFail, Language.ENGLISH, false)
+  },
+  // CPC
+  {
     filename: 'vocational4PassEnglish',
-    markdown: getRenderedText(TestOutcome.FAIL, personalisationCatADI3Fail, Language.ENGLISH, false)
+    markdown: getRenderedText(TestOutcome.PASS, personalisationVocational4Pass, Language.ENGLISH, false)
+  },
+  {
+    filename: 'vocational4FailEnglish',
+    markdown: getRenderedText(TestOutcome.FAIL, personalisationVocational4Fail, Language.ENGLISH, false)
   },
 );
-
 
 templates.forEach((template: { filename: string; markdown: string | undefined; }) => {
     generatePdf(template.filename, template.markdown)
@@ -57,6 +143,9 @@ templates.forEach((template: { filename: string; markdown: string | undefined; }
  */
 function generatePdf(filename: string, template: string | undefined) {
   const md = markdownIt();
+  if(!template) {
+    console.log('fileName:', filename);
+  }
   const htmlContent = md.render(template as string);
   const outputFilePath = `integration/output/${filename}.pdf`;
   pdf.create(htmlContent).toFile(outputFilePath, (err: any, res: any) => {

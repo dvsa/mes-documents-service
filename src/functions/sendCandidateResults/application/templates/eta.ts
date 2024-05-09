@@ -12,18 +12,3 @@ During your test, your examiner had to take control of the vehicle to avoid an i
 
 {{/if}}
 `;
-
-export const etaTemplateWelsh = `
-{{#if showEtaText}}
-# Cymerodd eich arholwr gamau
-
-{{/if}}
-{{#if showEtaVerbal}}
-Yn ystod eich prawf roedd angen i’ch arholwr gymryd camau ar lafar.
-
-{{/if}}
-{{#if showEtaPhysical}}
-Yn ystod eich prawf roedd angen i’ch arholwr gymryd camau corfforol.
-
-{{/if}}
-`;

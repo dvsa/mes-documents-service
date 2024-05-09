@@ -7,13 +7,3 @@ export const dangerousFaultsTemplate = `
 
 {{/if}}
 `;
-
-export const DangerousFaultsWelshTemplate = `
-{{#if showDangerousFaults}}
-# Eich beiau peryglus:
-  {{#each dangerousFaults}}
-  - {{ this }}
-  {{/each}}
-
-{{/if}}
-`;

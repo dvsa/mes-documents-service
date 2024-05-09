@@ -1,14 +1,14 @@
-import { DocumentsServiceError } from '../../domain/errors/documents-service-error';
-import { Address, PersonalisationDetails } from '../../domain/personalisation.model';
-import { INotifyClient } from '../../domain/notify-client.interface';
-import { get, isNil, omitBy } from 'lodash';
-import { AxiosError } from 'axios';
+import {DocumentsServiceError} from '../../domain/errors/documents-service-error';
+import {Address, PersonalisationDetails} from '../../domain/personalisation.model';
+import {INotifyClient} from '../../domain/notify-client.interface';
+import {get, isNil, omitBy} from 'lodash';
+import {AxiosError} from 'axios';
 import * as Handlebars from 'handlebars';
-import { subjectMapper, templateMapper } from './template-selector';
-import { Language } from '../../domain/conducted-language';
-import { TestOutcome } from '../../domain/test-outcome';
-import { CommunicationMethod } from '@dvsa/mes-test-schema/categories/common';
-import { Correspondence } from '../../domain/template-id.model';
+import {subjectMapper, templateMapper} from './template-selector';
+import {Language} from '../../domain/conducted-language';
+import {TestOutcome} from '../../domain/test-outcome';
+import {CommunicationMethod} from '@dvsa/mes-test-schema/categories/common';
+import {Correspondence} from '../../domain/template-id.model';
 
 export interface Personalisation extends Partial<Address>{
   renderedSubject: string | undefined;
@@ -127,10 +127,10 @@ export function getRenderedText(
 ): string | undefined {
   try {
     const compileTemplate = Handlebars.compile(
-      templateMapper(testOutcome, notificationPersonalisation.category, conductedLanguage, padi)
+      // eslint-disable-next-line max-len
+      templateMapper(testOutcome, notificationPersonalisation.category, conductedLanguage, padi, notificationPersonalisation.previousAttempts)
     );
     return compileTemplate(notificationPersonalisation);
-
   } catch (error) {
     throw Error(`Error preparing renderedText ${error}`);
   }

@@ -7,13 +7,3 @@ export const seriousFaultsTemplate = `
 
 {{/if}}
 `;
-
-export const SeriousFaultsWelshTemplate = `
-{{#if showSeriousFaults}}
-# Eich beiau difrifol:
-  {{#each seriousFaults}}
-  - {{ this }}
-  {{/each}}
-
-{{/if}}
-`;
