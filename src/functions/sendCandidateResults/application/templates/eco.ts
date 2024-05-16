@@ -5,7 +5,7 @@
  */
 export const ecoTemplate = (riding?: boolean): string => {
   return `
-{#if showEcoText}}
+{{#if showEcoText}}
 # Fuel-efficient ${riding ? 'riding' : 'driving'}
 
 Fuel-efficient ${riding ? 'riding' : 'driving'} is a style of safe driving that reduces your fuel use and helps the environment.

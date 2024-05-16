@@ -258,19 +258,3 @@ When you take the off-road test, you must use:
 
 ---
 `;
-
-export const nextStepsPassMod2Template = `
-# What to do next
-
-{{#if showProvLicenceRetainedByDriver}}
-You must send your driving test pass certificate and documents to DVLA within 2 years of passing your driving test or you’ll have to take it again.
-
-^Find out how to apply at https://www.gov.uk/apply-for-your-full-driving-licence.
-{{/if}}
-
-{{#if showProvLicenceRetainedByDvsa}}
-DVLA will send your full driving licence to you automatically. It will be sent to the address on your provisional licence.
-{{/if}}
-
----
-`;

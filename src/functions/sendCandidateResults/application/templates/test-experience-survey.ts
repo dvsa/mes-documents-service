@@ -16,12 +16,6 @@ Every customer is important to us. We’d like your feedback about taking this t
 
 `;
 
-export const testExperienceSurveyVocationalTemplate = `
-# Your experience of the driving test
-However your test went, we’d really like your feedback about your experience of the driving test. Please complete this short survey, it should only take about 5 minutes. The survey is voluntary.
-https://www.smartsurvey.co.uk/s/VocationalCandidateCSAT/
-`;
-
 export const testExperienceSurveyTemplate3b = `
 # Your experience of the driving test
 However your test went, we’d really like your feedback about your experience of the driving test. Please complete this short survey, it should only take about 5 minutes.

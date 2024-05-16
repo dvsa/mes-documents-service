@@ -31,7 +31,7 @@ You were assessed on 4 competences in this topic:
 
 You scored {{riskManagementScore}} out of 15 in risk management.
 
-{{#if ${fail}}
+{{#if ${fail}}}
 You needed to score 8 or more in this topic to pass the ${standardsCheck ? 'standards check' : 'test'}.
 {{/if}}
 

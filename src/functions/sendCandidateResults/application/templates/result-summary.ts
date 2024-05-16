@@ -12,9 +12,9 @@ export const passResultTemplate = (testType: string, categorySwitch: TestCategor
   case TestCategory.ADI3:
   case TestCategory.SC:
     template = `
-^# Result: Pass (grade {{grade}})
-^Test type {{category}} test
-^Test centre: {{location}}
+^# Result: Pass (grade {{grade}})\n
+^Test type {{category}} test\n
+^Test centre: {{location}}\n
 ^Date: {{date}}
 
 ## Result summary
@@ -44,12 +44,12 @@ To keep improving, it’s important to understand which competences you can cont
   case TestCategory.C1M:
   case TestCategory.CCPC:
     template = `
-^# Result: Pass
-^Test type: ${testType} (category {{category}})
-^Test centre: {{location}}
+^# Result: Pass\n
+^Test type: ${testType} (category {{category}})\n
+^Test centre: {{location}}\n
 ^Date: {{date}}
 {{#if ${categorySwitch === TestCategory.CCPC}}}
-^Overall score: {{totalScore}} out of 100
+\n^Overall score: {{totalScore}} out of 100
 {{/if}}
 
 Congratulations on passing your test.
@@ -59,9 +59,9 @@ To keep improving, it’s important to understand any faults you made.
     break;
   default:
     template = `
-^# Result: Pass
-^Test type: ${testType} (category {{category}})
-^Test centre: {{location}}
+^# Result: Pass\n
+^Test type: ${testType} (category {{category}})\n
+^Test centre: {{location}}\n
 ^Date: {{date}}
      
 Congratulations on passing your test.

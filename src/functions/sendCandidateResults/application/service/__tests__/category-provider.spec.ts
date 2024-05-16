@@ -1,13 +1,13 @@
-import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
+import {TestCategory} from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 import {
-  isBikeCategory,
-  isADI3Category,
-  getCategoryType,
   getCategorySubject,
+  getCategoryType,
+  isADI3Category,
+  isBikeCategory,
   isCPCCategory,
 } from '../category-provider';
-import { TestType } from '../../../domain/template-id.model';
-import { CategoryType } from '../../../domain/category-type';
+import {TestType} from '../../../domain/template-id.model';
+import {CategoryType} from '../../../domain/category-type';
 
 describe('isBikeCategory', () => {
   it('should return true for bike categories', () => {
@@ -145,15 +145,12 @@ describe('getCategoryType', () => {
     expect(getCategoryType(TestCategory.ADI2)).toBe(TestType.ADI2);
   });
 
-  it('should return TestType.ADI3 for TestCategory.ADI3 and TestCategory.SC', () => {
-    const adi3Categories = [
-      TestCategory.ADI3,
-      TestCategory.SC,
-    ];
+  it('should return TestType.ADI3 for TestCategory.ADI3', () => {
+    expect(getCategoryType(TestCategory.ADI3)).toBe(TestType.ADI3);
+  });
 
-    adi3Categories.forEach((category) => {
-      expect(getCategoryType(category)).toBe(TestType.ADI3);
-    });
+  it('should return TestType.SC for TestCategory.SC', () => {
+    expect(getCategoryType(TestCategory.SC)).toBe(TestType.SC);
   });
 
   it('should return TestType.B for TestCategory.B', () => {

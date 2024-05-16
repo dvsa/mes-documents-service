@@ -39,7 +39,7 @@ Check our guide which explains:
 - what your driving examiner assessed during your test
 - what you needed to do
 - how to improve your skills, knowledge and understanding in each area
-{{#if ${fail}}
+{{#if ${fail}}}
 - how to book a new test when you're ready
 {{/if}}
 

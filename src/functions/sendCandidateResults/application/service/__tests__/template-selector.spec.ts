@@ -111,43 +111,23 @@ describe('Template Mapper', () => {
   // CatAmod1
   it('should return the correct template for a pass in English for A Mod 1', () => {
     const template = templateMapper(TestOutcome.PASS, TestCategory.EUA1M1, Language.ENGLISH);
-    expect(template).toContain('Motorcycle test reference number');
-  });
-
-  it('should return the correct template for a pass in Welsh for A Mod 1', () => {
-    const template = templateMapper(TestOutcome.PASS, TestCategory.EUA1M1, Language.WELSH);
-    expect(template).toContain('Cyfeirnod y prawf Beic Modur');
+    expect(template).toContain('Driving test reference number');
   });
 
   it('should return the correct template for a fail in English for A Mod 1', () => {
     const template = templateMapper(TestOutcome.FAIL, TestCategory.EUA1M1, Language.ENGLISH);
-    expect(template).toContain('Motorcycle test reference number');
-  });
-
-  it('should return the correct template for a fail in Welsh for A Mod 1', () => {
-    const template = templateMapper(TestOutcome.FAIL, TestCategory.EUA1M1, Language.WELSH);
-    expect(template).toContain('Cyfeirnod y prawf Beic Modur');
+    expect(template).toContain('Driving test reference number');
   });
 
   // CatAmod2
   it('should return the correct template for a pass in English for A Mod 2', () => {
     const template = templateMapper(TestOutcome.PASS, TestCategory.EUA1M2, Language.ENGLISH);
-    expect(template).toContain('Motorcycle test reference number');
-  });
-
-  it('should return the correct template for a pass in Welsh for A Mod 2', () => {
-    const template = templateMapper(TestOutcome.PASS, TestCategory.EUA1M2, Language.WELSH);
-    expect(template).toContain('Cyfeirnod y prawf Beic Modur');
+    expect(template).toContain('Driving test reference number');
   });
 
   it('should return the correct template for a fail in English for A Mod 2', () => {
     const template = templateMapper(TestOutcome.FAIL, TestCategory.EUA1M2, Language.ENGLISH);
-    expect(template).toContain('Motorcycle test reference number');
-  });
-
-  it('should return the correct template for a fail in Welsh for A Mod 2', () => {
-    const template = templateMapper(TestOutcome.FAIL, TestCategory.EUA1M2, Language.WELSH);
-    expect(template).toContain('Cyfeirnod y prawf Beic Modur');
+    expect(template).toContain('Driving test reference number');
   });
 
   // ADI2
@@ -156,19 +136,9 @@ describe('Template Mapper', () => {
     expect(template).toContain('Driving test reference number');
   });
 
-  it('should return the correct template for a pass in Welsh for A Mod 2', () => {
-    const template = templateMapper(TestOutcome.PASS, TestCategory.ADI2, Language.WELSH);
-    expect(template).toContain('Cyfeirnod prawf gyrru');
-  });
-
   it('should return the correct template for a fail in English for A Mod 2', () => {
     const template = templateMapper(TestOutcome.FAIL, TestCategory.ADI2, Language.ENGLISH);
     expect(template).toContain('Driving test reference number');
-  });
-
-  it('should return the correct template for a fail in Welsh for A Mod 2', () => {
-    const template = templateMapper(TestOutcome.FAIL, TestCategory.ADI2, Language.WELSH);
-    expect(template).toContain('Cyfeirnod prawf gyrru');
   });
 
   // CatB
@@ -177,19 +147,9 @@ describe('Template Mapper', () => {
     expect(template).toContain('Driving test reference number');
   });
 
-  it('should return the correct template for a pass in Welsh for B', () => {
-    const template = templateMapper(TestOutcome.PASS, TestCategory.B, Language.WELSH);
-    expect(template).toContain('Cyfeirnod prawf gyrru');
-  });
-
   it('should return the correct template for a fail in English for B', () => {
     const template = templateMapper(TestOutcome.FAIL, TestCategory.B, Language.ENGLISH);
     expect(template).toContain('Driving test reference number');
-  });
-
-  it('should return the correct template for a fail in Welsh for B', () => {
-    const template = templateMapper(TestOutcome.FAIL, TestCategory.B, Language.WELSH);
-    expect(template).toContain('Cyfeirnod prawf gyrru');
   });
 
   // Vocational
@@ -198,61 +158,31 @@ describe('Template Mapper', () => {
     expect(template).toContain('Driving test reference number');
   });
 
-  it('should return the correct template for a pass in Welsh for Vocational tests', () => {
-    const template = templateMapper(TestOutcome.PASS, TestCategory.C, Language.WELSH);
-    expect(template).toContain('Cyfeirnod prawf gyrru');
-  });
-
   it('should return the correct template for a fail in English for Vocational tests', () => {
     const template = templateMapper(TestOutcome.FAIL, TestCategory.C, Language.ENGLISH);
     expect(template).toContain('Driving test reference number');
   });
 
-  it('should return the correct template for a fail in Welsh for Vocational tests', () => {
-    const template = templateMapper(TestOutcome.FAIL, TestCategory.C, Language.WELSH);
-    expect(template).toContain('Cyfeirnod prawf gyrru');
-  });
-
   // Manoeuvre
   it('should return the correct template for a pass in English for Manoeuvre tests', () => {
     const template = templateMapper(TestOutcome.PASS, TestCategory.CM, Language.ENGLISH);
-    expect(template).toContain('Module 3a test');
-  });
-
-  it('should return the correct template for a pass in Welsh for Manoeuvre tests', () => {
-    const template = templateMapper(TestOutcome.PASS, TestCategory.CM, Language.WELSH);
-    expect(template).toContain('Prawf Modiwl 3a');
+    expect(template).toContain('Driver CPC part 3a (off-road exercises) test');
   });
 
   it('should return the correct template for a fail in English for Manoeuvre tests', () => {
     const template = templateMapper(TestOutcome.FAIL, TestCategory.CM, Language.ENGLISH);
-    expect(template).toContain('Module 3a test');
-  });
-
-  it('should return the correct template for a fail in Welsh for Manoeuvre tests', () => {
-    const template = templateMapper(TestOutcome.FAIL, TestCategory.CM, Language.WELSH);
-    expect(template).toContain('Prawf Modiwl 3a');
+    expect(template).toContain('Driver CPC part 3a (off-road exercises) test');
   });
 
   // Cpc
   it('should return the correct template for a pass in English for CPC tests', () => {
     const template = templateMapper(TestOutcome.PASS, TestCategory.CCPC, Language.ENGLISH);
-    expect(template).toContain('CPC Module 4 reference number');
-  });
-
-  it('should return the correct template for a pass in Welsh for CPC tests', () => {
-    const template = templateMapper(TestOutcome.PASS, TestCategory.CCPC, Language.WELSH);
-    expect(template).toContain('CPC Modiwl 4 rhif cyfeirnod');
+    expect(template).toContain('Driver CPC part 4 (practical demonstration) test');
   });
 
   it('should return the correct template for a fail in English for CPC tests', () => {
     const template = templateMapper(TestOutcome.FAIL, TestCategory.CCPC, Language.ENGLISH);
-    expect(template).toContain('CPC Module 4 reference number');
-  });
-
-  it('should return the correct template for a fail in Welsh for CPC tests', () => {
-    const template = templateMapper(TestOutcome.FAIL, TestCategory.CCPC, Language.WELSH);
-    expect(template).toContain('CPC Modiwl 4 rhif cyfeirnod');
+    expect(template).toContain('Driver CPC part 4 (practical demonstration) test');
   });
 
   // Home
@@ -261,19 +191,9 @@ describe('Template Mapper', () => {
     expect(template).toContain('Driving test reference number');
   });
 
-  it('should return the correct template for a pass in Welsh for Home tests', () => {
-    const template = templateMapper(TestOutcome.PASS, TestCategory.F, Language.WELSH);
-    expect(template).toContain('Cyfeirnod prawf gyrru');
-  });
-
   it('should return the correct template for a fail in English for Home tests', () => {
     const template = templateMapper(TestOutcome.FAIL, TestCategory.F, Language.ENGLISH);
     expect(template).toContain('Driving test reference number');
-  });
-
-  it('should return the correct template for a fail in Welsh for Home tests', () => {
-    const template = templateMapper(TestOutcome.FAIL, TestCategory.F, Language.WELSH);
-    expect(template).toContain('Cyfeirnod prawf gyrru');
   });
 
 });

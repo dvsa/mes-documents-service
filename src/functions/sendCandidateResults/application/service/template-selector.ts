@@ -1,7 +1,7 @@
 import {TestCategory} from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 import {Language} from '../../domain/conducted-language';
 import {headerTemplate} from '../templates/header';
-import { failResultTemplate, passResultTemplate } from '../templates/result-summary';
+import {failResultTemplate, passResultTemplate} from '../templates/result-summary';
 import {
   testExperienceSurveyRidingTemplate,
   testExperienceSurveyTemplate,
@@ -24,11 +24,10 @@ import {
   nextStepsAdi3FirstOrSecondFailTemplate,
   nextStepsAdi3PassTemplate,
   nextStepsAdi3ThirdFailTemplate,
+  nextStepsDrivingTemplate,
   nextStepsFailBTemplate,
   nextStepsMod1PassTemplate,
   NextStepsPass3aTemplate,
-  nextStepsDrivingTemplate,
-  nextStepsPassMod2Template,
   nextStepsScFirstOrSecondTemplate,
   nextStepsScThirdTemplate,
 } from '../templates/next-steps';
@@ -55,24 +54,8 @@ import {
   statementOfFailureTractorTemplate,
   statementOfFailureVocational3bTemplate,
 } from '../templates/statement-of-failure';
-import {
-  UrlDescriptors,
-  FailUrls,
-  PassUrls,
-  understandingResultTemplate,
-} from '../templates/understanding-your-result';
-import {
-  appealYourAdi2TestTemplate,
-  howToAppeal3aTemplate,
-  howToAppeal3bTemplate,
-  howToAppeal4Template,
-  howToAppealAdi3FirstOrSecondTemplate,
-  howToAppealAdi3ThirdTemplate,
-  howToAppealBTemplate,
-  howToAppealScFirstOrSecondTemplate,
-  howToAppealScThirdTemplate,
-  howToAppealTractorTemplate,
-} from '../templates/appeal-your-test';
+import {FailUrls, PassUrls, understandingResultTemplate, UrlDescriptors} from '../templates/understanding-your-result';
+import { AppealUrls, howToAppealTemplate } from '../templates/appeal-your-test';
 import {signOffTemplate} from '../templates/sign-off';
 import {
   importantInformationForHGVAndBusVocational3bTemplate,
@@ -89,6 +72,7 @@ import {
   importantInfoForRiders,
 } from '../templates/info-for-new-drivers';
 import {ecoTemplate} from '../templates/eco';
+import {writeFileSync} from 'fs';
 
 // ADI2
 export const passEnglishAdi2 =
@@ -114,7 +98,7 @@ export const failEnglishAdi2 =
     ${ecoTemplate()}
     ${understandingResultTemplate(UrlDescriptors.ADI2, FailUrls.ADI2, true)}
     ${nextStepsADI2FailTemplate}
-    ${appealYourAdi2TestTemplate}
+    ${howToAppealTemplate(AppealUrls.ADI2)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
     `;
@@ -135,7 +119,7 @@ export const failEnglishAdi3FirstOrSecondAttempt = `
     ${failResultTemplate('ADI part 3 (instructional ability) test', TestCategory.ADI3)}
     ${gradeTemplate(true, false)}
     ${nextStepsAdi3FirstOrSecondFailTemplate}
-    ${howToAppealAdi3FirstOrSecondTemplate}
+    ${howToAppealTemplate(AppealUrls.ADI3_1ST_OR_2ND, TestCategory.ADI3)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
 `;
@@ -145,7 +129,7 @@ export const failEnglishAdi3ThirdAttempt = `
     ${failResultTemplate('ADI part 3 (instructional ability) test', TestCategory.ADI3, true)}
     ${gradeTemplate(true, false)}
     ${nextStepsAdi3ThirdFailTemplate}
-    ${howToAppealAdi3ThirdTemplate}
+    ${howToAppealTemplate(AppealUrls.ADI3_3RD, TestCategory.ADI3)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
 `;
@@ -165,7 +149,7 @@ export const failEnglishScFirstOrSecondAttempt = `
     ${failResultTemplate('ADI standards check', TestCategory.SC)}
     ${gradeTemplate(true, true)}
     ${nextStepsScFirstOrSecondTemplate}
-    ${howToAppealScFirstOrSecondTemplate}
+    ${howToAppealTemplate(AppealUrls.SC_1ST_OR_2ND, TestCategory.SC)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
 `;
@@ -175,7 +159,7 @@ export const failEnglishScThirdAttempt = `
     ${failResultTemplate('ADI standards check', TestCategory.SC, true)}
     ${gradeTemplate(true, true)}
     ${nextStepsScThirdTemplate}
-    ${howToAppealScThirdTemplate}
+    ${howToAppealTemplate(AppealUrls.SC_3RD, TestCategory.SC)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
 `;
@@ -206,7 +190,7 @@ export const failEnglishB = `
     ${nextStepsFailBTemplate}
     ${testExperienceSurveyTemplate}
     ${statementOfFailureBTemplate}
-    ${howToAppealBTemplate}
+    ${howToAppealTemplate(AppealUrls.B)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
 `;
@@ -226,7 +210,7 @@ export const passEnglishAMod1 = `
     ${dataPrivacyTemplate}
 `;
 
-export const failEnglishMod1 = `
+export const failEnglishAMod1 = `
     ${headerTemplate}
     ${failResultTemplate('motorcycle module 1 (off-road) test', TestCategory.EUAM1)}
     ${etaTemplate}
@@ -239,6 +223,7 @@ export const failEnglishMod1 = `
     ${understandingResultTemplate(UrlDescriptors.RIDING, FailUrls.MOD1, true)}
     ${testExperienceSurveyRidingTemplate}
     ${statementOfFailureMod1Template}
+    ${howToAppealTemplate(AppealUrls.MOD1)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
 `;
@@ -251,7 +236,7 @@ export const passEnglishAMod2 =
     ${ridingFaultTemplate}
     ${ecoTemplate(true)}
     ${understandingResultTemplate(UrlDescriptors.RIDING, PassUrls.MOD2)}
-    ${nextStepsPassMod2Template}
+    ${nextStepsDrivingTemplate}
     ${testExperienceSurveyRidingTemplate}
     ${importantInfoForRiders}
     ${signOffTemplate}
@@ -270,6 +255,7 @@ export const failEnglishAMod2 =
     ${understandingResultTemplate(UrlDescriptors.RIDING, FailUrls.MOD2, true)}
     ${testExperienceSurveyRidingTemplate}
     ${statementOfFailureMod2Template}
+    ${howToAppealTemplate(AppealUrls.MOD2)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
     `;
@@ -297,9 +283,9 @@ export const failEnglishHome =
     ${seriousFaultsTemplate}
     ${drivingFaultsTemplate}
     ${ecoTemplate()}
-    ${understandingResultTemplate(UrlDescriptors.DRIVING, FailUrls.TRACTOR, true)}
+    ${understandingResultTemplate(UrlDescriptors.DRIVING, FailUrls.TRACTOR)}
     ${statementOfFailureTractorTemplate}
-    ${howToAppealTractorTemplate}
+    ${howToAppealTemplate(AppealUrls.TRACTOR)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
     `;
@@ -322,7 +308,7 @@ export const failEnglishMan =
     ${seriousFaultsTemplate}
     ${understandingResultTemplate(UrlDescriptors.DRIVING, FailUrls.MANOEUVRES, true)}
     ${statementOfFailureVocational3bTemplate}
-    ${howToAppeal3aTemplate}
+    ${howToAppealTemplate(AppealUrls.MANOEUVRES)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
     `;
@@ -355,7 +341,7 @@ export const failEnglishVocational =
     ${understandingResultTemplate(UrlDescriptors.DRIVING, FailUrls.VOCATIONAL, true)}
     ${testExperienceSurveyTemplate3b}
     ${statementOfFailureVocational3bTemplate}
-    ${howToAppeal3bTemplate}
+    ${howToAppealTemplate(AppealUrls.VOCATIONAL)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
     `;
@@ -380,7 +366,7 @@ export const failEnglishCpc =
     ${vocationalScoringExplanation}
     ${vocationalScoring}
     ${statementOfFailureVocational4}
-    ${howToAppeal4Template}
+    ${howToAppealTemplate(AppealUrls.CPC)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
     `;
@@ -415,11 +401,6 @@ export function templateMapper(testOutcome: TestOutcome, category: TestCategory,
       previousAttemptsText = 'ThirdAttempt';
     } else previousAttemptsText = 'FirstOrSecondAttempt';
   }
-  ;
-  console.log('========================================');
-  console.log('template identifier string:', `${testOutcome}${language}${testType}${previousAttemptsText}`);
-  // console.log('Template:', (templates as Record<string, string>)['failEnglishAdi3FirstOrSecondAttempt']);
-  console.log('========================================');
   return (templates as Record<string, string>)[`${testOutcome}${language}${testType}${previousAttemptsText}`];
 }
 
@@ -435,7 +416,7 @@ const templates = {
   passEnglishB,
   failEnglishB,
   passEnglishAMod1,
-  failEnglishMod1,
+  failEnglishAMod1,
   passEnglishAMod2,
   failEnglishAMod2,
   passEnglishHome,

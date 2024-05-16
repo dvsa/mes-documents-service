@@ -125,7 +125,7 @@ describe('sendNotification', () => {
         mockEmail1,
         Correspondence.POST,
         'temp-id',
-        personalisationCatBPass,
+        personalisationCatBFail,
         '12345678',
         'reply-id',
         mockClient,

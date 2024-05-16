@@ -47,7 +47,7 @@ describe('Custom-property-provider-cat-adi3', () => {
       lessonAndTheme: { studentLevel: 'beginner', lessonThemes: [], other: 'Mock Lesson Theme' },
     } as CatADI3TestData;
 
-    expect(getCustomPropertiesCatADI3(td, '3', '123', 'ADI3')).toEqual({
+    expect(getCustomPropertiesCatADI3(td, '3', '123', 'ADI3', 1)).toEqual({
       prn: '123',
       lessonPlanningScore: '0',
       lp1Score: '0',
@@ -73,6 +73,7 @@ describe('Custom-property-provider-cat-adi3', () => {
       studentLevel: 'Beginner',
       lessonThemes: ['Mock Lesson Theme'],
       grade: '',
+      previousAttempts: 1,
       showGrade: false,
       result: 'were unsuccessful',
       feedback: 'Mock feedback',
@@ -121,7 +122,7 @@ describe('Custom-property-provider-cat-adi3', () => {
       },
     } as CatADI3TestData;
 
-    expect(getCustomPropertiesCatADI3(td, '1', '123', 'SC')).toEqual({
+    expect(getCustomPropertiesCatADI3(td, '1', '123', 'SC', 1)).toEqual({
       prn: '123',
       lessonPlanningScore: '8',
       lp1Score: '2',
@@ -156,6 +157,7 @@ describe('Custom-property-provider-cat-adi3', () => {
       result: 'passed',
       feedback: '',
       categoryDescriptor: 'Standards Check',
+      previousAttempts: 1,
       RMFail: false,
       code4: false,
       isADI3: false,
@@ -200,7 +202,7 @@ describe('Custom-property-provider-cat-adi3', () => {
       },
     } as CatADI3TestData;
 
-    expect(getCustomPropertiesCatADI3(td, '1', '123', 'SC')).toEqual({
+    expect(getCustomPropertiesCatADI3(td, '1', '123', 'SC', 2)).toEqual({
       prn: '123',
       lessonPlanningScore: '8',
       lp1Score: '2',
@@ -235,6 +237,7 @@ describe('Custom-property-provider-cat-adi3', () => {
       result: 'passed',
       feedback: '',
       categoryDescriptor: 'Standards Check',
+      previousAttempts: 2,
       RMFail: false,
       code4: false,
       isADI3: false,
@@ -246,7 +249,7 @@ describe('Custom-property-provider-cat-adi3', () => {
   it('should throw error when undefined test data', () => {
     const td = undefined;
     expect(() => {
-      getCustomPropertiesCatADI3(td, '4', '', 'ADI3');
+      getCustomPropertiesCatADI3(td, '4', '', 'ADI3', 2);
     }).toThrowError('No Test Data');
   });
 });
