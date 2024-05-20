@@ -9,13 +9,6 @@ import {Language} from '../../domain/conducted-language';
 import {TestOutcome} from '../../domain/test-outcome';
 import {CommunicationMethod} from '@dvsa/mes-test-schema/categories/common';
 import {Correspondence} from '../../domain/template-id.model';
-import {TestCategory} from '@dvsa/mes-test-schema/category-definitions/common/test-category';
-import {writeFileSync} from 'fs';
-import {
-  personalisationCatbEnglishFailLetterMock, personalisationCatbEnglishFailMock,
-  personalisationCatbEnglishPassLetterMock,
-  personalisationCatbEnglishPassMock,
-} from './__mocks__/personalisation-catb-mock';
 
 export interface Personalisation extends Partial<Address>{
   renderedSubject: string | undefined;

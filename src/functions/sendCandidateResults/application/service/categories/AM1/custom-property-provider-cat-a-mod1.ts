@@ -66,7 +66,7 @@ CatAMod1ICustomProperties,
   }
 
   if (get(emergencyStopData, 'secondAttempt') !== undefined) {
-    emergencyStopAttempts.showEmergencySecondAttempt =     emergencyStopAttempts.showEmergencyFirstAttempt = true;
+    emergencyStopAttempts.showEmergencySecondAttempt = emergencyStopAttempts.showEmergencyFirstAttempt = true;
     emergencyStopAttempts.emergencySecondAttempt = `${emergencyStopData.secondAttempt} km/h`;
   }
 

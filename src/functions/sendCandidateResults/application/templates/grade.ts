@@ -12,7 +12,7 @@ You were assessed on 17 competences across 3 topics.
 You could score 0 to 3 points for each competence. The scores mean:
 
 - 0 - No evidence of the competence
-- 1 -  Demonstrated in a few elements 
+- 1 - Demonstrated in a few elements 
 - 2 - Demonstrated in most elements 
 - 3 - Demonstrated in all elements
 
