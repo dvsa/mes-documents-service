@@ -169,7 +169,8 @@ const catBEnglishFailRenderedText = '\n' +
     '^\n' +
     '^The candidate with the number shown above has been examined and has FAILED to pass the practical test / test of competence to drive prescribed under the Road Traffic Act (and for the purpose of section 36 of the Road Traffic Offenders Act 1988) in respect of vehicles in the above category / categories.\n' +
     '\n' +
-    '    # How to appeal your driving test\n' +
+    '    \n' +
+    '# How to appeal your driving test\n' +
     '\n' +
     'You can appeal to a court if you think your driving examiner did not follow the law about how they must carry out driving tests.\n' +
     '\n' +
