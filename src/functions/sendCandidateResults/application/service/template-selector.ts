@@ -72,7 +72,6 @@ import {
   importantInfoForRiders,
 } from '../templates/info-for-new-drivers';
 import {ecoTemplate} from '../templates/eco';
-import {writeFileSync} from 'fs';
 
 // ADI2
 export const passEnglishAdi2 =
@@ -223,7 +222,7 @@ export const failEnglishAMod1 = `
     ${understandingResultTemplate(UrlDescriptors.RIDING, FailUrls.MOD1, true)}
     ${testExperienceSurveyRidingTemplate}
     ${statementOfFailureMod1Template}
-    ${howToAppealTemplate(AppealUrls.MOD1)}
+    ${howToAppealTemplate(AppealUrls.MOD1, TestCategory.EUAM1, true)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
 `;
@@ -255,7 +254,7 @@ export const failEnglishAMod2 =
     ${understandingResultTemplate(UrlDescriptors.RIDING, FailUrls.MOD2, true)}
     ${testExperienceSurveyRidingTemplate}
     ${statementOfFailureMod2Template}
-    ${howToAppealTemplate(AppealUrls.MOD2)}
+    ${howToAppealTemplate(AppealUrls.MOD2, TestCategory.EUAM2, true)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
     `;
@@ -389,12 +388,11 @@ export function subjectMapper(category: TestCategory, language: Language, padi?:
  * @param testOutcome
  * @param category
  * @param language
- * @param padi
  * @param previousAttempts
  */
 // eslint-disable-next-line max-len
-export function templateMapper(testOutcome: TestOutcome, category: TestCategory, language: Language, padi?: boolean, previousAttempts?: number) {
-  const testType = padi ? 'padi' : getCategoryType(category);
+export function templateMapper(testOutcome: TestOutcome, category: TestCategory, language: Language, previousAttempts?: number) {
+  const testType= getCategoryType(category);
   let previousAttemptsText: string = '';
   if (isADI3Category(category) && testOutcome === 'fail') {
     if (previousAttempts && previousAttempts > 1) {

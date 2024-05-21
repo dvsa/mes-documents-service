@@ -128,7 +128,7 @@ export function getRenderedText(
   try {
     const compileTemplate = Handlebars.compile(
       // eslint-disable-next-line max-len
-      templateMapper(testOutcome, notificationPersonalisation.category, conductedLanguage, padi, notificationPersonalisation.previousAttempts)
+      templateMapper(testOutcome, notificationPersonalisation.category, conductedLanguage, notificationPersonalisation.previousAttempts)
     );
     return compileTemplate(notificationPersonalisation);
   } catch (error) {

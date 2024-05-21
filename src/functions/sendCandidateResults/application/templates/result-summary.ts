@@ -13,13 +13,13 @@ export const passResultTemplate = (testType: string, categorySwitch: TestCategor
   case TestCategory.SC:
     template = `
 ^# Result: Pass (grade {{grade}})\n
-^Test type {{category}} test\n
+^Test type: {{category}} test\n
 ^Test centre: {{location}}\n
 ^Date: {{date}}
 
 ## Result summary
 
-^Overall score:{{totalScore}} out of 51
+^Overall score: {{totalScore}} out of 51
 
 ^Lesson planning: {{lessonPlanningScore}} out of 12
 ^Risk management: {{riskManagementScore}} out of 15
@@ -29,13 +29,15 @@ export const passResultTemplate = (testType: string, categorySwitch: TestCategor
 
 ^Student – {{studentLevel}} 
 ^Theme(s): 
-^{{lessonThemes}} 
+{{#each lessonThemes}}
+  - {{ this }} 
+{{/each}} 
 
 ---
 
 Congratulations on passing your ${categorySwitch === TestCategory.SC ? 'ADI standards check' : 'test'}.
 
-To keep improving, it’s important to understand which competences you can continue to develop. 
+To keep improving, it’s important to understand which competencies you can continue to develop. 
 
 ---    
     `;
@@ -98,17 +100,19 @@ export const failResultTemplate = (testType: string, categorySwitch: TestCategor
 ^##Risk management fail
 {{/if}}
  
-^Overall score:{{totalScore}} out of 51
+^Overall score: {{totalScore}} out of 51
 
 ^Lesson planning: {{lessonPlanningScore}} out of 12
 ^Risk management: {{riskManagementScore}} out of 15
-^Teaching and learning strategies:{{teachingLearningStrategiesScore}} out of 24
+^Teaching and learning strategies: {{teachingLearningStrategiesScore}} out of 24
 
 ## About the lesson
 
 ^Student – {{studentLevel}} 
 ^Theme(s): 
-^{{lessonThemes}} 
+{{#each lessonThemes}}
+  - {{ this }} 
+{{/each}} 
 
 ---
 
@@ -118,7 +122,7 @@ We're sorry that you were unsuccessful this ${thirdAttempt ? 'time and have not 
 You’re allowed 3 attempts to pass the standards check.
 {{/if}}
 
-${thirdAttempt ? 'If you intend to restart the qualification process,' : `To prepare for your next ${categorySwitch === TestCategory.SC ? 'standards check' : 'test,'}`} it’s important to understand more about the competences you were assessed on.
+${thirdAttempt ? 'If you intend to restart the qualification process,' : `To prepare for your next ${categorySwitch === TestCategory.SC ? 'standards check' : 'test,'}`} it’s important to understand more about the competencies you were assessed on.
 
 ---
     `;

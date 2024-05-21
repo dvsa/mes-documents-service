@@ -1,6 +1,8 @@
 export const emergencyStopTemplate = `
+{{#if emergencyFirstAttempt}}
 # Emergency stop
 First attempt: {{ emergencyFirstAttempt }}
+{{/if}}
 {{#if showEmergencySecondAttempt}}
 
 Second attempt: {{ emergencySecondAttempt }}

@@ -16,8 +16,9 @@ export enum AppealUrls {
   CPC = 'https://www.gov.uk/guidance/appeal-your-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-4-test&utm_content=unsuccessful',
 }
 
-export const howToAppealTemplate = (url: string, category?: TestCategory): string => {
-  return  `# How to appeal your driving test
+export const howToAppealTemplate = (url: string, category?: TestCategory, riding?: boolean): string => {
+  return  `
+# How to appeal your ${riding ? 'motorcycle' : 'driving'} test
 
 You can appeal to a court if you think your driving examiner did not follow the law about how they must carry out ${category === TestCategory.ADI3 ? 'ADI qualifying tests' : category === TestCategory.SC ? 'ADI standards checks' : 'driving tests'}.
 

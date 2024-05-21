@@ -1,6 +1,8 @@
 export const avoidanceExerciseTemplate = `
+{{#if avoidanceFirstAttempt}}
 # Avoidance Exercise / Controlled Stop
 First attempt: {{ avoidanceFirstAttempt }}
+{{/if}}
 {{#if showAvoidanceSecondAttempt}}
 
 Second attempt: {{ avoidanceSecondAttempt }}

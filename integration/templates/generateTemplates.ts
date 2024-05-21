@@ -31,7 +31,7 @@ const templates = [];
 
 //Add templates to generate pdfs
 templates.push(
-  //ADI2
+  // ADI2
   {
     filename: 'adi2PassEnglish',
     markdown: getRenderedText(TestOutcome.PASS, personalisationCatADI2Pass, Language.ENGLISH, false)
@@ -51,7 +51,7 @@ templates.push(
   },
   {
     filename: 'adi3FailEnglishThird',
-    markdown: getRenderedText(TestOutcome.FAIL, personalisationCatADI3FailThird, Language.ENGLISH, false)
+    markdown: getRenderedText(TestOutcome.FAIL, personalisationCatADI3FailThird, Language.ENGLISH, true)
   },
   // SC
   {
@@ -64,7 +64,7 @@ templates.push(
   },
   {
     filename: 'scFailEnglishThird',
-    markdown: getRenderedText(TestOutcome.FAIL, personalisationCatSCFailThird, Language.ENGLISH, false)
+    markdown: getRenderedText(TestOutcome.FAIL, personalisationCatSCFailThird, Language.ENGLISH, true)
   },
   // B
   {
