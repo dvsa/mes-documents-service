@@ -9,7 +9,8 @@ import { Language } from '../../../domain/conducted-language';
 import { TestOutcome } from '../../../domain/test-outcome';
 import {
   personalisationCatbEnglishFailLetterMock,
-  personalisationCatbEnglishFailMock, personalisationCatbEnglishPassLetterMock,
+  personalisationCatbEnglishFailMock,
+  personalisationCatbEnglishPassLetterMock,
   personalisationCatbEnglishPassMock,
 } from '../__mocks__/personalisation-catb-mock';
 import { personalisationCatBFail, personalisationCatBPass } from '../__mocks__/personalisation-details';
@@ -101,6 +102,7 @@ describe('sendNotification', () => {
         Language.ENGLISH,
         TestOutcome.PASS,
       );
+
 
     expect(mockClient.sendLetter).toHaveBeenCalledWith(
       'temp-id',

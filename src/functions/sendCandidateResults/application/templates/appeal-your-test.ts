@@ -18,9 +18,9 @@ export enum AppealUrls {
 
 export const howToAppealTemplate = (url: string, category?: TestCategory, riding?: boolean): string => {
   return  `
-# How to appeal your ${riding ? 'motorcycle' : 'driving'} test
+# How to appeal your ${category === TestCategory.ADI3 ? '' : category === TestCategory.SC ? 'standards check' : (riding ? 'motorcycle test' : 'driving test')} 
 
-You can appeal to a court if you think your driving examiner did not follow the law about how they must carry out ${category === TestCategory.ADI3 ? 'ADI qualifying tests' : category === TestCategory.SC ? 'ADI standards checks' : 'driving tests'}.
+You can appeal to a court if you think your ${(category === TestCategory.ADI3 || category === TestCategory.SC) ? '' : 'driving'} examiner did not follow the law about how they must carry out ${category === TestCategory.ADI3 ? 'ADI qualifying tests' : category === TestCategory.SC ? 'ADI standards checks' : 'driving tests'}.
 
 The court cannot change your test result. If you win your appeal, they can decide you should get a free retest. If you lose your appeal, you might have to pay significant legal costs.
 

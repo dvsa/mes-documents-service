@@ -13,7 +13,7 @@ export const passResultTemplate = (testType: string, categorySwitch: TestCategor
   case TestCategory.SC:
     template = `
 ^# Result: Pass (grade {{grade}})\n
-^Test type: {{category}} test\n
+^Test type: ${testType}\n
 ^Test centre: {{location}}\n
 ^Date: {{date}}
 
@@ -27,7 +27,8 @@ export const passResultTemplate = (testType: string, categorySwitch: TestCategor
 
 ## About the lesson
 
-^Student – {{studentLevel}} 
+^Student – {{studentLevel}}
+ 
 ^Theme(s): 
 {{#each lessonThemes}}
   - {{ this }} 
@@ -86,9 +87,9 @@ export const failResultTemplate = (testType: string, categorySwitch: TestCategor
   case TestCategory.ADI3:
   case TestCategory.SC:
     template = `
-^# Result: Unsuccessful
-^Test type: ${testType}
-^Test centre: {{location}}
+^# Result: Unsuccessful\n
+^Test type: ${testType}\n
+^Test centre: {{location}}\n
 ^Date: {{date}}
 
 ## Result summary
@@ -130,9 +131,9 @@ ${thirdAttempt ? 'If you intend to restart the qualification process,' : `To pre
   case TestCategory.CCPC:
     template = `
 ^# Result: Unsuccessful
-^Test type: Driver CPC part 4 (practical demonstration) test (category {{category}})
-^Test centre: {{location}}
-^Date: {{date}}
+^Test type: Driver CPC part 4 (practical demonstration) test (category {{category}})\n
+^Test centre: {{location}}\n
+^Date: {{date}}\n
 ^Overall score: {{totalScore}} out of 100
 
 We're sorry that you were unsuccessful this time.
@@ -141,9 +142,9 @@ To prepare for your next test, it’s important to understand more about your re
     `;
     break;
   default: template = `
-^# Result: Unsuccessful
-^Test type: ${testType} (category {{category}})
-^Test centre: {{location}}
+^# Result: Unsuccessful\n
+^Test type: ${testType} (category {{category}})\n
+^Test centre: {{location}}\n
 ^Date: {{date}}
 
 We're sorry that you were unsuccessful this time.

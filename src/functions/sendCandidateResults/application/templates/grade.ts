@@ -1,10 +1,7 @@
 /**
  * Function to generate a grade template for ADI3 & SC templates
- * @param fail
- * @param standardsCheck
  */
-export const gradeTemplate = (fail: boolean, standardsCheck: boolean): string => {
-  return `
+export const gradeTemplate = `
 # How the assessment worked
 
 You were assessed on 17 competencies across 3 topics. 
@@ -30,10 +27,6 @@ You were assessed on 4 competencies in this topic:
 ## Risk management
 
 You scored {{riskManagementScore}} out of 15 in risk management.
-
-{{#if ${fail}}}
-You needed to score 8 or more in this topic to pass the ${standardsCheck ? 'standards check' : 'test'}.
-{{/if}}
 
 You were assessed on 5 competencies in this topic:
 
@@ -66,4 +59,3 @@ The examiner gave this feedback:
 
 ---
     `;
-};
