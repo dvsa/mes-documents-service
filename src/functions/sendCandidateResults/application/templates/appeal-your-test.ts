@@ -16,11 +16,22 @@ export enum AppealUrls {
   CPC = 'https://www.gov.uk/guidance/appeal-your-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-4-test&utm_content=unsuccessful',
 }
 
-export const howToAppealTemplate = (url: string, category?: TestCategory, riding?: boolean): string => {
-  return  `
-# How to appeal your ${riding ? 'motorcycle' : 'driving'} test
+const getTestType = (category: TestCategory, riding: boolean): string => {
+  switch (category) {
+  case TestCategory.ADI3:
+    return 'test';
+  case TestCategory.SC:
+    return 'standards check';
+  default:
+    return riding ? 'motorcycle test' : 'driving test';
+  }
+};
 
-You can appeal to a court if you think your driving examiner did not follow the law about how they must carry out ${category === TestCategory.ADI3 ? 'ADI qualifying tests' : category === TestCategory.SC ? 'ADI standards checks' : 'driving tests'}.
+export const howToAppealTemplate = (url: string, category: TestCategory, riding: boolean = false): string => {
+  return  `
+# How to appeal your ${getTestType(category, riding)} 
+
+You can appeal to a court if you think your ${[TestCategory.ADI3, TestCategory.SC].includes(category) ? '' : 'driving'} examiner did not follow the law about how they must carry out ${category === TestCategory.ADI3 ? 'ADI qualifying tests' : category === TestCategory.SC ? 'ADI standards checks' : 'driving tests'}.
 
 The court cannot change your test result. If you win your appeal, they can decide you should get a free retest. If you lose your appeal, you might have to pay significant legal costs.
 

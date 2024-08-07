@@ -1,5 +1,31 @@
 /* eslint-disable max-len */
 import {TestCategory} from '@dvsa/mes-test-schema/category-definitions/common/test-category';
+import * as Handlebars from 'handlebars';
+
+/**
+ * Function to transform the category displayed into a more user-friendly format
+ * transformCategory
+ * @param category
+ */
+Handlebars.registerHelper('transformCategory', function (category: TestCategory) {
+  switch (category) {
+  case TestCategory.EUAM1:
+  case TestCategory.EUA1M1:
+  case TestCategory.EUA1M2:
+  case TestCategory.EUAMM1:
+    return 'A1';
+  case TestCategory.EUAM2:
+  case TestCategory.EUA2M1:
+  case TestCategory.EUA2M2:
+  case TestCategory.EUAMM2:
+    return 'A2';
+  case TestCategory.F:
+  case TestCategory.K:
+    return category.toLowerCase();
+  default:
+    return category.replace('+', '');
+  }
+});
 
 /**
  * Function to generate a pass result template
@@ -13,7 +39,7 @@ export const passResultTemplate = (testType: string, categorySwitch: TestCategor
   case TestCategory.SC:
     template = `
 ^# Result: Pass (grade {{grade}})\n
-^Test type: {{category}} test\n
+^Test type: ${testType}\n
 ^Test centre: {{location}}\n
 ^Date: {{date}}
 
@@ -27,7 +53,8 @@ export const passResultTemplate = (testType: string, categorySwitch: TestCategor
 
 ## About the lesson
 
-^Student – {{studentLevel}} 
+^Student – {{studentLevel}}
+ 
 ^Theme(s): 
 {{#each lessonThemes}}
   - {{ this }} 
@@ -47,7 +74,7 @@ To keep improving, it’s important to understand which competencies you can con
   case TestCategory.CCPC:
     template = `
 ^# Result: Pass\n
-^Test type: ${testType} (category {{category}})\n
+^Test type: ${testType} (category {{transformCategory category}})\n
 ^Test centre: {{location}}\n
 ^Date: {{date}}
 {{#if ${categorySwitch === TestCategory.CCPC}}}
@@ -62,7 +89,7 @@ To keep improving, it’s important to understand any faults you made.
   default:
     template = `
 ^# Result: Pass\n
-^Test type: ${testType} (category {{category}})\n
+^Test type: ${testType} (category {{transformCategory category}})\n
 ^Test centre: {{location}}\n
 ^Date: {{date}}
      
@@ -86,9 +113,9 @@ export const failResultTemplate = (testType: string, categorySwitch: TestCategor
   case TestCategory.ADI3:
   case TestCategory.SC:
     template = `
-^# Result: Unsuccessful
-^Test type: ${testType}
-^Test centre: {{location}}
+^# Result: Unsuccessful\n
+^Test type: ${testType}\n
+^Test centre: {{location}}\n
 ^Date: {{date}}
 
 ## Result summary
@@ -130,9 +157,9 @@ ${thirdAttempt ? 'If you intend to restart the qualification process,' : `To pre
   case TestCategory.CCPC:
     template = `
 ^# Result: Unsuccessful
-^Test type: Driver CPC part 4 (practical demonstration) test (category {{category}})
-^Test centre: {{location}}
-^Date: {{date}}
+^Test type: Driver CPC part 4 (practical demonstration) test (category {{category}})\n
+^Test centre: {{location}}\n
+^Date: {{date}}\n
 ^Overall score: {{totalScore}} out of 100
 
 We're sorry that you were unsuccessful this time.
@@ -141,9 +168,9 @@ To prepare for your next test, it’s important to understand more about your re
     `;
     break;
   default: template = `
-^# Result: Unsuccessful
-^Test type: ${testType} (category {{category}})
-^Test centre: {{location}}
+^# Result: Unsuccessful\n
+^Test type: ${testType} (category {{transformCategory category}})\n
+^Test centre: {{location}}\n
 ^Date: {{date}}
 
 We're sorry that you were unsuccessful this time.

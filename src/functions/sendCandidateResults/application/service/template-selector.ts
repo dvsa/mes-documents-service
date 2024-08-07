@@ -97,7 +97,7 @@ export const failEnglishAdi2 =
     ${ecoTemplate()}
     ${understandingResultTemplate(UrlDescriptors.ADI2, FailUrls.ADI2, true)}
     ${nextStepsADI2FailTemplate}
-    ${howToAppealTemplate(AppealUrls.ADI2)}
+    ${howToAppealTemplate(AppealUrls.ADI2, TestCategory.ADI2)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
     `;
@@ -105,8 +105,8 @@ export const failEnglishAdi2 =
 // ADI3
 export const passEnglishAdi3 = `
     ${headerTemplate}
-    ${passResultTemplate('', TestCategory.ADI3)}
-    ${gradeTemplate(false, false)}
+    ${passResultTemplate('ADI part 3 (instructional ability) test', TestCategory.ADI3)}
+    ${gradeTemplate}
     ${nextStepsAdi3PassTemplate}
     ${importantInfoForNewDriversAdi3}
     ${signOffTemplate}
@@ -116,7 +116,7 @@ export const passEnglishAdi3 = `
 export const failEnglishAdi3FirstOrSecondAttempt = `
     ${headerTemplate}
     ${failResultTemplate('ADI part 3 (instructional ability) test', TestCategory.ADI3)}
-    ${gradeTemplate(true, false)}
+    ${gradeTemplate}
     ${nextStepsAdi3FirstOrSecondFailTemplate}
     ${howToAppealTemplate(AppealUrls.ADI3_1ST_OR_2ND, TestCategory.ADI3)}
     ${signOffTemplate}
@@ -126,7 +126,7 @@ export const failEnglishAdi3FirstOrSecondAttempt = `
 export const failEnglishAdi3ThirdAttempt = `
     ${headerTemplate}
     ${failResultTemplate('ADI part 3 (instructional ability) test', TestCategory.ADI3, true)}
-    ${gradeTemplate(true, false)}
+    ${gradeTemplate}
     ${nextStepsAdi3ThirdFailTemplate}
     ${howToAppealTemplate(AppealUrls.ADI3_3RD, TestCategory.ADI3)}
     ${signOffTemplate}
@@ -136,8 +136,8 @@ export const failEnglishAdi3ThirdAttempt = `
 // SC
 export const passEnglishSc = `
     ${headerTemplate}
-    ${passResultTemplate('', TestCategory.SC)}
-    ${gradeTemplate(false, true)}
+    ${passResultTemplate('ADI standards check', TestCategory.SC)}
+    ${gradeTemplate}
     ${importantInfoForDriversSc}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
@@ -146,7 +146,7 @@ export const passEnglishSc = `
 export const failEnglishScFirstOrSecondAttempt = `
     ${headerTemplate}
     ${failResultTemplate('ADI standards check', TestCategory.SC)}
-    ${gradeTemplate(true, true)}
+    ${gradeTemplate}
     ${nextStepsScFirstOrSecondTemplate}
     ${howToAppealTemplate(AppealUrls.SC_1ST_OR_2ND, TestCategory.SC)}
     ${signOffTemplate}
@@ -156,7 +156,7 @@ export const failEnglishScFirstOrSecondAttempt = `
 export const failEnglishScThirdAttempt = `
     ${headerTemplate}
     ${failResultTemplate('ADI standards check', TestCategory.SC, true)}
-    ${gradeTemplate(true, true)}
+    ${gradeTemplate}
     ${nextStepsScThirdTemplate}
     ${howToAppealTemplate(AppealUrls.SC_3RD, TestCategory.SC)}
     ${signOffTemplate}
@@ -189,7 +189,7 @@ export const failEnglishB = `
     ${nextStepsFailBTemplate}
     ${testExperienceSurveyTemplate}
     ${statementOfFailureBTemplate}
-    ${howToAppealTemplate(AppealUrls.B)}
+    ${howToAppealTemplate(AppealUrls.B, TestCategory.B)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
 `;
@@ -276,15 +276,15 @@ export const passEnglishHome =
 export const failEnglishHome =
     `
     ${headerTemplate}
-    ${failResultTemplate('Tractor or specialist vehicle driving test', TestCategory.F)}
+    ${failResultTemplate('tractor or specialist vehicle driving test', TestCategory.F)}
     ${etaTemplate}
     ${dangerousFaultsTemplate}
     ${seriousFaultsTemplate}
     ${drivingFaultsTemplate}
     ${ecoTemplate()}
-    ${understandingResultTemplate(UrlDescriptors.DRIVING, FailUrls.TRACTOR)}
+    ${understandingResultTemplate(UrlDescriptors.DRIVING, FailUrls.TRACTOR, true)}
     ${statementOfFailureTractorTemplate}
-    ${howToAppealTemplate(AppealUrls.TRACTOR)}
+    ${howToAppealTemplate(AppealUrls.TRACTOR, TestCategory.F)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
     `;
@@ -307,7 +307,7 @@ export const failEnglishMan =
     ${seriousFaultsTemplate}
     ${understandingResultTemplate(UrlDescriptors.DRIVING, FailUrls.MANOEUVRES, true)}
     ${statementOfFailureVocational3bTemplate}
-    ${howToAppealTemplate(AppealUrls.MANOEUVRES)}
+    ${howToAppealTemplate(AppealUrls.MANOEUVRES, TestCategory.C1M)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
     `;
@@ -340,7 +340,7 @@ export const failEnglishVocational =
     ${understandingResultTemplate(UrlDescriptors.DRIVING, FailUrls.VOCATIONAL, true)}
     ${testExperienceSurveyTemplate3b}
     ${statementOfFailureVocational3bTemplate}
-    ${howToAppealTemplate(AppealUrls.VOCATIONAL)}
+    ${howToAppealTemplate(AppealUrls.VOCATIONAL, TestCategory.C)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
     `;
@@ -361,11 +361,11 @@ export const passEnglishCpc =
 export const failEnglishCpc =
     `
     ${headerTemplate}
-    ${failResultTemplate('', TestCategory.CCPC)}
+    ${failResultTemplate('Driver CPC part 4 (practical demonstration) test', TestCategory.CCPC)}
     ${vocationalScoringExplanation}
     ${vocationalScoring}
     ${statementOfFailureVocational4}
-    ${howToAppealTemplate(AppealUrls.CPC)}
+    ${howToAppealTemplate(AppealUrls.CPC, TestCategory.CCPC)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
     `;
