@@ -7,13 +7,24 @@ import * as Handlebars from 'handlebars';
  * transformCategory
  * @param category
  */
-Handlebars.registerHelper('transformCategory', function (category: TestCategory.EUAM1 | TestCategory.EUAM2) {
-  const categoryTransform = {
-    EUAM1: 'AM1',
-    EUAM2: 'AM2',
-  };
-
-  return categoryTransform[category] || category;
+Handlebars.registerHelper('transformCategory', function (category: TestCategory) {
+  switch (category) {
+  case TestCategory.EUAM1:
+  case TestCategory.EUA1M1:
+  case TestCategory.EUA1M2:
+  case TestCategory.EUAMM1:
+    return 'A1';
+  case TestCategory.EUAM2:
+  case TestCategory.EUA2M1:
+  case TestCategory.EUA2M2:
+  case TestCategory.EUAMM2:
+    return 'A2';
+  case TestCategory.F:
+  case TestCategory.K:
+    return category.toLowerCase();
+  default:
+    return category.replace('+', '');
+  }
 });
 
 /**
@@ -63,7 +74,7 @@ To keep improving, it’s important to understand which competencies you can con
   case TestCategory.CCPC:
     template = `
 ^# Result: Pass\n
-^Test type: ${testType} (category {{category}})\n
+^Test type: ${testType} (category {{transformCategory category}})\n
 ^Test centre: {{location}}\n
 ^Date: {{date}}
 {{#if ${categorySwitch === TestCategory.CCPC}}}
