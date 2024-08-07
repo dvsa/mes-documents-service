@@ -97,7 +97,7 @@ export const failEnglishAdi2 =
     ${ecoTemplate()}
     ${understandingResultTemplate(UrlDescriptors.ADI2, FailUrls.ADI2, true)}
     ${nextStepsADI2FailTemplate}
-    ${howToAppealTemplate(AppealUrls.ADI2)}
+    ${howToAppealTemplate(AppealUrls.ADI2, TestCategory.ADI2)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
     `;
@@ -189,7 +189,7 @@ export const failEnglishB = `
     ${nextStepsFailBTemplate}
     ${testExperienceSurveyTemplate}
     ${statementOfFailureBTemplate}
-    ${howToAppealTemplate(AppealUrls.B)}
+    ${howToAppealTemplate(AppealUrls.B, TestCategory.B)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
 `;
@@ -284,7 +284,7 @@ export const failEnglishHome =
     ${ecoTemplate()}
     ${understandingResultTemplate(UrlDescriptors.DRIVING, FailUrls.TRACTOR, true)}
     ${statementOfFailureTractorTemplate}
-    ${howToAppealTemplate(AppealUrls.TRACTOR)}
+    ${howToAppealTemplate(AppealUrls.TRACTOR, TestCategory.F)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
     `;
@@ -307,7 +307,7 @@ export const failEnglishMan =
     ${seriousFaultsTemplate}
     ${understandingResultTemplate(UrlDescriptors.DRIVING, FailUrls.MANOEUVRES, true)}
     ${statementOfFailureVocational3bTemplate}
-    ${howToAppealTemplate(AppealUrls.MANOEUVRES)}
+    ${howToAppealTemplate(AppealUrls.MANOEUVRES, TestCategory.C1M)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
     `;
@@ -340,7 +340,7 @@ export const failEnglishVocational =
     ${understandingResultTemplate(UrlDescriptors.DRIVING, FailUrls.VOCATIONAL, true)}
     ${testExperienceSurveyTemplate3b}
     ${statementOfFailureVocational3bTemplate}
-    ${howToAppealTemplate(AppealUrls.VOCATIONAL)}
+    ${howToAppealTemplate(AppealUrls.VOCATIONAL, TestCategory.C)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
     `;
@@ -365,7 +365,7 @@ export const failEnglishCpc =
     ${vocationalScoringExplanation}
     ${vocationalScoring}
     ${statementOfFailureVocational4}
-    ${howToAppealTemplate(AppealUrls.CPC)}
+    ${howToAppealTemplate(AppealUrls.CPC, TestCategory.CCPC)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
     `;

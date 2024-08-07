@@ -1,5 +1,20 @@
 /* eslint-disable max-len */
 import {TestCategory} from '@dvsa/mes-test-schema/category-definitions/common/test-category';
+import * as Handlebars from 'handlebars';
+
+/**
+ * Function to transform the category displayed into a more user-friendly format
+ * transformCategory
+ * @param category
+ */
+Handlebars.registerHelper('transformCategory', function (category: TestCategory.EUAM1 | TestCategory.EUAM2) {
+  const categoryTransform = {
+    EUAM1: 'AM1',
+    EUAM2: 'AM2',
+  };
+
+  return categoryTransform[category] || category;
+});
 
 /**
  * Function to generate a pass result template
@@ -63,7 +78,7 @@ To keep improving, it’s important to understand any faults you made.
   default:
     template = `
 ^# Result: Pass\n
-^Test type: ${testType} (category {{category}})\n
+^Test type: ${testType} (category {{transformCategory category}})\n
 ^Test centre: {{location}}\n
 ^Date: {{date}}
      
@@ -143,7 +158,7 @@ To prepare for your next test, it’s important to understand more about your re
     break;
   default: template = `
 ^# Result: Unsuccessful\n
-^Test type: ${testType} (category {{category}})\n
+^Test type: ${testType} (category {{transformCategory category}})\n
 ^Test centre: {{location}}\n
 ^Date: {{date}}
 
