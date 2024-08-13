@@ -95,13 +95,13 @@ describe('Subject Mapper', () => {
   });
 
   it('should return the correct subject for padi when english', () => {
-    const subject = subjectMapper(TestCategory.B, Language.ENGLISH, true);
+    const subject = subjectMapper(TestCategory.B, Language.ENGLISH);
     // eslint-disable-next-line max-len
     expect(subject).toContain('{{#if isADI3}}ADI Part 3 – 3rd Attempt Fail{{/if}}{{#if isSC}}ADI SC – 3rd Attempt Fail{{/if}}');
   });
 
   it('should return the correct subject for padi when Welsh', () => {
-    const subject = subjectMapper(TestCategory.B, Language.WELSH, true);
+    const subject = subjectMapper(TestCategory.B, Language.WELSH);
     // eslint-disable-next-line max-len
     expect(subject).toContain('{{#if isADI3}}ADI Part 3 – 3rd Attempt Fail{{/if}}{{#if isSC}}ADI SC – 3rd Attempt Fail{{/if}}');
   });

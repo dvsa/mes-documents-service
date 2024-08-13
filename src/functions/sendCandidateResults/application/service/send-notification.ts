@@ -25,7 +25,6 @@ export async function sendNotification(
   client: INotifyClient,
   conductedLanguage: Language,
   testOutcome: TestOutcome,
-  padi?: boolean,
 ): Promise<any> {
 
   let personalisation: Personalisation;
@@ -34,14 +33,15 @@ export async function sendNotification(
   let address: Address;
 
   try {
-    renderedSubject = getRenderedSubject(notificationPersonalisation, conductedLanguage, padi);
+    renderedSubject = getRenderedSubject(notificationPersonalisation, conductedLanguage);
   } catch (subjectError) {
     console.error('Error preparing rendered subject', subjectError);
     throw new Error('Error preparing rendered content');
   }
 
   try {
-    renderedText = getRenderedText(testOutcome, notificationPersonalisation, conductedLanguage, padi);
+    console.log('conductedLanguage | sendNotification:', conductedLanguage);
+    renderedText = getRenderedText(testOutcome, notificationPersonalisation, conductedLanguage);
   } catch (textError) {
     console.error('Error preparing rendered text', textError);
     throw new Error('Error preparing rendered content');
@@ -94,16 +94,15 @@ export async function sendNotification(
  * Compile subject from the appropriate category and personalisation
  * @param notificationPersonalisation
  * @param conductedLanguage
- * @param padi
  */
 export function getRenderedSubject(
   notificationPersonalisation: PersonalisationDetails,
   conductedLanguage: Language,
-  padi: boolean | undefined
 ): string | undefined {
   try {
+    console.log('Conducted language | getRenderedSubject:', conductedLanguage);
     const compileSubject = Handlebars.compile(
-      subjectMapper(notificationPersonalisation.category, conductedLanguage, padi)
+      subjectMapper(notificationPersonalisation.category, conductedLanguage)
     );
     return compileSubject(notificationPersonalisation);
 
@@ -117,15 +116,14 @@ export function getRenderedSubject(
  * @param testOutcome
  * @param notificationPersonalisation
  * @param conductedLanguage
- * @param padi
  */
 export function getRenderedText(
   testOutcome: TestOutcome,
   notificationPersonalisation: PersonalisationDetails,
   conductedLanguage: Language,
-  padi: boolean | undefined
 ): string | undefined {
   try {
+    console.log('Conducted language | getRenderedText:', conductedLanguage);
     const compileTemplate = Handlebars.compile(
       // eslint-disable-next-line max-len
       templateMapper(testOutcome, notificationPersonalisation.category, conductedLanguage, notificationPersonalisation.previousAttempts)

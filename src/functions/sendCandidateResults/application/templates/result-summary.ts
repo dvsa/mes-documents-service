@@ -180,3 +180,15 @@ To prepare for your next test, it’s important to understand more about the fau
   }
   return template;
 };
+
+export const failResultWelshTemplateAdi2 = `
+^# Canlyniad: Aflwyddiannus
+^ Math prawf: Prawf ADI rhan 2 (gallu gyrru)
+^ Canolfan profi: {{ location }}
+^ Dyddiad:  {{date }}
+
+Mae'n ddrwg gennym nad oeddech yn llwyddiannus y tro hwn.
+
+I paratoi ar gyfer eich prawf nesaf, mae'n bwysig deall mwy am y rhesymau nad ydych wedi bod yn llwyddiannus y tro hwn. 
+
+`;

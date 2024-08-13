@@ -9,6 +9,16 @@ export const drivingFaultsTemplate = `
 {{/if}}
 `;
 
+export const drivingFaultsWelshTemplate = `
+{{#if showDrivingFaults}}
+# Eich camgymeriadau gyrru:
+  {{#each drivingFaults}}
+  - {{ this }}
+  {{/each}}
+
+{{/if}}
+`;
+
 export const ridingFaultTemplate = `
 {{#if showDrivingFaults}}
 # Your riding faults:

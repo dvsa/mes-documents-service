@@ -5,6 +5,12 @@ export enum UrlDescriptors {
   ADI2 = 'Find out more about ADI part 2 test faults and results',
 }
 
+export enum UrlDescriptorsWelsh {
+  DRIVING = 'Darganfod mwy am namau a chanlyniadau prawf gyrru',
+  RIDING = 'Darganfod mwy am namau a chanlyniadau prawf beic modur',
+  ADI2 = 'Darganfod mwy am namau a chanlyniadau prawf ADI rhan 2',
+}
+
 export enum PassUrls {
   ADI2 = 'https://www.gov.uk/guidance/understanding-your-driving-test-result/approved-driving-instructor-adi-part-2-driving-ability-test?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=pass',
   B = 'https://www.gov.uk/guidance/understanding-your-driving-test-result/car-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=car-driving-test&utm_content=pass',
@@ -41,6 +47,29 @@ Check our guide which explains:
 - how to improve your skills, knowledge and understanding in each area
 {{#if ${fail}}}
 - how to book a new test when you're ready
+{{/if}}
+
+^[${urlDescriptor}](${url}).  
+  `;
+};
+
+/**
+ * Function to generate an understanding your result template in Welsh
+ * @param urlDescriptor
+ * @param url
+ * @param fail
+ */
+export const understandingResultWelshTemplate = (urlDescriptor: string, url: string, fail?: boolean): string => {
+  return `
+# Deall eich canlyniad
+
+Gwiriwch ein canllaw sy'n esbonio:
+
+- yr hyn a aseswyd gan eich archwiliwr gyrru yn ystod eich prawf
+- yr hyn oedd rhaid i chi gwneud
+- sut i wella eich sgiliau, gwybodaeth a dealltwriaeth ym mhob rhan
+{{#if ${fail}}}
+- sut i trefnu prawf newydd pan fyddech yn barod
 {{/if}}
 
 ^[${urlDescriptor}](${url}).  

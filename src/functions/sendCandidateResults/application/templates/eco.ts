@@ -45,3 +45,17 @@ ${riding ? 'The motorcycle' : 'Your driving'} examiner saw that you could improv
 {{/if}}
 `;
 };
+
+export const ecoWelshTemplate = (riding?: boolean): string => {
+  return `
+{{#if showEcoText}}
+# ${riding ? 'Marchogaeth' : 'Gyrru'} tanwydd-effeithlon
+
+{{#if (displayEcoExplanation category)}}
+${riding ? 'Marchogaeth' : 'Gyrru'} tanwydd-effeithlon o ran tanwydd yn arddull o yrru diogel sy'n lleihau eich defnydd o danwydd ac yn helpu'r amgylchedd.
+{{/if}}
+{{/if}}
+
+---
+`;
+};

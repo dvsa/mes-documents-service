@@ -66,7 +66,17 @@ export const nextStepsADI2FailTemplate = `
 
 Get a registered trainer to help you prepare for your next attempt at the ADI part 2 test if you have not done so already.
 
-[Find driving instructor training courses](https://www.gov.uk/find-driving-instructor-training?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=unsuccessful).
+^[Find driving instructor training courses](https://www.gov.uk/find-driving-instructor-training?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=unsuccessful).
+`;
+
+export const nextStepsAdi2WelshFailTemplate = `
+# Beth i wneud nesaf
+
+Cael hyfforddwr cofrestredig i'ch helpu i baratoi ar gyfer eich ymgais nesaf ar y prawf ADI rhan 2 os nad ydych wedi gwneud hynny yn barod.
+
+^[Darganfod gyrsiau hyfforddi gyrru](https://www.gov.uk/find-driving-instructor-training?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=unsuccessful).
+
+---
 `;
 
 export const nextStepsAdi2PassTemplate = `

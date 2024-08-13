@@ -1,8 +1,8 @@
 import * as markdownIt from 'markdown-it';
 import * as pdf from 'html-pdf';
-import { getRenderedText } from "../../src/functions/sendCandidateResults/application/service/send-notification";
-import { TestOutcome } from "../../src/functions/sendCandidateResults/domain/test-outcome";
-import { Language } from "../../src/functions/sendCandidateResults/domain/conducted-language";
+import {getRenderedText} from "../../src/functions/sendCandidateResults/application/service/send-notification";
+import {TestOutcome} from "../../src/functions/sendCandidateResults/domain/test-outcome";
+import {Language} from "../../src/functions/sendCandidateResults/domain/conducted-language";
 import {
   personalisationCatADI2Fail,
   personalisationCatADI2Pass,
@@ -27,10 +27,12 @@ import {
   personalisationVocational4Fail,
   personalisationVocational4Pass,
 } from "../../src/functions/sendCandidateResults/application/service/__mocks__/personalisation-details";
+import {writeFileSync} from "node:fs";
 
 const templates = [
   { outcome: TestOutcome.PASS, personalisation: personalisationCatADI2Pass, language: Language.ENGLISH, category: 'adi2PassEnglish' },
   { outcome: TestOutcome.FAIL, personalisation: personalisationCatADI2Fail, language: Language.ENGLISH, category: 'adi2FailEnglish' },
+  { outcome: TestOutcome.FAIL, personalisation: personalisationCatADI2Fail, language: Language.WELSH, category: 'adi2FailWelsh'},
   { outcome: TestOutcome.PASS, personalisation: personalisationCatADI3Pass, language: Language.ENGLISH, category: 'adi3PassEnglish' },
   { outcome: TestOutcome.FAIL, personalisation: personalisationCatADI3FailFirstOrSecond, language: Language.ENGLISH, category: 'adi3FailEnglishFirstOrSecond' },
   { outcome: TestOutcome.FAIL, personalisation: personalisationCatADI3FailThird, language: Language.ENGLISH, category: 'adi3FailEnglishThird' },
@@ -53,7 +55,7 @@ const templates = [
   { outcome: TestOutcome.FAIL, personalisation: personalisationVocational4Fail, language: Language.ENGLISH, category: 'vocational4FailEnglish' },
 ].map(({ outcome, personalisation, language, category }) => ({
   filename: category,
-  markdown: getRenderedText(outcome, personalisation, language, false)
+  markdown: getRenderedText(outcome, personalisation, language)
 }));
 
 templates.forEach(({ filename, markdown }) => generatePdf(filename, markdown));

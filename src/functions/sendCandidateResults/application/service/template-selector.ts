@@ -1,26 +1,26 @@
 import {TestCategory} from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 import {Language} from '../../domain/conducted-language';
-import {headerTemplate} from '../templates/header';
-import {failResultTemplate, passResultTemplate} from '../templates/result-summary';
+import {headerTemplate, headerWelshTemplate} from '../templates/header';
+import {failResultTemplate, failResultWelshTemplateAdi2, passResultTemplate} from '../templates/result-summary';
 import {
   testExperienceSurveyRidingTemplate,
   testExperienceSurveyTemplate,
   testExperienceSurveyTemplate3b,
 } from '../templates/test-experience-survey';
-import {dataPrivacyTemplate} from '../templates/data-privacy';
+import {dataPrivacyTemplate, dataPrivacyWelshTemplate} from '../templates/data-privacy';
 import {TestOutcome} from '../../domain/test-outcome';
-import {etaTemplate} from '../templates/eta';
-import {dangerousFaultsTemplate} from '../templates/dangerous-faults';
-import {seriousFaultsTemplate} from '../templates/serious-faults';
+import {etaTemplate, etaWelshTemplate} from '../templates/eta';
+import {dangerousFaultsTemplate, dangerousFaultsWelshTemplate} from '../templates/dangerous-faults';
+import {seriousFaultsTemplate, seriousFaultsWelshTemplate} from '../templates/serious-faults';
 import {
-  drivingFaultsTemplate,
+  drivingFaultsTemplate, drivingFaultsWelshTemplate,
   ridingFaultTemplate,
   vocationalScoring,
   vocationalScoringExplanation,
 } from '../templates/driving-faults';
 import {
   nextStepsADI2FailTemplate,
-  nextStepsAdi2PassTemplate,
+  nextStepsAdi2PassTemplate, nextStepsAdi2WelshFailTemplate,
   nextStepsAdi3FirstOrSecondFailTemplate,
   nextStepsAdi3PassTemplate,
   nextStepsAdi3ThirdFailTemplate,
@@ -54,9 +54,15 @@ import {
   statementOfFailureTractorTemplate,
   statementOfFailureVocational3bTemplate,
 } from '../templates/statement-of-failure';
-import {FailUrls, PassUrls, understandingResultTemplate, UrlDescriptors} from '../templates/understanding-your-result';
-import { AppealUrls, howToAppealTemplate } from '../templates/appeal-your-test';
-import {signOffTemplate} from '../templates/sign-off';
+import {
+  FailUrls,
+  PassUrls,
+  understandingResultTemplate, understandingResultWelshTemplate,
+  UrlDescriptors,
+  UrlDescriptorsWelsh,
+} from '../templates/understanding-your-result';
+import {AppealUrls, howToAppealTemplate, howToAppealWelshTemplate} from '../templates/appeal-your-test';
+import {signOffTemplate, signOffWelshTemplate} from '../templates/sign-off';
 import {
   importantInformationForHGVAndBusVocational3bTemplate,
   importantInformationForHGVAndBusVocational4Template,
@@ -71,7 +77,7 @@ import {
   importantInfoForNewDriversAdi3,
   importantInfoForRiders,
 } from '../templates/info-for-new-drivers';
-import {ecoTemplate} from '../templates/eco';
+import {ecoTemplate, ecoWelshTemplate} from '../templates/eco';
 
 // ADI2
 export const passEnglishAdi2 =
@@ -100,6 +106,22 @@ export const failEnglishAdi2 =
     ${howToAppealTemplate(AppealUrls.ADI2, TestCategory.ADI2)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
+    `;
+
+export const failWelshAdi2 =
+    `
+    ${headerWelshTemplate}
+    ${failResultWelshTemplateAdi2}
+    ${etaWelshTemplate}
+    ${dangerousFaultsWelshTemplate}
+    ${seriousFaultsWelshTemplate}
+    ${drivingFaultsWelshTemplate}
+    ${ecoWelshTemplate()}
+    ${understandingResultWelshTemplate(UrlDescriptorsWelsh.ADI2, FailUrls.ADI2, true)}
+    ${nextStepsAdi2WelshFailTemplate}
+    ${howToAppealWelshTemplate(AppealUrls.ADI2, TestCategory.ADI2)}
+    ${signOffWelshTemplate}
+    ${dataPrivacyWelshTemplate}
     `;
 
 // ADI3
@@ -375,16 +397,15 @@ export const failEnglishCpc =
  * types: Driving | Riding | ADI3
  * @param category
  * @param language
- * @param padi
  */
-export function subjectMapper(category: TestCategory, language: Language, padi?: boolean) {
-  const subjectType = padi ? 'padi' : getCategorySubject(category);
+export function subjectMapper(category: TestCategory, language: Language) {
+  const subjectType = getCategorySubject(category);
   return (emailSubjects as Record<string, string>)[`${subjectType}${language}Subject`] || '';
 }
 
 /**
  * Select template based upon category, test outcome & language
- * Note: ADI3/padi follows a different pattern
+ * Note: ADI3/SC follows a different pattern
  * @param testOutcome
  * @param category
  * @param language
@@ -405,6 +426,7 @@ export function templateMapper(testOutcome: TestOutcome, category: TestCategory,
 const templates = {
   passEnglishAdi2,
   failEnglishAdi2,
+  failWelshAdi2,
   passEnglishAdi3,
   failEnglishAdi3FirstOrSecondAttempt,
   failEnglishAdi3ThirdAttempt,

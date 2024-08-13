@@ -7,3 +7,13 @@ export const dangerousFaultsTemplate = `
 
 {{/if}}
 `;
+
+export const dangerousFaultsWelshTemplate = `
+{{#if showDangerousFaults}}
+# Eich camgymeriadau peryglus:
+  {{#each dangerousFaults}}
+  - {{ this }}
+  {{/each}}
+
+{{/if}}
+`;

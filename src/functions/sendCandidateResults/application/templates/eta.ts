@@ -12,3 +12,18 @@ During your test, your examiner had to take control of the vehicle to avoid an i
 
 {{/if}}
 `;
+
+export const etaWelshTemplate = `
+{{#if showEtaText}}
+# Roedd yn rhaid i'ch arholwr weithredu
+    
+{{/if}}
+{{#if showEtaVerbal}}
+Yn ystod eich prawf, roedd yn rhaid i'ch arholwr ddweud wrthych am wneud rhywbeth i osgoi digwyddiad.
+        
+{{/if}}
+{{#if showEtaPhysical}}
+Yn ystod eich prawf, roedd yn rhaid i'ch arholwr cymryd rheolaeth ar y cerbyd i osgoi digwyddiad.
+
+{{/if}}
+`;
