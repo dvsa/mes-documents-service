@@ -29,12 +29,12 @@
   "dependencies": {
     "@aws-sdk/client-secrets-manager": "^3.454.0",
     "@dvsa/mes-microservice-common": "1.1.6",
-    "axios": "^1.6.5",
+    "axios": "^1.6.8",
     "bottleneck": "^2.19.5",
     "inversify": "6.0.2",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
-    "notifications-node-client": "^7.0.6",
+    "notifications-node-client": "^8.2.1",
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
