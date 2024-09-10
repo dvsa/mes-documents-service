@@ -13,6 +13,23 @@ If you have already passed the part 3 tests, your Driver CPC card will now be se
 ^[Find out about getting your Driver CPC card](https://www.gov.uk/become-lorry-bus-driver/after-youve-qualified?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-4-test&utm_content=pass). 
 `;
 
+export const vocationalIfYouWantToDriveWelshTemplate4 = `
+# Os ydych chi eisiau gyrru fel prif ran eich swydd
+
+Bydd angen y CPC Gyrwyr llawn arnoch os ydych yn gyrru lori HGV, bws neu goets fel prif ran eich swydd. 
+
+Rhaid i chi basio'r prawf CPC Gyrrwr rhan 3a a 3b, os nad ydych wedi gwneud hynny eto
+
+^Darganfod mwy am y [Prawf Gyrwr CPC rhan 3a](https://www.gov.uk/become-lorry-bus-driver/driver-cpc-part-3a-off-road-test?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-4-test&utm_content=pass) and [Prawf Gyrwr CPC rhan 3b](https://www.gov.uk/become-lorry-bus-driver/driver-cpc-part-3b-on-road-test?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-4-test&utm_content=pass). 
+
+Os ydych eisoes wedi pasio prawf rhan 3, bydd eich cerdyn Gyrrwr CPC yn cael ei anfon i'r cyfeiriad ar eich trwydded yrru.
+
+^[Darganfod mwy am eich cerdyn Gyrrwr CPC](https://www.gov.uk/become-lorry-bus-driver/after-youve-qualified?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-4-test&utm_content=pass). 
+
+---
+
+`;
+
 export const vocationalIfYouWantToDriveTemplate3b = `
 # If you want to drive as the main part of your job
 
@@ -27,12 +44,21 @@ If you have already passed the part 4 test, your Driver CPC card will now be sen
 ^[Find out about getting your Driver CPC card](https://www.gov.uk/become-lorry-bus-driver/after-youve-qualified?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-3b-test&utm_content=pass). 
 `;
 
-export const statementOfFailureVocational4 = `
-# Statement of failure to pass CPC module 4 test
+export const vocationalIfYouWantToDriveWelshTemplate3b = `
+# Os ydych chi eisiau gyrru fel prif ran eich swydd
 
-^CPC Module 4 reference number: {{applicationReference}}
-^
-^The candidate with the number shown above has been examined and FAILED to pass the Module 4 element of the Driver Certificate of Professional Competence(CPC) qualification process. Candidates are assessed against the 5 set topics listed above in deciding whether they are competent to comply with the requirements. 
+Bydd angen y cymhwyster CPC Gyrwyr llawn arnoch os ydych yn gyrru lori, bws neu goets fel prif ran eich swydd. 
+
+Rhaid i chi basio'r prawf CPC Gyrrwr rhan 4 (arddangosiad ymarferol) os nad ydych wedi gwneud hynny eto.
+
+^[Darganfod mwy am y prawf Gyrrwr CPC rhan 4](https://www.gov.uk/become-lorry-bus-driver/driver-cpc-part-4-practical-demonstration-test?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-3b-test&utm_content=pass). 
+
+Os ydych eisoes wedi pasio prawf rhan 4, bydd eich cerdyn Gyrrwr CPC yn cael ei anfon i'r cyfeiriad ar eich trwydded yrru.
+
+^[Darganfod mwy am eich cerdyn Gyrrwr CPC](https://www.gov.uk/become-lorry-bus-driver/after-youve-qualified?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-3b-test&utm_content=pass). 
+
+---
+
 `;
 
 export const importantInformationForHGVAndBusVocational4Template = `
@@ -89,6 +115,59 @@ You must get an ‘animal transportation certificate of competence’ if you wan
 {{/if}}
 `;
 
+export const importantInformationForHGVAndBusVocational4WelshTemplate = `
+# Gwybodaeth bwysig ar gyfer gyrrwyr newydd HGV a fysiau
+
+Mae rhaid i chi wneud sawl peth nawr eich bod wedi pasio'ch prawf. Mae'r eitemau hyn yn cynnwys:
+
+- sicrhau bod eich cerbyd yn dilyn yr holl reolau
+- diweddaru eich manylion gyda DVLA
+
+^[Darganfod mwy am rwymedigaethau cyfreithiol gyrwyr a teithwyr]( https://www.gov.uk/legal-obligations-drivers-riders?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-4-test&utm_content=pass).
+
+## Paratoi ar gyfer gweithio fel gyrrwr
+
+Os ydych eisoes wedi pasio eich prawf Gyrrwr CPC rhan 3 ac os yw eich swydd yn gofyn am hynny, bydd angen i chi:
+
+- gwnewch gais am gerdyn tacograff digidol i storio gwybodaeth am eich gwaith bob dydd
+- paratoi i wneud teithiau rhyngwladol
+
+^[Darganfod beth i'w wneud nawr eich bod wedi cymhwyso](https://www.gov.uk/become-lorry-bus-driver/after-youve-qualified?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-4-test&utm_content=pass). 
+
+## Aros yn gymwys
+
+Os ydych chi eisoes wedi pasio prawf Gyrrwr CPC rhan 4 ac os mai gyrru yw prif ran eich swydd, bydd rhaid wneud y canlynol pob 5 mlynedd:
+
+- cymryd 35 awr o hyfforddiant Gyrrwr CPC i barhau i yrru'n broffesiynol
+- adnewyddu eich trwydded yrru HGV neu fws
+
+Os yr ydych yn 65 oed neu dros, bydd rhaid adnewyddu eich trwydded yrru HGV neu fws pob blwyddyn.
+
+^[Dysgwch am hyfforddiant CPC Gyrwyr ar gyfer gyrwyr cymwys](https://www.gov.uk/driver-cpc-training?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-4-test&utm_content=pass). 
+
+## Cymwys i dynnu trelars trwm
+
+Mae cyfyngiadau ar faint ôl-gerbyd y gallwch ei dynnu gyda phob categori o gerbyd.
+
+Os ydych chi eisiau tynnu trelar mwy, efallai y bydd angen i chi uwchraddio'ch trwydded.
+
+^[Darganfod sut i uwchraddio'ch trwydded i dynnu ôl-gerbydau trymach](https://www.gov.uk/become-lorry-bus-driver/qualify-heavier-trailers?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-4-test&utm_content=pass). 
+
+{{#if showLGVText}}
+## Cymwys i gludo nwyddau peryglus
+
+Os ydych chi eisiau cludo nwyddau peryglus mewn HGV, mae angen i chi hyfforddi a phasio arholiadau.
+
+^[Dysgwch sut i ddod yn yrrwr nwyddau peryglus yn](https://www.gov.uk/become-dangerous-goods-driver).
+
+## Os ydych chi eisiau cludo anifeiliaid
+
+Rhaid i chi gael ‘tystysgrif cymhwysedd cludo anifeiliaid’ os ydych am yrru moch, ceffylau, gwartheg, geifr, defaid neu ddofednod am resymau masnachol ac ar deithiau 40.4 milltir a throsodd.
+
+^[Darganfod sut i cael y tystysgrif i cludo anifeiliaid](https://www.gov.uk/become-lorry-bus-driver/transport-animals).
+{{/if}}
+`;
+
 export const importantInformationForHGVAndBusVocational3bTemplate = `
 # Important information for new HGV and bus drivers
 
@@ -140,5 +219,58 @@ If you want to transport dangerous goods in an HGV, you need to train and pass e
 You must get an ‘animal transportation certificate of competence’ if you want to drive pigs, horses, cattle, goats, sheep or poultry for commercial reasons and on journeys of 40.4 miles and over.
 
 ^Find out how to get the certificate to transport animals at https://www.gov.uk/become-lorry-bus-driver/transport-animals.
+{{/if}}
+`;
+
+export const importantInformationForHGVAndBusVocational3bWelshTemplate = `
+# Gwybodaeth bwysig ar gyfer gyrrwyr newydd HGV a fysiau
+
+Mae rhaid i chi wneud sawl peth nawr eich bod wedi pasio'ch prawf. Mae'r eitemau hyn yn cynnwys:
+
+- sicrhau bod eich cerbyd yn dilyn yr holl reolau
+- diweddaru eich manylion gyda DVLA
+
+^[Darganfod mwy am rwymedigaethau cyfreithiol gyrwyr a teithwyr](https://www.gov.uk/legal-obligations-drivers-riders?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-3b-test&utm_content=pass).
+
+## Paratoi ar gyfer gweithio fel gyrrwr
+
+Os ydych eisoes wedi pasio eich prawf Gyrrwr CPC rhan 4 ac os yw eich swydd yn gofyn am hynny, bydd angen i chi:
+
+- gwnewch gais am gerdyn tacograff digidol i storio gwybodaeth am eich gwaith bob dydd
+- paratoi i wneud teithiau rhyngwladol
+
+^[Darganfod beth i'w wneud nawr eich bod wedi cymhwyso](https://www.gov.uk/become-lorry-bus-driver/after-youve-qualified?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-3b-test&utm_content=pass). 
+
+## Aros yn gymwys
+
+Os ydych chi eisoes wedi pasio prawf Gyrrwr CPC rhan 4 ac os mai gyrru yw prif ran eich swydd, bydd rhaid wneud y canlynol pob 5 mlynedd:
+
+- cymryd 35 awr o hyfforddiant Gyrrwr CPC i barhau i yrru'n broffesiynol
+- adnewyddu eich trwydded yrru HGV neu fws
+
+Os yr ydych yn 65 oed neu dros, bydd rhaid adnewyddu eich trwydded yrru HGV neu fws pob blwyddyn.
+
+^[Dysgwch am hyfforddiant CPC Gyrwyr ar gyfer gyrwyr cymwys](https://www.gov.uk/driver-cpc-training?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-3b-test&utm_content=pass). 
+
+## Cymwys i dynnu trelars trwm
+
+Mae cyfyngiadau ar faint ôl-gerbyd y gallwch ei dynnu gyda phob categori o gerbyd.
+
+Os ydych chi eisiau tynnu trelar mwy, efallai y bydd angen i chi uwchraddio'ch trwydded.
+
+^[Darganfod sut i uwchraddio'ch trwydded i dynnu ôl-gerbydau trymach](https://www.gov.uk/become-lorry-bus-driver/qualify-heavier-trailers?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-3b-test&utm_content=pass). 
+
+{{#if showLGVText}}
+# Cymwys i gludo nwyddau peryglus
+
+Os ydych chi eisiau cludo nwyddau peryglus mewn HGV, mae angen i chi hyfforddi a phasio arholiadau.
+
+^[Darganfod sut i fod yn gyrrwr cludo nwyddau peryglus](https://www.gov.uk/become-dangerous-goods-driver).
+
+# Os ydych chi eisiau cludo anifeiliaid
+
+Rhaid i chi gael ‘tystysgrif cymhwysedd cludo anifeiliaid’ os ydych am yrru moch, ceffylau, gwartheg, geifr, defaid neu ddofednod am resymau masnachol ac ar deithiau 40.4 milltir a throsodd.
+
+^[Darganfod sut i cael y tystysgrif i cludo anifeiliaid](https://www.gov.uk/become-lorry-bus-driver/transport-animals).
 {{/if}}
 `;

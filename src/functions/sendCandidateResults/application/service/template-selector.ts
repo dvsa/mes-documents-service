@@ -1,11 +1,18 @@
 import {TestCategory} from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 import {Language} from '../../domain/conducted-language';
 import {headerTemplate, headerWelshTemplate} from '../templates/header';
-import {failResultTemplate, failResultWelshTemplateAdi2, passResultTemplate} from '../templates/result-summary';
+import {
+  failResultTemplate,
+  failResultWelshTemplate,
+  passResultTemplate,
+  passResultWelshTemplate,
+} from '../templates/result-summary';
 import {
   testExperienceSurveyRidingTemplate,
+  testExperienceSurveyRidingWelshTemplate,
   testExperienceSurveyTemplate,
   testExperienceSurveyTemplate3b,
+  testExperienceSurveyWelshTemplate,
 } from '../templates/test-experience-survey';
 import {dataPrivacyTemplate, dataPrivacyWelshTemplate} from '../templates/data-privacy';
 import {TestOutcome} from '../../domain/test-outcome';
@@ -13,23 +20,35 @@ import {etaTemplate, etaWelshTemplate} from '../templates/eta';
 import {dangerousFaultsTemplate, dangerousFaultsWelshTemplate} from '../templates/dangerous-faults';
 import {seriousFaultsTemplate, seriousFaultsWelshTemplate} from '../templates/serious-faults';
 import {
-  drivingFaultsTemplate, drivingFaultsWelshTemplate,
+  drivingFaultsTemplate,
+  drivingFaultsWelshTemplate,
   ridingFaultTemplate,
+  ridingFaultWelshTemplate,
   vocationalScoring,
-  vocationalScoringExplanation,
+  vocationalScoringExplanation, vocationalScoringExplanationWelsh, vocationalScoringWelsh,
 } from '../templates/driving-faults';
 import {
   nextStepsADI2FailTemplate,
-  nextStepsAdi2PassTemplate, nextStepsAdi2WelshFailTemplate,
+  nextStepsAdi2PassTemplate,
+  nextStepsAdi2WelshFailTemplate,
+  nextStepsAdi2WelshPassTemplate,
   nextStepsAdi3FirstOrSecondFailTemplate,
+  nextStepsAdi3FirstOrSecondWelshFailTemplate,
   nextStepsAdi3PassTemplate,
   nextStepsAdi3ThirdFailTemplate,
+  nextStepsAdi3ThirdWelshFailTemplate,
+  nextStepsAdi3WelshPassTemplate,
   nextStepsDrivingTemplate,
+  nextStepsDrivingWelshTemplate,
   nextStepsFailBTemplate,
+  nextStepsFailBWelshTemplate,
   nextStepsMod1PassTemplate,
-  NextStepsPass3aTemplate,
+  nextStepsMod1PassWelshTemplate,
+  NextStepsPass3aTemplate, nextStepsPass3aWelshTemplate,
   nextStepsScFirstOrSecondTemplate,
+  nextStepsScFirstOrSecondWelshTemplate,
   nextStepsScThirdTemplate,
+  nextStepsScThirdWelshTemplate,
 } from '../templates/next-steps';
 import {getCategorySubject, getCategoryType, isADI3Category} from './category-provider';
 import {
@@ -44,15 +63,20 @@ import {
   ridingEnglishSubject,
   ridingWelshSubject,
 } from '../templates/email-subject';
-import {emergencyStopTemplate} from '../templates/emergency-stop';
-import {avoidanceExerciseTemplate} from '../templates/avoidance-exercise';
-import {gradeTemplate} from '../templates/grade';
+import {emergencyStopTemplate, emergencyStopWelshTemplate} from '../templates/emergency-stop';
+import {avoidanceExerciseTemplate, avoidanceExerciseWelshTemplate} from '../templates/avoidance-exercise';
+import {gradeTemplate, gradeWelshTemplate} from '../templates/grade';
 import {
   statementOfFailureBTemplate,
+  statementOfFailureBWelshTemplate,
   statementOfFailureMod1Template,
+  statementOfFailureMod1WelshTemplate,
   statementOfFailureMod2Template,
+  statementOfFailureMod2WelshTemplate,
   statementOfFailureTractorTemplate,
-  statementOfFailureVocational3bTemplate,
+  statementOfFailureTractorWelshTemplate,
+  statementOfFailure3a_3bTemplate,
+  statementOfFailure3a_3bWelshTemplate, statementOfFailureVocational4, statementOfFailureVocational4Welsh,
 } from '../templates/statement-of-failure';
 import {
   FailUrls,
@@ -65,23 +89,29 @@ import {AppealUrls, howToAppealTemplate, howToAppealWelshTemplate} from '../temp
 import {signOffTemplate, signOffWelshTemplate} from '../templates/sign-off';
 import {
   importantInformationForHGVAndBusVocational3bTemplate,
+  importantInformationForHGVAndBusVocational3bWelshTemplate,
   importantInformationForHGVAndBusVocational4Template,
-  statementOfFailureVocational4,
+  importantInformationForHGVAndBusVocational4WelshTemplate,
   vocationalIfYouWantToDriveTemplate3b,
   vocationalIfYouWantToDriveTemplate4,
+  vocationalIfYouWantToDriveWelshTemplate3b,
+  vocationalIfYouWantToDriveWelshTemplate4,
 } from '../templates/vocational-additional-info';
 import {
   importantInfoForDriversB,
+  importantInfoForDriversBWelsh,
   importantInfoForDriversSc,
+  importantInfoForDriversScWelsh,
   importantInfoForDriversTractor,
+  importantInfoForDriversTractorWelsh,
   importantInfoForNewDriversAdi3,
-  importantInfoForRiders,
+  importantInfoForNewDriversAdi3Welsh,
+  importantInfoForRiders, importantInfoForRidersWelsh,
 } from '../templates/info-for-new-drivers';
 import {ecoTemplate, ecoWelshTemplate} from '../templates/eco';
 
 // ADI2
-export const passEnglishAdi2 =
-    `
+export const passEnglishAdi2 = `
     ${headerTemplate}
     ${passResultTemplate('ADI part 2 (driving ability) test', TestCategory.ADI2)}
     ${drivingFaultsTemplate}
@@ -90,10 +120,21 @@ export const passEnglishAdi2 =
     ${nextStepsAdi2PassTemplate}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
-    `;
+`;
 
-export const failEnglishAdi2 =
-    `
+// ADI2
+export const passWelshAdi2 = `
+    ${headerWelshTemplate}
+    ${passResultWelshTemplate('Prawf ADI rhan 2 (gallu gyrru)', TestCategory.ADI2)}
+    ${drivingFaultsWelshTemplate}
+    ${ecoWelshTemplate()}
+    ${understandingResultWelshTemplate(UrlDescriptorsWelsh.ADI2, PassUrls.ADI2)}
+    ${nextStepsAdi2WelshPassTemplate}
+    ${signOffWelshTemplate}
+    ${dataPrivacyWelshTemplate}
+`;
+
+export const failEnglishAdi2 = `
     ${headerTemplate}
     ${failResultTemplate('ADI part 2 (driving ability) test', TestCategory.ADI2)}
     ${etaTemplate}
@@ -106,12 +147,11 @@ export const failEnglishAdi2 =
     ${howToAppealTemplate(AppealUrls.ADI2, TestCategory.ADI2)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
-    `;
+`;
 
-export const failWelshAdi2 =
-    `
+export const failWelshAdi2 = `
     ${headerWelshTemplate}
-    ${failResultWelshTemplateAdi2}
+    ${failResultWelshTemplate('Prawf ADI rhan 2 (gallu gyrru)', TestCategory.ADI2)}
     ${etaWelshTemplate}
     ${dangerousFaultsWelshTemplate}
     ${seriousFaultsWelshTemplate}
@@ -122,7 +162,7 @@ export const failWelshAdi2 =
     ${howToAppealWelshTemplate(AppealUrls.ADI2, TestCategory.ADI2)}
     ${signOffWelshTemplate}
     ${dataPrivacyWelshTemplate}
-    `;
+`;
 
 // ADI3
 export const passEnglishAdi3 = `
@@ -135,6 +175,16 @@ export const passEnglishAdi3 = `
     ${dataPrivacyTemplate}
 `;
 
+export const passWelshAdi3 = `
+    ${headerWelshTemplate}
+    ${passResultWelshTemplate('', TestCategory.ADI3)}
+    ${gradeWelshTemplate}
+    ${nextStepsAdi3WelshPassTemplate}
+    ${importantInfoForNewDriversAdi3Welsh}
+    ${signOffWelshTemplate}
+    ${dataPrivacyWelshTemplate}
+`;
+
 export const failEnglishAdi3FirstOrSecondAttempt = `
     ${headerTemplate}
     ${failResultTemplate('ADI part 3 (instructional ability) test', TestCategory.ADI3)}
@@ -143,6 +193,16 @@ export const failEnglishAdi3FirstOrSecondAttempt = `
     ${howToAppealTemplate(AppealUrls.ADI3_1ST_OR_2ND, TestCategory.ADI3)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
+`;
+
+export const failWelshAdi3FirstOrSecondAttempt = `
+    ${headerWelshTemplate}
+    ${failResultWelshTemplate('prawf ADI rhan 3 (gallu cyfarwyddiadol)', TestCategory.ADI3)}
+    ${gradeWelshTemplate}
+    ${nextStepsAdi3FirstOrSecondWelshFailTemplate}
+    ${howToAppealWelshTemplate(AppealUrls.ADI3_1ST_OR_2ND, TestCategory.ADI3)}
+    ${signOffWelshTemplate}
+    ${dataPrivacyWelshTemplate}
 `;
 
 export const failEnglishAdi3ThirdAttempt = `
@@ -155,6 +215,16 @@ export const failEnglishAdi3ThirdAttempt = `
     ${dataPrivacyTemplate}
 `;
 
+export const failWelshAdi3ThirdAttempt = `
+    ${headerWelshTemplate}
+    ${failResultWelshTemplate('prawf ADI rhan 3 (gallu cyfarwyddiadol)', TestCategory.ADI3)}
+    ${gradeWelshTemplate}
+    ${nextStepsAdi3ThirdWelshFailTemplate}
+    ${howToAppealWelshTemplate(AppealUrls.ADI3_3RD, TestCategory.ADI3)}
+    ${signOffWelshTemplate}
+    ${dataPrivacyWelshTemplate}
+`;
+
 // SC
 export const passEnglishSc = `
     ${headerTemplate}
@@ -163,6 +233,15 @@ export const passEnglishSc = `
     ${importantInfoForDriversSc}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
+`;
+
+export const passWelshSc = `
+    ${headerWelshTemplate}
+    ${passResultWelshTemplate('arolwg safonau ADI', TestCategory.SC)}
+    ${gradeWelshTemplate}
+    ${importantInfoForDriversScWelsh}
+    ${signOffWelshTemplate}
+    ${dataPrivacyWelshTemplate}
 `;
 
 export const failEnglishScFirstOrSecondAttempt = `
@@ -175,6 +254,16 @@ export const failEnglishScFirstOrSecondAttempt = `
     ${dataPrivacyTemplate}
 `;
 
+export const failWelshScFirstOrSecondAttempt = `
+    ${headerWelshTemplate}
+    ${failResultWelshTemplate('arolwg safonau ADI', TestCategory.SC)}
+    ${gradeWelshTemplate}
+    ${nextStepsScFirstOrSecondWelshTemplate}
+    ${howToAppealWelshTemplate(AppealUrls.SC_1ST_OR_2ND, TestCategory.SC)}
+    ${signOffWelshTemplate}
+    ${dataPrivacyWelshTemplate}
+`;
+
 export const failEnglishScThirdAttempt = `
     ${headerTemplate}
     ${failResultTemplate('ADI standards check', TestCategory.SC, true)}
@@ -183,6 +272,16 @@ export const failEnglishScThirdAttempt = `
     ${howToAppealTemplate(AppealUrls.SC_3RD, TestCategory.SC)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
+`;
+
+export const failWelshScThirdAttempt = `
+    ${headerWelshTemplate}
+    ${failResultWelshTemplate('arolwg safonau ADI', TestCategory.SC, true)}
+    ${gradeWelshTemplate}
+    ${nextStepsScThirdWelshTemplate}
+    ${howToAppealWelshTemplate(AppealUrls.SC_3RD, TestCategory.SC)}
+    ${signOffWelshTemplate}
+    ${dataPrivacyWelshTemplate}
 `;
 
 // B
@@ -197,6 +296,19 @@ export const passEnglishB = `
     ${importantInfoForDriversB}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
+`;
+
+export const passWelshB = `
+    ${headerWelshTemplate}
+    ${passResultWelshTemplate('prawf gyrru car', TestCategory.B)}
+    ${drivingFaultsWelshTemplate}
+    ${ecoWelshTemplate()}
+    ${understandingResultWelshTemplate(UrlDescriptorsWelsh.DRIVING, PassUrls.B)}
+    ${nextStepsDrivingWelshTemplate}
+    ${testExperienceSurveyWelshTemplate}
+    ${importantInfoForDriversBWelsh}
+    ${signOffWelshTemplate}
+    ${dataPrivacyWelshTemplate}
 `;
 
 export const failEnglishB = `
@@ -216,6 +328,23 @@ export const failEnglishB = `
     ${dataPrivacyTemplate}
 `;
 
+export const failWelshB = `
+    ${headerWelshTemplate}
+    ${failResultWelshTemplate('prawf gyrru car', TestCategory.B)}
+    ${etaWelshTemplate}
+    ${dangerousFaultsWelshTemplate}
+    ${seriousFaultsWelshTemplate}
+    ${drivingFaultsWelshTemplate}
+    ${ecoWelshTemplate()}
+    ${understandingResultWelshTemplate(UrlDescriptorsWelsh.DRIVING, FailUrls.B, true)}
+    ${nextStepsFailBWelshTemplate}
+    ${testExperienceSurveyWelshTemplate}
+    ${statementOfFailureBWelshTemplate}
+    ${howToAppealWelshTemplate(AppealUrls.B, TestCategory.B)}
+    ${signOffWelshTemplate}
+    ${dataPrivacyWelshTemplate}
+`;
+
 // MOD1
 export const passEnglishAMod1 = `
     ${headerTemplate}
@@ -229,6 +358,20 @@ export const passEnglishAMod1 = `
     ${testExperienceSurveyRidingTemplate}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
+`;
+
+export const passWelshAMod1 = `
+    ${headerWelshTemplate}
+    ${passResultWelshTemplate('prawf gyrru beic modur modiwl 1 (oddi ar y ffordd)', TestCategory.EUAM1)}
+    ${ridingFaultWelshTemplate}
+    ${emergencyStopWelshTemplate}
+    ${avoidanceExerciseWelshTemplate}
+    ${ecoWelshTemplate(true)}
+    ${understandingResultWelshTemplate(UrlDescriptorsWelsh.RIDING, PassUrls.MOD1)}
+    ${nextStepsMod1PassWelshTemplate}
+    ${testExperienceSurveyRidingWelshTemplate}
+    ${signOffWelshTemplate}
+    ${dataPrivacyWelshTemplate}
 `;
 
 export const failEnglishAMod1 = `
@@ -249,9 +392,26 @@ export const failEnglishAMod1 = `
     ${dataPrivacyTemplate}
 `;
 
+export const failWelshAMod1 = `
+    ${headerWelshTemplate}
+    ${failResultWelshTemplate('prawf gyrru beic modur modiwl 1 (oddi ar y ffordd)', TestCategory.EUAM1)}
+    ${etaWelshTemplate}
+    ${dangerousFaultsWelshTemplate}
+    ${seriousFaultsWelshTemplate}
+    ${ridingFaultWelshTemplate}
+    ${emergencyStopWelshTemplate}
+    ${avoidanceExerciseWelshTemplate}
+    ${ecoWelshTemplate(true)}
+    ${understandingResultWelshTemplate(UrlDescriptorsWelsh.RIDING, FailUrls.MOD1, true)}
+    ${testExperienceSurveyRidingWelshTemplate}
+    ${statementOfFailureMod1WelshTemplate}
+    ${howToAppealWelshTemplate(AppealUrls.MOD1, TestCategory.EUAM1, true)}
+    ${signOffWelshTemplate}
+    ${dataPrivacyWelshTemplate}
+`;
+
 // MOD2
-export const passEnglishAMod2 =
-    `
+export const passEnglishAMod2 = `
     ${headerTemplate}
     ${passResultTemplate('motorcycle module 2 (on-road) test', TestCategory.EUAM2)}
     ${ridingFaultTemplate}
@@ -262,7 +422,20 @@ export const passEnglishAMod2 =
     ${importantInfoForRiders}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
-    `;
+`;
+
+export const passWelshAMod2 = `
+    ${headerWelshTemplate}
+    ${passResultWelshTemplate('prawf gyrru beic modur modiwl 2 (oddi ar y ffordd)', TestCategory.EUAM2)}
+    ${ridingFaultWelshTemplate}
+    ${ecoWelshTemplate(true)}
+    ${understandingResultWelshTemplate(UrlDescriptorsWelsh.RIDING, PassUrls.MOD2)}
+    ${nextStepsDrivingWelshTemplate}
+    ${testExperienceSurveyRidingWelshTemplate}
+    ${importantInfoForRidersWelsh}
+    ${signOffWelshTemplate}
+    ${dataPrivacyWelshTemplate}
+`;
 
 export const failEnglishAMod2 =
     `
@@ -279,11 +452,26 @@ export const failEnglishAMod2 =
     ${howToAppealTemplate(AppealUrls.MOD2, TestCategory.EUAM2, true)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
-    `;
+`;
+
+export const failWelshAMod2 = `
+    ${headerWelshTemplate}
+    ${failResultWelshTemplate('prawf gyrru beic modur modiwl 2 (oddi ar y ffordd)', TestCategory.EUAM2)}
+    ${etaWelshTemplate}
+    ${dangerousFaultsWelshTemplate}
+    ${seriousFaultsWelshTemplate}
+    ${ridingFaultWelshTemplate}
+    ${ecoWelshTemplate(true)}
+    ${understandingResultWelshTemplate(UrlDescriptorsWelsh.RIDING, FailUrls.MOD2, true)}
+    ${testExperienceSurveyRidingWelshTemplate}
+    ${statementOfFailureMod2WelshTemplate}
+    ${howToAppealWelshTemplate(AppealUrls.MOD2, TestCategory.EUAM2, true)}
+    ${signOffWelshTemplate}
+    ${dataPrivacyWelshTemplate}
+`;
 
 // Tractor
-export const passEnglishHome =
-    `
+export const passEnglishHome = `
     ${headerTemplate}
     ${passResultTemplate('tractor or specialist vehicle driving test', TestCategory.F)}
     ${drivingFaultsTemplate}
@@ -293,10 +481,21 @@ export const passEnglishHome =
     ${importantInfoForDriversTractor}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
-    `;
+`;
 
-export const failEnglishHome =
-    `
+export const passWelshHome = `
+    ${headerWelshTemplate}
+    ${passResultWelshTemplate('prawf gyrru tractor neu gerbyd arbenigol', TestCategory.F)}
+    ${drivingFaultsWelshTemplate}
+    ${ecoWelshTemplate()}
+    ${understandingResultWelshTemplate(UrlDescriptorsWelsh.DRIVING, PassUrls.TRACTOR)}
+    ${nextStepsDrivingWelshTemplate}
+    ${importantInfoForDriversTractorWelsh}
+    ${signOffWelshTemplate}
+    ${dataPrivacyWelshTemplate}
+`;
+
+export const failEnglishHome = `
     ${headerTemplate}
     ${failResultTemplate('tractor or specialist vehicle driving test', TestCategory.F)}
     ${etaTemplate}
@@ -309,34 +508,66 @@ export const failEnglishHome =
     ${howToAppealTemplate(AppealUrls.TRACTOR, TestCategory.F)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
-    `;
+`;
+
+export const failWelshHome = `
+    ${headerWelshTemplate}
+    ${failResultWelshTemplate('prawf gyrru tractor neu gerbyd arbenigol', TestCategory.F)}
+    ${etaWelshTemplate}
+    ${dangerousFaultsWelshTemplate}
+    ${seriousFaultsWelshTemplate}
+    ${drivingFaultsWelshTemplate}
+    ${ecoWelshTemplate()}
+    ${understandingResultWelshTemplate(UrlDescriptorsWelsh.DRIVING, FailUrls.TRACTOR, true)}
+    ${statementOfFailureTractorWelshTemplate}
+    ${howToAppealWelshTemplate(AppealUrls.TRACTOR, TestCategory.F)}
+    ${signOffWelshTemplate}
+    ${dataPrivacyWelshTemplate}
+`;
 
 // Manoeuvres
-export const passEnglishMan =
-    `
+export const passEnglishMan = `
     ${headerTemplate}
     ${passResultTemplate('Driver CPC part 3a (off-road exercises) test', TestCategory.C1M)}
     ${NextStepsPass3aTemplate}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
-    `;
+`;
 
-export const failEnglishMan =
-    `
+export const passWelshMan = `
+    ${headerWelshTemplate}
+    ${passResultWelshTemplate('prawf gyrru tractor neu gerbyd arbenigol', TestCategory.C1M)}
+    ${nextStepsPass3aWelshTemplate}
+    ${signOffWelshTemplate}
+    ${dataPrivacyWelshTemplate}
+`;
+
+export const failEnglishMan = `
     ${headerTemplate}
     ${failResultTemplate('Driver CPC part 3a (off-road exercises) test', TestCategory.C1M)}
     ${dangerousFaultsTemplate}
     ${seriousFaultsTemplate}
     ${understandingResultTemplate(UrlDescriptors.DRIVING, FailUrls.MANOEUVRES, true)}
-    ${statementOfFailureVocational3bTemplate}
+    ${statementOfFailure3a_3bTemplate}
     ${howToAppealTemplate(AppealUrls.MANOEUVRES, TestCategory.C1M)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
-    `;
+`;
+
+export const failWelshMan = `
+    ${headerWelshTemplate}
+    ${failResultWelshTemplate('Prawf gyrrwr CPC rhan 3a (ymarferion oddi ar y ffordd)', TestCategory.C1M)}
+    ${dangerousFaultsWelshTemplate}
+    ${seriousFaultsWelshTemplate}
+    ${understandingResultWelshTemplate(UrlDescriptorsWelsh.DRIVING, FailUrls.MANOEUVRES, true)}
+    ${statementOfFailure3a_3bWelshTemplate}
+    ${howToAppealWelshTemplate(AppealUrls.MANOEUVRES, TestCategory.C1M)}
+    ${signOffWelshTemplate}
+    ${dataPrivacyWelshTemplate}
+`;
 
 // Vocational
-export const passEnglishVocational =
-    `
+export const passEnglishVocational = `
     ${headerTemplate}
     ${passResultTemplate('Driver CPC part 3b (on-road driving) test', TestCategory.C)}
     ${drivingFaultsTemplate}
@@ -348,10 +579,23 @@ export const passEnglishVocational =
     ${importantInformationForHGVAndBusVocational3bTemplate}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
-    `;
+`;
 
-export const failEnglishVocational =
-    `
+export const passWelshVocational = `
+    ${headerWelshTemplate}
+    ${passResultWelshTemplate('Prawf gyrrwr CPC rhan 3b (ymarferion oddi ar y ffordd)', TestCategory.C)}
+    ${drivingFaultsWelshTemplate}
+    ${ecoWelshTemplate()}
+    ${understandingResultWelshTemplate(UrlDescriptorsWelsh.DRIVING, PassUrls.VOCATIONAL)}
+    ${nextStepsDrivingWelshTemplate}
+    ${testExperienceSurveyWelshTemplate}
+    ${vocationalIfYouWantToDriveWelshTemplate3b}
+    ${importantInformationForHGVAndBusVocational3bWelshTemplate}
+    ${signOffWelshTemplate}
+    ${dataPrivacyWelshTemplate}
+`;
+
+export const failEnglishVocational = `
     ${headerTemplate}
     ${failResultTemplate('Driver CPC part 3b (on-road driving) test', TestCategory.C)}
     ${etaTemplate}
@@ -361,15 +605,30 @@ export const failEnglishVocational =
     ${ecoTemplate()}
     ${understandingResultTemplate(UrlDescriptors.DRIVING, FailUrls.VOCATIONAL, true)}
     ${testExperienceSurveyTemplate3b}
-    ${statementOfFailureVocational3bTemplate}
+    ${statementOfFailure3a_3bTemplate}
     ${howToAppealTemplate(AppealUrls.VOCATIONAL, TestCategory.C)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
-    `;
+`;
+
+export const failWelshVocational = `
+    ${headerWelshTemplate}
+    ${failResultWelshTemplate('Prawf gyrrwr CPC rhan 3b (ymarferion oddi ar y ffordd)', TestCategory.C)}
+    ${etaWelshTemplate}
+    ${dangerousFaultsWelshTemplate}
+    ${seriousFaultsWelshTemplate}
+    ${drivingFaultsWelshTemplate}
+    ${ecoWelshTemplate()}
+    ${understandingResultWelshTemplate(UrlDescriptorsWelsh.DRIVING, FailUrls.VOCATIONAL, true)}
+    ${testExperienceSurveyWelshTemplate}
+    ${statementOfFailure3a_3bWelshTemplate}
+    ${howToAppealWelshTemplate(AppealUrls.VOCATIONAL, TestCategory.C)}
+    ${signOffWelshTemplate}
+    ${dataPrivacyWelshTemplate}
+`;
 
 // CPC
-export const passEnglishCpc =
-    `
+export const passEnglishCpc = `
     ${headerTemplate}
     ${passResultTemplate('Driver CPC part 4 (practical demonstration) test', TestCategory.CCPC)}
     ${vocationalScoringExplanation}
@@ -378,10 +637,20 @@ export const passEnglishCpc =
     ${importantInformationForHGVAndBusVocational4Template}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
-    `;
+`;
 
-export const failEnglishCpc =
-    `
+export const passWelshCpc = `
+    ${headerWelshTemplate}
+    ${passResultWelshTemplate('Prawf gyrrwr CPC rhan 4 (arddangosiad ymarferol)', TestCategory.CCPC)}
+    ${vocationalScoringExplanationWelsh}
+    ${vocationalScoringWelsh}
+    ${vocationalIfYouWantToDriveWelshTemplate4}
+    ${importantInformationForHGVAndBusVocational4WelshTemplate}
+    ${signOffWelshTemplate}
+    ${dataPrivacyWelshTemplate}
+`;
+
+export const failEnglishCpc = `
     ${headerTemplate}
     ${failResultTemplate('Driver CPC part 4 (practical demonstration) test', TestCategory.CCPC)}
     ${vocationalScoringExplanation}
@@ -390,7 +659,18 @@ export const failEnglishCpc =
     ${howToAppealTemplate(AppealUrls.CPC, TestCategory.CCPC)}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
-    `;
+`;
+
+export const failWelshCpc = `
+    ${headerWelshTemplate}
+    ${failResultWelshTemplate('Prawf gyrrwr CPC rhan 4 (arddangosiad ymarferol)', TestCategory.CCPC)}
+    ${vocationalScoringExplanationWelsh}
+    ${vocationalScoringWelsh}
+    ${statementOfFailureVocational4Welsh}
+    ${howToAppealWelshTemplate(AppealUrls.CPC, TestCategory.CCPC)}
+    ${signOffWelshTemplate}
+    ${dataPrivacyWelshTemplate}
+`;
 
 /**
  * Select subject based upon category & language
@@ -425,28 +705,49 @@ export function templateMapper(testOutcome: TestOutcome, category: TestCategory,
 
 const templates = {
   passEnglishAdi2,
+  passWelshAdi2,
   failEnglishAdi2,
   failWelshAdi2,
   passEnglishAdi3,
+  passWelshAdi3,
   failEnglishAdi3FirstOrSecondAttempt,
+  failWelshAdi3FirstOrSecondAttempt,
   failEnglishAdi3ThirdAttempt,
+  failWelshAdi3ThirdAttempt,
   passEnglishSc,
+  passWelshSc,
   failEnglishScFirstOrSecondAttempt,
+  failWelshScFirstOrSecondAttempt,
   failEnglishScThirdAttempt,
+  failWelshScThirdAttempt,
   passEnglishB,
+  passWelshB,
   failEnglishB,
+  failWelshB,
   passEnglishAMod1,
+  passWelshAMod1,
   failEnglishAMod1,
+  failWelshAMod1,
   passEnglishAMod2,
+  passWelshAMod2,
   failEnglishAMod2,
+  failWelshAMod2,
   passEnglishHome,
+  passWelshHome,
   failEnglishHome,
+  failWelshHome,
   passEnglishMan,
+  passWelshMan,
   failEnglishMan,
+  failWelshMan,
   passEnglishVocational,
+  passWelshVocational,
   failEnglishVocational,
+  failWelshVocational,
   passEnglishCpc,
+  passWelshCpc,
   failEnglishCpc,
+  failWelshCpc,
 };
 
 const emailSubjects = {

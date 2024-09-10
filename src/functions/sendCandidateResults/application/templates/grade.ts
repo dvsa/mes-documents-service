@@ -59,3 +59,66 @@ The examiner gave this feedback:
 
 ---
     `;
+
+/**
+ * Function to generate a grade template for ADI3 & SC templates in Welsh
+ */
+export const gradeWelshTemplate = `
+# Sut gweithiodd yr asesiad
+
+Cawsoch eich asesu ar 17 o gymwyseddau ar draws 3 phwnc. 
+
+Gallech sgorio 0 i 3 phwynt am bob cymhwysedd. Mae'r sgorau yn golygu:
+
+- 0 - Dim tystiolaeth o'r cymhwysedd
+- 1 - Wedi'i ddangos mewn ychydig o elfennau 
+- 2 - Wedi'i ddangos mewn rhan fwyaf o elfennau 
+- 3 - Wedi'i ddangos mewn pob elfen
+
+## Cynllunio gwersi
+
+Fe wnaethoch {{lessonPlanningScore}} chi sgorio allan o 12 ar gyfer gynllunio gwersi.
+
+Cawsoch eich asesu ar 4 cymhwysedd yn y pwnc hwn: 
+
+- Nodi nodau ac anghenion dysgu - {{lp1Score}} allan o 3
+- Defnyddiwch strwythur gwers priodol - {{lp2Score}} allan o 3
+- Dewiswch feysydd ymarfer addas - {{lp3Score}} allan o 3
+- Addaswch y cynllun gwers pan fo'n briodol - {{lp4Score}} allan o 3
+
+## Rheoli Risg
+
+Fe wnaethoch chi sgorio {{riskManagementScore}} allan o 15 mewn rheoli risg.
+
+Cawsoch eich asesu ar 5 cymhwysedd yn y pwnc hwn:
+
+- Rhannu'r cyfrifoldeb am risg - {{rm1Score}} allan o 3
+- Rhoi cyfarwyddiadau clir, amserol ac addas - {{rm2Score}} allan o 3
+- Cynnal ymwybyddiaeth o’r hyn sydd o’ch cwmpas a gweithredoedd y disgybl - {{rm3Score}} allan o 3
+- Gwneud ymyriadau llafar a chorfforol amserol a phriodol - {{rm4Score}} allan o 3
+- Helpwch y disgybl i ddeall digwyddiadau diogelwch critigol - {{rm5Score}} allan o 3
+
+
+## Strategaethau addysgu a dysgu
+
+Fe wnaethoch chi sgorio {{teachingLearningStrategiesScore}} allan o 24 mewn strategaethau addysgu a dysgu.
+
+Cawsoch eich asesu ar 8 cymhwysedd yn y pwnc hwn:
+
+- Defnyddiwch arddull addysgu a dysgu addas - {{tls1Score}} allan o 3
+- Annog dadansoddi problemau a chyfrifoldeb am ddysgu - {{tls2Score}} allan o 3
+- Egluro canlyniadau dysgu - {{tls3Score}} allan o 3
+- Rhoi gwybodaeth dechnegol gywir a phriodol - {{tls4Score}} allan o 3
+- Rhoi adborth priodol ac amserol yn ystod y sesiwn - {{tls5Score}} allan o 3
+- Gwaith dilynol ac ateb cwestiynau’r disgybl - {{tls6Score}} allan o 3
+- Cynnal dull priodol - {{tls7Score}} allan o 3
+- Anogwch y disgybl i fyfyrio ar eu perfformiad - {{tls8Score}} allan o 3
+
+## Adborth gan yr arholwr 
+
+Rhoddodd yr archwiliwr yr adborth hwn:
+
+^{{feedback}} 
+
+---
+    `;

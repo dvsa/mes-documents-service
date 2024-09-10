@@ -9,7 +9,7 @@ You must:
 - update your ADI registration within 7 days if your name or permanent home or business address change
 - write to the ADI Registrar within 7 days if you get a caution or conviction
 
-^[Find out about managing your ADI registration]( https://www.gov.uk/manage-approved-driving-instructor-registration?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=pass). 
+^[Find out about managing your ADI registration](https://www.gov.uk/manage-approved-driving-instructor-registration?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=pass). 
 
 ## Taking ADI standards checks
 
@@ -19,7 +19,32 @@ The purpose of the check is to make sure you have kept up your standard of instr
 
 The ADI Registrar will write to you to tell you when you have to take one.
 
-^[Find out about the ADI standards check](https://www.gov.uk/adi-standards-check?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=pass). 
+^[Find out about the ADI standards check](https://www.gov.uk/adi-standards-check?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=pass).
+ 
+`;
+
+export const importantInfoForNewDriversAdi3Welsh= `
+# Gwybodaeth bwysig ar gyfer hyfforddwyr gyrru newydd
+
+Byddwch chi'n gyfrifol am eich cofrestriad ADI, gan gynnwys ei adnewyddu a chadw'ch cofrestriad yn gyfredol.
+
+Mae'n rhaid i chi wneud y canlynol:
+
+- diweddaru'ch cofrestru ADI o fewn 7 diwrnod os bydd eich enw neu gyfeiriad cartref neu fusnes parhaol yn newid
+- ysgrifennu at y Cofrestrydd o fewn 7 diwrnod os cewch rybudd neu gollfarn
+
+^[Dysgwch am reoli eich cofrestriad ADI](https://www.gov.uk/manage-approved-driving-instructor-registration?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=pass). 
+
+## Cymryd arolygiadau safonau ADI
+
+Mae rhaid cymryd a pasio arolygiadau safonau ADI pan mae'r DVSA yn gofyn.
+
+Pwrpas yr arolwg yw i sicrhau eich fod wedi cadw at eich safon cyfarwyddyd. 
+
+Fydd y Cofrestrydd ADI yn ysgrifennu atoch i ddweud pan fydd rhaid wneud arolwg.
+
+^[Darfanfod mwy am yr arolygion safonol ADI](https://www.gov.uk/adi-standards-check?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=pass).
+
 `;
 
 export const importantInfoForDriversB = `
@@ -48,6 +73,35 @@ The Pass Plus training course will help you to improve your skills and drive mor
 It takes at least 6 hours and it may help you get a car insurance discount if you successfully complete the course. 
 
 ^[Find out more about Pass Plus](https://www.gov.uk/pass-plus?utm_source=dvsa&utm_medium=email&utm_campaign=car-driving-test&utm_content=pass).
+
+`;
+
+export const importantInfoForDriversBWelsh = `
+# Gwybodaeth bwysig ar gyfer gyrrwyr newydd
+
+Mae rhaid i chi wneud sawl peth nawr eich bod wedi pasio'ch prawf. Mae hyn yn cynnwys:
+
+- sicrhau bod eich cerbyd yn dilyn yr holl reolau
+- diweddaru eich manylion gyda DVLA
+
+^[Darganfod mwy am rwymedigaethau cyfreithiol gyrwyr a teithwyr](https://www.gov.uk/legal-obligations-drivers-riders?utm_source=dvsa&utm_medium=email&utm_campaign=car-driving-test&utm_content=pass).
+
+## Cod diogelwch ar gyfer gyrwyr newydd
+
+Mae 1 o bob 5 gyrrwr newydd yn cael rhyw fath o wrthdrawiad yn eu blwyddyn gyntaf o yrru. Dyma’r amser pan fyddwch chi fwyaf agored i niwed. 
+
+Mae’r cod diogelwch ar gyfer gyrwyr newydd yn rhoi cyngor i’ch helpu i gyrru mor ddiogel â phosibl yn ystod y 12 mis cyntaf.
+
+^[Edrych ar y cod diogelwch ar gyfer gyrwyr newydd](https://www.gov.uk/safety-code-new-drivers?utm_source=dvsa&utm_medium=email&utm_campaign=car-driving-test&utm_content=pass).
+
+## Cymerwch hyfforddiant ychwanegol i'ch gwneud yn fwy diogel
+
+Bydd y cwrs hyfforddi Pass Plus yn eich helpu i wella'ch sgiliau a gyrru'n fwy diogel. 
+
+Mae'n cymryd o leiaf 6 awr a gallai eich helpu i gael gostyngiad yswiriant car os byddwch yn cwblhau'r cwrs yn llwyddiannus. 
+
+^[Darganfod mwy am Pass Plus](https://www.gov.uk/pass-plus?utm_source=dvsa&utm_medium=email&utm_campaign=car-driving-test&utm_content=pass).
+
 `;
 
 export const importantInfoForDriversSc = `
@@ -60,7 +114,22 @@ You must:
 - update your ADI registration within 7 days if your name or permanent home or business address change
 - write to the ADI Registrar within 7 days if you get a caution or conviction
 
-^[Find out about managing your ADI registration]( https://www.gov.uk/manage-approved-driving-instructor-registration?utm_source=dvsa&utm_medium=email&utm_campaign=adi-standards-check&utm_content=pass).
+^[Find out about managing your ADI registration](https://www.gov.uk/manage-approved-driving-instructor-registration?utm_source=dvsa&utm_medium=email&utm_campaign=adi-standards-check&utm_content=pass).
+
+`;
+
+export const importantInfoForDriversScWelsh = `
+# Gwybodaeth bwysig ar gyfer hyfforddwyr gyrru newydd
+
+Byddwch chi'n gyfrifol am eich cofrestriad ADI, gan gynnwys ei adnewyddu a chadw'ch cofrestriad yn gyfredol.
+
+Mae'n rhaid i chi wneud y canlynol:
+
+- diweddaru'ch cofrestru ADI o fewn 7 diwrnod os bydd eich enw neu gyfeiriad cartref neu fusnes parhaol yn newid
+- ysgrifennu at y Cofrestrydd o fewn 7 diwrnod os cewch rybudd neu gollfarn
+
+^[Dysgwch am reoli eich cofrestriad ADI](https://www.gov.uk/manage-approved-driving-instructor-registration?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=pass).
+
 `;
 
 export const importantInfoForDriversTractor = `
@@ -88,7 +157,37 @@ You can only use your category F driving licence for ‘agricultural purposes’
 - aquatic farming - breeding fish and other aquatic animals, or growing aquatic plants, usually for food, in fish ponds, tanks or other artificial enclosures or environments
 - forestry - cultivating forests and the management of growing timber
 
-^[Check the rules that apply to the use of tractors in Great Britain](https://www.gov.uk/government/publications/tractors-regulations-on-use/tractors-and-regulatory-requirements-a-brief-guide-september-2017?utm_source=dvsa&utm_medium=email&utm_campaign=tractor-specialist-vehicle-test&utm_content=pass). 
+^[Check the rules that apply to the use of tractors in Great Britain](https://www.gov.uk/government/publications/tractors-regulations-on-use/tractors-and-regulatory-requirements-a-brief-guide-september-2017?utm_source=dvsa&utm_medium=email&utm_campaign=tractor-specialist-vehicle-test&utm_content=pass).
+ 
+`;
+
+export const importantInfoForDriversTractorWelsh = `
+# Gwybodaeth bwysig ar gyfer gyrrwyr newydd 
+
+Cyn dechrau gyrru, gwiriwch y terfynau oedran ar gyfer y gwahanol fathau o dractorau a cherbydau arbenigol y gallwch eu gyrru. 
+
+^[Gwiriwch y rheolau ynghylch yr hyn y gallwch ei yrru](https://www.gov.uk/learning-to-drive-a-tractor-or-specialist-vehicle/age-limits?utm_source=dvsa&utm_medium=email&utm_campaign=tractor-specialist-vehicle-test&utm_content=pass).
+
+## Cod diogelwch ar gyfer gyrwyr newydd
+
+Eich blwyddyn gyntaf o yrru fydd yr adeg pan fyddwch fwyaf agored i niwed. 
+
+Mae’r cod diogelwch ar gyfer gyrwyr newydd yn rhoi cyngor i’ch helpu i gyrru mor ddiogel â phosibl yn ystod y 12 mis cyntaf.
+
+^[Edrych ar y cod diogelwch ar gyfer gyrwyr newydd](https://www.gov.uk/safety-code-new-drivers?utm_source=dvsa&utm_medium=email&utm_campaign=tractor-specialist-vehicle-test&utm_content=pass).
+
+
+## Rheolau ar gyfer defnyddio tractors
+
+Dim ond am ‘ddibenion amaethyddol’ y gallwch ddefnyddio’ch trwydded yrru categori F. Mae hyn yn cynnwys:
+
+- amaethyddiaeth - tyfu a chasglu cnydau, a magu anifeiliaid
+- garddwriaeth - meithrin neu reoli gerddi, gan gynnwys tyfu blodau, ffrwythau a llysiau, a rheoli coed, llwyni a phlanhigion coediog mewn gerddi
+- ffermio dyfrol - bridio pysgod ac anifeiliaid dyfrol eraill, neu dyfu planhigion dyfrol, fel arfer ar gyfer bwyd, mewn pyllau pysgod, tanciau neu gaeau neu amgylcheddau artiffisial eraill
+- coedwigaeth - tyfu coedwigoedd a rheoli coed sy'n tyfu
+
+^[Gwelwch y rheolau perthnasol yw'r defnydd o dractorau ym Mhrydain](https://www.gov.uk/government/publications/tractors-regulations-on-use/tractors-and-regulatory-requirements-a-brief-guide-september-2017?utm_source=dvsa&utm_medium=email&utm_campaign=tractor-specialist-vehicle-test&utm_content=pass).
+
 `;
 
 export const importantInfoForRiders = `
@@ -99,7 +198,7 @@ You must do several things now you’ve passed your test. These include:
 - making sure your vehicle follows all the rules
 - keeping your details up to date with DVLA
 
-^[Find out more about the legal obligations of drivers and riders]( https://www.gov.uk/legal-obligations-drivers-riders?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-2-test&utm_content=pass).
+^[Find out more about the legal obligations of drivers and riders](https://www.gov.uk/legal-obligations-drivers-riders?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-2-test&utm_content=pass).
 
 ## Get more from your riding
 
@@ -108,7 +207,7 @@ from an expert trainer through the DVSA enhanced rider scheme.
 
 If you successfully complete the scheme you’ll get a ‘DVSA certificate of competence’. You can use this to get discounts with most motorcycle insurers.
 
-^[Find out how to take the DVSA enhanced rider scheme]( https://www.gov.uk/enhanced-rider-scheme?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-2-test&utm_content=pass). 
+^[Find out how to take the DVSA enhanced rider scheme](https://www.gov.uk/enhanced-rider-scheme?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-2-test&utm_content=pass). 
 
 ## Choose the right motorcycle helmet 
 
@@ -121,5 +220,38 @@ Choosing the right motorcycle helmet could help save your life. SHARP ratings he
 The Elite Rider Hub is designed to help you choose the most suitable post-test training. It gives an insight into training which will make you a safe, capable, and progressive rider.
 
 ^[Visit the Elite Rider Hub](https://www.eliteriderhub.co.uk?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-2-test&utm_content=pass). 
+
+`;
+
+export const importantInfoForRidersWelsh = `
+# Gwybodaeth bwysig ar gyfer gyrrwyr newydd
+
+Mae rhaid i chi wneud sawl peth nawr eich bod wedi pasio'ch prawf. Mae'r eitemau hyn yn cynnwys:
+
+- sicrhau bod eich cerbyd yn dilyn yr holl reolau
+- diweddaru eich manylion gyda DVLA
+
+^[Darganfod mwy am rwymedigaethau cyfreithiol gyrwyr a teithwyr](https://www.gov.uk/legal-obligations-drivers-riders?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-2-test&utm_content=pass).
+
+## Manteisiwch fwy o'ch gyrru
+
+Manteisiwch yn fwy ar eich beiciau modur a dewch yn feiciwr mwy diogel gyda chymorth
+gan hyfforddwr arbenigol trwy gynllun beiciwr uwch y DVSA.
+
+Os byddwch yn cwblhau’r cynllun yn llwyddiannus byddwch yn cael ‘tystysgrif cymhwysedd DVSA’. Gallech ddefnyddio hwn i gael gostyngiadau gyda'r rhan fwyaf o yswirwyr beiciau modur.
+
+^[Darganfod sut i gymryd cynllun beiciwr uwch y DVSA](https://www.gov.uk/enhanced-rider-scheme?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-2-test&utm_content=pass). 
+
+## Dewiswch yr helmed beic modur cywir 
+
+Gall dewis y helmed beic modur helpu arbed eich bywyd. Mae graddfeydd SHARP yn eich helpu i ddeall faint o amddiffyniad y mae helmed yn ei gynnig mewn damwain. 
+
+^[Ewch i'r wefan SHARP](https://sharp.dft.gov.uk?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-2-test&utm_content=pass).
+
+## Darganfod hyfforddiant bellach
+
+Mae'r Hwb Elite Rider wedi'i greu i'ch helpu ddewis y hyfforddiant fwyaf addas ar ol wneud y prawf. Mae'n rhoi mewnwelediad i'r hyfforddiant a fydd yn eich gwneud yn feiciwr diogel, galluog a blaengar.
+
+^[Ewch i'r Hwb Elite Rider](https://www.eliteriderhub.co.uk?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-2-test&utm_content=pass). 
 
 `;

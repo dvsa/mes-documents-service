@@ -32,7 +32,7 @@ const getWelshTestType = (category: TestCategory, riding: boolean): string => {
   case TestCategory.ADI3:
     return 'prawf';
   case TestCategory.SC:
-    return 'gwiriad safonau';
+    return 'arolwg safonau';
   default:
     return riding ? 'prawf beic modur' : 'prawf gyrru';
   }
@@ -47,6 +47,7 @@ You can appeal to a court if you think your ${[TestCategory.ADI3, TestCategory.S
 The court cannot change your test result. If you win your appeal, they can decide you should get a free retest. If you lose your appeal, you might have to pay significant legal costs.
 
 ^[Find out how to appeal if you think your examiner did not follow the law](${url}).
+
 `;
 };
 
@@ -54,10 +55,11 @@ export const howToAppealWelshTemplate = (url: string, category: TestCategory, ri
   return  `
 # Sut i apelio eich ${getWelshTestType(category, riding)}
 
-Gallwch apelio at lys os credwch na ddilynodd eich arholwr ${[TestCategory.ADI3, TestCategory.SC].includes(category) ? '' : 'gyrru\'r'} gyfraith ynghylch sut y mae'n rhaid iddynt gynnal profion ${category === TestCategory.ADI3 ? 'cymhwyso ADI' : category === TestCategory.SC ? 'gwiriadau safonau ADI' : 'gyrru'}.
+Gallwch apelio at lys os credwch na ddilynodd eich arholwr ${[TestCategory.ADI3, TestCategory.SC].includes(category) ? '' : 'gyrru\'r'} gyfraith ynghylch sut y mae'n rhaid iddynt gynnal profion ${category === TestCategory.ADI3 ? 'cymhwyso ADI' : category === TestCategory.SC ? 'arolwg safonau ADI' : 'gyrru'}.
 
 Ni all y llys newid canlyniad eich prawf. Os byddwch yn ennill eich apêl, gallant benderfynu y dylech naill ai'n: Mae'n bosibl y bydd yn rhaid i chi dalu costau cyfreithiol sylweddol os byddwch yn colli'ch apêl.
 
-^[Darganfyddwch sut i apelio os credwch na ddilynodd eich archwiliwr y gyfraith](${url}). 
+^[Darganfyddwch sut i apelio os credwch na ddilynodd eich archwiliwr y gyfraith](${url}).
+
 `;
 };

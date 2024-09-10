@@ -28,6 +28,40 @@ Handlebars.registerHelper('transformCategory', function (category: TestCategory)
 });
 
 /**
+ * Function to check if the test is a third attempt, also returns a bespoke message for SC
+ * ifNotThirdAttempt
+ * @param thirdAttempt
+ * @param category
+ */
+Handlebars.registerHelper('ifNotThirdAttempt', function (previousAttempts: number, category: TestCategory) {
+  let result: string = '';
+  if (previousAttempts <= 1) {
+    result =  'Caniateir 3 ymgais i chi basio’r prawf ADI rhan 3.';
+  } else if (category === TestCategory.SC) {
+    result = 'Gan eich bod bellach wedi bod yn aflwyddiannus 3 gwaith, gall y Cofrestrydd ADI ddechrau\'r broses o\'ch tynnu oddi ar y gofrestr ADI.';
+  }
+  return result;
+});
+
+/**
+ * Function to generate the end string at the bottom of a failure result template
+ * generateFailureEndResultResponse
+ * @param category
+ * @param thirdAttempt
+ */
+Handlebars.registerHelper('generateFailureEndResultResponse', function (category: TestCategory, previousAttempts: number) {
+  let result: string = '';
+  if (previousAttempts >= 2) {
+    if(category === TestCategory.SC) {
+      result = 'Rydym yn esbonio sut y bydd y broses hon yn gweithio yn ddiweddarach yn yr e-bost hwn.';
+    } else result = 'Os ydych yn bwriadu ailgychwyn y broses gymhwyso, mae\'n bwysig deall mwy am y rhesymau nad ydych wedi bod yn llwyddiannus y tro hwn.';
+  } else {
+    result = `I paratoi ar gyfer eich ${category === TestCategory.SC ? 'arolwg safonau' : 'prawf'} nesaf, mae'n bwysig deall mwy am y rhesymau nad ydych wedi bod yn llwyddiannus y tro hwn.`;
+  }
+  return result;
+});
+
+/**
  * Function to generate a pass result template
  * @param testType
  * @param categorySwitch
@@ -69,17 +103,13 @@ To keep improving, it’s important to understand which competencies you can con
 ---    
     `;
     break;
-  case TestCategory.C:
-  case TestCategory.C1M:
   case TestCategory.CCPC:
     template = `
 ^# Result: Pass\n
 ^Test type: ${testType} (category {{transformCategory category}})\n
 ^Test centre: {{location}}\n
 ^Date: {{date}}
-{{#if ${categorySwitch === TestCategory.CCPC}}}
 \n^Overall score: {{totalScore}} out of 100
-{{/if}}
 
 Congratulations on passing your test.
  
@@ -97,6 +127,76 @@ Congratulations on passing your test.
      
 To keep improving, it’s important to understand any faults you made.
       `;
+  }
+  return template;
+};
+
+/**
+ * Function to generate a pass result template in Welsh
+ * @param testType
+ * @param categorySwitch
+ */
+export const passResultWelshTemplate = (testType: string, categorySwitch: TestCategory): string => {
+  let template: string;
+  switch(categorySwitch) {
+  case TestCategory.ADI3:
+  case TestCategory.SC:
+    template = `
+^# Canlyniad: Llwyddo (gradd {{grade}})\n
+^Prawf math: {{category}} prawf\n
+^Canolfan profi: {{location}}\n
+^Dyddiad: {{date}}
+
+## Crynoldeb y ganlyniad
+
+^Sgôr cyffredinol: {{totalScore}} allan o 51
+
+^Cynllunio gwersi: {{lessonPlanningScore}} allan o 12
+^Rheoli risg: {{riskManagementScore}} allan o 15
+^Strategaethau addysgu a dysgu: {{teachingLearningStrategiesScore}} allan o 24
+
+## Am y wers
+
+^Disgybl – {{studentLevel}} 
+^Them(au):
+{{#each lessonThemes}}
+  - {{ this }} 
+{{/each}} 
+
+---
+
+Llongyfarchiadau am pasio eich ${categorySwitch === TestCategory.SC ? 'gwiriad safonau ADI' : 'prawf'}.
+
+Er mwyn parhau i wella, mae'n bwysig deall pa gymwyseddau y gallwch barhau i'w datblygu. 
+
+---
+    `;
+    break;
+  case TestCategory.CCPC:
+    template = `
+^# Canlyniad: Llwyddiannus
+^Math o brawf: Prawf gyrrwr CPC rhan 4 (arddangosiad ymarferol) (categori {{category}})
+^Canolfan profi {{location}}
+^Dyddiad {{date}}
+\n^Sgôr cyffredinol: {{totalScore}} allan o 100
+
+Llongyfarchiadau am pasio eich prawf.
+ 
+I paratoi ar gyfer eich prawf nesaf, mae'n bwysig deall mwy am y rhesymau nad ydych wedi bod yn llwyddiannus y tro hwn.
+
+--- 
+      `;
+    break;
+  default: template = `
+^# Canlyniad: Llwyddiannus\n
+^Math prawf: ${testType} (categori {{transformCategory category}})\n
+^Canolfan profi: {{location}}\n
+^Dyddiad:  {{date}}
+
+Llongyfarchiadau am pasio eich prawf.
+ 
+Er mwyn parhau i wella, mae'n bwysig deall unrhyw camgymeriadau a wnaethoch.
+    `;
   }
   return template;
 };
@@ -181,14 +281,82 @@ To prepare for your next test, it’s important to understand more about the fau
   return template;
 };
 
-export const failResultWelshTemplateAdi2 = `
+/**
+ * Function to generate a fail result template in Welsh
+ * @param testType
+ * @param categorySwitch
+ * @param thirdAttempt
+ */
+export const failResultWelshTemplate = (testType: string, categorySwitch: TestCategory, thirdAttempt?: boolean): string => {
+  let template: string;
+  switch (categorySwitch) {
+  case TestCategory.ADI3:
+  case TestCategory.SC:
+    template = `
 ^# Canlyniad: Aflwyddiannus
-^ Math prawf: Prawf ADI rhan 2 (gallu gyrru)
-^ Canolfan profi: {{ location }}
-^ Dyddiad:  {{date }}
+^Math o brawf: ${testType}
+^Canolfan profi: {{location}}
+^Dyddiad: {{date}}
+
+## Crynoldeb y ganlyniad
+
+{{#if code4}}
+^##Wedi terfynu
+{{/if}}
+{{#if RMFail}}
+^##Methiant Rheoli Risg
+{{/if}}
+
+^sgôr cyffredinol: {{totalScore}} allan o 51
+
+^Cynllunio gwersi: {{lessonPlanningScore}} allan o 12
+^Rheoli risg: {{riskManagementScore}} allan o 15
+^Strategaethau addysgu a dysgu: {{teachingLearningStrategiesScore}} allan o 24
+
+## Am y wers
+
+^Disgybl – {{studentLevel}} 
+^Them(au): 
+{{#each lessonThemes}}
+  - {{ this }} 
+{{/each}}
+
+---
+
+Mae'n ddrwg gennym ${thirdAttempt ? `${categorySwitch === TestCategory.ADI3 ? 'nad oeddech yn llwyddiannus y tro hwn ac nad ydych wedi cymhwyso fel ADI' : 'na fuoch yn llwyddiannus ar y trydydd cynnig hwn i gymryd eich arolwg safonau'}` : 'hwn'}.
+
+{{ifNotThirdAttempt previousAttempts category}}
+
+{{generateFailureEndResultResponse category previousAttempts}}
+
+---
+    `;
+    break;
+  case TestCategory.CCPC:
+    template = `
+^# Canlyniad: Aflwyddiannus
+^Math o brawf: Prawf gyrrwr CPC rhan 4 (arddangosiad ymarferol) (categori {{category}})\n
+^Canolfan profi: {{location}}\n
+^Dyddiad: {{date}}\n
+^Sgôr cyffredinol: {{totalScore}} allan o 100
 
 Mae'n ddrwg gennym nad oeddech yn llwyddiannus y tro hwn.
 
 I paratoi ar gyfer eich prawf nesaf, mae'n bwysig deall mwy am y rhesymau nad ydych wedi bod yn llwyddiannus y tro hwn. 
 
-`;
+---
+    `;
+    break;
+  default:
+    template = `
+^# Canlyniad: Aflwyddiannus\n
+^Math prawf: ${testType} (categori {{transformCategory category}})\n
+^Canolfan profi: {{location}}\n
+^Dyddiad:  {{date}}
+
+Mae'n ddrwg gennym nad oeddech yn llwyddiannus y tro hwn.
+
+I paratoi ar gyfer eich prawf nesaf, mae'n bwysig deall mwy am y rhesymau nad ydych wedi bod yn llwyddiannus y tro hwn.`;
+  }
+  return template;
+};

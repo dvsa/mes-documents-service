@@ -9,11 +9,13 @@ Second attempt: {{ emergencySecondAttempt }}
 {{/if}}
 `;
 
-export const emergencyStopTemplateWelshTemplate = `
-# Stop argyfwng
-Ymgais gyntaf: {{ emergencyFirstAttempt }}
+export const emergencyStopWelshTemplate = `
+{{#if showEmergencyStop}}
+# Stopio brys
+Cynnig cyntaf: {{emergencyFirstAtempt}}
+{{/if}} 
 {{#if showEmergencySecondAttempt}}
 
-Ail ymgais: {{ emergencySecondAttempt }}
+Ail ymgais: {{emergencySecondAttempt}}
 {{/if}}
 `;

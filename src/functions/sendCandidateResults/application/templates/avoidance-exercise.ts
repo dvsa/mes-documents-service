@@ -10,10 +10,12 @@ Second attempt: {{ avoidanceSecondAttempt }}
 `;
 
 export const avoidanceExerciseWelshTemplate = `
-# Ymarfer Osgoi / Stop dan Reolaeth
-Ymgais gyntaf: {{ avoidanceFirstAttempt }}
+{{#if showAvoidanceExercise}}
+# Ymarfer osgoi a stopio rheoledig
+Cynnig cyntaf: {{avoidanceFirstAttempt}}
+{{/if}}
 {{#if showAvoidanceSecondAttempt}}
 
-Ail ymgais: {{ avoidanceSecondAttempt }}
+Ail ymgais: {{avoidanceSecondAttempt}}
 {{/if}}
 `;
