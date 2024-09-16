@@ -47,10 +47,65 @@ export function isCPCCategory(category: CategoryCode): boolean {
  * @param category
  */
 export function getCategorySubject(category: TestCategory): CategoryType {
-  return isADI3Category(category) ? CategoryType.ADI :
-    isCPCCategory(category) ? CategoryType.CPC :
-      isBikeCategory(category) ? CategoryType.RIDING :
-        CategoryType.DRIVING;
+  let result: CategoryType;
+  switch (category) {
+  case TestCategory.ADI2:
+    result = CategoryType.ADI2;
+    break;
+  case TestCategory.ADI3:
+    result = CategoryType.ADI3;
+    break;
+  case TestCategory.SC:
+    result = CategoryType.SC;
+    break;
+  case TestCategory.B:
+    result = CategoryType.DRIVING;
+    break;
+  case TestCategory.EUAM1:
+  case TestCategory.EUA1M1:
+  case TestCategory.EUA2M1:
+  case TestCategory.EUAMM1:
+    result = CategoryType.MOD1;
+    break;
+  case TestCategory.EUAM2:
+  case TestCategory.EUA1M2:
+  case TestCategory.EUA2M2:
+  case TestCategory.EUAMM2:
+    result = CategoryType.MOD2;
+    break;
+  case TestCategory.F:
+  case TestCategory.G:
+  case TestCategory.H:
+  case TestCategory.K:
+    result = CategoryType.HOME;
+    break;
+  case TestCategory.C:
+  case TestCategory.C1:
+  case TestCategory.CE:
+  case TestCategory.C1E:
+  case TestCategory.D:
+  case TestCategory.D1:
+  case TestCategory.DE:
+  case TestCategory.D1E:
+    result = CategoryType.VOCATIONAL;
+    break;
+  case TestCategory.CM:
+  case TestCategory.C1M:
+  case TestCategory.CEM:
+  case TestCategory.C1EM:
+  case TestCategory.DM:
+  case TestCategory.D1M:
+  case TestCategory.DEM:
+  case TestCategory.D1EM:
+    result = CategoryType.MANOEUVRE;
+    break;
+  case TestCategory.CCPC:
+  case TestCategory.DCPC:
+    result = CategoryType.CPC;
+    break;
+  default: result = CategoryType.DRIVING;
+  }
+  return result;
 }
 
 /**

@@ -52,16 +52,26 @@ import {
 } from '../templates/next-steps';
 import {getCategorySubject, getCategoryType, isADI3Category} from './category-provider';
 import {
-  adiEnglishSubject,
-  adiWelshSubject,
-  cpcEnglishSubject,
-  cpcWelshSubject,
+  adi2EnglishSubject,
+  adi2WelshSubject,
+  adi3EnglishSubject,
+  adi3WelshSubject,
+  scEnglishSubject,
+  scWelshSubject,
   drivingEnglishSubject,
   drivingWelshSubject,
-  padiEnglishSubject,
-  padiWelshSubject,
-  ridingEnglishSubject,
-  ridingWelshSubject,
+  mod1EnglishSubject,
+  mod1WelshSubject,
+  mod2EnglishSubject,
+  mod2WelshSubject,
+  homeEnglishSubject,
+  homeWelshSubject,
+  manoeuvreEnglishSubject,
+  manoeuvreWelshSubject,
+  vocationalEnglishSubject,
+  vocationalWelshSubject,
+  cpcEnglishSubject,
+  cpcWelshSubject,
 } from '../templates/email-subject';
 import {emergencyStopTemplate, emergencyStopWelshTemplate} from '../templates/emergency-stop';
 import {avoidanceExerciseTemplate, avoidanceExerciseWelshTemplate} from '../templates/avoidance-exercise';
@@ -109,6 +119,7 @@ import {
   importantInfoForRiders, importantInfoForRidersWelsh,
 } from '../templates/info-for-new-drivers';
 import {ecoTemplate, ecoWelshTemplate} from '../templates/eco';
+import {writeFileSync} from 'node:fs';
 
 // ADI2
 export const passEnglishAdi2 = `
@@ -751,14 +762,24 @@ const templates = {
 };
 
 const emailSubjects = {
+  adi2EnglishSubject,
+  adi2WelshSubject,
+  adi3EnglishSubject,
+  adi3WelshSubject,
+  scEnglishSubject,
+  scWelshSubject,
   drivingEnglishSubject,
   drivingWelshSubject,
-  ridingEnglishSubject,
-  ridingWelshSubject,
-  adiEnglishSubject,
-  adiWelshSubject,
-  padiEnglishSubject,
-  padiWelshSubject,
+  mod1EnglishSubject,
+  mod1WelshSubject,
+  mod2EnglishSubject,
+  mod2WelshSubject,
+  homeEnglishSubject,
+  homeWelshSubject,
+  manoeuvreEnglishSubject,
+  manoeuvreWelshSubject,
+  vocationalEnglishSubject,
+  vocationalWelshSubject,
   cpcEnglishSubject,
   cpcWelshSubject,
 };

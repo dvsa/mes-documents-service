@@ -96,7 +96,7 @@ describe('getCategorySubject', () => {
     ];
 
     adi3Categories.forEach((category) => {
-      expect(getCategorySubject(category)).toBe(CategoryType.ADI);
+      expect(getCategorySubject(category)).toBe(CategoryType.ADI3);
     });
   });
 

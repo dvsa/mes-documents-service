@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import {DocumentsServiceError} from '../../domain/errors/documents-service-error';
 import {Address, PersonalisationDetails} from '../../domain/personalisation.model';
 import {INotifyClient} from '../../domain/notify-client.interface';
@@ -100,7 +101,6 @@ export function getRenderedSubject(
   conductedLanguage: Language,
 ): string | undefined {
   try {
-    console.log('Conducted language | getRenderedSubject:', conductedLanguage);
     const compileSubject = Handlebars.compile(
       subjectMapper(notificationPersonalisation.category, conductedLanguage)
     );
@@ -123,7 +123,6 @@ export function getRenderedText(
   conductedLanguage: Language,
 ): string | undefined {
   try {
-    console.log('Conducted language | getRenderedText:', conductedLanguage);
     const compileTemplate = Handlebars.compile(
       // eslint-disable-next-line max-len
       templateMapper(testOutcome, notificationPersonalisation.category, conductedLanguage, notificationPersonalisation.previousAttempts)

@@ -1,6 +1,9 @@
 import * as markdownIt from 'markdown-it';
 import * as pdf from 'html-pdf';
-import {getRenderedText} from "../../src/functions/sendCandidateResults/application/service/send-notification";
+import {
+  getRenderedSubject,
+  getRenderedText
+} from "../../src/functions/sendCandidateResults/application/service/send-notification";
 import {TestOutcome} from "../../src/functions/sendCandidateResults/domain/test-outcome";
 import {Language} from "../../src/functions/sendCandidateResults/domain/conducted-language";
 import {
@@ -76,7 +79,8 @@ const templates = [
   { outcome: TestOutcome.FAIL, personalisation: personalisationVocational4Fail, language: Language.WELSH, category: 'vocational4FailWelsh' },
 ].map(({ outcome, personalisation, language, category }) => ({
   filename: category,
-  markdown: getRenderedText(outcome, personalisation, language)
+  markdown: getRenderedText(outcome, personalisation, language),
+  subject: getRenderedSubject(personalisation, language),
 }));
 
 templates.forEach(({ filename, markdown }) => generatePdf(filename, markdown));
