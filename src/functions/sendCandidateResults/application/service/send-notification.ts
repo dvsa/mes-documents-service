@@ -47,14 +47,16 @@ export async function sendNotification(
     console.error('Error preparing rendered text', textError);
     throw new Error('Error preparing rendered content');
   }
-
+  console.log('++++++++++++++++++++++++++++++++++++++++++++++++++++');
+  console.log('notificationPersonalisation:', notificationPersonalisation);
+  console.log('++++++++++++++++++++++++++++++++++++++++++++++++++++');
   personalisation = {
     renderedSubject,
     renderedText,
   };
 
   // add address if POST
-  if (communicationMethod === Correspondence.POST) {
+  if (communicationMethod === Correspondence.EMAIL) {
     address = omitBy({
       address_line_1: notificationPersonalisation.address_line_1,
       address_line_2: notificationPersonalisation.address_line_2,
@@ -65,18 +67,22 @@ export async function sendNotification(
       postcode: notificationPersonalisation.postcode,
     }, isNil);
 
+    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+    console.log('Address:', address);
+    console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
     personalisation = {
       ...personalisation,
       ...address,
     };
   }
 
+  console.log('=============================================');
   console.log('personalisation', personalisation);
+  console.log('=============================================');
 
   try {
-    communicationMethod === Correspondence.EMAIL ?
-      await client.sendEmail(templateId, emailAddress, {personalisation, reference, emailReplyToId}) :
-      await client.sendLetter(templateId, {personalisation, reference});
+    await client.sendEmail(templateId, emailAddress, {personalisation, reference, emailReplyToId});
+    await client.sendLetter(templateId, {personalisation, reference});
     return Promise.resolve();
   } catch (err: any) {
     const axiosError = err as unknown as AxiosError;
