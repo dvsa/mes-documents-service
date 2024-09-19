@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
 import * as Handlebars from 'handlebars';
+import {Correspondence} from '../../domain/template-id.model';
 
 export enum UrlDescriptors {
   DRIVING = 'Find out more about driving test faults and results',
@@ -33,7 +34,7 @@ export enum FailUrls {
 }
 
 Handlebars.registerHelper('displayUrl', function (communicationMethod: string, url: string, urlDescriptor: string) {
-  if (communicationMethod === 'email') {
+  if (communicationMethod === Correspondence.EMAIL) {
     return `^[${urlDescriptor}](${url})`;
   } else return `^${urlDescriptor}: ${url}`;
 });
@@ -57,7 +58,7 @@ Check our guide which explains:
 - how to book a new test when you're ready
 {{/if}}
 
-{{displayUrl communicationMethod ${url} ${urlDescriptor}}}
+{{displayUrl communicationMethod "${url}" "${urlDescriptor}"}}
   `;
 };
 
@@ -80,6 +81,6 @@ Gwiriwch ein canllaw sy'n esbonio:
 - sut i trefnu prawf newydd pan fyddech yn barod
 {{/if}}
 
-{{displayUrl communicationMethod ${url} ${urlDescriptor}}}
+{{displayUrl communicationMethod "${url}" "${urlDescriptor}"}}
   `;
 };

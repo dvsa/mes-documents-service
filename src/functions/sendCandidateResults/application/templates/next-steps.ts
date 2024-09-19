@@ -1,4 +1,14 @@
 /* eslint-disable max-len */
+
+import * as Handlebars from 'handlebars';
+import {Correspondence} from '../../domain/template-id.model';
+
+Handlebars.registerHelper('displayUrl', function (communicationMethod: string, url: string, urlDescriptor: string, parameters) {
+  if (communicationMethod === Correspondence.EMAIL) {
+    return `^[${urlDescriptor}](${url}).`;
+  } else return `^${urlDescriptor}: ${url}`;
+});
+
 export const nextStepsDrivingTemplate = `
 # What to do next
 
@@ -40,7 +50,7 @@ Visit the 'Ready to Pass?' website for advice and tips about:
 - practising ways of managing your nerves
 - taking mock driving tests with your instructor
 
-^[Visit the ‘Ready to Pass?’ website]( https://readytopass.campaign.gov.uk/?utm_source=dvsa&utm_medium=email&utm_campaign=car-driving-test&utm_content=unsuccessful).  
+{{displayUrl "Visit the ‘Ready to Pass?’ website" "https://readytopass.campaign.gov.uk/?utm_source=dvsa&utm_medium=email&utm_campaign=car-driving-test&utm_content=unsuccessful"}}
 
 ---
 `;
@@ -54,7 +64,7 @@ Ewch i'r wefan 'Barod i'w Pasio?' am gyngor ac awgrymiadau am:
 - ymarfer ffyrdd o reoli eich nerfau
 - cymryd profion gyrru ymarfer gyda'ch hyfforddwr
 
-^[Ewch i'r wefan 'Barod i'w Pasio?'](https://readytopass.campaign.gov.uk/?utm_source=dvsa&utm_medium=email&utm_campaign=car-driving-test&utm_content=unsuccessful).  
+{{displayUrl "Ewch i'r wefan 'Barod i'w Pasio?" "https://readytopass.campaign.gov.uk/?utm_source=dvsa&utm_medium=email&utm_campaign=car-driving-test&utm_content=unsuccessful"}}
 
 ---
 `;
@@ -68,8 +78,7 @@ You need to pass the part 3b test within 6 months. If you do not, you’ll need 
 
 You or your trainer need to book the test if it’s not already been booked. If you do it yourself, book at [www.gov.uk/book-driving-test](https://www.gov.uk/book-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-3a-test&utm_content=pass).
 
-^[Find out how the part 3b test works](https://www.gov.uk/become-lorry-bus-driver/driver-cpc-part-3b-on-road-test?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-3a-test&utm_content=pass). 
-
+{{displayUrl "Find out how the part 3b test works" "https://www.gov.uk/become-lorry-bus-driver/driver-cpc-part-3b-on-road-test?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-3a-test&utm_content=pass"}}
 
 ## What to take to the part 3b test
 
@@ -87,7 +96,7 @@ Your test will be cancelled and you’ll lose your fee if you do not bring these
 
 You need to get a replacement certificate if you lose yours. It costs £15.
 
-^[Find out how to replace a lost certificate](https://www.gov.uk/become-lorry-bus-driver/driver-cpc-part-3a-off-road-test?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-3a-test&utm_content=pass). 
+{{displayUrl "Find out how to replace a lost certificate" "https://www.gov.uk/become-lorry-bus-driver/driver-cpc-part-3a-off-road-test?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-3a-test&utm_content=pass"}}
 
 `;
 
@@ -100,8 +109,7 @@ Bydd rhaid pasio'r prawf rhan 3b o fewn 6 mis. Os ydych yn aflwyddiannus, bydd r
 
 Mae angen i chi neu'ch hyfforddwr archebu'r prawf os nad yw eisoes wedi'i archebu. Os yr ydych yn trefnu eich hun, ewch i [www.gov.uk/book-driving-test](https://www.gov.uk/book-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-3a-test&utm_content=pass).
 
-^[Darganfyddwch sut mae'r prawf rhan 3b yn gweithio](https://www.gov.uk/become-lorry-bus-driver/driver-cpc-part-3a-off-road-test?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-3a-test&utm_content=pass). 
-
+{{displayUrl "Darganfyddwch sut mae'r prawf rhan 3b yn gweithio" "https://www.gov.uk/become-lorry-bus-driver/driver-cpc-part-3b-on-road-test?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-3a-test&utm_content=pass"}}
 
 ## Beth i'w gymryd i'r prawf rhan 3b
 
@@ -119,7 +127,7 @@ Bydd eich prawf yn cael ei ganslo a byddwch yn colli eich taliad os na fyddwch y
 
 Mae angen i chi gael tystysgrif arall os byddwch yn colli'ch un chi. Mae'n costio £15.
 
-^[Darganfyddwch sut i ddisodli tystysgrif goll](https://www.gov.uk/become-lorry-bus-driver/driver-cpc-part-3a-off-road-test?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-3a-test&utm_content=pass).
+{{displayUrl "Darganfyddwch sut i ddisodli tystysgrif goll" "https://www.gov.uk/become-lorry-bus-driver/driver-cpc-part-3a-off-road-test?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-3a-test&utm_content=pass"}}
 
 `;
 
@@ -128,7 +136,9 @@ export const nextStepsADI2FailTemplate = `
 
 Get a registered trainer to help you prepare for your next attempt at the ADI part 2 test if you have not done so already.
 
-^[Find driving instructor training courses](https://www.gov.uk/find-driving-instructor-training?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=unsuccessful).
+{{displayUrl "Find driving instructor training courses" "https://www.gov.uk/find-driving-instructor-training?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=unsuccessful"}}
+
+---
 `;
 
 export const nextStepsAdi2WelshFailTemplate = `
@@ -136,7 +146,7 @@ export const nextStepsAdi2WelshFailTemplate = `
 
 Cael hyfforddwr cofrestredig i'ch helpu i baratoi ar gyfer eich ymgais nesaf ar y prawf ADI rhan 2 os nad ydych wedi gwneud hynny yn barod.
 
-^[Darganfod gyrsiau hyfforddi gyrru](https://www.gov.uk/find-driving-instructor-training?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=unsuccessful).
+{{displayUrl "Darganfod gyrsiau hyfforddi gyrru" "https://www.gov.uk/find-driving-instructor-training?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=unsuccessful"}}
 
 ---
 `;
@@ -148,7 +158,7 @@ export const nextStepsAdi2PassTemplate = `
 
 Get a registered trainer to help you prepare for the ADI part 3 (instructional ability) test if you have not done so already.
 
-^[Find driving instructor training courses](https://www.gov.uk/find-driving-instructor-training?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=pass). 
+{{displayUrl "Find driving instructor training courses" "https://www.gov.uk/find-driving-instructor-training?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=pass"}}
 
 ## 2. Study the national standards
 
@@ -164,7 +174,7 @@ These documents set out:
 - the skills, knowledge and understanding you will help your pupils to learn
 - a way of teaching pupils the skills, knowledge and understanding 
 
-^[Find out more about the national standards and syllabus](https://www.gov.uk/government/collections/national-driving-and-riding-standards?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=pass). 
+{{displayUrl "Find out more about the national standards and syllabus" "https://www.gov.uk/government/collections/national-driving-and-riding-standards?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=pass"}}
 
 ## 3. Get practice teaching
 
@@ -172,7 +182,7 @@ You have the option to apply for a 6 month trainee licence to get experience tea
 
 You must have had at least 40 hours of training from a qualified ADI in providing driving instruction (at least 10 of which were done in a car) to apply.
 
-^[Find out more about getting a trainee driving instructor licence](https://www.gov.uk/trainee-driving-instructor-licence-the-rules?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=pass). 
+{{displayUrl "Find out more about getting a trainee driving instructor licence" "https://www.gov.uk/trainee-driving-instructor-licence-the-rules?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=pass"}}
 
 ## 4. Book your ADI part 3 test
 
@@ -180,7 +190,7 @@ When you and your trainer agree you're ready, book your ADI part 3 test.
 
 You must book the ADI part 3 test within 2 years of the date you passed the ADI part 1 (theory) test. If you do not, you'll have to start the application process again.
 
-^[Book your ADI part 3 test](https://www.gov.uk/book-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=pass).
+{{displayUrl "Book your ADI part 3 test" "https://www.gov.uk/book-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=pass"}}
 `;
 
 export const nextStepsAdi2WelshPassTemplate = `
@@ -190,7 +200,7 @@ export const nextStepsAdi2WelshPassTemplate = `
 
 Cael hyfforddwr cofrestredig i'ch helpu i baratoi ar gyfer eich ymgais nesaf ar y prawf ADI rhan 3 os nad ydych wedi gwneud hynny yn barod.
 
-^[Darganfod gyrsiau hyfforddi gyrru](https://www.gov.uk/find-driving-instructor-training?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=pass)
+{{displayUrl "Darganfod gyrsiau hyfforddi gyrru" "https://www.gov.uk/find-driving-instructor-training?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=pass"}}
 
 ## 2. Adolygu y safonau cenedlaethol
 
@@ -206,7 +216,7 @@ Mae’r dogfennau hyn yn nodi:
 - y sgiliau, gwybodaeth a dealltwriaeth a fyddech yn helpu eich disgyblion dysgu
 - ffordd o addysgu disgyblion y sgiliau, gwybodaeth a dealltwriaeth 
 
-^[Dysgwch fwy am y safonau cenedlaethol a'r maes llafur](https://www.gov.uk/government/collections/national-driving-and-riding-standards?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=pass). 
+{{displayUrl "Dysgwch fwy am y safonau cenedlaethol a'r maes llafur" "https://www.gov.uk/government/collections/national-driving-and-riding-standards?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=pass"}} 
 
 ## 3. Cael addysgu ymarfer
 
@@ -214,7 +224,7 @@ Mae gennych yr opsiwn i wneud cais am drwydded hyfforddai 6 mis i gael profiad o
 
 Mae'n rhaid eich bod wedi cael o leiaf 40 awr o hyfforddiant gan ADI cymwysedig mewn darparu cyfarwyddyd gyrru (y gwnaed o leiaf 10 ohonynt mewn car) i wneud cais.
 
-^[Dysgwch fwy am gael trwydded hyfforddwr gyrru dan hyfforddiant]( https://www.gov.uk/trainee-driving-instructor-licence-the-rules?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=pass)). 
+{{displayUrl "Dysgwch fwy am gael trwydded hyfforddwr gyrru dan hyfforddiant" "https://www.gov.uk/trainee-driving-instructor-licence-the-rules?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=pass"}}
 
 ## 4. Archebwch eich prawf ADI rhan 3
 
@@ -222,7 +232,7 @@ Pan fyddwch chi a'ch hyfforddwr yn cytuno eich bod yn barod, archebwch eich praw
 
 Rhaid i chi archebu'r prawf ADI rhan 3 o fewn 2 flynedd i'r dyddiad y gwnaethoch basio'r prawf ADI rhan 1 (theori). Os na wnewch hynny, bydd yn rhaid i chi ddechrau'r broses ymgeisio eto.
 
-^[Trefnu rhan 3 o'r prawf ADI](https://www.gov.uk/book-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=pass).
+{{displayUrl "Archebwch eich prawf ADI rhan 3" "https://www.gov.uk/book-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=pass"}}
 `;
 
 export const nextStepsAdi3FirstOrSecondFailTemplate = `
@@ -232,7 +242,7 @@ export const nextStepsAdi3FirstOrSecondFailTemplate = `
 
 Get a registered trainer to help you prepare for your next attempt if you do not already have one.
 
-^[Find driving instructor training courses](https://www.gov.uk/find-driving-instructor-training?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=unsuccesful-1st-2nd). 
+{{displayUrl "Find driving instructor training courses" "https://www.gov.uk/find-driving-instructor-training?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=unsuccesful-1st-2nd"}} 
 
 ## 2. Study the national standards
 
@@ -248,7 +258,7 @@ These documents set out:
 - the skills, knowledge and understanding you will help your pupils to learn
 - a way of teaching pupils the skills, knowledge and understanding 
 
-^[Find out more about the national standards and syllabus](https://www.gov.uk/government/collections/national-driving-and-riding-standards?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=unsuccessful-1st-2nd). 
+{{displayUrl "Find out more about the national standards and syllabus" "https://www.gov.uk/government/collections/national-driving-and-riding-standards?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=unsuccessful-1st-2nd"}}
 
 ## 3. If you have a trainee driving instructor licence
 
@@ -266,7 +276,7 @@ export const nextStepsAdi3FirstOrSecondWelshFailTemplate = `
 
 Cael hyfforddwr cofrestredig i'ch helpu i baratoi ar gyfer eich ymgais nesaf ar y prawf ADI rhan 2 os nad ydych wedi gwneud hynny yn barod.
 
-^[Darganfod gyrsiau hyfforddi gyrru](https://www.gov.uk/find-driving-instructor-training?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=unsuccesful-1st-2nd)). 
+{{displayUrl "Darganfod gyrsiau hyfforddi gyrru" "https://www.gov.uk/find-driving-instructor-training?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=unsuccesful-1st-2nd"}}
 
 ## 2. Adolygu y safonau cenedlaethol
 
@@ -282,13 +292,13 @@ Mae’r dogfennau hyn yn nodi:
 - y sgiliau, gwybodaeth a dealltwriaeth a fyddech yn helpu eich disgyblion dysgu
 - ffordd o addysgu disgyblion y sgiliau, gwybodaeth a dealltwriaeth 
 
-^[Dysgwch fwy am y safonau cenedlaethol a'r maes llafur](https://www.gov.uk/government/collections/national-driving-and-riding-standards?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=unsuccessful-1st-2nd). 
+{{displayUrl "Dysgwch fwy am y safonau cenedlaethol a'r maes llafur" "https://www.gov.uk/government/collections/national-driving-and-riding-standards?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=unsuccessful-1st-2nd"}}
 
 ## 3. Os oes gennych drwydded hyfforddwr gyrru o dan hyfforddiant
 
 Os dewiswch yr opsiwn ‘hyfforddiant ychwanegol’ (opsiwn 2) pan wnaethoch gais am eich trwydded hyfforddai, rhaid i chi wneud 5 awr o hyfforddiant ychwanegol cyn sefyll y prawf eto.
 
-[Dysgwch fwy am gael trwydded hyfforddwr gyrru dan hyfforddiant](https://www.gov.uk/trainee-driving-instructor-licence-the-rules/options-when-you-apply-for-a-trainee-licence?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=unsuccessful-1st-2nd). 
+{{displayUrl "Dysgwch fwy am gael trwydded hyfforddwr gyrru dan hyfforddiant" "https://www.gov.uk/trainee-driving-instructor-licence-the-rules/options-when-you-apply-for-a-trainee-licence?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=unsuccessful-1st-2nd"}}
 
 ---
 `;
@@ -313,7 +323,7 @@ Bydd angen i chi ddilyn y camau hyn os ydych chi dal eisiau bod yn ADI.
 
 Rhaid i chi aros 2 flynedd o'r adeg y gwnaethoch basio'r prawf ADI rhan 1 yn wreiddiol cyn y gallwch ei gymryd eto.
 
-[Darganfod sut i fod yn hyfforddwr gyrru](https://www.gov.uk/become-car-driving-instructor?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=unsuccessful-3rd)). 
+{{displayUrl "Darganfod sut i fod yn hyfforddwr gyrru" "https://www.gov.uk/become-car-driving-instructor?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=unsuccessful-3rd"}}
 
 ---
 `;
@@ -338,7 +348,7 @@ You will need to follow these steps if you still want to become an ADI.
 
 You must wait 2 years from when you originally passed the ADI part 1 test before you can take it again.
 
-^[Find out how to become a driving instructor](https://www.gov.uk/become-car-driving-instructor?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=unsuccessful-3rd). 
+{{displayUrl "Find out how to become a driving instructor" "https://www.gov.uk/become-car-driving-instructor?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=unsuccessful-3rd"}}
 
 ---
 `;
@@ -352,7 +362,7 @@ You must have your ADI certificate before you start working as an ADI.
 
 You must apply for your certificate within 12 months of passing the test, or you’ll have to pass all 3 qualifying tests again.
 
-^[Apply for your first ADI certificate](https://www.gov.uk/apply-first-approved-driving-instructor-adi-badge?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=pass). 
+{{displayUrl "Apply for your first ADI certificate" "https://www.gov.uk/apply-first-approved-driving-instructor-adi-badge?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=pass"}}
 
 ---
 `;
@@ -366,7 +376,7 @@ Rhaid i chi gael eich tystysgrif ADI cyn i chi ddechrau gweithio fel ADI.
 
 Rhaid i chi wneud cais am eich tystysgrif o fewn 12 mis i basio’r prawf, neu bydd yn rhaid i chi basio pob un o’r 3 phrawf cymhwyso eto.
 
-^[Gwnewch gais am eich tystysgrif ADI gyntaf](https://www.gov.uk/apply-first-approved-driving-instructor-adi-badge?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=pass). 
+{{displayUrl "Gwnewch gais am eich tystysgrif ADI gyntaf" "https://www.gov.uk/apply-first-approved-driving-instructor-adi-badge?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=pass"}}
 
 ---
 `;
@@ -378,7 +388,7 @@ export const nextStepsScFirstOrSecondTemplate = `
 
 Get a registered trainer to help you prepare for your next attempt if you do not already have one.
 
-^[Find driving instructor training courses](https://www.gov.uk/find-driving-instructor-training?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=unsuccesful-1st-2nd). 
+{{displayUrl "Find driving instructor training courses" "https://www.gov.uk/find-driving-instructor-training?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=unsuccesful-1st-2nd"}}
 
 ## 2. Study the national standards
 
@@ -394,7 +404,7 @@ These documents set out:
 - the skills, knowledge and understanding you will help your pupils to learn
 - a way of teaching pupils the skills, knowledge and understanding 
 
-^[Find out more about the national standards and syllabus](https://www.gov.uk/government/collections/national-driving-and-riding-standards?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=unsuccessful-1st-2nd). 
+{{displayUrl "Find out more about the national standards and syllabus" "https://www.gov.uk/government/collections/national-driving-and-riding-standards?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=unsuccessful-1st-2nd"}}
 
 ---
 `;
@@ -406,7 +416,7 @@ export const nextStepsScFirstOrSecondWelshTemplate = `
  
 Cael hyfforddwr cofrestredig i'ch helpu i baratoi ar gyfer eich ymgais nesaf ar y prawf ADI rhan 2 os nad ydych wedi gwneud hynny yn barod.
  
-^[Darganfod gyrsiau hyfforddi gyrru](https://www.gov.uk/find-driving-instructor-training?utm_source=dvsa&utm_medium=email&utm_campaign=adi-standards-check&utm_content=unsuccesful-1st-2nd). 
+{{displayUrl "Darganfod gyrsiau hyfforddi gyrru" "https://www.gov.uk/find-driving-instructor-training?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=unsuccesful-1st-2nd"}}
  
 ## 2. Adolygu y safonau cenedlaethol
  
@@ -422,7 +432,7 @@ Mae’r dogfennau hyn yn nodi:
 - y sgiliau, gwybodaeth a dealltwriaeth a fyddech yn helpu eich disgyblion dysgu
 - ffordd o addysgu disgyblion y sgiliau, gwybodaeth a dealltwriaeth 
  
-^[Dysgwch fwy am y safonau cenedlaethol a'r maes llafur](https://www.gov.uk/government/collections/national-driving-and-riding-standards?utm_source=dvsa&utm_medium=email&utm_campaign=adi-standards-check&utm_content=unsuccessful-1st-2nd).
+{{displayUrl "Dysgwch fwy am y safonau cenedlaethol a'r maes llafur" "https://www.gov.uk/government/collections/national-driving-and-riding-standards?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=unsuccessful-1st-2nd"}}
 `;
 
 export const nextStepsScThirdTemplate = `
@@ -432,13 +442,13 @@ The ADI Registrar will now consider whether or not to remove you from the ADI re
 
 They will write to you in the coming weeks to ask you to send a statement of facts for them to consider before making their decision. This is known as ‘making representations’. 
 
-^You can get help from an [ADI association](https://www.gov.uk/government/publications/driving-instructor-associations-and-organisations/driving-instructor-associations-and-organisations?utm_source=dvsa&utm_medium=email&utm_campaign=adi-standards-check&utm_content=unsuccessful-3rd) to make your representations. 
+{{displayUrl "You can get help from an ADI association to make your representations" "https://www.gov.uk/government/publications/driving-instructor-associations-and-organisations/driving-instructor-associations-and-organisations?utm_source=dvsa&utm_medium=email&utm_campaign=adi-standards-check&utm_content=unsuccessful-3rd"}}
 
 The ADI Registrar will then write to tell you their decision after you’ve made your representations. 
 
 You will be able appeal to an independent tribunal if you disagree with their decision.
 
-^[Find out how ADI registration decision appeals work](https://www.gov.uk/appeal-driving-instructor-registration-decision?utm_source=dvsa&utm_medium=email&utm_campaign=adi-standards-check&utm_content=unsuccessful-3rd). 
+{{displayUrl "Find out how ADI registration decision appeals work" "https://www.gov.uk/appeal-driving-instructor-registration-decision?utm_source=dvsa&utm_medium=email&utm_campaign=adi-standards-check&utm_content=unsuccessful-3rd"}}
 
 ## Providing driving lessons
 
@@ -460,13 +470,13 @@ Bydd y Cofrestrydd ADI nawr yn ystyried a ddylid eich tynnu oddi ar y gofrestr A
 
 Byddant yn ysgrifennu atoch yn ystod yr wythnosau nesaf i ofyn ichi anfon datganiad o ffeithiau atynt i'w hystyried cyn gwneud eu penderfyniad. Gelwir hyn yn 'sylwi'. 
 
-^Gallwch gael cymorth gan [cymdeithas ADI]( https://www.gov.uk/government/publications/driving-instructor-associations-and-organisations/driving-instructor-associations-and-organisations?utm_source=dvsa&utm_medium= email&utm_campaign= adi-standards-check&utm_content=aflwyddiannus-3ydd) i wneud eich sylwadau. 
+{{displayUrl "Gallwch gael cymorth gan cymdeithas ADI i wneud eich sylwadau" "https://www.gov.uk/government/publications/driving-instructor-associations-and-organisations/driving-instructor-associations-and-organisations?utm_source=dvsa&utm_medium= email&utm_campaign=adi-standards-check&utm_content=aflwyddiannus-3ydd"}}
 
 Yna bydd y Cofrestrydd ADI yn ysgrifennu atoch i roi gwybod i chi beth yw ei benderfyniad ar ôl i chi wneud eich sylwadau. 
 
 Byddwch yn gallu apelio i dribiwnlys annibynnol os ydych yn anghytuno â'u penderfyniad.
 
-^[Darganfyddwch sut mae apeliadau penderfyniad cofrestru ADI yn gweithio]( https://www.gov.uk/appeal-driving-instructor-registration-decision?utm_source=dvsa&utm_medium=email&utm_campaign=adi-standards-check&utm_content=unsuccessful-3rd). 
+{{displayUrl "Darganfyddwch sut mae apeliadau penderfyniad cofrestru ADI yn gweithio" "https://www.gov.uk/appeal-driving-instructor-registration-decision?utm_source=dvsa&utm_medium=email&utm_campaign=adi-standards-check&utm_content=unsuccessful-3rd"}}
 
 ## Rhoi gwersi gyrru
 
@@ -495,7 +505,7 @@ When you take the off-road test, you must use:
 - the same subcategory as the licence you’re applying for
 - a vehicle with the same type of transmission (manual, automatic or semi-automatic) that you used this time
  
-^[Find out more about the vehicles you can use for the tests](https://www.gov.uk/motorcycle-test/motorcycles-mopeds-you-can-use?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-1-test&utm_content=pass). 
+{{displayUrl "Find out more about the vehicles you can use for the tests" "https://www.gov.uk/motorcycle-test/motorcycles-mopeds-you-can-use?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-1-test&utm_content=pass"}}
 
 ---
 `;
@@ -514,7 +524,7 @@ Pan fyddwch yn cymryd y prawf oddi ar y ffordd, bydd rhaid i chi ddefnyddio:
 - yr un is-gategori â’r drwydded yr ydych yn gwneud cais amdani
 - cerbyd gyda'r un math o drawsyriant (â llaw, awtomatig neu led-awtomatig) a ddefnyddiwyd gennych y tro hwn
  
-^[Darganfod mwy am y mathau o gerbyd gallech defnyddio yn y profion](https://www.gov.uk/motorcycle-test/motorcycles-mopeds-you-can-use?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-1-test&utm_content=pass). 
+{{displayUrl "Darganfod mwy am y mathau o gerbyd gallech defnyddio yn y profion" "https://www.gov.uk/motorcycle-test/motorcycles-mopeds-you-can-use?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-1-test&utm_content=pass"}}
 
 ---
 `;
