@@ -1,5 +1,7 @@
 /* eslint-disable max-len */
 import {TestCategory} from '@dvsa/mes-test-schema/category-definitions/common/test-category';
+import {Correspondence} from '../../domain/template-id.model';
+import * as Handlebars from 'handlebars';
 
 export enum AppealUrls {
   ADI2 = 'https://www.gov.uk/guidance/appeal-your-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=unsuccessful',
@@ -38,6 +40,15 @@ const getWelshTestType = (category: TestCategory, riding: boolean): string => {
   }
 };
 
+/**
+ * Handlebars helper to correctly display the URL depending on if it's an E-mail or Letter
+ */
+Handlebars.registerHelper('displayUrlAppeals', function (communicationMethod: string, urlDescriptor: string, url: string) {
+  if (communicationMethod === Correspondence.EMAIL) {
+    return `^[${urlDescriptor}](${url}).`;
+  } else return `^${urlDescriptor}: ${url}`;
+});
+
 export const howToAppealTemplate = (url: string, category: TestCategory, riding: boolean = false): string => {
   return  `
 # How to appeal your ${getTestType(category, riding)} 
@@ -46,7 +57,7 @@ You can appeal to a court if you think your ${[TestCategory.ADI3, TestCategory.S
 
 The court cannot change your test result. If you win your appeal, they can decide you should get a free retest. If you lose your appeal, you might have to pay significant legal costs.
 
-^[Find out how to appeal if you think your examiner did not follow the law](${url}).
+{{displayUrlAppeals communicationMethod "Find out how to appeal if you think your examiner did not follow the law" "${url}"}}
 
 `;
 };
@@ -59,7 +70,7 @@ Gallwch apelio at lys os credwch na ddilynodd eich arholwr ${[TestCategory.ADI3,
 
 Ni all y llys newid canlyniad eich prawf. Os byddwch yn ennill eich apêl, gallant benderfynu y dylech naill ai'n: Mae'n bosibl y bydd yn rhaid i chi dalu costau cyfreithiol sylweddol os byddwch yn colli'ch apêl.
 
-^[Darganfyddwch sut i apelio os credwch na ddilynodd eich archwiliwr y gyfraith](${url}).
+{{displayUrlAppeals communicationMethod "Darganfyddwch sut i apelio os credwch na ddilynodd eich archwiliwr y gyfraith" "${url}"}}
 
 `;
 };

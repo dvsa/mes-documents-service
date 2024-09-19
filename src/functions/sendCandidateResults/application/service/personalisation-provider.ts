@@ -25,6 +25,7 @@ import * as moment from 'moment';
 import 'moment/locale/cy';
 import { TestResultSchemasUnion } from '@dvsa/mes-test-schema/categories';
 import { isBikeCategory } from './category-provider';
+import {Correspondence} from '../../domain/template-id.model';
 
 export interface IPersonalisationProvider {
 

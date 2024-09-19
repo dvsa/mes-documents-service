@@ -33,6 +33,9 @@ export enum FailUrls {
   TRACTOR = 'https://www.gov.uk/guidance/understanding-your-driving-test-result/tractor-or-specialist-vehicle-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=tractor-specialist-vehicle-test&utm_content=unsuccessful',
 }
 
+/**
+ * Handlebars helper to correctly display the URL depending on if it's an E-mail or Letter
+ */
 Handlebars.registerHelper('displayUrl', function (communicationMethod: string, url: string, urlDescriptor: string) {
   if (communicationMethod === Correspondence.EMAIL) {
     return `^[${urlDescriptor}](${url})`;

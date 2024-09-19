@@ -12,7 +12,7 @@ import {
   testExperienceSurveyRidingWelshTemplate,
   testExperienceSurveyTemplate,
   testExperienceSurveyTemplate3b,
-  testExperienceSurveyWelshTemplate,
+  testExperienceSurveyWelshTemplate, testExperienceSurveyWelshTemplate3b,
 } from '../templates/test-experience-survey';
 import {dataPrivacyTemplate, dataPrivacyWelshTemplate} from '../templates/data-privacy';
 import {TestOutcome} from '../../domain/test-outcome';
@@ -599,7 +599,7 @@ export const passWelshVocational = `
     ${ecoWelshTemplate()}
     ${understandingResultWelshTemplate(UrlDescriptorsWelsh.DRIVING, PassUrls.VOCATIONAL)}
     ${nextStepsDrivingWelshTemplate}
-    ${testExperienceSurveyWelshTemplate}
+    ${testExperienceSurveyWelshTemplate3b}
     ${vocationalIfYouWantToDriveWelshTemplate3b}
     ${importantInformationForHGVAndBusVocational3bWelshTemplate}
     ${signOffWelshTemplate}
@@ -631,7 +631,7 @@ export const failWelshVocational = `
     ${drivingFaultsWelshTemplate}
     ${ecoWelshTemplate()}
     ${understandingResultWelshTemplate(UrlDescriptorsWelsh.DRIVING, FailUrls.VOCATIONAL, true)}
-    ${testExperienceSurveyWelshTemplate}
+    ${testExperienceSurveyWelshTemplate3b}
     ${statementOfFailure3a_3bWelshTemplate}
     ${howToAppealWelshTemplate(AppealUrls.VOCATIONAL, TestCategory.C)}
     ${signOffWelshTemplate}
