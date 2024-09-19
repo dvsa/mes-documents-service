@@ -19,7 +19,7 @@ You must have the full Driver CPC qualification if you want to drive an HGV, bus
 
 You must pass the Driver CPC parts 3a and 3b tests, if you have not already done so.
 
-^{{displayUrlAdditionalInfo communicationMethod "Find out about the [Driver CPC part 3a test" "https://www.gov.uk/become-lorry-bus-driver/driver-cpc-part-3a-off-road-test?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-4-test&utm_content=pass"}} and ^{{displayUrlAdditionalInfo communicationMethod "Driver CPC part 3b test" "https://www.gov.uk/become-lorry-bus-driver/driver-cpc-part-3b-on-road-test?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-4-test&utm_content=pass"}} 
+^{{displayUrlAdditionalInfo communicationMethod "Find out about the [Driver CPC part 3a test" "https://www.gov.uk/become-lorry-bus-driver/driver-cpc-part-3a-off-road-test?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-4-test&utm_content=pass"}} and {{displayUrlAdditionalInfo communicationMethod "Driver CPC part 3b test" "https://www.gov.uk/become-lorry-bus-driver/driver-cpc-part-3b-on-road-test?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-4-test&utm_content=pass"}} 
 
 If you have already passed the part 3 tests, your Driver CPC card will now be sent to the address on your driving licence.
 
