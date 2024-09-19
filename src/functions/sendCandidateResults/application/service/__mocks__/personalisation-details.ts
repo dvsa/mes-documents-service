@@ -33,6 +33,7 @@ export const personalisationVocational4Pass: PersonalisationDetails = {
   q4Score:'15',
   q5Score:'12',
   totalScore: '77',
+  communicationMethod: 'EMAIL',
 };
 
 export const personalisationVocational4Fail: PersonalisationDetails = {
@@ -67,6 +68,7 @@ export const personalisationVocational4Fail: PersonalisationDetails = {
   q4Score:'3',
   q5Score:'3',
   totalScore: '12',
+  communicationMethod: 'EMAIL',
 };
 
 export const personalisationVocational3aPass: PersonalisationDetails = {
@@ -101,6 +103,7 @@ export const personalisationVocational3aPass: PersonalisationDetails = {
   q4Score:'4',
   q5Score:'5',
   totalScore: '21',
+  communicationMethod: 'EMAIL',
 };
 
 export const personalisationVocational3aFail: PersonalisationDetails = {
@@ -135,6 +138,7 @@ export const personalisationVocational3aFail: PersonalisationDetails = {
   q4Score:'3',
   q5Score:'3',
   totalScore: '11',
+  communicationMethod: 'EMAIL',
 };
 
 export const personalisationVocational3bPass: PersonalisationDetails = {
@@ -169,6 +173,7 @@ export const personalisationVocational3bPass: PersonalisationDetails = {
   q4Score:'4',
   q5Score:'5',
   totalScore: '21',
+  communicationMethod: 'EMAIL',
 };
 
 export const personalisationVocational3bFail: PersonalisationDetails = {
@@ -203,6 +208,7 @@ export const personalisationVocational3bFail: PersonalisationDetails = {
   q4Score:'3',
   q5Score:'3',
   totalScore: '11',
+  communicationMethod: 'EMAIL',
 };
 
 export const personalisationCatBPass: PersonalisationDetails = {
@@ -231,6 +237,7 @@ export const personalisationCatBPass: PersonalisationDetails = {
   showEtaVerbal: false,
   showProvLicenceRetainedByDvsa: true,
   showProvLicenceRetainedByDriver: false,
+  communicationMethod: 'EMAIL',
 };
 
 export const personalisationCatMod1Pass: PersonalisationDetails = {
@@ -257,6 +264,7 @@ export const personalisationCatMod1Pass: PersonalisationDetails = {
   showEtaVerbal: false,
   showProvLicenceRetainedByDvsa: true,
   showProvLicenceRetainedByDriver: false,
+  communicationMethod: 'EMAIL',
 };
 
 export const personalisationCatMod1Fail: PersonalisationDetails = {
@@ -286,6 +294,7 @@ export const personalisationCatMod1Fail: PersonalisationDetails = {
   showEtaVerbal: false,
   showProvLicenceRetainedByDvsa: true,
   showProvLicenceRetainedByDriver: false,
+  communicationMethod: 'EMAIL',
 };
 
 export const personalisationCatMod2Pass: PersonalisationDetails = {
@@ -315,6 +324,7 @@ export const personalisationCatMod2Pass: PersonalisationDetails = {
   showEtaVerbal: false,
   showProvLicenceRetainedByDvsa: true,
   showProvLicenceRetainedByDriver: false,
+  communicationMethod: 'EMAIL',
 };
 
 export const personalisationCatMod2Fail: PersonalisationDetails = {
@@ -344,6 +354,7 @@ export const personalisationCatMod2Fail: PersonalisationDetails = {
   showEtaVerbal: false,
   showProvLicenceRetainedByDvsa: true,
   showProvLicenceRetainedByDriver: false,
+  communicationMethod: 'EMAIL',
 };
 
 export const personalisationCatBFail: PersonalisationDetails = {
@@ -379,6 +390,7 @@ export const personalisationCatBFail: PersonalisationDetails = {
   address_line_5: undefined,
   address_line_6: 'Nottingham',
   postcode: 'NG1 2AS',
+  communicationMethod: 'EMAIL',
 };
 
 export const personalisationCatADI2Pass: PersonalisationDetails = {
@@ -406,6 +418,7 @@ export const personalisationCatADI2Pass: PersonalisationDetails = {
   address_line_5: 'Address Line 4',
   address_line_6: 'Address Line 5',
   postcode: 'PO57 0DE',
+  communicationMethod: 'EMAIL',
 };
 
 export const personalisationCatADI2Fail: PersonalisationDetails = {
@@ -437,6 +450,7 @@ export const personalisationCatADI2Fail: PersonalisationDetails = {
   address_line_5: undefined,
   address_line_6: undefined,
   postcode: 'AB12 3CD',
+  communicationMethod: 'EMAIL',
 };
 
 export const personalisationCatADI3Pass: PersonalisationDetails = {
@@ -498,6 +512,7 @@ export const personalisationCatADI3Pass: PersonalisationDetails = {
   address_line_5: undefined,
   address_line_6: undefined,
   postcode: 'PO57 0DE',
+  communicationMethod: 'EMAIL',
 };
 
 export const personalisationCatADI3FailFirstOrSecond: PersonalisationDetails = {
@@ -560,6 +575,7 @@ export const personalisationCatADI3FailFirstOrSecond: PersonalisationDetails = {
   address_line_5: undefined,
   address_line_6: undefined,
   postcode: 'PO57 0DE',
+  communicationMethod: 'EMAIL',
 };
 
 export const personalisationCatADI3FailThird: PersonalisationDetails = {
@@ -622,6 +638,7 @@ export const personalisationCatADI3FailThird: PersonalisationDetails = {
   address_line_5: undefined,
   address_line_6: undefined,
   postcode: 'PO57 0DE',
+  communicationMethod: 'EMAIL',
 };
 
 export const personalisationCatSCPass: PersonalisationDetails = {
@@ -683,6 +700,7 @@ export const personalisationCatSCPass: PersonalisationDetails = {
   address_line_5: undefined,
   address_line_6: undefined,
   postcode: 'PO57 0DE',
+  communicationMethod: 'EMAIL',
 };
 
 export const personalisationTractorPass: PersonalisationDetails = {
@@ -704,6 +722,7 @@ export const personalisationTractorPass: PersonalisationDetails = {
   showProvLicenceRetainedByDvsa: false,
   showProvLicenceRetainedByDriver: true,
   result: 'pass',
+  communicationMethod: 'EMAIL',
 };
 
 export const personalisationTractorFail: PersonalisationDetails = {
@@ -725,6 +744,7 @@ export const personalisationTractorFail: PersonalisationDetails = {
   showProvLicenceRetainedByDvsa: false,
   showProvLicenceRetainedByDriver: true,
   result: 'fail',
+  communicationMethod: 'EMAIL',
 };
 
 export const personalisationCatSCFailFirstOrSecond: PersonalisationDetails = {
@@ -787,6 +807,7 @@ export const personalisationCatSCFailFirstOrSecond: PersonalisationDetails = {
   address_line_5: undefined,
   address_line_6: undefined,
   postcode: 'PO57 0DE',
+  communicationMethod: 'EMAIL',
 };
 
 export const personalisationCatSCFailThird: PersonalisationDetails = {
@@ -849,4 +870,5 @@ export const personalisationCatSCFailThird: PersonalisationDetails = {
   address_line_5: undefined,
   address_line_6: undefined,
   postcode: 'PO57 0DE',
+  communicationMethod: 'EMAIL',
 };

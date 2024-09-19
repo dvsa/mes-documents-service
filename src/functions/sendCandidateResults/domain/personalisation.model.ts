@@ -34,6 +34,8 @@ export interface Personalisation {
 
   showProvLicenceRetainedByDvsa: boolean;
   showProvLicenceRetainedByDriver: boolean;
+
+  communicationMethod: string;
 }
 
 export interface PersonalisationDetails extends Personalisation,

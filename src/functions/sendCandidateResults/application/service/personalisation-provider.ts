@@ -71,8 +71,8 @@ export class PersonalisationProvider implements IPersonalisationProvider {
 
   private getCommonPersonalisationValues(testresult: TestResultSchemasUnion): Personalisation {
     const testData = get(testresult, 'testData') as TestData;
-
     const lang = get(testresult, 'communicationPreferences.conductedLanguage') as ConductedLanguage;
+    const commsMethod = get(testresult, 'communicationPreferences.communicationMethod') as string;
 
     const drivingFaults = this.buildFaultStringWithCount(
       this.faultProvider.getDrivingFaults(testData, testresult.category).sort((a, b) => b.count - a.count),
@@ -116,6 +116,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       showEtaPhysical: this.shouldShowEtaPhysical(eta),
       showProvLicenceRetainedByDvsa: provisionalLicenceProvided,
       showProvLicenceRetainedByDriver: !provisionalLicenceProvided,
+      communicationMethod: commsMethod,
     };
   }
 

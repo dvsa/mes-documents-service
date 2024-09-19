@@ -1,4 +1,6 @@
 /* eslint-disable max-len */
+import * as Handlebars from 'handlebars';
+
 export enum UrlDescriptors {
   DRIVING = 'Find out more about driving test faults and results',
   RIDING = 'Find out more about motorcycle test faults and results',
@@ -30,6 +32,12 @@ export enum FailUrls {
   TRACTOR = 'https://www.gov.uk/guidance/understanding-your-driving-test-result/tractor-or-specialist-vehicle-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=tractor-specialist-vehicle-test&utm_content=unsuccessful',
 }
 
+Handlebars.registerHelper('displayUrl', function (communicationMethod: string, url: string, urlDescriptor: string) {
+  if (communicationMethod === 'email') {
+    return `^[${urlDescriptor}](${url})`;
+  } else return `^${urlDescriptor}: ${url}`;
+});
+
 /**
  * Function to generate an understanding your result template
  * @param urlDescriptor
@@ -49,7 +57,7 @@ Check our guide which explains:
 - how to book a new test when you're ready
 {{/if}}
 
-^[${urlDescriptor}](${url}).  
+{{displayUrl communicationMethod ${url} ${urlDescriptor}}}
   `;
 };
 
@@ -72,6 +80,6 @@ Gwiriwch ein canllaw sy'n esbonio:
 - sut i trefnu prawf newydd pan fyddech yn barod
 {{/if}}
 
-^[${urlDescriptor}](${url}).  
+{{displayUrl communicationMethod ${url} ${urlDescriptor}}}
   `;
 };
