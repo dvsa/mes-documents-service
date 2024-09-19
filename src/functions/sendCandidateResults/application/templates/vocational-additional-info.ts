@@ -131,6 +131,7 @@ If you want to transport dangerous goods in an HGV, you need to train and pass e
 You must get an ‘animal transportation certificate of competence’ if you want to drive pigs, horses, cattle, goats, sheep or poultry for commercial reasons and on journeys of 40.4 miles and over.
 
 ^Find out how to get the certificate to transport animals at https://www.gov.uk/become-lorry-bus-driver/transport-animals.
+
 {{/if}}
 ---
 
@@ -186,6 +187,7 @@ Os ydych chi eisiau cludo nwyddau peryglus mewn HGV, mae angen i chi hyfforddi a
 Rhaid i chi gael ‘tystysgrif cymhwysedd cludo anifeiliaid’ os ydych am yrru moch, ceffylau, gwartheg, geifr, defaid neu ddofednod am resymau masnachol ac ar deithiau 40.4 milltir a throsodd.
 
 ^Darganfyddwch sut i gael y dtystysgrif i cludo anifeiliaid yn https://www.gov.uk/become-lorry-bus-driver/transport-animals.
+
 {{/if}}
 ---
 
@@ -245,6 +247,7 @@ You must get an ‘animal transportation certificate of competence’ if you wan
 
 {{/if}}
 ---
+
 `;
 
 export const importantInformationForHGVAndBusVocational3bWelshTemplate = `
@@ -297,5 +300,8 @@ Os ydych chi eisiau cludo nwyddau peryglus mewn HGV, mae angen i chi hyfforddi a
 Rhaid i chi gael ‘tystysgrif cymhwysedd cludo anifeiliaid’ os ydych am yrru moch, ceffylau, gwartheg, geifr, defaid neu ddofednod am resymau masnachol ac ar deithiau 40.4 milltir a throsodd.
 
 ^Dysgwch sut i gael y dystysgrif i gludo anifeiliaid yn https://www.gov.uk/become-lorry-bus-driver/transport-animals.
+
 {{/if}}
+---
+
 `;
