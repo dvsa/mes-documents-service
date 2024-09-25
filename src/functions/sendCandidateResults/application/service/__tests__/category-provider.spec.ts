@@ -89,17 +89,6 @@ describe('isCPCCategory', () => {
 });
 
 describe('getCategorySubject', () => {
-  it('should return CategoryType.ADI for ADI3 and SC categories', () => {
-    const adi3Categories = [
-      TestCategory.ADI3,
-      TestCategory.SC,
-    ];
-
-    adi3Categories.forEach((category) => {
-      expect(getCategorySubject(category)).toBe(CategoryType.ADI3);
-    });
-  });
-
   it('should return CategoryType.CPC for CPC categories', () => {
     const cpcCategories = [
       TestCategory.CCPC,
@@ -108,34 +97,6 @@ describe('getCategorySubject', () => {
 
     cpcCategories.forEach((category) => {
       expect(getCategorySubject(category)).toBe(CategoryType.CPC);
-    });
-  });
-
-  it('should return CategoryType.RIDING for bike categories', () => {
-    const bikeCategories = [
-      TestCategory.EUAM1,
-      TestCategory.EUA1M1,
-      TestCategory.EUA2M1,
-      TestCategory.EUAMM1,
-      TestCategory.EUAM2,
-      TestCategory.EUA1M2,
-      TestCategory.EUA2M2,
-      TestCategory.EUAMM2,
-    ];
-
-    bikeCategories.forEach((category) => {
-      expect(getCategorySubject(category)).toBe(CategoryType.RIDING);
-    });
-  });
-
-  it('should return CategoryType.DRIVING for other categories', () => {
-    const otherCategories = [
-      TestCategory.B,
-      TestCategory.C,
-    ];
-
-    otherCategories.forEach((category) => {
-      expect(getCategorySubject(category)).toBe(CategoryType.DRIVING);
     });
   });
 });

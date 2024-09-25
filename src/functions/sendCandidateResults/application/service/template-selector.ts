@@ -119,7 +119,6 @@ import {
   importantInfoForRiders, importantInfoForRidersWelsh,
 } from '../templates/info-for-new-drivers';
 import {ecoTemplate, ecoWelshTemplate} from '../templates/eco';
-import {writeFileSync} from 'node:fs';
 
 // ADI2
 export const passEnglishAdi2 = `

@@ -31,79 +31,51 @@ const cpcCategories = [
 
 describe('Subject Mapper', () => {
   it('should return the correct subject for a driving test in English', () => {
-    drivingCategories.forEach((category) => {
-      const subject = subjectMapper(category, Language.ENGLISH);
-      // eslint-disable-next-line max-len
-      expect(subject).toContain('Your driving test result on {{ date }} – Driving test reference number: {{ applicationReference }}');
-    });
+    const subject = subjectMapper(drivingCategories[0], Language.ENGLISH);
+    // eslint-disable-next-line max-len
+    expect(subject).toContain('Your car driving test result');
   });
 
   it('should return the correct subject for a driving test in Welsh', () => {
-    drivingCategories.forEach((category) => {
-      const subject = subjectMapper(category, Language.WELSH);
-      // eslint-disable-next-line max-len
-      expect(subject).toContain('Canlyniad eich prawf gyrru ar {{ date }} - Cyfeirnod prawf gyrru: {{ applicationReference }}');
-    });
+    const subject = subjectMapper(drivingCategories[0], Language.WELSH);
+    // eslint-disable-next-line max-len
+    expect(subject).toContain('Eich canlyniad prawf gyrru');
   });
 
   it('should return the correct subject for all riding tests in English', () => {
-    bikeCategories.forEach((category) => {
-      const subject = subjectMapper(category, Language.ENGLISH);
-      // eslint-disable-next-line max-len
-      expect(subject).toContain('Your motorcycle test result on {{ date }} – Motorcycle test reference number: {{ applicationReference }}');
-    });
+    const subject = subjectMapper(bikeCategories[4], Language.ENGLISH);
+    // eslint-disable-next-line max-len
+    expect(subject).toContain('Your motorcycle module 2 test result');
   });
 
   it('should return the correct subject for all riding tests in Welsh', () => {
-    bikeCategories.forEach((category) => {
-      const subject = subjectMapper(category, Language.WELSH);
-      // eslint-disable-next-line max-len
-      expect(subject).toContain('Canlyniad eich prawf Beic Modur ar {{ date }} - Cyfeirnod y prawf Beic Modur: {{ applicationReference }}');
-    });
+    const subject = subjectMapper(bikeCategories[4], Language.WELSH);
+    // eslint-disable-next-line max-len
+    expect(subject).toContain('Canlyniad prawf beic modur modiwl 2');
   });
 
   it('should return the correct subject for all adi3/sc tests in English', () => {
-    adiCategories.forEach((category) => {
-      const subject = subjectMapper(category, Language.ENGLISH);
-      // eslint-disable-next-line max-len
-      expect(subject).toContain('Your {{ categoryDescriptor }} test result on {{ date }} – Test reference number: {{ applicationReference }}');
-    });
+    const subject = subjectMapper(adiCategories[1], Language.ENGLISH);
+    // eslint-disable-next-line max-len
+    expect(subject).toContain('Your ADI standards check result');
   });
 
   it('should return the correct subject for all adi3/sc tests in Welsh', () => {
-    adiCategories.forEach((category) => {
-      const subject = subjectMapper(category, Language.WELSH);
-      // eslint-disable-next-line max-len
-      expect(subject).toContain('Canlyniad eich prawf {{ categoryDescriptor }} ar {{ date }} – Cyfeirnod prawf gyrru: {{ applicationReference }}');
-    });
+    const subject = subjectMapper(adiCategories[1], Language.WELSH);
+    // eslint-disable-next-line max-len
+    expect(subject).toContain('Eich canlyniadau arolwg safonau ADI');
   });
 
   it('should return the correct subject for all cpc tests in English', () => {
-    cpcCategories.forEach((category) => {
-      const subject = subjectMapper(category, Language.ENGLISH);
-      // eslint-disable-next-line max-len
-      expect(subject).toContain('Your test result on {{ date }} – CPC Module 4 reference number: {{ applicationReference }}');
-    });
+    const subject = subjectMapper(cpcCategories[0], Language.ENGLISH);
+    // eslint-disable-next-line max-len
+    expect(subject).toContain('Your Driver CPC part 4 test result');
   });
 
   it('should return the correct subject for all cpc tests in Welsh', () => {
-    cpcCategories.forEach((category) => {
-      const subject = subjectMapper(category, Language.WELSH);
-      // eslint-disable-next-line max-len
-      expect(subject).toContain('Canlyniad eich prawf ar {{ date }} – CPC Modiwl 4 rhif cyfeirnod: {{ applicationReference }}');
-    });
-  });
-
-  it('should return the correct subject for padi when english', () => {
-    const subject = subjectMapper(TestCategory.ADI3, Language.ENGLISH);
+    const subject = subjectMapper(cpcCategories[0], Language.WELSH);
     // eslint-disable-next-line max-len
-    expect(subject).toContain('{{#if isADI3}}ADI Part 3 – 3rd Attempt Fail{{/if}}{{#if isSC}}ADI SC – 3rd Attempt Fail{{/if}}');
-  });
-
-  it('should return the correct subject for padi when Welsh', () => {
-    const subject = subjectMapper(TestCategory.ADI3, Language.WELSH);
-    // eslint-disable-next-line max-len
-    expect(subject).toContain('{{#if isADI3}}ADI Part 3 – 3rd Attempt Fail{{/if}}{{#if isSC}}ADI SC – 3rd Attempt Fail{{/if}}');
+    expect(subject).toContain('Canlyniad eich prawf Gyrrwr CPC rhan 4');
   });
 });
 

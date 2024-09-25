@@ -358,7 +358,7 @@ export const personalisationCatMod2Fail: PersonalisationDetails = {
 };
 
 export const personalisationCatBFail: PersonalisationDetails = {
-  applicationReference: 14091418816,
+  applicationReference: 12345678,
   category: TestCategory.B,
   date: '14 December 2023',
   location: 'Graham\'s Centre',

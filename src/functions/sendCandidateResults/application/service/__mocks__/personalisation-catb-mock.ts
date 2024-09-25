@@ -36,7 +36,7 @@ const catBEnglishPassRenderedText = '\n' +
     '- what you needed to do\n' +
     '- how to improve your skills, knowledge and understanding in each area\n' +
     '\n' +
-    '^[Find out more about driving test faults and results](https://www.gov.uk/guidance/understanding-your-driving-test-result/car-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=car-driving-test&utm_content=pass).  \n' +
+    '^Find out more about driving test faults and results: https://www.gov.uk/guidance/understanding-your-driving-test-result/car-driving-test?utm_source&#x3D;dvsa&amp;utm_medium&#x3D;email&amp;utm_campaign&#x3D;car-driving-test&amp;utm_content&#x3D;pass\n' +
     '  \n' +
     '    \n' +
     '# What to do next\n' +
@@ -51,7 +51,7 @@ const catBEnglishPassRenderedText = '\n' +
     '\n' +
     'Every customer is important to us. We’d like your feedback about taking this test. We’ll use it to keep improving our services. \n' +
     '\n' +
-    '^[Start the survey now]( https://www.smartsurvey.co.uk/s/yourdrivingtest) – it takes about 5 minutes.\n' +
+    '^Start the survey now - it takes about 5 minutes: https://www.smartsurvey.co.uk/s/yourdrivingtest\n' +
     '\n' +
     '---\n' +
     '\n' +
@@ -64,7 +64,7 @@ const catBEnglishPassRenderedText = '\n' +
     '- making sure your vehicle follows all the rules\n' +
     '- keeping your details up to date with DVLA\n' +
     '\n' +
-    '^[Find out more about the legal obligations of drivers and riders](https://www.gov.uk/legal-obligations-drivers-riders?utm_source=dvsa&utm_medium=email&utm_campaign=car-driving-test&utm_content=pass).\n' +
+    '^Find out more about the legal obligations of drivers and riders: https://www.gov.uk/legal-obligations-drivers-riders?utm_source&#x3D;dvsa&amp;utm_medium&#x3D;email&amp;utm_campaign&#x3D;car-driving-test&amp;utm_content&#x3D;pass\n' +
     '\n' +
     '## Safety code for new drivers\n' +
     '\n' +
@@ -73,7 +73,7 @@ const catBEnglishPassRenderedText = '\n' +
     '\n' +
     'The safety code for new drivers provides advice to help you get through the first 12 months as safely as possible.\n' +
     '\n' +
-    '^[Check the safety code for new drivers](https://www.gov.uk/safety-code-new-drivers?utm_source=dvsa&utm_medium=email&utm_campaign=car-driving-test&utm_content=pass).\n' +
+    '^Check the safety code for new drivers: https://www.gov.uk/safety-code-new-drivers?utm_source&#x3D;dvsa&amp;utm_medium&#x3D;email&amp;utm_campaign&#x3D;car-driving-test&amp;utm_content&#x3D;pass\n' +
     '\n' +
     '## Take extra training to make you safer\n' +
     '\n' +
@@ -81,7 +81,7 @@ const catBEnglishPassRenderedText = '\n' +
     '\n' +
     'It takes at least 6 hours and it may help you get a car insurance discount if you successfully complete the course. \n' +
     '\n' +
-    '^[Find out more about Pass Plus](https://www.gov.uk/pass-plus?utm_source=dvsa&utm_medium=email&utm_campaign=car-driving-test&utm_content=pass).\n' +
+    '^Find out more about Pass Plus: https://www.gov.uk/pass-plus?utm_source&#x3D;dvsa&amp;utm_medium&#x3D;email&amp;utm_campaign&#x3D;car-driving-test&amp;utm_content&#x3D;pass\n' +
     '\n' +
     '\n' +
     '    \n' +
@@ -93,12 +93,12 @@ const catBEnglishPassRenderedText = '\n' +
     '\n' +
     '\n' +
     '    \n' +
-    'Find out how we collect, use and store your personal information at [www.gov.uk/dvsa/privacy](https://www.gov.uk/dvsa/privacy). \n' +
+    'Find out how we collect, use and store your personal information at https:www.gov.uk/dvsa/privacy. \n' +
     '\n';
 
 const catBEnglishFailRenderedText = '\n' +
     '    \n' +
-    'Driving test reference number: 14091418816\n' +
+    'Driving test reference number: 12345678\n' +
     '\n' +
     'Dear candidate,\n' +
     '\n' +
@@ -153,7 +153,7 @@ const catBEnglishFailRenderedText = '\n' +
     '- how to improve your skills, knowledge and understanding in each area\n' +
     '- how to book a new test when you\'re ready\n' +
     '\n' +
-    '^[Find out more about driving test faults and results](https://www.gov.uk/guidance/understanding-your-driving-test-result/car-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=car-driving-test&utm_content=unsuccessful).  \n' +
+    '^Find out more about driving test faults and results: https://www.gov.uk/guidance/understanding-your-driving-test-result/car-driving-test?utm_source&#x3D;dvsa&amp;utm_medium&#x3D;email&amp;utm_campaign&#x3D;car-driving-test&amp;utm_content&#x3D;unsuccessful\n' +
     '  \n' +
     '    \n' +
     '# How to prepare for your next test\n' +
@@ -164,7 +164,7 @@ const catBEnglishFailRenderedText = '\n' +
     '- practising ways of managing your nerves\n' +
     '- taking mock driving tests with your instructor\n' +
     '\n' +
-    '^[Visit the ‘Ready to Pass?’ website]( https://readytopass.campaign.gov.uk/?utm_source=dvsa&utm_medium=email&utm_campaign=car-driving-test&utm_content=unsuccessful).  \n' +
+    '^Visit the ‘Ready to Pass?’ website: https://readytopass.campaign.gov.uk/?utm_source&#x3D;dvsa&amp;utm_medium&#x3D;email&amp;utm_campaign&#x3D;car-driving-test&amp;utm_content&#x3D;unsuccessful\n' +
     '\n' +
     '---\n' +
     '\n' +
@@ -173,7 +173,7 @@ const catBEnglishFailRenderedText = '\n' +
     '\n' +
     'Every customer is important to us. We’d like your feedback about taking this test. We’ll use it to keep improving our services. \n' +
     '\n' +
-    '^[Start the survey now]( https://www.smartsurvey.co.uk/s/yourdrivingtest) – it takes about 5 minutes.\n' +
+    '^Start the survey now - it takes about 5 minutes: https://www.smartsurvey.co.uk/s/yourdrivingtest\n' +
     '\n' +
     '---\n' +
     '\n' +
@@ -181,7 +181,7 @@ const catBEnglishFailRenderedText = '\n' +
     '    \n' +
     '# Statement of failure to pass practical test\n' +
     '\n' +
-    '^Driving test reference number: 14091418816\n' +
+    '^Driving test reference number: 12345678\n' +
     '\n' +
     '^The candidate with the number shown above has been examined and has FAILED to pass the practical test / test of competence to drive prescribed under the Road Traffic Act (and for the purpose of section 36 of the Road Traffic Offenders Act 1988) in respect of vehicles in the above category / categories.\n' +
     '\n' +
@@ -192,7 +192,7 @@ const catBEnglishFailRenderedText = '\n' +
     '\n' +
     'The court cannot change your test result. If you win your appeal, they can decide you should get a free retest. If you lose your appeal, you might have to pay significant legal costs.\n' +
     '\n' +
-    '^[Find out how to appeal if you think your examiner did not follow the law](https://www.gov.uk/guidance/appeal-your-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=car-driving-test&utm_content=unsuccessful).\n' +
+    '^Find out how to appeal if you think your examiner did not follow the law: https://www.gov.uk/guidance/appeal-your-driving-test?utm_source&#x3D;dvsa&amp;utm_medium&#x3D;email&amp;utm_campaign&#x3D;car-driving-test&amp;utm_content&#x3D;unsuccessful\n' +
     '\n' +
     '\n' +
     '    \n' +
@@ -204,21 +204,21 @@ const catBEnglishFailRenderedText = '\n' +
     '\n' +
     '\n' +
     '    \n' +
-    'Find out how we collect, use and store your personal information at [www.gov.uk/dvsa/privacy](https://www.gov.uk/dvsa/privacy). \n' +
+    'Find out how we collect, use and store your personal information at https:www.gov.uk/dvsa/privacy. \n' +
     '\n';
 
 export const personalisationCatbEnglishPassMock = {
-  renderedSubject: 'Your driving test result on 01 January 1990 – Driving test reference number: 12345678',
+  renderedSubject: 'Your car driving test result',
   renderedText: catBEnglishPassRenderedText,
 };
 
 export const personalisationCatbEnglishFailMock = {
-  renderedSubject: 'Your driving test result on 14 December 2023 – Driving test reference number: 14091418816',
+  renderedSubject: 'Your car driving test result',
   renderedText: catBEnglishFailRenderedText,
 };
 
 export const personalisationCatbEnglishPassLetterMock = {
-  renderedSubject: 'Your driving test result on 01 January 1990 – Driving test reference number: 12345678',
+  renderedSubject: 'Your car driving test result',
   address_line_1: 'add1',
   address_line_2: 'add2',
   postcode: 'sa1',
@@ -226,7 +226,7 @@ export const personalisationCatbEnglishPassLetterMock = {
 };
 
 export const personalisationCatbEnglishFailLetterMock = {
-  renderedSubject: 'Your driving test result on 14 December 2023 – Driving test reference number: 14091418816',
+  renderedSubject: 'Your car driving test result',
   address_line_1: 'Mock Address 1',
   address_line_2: 'Mock Address 2',
   address_line_3: 'Mock Address 3',

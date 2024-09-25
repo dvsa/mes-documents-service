@@ -30,7 +30,6 @@ import {
   personalisationVocational4Fail,
   personalisationVocational4Pass,
 } from "../../src/functions/sendCandidateResults/application/service/__mocks__/personalisation-details";
-import {writeFileSync} from "node:fs";
 
 const templates = [
   { outcome: TestOutcome.PASS, personalisation: personalisationCatADI2Pass, language: Language.ENGLISH, category: 'adi2PassEnglish' },
