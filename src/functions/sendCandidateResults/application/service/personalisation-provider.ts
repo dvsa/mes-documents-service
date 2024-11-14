@@ -117,7 +117,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       showEtaPhysical: this.shouldShowEtaPhysical(eta),
       showProvLicenceRetainedByDvsa: provisionalLicenceProvided,
       showProvLicenceRetainedByDriver: !provisionalLicenceProvided,
-      communicationMethod: Correspondence.POST,
+      communicationMethod: commsMethod,
     };
   }
 
