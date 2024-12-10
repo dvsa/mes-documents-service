@@ -1,6 +1,6 @@
 export const seriousFaultsTemplate = `
 {{#if showSeriousFaults}}
-# Your serious faults:
+# Your serious faults
   {{#each seriousFaults}}
   - {{ this }}
   {{/each}}
@@ -10,7 +10,7 @@ export const seriousFaultsTemplate = `
 
 export const seriousFaultsWelshTemplate = `
 {{#if showSeriousFaults}}
-# Eich camgymeriadau difrifol:
+# Eich camgymeriadau difrifol
   {{#each seriousFaults}}
   - {{ this }}
   {{/each}}

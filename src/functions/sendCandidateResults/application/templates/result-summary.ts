@@ -2,6 +2,29 @@
 import {TestCategory} from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 import * as Handlebars from 'handlebars';
 
+export enum CategoryDescriptors {
+  B_ENGLISH = 'car driving test',
+  B_WELSH = 'prawf gyrru car',
+  ADI2_ENGLISH = 'ADI part 2 (driving ability) test',
+  ADI2_WELSH = 'Prawf ADI rhan 2 (gallu gyrru)',
+  ADI3_ENGLISH = 'ADI part 3 (instructional ability) test',
+  ADI3_WELSH = 'prawf ADI rhan 3 (gallu cyfarwyddiadol)',
+  SC_ENGLISH = 'ADI standards check',
+  SC_WELSH = 'arolwg safonau ADI',
+  MOD1_ENGLISH = 'motorcycle module 1 (off-road) test',
+  MOD1_WELSH = 'prawf gyrru beic modur modiwl 1 (oddi ar y ffordd)',
+  MOD2_ENGLISH = 'motorcycle module 2 (on-road) test',
+  MOD2_WELSH = 'prawf gyrru beic modur modiwl 2 (oddi ar y ffordd)',
+  HOME_ENGLISH = 'tractor or specialist vehicle driving test',
+  HOME_WELSH = 'prawf gyrru tractor neu gerbyd arbenigol',
+  MANOEUVRES_ENGLISH = 'Driver CPC part 3a (off-road exercises) test',
+  MANOEUVRES_WELSH = 'Prawf gyrrwr CPC rhan 3a (ymarferion oddi ar y ffordd)',
+  VOCATIONAL_ENGLISH = 'Driver CPC part 3b (on-road driving) test',
+  VOCATIONAL_WELSH = 'Prawf gyrrwr CPC rhan 3b (ymarferion oddi ar y ffordd)',
+  CPC_ENGLISH = 'Driver CPC part 4 (practical demonstration) test',
+  CPC_WELSH = 'Prawf gyrrwr CPC rhan 4 (arddangosiad ymarferol)',
+};
+
 /**
  * Function to transform the category displayed into a more user-friendly format
  * transformCategory
@@ -119,7 +142,7 @@ To keep improving, it’s important to understand any faults you made.
   default:
     template = `
 ^# Result: Pass\n
-^Test type: ${testType} (category {{transformCategory category}})\n
+^Test type: ${testType} ${categorySwitch !== TestCategory.ADI2 ? '(category {{transformCategory category}})' : ''}\n
 ^Test centre: {{location}}\n
 ^Date: {{date}}
      

@@ -2,6 +2,7 @@ import {TestCategory} from '@dvsa/mes-test-schema/category-definitions/common/te
 import {Language} from '../../domain/conducted-language';
 import {headerTemplate, headerWelshTemplate} from '../templates/header';
 import {
+  CategoryDescriptors,
   failResultTemplate,
   failResultWelshTemplate,
   passResultTemplate,
@@ -123,7 +124,7 @@ import {ecoTemplate, ecoWelshTemplate} from '../templates/eco';
 // ADI2
 export const passEnglishAdi2 = `
     ${headerTemplate}
-    ${passResultTemplate('ADI part 2 (driving ability) test', TestCategory.ADI2)}
+    ${passResultTemplate(CategoryDescriptors.ADI2_ENGLISH, TestCategory.ADI2)}
     ${drivingFaultsTemplate}
     ${ecoTemplate()}
     ${understandingResultTemplate(UrlDescriptors.ADI2, PassUrls.ADI2)}
@@ -135,7 +136,7 @@ export const passEnglishAdi2 = `
 // ADI2
 export const passWelshAdi2 = `
     ${headerWelshTemplate}
-    ${passResultWelshTemplate('Prawf ADI rhan 2 (gallu gyrru)', TestCategory.ADI2)}
+    ${passResultWelshTemplate(CategoryDescriptors.ADI2_WELSH, TestCategory.ADI2)}
     ${drivingFaultsWelshTemplate}
     ${ecoWelshTemplate()}
     ${understandingResultWelshTemplate(UrlDescriptorsWelsh.ADI2, PassUrls.ADI2)}
@@ -146,7 +147,7 @@ export const passWelshAdi2 = `
 
 export const failEnglishAdi2 = `
     ${headerTemplate}
-    ${failResultTemplate('ADI part 2 (driving ability) test', TestCategory.ADI2)}
+    ${failResultTemplate(CategoryDescriptors.ADI2_ENGLISH, TestCategory.ADI2)}
     ${etaTemplate}
     ${dangerousFaultsTemplate}
     ${seriousFaultsTemplate}
@@ -161,7 +162,7 @@ export const failEnglishAdi2 = `
 
 export const failWelshAdi2 = `
     ${headerWelshTemplate}
-    ${failResultWelshTemplate('Prawf ADI rhan 2 (gallu gyrru)', TestCategory.ADI2)}
+    ${failResultWelshTemplate(CategoryDescriptors.ADI2_WELSH, TestCategory.ADI2)}
     ${etaWelshTemplate}
     ${dangerousFaultsWelshTemplate}
     ${seriousFaultsWelshTemplate}
@@ -177,7 +178,7 @@ export const failWelshAdi2 = `
 // ADI3
 export const passEnglishAdi3 = `
     ${headerTemplate}
-    ${passResultTemplate('ADI part 3 (instructional ability) test', TestCategory.ADI3)}
+    ${passResultTemplate(CategoryDescriptors.ADI3_ENGLISH, TestCategory.ADI3)}
     ${gradeTemplate}
     ${nextStepsAdi3PassTemplate}
     ${importantInfoForNewDriversAdi3}
@@ -187,7 +188,7 @@ export const passEnglishAdi3 = `
 
 export const passWelshAdi3 = `
     ${headerWelshTemplate}
-    ${passResultWelshTemplate('', TestCategory.ADI3)}
+    ${passResultWelshTemplate(CategoryDescriptors.ADI3_WELSH, TestCategory.ADI3)}
     ${gradeWelshTemplate}
     ${nextStepsAdi3WelshPassTemplate}
     ${importantInfoForNewDriversAdi3Welsh}
@@ -197,7 +198,7 @@ export const passWelshAdi3 = `
 
 export const failEnglishAdi3FirstOrSecondAttempt = `
     ${headerTemplate}
-    ${failResultTemplate('ADI part 3 (instructional ability) test', TestCategory.ADI3)}
+    ${failResultTemplate(CategoryDescriptors.ADI3_ENGLISH, TestCategory.ADI3)}
     ${gradeTemplate}
     ${nextStepsAdi3FirstOrSecondFailTemplate}
     ${howToAppealTemplate(AppealUrls.ADI3_1ST_OR_2ND, TestCategory.ADI3)}
@@ -207,7 +208,7 @@ export const failEnglishAdi3FirstOrSecondAttempt = `
 
 export const failWelshAdi3FirstOrSecondAttempt = `
     ${headerWelshTemplate}
-    ${failResultWelshTemplate('prawf ADI rhan 3 (gallu cyfarwyddiadol)', TestCategory.ADI3)}
+    ${failResultWelshTemplate(CategoryDescriptors.ADI3_WELSH, TestCategory.ADI3)}
     ${gradeWelshTemplate}
     ${nextStepsAdi3FirstOrSecondWelshFailTemplate}
     ${howToAppealWelshTemplate(AppealUrls.ADI3_1ST_OR_2ND, TestCategory.ADI3)}
@@ -217,7 +218,7 @@ export const failWelshAdi3FirstOrSecondAttempt = `
 
 export const failEnglishAdi3ThirdAttempt = `
     ${headerTemplate}
-    ${failResultTemplate('ADI part 3 (instructional ability) test', TestCategory.ADI3, true)}
+    ${failResultTemplate(CategoryDescriptors.ADI3_ENGLISH, TestCategory.ADI3, true)}
     ${gradeTemplate}
     ${nextStepsAdi3ThirdFailTemplate}
     ${howToAppealTemplate(AppealUrls.ADI3_3RD, TestCategory.ADI3)}
@@ -227,7 +228,7 @@ export const failEnglishAdi3ThirdAttempt = `
 
 export const failWelshAdi3ThirdAttempt = `
     ${headerWelshTemplate}
-    ${failResultWelshTemplate('prawf ADI rhan 3 (gallu cyfarwyddiadol)', TestCategory.ADI3)}
+    ${failResultWelshTemplate(CategoryDescriptors.ADI3_WELSH, TestCategory.ADI3)}
     ${gradeWelshTemplate}
     ${nextStepsAdi3ThirdWelshFailTemplate}
     ${howToAppealWelshTemplate(AppealUrls.ADI3_3RD, TestCategory.ADI3)}
@@ -238,7 +239,7 @@ export const failWelshAdi3ThirdAttempt = `
 // SC
 export const passEnglishSc = `
     ${headerTemplate}
-    ${passResultTemplate('ADI standards check', TestCategory.SC)}
+    ${passResultTemplate(CategoryDescriptors.SC_ENGLISH, TestCategory.SC)}
     ${gradeTemplate}
     ${importantInfoForDriversSc}
     ${signOffTemplate}
@@ -247,7 +248,7 @@ export const passEnglishSc = `
 
 export const passWelshSc = `
     ${headerWelshTemplate}
-    ${passResultWelshTemplate('arolwg safonau ADI', TestCategory.SC)}
+    ${passResultWelshTemplate(CategoryDescriptors.SC_WELSH, TestCategory.SC)}
     ${gradeWelshTemplate}
     ${importantInfoForDriversScWelsh}
     ${signOffWelshTemplate}
@@ -256,7 +257,7 @@ export const passWelshSc = `
 
 export const failEnglishScFirstOrSecondAttempt = `
     ${headerTemplate}
-    ${failResultTemplate('ADI standards check', TestCategory.SC)}
+    ${failResultTemplate(CategoryDescriptors.SC_ENGLISH, TestCategory.SC)}
     ${gradeTemplate}
     ${nextStepsScFirstOrSecondTemplate}
     ${howToAppealTemplate(AppealUrls.SC_1ST_OR_2ND, TestCategory.SC)}
@@ -266,7 +267,7 @@ export const failEnglishScFirstOrSecondAttempt = `
 
 export const failWelshScFirstOrSecondAttempt = `
     ${headerWelshTemplate}
-    ${failResultWelshTemplate('arolwg safonau ADI', TestCategory.SC)}
+    ${failResultWelshTemplate(CategoryDescriptors.SC_WELSH, TestCategory.SC)}
     ${gradeWelshTemplate}
     ${nextStepsScFirstOrSecondWelshTemplate}
     ${howToAppealWelshTemplate(AppealUrls.SC_1ST_OR_2ND, TestCategory.SC)}
@@ -276,7 +277,7 @@ export const failWelshScFirstOrSecondAttempt = `
 
 export const failEnglishScThirdAttempt = `
     ${headerTemplate}
-    ${failResultTemplate('ADI standards check', TestCategory.SC, true)}
+    ${failResultTemplate(CategoryDescriptors.SC_ENGLISH, TestCategory.SC, true)}
     ${gradeTemplate}
     ${nextStepsScThirdTemplate}
     ${howToAppealTemplate(AppealUrls.SC_3RD, TestCategory.SC)}
@@ -286,7 +287,7 @@ export const failEnglishScThirdAttempt = `
 
 export const failWelshScThirdAttempt = `
     ${headerWelshTemplate}
-    ${failResultWelshTemplate('arolwg safonau ADI', TestCategory.SC, true)}
+    ${failResultWelshTemplate(CategoryDescriptors.SC_WELSH, TestCategory.SC, true)}
     ${gradeWelshTemplate}
     ${nextStepsScThirdWelshTemplate}
     ${howToAppealWelshTemplate(AppealUrls.SC_3RD, TestCategory.SC)}
@@ -297,7 +298,7 @@ export const failWelshScThirdAttempt = `
 // B
 export const passEnglishB = `
     ${headerTemplate}
-    ${passResultTemplate('car driving test', TestCategory.B)}
+    ${passResultTemplate(CategoryDescriptors.B_ENGLISH, TestCategory.B)}
     ${drivingFaultsTemplate}
     ${ecoTemplate()}
     ${understandingResultTemplate(UrlDescriptors.DRIVING, PassUrls.B)}
@@ -310,7 +311,7 @@ export const passEnglishB = `
 
 export const passWelshB = `
     ${headerWelshTemplate}
-    ${passResultWelshTemplate('prawf gyrru car', TestCategory.B)}
+    ${passResultWelshTemplate(CategoryDescriptors.B_WELSH, TestCategory.B)}
     ${drivingFaultsWelshTemplate}
     ${ecoWelshTemplate()}
     ${understandingResultWelshTemplate(UrlDescriptorsWelsh.DRIVING, PassUrls.B)}
@@ -323,7 +324,7 @@ export const passWelshB = `
 
 export const failEnglishB = `
     ${headerTemplate}
-    ${failResultTemplate('car driving test', TestCategory.B)}
+    ${failResultTemplate(CategoryDescriptors.B_ENGLISH, TestCategory.B)}
     ${etaTemplate}
     ${dangerousFaultsTemplate}
     ${seriousFaultsTemplate}
@@ -340,7 +341,7 @@ export const failEnglishB = `
 
 export const failWelshB = `
     ${headerWelshTemplate}
-    ${failResultWelshTemplate('prawf gyrru car', TestCategory.B)}
+    ${failResultWelshTemplate(CategoryDescriptors.B_WELSH, TestCategory.B)}
     ${etaWelshTemplate}
     ${dangerousFaultsWelshTemplate}
     ${seriousFaultsWelshTemplate}
@@ -358,7 +359,7 @@ export const failWelshB = `
 // MOD1
 export const passEnglishAMod1 = `
     ${headerTemplate}
-    ${passResultTemplate('motorcycle module 1 (off-road) test', TestCategory.EUAM1)}
+    ${passResultTemplate(CategoryDescriptors.MOD1_ENGLISH, TestCategory.EUAM1)}
     ${ridingFaultTemplate}
     ${emergencyStopTemplate}
     ${avoidanceExerciseTemplate}
@@ -372,7 +373,7 @@ export const passEnglishAMod1 = `
 
 export const passWelshAMod1 = `
     ${headerWelshTemplate}
-    ${passResultWelshTemplate('prawf gyrru beic modur modiwl 1 (oddi ar y ffordd)', TestCategory.EUAM1)}
+    ${passResultWelshTemplate(CategoryDescriptors.MOD1_WELSH, TestCategory.EUAM1)}
     ${ridingFaultWelshTemplate}
     ${emergencyStopWelshTemplate}
     ${avoidanceExerciseWelshTemplate}
@@ -386,7 +387,7 @@ export const passWelshAMod1 = `
 
 export const failEnglishAMod1 = `
     ${headerTemplate}
-    ${failResultTemplate('motorcycle module 1 (off-road) test', TestCategory.EUAM1)}
+    ${failResultTemplate(CategoryDescriptors.MOD1_ENGLISH, TestCategory.EUAM1)}
     ${etaTemplate}
     ${dangerousFaultsTemplate}
     ${seriousFaultsTemplate}
@@ -404,7 +405,7 @@ export const failEnglishAMod1 = `
 
 export const failWelshAMod1 = `
     ${headerWelshTemplate}
-    ${failResultWelshTemplate('prawf gyrru beic modur modiwl 1 (oddi ar y ffordd)', TestCategory.EUAM1)}
+    ${failResultWelshTemplate(CategoryDescriptors.MOD1_WELSH, TestCategory.EUAM1)}
     ${etaWelshTemplate}
     ${dangerousFaultsWelshTemplate}
     ${seriousFaultsWelshTemplate}
@@ -423,7 +424,7 @@ export const failWelshAMod1 = `
 // MOD2
 export const passEnglishAMod2 = `
     ${headerTemplate}
-    ${passResultTemplate('motorcycle module 2 (on-road) test', TestCategory.EUAM2)}
+    ${passResultTemplate(CategoryDescriptors.MOD2_ENGLISH, TestCategory.EUAM2)}
     ${ridingFaultTemplate}
     ${ecoTemplate(true)}
     ${understandingResultTemplate(UrlDescriptors.RIDING, PassUrls.MOD2)}
@@ -436,7 +437,7 @@ export const passEnglishAMod2 = `
 
 export const passWelshAMod2 = `
     ${headerWelshTemplate}
-    ${passResultWelshTemplate('prawf gyrru beic modur modiwl 2 (oddi ar y ffordd)', TestCategory.EUAM2)}
+    ${passResultWelshTemplate(CategoryDescriptors.MOD2_WELSH, TestCategory.EUAM2)}
     ${ridingFaultWelshTemplate}
     ${ecoWelshTemplate(true)}
     ${understandingResultWelshTemplate(UrlDescriptorsWelsh.RIDING, PassUrls.MOD2)}
@@ -450,7 +451,7 @@ export const passWelshAMod2 = `
 export const failEnglishAMod2 =
     `
     ${headerTemplate}
-    ${failResultTemplate('motorcycle module 2 (on-road) test', TestCategory.EUAM2)}
+    ${failResultTemplate(CategoryDescriptors.MOD2_ENGLISH, TestCategory.EUAM2)}
     ${etaTemplate}
     ${dangerousFaultsTemplate}
     ${seriousFaultsTemplate}
@@ -466,7 +467,7 @@ export const failEnglishAMod2 =
 
 export const failWelshAMod2 = `
     ${headerWelshTemplate}
-    ${failResultWelshTemplate('prawf gyrru beic modur modiwl 2 (oddi ar y ffordd)', TestCategory.EUAM2)}
+    ${failResultWelshTemplate(CategoryDescriptors.MOD2_WELSH, TestCategory.EUAM2)}
     ${etaWelshTemplate}
     ${dangerousFaultsWelshTemplate}
     ${seriousFaultsWelshTemplate}
@@ -483,7 +484,7 @@ export const failWelshAMod2 = `
 // Tractor
 export const passEnglishHome = `
     ${headerTemplate}
-    ${passResultTemplate('tractor or specialist vehicle driving test', TestCategory.F)}
+    ${passResultTemplate(CategoryDescriptors.HOME_ENGLISH, TestCategory.F)}
     ${drivingFaultsTemplate}
     ${ecoTemplate()}
     ${understandingResultTemplate(UrlDescriptors.DRIVING, PassUrls.TRACTOR)}
@@ -495,7 +496,7 @@ export const passEnglishHome = `
 
 export const passWelshHome = `
     ${headerWelshTemplate}
-    ${passResultWelshTemplate('prawf gyrru tractor neu gerbyd arbenigol', TestCategory.F)}
+    ${passResultWelshTemplate(CategoryDescriptors.HOME_WELSH, TestCategory.F)}
     ${drivingFaultsWelshTemplate}
     ${ecoWelshTemplate()}
     ${understandingResultWelshTemplate(UrlDescriptorsWelsh.DRIVING, PassUrls.TRACTOR)}
@@ -507,7 +508,7 @@ export const passWelshHome = `
 
 export const failEnglishHome = `
     ${headerTemplate}
-    ${failResultTemplate('tractor or specialist vehicle driving test', TestCategory.F)}
+    ${failResultTemplate(CategoryDescriptors.HOME_ENGLISH, TestCategory.F)}
     ${etaTemplate}
     ${dangerousFaultsTemplate}
     ${seriousFaultsTemplate}
@@ -522,7 +523,7 @@ export const failEnglishHome = `
 
 export const failWelshHome = `
     ${headerWelshTemplate}
-    ${failResultWelshTemplate('prawf gyrru tractor neu gerbyd arbenigol', TestCategory.F)}
+    ${failResultWelshTemplate(CategoryDescriptors.HOME_WELSH, TestCategory.F)}
     ${etaWelshTemplate}
     ${dangerousFaultsWelshTemplate}
     ${seriousFaultsWelshTemplate}
@@ -538,7 +539,7 @@ export const failWelshHome = `
 // Manoeuvres
 export const passEnglishMan = `
     ${headerTemplate}
-    ${passResultTemplate('Driver CPC part 3a (off-road exercises) test', TestCategory.C1M)}
+    ${passResultTemplate(CategoryDescriptors.MANOEUVRES_ENGLISH, TestCategory.C1M)}
     ${NextStepsPass3aTemplate}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
@@ -546,7 +547,7 @@ export const passEnglishMan = `
 
 export const passWelshMan = `
     ${headerWelshTemplate}
-    ${passResultWelshTemplate('prawf gyrru tractor neu gerbyd arbenigol', TestCategory.C1M)}
+    ${passResultWelshTemplate(CategoryDescriptors.MANOEUVRES_WELSH, TestCategory.C1M)}
     ${nextStepsPass3aWelshTemplate}
     ${signOffWelshTemplate}
     ${dataPrivacyWelshTemplate}
@@ -554,7 +555,7 @@ export const passWelshMan = `
 
 export const failEnglishMan = `
     ${headerTemplate}
-    ${failResultTemplate('Driver CPC part 3a (off-road exercises) test', TestCategory.C1M)}
+    ${failResultTemplate(CategoryDescriptors.MANOEUVRES_ENGLISH, TestCategory.C1M)}
     ${dangerousFaultsTemplate}
     ${seriousFaultsTemplate}
     ${understandingResultTemplate(UrlDescriptors.DRIVING, FailUrls.MANOEUVRES, true)}
@@ -566,7 +567,7 @@ export const failEnglishMan = `
 
 export const failWelshMan = `
     ${headerWelshTemplate}
-    ${failResultWelshTemplate('Prawf gyrrwr CPC rhan 3a (ymarferion oddi ar y ffordd)', TestCategory.C1M)}
+    ${failResultWelshTemplate(CategoryDescriptors.MANOEUVRES_WELSH, TestCategory.C1M)}
     ${dangerousFaultsWelshTemplate}
     ${seriousFaultsWelshTemplate}
     ${understandingResultWelshTemplate(UrlDescriptorsWelsh.DRIVING, FailUrls.MANOEUVRES, true)}
@@ -579,7 +580,7 @@ export const failWelshMan = `
 // Vocational
 export const passEnglishVocational = `
     ${headerTemplate}
-    ${passResultTemplate('Driver CPC part 3b (on-road driving) test', TestCategory.C)}
+    ${passResultTemplate(CategoryDescriptors.VOCATIONAL_ENGLISH, TestCategory.C)}
     ${drivingFaultsTemplate}
     ${ecoTemplate()}
     ${understandingResultTemplate(UrlDescriptors.DRIVING, PassUrls.VOCATIONAL)}
@@ -593,7 +594,7 @@ export const passEnglishVocational = `
 
 export const passWelshVocational = `
     ${headerWelshTemplate}
-    ${passResultWelshTemplate('Prawf gyrrwr CPC rhan 3b (ymarferion oddi ar y ffordd)', TestCategory.C)}
+    ${passResultWelshTemplate(CategoryDescriptors.VOCATIONAL_WELSH, TestCategory.C)}
     ${drivingFaultsWelshTemplate}
     ${ecoWelshTemplate()}
     ${understandingResultWelshTemplate(UrlDescriptorsWelsh.DRIVING, PassUrls.VOCATIONAL)}
@@ -607,7 +608,7 @@ export const passWelshVocational = `
 
 export const failEnglishVocational = `
     ${headerTemplate}
-    ${failResultTemplate('Driver CPC part 3b (on-road driving) test', TestCategory.C)}
+    ${failResultTemplate(CategoryDescriptors.VOCATIONAL_ENGLISH, TestCategory.C)}
     ${etaTemplate}
     ${dangerousFaultsTemplate}
     ${seriousFaultsTemplate}
@@ -623,7 +624,7 @@ export const failEnglishVocational = `
 
 export const failWelshVocational = `
     ${headerWelshTemplate}
-    ${failResultWelshTemplate('Prawf gyrrwr CPC rhan 3b (ymarferion oddi ar y ffordd)', TestCategory.C)}
+    ${failResultWelshTemplate(CategoryDescriptors.VOCATIONAL_WELSH, TestCategory.C)}
     ${etaWelshTemplate}
     ${dangerousFaultsWelshTemplate}
     ${seriousFaultsWelshTemplate}
@@ -640,7 +641,7 @@ export const failWelshVocational = `
 // CPC
 export const passEnglishCpc = `
     ${headerTemplate}
-    ${passResultTemplate('Driver CPC part 4 (practical demonstration) test', TestCategory.CCPC)}
+    ${passResultTemplate(CategoryDescriptors.CPC_ENGLISH, TestCategory.CCPC)}
     ${vocationalScoringExplanation}
     ${vocationalScoring}
     ${vocationalIfYouWantToDriveTemplate4}
@@ -651,7 +652,7 @@ export const passEnglishCpc = `
 
 export const passWelshCpc = `
     ${headerWelshTemplate}
-    ${passResultWelshTemplate('Prawf gyrrwr CPC rhan 4 (arddangosiad ymarferol)', TestCategory.CCPC)}
+    ${passResultWelshTemplate(CategoryDescriptors.CPC_WELSH, TestCategory.CCPC)}
     ${vocationalScoringExplanationWelsh}
     ${vocationalScoringWelsh}
     ${vocationalIfYouWantToDriveWelshTemplate4}
@@ -662,7 +663,7 @@ export const passWelshCpc = `
 
 export const failEnglishCpc = `
     ${headerTemplate}
-    ${failResultTemplate('Driver CPC part 4 (practical demonstration) test', TestCategory.CCPC)}
+    ${failResultTemplate(CategoryDescriptors.CPC_ENGLISH, TestCategory.CCPC)}
     ${vocationalScoringExplanation}
     ${vocationalScoring}
     ${statementOfFailureVocational4}
@@ -673,7 +674,7 @@ export const failEnglishCpc = `
 
 export const failWelshCpc = `
     ${headerWelshTemplate}
-    ${failResultWelshTemplate('Prawf gyrrwr CPC rhan 4 (arddangosiad ymarferol)', TestCategory.CCPC)}
+    ${failResultWelshTemplate(CategoryDescriptors.CPC_WELSH, TestCategory.CCPC)}
     ${vocationalScoringExplanationWelsh}
     ${vocationalScoringWelsh}
     ${statementOfFailureVocational4Welsh}

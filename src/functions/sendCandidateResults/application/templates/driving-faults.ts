@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 export const drivingFaultsTemplate = `
 {{#if showDrivingFaults}}
-# Your driving faults:
+# Your driving faults
   {{#each drivingFaults}}
   - {{ this }}
   {{/each}}
@@ -11,7 +11,7 @@ export const drivingFaultsTemplate = `
 
 export const drivingFaultsWelshTemplate = `
 {{#if showDrivingFaults}}
-# Eich camgymeriadau gyrru:
+# Eich camgymeriadau gyrru
   {{#each drivingFaults}}
   - {{ this }}
   {{/each}}
@@ -21,7 +21,7 @@ export const drivingFaultsWelshTemplate = `
 
 export const ridingFaultTemplate = `
 {{#if showDrivingFaults}}
-# Your riding faults:
+# Your riding faults
   {{#each drivingFaults}}
   - {{ this }}
   {{/each}}
@@ -30,7 +30,7 @@ export const ridingFaultTemplate = `
 
 export const ridingFaultWelshTemplate = `
 {{#if showDrivingFaults}}
-# Eich camgymeriadau beicio:
+# Eich camgymeriadau beicio
   {{#each drivingFaults}}
   - {{ this }}
   {{/each}}

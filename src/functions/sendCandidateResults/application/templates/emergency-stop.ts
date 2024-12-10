@@ -1,5 +1,5 @@
 export const emergencyStopTemplate = `
-{{#if emergencyFirstAttempt}}
+{{#if showEmergencyFirstAttempt}}
 # Emergency stop
 First attempt: {{ emergencyFirstAttempt }}
 {{/if}}
@@ -10,10 +10,10 @@ Second attempt: {{ emergencySecondAttempt }}
 `;
 
 export const emergencyStopWelshTemplate = `
-{{#if showEmergencyStop}}
+{{#if showEmergencyFirstAttempt}}
 # Stopio brys
-Cynnig cyntaf: {{emergencyFirstAtempt}}
-{{/if}} 
+Cynnig cyntaf: {{emergencyFirstAttempt}}
+{{/if}}
 {{#if showEmergencySecondAttempt}}
 
 Ail ymgais: {{emergencySecondAttempt}}

@@ -1,6 +1,6 @@
 export const dangerousFaultsTemplate = `
 {{#if showDangerousFaults}}
-# Your dangerous faults:
+# Your dangerous faults
   {{#each dangerousFaults}}
   - {{ this }}
   {{/each}}
@@ -10,7 +10,7 @@ export const dangerousFaultsTemplate = `
 
 export const dangerousFaultsWelshTemplate = `
 {{#if showDangerousFaults}}
-# Eich camgymeriadau peryglus:
+# Eich camgymeriadau peryglus
   {{#each dangerousFaults}}
   - {{ this }}
   {{/each}}

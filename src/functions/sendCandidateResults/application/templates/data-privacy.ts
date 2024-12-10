@@ -12,7 +12,7 @@ Handlebars.registerHelper('displayUrlDataPrivacy', function (communicationMethod
 });
 
 export const dataPrivacyTemplate = `
-Find out how we collect, use and store your personal information at https:www.gov.uk/dvsa/privacy. 
+Find out how we collect, use and store your personal information at https://www.gov.uk/dvsa/privacy. 
 `;
 
 export const dataPrivacyWelshTemplate = `
