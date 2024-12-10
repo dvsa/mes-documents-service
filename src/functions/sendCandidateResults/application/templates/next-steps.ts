@@ -6,10 +6,10 @@ import {Correspondence} from '../../domain/template-id.model';
 /**
  * Handlebars helper to correctly display the URL depending on if it's an E-mail or Letter
  */
-Handlebars.registerHelper('displayUrlNextSteps', function (communicationMethod: string, urlDescriptor: string, url: string) {
+Handlebars.registerHelper('displayUrlNextSteps', function (communicationMethod: string, urlDescriptor: string, url: string, caretFlag: boolean = true) {
   if (communicationMethod === Correspondence.EMAIL) {
-    return `^[${urlDescriptor}](${url}).`;
-  } else return `^${urlDescriptor}: ${url}`;
+    return `${caretFlag ? '^' : ''}[${urlDescriptor}](${url}).`;
+  } else return `${caretFlag ? '^' : ''}${urlDescriptor}: ${url}`;
 });
 
 export const nextStepsDrivingTemplate = `
@@ -79,7 +79,7 @@ You now need to take and pass the on-road driving (part 3b) test.
 
 You need to pass the part 3b test within 6 months. If you do not, you’ll need to pass part 3a again.
 
-You or your trainer need to book the test if it’s not already been booked. If you do it yourself, book at {{displayUrlNextSteps communicationMethod "www.gov.uk/book-driving-test" "https://www.gov.uk/book-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-3a-test&utm_content=pass"}}
+You or your trainer need to book the test if it’s not already been booked. If you do it yourself, book at {{displayUrlNextSteps communicationMethod "www.gov.uk/book-driving-test" "https://www.gov.uk/book-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-3a-test&utm_content=pass" false}}
 
 {{displayUrlNextSteps communicationMethod "Find out how the part 3b test works" "https://www.gov.uk/become-lorry-bus-driver/driver-cpc-part-3b-on-road-test?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-3a-test&utm_content=pass"}}
 
@@ -110,7 +110,7 @@ Mae rhaid nawr cymryd a phasio'r prawf gyrru ar y ffordd (rhan 3b).
 
 Bydd rhaid pasio'r prawf rhan 3b o fewn 6 mis. Os ydych yn aflwyddiannus, bydd rhaid pasio rhan 3a eto.
 
-Mae angen i chi neu'ch hyfforddwr archebu'r prawf os nad yw eisoes wedi'i archebu. Os yr ydych yn trefnu eich hun, ewch i {{displayUrlNextSteps communicationMethod "www.gov.uk/book-driving-test" "https://www.gov.uk/book-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-3a-test&utm_content=pass"}}
+Mae angen i chi neu'ch hyfforddwr archebu'r prawf os nad yw eisoes wedi'i archebu. Os yr ydych yn trefnu eich hun, ewch i {{displayUrlNextSteps communicationMethod "www.gov.uk/book-driving-test" "https://www.gov.uk/book-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-3a-test&utm_content=pass" false}}
 
 {{displayUrlNextSteps communicationMethod "Darganfyddwch sut mae'r prawf rhan 3b yn gweithio" "https://www.gov.uk/become-lorry-bus-driver/driver-cpc-part-3b-on-road-test?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-3a-test&utm_content=pass"}}
 
@@ -501,7 +501,7 @@ You now need to pass your motorcycle module 2 (on-road) test.
 
 {{displayUrlNextSteps communicationMethod "If you’re upgrading your licence through ‘progressive access’, you must pass module 2 within 6 months. You have to pass module 1 again if you do not" "https://www.gov.uk/ride-motorcycle-moped/bike-categories-ages-and-licence-requirements?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-1-test&utm_content=pass"}}
 
-You or your motorcycle instructor need to book your motorcycle module 2 test if it’s not already been booked. If you do it yourself, book at {{displayUrlNextSteps communicationMethod "www.gov.uk/book-driving-test" "https://www.gov.uk/book-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-1-test&utm_content=pass"}}
+You or your motorcycle instructor need to book your motorcycle module 2 test if it’s not already been booked. If you do it yourself, book at {{displayUrlNextSteps communicationMethod "www.gov.uk/book-driving-test" "https://www.gov.uk/book-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-1-test&utm_content=pass" false}}
 
 When you take the off-road test, you must use:
 
@@ -520,7 +520,7 @@ Nawr mae angen basio y prawf gyrru beic modur modiwl 2 (ar y ffordd).
 
 Os ydych chi’n uwchraddio’ch trwydded trwy ‘[mynediad cynyddol]( https://www.gov.uk/ride-motorcycle-moped/bike-categories-ages-and-licence-requirements?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-1-test&utm_content=pass)’, mae rhaid pasio modiwl 2 o fewn 6 mis. Bydd rhaid pasio modiwl 1 eto os ydych yn aflwyddiannus.
 
-Mae angen i chi neu’ch hyfforddwr beic modur archebu prawf modiwl 2 eich beic modur os nad yw eisoes wedi’i archebu. Os ydych yn trefnu eich hun, ewch i {{displayUrlNextSteps communicationMethod "www.gov.uk/book-driving-test" "https://www.gov.uk/book-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-1-test&utm_content=pass"}}
+Mae angen i chi neu’ch hyfforddwr beic modur archebu prawf modiwl 2 eich beic modur os nad yw eisoes wedi’i archebu. Os ydych yn trefnu eich hun, ewch i {{displayUrlNextSteps communicationMethod "www.gov.uk/book-driving-test" "https://www.gov.uk/book-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-1-test&utm_content=pass" false}}
 
 Pan fyddwch yn cymryd y prawf oddi ar y ffordd, bydd rhaid i chi ddefnyddio:
 
