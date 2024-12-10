@@ -23,7 +23,7 @@ export enum CategoryDescriptors {
   VOCATIONAL_WELSH = 'Prawf gyrrwr CPC rhan 3b (ymarferion oddi ar y ffordd)',
   CPC_ENGLISH = 'Driver CPC part 4 (practical demonstration) test',
   CPC_WELSH = 'Prawf gyrrwr CPC rhan 4 (arddangosiad ymarferol)',
-};
+}
 
 /**
  * Function to transform the category displayed into a more user-friendly format
