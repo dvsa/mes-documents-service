@@ -37,6 +37,8 @@ const catBEnglishPassRenderedText = '\n' +
     '- how to improve your skills, knowledge and understanding in each area\n' +
     '\n' +
     '^Find out more about driving test faults and results: https://www.gov.uk/guidance/understanding-your-driving-test-result/car-driving-test?utm_source&#x3D;dvsa&amp;utm_medium&#x3D;email&amp;utm_campaign&#x3D;car-driving-test&amp;utm_content&#x3D;pass\n' +
+    '\n' +
+    '---\n' +
     '  \n' +
     '    \n' +
     '# What to do next\n' +
@@ -154,6 +156,8 @@ const catBEnglishFailRenderedText = '\n' +
     '- how to book a new test when you\'re ready\n' +
     '\n' +
     '^Find out more about driving test faults and results: https://www.gov.uk/guidance/understanding-your-driving-test-result/car-driving-test?utm_source&#x3D;dvsa&amp;utm_medium&#x3D;email&amp;utm_campaign&#x3D;car-driving-test&amp;utm_content&#x3D;unsuccessful\n' +
+    '\n' +
+    '---\n' +
     '  \n' +
     '    \n' +
     '# How to prepare for your next test\n' +
