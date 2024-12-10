@@ -95,7 +95,7 @@ const catBEnglishPassRenderedText = '\n' +
     '\n' +
     '\n' +
     '    \n' +
-    'Find out how we collect, use and store your personal information at https:www.gov.uk/dvsa/privacy. \n' +
+    'Find out how we collect, use and store your personal information at https://www.gov.uk/dvsa/privacy. \n' +
     '\n';
 
 const catBEnglishFailRenderedText = '\n' +
@@ -128,7 +128,7 @@ const catBEnglishFailRenderedText = '\n' +
     '    \n' +
     '\n' +
     '    \n' +
-    '# Your driving faults:\n' +
+    '# Your driving faults\n' +
     '  - Judgement - Meeting, 1\n' +
     '  - Judgement - Overtaking, 1\n' +
     '  - Junctions - Observation, 1\n' +
@@ -208,7 +208,7 @@ const catBEnglishFailRenderedText = '\n' +
     '\n' +
     '\n' +
     '    \n' +
-    'Find out how we collect, use and store your personal information at https:www.gov.uk/dvsa/privacy. \n' +
+    'Find out how we collect, use and store your personal information at https://www.gov.uk/dvsa/privacy. \n' +
     '\n';
 
 export const personalisationCatbEnglishPassMock = {
