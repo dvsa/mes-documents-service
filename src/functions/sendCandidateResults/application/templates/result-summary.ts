@@ -243,7 +243,7 @@ export const failResultTemplate = (testType: string, categorySwitch: TestCategor
 
 ---
 
-We're sorry that you were unsuccessful this ${thirdAttempt ? 'time and have not qualified as an ADI' : 'time'}.
+We're sorry that you were unsuccessful this time.
 {{#if ${categorySwitch === TestCategory.SC}}}
 
 You’re allowed 3 attempts to pass the standards check.

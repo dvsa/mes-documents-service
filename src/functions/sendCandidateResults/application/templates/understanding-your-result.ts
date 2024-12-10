@@ -62,6 +62,8 @@ Check our guide which explains:
 {{/if}}
 
 {{displayUrl communicationMethod "${url}" "${urlDescriptor}"}}
+
+---
   `;
 };
 
@@ -85,5 +87,7 @@ Gwiriwch ein canllaw sy'n esbonio:
 {{/if}}
 
 {{displayUrl communicationMethod "${url}" "${urlDescriptor}"}}
+
+---
   `;
 };
