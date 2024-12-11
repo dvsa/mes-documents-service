@@ -1,5 +1,5 @@
 export const avoidanceExerciseTemplate = `
-{{#if avoidanceFirstAttempt}}
+{{#if showAvoidanceFirstAttempt}}
 # Avoidance Exercise / Controlled Stop
 First attempt: {{ avoidanceFirstAttempt }}
 {{/if}}
@@ -10,7 +10,7 @@ Second attempt: {{ avoidanceSecondAttempt }}
 `;
 
 export const avoidanceExerciseWelshTemplate = `
-{{#if showAvoidanceExercise}}
+{{#if showAvoidanceFirstAttempt}}
 # Ymarfer osgoi a stopio rheoledig
 Cynnig cyntaf: {{avoidanceFirstAttempt}}
 {{/if}}
