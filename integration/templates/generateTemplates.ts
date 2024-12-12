@@ -127,13 +127,13 @@ const templates = [
   subject: getRenderedSubject(personalisation, language),
 }));
 
-function generatePdf(filename: string, template: string | undefined) {
+function generatePdf(filename: string, template: string | undefined, subject: string | undefined) {
   const md = markdownIt();
   if (!template) {
     console.log('fileName:', filename);
     return;
   }
-  const htmlContent = md.render(template);
+  const htmlContent = `<p>Email Subject: ${subject}</p>` + md.render(template);
   const outputFilePath = `integration/output/${filename}.pdf`;
   const options = { timeout: TIMEOUT };
 
@@ -143,4 +143,4 @@ function generatePdf(filename: string, template: string | undefined) {
   });
 }
 
-templates.forEach(({ filename, markdown }) => generatePdf(filename, markdown));
+templates.forEach(({ filename, markdown, subject }) => generatePdf(filename, markdown, subject));
