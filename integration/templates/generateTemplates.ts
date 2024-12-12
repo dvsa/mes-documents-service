@@ -37,15 +37,19 @@ import {
   personalisationCatSCFailFirstOrSecond2,
   personalisationCatSCFailThird,
   personalisationCatSCFailThird2,
-  personalisationCatSCPass, personalisationHomeFail,
-  personalisationTractorPass,
-  personalisationVocational3aFail,
+  personalisationCatSCPass,
+  personalisationSpecialistVehicleFail, personalisationSpecialistVehicleFail2, personalisationSpecialistVehicleFail3,
+  personalisationSpecialistVehiclePass, personalisationSpecialistVehiclePass2,
+  personalisationVocational3aFail, personalisationVocational3aFail2,
   personalisationVocational3aPass,
-  personalisationVocational3bFail,
-  personalisationVocational3bPass, personalisationVocational4Fail,
+  personalisationVocational3bFail, personalisationVocational3bFail2, personalisationVocational3bFail3,
+  personalisationVocational3bPass, personalisationVocational3bPass2,
+  personalisationVocational4Fail,
   personalisationVocational4Pass
 } from "../../src/functions/sendCandidateResults/application/service/__mocks__/personalisation-details";
 
+// Increase timeout to 120 seconds
+const TIMEOUT = 120000;
 
 const templates = [
   { outcome: TestOutcome.FAIL, personalisation: personalisationCatADI2Fail, language: Language.ENGLISH, filename: 'adi2FailEnglish' },
@@ -93,29 +97,35 @@ const templates = [
   { outcome: TestOutcome.PASS, personalisation: personalisationCatMod2Pass, language: Language.ENGLISH, filename: 'AMod2PassEnglish' },
   { outcome: TestOutcome.PASS, personalisation: personalisationCatMod2Pass2, language: Language.ENGLISH, filename: 'AMod2PassEnglish2' },
   { outcome: TestOutcome.PASS, personalisation: personalisationCatMod2Pass, language: Language.WELSH, filename: 'AMod2PassWelsh' },
-  { outcome: TestOutcome.FAIL, personalisation: personalisationHomeFail, language: Language.ENGLISH, filename: 'homeFailEnglish' },
-  { outcome: TestOutcome.FAIL, personalisation: personalisationHomeFail, language: Language.WELSH, filename: 'homeFailWelsh' },
-  { outcome: TestOutcome.PASS, personalisation: personalisationTractorPass, language: Language.ENGLISH, filename: 'tractorPassEnglish' },
-  { outcome: TestOutcome.PASS, personalisation: personalisationTractorPass, language: Language.WELSH, filename: 'tractorPassWelsh' },
+  { outcome: TestOutcome.FAIL, personalisation: personalisationSpecialistVehicleFail, language: Language.ENGLISH, filename: 'specialistVehicleFailEnglish' },
+  { outcome: TestOutcome.FAIL, personalisation: personalisationSpecialistVehicleFail2, language: Language.ENGLISH, filename: 'specialistVehicleFailEnglish2' },
+  { outcome: TestOutcome.FAIL, personalisation: personalisationSpecialistVehicleFail3, language: Language.ENGLISH, filename: 'specialistVehicleFailEnglish3' },
+  { outcome: TestOutcome.FAIL, personalisation: personalisationSpecialistVehicleFail, language: Language.WELSH, filename: 'specialistVehicleFailWelsh' },
+  { outcome: TestOutcome.PASS, personalisation: personalisationSpecialistVehiclePass, language: Language.ENGLISH, filename: 'specialistVehiclePassEnglish' },
+  { outcome: TestOutcome.PASS, personalisation: personalisationSpecialistVehiclePass2, language: Language.ENGLISH, filename: 'specialistVehiclePassEnglish2' },
+  { outcome: TestOutcome.PASS, personalisation: personalisationSpecialistVehiclePass, language: Language.WELSH, filename: 'specialistVehiclePassWelsh' },
+  { outcome: TestOutcome.FAIL, personalisation: personalisationVocational3aFail, language: Language.ENGLISH, filename: 'vocational3aFailEnglish' },
+  { outcome: TestOutcome.FAIL, personalisation: personalisationVocational3aFail2, language: Language.ENGLISH, filename: 'vocational3aFailEnglish2' },
+  { outcome: TestOutcome.FAIL, personalisation: personalisationVocational3aFail, language: Language.WELSH, filename: 'vocational3aFailWelsh' },
   { outcome: TestOutcome.PASS, personalisation: personalisationVocational3aPass, language: Language.ENGLISH, filename: 'vocational3aPassEnglish' },
   { outcome: TestOutcome.PASS, personalisation: personalisationVocational3aPass, language: Language.WELSH, filename: 'vocational3aPassWelsh' },
-  { outcome: TestOutcome.FAIL, personalisation: personalisationVocational3aFail, language: Language.ENGLISH, filename: 'vocational3aFailEnglish' },
-  { outcome: TestOutcome.FAIL, personalisation: personalisationVocational3aFail, language: Language.WELSH, filename: 'vocational3aFailWelsh' },
-  { outcome: TestOutcome.PASS, personalisation: personalisationVocational3bPass, language: Language.ENGLISH, filename: 'vocational3bPassEnglish' },
-  { outcome: TestOutcome.PASS, personalisation: personalisationVocational3bPass, language: Language.WELSH, filename: 'vocational3bPassWelsh' },
   { outcome: TestOutcome.FAIL, personalisation: personalisationVocational3bFail, language: Language.ENGLISH, filename: 'vocational3bFailEnglish' },
+  { outcome: TestOutcome.FAIL, personalisation: personalisationVocational3bFail2, language: Language.ENGLISH, filename: 'vocational3bFailEnglish2' },
+  { outcome: TestOutcome.FAIL, personalisation: personalisationVocational3bFail3, language: Language.ENGLISH, filename: 'vocational3bFailEnglish3' },
   { outcome: TestOutcome.FAIL, personalisation: personalisationVocational3bFail, language: Language.WELSH, filename: 'vocational3bFailWelsh' },
-  { outcome: TestOutcome.PASS, personalisation: personalisationVocational4Pass, language: Language.ENGLISH, filename: 'vocational4PassEnglish' },
-  { outcome: TestOutcome.PASS, personalisation: personalisationVocational4Pass, language: Language.WELSH, filename: 'vocational4PassWelsh' },
+  { outcome: TestOutcome.PASS, personalisation: personalisationVocational3bPass, language: Language.ENGLISH, filename: 'vocational3bPassEnglish' },
+  { outcome: TestOutcome.PASS, personalisation: personalisationVocational3bPass2, language: Language.ENGLISH, filename: 'vocational3bPassEnglish2' },
+  { outcome: TestOutcome.PASS, personalisation: personalisationVocational3bPass, language: Language.WELSH, filename: 'vocational3bPassWelsh' },
   { outcome: TestOutcome.FAIL, personalisation: personalisationVocational4Fail, language: Language.ENGLISH, filename: 'vocational4FailEnglish' },
   { outcome: TestOutcome.FAIL, personalisation: personalisationVocational4Fail, language: Language.WELSH, filename: 'vocational4FailWelsh' },
+  { outcome: TestOutcome.PASS, personalisation: personalisationVocational4Pass, language: Language.ENGLISH, filename: 'vocational4PassEnglish' },
+  { outcome: TestOutcome.PASS, personalisation: personalisationVocational4Pass, language: Language.WELSH, filename: 'vocational4PassWelsh' },
 ].map(({ outcome, personalisation, language, filename }) => ({
-  filename: filename,
+  outcome,
+  filename,
   markdown: getRenderedText(outcome, personalisation, language),
   subject: getRenderedSubject(personalisation, language),
 }));
-
-templates.forEach(({ filename, markdown }) => generatePdf(filename, markdown));
 
 function generatePdf(filename: string, template: string | undefined) {
   const md = markdownIt();
@@ -125,8 +135,12 @@ function generatePdf(filename: string, template: string | undefined) {
   }
   const htmlContent = md.render(template);
   const outputFilePath = `integration/output/${filename}.pdf`;
-  pdf.create(htmlContent).toFile(outputFilePath, (err, res) => {
+  const options = { timeout: TIMEOUT };
+
+  pdf.create(htmlContent, options).toFile(outputFilePath, (err, res) => {
     if (err) return console.log(err);
     console.log(res);
   });
 }
+
+templates.forEach(({ filename, markdown }) => generatePdf(filename, markdown));
