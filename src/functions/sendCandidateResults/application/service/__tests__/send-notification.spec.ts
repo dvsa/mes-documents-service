@@ -30,7 +30,7 @@ describe('sendNotification', () => {
         Correspondence.EMAIL,
         'temp-id',
         personalisationCatBPass,
-        '12345678',
+        '12345678901',
         'reply-id',
         mockClient,
         Language.ENGLISH,
@@ -42,7 +42,7 @@ describe('sendNotification', () => {
       mockEmail1,
       {
         personalisation: personalisationCatbEnglishPassMock,
-        reference: '12345678',
+        reference: '12345678901',
         emailReplyToId: 'reply-id',
       }
     );
