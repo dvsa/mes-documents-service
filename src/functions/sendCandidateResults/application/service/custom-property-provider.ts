@@ -31,7 +31,10 @@ export class CustomPropertyProvider implements ICustomPropertyProvider {
     case TestCategory.ADI3:
     case TestCategory.SC:
       const prn = get<TestResultSchemasUnion, string>(testResult, 'journalData.candidate.prn');
-      return getCustomPropertiesCatADI3(testData as CatADI3TestData, activityCode, prn, category as CategoryCode);
+      // eslint-disable-next-line max-len
+      const previousAttempts = get<TestResultSchemasUnion, string>(testResult, 'journalData.candidate.previousADITests');
+      // eslint-disable-next-line max-len
+      return getCustomPropertiesCatADI3(testData as CatADI3TestData, activityCode, prn, category as CategoryCode, previousAttempts);
     case TestCategory.CCPC:
     case TestCategory.DCPC:
       return getCustomPropertiesCatCPC(testData as CatCPCTestData, category);

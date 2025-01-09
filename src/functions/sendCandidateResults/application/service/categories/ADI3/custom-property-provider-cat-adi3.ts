@@ -6,13 +6,13 @@ import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/
 
 import { CustomProperties } from '../../../../domain/custom-properties';
 import { lessonThemeValues, studentValues } from '../../../../domain/competencies';
-import { BooleanText, PositionText } from '../../../../domain/personalisation.model';
+import { PositionText } from '../../../../domain/personalisation.model';
 
 const DEFAULT_SCORE: string = '0';
 
 export interface CatADI3CustomProperties extends CustomProperties {
-  isADI3: string;
-  isSC: string;
+  isADI3: boolean;
+  isSC: boolean;
   lessonPlanningScore: string;
   lp1Score: string;
   lp2Score: string;
@@ -37,13 +37,14 @@ export interface CatADI3CustomProperties extends CustomProperties {
   studentLevel: string;
   lessonThemes: string[];
   grade: string;
-  showGrade: BooleanText;
+  showGrade: boolean;
   result: string;
   feedback: string;
   prn: string;
+  previousAttempts: number;
   categoryDescriptor: string;
-  code4: string;
-  RMFail: string;
+  code4: boolean;
+  RMFail: boolean;
   positionType: string;
 }
 
@@ -51,7 +52,8 @@ export const getCustomPropertiesCatADI3 = (
   testData: TestData | undefined,
   activityCode: ActivityCode,
   prn: string,
-  category: CategoryCode
+  category: CategoryCode,
+  previousAttempts: number
 ): CatADI3CustomProperties => {
   if (!testData) {
     throw new Error('No Test Data');
@@ -60,10 +62,10 @@ export const getCustomPropertiesCatADI3 = (
   const grade = toString(get(testData, 'review.grade'));
 
   return {
-    isADI3: (category === TestCategory.ADI3) ? BooleanText.YES : BooleanText.NO,
-    isSC: (category === TestCategory.SC) ? BooleanText.YES : BooleanText.NO,
-    RMFail: get(testData, 'riskManagement.score', 0) <= 7 ? BooleanText.YES : BooleanText.NO,
-    code4: activityCode === '4' ? BooleanText.YES : BooleanText.NO,
+    isADI3: (category === TestCategory.ADI3),
+    isSC: (category === TestCategory.SC),
+    RMFail: get(testData, 'riskManagement.score', 0) <= 7,
+    code4: activityCode === '4',
     categoryDescriptor: (category === TestCategory.SC) ? 'Standards Check' : 'ADI Part 3',
     lessonPlanningScore: toString(get(testData, 'lessonPlanning.score')) || DEFAULT_SCORE,
     lp1Score: toString(get(testData, 'lessonPlanning.q1.score')) || DEFAULT_SCORE,
@@ -96,10 +98,11 @@ export const getCustomPropertiesCatADI3 = (
       .concat(get(testData, 'lessonAndTheme.other', ''))
       .filter((theme) => !!theme) as LessonTheme[],
     grade: (activityCode === '1' && grade) ? grade : '',
-    showGrade: (activityCode === '1' && get(testData, 'review.grade')) ? BooleanText.YES : BooleanText.NO,
+    showGrade: !!(activityCode === '1' && get(testData, 'review.grade')),
     result: (activityCode === '1') ? 'passed' : 'were unsuccessful',
     feedback: get(testData, 'review.feedback', ''),
     positionType: (category === TestCategory.SC) ? PositionText.ON : PositionText.IN,
     prn,
+    previousAttempts,
   };
 };

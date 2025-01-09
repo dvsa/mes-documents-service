@@ -7,7 +7,6 @@ import {
 import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 
 import { getCustomPropertiesCatCPC } from '../custom-property-provider-cat-cpc';
-import { BooleanText } from '../../../../../domain/personalisation.model';
 
 const getQuestion = (questionNumber: number, score: number | null): Question => {
   return {
@@ -84,8 +83,8 @@ describe('Custom-property-provider-cat-cpc', () => {
       q4Score: '0',
       q5Score: '0',
       totalScore: '0',
-      showLGVText: 'yes' as BooleanText,
-      showPCVText: 'no' as BooleanText,
+      showLGVText: true,
+      showPCVText: false,
     });
   });
 
@@ -106,8 +105,8 @@ describe('Custom-property-provider-cat-cpc', () => {
       q4Score: '20',
       q5Score: '15',
       totalScore: '80',
-      showLGVText: 'yes' as BooleanText,
-      showPCVText: 'no' as BooleanText,
+      showLGVText: true,
+      showPCVText: false,
     });
   });
 
@@ -119,8 +118,8 @@ describe('Custom-property-provider-cat-cpc', () => {
       q4Score: '0',
       q5Score: '0',
       totalScore: '0',
-      showLGVText: 'yes' as BooleanText,
-      showPCVText: 'no' as BooleanText,
+      showLGVText: true,
+      showPCVText: false,
     });
   });
 
