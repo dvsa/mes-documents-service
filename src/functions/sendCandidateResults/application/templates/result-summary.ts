@@ -266,13 +266,14 @@ export const failResultTemplate = (testType: string, categorySwitch: TestCategor
 
 ---
 
-We're sorry that you were unsuccessful this time.
-{{#if ${categorySwitch === TestCategory.SC}}}
-
-You’re allowed 3 attempts to pass the standards check.
-{{/if}}
-
-${thirdAttempt ? 'If you intend to restart the qualification process,' : `To prepare for your next ${categorySwitch === TestCategory.SC ? 'standards check' : 'test,'}`} it’s important to understand more about the competencies you were assessed on.
+We're sorry that you were unsuccessful
+${thirdAttempt ?
+    (categorySwitch === TestCategory.ADI3 ?
+      'this time and have not qualified as an ADI.\n\n If you intend to restart the qualification process, it’s important to understand more about the competences you were assessed on.' :
+      'on this third attempt at taking your standards check.\n\n Because you have now been unsuccessful 3 times, the ADI Registrar can begin the process of removing you from the ADI register.\n\n We explain how this process will work later in this email.') :
+    (categorySwitch === TestCategory.ADI3 ?
+      'this time.\n\n You’re allowed 3 attempts to pass the ADI part 3 test.\n\n To prepare for your next test, it’s important to understand more about the competences you were assessed on.' :
+      'this time.\n\n You’re allowed 3 attempts to pass the standards check.\n\n To prepare for your next standards check, it’s important to understand more about the competences you were assessed on.')}
 
 ---
     `;
