@@ -44,7 +44,7 @@ You could score up to 20 points in each of the 5 topics you were tested on.
 
 To pass, you needed to both:
 
-- score 15 or more in each of the 5 topics
+- score at 15 or more in each of the 5 topics
 - achieve an overall score of at least 80
 `;
 

@@ -499,7 +499,7 @@ export const nextStepsMod1PassTemplate = `
 
 You now need to pass your motorcycle module 2 (on-road) test.
 
-{{displayUrlNextSteps communicationMethod "If you’re upgrading your licence through ‘progressive access’, you must pass module 2 within 6 months. You have to pass module 1 again if you do not" "https://www.gov.uk/ride-motorcycle-moped/bike-categories-ages-and-licence-requirements?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-1-test&utm_content=pass"}}
+"If you’re upgrading your licence through {{displayUrlNextSteps communicationMethod "progressive access" "https://www.gov.uk/ride-motorcycle-moped/bike-categories-ages-and-licence-requirements?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-1-test&utm_content=pass"}}, you must pass module 2 within 6 months. You have to pass module 1 again if you do not
 
 You or your motorcycle instructor need to book your motorcycle module 2 test if it’s not already been booked. If you do it yourself, book at {{displayUrlNextSteps communicationMethod "www.gov.uk/book-driving-test" "https://www.gov.uk/book-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-1-test&utm_content=pass" false}}
 
