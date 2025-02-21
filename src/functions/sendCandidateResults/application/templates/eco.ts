@@ -43,6 +43,7 @@ Fuel-efficient ${riding ? 'riding' : 'driving'} is a style of safe driving that 
 
 ${riding ? 'The motorcycle' : 'Your driving'} examiner saw that you could improve the control and planning of your driving. You should aim to ${riding ? 'ride' : 'drive'} in a fuel-efficient manner, considering your effect on the environment.
 {{/if}}
+
 `;
 };
 
@@ -58,6 +59,5 @@ ${riding ? 'Marchogaeth' : 'Gyrru'} tanwydd-effeithlon o ran tanwydd yn arddull 
 Sylwodd yr arholwr ${riding ? 'beiciau modur' : 'gyrru'} y gallech wella rheolaeth a gynlluniad eich gyrru. Dylech anelu i ${riding ? 'reidio' : 'yrru'} mewn modd tanwydd-effeithlon, gan ystyried eich effaith ar yr amgylchedd.
 {{/if}}
 
----
 `;
 };

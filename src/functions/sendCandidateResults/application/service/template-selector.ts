@@ -127,6 +127,7 @@ export const passEnglishAdi2 = `
     ${passResultTemplate(CategoryDescriptors.ADI2_ENGLISH, TestCategory.ADI2)}
     ${drivingFaultsTemplate}
     ${ecoTemplate()}
+---
     ${understandingResultTemplate(UrlDescriptors.ADI2, PassUrls.ADI2)}
     ${nextStepsAdi2PassTemplate}
     ${signOffTemplate}
@@ -139,6 +140,7 @@ export const passWelshAdi2 = `
     ${passResultWelshTemplate(CategoryDescriptors.ADI2_WELSH, TestCategory.ADI2)}
     ${drivingFaultsWelshTemplate}
     ${ecoWelshTemplate()}
+---
     ${understandingResultWelshTemplate(UrlDescriptorsWelsh.ADI2, PassUrls.ADI2)}
     ${nextStepsAdi2WelshPassTemplate}
     ${signOffWelshTemplate}
@@ -153,6 +155,7 @@ export const failEnglishAdi2 = `
     ${seriousFaultsTemplate}
     ${drivingFaultsTemplate}
     ${ecoTemplate()}
+---
     ${understandingResultTemplate(UrlDescriptors.ADI2, FailUrls.ADI2, true)}
     ${nextStepsADI2FailTemplate}
     ${howToAppealTemplate(AppealUrls.ADI2, TestCategory.ADI2)}
@@ -168,6 +171,7 @@ export const failWelshAdi2 = `
     ${seriousFaultsWelshTemplate}
     ${drivingFaultsWelshTemplate}
     ${ecoWelshTemplate()}
+---
     ${understandingResultWelshTemplate(UrlDescriptorsWelsh.ADI2, FailUrls.ADI2, true)}
     ${nextStepsAdi2WelshFailTemplate}
     ${howToAppealWelshTemplate(AppealUrls.ADI2, TestCategory.ADI2)}
@@ -179,6 +183,7 @@ export const failWelshAdi2 = `
 export const passEnglishAdi3 = `
     ${headerTemplate}
     ${passResultTemplate(CategoryDescriptors.ADI3_ENGLISH, TestCategory.ADI3)}
+---
     ${gradeTemplate}
     ${nextStepsAdi3PassTemplate}
     ${importantInfoForNewDriversAdi3}
@@ -189,6 +194,7 @@ export const passEnglishAdi3 = `
 export const passWelshAdi3 = `
     ${headerWelshTemplate}
     ${passResultWelshTemplate(CategoryDescriptors.ADI3_WELSH, TestCategory.ADI3)}
+---
     ${gradeWelshTemplate}
     ${nextStepsAdi3WelshPassTemplate}
     ${importantInfoForNewDriversAdi3Welsh}
@@ -199,6 +205,7 @@ export const passWelshAdi3 = `
 export const failEnglishAdi3FirstOrSecondAttempt = `
     ${headerTemplate}
     ${failResultTemplate(CategoryDescriptors.ADI3_ENGLISH, TestCategory.ADI3)}
+---
     ${gradeTemplate}
     ${nextStepsAdi3FirstOrSecondFailTemplate}
     ${howToAppealTemplate(AppealUrls.ADI3_1ST_OR_2ND, TestCategory.ADI3)}
@@ -209,6 +216,7 @@ export const failEnglishAdi3FirstOrSecondAttempt = `
 export const failWelshAdi3FirstOrSecondAttempt = `
     ${headerWelshTemplate}
     ${failResultWelshTemplate(CategoryDescriptors.ADI3_WELSH, TestCategory.ADI3)}
+---
     ${gradeWelshTemplate}
     ${nextStepsAdi3FirstOrSecondWelshFailTemplate}
     ${howToAppealWelshTemplate(AppealUrls.ADI3_1ST_OR_2ND, TestCategory.ADI3)}
@@ -219,6 +227,7 @@ export const failWelshAdi3FirstOrSecondAttempt = `
 export const failEnglishAdi3ThirdAttempt = `
     ${headerTemplate}
     ${failResultTemplate(CategoryDescriptors.ADI3_ENGLISH, TestCategory.ADI3, true)}
+---
     ${gradeTemplate}
     ${nextStepsAdi3ThirdFailTemplate}
     ${howToAppealTemplate(AppealUrls.ADI3_3RD, TestCategory.ADI3)}
@@ -229,6 +238,7 @@ export const failEnglishAdi3ThirdAttempt = `
 export const failWelshAdi3ThirdAttempt = `
     ${headerWelshTemplate}
     ${failResultWelshTemplate(CategoryDescriptors.ADI3_WELSH, TestCategory.ADI3)}
+---
     ${gradeWelshTemplate}
     ${nextStepsAdi3ThirdWelshFailTemplate}
     ${howToAppealWelshTemplate(AppealUrls.ADI3_3RD, TestCategory.ADI3)}
@@ -240,6 +250,7 @@ export const failWelshAdi3ThirdAttempt = `
 export const passEnglishSc = `
     ${headerTemplate}
     ${passResultTemplate(CategoryDescriptors.SC_ENGLISH, TestCategory.SC)}
+---
     ${gradeTemplate}
     ${importantInfoForDriversSc}
     ${signOffTemplate}
@@ -249,6 +260,7 @@ export const passEnglishSc = `
 export const passWelshSc = `
     ${headerWelshTemplate}
     ${passResultWelshTemplate(CategoryDescriptors.SC_WELSH, TestCategory.SC)}
+---
     ${gradeWelshTemplate}
     ${importantInfoForDriversScWelsh}
     ${signOffWelshTemplate}
@@ -258,6 +270,7 @@ export const passWelshSc = `
 export const failEnglishScFirstOrSecondAttempt = `
     ${headerTemplate}
     ${failResultTemplate(CategoryDescriptors.SC_ENGLISH, TestCategory.SC)}
+---
     ${gradeTemplate}
     ${nextStepsScFirstOrSecondTemplate}
     ${howToAppealTemplate(AppealUrls.SC_1ST_OR_2ND, TestCategory.SC)}
@@ -268,6 +281,7 @@ export const failEnglishScFirstOrSecondAttempt = `
 export const failWelshScFirstOrSecondAttempt = `
     ${headerWelshTemplate}
     ${failResultWelshTemplate(CategoryDescriptors.SC_WELSH, TestCategory.SC)}
+---
     ${gradeWelshTemplate}
     ${nextStepsScFirstOrSecondWelshTemplate}
     ${howToAppealWelshTemplate(AppealUrls.SC_1ST_OR_2ND, TestCategory.SC)}
@@ -278,6 +292,7 @@ export const failWelshScFirstOrSecondAttempt = `
 export const failEnglishScThirdAttempt = `
     ${headerTemplate}
     ${failResultTemplate(CategoryDescriptors.SC_ENGLISH, TestCategory.SC, true)}
+ --
     ${gradeTemplate}
     ${nextStepsScThirdTemplate}
     ${howToAppealTemplate(AppealUrls.SC_3RD, TestCategory.SC)}
@@ -288,6 +303,7 @@ export const failEnglishScThirdAttempt = `
 export const failWelshScThirdAttempt = `
     ${headerWelshTemplate}
     ${failResultWelshTemplate(CategoryDescriptors.SC_WELSH, TestCategory.SC, true)}
+---
     ${gradeWelshTemplate}
     ${nextStepsScThirdWelshTemplate}
     ${howToAppealWelshTemplate(AppealUrls.SC_3RD, TestCategory.SC)}
@@ -301,6 +317,7 @@ export const passEnglishB = `
     ${passResultTemplate(CategoryDescriptors.B_ENGLISH, TestCategory.B)}
     ${drivingFaultsTemplate}
     ${ecoTemplate()}
+---
     ${understandingResultTemplate(UrlDescriptors.DRIVING, PassUrls.B)}
     ${nextStepsDrivingTemplate}
     ${testExperienceSurveyTemplate}
@@ -314,6 +331,7 @@ export const passWelshB = `
     ${passResultWelshTemplate(CategoryDescriptors.B_WELSH, TestCategory.B)}
     ${drivingFaultsWelshTemplate}
     ${ecoWelshTemplate()}
+---
     ${understandingResultWelshTemplate(UrlDescriptorsWelsh.DRIVING, PassUrls.B)}
     ${nextStepsDrivingWelshTemplate}
     ${testExperienceSurveyWelshTemplate}
@@ -330,6 +348,7 @@ export const failEnglishB = `
     ${seriousFaultsTemplate}
     ${drivingFaultsTemplate}
     ${ecoTemplate()}
+---
     ${understandingResultTemplate(UrlDescriptors.DRIVING, FailUrls.B, true)}
     ${nextStepsFailBTemplate}
     ${testExperienceSurveyTemplate}
@@ -347,6 +366,7 @@ export const failWelshB = `
     ${seriousFaultsWelshTemplate}
     ${drivingFaultsWelshTemplate}
     ${ecoWelshTemplate()}
+---
     ${understandingResultWelshTemplate(UrlDescriptorsWelsh.DRIVING, FailUrls.B, true)}
     ${nextStepsFailBWelshTemplate}
     ${testExperienceSurveyWelshTemplate}
@@ -364,6 +384,7 @@ export const passEnglishAMod1 = `
     ${emergencyStopTemplate}
     ${avoidanceExerciseTemplate}
     ${ecoTemplate(true)}
+---
     ${understandingResultTemplate(UrlDescriptors.RIDING, PassUrls.MOD1)}
     ${nextStepsMod1PassTemplate}
     ${testExperienceSurveyRidingTemplate}
@@ -378,6 +399,7 @@ export const passWelshAMod1 = `
     ${emergencyStopWelshTemplate}
     ${avoidanceExerciseWelshTemplate}
     ${ecoWelshTemplate(true)}
+---
     ${understandingResultWelshTemplate(UrlDescriptorsWelsh.RIDING, PassUrls.MOD1)}
     ${nextStepsMod1PassWelshTemplate}
     ${testExperienceSurveyRidingWelshTemplate}
@@ -395,6 +417,7 @@ export const failEnglishAMod1 = `
     ${emergencyStopTemplate}
     ${avoidanceExerciseTemplate}
     ${ecoTemplate(true)}
+---
     ${understandingResultTemplate(UrlDescriptors.RIDING, FailUrls.MOD1, true)}
     ${testExperienceSurveyRidingTemplate}
     ${statementOfFailureMod1Template}
@@ -413,6 +436,7 @@ export const failWelshAMod1 = `
     ${emergencyStopWelshTemplate}
     ${avoidanceExerciseWelshTemplate}
     ${ecoWelshTemplate(true)}
+---
     ${understandingResultWelshTemplate(UrlDescriptorsWelsh.RIDING, FailUrls.MOD1, true)}
     ${testExperienceSurveyRidingWelshTemplate}
     ${statementOfFailureMod1WelshTemplate}
@@ -427,6 +451,7 @@ export const passEnglishAMod2 = `
     ${passResultTemplate(CategoryDescriptors.MOD2_ENGLISH, TestCategory.EUAM2)}
     ${ridingFaultTemplate}
     ${ecoTemplate(true)}
+---
     ${understandingResultTemplate(UrlDescriptors.RIDING, PassUrls.MOD2)}
     ${nextStepsDrivingTemplate}
     ${testExperienceSurveyRidingTemplate}
@@ -440,6 +465,7 @@ export const passWelshAMod2 = `
     ${passResultWelshTemplate(CategoryDescriptors.MOD2_WELSH, TestCategory.EUAM2)}
     ${ridingFaultWelshTemplate}
     ${ecoWelshTemplate(true)}
+---
     ${understandingResultWelshTemplate(UrlDescriptorsWelsh.RIDING, PassUrls.MOD2)}
     ${nextStepsDrivingWelshTemplate}
     ${testExperienceSurveyRidingWelshTemplate}
@@ -457,6 +483,7 @@ export const failEnglishAMod2 =
     ${seriousFaultsTemplate}
     ${ridingFaultTemplate}
     ${ecoTemplate(true)}
+---
     ${understandingResultTemplate(UrlDescriptors.RIDING, FailUrls.MOD2, true)}
     ${testExperienceSurveyRidingTemplate}
     ${statementOfFailureMod2Template}
@@ -473,6 +500,7 @@ export const failWelshAMod2 = `
     ${seriousFaultsWelshTemplate}
     ${ridingFaultWelshTemplate}
     ${ecoWelshTemplate(true)}
+---
     ${understandingResultWelshTemplate(UrlDescriptorsWelsh.RIDING, FailUrls.MOD2, true)}
     ${testExperienceSurveyRidingWelshTemplate}
     ${statementOfFailureMod2WelshTemplate}
@@ -487,6 +515,7 @@ export const passEnglishHome = `
     ${passResultTemplate(CategoryDescriptors.HOME_ENGLISH, TestCategory.F)}
     ${drivingFaultsTemplate}
     ${ecoTemplate()}
+---
     ${understandingResultTemplate(UrlDescriptors.DRIVING, PassUrls.TRACTOR)}
     ${nextStepsDrivingTemplate}
     ${importantInfoForDriversTractor}
@@ -499,6 +528,7 @@ export const passWelshHome = `
     ${passResultWelshTemplate(CategoryDescriptors.HOME_WELSH, TestCategory.F)}
     ${drivingFaultsWelshTemplate}
     ${ecoWelshTemplate()}
+---
     ${understandingResultWelshTemplate(UrlDescriptorsWelsh.DRIVING, PassUrls.TRACTOR)}
     ${nextStepsDrivingWelshTemplate}
     ${importantInfoForDriversTractorWelsh}
@@ -514,6 +544,7 @@ export const failEnglishHome = `
     ${seriousFaultsTemplate}
     ${drivingFaultsTemplate}
     ${ecoTemplate()}
+---
     ${understandingResultTemplate(UrlDescriptors.DRIVING, FailUrls.TRACTOR, true)}
     ${statementOfFailureTractorTemplate}
     ${howToAppealTemplate(AppealUrls.TRACTOR, TestCategory.F)}
@@ -529,6 +560,7 @@ export const failWelshHome = `
     ${seriousFaultsWelshTemplate}
     ${drivingFaultsWelshTemplate}
     ${ecoWelshTemplate()}
+---
     ${understandingResultWelshTemplate(UrlDescriptorsWelsh.DRIVING, FailUrls.TRACTOR, true)}
     ${statementOfFailureTractorWelshTemplate}
     ${howToAppealWelshTemplate(AppealUrls.TRACTOR, TestCategory.F)}
@@ -540,6 +572,7 @@ export const failWelshHome = `
 export const passEnglishMan = `
     ${headerTemplate}
     ${passResultTemplate(CategoryDescriptors.MANOEUVRES_ENGLISH, TestCategory.C1M)}
+---
     ${NextStepsPass3aTemplate}
     ${signOffTemplate}
     ${dataPrivacyTemplate}
@@ -548,6 +581,7 @@ export const passEnglishMan = `
 export const passWelshMan = `
     ${headerWelshTemplate}
     ${passResultWelshTemplate(CategoryDescriptors.MANOEUVRES_WELSH, TestCategory.C1M)}
+---
     ${nextStepsPass3aWelshTemplate}
     ${signOffWelshTemplate}
     ${dataPrivacyWelshTemplate}
@@ -558,6 +592,7 @@ export const failEnglishMan = `
     ${failResultTemplate(CategoryDescriptors.MANOEUVRES_ENGLISH, TestCategory.C1M)}
     ${dangerousFaultsTemplate}
     ${seriousFaultsTemplate}
+---
     ${understandingResultTemplate(UrlDescriptors.DRIVING, FailUrls.MANOEUVRES, true)}
     ${statementOfFailure3a_3bTemplate}
     ${howToAppealTemplate(AppealUrls.MANOEUVRES, TestCategory.C1M)}
@@ -570,6 +605,7 @@ export const failWelshMan = `
     ${failResultWelshTemplate(CategoryDescriptors.MANOEUVRES_WELSH, TestCategory.C1M)}
     ${dangerousFaultsWelshTemplate}
     ${seriousFaultsWelshTemplate}
+---
     ${understandingResultWelshTemplate(UrlDescriptorsWelsh.DRIVING, FailUrls.MANOEUVRES, true)}
     ${statementOfFailure3a_3bWelshTemplate}
     ${howToAppealWelshTemplate(AppealUrls.MANOEUVRES, TestCategory.C1M)}
@@ -583,6 +619,7 @@ export const passEnglishVocational = `
     ${passResultTemplate(CategoryDescriptors.VOCATIONAL_ENGLISH, TestCategory.C)}
     ${drivingFaultsTemplate}
     ${ecoTemplate()}
+---
     ${understandingResultTemplate(UrlDescriptors.DRIVING, PassUrls.VOCATIONAL)}
     ${nextStepsDrivingTemplate}
     ${testExperienceSurveyTemplate3b}
@@ -597,6 +634,7 @@ export const passWelshVocational = `
     ${passResultWelshTemplate(CategoryDescriptors.VOCATIONAL_WELSH, TestCategory.C)}
     ${drivingFaultsWelshTemplate}
     ${ecoWelshTemplate()}
+---
     ${understandingResultWelshTemplate(UrlDescriptorsWelsh.DRIVING, PassUrls.VOCATIONAL)}
     ${nextStepsDrivingWelshTemplate}
     ${testExperienceSurveyWelshTemplate3b}
@@ -614,6 +652,7 @@ export const failEnglishVocational = `
     ${seriousFaultsTemplate}
     ${drivingFaultsTemplate}
     ${ecoTemplate()}
+---
     ${understandingResultTemplate(UrlDescriptors.DRIVING, FailUrls.VOCATIONAL, true)}
     ${testExperienceSurveyTemplate3b}
     ${statementOfFailure3a_3bTemplate}
@@ -630,6 +669,7 @@ export const failWelshVocational = `
     ${seriousFaultsWelshTemplate}
     ${drivingFaultsWelshTemplate}
     ${ecoWelshTemplate()}
+---
     ${understandingResultWelshTemplate(UrlDescriptorsWelsh.DRIVING, FailUrls.VOCATIONAL, true)}
     ${testExperienceSurveyWelshTemplate3b}
     ${statementOfFailure3a_3bWelshTemplate}
@@ -642,7 +682,8 @@ export const failWelshVocational = `
 export const passEnglishCpc = `
     ${headerTemplate}
     ${passResultTemplate(CategoryDescriptors.CPC_ENGLISH, TestCategory.CCPC)}
-    ${vocationalScoringExplanation}
+---
+    ${ vocationalScoringExplanation}
     ${vocationalScoring}
     ${vocationalIfYouWantToDriveTemplate4}
     ${importantInformationForHGVAndBusVocational4Template}
@@ -653,6 +694,7 @@ export const passEnglishCpc = `
 export const passWelshCpc = `
     ${headerWelshTemplate}
     ${passResultWelshTemplate(CategoryDescriptors.CPC_WELSH, TestCategory.CCPC)}
+---
     ${vocationalScoringExplanationWelsh}
     ${vocationalScoringWelsh}
     ${vocationalIfYouWantToDriveWelshTemplate4}
@@ -664,6 +706,7 @@ export const passWelshCpc = `
 export const failEnglishCpc = `
     ${headerTemplate}
     ${failResultTemplate(CategoryDescriptors.CPC_ENGLISH, TestCategory.CCPC)}
+---
     ${vocationalScoringExplanation}
     ${vocationalScoring}
     ${statementOfFailureVocational4}
@@ -675,6 +718,7 @@ export const failEnglishCpc = `
 export const failWelshCpc = `
     ${headerWelshTemplate}
     ${failResultWelshTemplate(CategoryDescriptors.CPC_WELSH, TestCategory.CCPC)}
+---
     ${vocationalScoringExplanationWelsh}
     ${vocationalScoringWelsh}
     ${statementOfFailureVocational4Welsh}

@@ -30,7 +30,7 @@ export const ridingFaultTemplate = `
 
 export const ridingFaultWelshTemplate = `
 {{#if showDrivingFaults}}
-# Eich camgymeriadau beicio
+# Eich camgymeriadau marchogaeth
   {{#each drivingFaults}}
   - {{ this }}
   {{/each}}
@@ -46,6 +46,8 @@ To pass, you needed to both:
 
 - score at 15 or more in each of the 5 topics
 - achieve an overall score of at least 80
+
+---
 `;
 
 export const vocationalScoringExplanationWelsh = `
@@ -59,7 +61,6 @@ I basio, roedd rhaid:
 - cyflawni sgôr cyffredinol o 80 o leiaf
 
 ---
-
 `;
 
 export const vocationalScoring = `

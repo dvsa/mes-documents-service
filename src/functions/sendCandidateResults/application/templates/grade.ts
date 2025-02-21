@@ -28,6 +28,8 @@ You were assessed on 4 competencies in this topic:
 
 You scored {{riskManagementScore}} out of 15 in risk management.
 
+You needed to score 8 or more to pass the test.
+
 You were assessed on 5 competencies in this topic:
 
 - Share the responsibility for risk - {{rm1Score}} out of 3
@@ -89,6 +91,8 @@ Cawsoch eich asesu ar 4 cymhwysedd yn y pwnc hwn:
 ## Rheoli Risg
 
 Fe wnaethoch chi sgorio {{riskManagementScore}} allan o 15 mewn rheoli risg.
+
+Roedd angen i chi sgorio 8 neu fwy yn y pwnc hwn i basior prawf.
 
 Cawsoch eich asesu ar 5 cymhwysedd yn y pwnc hwn:
 

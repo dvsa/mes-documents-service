@@ -42,9 +42,6 @@ Handlebars.registerHelper('transformCategory', function (category: TestCategory)
   case TestCategory.EUA2M2:
   case TestCategory.EUAMM2:
     return 'A2';
-  case TestCategory.F:
-  case TestCategory.K:
-    return category.toLowerCase();
   default:
     return category.replace('+', '');
   }
@@ -122,9 +119,7 @@ export const passResultTemplate = (testType: string, categorySwitch: TestCategor
 Congratulations on passing your ${categorySwitch === TestCategory.SC ? 'ADI standards check' : 'test'}.
 
 To keep improving, it’s important to understand which competencies you can continue to develop. 
-
----    
-    `;
+`;
     break;
   case TestCategory.CCPC:
     template = `
@@ -137,7 +132,7 @@ To keep improving, it’s important to understand which competencies you can con
 Congratulations on passing your test.
  
 To keep improving, it’s important to understand any faults you made.
-      `;
+`;
     break;
   default:
     template = `
@@ -149,7 +144,7 @@ To keep improving, it’s important to understand any faults you made.
 Congratulations on passing your test.
      
 To keep improving, it’s important to understand any faults you made.
-      `;
+`;
   }
   return template;
 };
@@ -191,9 +186,7 @@ export const passResultWelshTemplate = (testType: string, categorySwitch: TestCa
 Llongyfarchiadau am pasio eich ${categorySwitch === TestCategory.SC ? 'gwiriad safonau ADI' : 'prawf'}.
 
 Er mwyn parhau i wella, mae'n bwysig deall pa gymwyseddau y gallwch barhau i'w datblygu. 
-
----
-    `;
+`;
     break;
   case TestCategory.CCPC:
     template = `
@@ -206,9 +199,7 @@ Er mwyn parhau i wella, mae'n bwysig deall pa gymwyseddau y gallwch barhau i'w d
 Llongyfarchiadau am pasio eich prawf.
  
 I paratoi ar gyfer eich prawf nesaf, mae'n bwysig deall mwy am y rhesymau nad ydych wedi bod yn llwyddiannus y tro hwn.
-
---- 
-      `;
+`;
     break;
   default: template = `
 ^# Canlyniad: Llwyddiannus\n
@@ -219,7 +210,7 @@ I paratoi ar gyfer eich prawf nesaf, mae'n bwysig deall mwy am y rhesymau nad yd
 Llongyfarchiadau am pasio eich prawf.
  
 Er mwyn parhau i wella, mae'n bwysig deall unrhyw camgymeriadau a wnaethoch.
-    `;
+`;
   }
   return template;
 };
@@ -274,9 +265,7 @@ ${thirdAttempt ?
     (categorySwitch === TestCategory.ADI3 ?
       'this time.\n\n You’re allowed 3 attempts to pass the ADI part 3 test.\n\n To prepare for your next test, it’s important to understand more about the competences you were assessed on.' :
       'this time.\n\n You’re allowed 3 attempts to pass the standards check.\n\n To prepare for your next standards check, it’s important to understand more about the competences you were assessed on.')}
-
----
-    `;
+`;
     break;
   case TestCategory.CCPC:
     template = `
@@ -289,7 +278,7 @@ ${thirdAttempt ?
 We're sorry that you were unsuccessful this time.
 
 To prepare for your next test, it’s important to understand more about your result this time.
-    `;
+`;
     break;
   default: template = `
 ^# Result: Unsuccessful\n
@@ -300,7 +289,7 @@ To prepare for your next test, it’s important to understand more about your re
 We're sorry that you were unsuccessful this time.
 
 To prepare for your next test, it’s important to understand more about the faults you made this time.
-    `;
+`;
   }
   return template;
 };
@@ -352,9 +341,7 @@ Mae'n ddrwg gennym ${thirdAttempt ? `${categorySwitch === TestCategory.ADI3 ? 'n
 {{ifNotThirdAttempt previousAttempts category}}
 
 {{generateFailureEndResultResponse category previousAttempts}}
-
----
-    `;
+`;
     break;
   case TestCategory.CCPC:
     template = `
@@ -367,9 +354,7 @@ Mae'n ddrwg gennym ${thirdAttempt ? `${categorySwitch === TestCategory.ADI3 ? 'n
 Mae'n ddrwg gennym nad oeddech yn llwyddiannus y tro hwn.
 
 I paratoi ar gyfer eich prawf nesaf, mae'n bwysig deall mwy am y rhesymau nad ydych wedi bod yn llwyddiannus y tro hwn. 
-
----
-    `;
+`;
     break;
   default:
     template = `
@@ -380,7 +365,8 @@ I paratoi ar gyfer eich prawf nesaf, mae'n bwysig deall mwy am y rhesymau nad yd
 
 Mae'n ddrwg gennym nad oeddech yn llwyddiannus y tro hwn.
 
-I paratoi ar gyfer eich prawf nesaf, mae'n bwysig deall mwy am y rhesymau nad ydych wedi bod yn llwyddiannus y tro hwn.`;
+I paratoi ar gyfer eich prawf nesaf, mae'n bwysig deall mwy am y rhesymau nad ydych wedi bod yn llwyddiannus y tro hwn.
+`;
   }
   return template;
 };

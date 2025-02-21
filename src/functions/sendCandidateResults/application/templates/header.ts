@@ -5,7 +5,7 @@ Dear candidate,
 `;
 
 export const headerWelshTemplate = `
-Rhif cyfeirnod prawf gyrru: {{ applicationReference }}
+Cyfeirnod y prawf gyrru: {{ applicationReference }}
 
 Annwyl ymgeisydd,
 `;
