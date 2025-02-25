@@ -383,7 +383,6 @@ export const passEnglishAMod1 = `
     ${ridingFaultTemplate}
     ${emergencyStopTemplate}
     ${avoidanceExerciseTemplate}
-    ${ecoTemplate(true)}
 ---
     ${understandingResultTemplate(UrlDescriptors.RIDING, PassUrls.MOD1)}
     ${nextStepsMod1PassTemplate}
@@ -398,7 +397,6 @@ export const passWelshAMod1 = `
     ${ridingFaultWelshTemplate}
     ${emergencyStopWelshTemplate}
     ${avoidanceExerciseWelshTemplate}
-    ${ecoWelshTemplate(true)}
 ---
     ${understandingResultWelshTemplate(UrlDescriptorsWelsh.RIDING, PassUrls.MOD1)}
     ${nextStepsMod1PassWelshTemplate}
@@ -416,7 +414,6 @@ export const failEnglishAMod1 = `
     ${ridingFaultTemplate}
     ${emergencyStopTemplate}
     ${avoidanceExerciseTemplate}
-    ${ecoTemplate(true)}
 ---
     ${understandingResultTemplate(UrlDescriptors.RIDING, FailUrls.MOD1, true)}
     ${testExperienceSurveyRidingTemplate}
@@ -435,7 +432,6 @@ export const failWelshAMod1 = `
     ${ridingFaultWelshTemplate}
     ${emergencyStopWelshTemplate}
     ${avoidanceExerciseWelshTemplate}
-    ${ecoWelshTemplate(true)}
 ---
     ${understandingResultWelshTemplate(UrlDescriptorsWelsh.RIDING, FailUrls.MOD1, true)}
     ${testExperienceSurveyRidingWelshTemplate}
