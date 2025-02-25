@@ -53,7 +53,7 @@ export const ecoWelshTemplate = (riding?: boolean): string => {
 # Gyrru tanwydd-effeithlon
 
 {{#if (displayEcoExplanation category)}}
-Mae gyrru tanwydd-effeithlon o ran tanwydd yn arddull o yrru diogel sy'n lleihau eich defnydd o danwydd ac yn helpu'r amgylchedd.
+Mae gyrru tanwydd-effeithlon yn arddull gyrru diogel sy'n Ileihau eich defnydd o danwydd ac yn helpu'r amgylchedd.
 {{/if}}
 
 Sylwodd yr arholwr gyrru y gallech wella rheolaeth a gynlluniad eich gyrru. Dylech anelu i yrru mewn modd tanwydd-effeithlon, gan ystyried eich effaith ar yr amgylchedd.
