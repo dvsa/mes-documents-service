@@ -13,7 +13,8 @@ const catBEnglishPassRenderedText = '\n' +
     '^Test centre: Example Test Centre\n' +
     '\n' +
     '^Date: 25 December 2024\n' +
-    '     \n' +
+    ' \n' +
+    '## \n' +
     'Congratulations on passing your test.\n' +
     '     \n' +
     'To keep improving, it’s important to understand any faults you made.\n' +
@@ -97,6 +98,7 @@ const catBEnglishPassRenderedText = '\n' +
     '\n' +
     '\n' +
     '    \n' +
+    '# \n' +
     'Thank you.\n' +
     '\n' +
     'Driver and Vehicle Standards Agency.\n' +
@@ -123,6 +125,7 @@ const catBEnglishFailRenderedText = '\n' +
     '\n' +
     '^Date: 25 December 2024\n' +
     '\n' +
+    '##\n' +
     'We\'re sorry that you were unsuccessful this time.\n' +
     '\n' +
     'To prepare for your next test, it’s important to understand more about the faults you made this time.\n' +
@@ -206,6 +209,7 @@ const catBEnglishFailRenderedText = '\n' +
     '\n' +
     '\n' +
     '    \n' +
+    '# \n' +
     'Thank you.\n' +
     '\n' +
     'Driver and Vehicle Standards Agency.\n' +

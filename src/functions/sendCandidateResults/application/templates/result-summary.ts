@@ -129,6 +129,7 @@ To keep improving, it’s important to understand which competencies you can con
 ^Date: {{date}}
 \n^Overall score: {{totalScore}} out of 100
 
+##
 Congratulations on passing your test.
  
 To keep improving, it’s important to understand any faults you made.
@@ -140,7 +141,8 @@ To keep improving, it’s important to understand any faults you made.
 ^Test type: ${testType} ${categorySwitch !== TestCategory.ADI2 ? '(category {{transformCategory category}})' : ''}\n
 ^Test centre: {{location}}\n
 ^Date: {{date}}
-     
+ 
+## 
 Congratulations on passing your test.
      
 To keep improving, it’s important to understand any faults you made.
@@ -196,6 +198,7 @@ Er mwyn parhau i wella, mae'n bwysig deall pa gymwyseddau y gallwch barhau i'w d
 ^Dyddiad {{date}}
 \n^Sgôr cyffredinol: {{totalScore}} allan o 100
 
+##
 Llongyfarchiadau am pasio eich prawf.
  
 I paratoi ar gyfer eich prawf nesaf, mae'n bwysig deall mwy am y rhesymau nad ydych wedi bod yn llwyddiannus y tro hwn.
@@ -207,6 +210,7 @@ I paratoi ar gyfer eich prawf nesaf, mae'n bwysig deall mwy am y rhesymau nad yd
 ^Canolfan profi: {{location}}\n
 ^Dyddiad:  {{date}}
 
+##
 Llongyfarchiadau am pasio eich prawf.
  
 Er mwyn parhau i wella, mae'n bwysig deall unrhyw camgymeriadau a wnaethoch.
@@ -275,6 +279,7 @@ ${thirdAttempt ?
 ^Date: {{date}}\n
 ^Overall score: {{totalScore}} out of 100
 
+##
 We're sorry that you were unsuccessful this time.
 
 To prepare for your next test, it’s important to understand more about your result this time.
@@ -286,6 +291,7 @@ To prepare for your next test, it’s important to understand more about your re
 ^Test centre: {{location}}\n
 ^Date: {{date}}
 
+##
 We're sorry that you were unsuccessful this time.
 
 To prepare for your next test, it’s important to understand more about the faults you made this time.
@@ -351,6 +357,7 @@ Mae'n ddrwg gennym ${thirdAttempt ? `${categorySwitch === TestCategory.ADI3 ? 'n
 ^Dyddiad: {{date}}\n
 ^Sgôr cyffredinol: {{totalScore}} allan o 100
 
+##
 Mae'n ddrwg gennym nad oeddech yn llwyddiannus y tro hwn ac nad ydych wedi cymhwyso fel ADI.
  
 Os ydych yn bwriadu ailgychwyn y broses gymhwyso, mae'n bwysig deall mwy am y cymwyseddau y cawsoch eich asesu arnynt. 
@@ -363,6 +370,7 @@ Os ydych yn bwriadu ailgychwyn y broses gymhwyso, mae'n bwysig deall mwy am y cy
 ^Canolfan profi: {{location}}\n
 ^Dyddiad:  {{date}}
 
+##
 Mae'n ddrwg gennym nad oeddech yn llwyddiannus y tro hwn ac nad ydych wedi cymhwyso fel ADI.
  
 Os ydych yn bwriadu ailgychwyn y broses gymhwyso, mae'n bwysig deall mwy am y cymwyseddau y cawsoch eich asesu arnynt.
