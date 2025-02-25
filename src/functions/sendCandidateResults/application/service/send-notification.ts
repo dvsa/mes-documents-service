@@ -10,7 +10,6 @@ import {Language} from '../../domain/conducted-language';
 import {TestOutcome} from '../../domain/test-outcome';
 import {CommunicationMethod} from '@dvsa/mes-test-schema/categories/common';
 import {Correspondence} from '../../domain/template-id.model';
-import { writeFileSync } from 'fs';
 
 export interface Personalisation extends Partial<Address>{
   renderedSubject: string | undefined;
