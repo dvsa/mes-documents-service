@@ -30,7 +30,7 @@ export const ridingFaultTemplate = `
 
 export const ridingFaultWelshTemplate = `
 {{#if showDrivingFaults}}
-# Eich camgymeriadau marchogaeth
+# Eich camgymeriadau gyrru
   {{#each drivingFaults}}
   - {{ this }}
   {{/each}}

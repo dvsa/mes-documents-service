@@ -161,7 +161,7 @@ export const passResultWelshTemplate = (testType: string, categorySwitch: TestCa
   case TestCategory.SC:
     template = `
 ^# Canlyniad: Llwyddo (gradd {{grade}})\n
-^Prawf math: {{category}} prawf\n
+^Math o brawf: {{category}} prawf\n
 ^Canolfan profi: {{location}}\n
 ^Dyddiad: {{date}}
 
@@ -203,7 +203,7 @@ I paratoi ar gyfer eich prawf nesaf, mae'n bwysig deall mwy am y rhesymau nad yd
     break;
   default: template = `
 ^# Canlyniad: Llwyddiannus\n
-^Math prawf: ${testType} (categori {{transformCategory category}})\n
+^Math o brawf: ${testType} (categori {{transformCategory category}})\n
 ^Canolfan profi: {{location}}\n
 ^Dyddiad:  {{date}}
 
@@ -359,7 +359,7 @@ I paratoi ar gyfer eich prawf nesaf, mae'n bwysig deall mwy am y rhesymau nad yd
   default:
     template = `
 ^# Canlyniad: Aflwyddiannus\n
-^Math prawf: ${testType} (categori {{transformCategory category}})\n
+^Math o brawf: ${testType} (categori {{transformCategory category}})\n
 ^Canolfan profi: {{location}}\n
 ^Dyddiad:  {{date}}
 

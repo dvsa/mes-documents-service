@@ -10,7 +10,7 @@ export const dangerousFaultsTemplate = `
 
 export const dangerousFaultsWelshTemplate = `
 {{#if showDangerousFaults}}
-# Eich beiau peryglus
+# Eich diffygion peryglus
   {{#each dangerousFaults}}
   - {{ this }}
   {{/each}}
