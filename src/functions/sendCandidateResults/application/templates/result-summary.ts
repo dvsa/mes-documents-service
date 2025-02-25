@@ -260,11 +260,11 @@ export const failResultTemplate = (testType: string, categorySwitch: TestCategor
 We're sorry that you were unsuccessful
 ${thirdAttempt ?
     (categorySwitch === TestCategory.ADI3 ?
-      'this time and have not qualified as an ADI.\n\n If you intend to restart the qualification process, it’s important to understand more about the competences you were assessed on.' :
+      'this time and have not qualified as an ADI.\n\n If you intend to restart the qualification process, it’s important to understand more about the competencies you were assessed on.' :
       'on this third attempt at taking your standards check.\n\n Because you have now been unsuccessful 3 times, the ADI Registrar can begin the process of removing you from the ADI register.\n\n We explain how this process will work later in this email.') :
     (categorySwitch === TestCategory.ADI3 ?
-      'this time.\n\n You’re allowed 3 attempts to pass the ADI part 3 test.\n\n To prepare for your next test, it’s important to understand more about the competences you were assessed on.' :
-      'this time.\n\n You’re allowed 3 attempts to pass the standards check.\n\n To prepare for your next standards check, it’s important to understand more about the competences you were assessed on.')}
+      'this time.\n\n You’re allowed 3 attempts to pass the ADI part 3 test.\n\n To prepare for your next test, it’s important to understand more about the competencies you were assessed on.' :
+      'this time.\n\n You’re allowed 3 attempts to pass the standards check.\n\n To prepare for your next standards check, it’s important to understand more about the competencies you were assessed on.')}
 `;
     break;
   case TestCategory.CCPC:
@@ -351,9 +351,9 @@ Mae'n ddrwg gennym ${thirdAttempt ? `${categorySwitch === TestCategory.ADI3 ? 'n
 ^Dyddiad: {{date}}\n
 ^Sgôr cyffredinol: {{totalScore}} allan o 100
 
-Mae'n ddrwg gennym nad oeddech yn llwyddiannus y tro hwn.
-
-I paratoi ar gyfer eich prawf nesaf, mae'n bwysig deall mwy am y rhesymau nad ydych wedi bod yn llwyddiannus y tro hwn. 
+Mae'n ddrwg gennym nad oeddech yn llwyddiannus y tro hwn ac nad ydych wedi cymhwyso fel ADI.
+ 
+Os ydych yn bwriadu ailgychwyn y broses gymhwyso, mae'n bwysig deall mwy am y cymwyseddau y cawsoch eich asesu arnynt. 
 `;
     break;
   default:
@@ -363,9 +363,9 @@ I paratoi ar gyfer eich prawf nesaf, mae'n bwysig deall mwy am y rhesymau nad yd
 ^Canolfan profi: {{location}}\n
 ^Dyddiad:  {{date}}
 
-Mae'n ddrwg gennym nad oeddech yn llwyddiannus y tro hwn.
-
-I paratoi ar gyfer eich prawf nesaf, mae'n bwysig deall mwy am y rhesymau nad ydych wedi bod yn llwyddiannus y tro hwn.
+Mae'n ddrwg gennym nad oeddech yn llwyddiannus y tro hwn ac nad ydych wedi cymhwyso fel ADI.
+ 
+Os ydych yn bwriadu ailgychwyn y broses gymhwyso, mae'n bwysig deall mwy am y cymwyseddau y cawsoch eich asesu arnynt.
 `;
   }
   return template;
