@@ -1,6 +1,6 @@
 import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 import { TestResultSchemasUnion } from '@dvsa/mes-test-schema/categories';
-import {CategoryCode, ConductedLanguage, TestData as CatAMod1TestData} from '@dvsa/mes-test-schema/categories/AM1';
+import { CategoryCode, ConductedLanguage, TestData as CatAMod1TestData } from '@dvsa/mes-test-schema/categories/AM1';
 import { TestData as CatCPCTestData } from '@dvsa/mes-test-schema/categories/CPC';
 import { TestData as CatADI3TestData } from '@dvsa/mes-test-schema/categories/ADI3';
 import { get } from 'lodash';
@@ -9,6 +9,7 @@ import { CustomProperties } from '../../domain/custom-properties';
 import { getCustomPropertiesCatAMod1 } from './categories/AM1/custom-property-provider-cat-a-mod1';
 import { getCustomPropertiesCatCPC } from './categories/CPC/custom-property-provider-cat-cpc';
 import { getCustomPropertiesCatADI3 } from './categories/ADI3/custom-property-provider-cat-adi3';
+import { getCustomPropertiesCatVocational } from './categories/vocational/custom-property-provider-cat-vocational';
 
 export interface ICustomPropertyProvider {
   getCustomProperties(testData: TestResultSchemasUnion | undefined): any;
@@ -28,6 +29,15 @@ export class CustomPropertyProvider implements ICustomPropertyProvider {
     const activityCode = get(testResult, 'activityCode');
 
     switch (category) {
+    case TestCategory.C:
+    case TestCategory.C1:
+    case TestCategory.CE:
+    case TestCategory.C1E:
+    case TestCategory.D:
+    case TestCategory.D1:
+    case TestCategory.DE:
+    case TestCategory.D1E:
+      return getCustomPropertiesCatVocational(category);
     case TestCategory.ADI3:
     case TestCategory.SC:
       const prn = get<TestResultSchemasUnion, string>(testResult, 'journalData.candidate.prn');

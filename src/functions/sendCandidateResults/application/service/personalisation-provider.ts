@@ -25,8 +25,6 @@ import * as moment from 'moment';
 import 'moment/locale/cy';
 import { TestResultSchemasUnion } from '@dvsa/mes-test-schema/categories';
 import { isBikeCategory } from './category-provider';
-import {Correspondence} from '../../domain/template-id.model';
-import {TestCategory} from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 
 export interface IPersonalisationProvider {
 
@@ -116,7 +114,6 @@ export class PersonalisationProvider implements IPersonalisationProvider {
       showEtaText: this.shouldShowEta(eta),
       showEtaVerbal: this.shouldShowEtaVerbal(eta),
       showEtaPhysical: this.shouldShowEtaPhysical(eta),
-      showLGVText: this.shouldShowLGV(testresult.category),
       showProvLicenceRetainedByDvsa: provisionalLicenceProvided,
       showProvLicenceRetainedByDriver: !provisionalLicenceProvided,
       communicationMethod: commsMethod,
@@ -174,18 +171,6 @@ export class PersonalisationProvider implements IPersonalisationProvider {
   private shouldShowEtaVerbal(eta: ETA): boolean {
     return !!(eta && eta.verbal);
   }
-
-  private shouldShowLGV(category: CategoryCode): boolean {
-    switch (category) {
-    case TestCategory.C:
-    case TestCategory.C1:
-    case TestCategory.CE:
-    case TestCategory.C1E:
-      return true;
-    default:
-      return false;
-    }
-  };
 
   private formatDate(stringDate: string, language: ConductedLanguage): string {
     switch (language) {
