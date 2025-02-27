@@ -35,7 +35,9 @@ const catBEnglishPassRenderedText = '\n' +
     'Your driving examiner saw that you could improve the control and planning of your driving. You should aim to drive in a fuel-efficient manner, considering your impact on the environment.\n' +
     '\n' +
     '\n' +
+    '    \n' +
     '---\n' +
+    '\n' +
     '    \n' +
     '# Understanding your result\n' +
     '\n' +
@@ -125,7 +127,7 @@ const catBEnglishFailRenderedText = '\n' +
     '\n' +
     '^Date: 25 December 2024\n' +
     '\n' +
-    '##\n' +
+    '## \n' +
     'We\'re sorry that you were unsuccessful this time.\n' +
     '\n' +
     'To prepare for your next test, it’s important to understand more about the faults you made this time.\n' +
@@ -153,7 +155,9 @@ const catBEnglishFailRenderedText = '\n' +
     'Your driving examiner saw that you could improve the control and planning of your driving. You should aim to drive in a fuel-efficient manner, considering your impact on the environment.\n' +
     '\n' +
     '\n' +
+    '    \n' +
     '---\n' +
+    '\n' +
     '    \n' +
     '# Understanding your result\n' +
     '\n' +
