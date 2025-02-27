@@ -42,9 +42,6 @@ Handlebars.registerHelper('transformCategory', function (category: TestCategory)
   case TestCategory.EUA2M2:
   case TestCategory.EUAMM2:
     return 'A2';
-  case TestCategory.F:
-  case TestCategory.K:
-    return category.toLowerCase();
   default:
     return category.replace('+', '');
   }
@@ -122,9 +119,7 @@ export const passResultTemplate = (testType: string, categorySwitch: TestCategor
 Congratulations on passing your ${categorySwitch === TestCategory.SC ? 'ADI standards check' : 'test'}.
 
 To keep improving, it’s important to understand which competencies you can continue to develop. 
-
----    
-    `;
+`;
     break;
   case TestCategory.CCPC:
     template = `
@@ -134,10 +129,11 @@ To keep improving, it’s important to understand which competencies you can con
 ^Date: {{date}}
 \n^Overall score: {{totalScore}} out of 100
 
+## 
 Congratulations on passing your test.
  
 To keep improving, it’s important to understand any faults you made.
-      `;
+`;
     break;
   default:
     template = `
@@ -145,11 +141,12 @@ To keep improving, it’s important to understand any faults you made.
 ^Test type: ${testType} ${categorySwitch !== TestCategory.ADI2 ? '(category {{transformCategory category}})' : ''}\n
 ^Test centre: {{location}}\n
 ^Date: {{date}}
-     
+ 
+## 
 Congratulations on passing your test.
      
 To keep improving, it’s important to understand any faults you made.
-      `;
+`;
   }
   return template;
 };
@@ -166,7 +163,7 @@ export const passResultWelshTemplate = (testType: string, categorySwitch: TestCa
   case TestCategory.SC:
     template = `
 ^# Canlyniad: Llwyddo (gradd {{grade}})\n
-^Prawf math: {{category}} prawf\n
+^Math o brawf: {{category}} prawf\n
 ^Canolfan profi: {{location}}\n
 ^Dyddiad: {{date}}
 
@@ -191,9 +188,7 @@ export const passResultWelshTemplate = (testType: string, categorySwitch: TestCa
 Llongyfarchiadau am pasio eich ${categorySwitch === TestCategory.SC ? 'gwiriad safonau ADI' : 'prawf'}.
 
 Er mwyn parhau i wella, mae'n bwysig deall pa gymwyseddau y gallwch barhau i'w datblygu. 
-
----
-    `;
+`;
     break;
   case TestCategory.CCPC:
     template = `
@@ -203,23 +198,23 @@ Er mwyn parhau i wella, mae'n bwysig deall pa gymwyseddau y gallwch barhau i'w d
 ^Dyddiad {{date}}
 \n^Sgôr cyffredinol: {{totalScore}} allan o 100
 
+## 
 Llongyfarchiadau am pasio eich prawf.
  
 I paratoi ar gyfer eich prawf nesaf, mae'n bwysig deall mwy am y rhesymau nad ydych wedi bod yn llwyddiannus y tro hwn.
-
---- 
-      `;
+`;
     break;
   default: template = `
 ^# Canlyniad: Llwyddiannus\n
-^Math prawf: ${testType} (categori {{transformCategory category}})\n
+^Math o brawf: ${testType} (categori {{transformCategory category}})\n
 ^Canolfan profi: {{location}}\n
 ^Dyddiad:  {{date}}
 
+## 
 Llongyfarchiadau am pasio eich prawf.
  
 Er mwyn parhau i wella, mae'n bwysig deall unrhyw camgymeriadau a wnaethoch.
-    `;
+`;
   }
   return template;
 };
@@ -269,14 +264,12 @@ export const failResultTemplate = (testType: string, categorySwitch: TestCategor
 We're sorry that you were unsuccessful
 ${thirdAttempt ?
     (categorySwitch === TestCategory.ADI3 ?
-      'this time and have not qualified as an ADI.\n\n If you intend to restart the qualification process, it’s important to understand more about the competences you were assessed on.' :
+      'this time and have not qualified as an ADI.\n\n If you intend to restart the qualification process, it’s important to understand more about the competencies you were assessed on.' :
       'on this third attempt at taking your standards check.\n\n Because you have now been unsuccessful 3 times, the ADI Registrar can begin the process of removing you from the ADI register.\n\n We explain how this process will work later in this email.') :
     (categorySwitch === TestCategory.ADI3 ?
-      'this time.\n\n You’re allowed 3 attempts to pass the ADI part 3 test.\n\n To prepare for your next test, it’s important to understand more about the competences you were assessed on.' :
-      'this time.\n\n You’re allowed 3 attempts to pass the standards check.\n\n To prepare for your next standards check, it’s important to understand more about the competences you were assessed on.')}
-
----
-    `;
+      'this time.\n\n You’re allowed 3 attempts to pass the ADI part 3 test.\n\n To prepare for your next test, it’s important to understand more about the competencies you were assessed on.' :
+      'this time.\n\n You’re allowed 3 attempts to pass the standards check.\n\n To prepare for your next standards check, it’s important to understand more about the competencies you were assessed on.')}
+`;
     break;
   case TestCategory.CCPC:
     template = `
@@ -286,10 +279,11 @@ ${thirdAttempt ?
 ^Date: {{date}}\n
 ^Overall score: {{totalScore}} out of 100
 
+## 
 We're sorry that you were unsuccessful this time.
 
 To prepare for your next test, it’s important to understand more about your result this time.
-    `;
+`;
     break;
   default: template = `
 ^# Result: Unsuccessful\n
@@ -297,10 +291,11 @@ To prepare for your next test, it’s important to understand more about your re
 ^Test centre: {{location}}\n
 ^Date: {{date}}
 
+## 
 We're sorry that you were unsuccessful this time.
 
 To prepare for your next test, it’s important to understand more about the faults you made this time.
-    `;
+`;
   }
   return template;
 };
@@ -352,9 +347,7 @@ Mae'n ddrwg gennym ${thirdAttempt ? `${categorySwitch === TestCategory.ADI3 ? 'n
 {{ifNotThirdAttempt previousAttempts category}}
 
 {{generateFailureEndResultResponse category previousAttempts}}
-
----
-    `;
+`;
     break;
   case TestCategory.CCPC:
     template = `
@@ -364,23 +357,24 @@ Mae'n ddrwg gennym ${thirdAttempt ? `${categorySwitch === TestCategory.ADI3 ? 'n
 ^Dyddiad: {{date}}\n
 ^Sgôr cyffredinol: {{totalScore}} allan o 100
 
-Mae'n ddrwg gennym nad oeddech yn llwyddiannus y tro hwn.
-
-I paratoi ar gyfer eich prawf nesaf, mae'n bwysig deall mwy am y rhesymau nad ydych wedi bod yn llwyddiannus y tro hwn. 
-
----
-    `;
+## 
+Mae'n ddrwg gennym nad oeddech yn llwyddiannus y tro hwn ac nad ydych wedi cymhwyso fel ADI.
+ 
+Os ydych yn bwriadu ailgychwyn y broses gymhwyso, mae'n bwysig deall mwy am y cymwyseddau y cawsoch eich asesu arnynt. 
+`;
     break;
   default:
     template = `
 ^# Canlyniad: Aflwyddiannus\n
-^Math prawf: ${testType} (categori {{transformCategory category}})\n
+^Math o brawf: ${testType} (categori {{transformCategory category}})\n
 ^Canolfan profi: {{location}}\n
 ^Dyddiad:  {{date}}
 
-Mae'n ddrwg gennym nad oeddech yn llwyddiannus y tro hwn.
-
-I paratoi ar gyfer eich prawf nesaf, mae'n bwysig deall mwy am y rhesymau nad ydych wedi bod yn llwyddiannus y tro hwn.`;
+## 
+Mae'n ddrwg gennym nad oeddech yn llwyddiannus y tro hwn ac nad ydych wedi cymhwyso fel ADI.
+ 
+Os ydych yn bwriadu ailgychwyn y broses gymhwyso, mae'n bwysig deall mwy am y cymwyseddau y cawsoch eich asesu arnynt.
+`;
   }
   return template;
 };

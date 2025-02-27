@@ -473,7 +473,7 @@ Bydd y Cofrestrydd ADI nawr yn ystyried a ddylid eich tynnu oddi ar y gofrestr A
 
 Byddant yn ysgrifennu atoch yn ystod yr wythnosau nesaf i ofyn ichi anfon datganiad o ffeithiau atynt i'w hystyried cyn gwneud eu penderfyniad. Gelwir hyn yn 'sylwi'. 
 
-{{displayUrlNextSteps communicationMethod "Gallwch gael cymorth gan cymdeithas ADI i wneud eich sylwadau" "https://www.gov.uk/government/publications/driving-instructor-associations-and-organisations/driving-instructor-associations-and-organisations?utm_source=dvsa&utm_medium= email&utm_campaign=adi-standards-check&utm_content=aflwyddiannus-3ydd"}}
+{{displayUrlNextSteps communicationMethod "Gallwch gael help gan" "https://www.gov.uk/government/publications/driving-instructor-associations-and-organisations/driving-instructor-associations-and-organisations?utm_source=dvsa&utm_medium= email&utm_campaign=adi-standards-check&utm_content=aflwyddiannus-3ydd"}}
 
 Yna bydd y Cofrestrydd ADI yn ysgrifennu atoch i roi gwybod i chi beth yw ei benderfyniad ar ôl i chi wneud eich sylwadau. 
 

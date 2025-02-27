@@ -8,7 +8,7 @@ import * as Handlebars from 'handlebars';
  */
 Handlebars.registerHelper('displayUrlAdditionalInfo', function (communicationMethod: string, urlDescriptor: string, url: string) {
   if (communicationMethod === Correspondence.EMAIL) {
-    return `[${urlDescriptor}](${url}).`;
+    return `[${urlDescriptor}](${url})`;
   } else return `${urlDescriptor}: ${url}`;
 });
 
@@ -133,7 +133,6 @@ You must get an ‘animal transportation certificate of competence’ if you wan
 ^Find out how to get the certificate to transport animals at https://www.gov.uk/become-lorry-bus-driver/transport-animals.
 
 {{/if}}
----
 
 `;
 
@@ -189,7 +188,6 @@ Rhaid i chi gael ‘tystysgrif cymhwysedd cludo anifeiliaid’ os ydych am yrru 
 ^Darganfyddwch sut i gael y dtystysgrif i cludo anifeiliaid yn https://www.gov.uk/become-lorry-bus-driver/transport-animals.
 
 {{/if}}
----
 
 `;
 
@@ -246,7 +244,6 @@ You must get an ‘animal transportation certificate of competence’ if you wan
 ^Find out how to get the certificate to transport animals at https://www.gov.uk/become-lorry-bus-driver/transport-animals.
 
 {{/if}}
----
 
 `;
 
@@ -302,6 +299,5 @@ Rhaid i chi gael ‘tystysgrif cymhwysedd cludo anifeiliaid’ os ydych am yrru 
 ^Dysgwch sut i gael y dystysgrif i gludo anifeiliaid yn https://www.gov.uk/become-lorry-bus-driver/transport-animals.
 
 {{/if}}
----
 
 `;
