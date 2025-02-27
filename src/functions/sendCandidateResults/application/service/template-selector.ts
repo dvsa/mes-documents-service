@@ -680,7 +680,7 @@ export const passEnglishCpc = `
     ${headerTemplate}
     ${passResultTemplate(CategoryDescriptors.CPC_ENGLISH, TestCategory.CCPC)}
     ${lineBreakTemplate}
-    ${ vocationalScoringExplanation}
+    ${vocationalScoringExplanation}
     ${vocationalScoring}
     ${vocationalIfYouWantToDriveTemplate4}
     ${importantInformationForHGVAndBusVocational4Template}
