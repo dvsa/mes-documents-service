@@ -21,23 +21,23 @@ ignore:
         expires: 2025-03-30T09:01:15.119Z
         created: 2023-12-15T00:00:00.000Z
   SNYK-JS-FASTXMLPARSER-7573289:
-      - '*':
-          reason: Remediation not yet available
-          expires: 2025-03-30T09:01:15.119Z
-          created: 2023-12-15T00:00:00.000Z
+    - '*':
+        reason: Remediation not yet available
+        expires: 2025-03-30T09:01:15.119Z
+        created: 2023-12-15T00:00:00.000Z
   SNYK-JS-AXIOS-6671926:
-      - '*':
-          reason: Remediation not yet available
-          expires: 2025-03-30T09:01:15.119Z
-          created: 2023-12-15T00:00:00.000Z
+    - '*':
+        reason: Remediation not yet available
+        expires: 2025-03-30T09:01:15.119Z
+        created: 2023-12-15T00:00:00.000Z
   SNYK-JS-FOLLOWREDIRECTS-6444610:
     - '*':
         reason: Remediation not yet available
         expires: 2025-03-30T09:01:15.119Z
         created: 2023-12-15T00:00:00.000Z
   SNYK-JS-AXIOS-7361793:
-      - '*':
-          reason: Remediation not yet available
-          expires: 2025-03-30T09:01:15.119Z
-          created: 2023-12-15T00:00:00.000Z
+    - '*':
+        reason: Remediation not yet available
+        expires: 2025-03-30T09:01:15.119Z
+        created: 2023-12-15T00:00:00.000Z
 patch: {}
