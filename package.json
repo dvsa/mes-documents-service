@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-secrets-manager": "^3.454.0",
-    "@dvsa/mes-microservice-common": "1.1.6",
+    "@dvsa/mes-microservice-common": "1.1.12",
     "axios": "^1.6.5",
     "bottleneck": "^2.19.5",
     "inversify": "6.0.2",
