@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-secrets-manager": "^3.454.0",
-    "@dvsa/mes-microservice-common": "1.1.6",
+    "@dvsa/mes-microservice-common": "1.1.12",
     "axios": "^1.6.5",
     "bottleneck": "^2.19.5",
     "inversify": "6.0.2",
@@ -38,7 +38,7 @@
     "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
-    "@dvsa/mes-test-schema": "3.42.5",
+    "@dvsa/mes-test-schema": "3.43.4",
     "@types/aws-lambda": "^8.10.126",
     "@types/jasmine": "^5.1.2",
     "@types/node": "^20.9.2",
