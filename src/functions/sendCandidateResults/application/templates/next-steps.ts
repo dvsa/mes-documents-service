@@ -8,7 +8,7 @@ import {Correspondence} from '../../domain/template-id.model';
  */
 Handlebars.registerHelper('displayUrlNextSteps', function (communicationMethod: string, urlDescriptor: string, url: string, caretFlag: boolean = true) {
   if (communicationMethod === Correspondence.EMAIL) {
-    return `${caretFlag ? '^' : ''}[${urlDescriptor}](${url}).`;
+    return `${caretFlag ? '^' : ''}[${urlDescriptor}](${url})`;
   } else return `${caretFlag ? '^' : ''}${urlDescriptor}: ${url}`;
 });
 
@@ -499,16 +499,16 @@ export const nextStepsMod1PassTemplate = `
 
 You now need to pass your motorcycle module 2 (on-road) test.
 
-"If you’re upgrading your licence through {{displayUrlNextSteps communicationMethod "progressive access" "https://www.gov.uk/ride-motorcycle-moped/bike-categories-ages-and-licence-requirements?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-1-test&utm_content=pass"}}, you must pass module 2 within 6 months. You have to pass module 1 again if you do not
+"If you’re upgrading your licence through {{displayUrlNextSteps communicationMethod "progressive access" "https://www.gov.uk/ride-motorcycle-moped/bike-categories-ages-and-licence-requirements?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-1-test&utm_content=pass" false}}, you must pass module 2 within 6 months. You have to pass module 1 again if you do not.
 
-You or your motorcycle instructor need to book your motorcycle module 2 test if it’s not already been booked. If you do it yourself, book at {{displayUrlNextSteps communicationMethod "www.gov.uk/book-driving-test" "https://www.gov.uk/book-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-1-test&utm_content=pass" false}}
+You or your motorcycle instructor need to book your motorcycle module 2 test if it’s not already been booked. If you do it yourself, book at {{displayUrlNextSteps communicationMethod "www.gov.uk/book-driving-test" "https://www.gov.uk/book-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-1-test&utm_content=pass" false}}.
 
 When you take the off-road test, you must use:
 
 - the same subcategory as the licence you’re applying for
 - a vehicle with the same type of transmission (manual, automatic or semi-automatic) that you used this time
  
-{{displayUrlNextSteps communicationMethod "Find out more about the vehicles you can use for the tests" "https://www.gov.uk/motorcycle-test/motorcycles-mopeds-you-can-use?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-1-test&utm_content=pass"}}
+{{displayUrlNextSteps communicationMethod "Find out more about the vehicles you can use for the tests" "https://www.gov.uk/motorcycle-test/motorcycles-mopeds-you-can-use?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-1-test&utm_content=pass"}}.
 
 ---
 `;
@@ -518,9 +518,9 @@ export const nextStepsMod1PassWelshTemplate = `
 
 Nawr mae angen basio y prawf gyrru beic modur modiwl 2 (ar y ffordd).
 
-Os ydych chi’n uwchraddio’ch trwydded trwy ‘[mynediad cynyddol]( https://www.gov.uk/ride-motorcycle-moped/bike-categories-ages-and-licence-requirements?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-1-test&utm_content=pass)’, mae rhaid pasio modiwl 2 o fewn 6 mis. Bydd rhaid pasio modiwl 1 eto os ydych yn aflwyddiannus.
+Os ydych chi’n uwchraddio’ch trwydded trwy {{displayUrlNextSteps communicationMethod "mynediad cynyddol" "https://www.gov.uk/ride-motorcycle-moped/bike-categories-ages-and-licence-requirements?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-1-test&utm_content=pass" false}}, mae rhaid pasio modiwl 2 o fewn 6 mis. Bydd rhaid pasio modiwl 1 eto os ydych yn aflwyddiannus.
 
-Mae angen i chi neu’ch hyfforddwr beic modur archebu prawf modiwl 2 eich beic modur os nad yw eisoes wedi’i archebu. Os ydych yn trefnu eich hun, ewch i {{displayUrlNextSteps communicationMethod "www.gov.uk/book-driving-test" "https://www.gov.uk/book-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-1-test&utm_content=pass" false}}
+Mae angen i chi neu’ch hyfforddwr beic modur archebu prawf modiwl 2 eich beic modur os nad yw eisoes wedi’i archebu. Os ydych yn trefnu eich hun, ewch i {{displayUrlNextSteps communicationMethod "www.gov.uk/book-driving-test" "https://www.gov.uk/book-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-1-test&utm_content=pass" false}}.
 
 Pan fyddwch yn cymryd y prawf oddi ar y ffordd, bydd rhaid i chi ddefnyddio:
 

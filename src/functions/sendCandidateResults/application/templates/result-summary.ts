@@ -326,7 +326,7 @@ export const failResultWelshTemplate = (testType: string, categorySwitch: TestCa
 ^##Methiant Rheoli Risg
 {{/if}}
 
-^sgôr cyffredinol: {{totalScore}} allan o 51
+^Sgôr cyffredinol: {{totalScore}} allan o 51
 
 ^Cynllunio gwersi: {{lessonPlanningScore}} allan o 12
 ^Rheoli risg: {{riskManagementScore}} allan o 15
@@ -360,7 +360,7 @@ Mae'n ddrwg gennym ${thirdAttempt ? `${categorySwitch === TestCategory.ADI3 ? 'n
 ## 
 Mae'n ddrwg gennym nad oeddech yn llwyddiannus y tro hwn ac nad ydych wedi cymhwyso fel ADI.
  
-Os ydych yn bwriadu ailgychwyn y broses gymhwyso, mae'n bwysig deall mwy am y cymwyseddau y cawsoch eich asesu arnynt. 
+I paratoi ar gyfer eich prawf nesaf, mae'n bwysig deall mwy am y rhesymau nad ydych wedi bod yn llwyddiannus y tro hwn.
 `;
     break;
   default:
@@ -373,7 +373,7 @@ Os ydych yn bwriadu ailgychwyn y broses gymhwyso, mae'n bwysig deall mwy am y cy
 ## 
 Mae'n ddrwg gennym nad oeddech yn llwyddiannus y tro hwn ac nad ydych wedi cymhwyso fel ADI.
  
-Os ydych yn bwriadu ailgychwyn y broses gymhwyso, mae'n bwysig deall mwy am y cymwyseddau y cawsoch eich asesu arnynt.
+I paratoi ar gyfer eich prawf nesaf, mae'n bwysig deall mwy am y rhesymau nad ydych wedi bod yn llwyddiannus y tro hwn.
 `;
   }
   return template;
