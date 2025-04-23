@@ -181,7 +181,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     }
   }
 
-  private modifyCompetencyLabel = (label: string, category: CategoryCode): string => {
+  modifyCompetencyLabel = (label: string, category: CategoryCode): string => {
     if (label === englishCompetencyLabels.controlledStop) {
       if (shouldDisplayEmergencyLabel(category)) {
         return modifiedEnglishCompetencyLabels.controlledStop;

@@ -2,7 +2,11 @@ import { IPersonalisationProvider, PersonalisationProvider } from '../personalis
 import { IFaultProvider, FaultProvider } from '../fault-provider';
 import { ICustomPropertyProvider, CustomPropertyProvider } from '../custom-property-provider';
 import { completedCatBTest } from '../../../framework/__mocks__/test-data.mock';
-import { englishCompetencyLabels, welshCompetencyLabels } from '../../../domain/competencies';
+import {
+  englishCompetencyLabels,
+  modifiedEnglishCompetencyLabels,
+  welshCompetencyLabels,
+} from '../../../domain/competencies';
 
 describe('personalisation-provider', () => {
 
@@ -16,6 +20,53 @@ describe('personalisation-provider', () => {
     if (completedCatBTest.communicationPreferences) {
       completedCatBTest.communicationPreferences.conductedLanguage = 'English';
     }
+  });
+
+  describe('modifyCompetencyLabel', () => {
+    const personalisationProvider: PersonalisationProvider = new PersonalisationProvider(
+      faultProvider,
+      customPropertyProvider,
+    );
+    it('should return the modified label for controlled stop when emergency label is required', () => {
+      const result = personalisationProvider.modifyCompetencyLabel(
+        englishCompetencyLabels.controlledStop,
+        'B',
+      );
+
+      expect(result).toBe(modifiedEnglishCompetencyLabels.controlledStop);
+    });
+    it('should return the modified label for move off control when category is a bike category', () => {
+      const result = personalisationProvider.modifyCompetencyLabel(
+        englishCompetencyLabels.moveOffControl,
+        'A',
+      );
+
+      expect(result).toBe(modifiedEnglishCompetencyLabels.moveOffControl);
+    });
+    it('should return the modified label for move off safety when category is a bike category', () => {
+      const result = personalisationProvider.modifyCompetencyLabel(
+        englishCompetencyLabels.moveOffSafety,
+        'A',
+      );
+
+      expect(result).toBe(modifiedEnglishCompetencyLabels.moveOffSafety);
+    });
+    it('should return the original label when no modifications are required', () => {
+      const result = personalisationProvider.modifyCompetencyLabel(
+        englishCompetencyLabels.signalsCorrectly,
+        'B',
+      );
+
+      expect(result).toBe(englishCompetencyLabels.signalsCorrectly);
+    });
+    it('should return the original label for controlled stop when emergency label is not required', () => {
+      const result = personalisationProvider.modifyCompetencyLabel(
+        englishCompetencyLabels.controlledStop,
+        'C',
+      );
+
+      expect(result).toBe(englishCompetencyLabels.controlledStop);
+    });
   });
 
   describe('getPersonalisationDetails', () => {
