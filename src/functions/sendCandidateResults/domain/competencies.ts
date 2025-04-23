@@ -270,6 +270,7 @@ export enum welshCompetencyLabels {
 export enum modifiedEnglishCompetencyLabels {
   moveOffSafety = 'Move away - Safety',
   moveOffControl = 'Move away - Control',
+  controlledStop = 'Emergency stop',
 }
 
 export enum englishTexts {
