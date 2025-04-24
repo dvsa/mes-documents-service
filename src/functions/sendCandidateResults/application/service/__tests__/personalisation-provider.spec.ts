@@ -69,7 +69,7 @@ describe('personalisation-provider', () => {
     });
   });
 
-  fdescribe('getPersonalisationDetails', () => {
+  describe('getPersonalisationDetails', () => {
     it('should return the correct data', () => {
       const personalisationProvider: IPersonalisationProvider = new PersonalisationProvider(
         faultProvider,
