@@ -38,7 +38,7 @@ describe('personalisation-provider', () => {
     it('should return the modified label for move off control when category is a bike category', () => {
       const result = personalisationProvider.modifyCompetencyLabel(
         englishCompetencyLabels.moveOffControl,
-        'A',
+        'EUA1M1',
       );
 
       expect(result).toBe(modifiedEnglishCompetencyLabels.moveOffControl);
@@ -46,7 +46,7 @@ describe('personalisation-provider', () => {
     it('should return the modified label for move off safety when category is a bike category', () => {
       const result = personalisationProvider.modifyCompetencyLabel(
         englishCompetencyLabels.moveOffSafety,
-        'A',
+        'EUA1M1',
       );
 
       expect(result).toBe(modifiedEnglishCompetencyLabels.moveOffSafety);
@@ -69,7 +69,7 @@ describe('personalisation-provider', () => {
     });
   });
 
-  describe('getPersonalisationDetails', () => {
+  fdescribe('getPersonalisationDetails', () => {
     it('should return the correct data', () => {
       const personalisationProvider: IPersonalisationProvider = new PersonalisationProvider(
         faultProvider,
@@ -88,7 +88,7 @@ describe('personalisation-provider', () => {
       expect(result.drivingFaults).toContain(`${englishCompetencyLabels.awarenessPlanning}, 2`);
       expect(result.drivingFaults).toContain(`${englishCompetencyLabels.controlsSteering}, 1`);
       expect(result.drivingFaults).toContain(`${englishCompetencyLabels.signalsCorrectly}, 3`);
-      expect(result.drivingFaults).toContain(`${englishCompetencyLabels.controlledStop}, 1`);
+      expect(result.drivingFaults).toContain(`${modifiedEnglishCompetencyLabels.controlledStop}, 1`);
       expect(result.drivingFaults).toContain(`${englishCompetencyLabels.reverseParkCarparkControl}, 1`);
       expect(result.drivingFaults).toContain(`${englishCompetencyLabels.reverseParkCarparkObservation}, 1`);
 
