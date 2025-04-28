@@ -18,14 +18,14 @@ export const statementOfFailureMod2Template = `
 # Statement of failure to pass practical test 
 
 ^Motorcycle test reference number: {{applicationReference}}\n 
-^The candidate with the number shown above has been examined and has FAILED to pass the manoeuvres test prescribed for the purposes of section 89 of the Road Traffic Act 1988 and for the purposes of section 36 of the Road Traffic Offenders Act 1988. 
+^The candidate with the number shown above has been examined and has failed to pass the practical test / test of competence to drive prescribed under the Road Traffic Act (and for the purpose of section 36 of the Road Traffic Offenders Act 1988) in respect of vehicles in the above category / categories. 
 `;
 
 export const statementOfFailureMod2WelshTemplate = `
 # Datganiad o fethiant i basio prawf ymarferol
 
 ^Cyfeirnod prawf gyrru beic modur: {{applicationReference}}\n
-^Mae’r ymgeisydd gyda’r rhif a ddangosir uchod wedi’i arholi ac wedi bod yn AFLWYDDIANNUS gyda’r prawf ymarferol / prawf cymhwysedd i yrru a ragnodwyd o dan Ddeddf Traffig Ffyrdd (ac at ddiben adran 36 o Ddeddf Troseddwyr Traffig Ffyrdd 1988) mewn perthynas â cherbydau yn y categori / categorïau uchod. 
+^Arholwyd yr ymgeisydd gyda’r cyfeirnod archebu a ddangosir uchod ac mae wedi METHU i basio’r prawf ymarferol / prawf cymhwysedd i yrru a ragnodir o dan y Ddeddf Traffig Ffyrdd (ac at ddibenion adran 36 Deddf Troseddwyr Traffig Ffyrdd 1988) mewn perthynas â cherbydau yn y categori / categorïau uchod.
 `;
 
 export const statementOfFailureBTemplate = `
