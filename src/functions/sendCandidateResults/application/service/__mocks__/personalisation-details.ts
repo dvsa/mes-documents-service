@@ -964,7 +964,7 @@ export const personalisationCatMod2Fail3: PersonalisationDetails = {
 
 export const personalisationCatMod2Pass: PersonalisationDetails = {
   ...commonCandidateDetails,
-  category: TestCategory.EUAM2,
+  category: TestCategory.EUA1M2,
   drivingFaults: [
     'Judgement - Meeting, 1',
     'Judgement - Overtaking, 1',

@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import {TestCategory} from '@dvsa/mes-test-schema/category-definitions/common/test-category';
+import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 import * as Handlebars from 'handlebars';
 
 export enum CategoryDescriptors {
@@ -31,20 +31,7 @@ export enum CategoryDescriptors {
  * @param category
  */
 Handlebars.registerHelper('transformCategory', function (category: TestCategory) {
-  switch (category) {
-  case TestCategory.EUAM1:
-  case TestCategory.EUA1M1:
-  case TestCategory.EUA1M2:
-  case TestCategory.EUAMM1:
-    return 'A1';
-  case TestCategory.EUAM2:
-  case TestCategory.EUA2M1:
-  case TestCategory.EUA2M2:
-  case TestCategory.EUAMM2:
-    return 'A2';
-  default:
-    return category.replace('+', '');
-  }
+  return category.replace('+', '');
 });
 
 /**
@@ -56,7 +43,7 @@ Handlebars.registerHelper('transformCategory', function (category: TestCategory)
 Handlebars.registerHelper('ifNotThirdAttempt', function (previousAttempts: number, category: TestCategory) {
   let result: string = '';
   if (previousAttempts <= 1) {
-    result =  'Caniateir 3 ymgais i chi basio’r prawf ADI rhan 3.';
+    result = 'Caniateir 3 ymgais i chi basio’r prawf ADI rhan 3.';
   } else if (category === TestCategory.SC) {
     result = 'Gan eich bod bellach wedi bod yn aflwyddiannus 3 gwaith, gall y Cofrestrydd ADI ddechrau\'r broses o\'ch tynnu oddi ar y gofrestr ADI.';
   }
@@ -72,7 +59,7 @@ Handlebars.registerHelper('ifNotThirdAttempt', function (previousAttempts: numbe
 Handlebars.registerHelper('generateFailureEndResultResponse', function (category: TestCategory, previousAttempts: number) {
   let result: string = '';
   if (previousAttempts >= 2) {
-    if(category === TestCategory.SC) {
+    if (category === TestCategory.SC) {
       result = 'Rydym yn esbonio sut y bydd y broses hon yn gweithio yn ddiweddarach yn yr e-bost hwn.';
     } else result = 'Os ydych yn bwriadu ailgychwyn y broses gymhwyso, mae\'n bwysig deall mwy am y rhesymau nad ydych wedi bod yn llwyddiannus y tro hwn.';
   } else {
@@ -88,7 +75,7 @@ Handlebars.registerHelper('generateFailureEndResultResponse', function (category
  */
 export const passResultTemplate = (testType: string, categorySwitch: TestCategory): string => {
   let template: string;
-  switch(categorySwitch) {
+  switch (categorySwitch) {
   case TestCategory.ADI3:
   case TestCategory.SC:
     template = `
@@ -158,7 +145,7 @@ To keep improving, it’s important to understand any faults you made.
  */
 export const passResultWelshTemplate = (testType: string, categorySwitch: TestCategory): string => {
   let template: string;
-  switch(categorySwitch) {
+  switch (categorySwitch) {
   case TestCategory.ADI3:
   case TestCategory.SC:
     template = `
@@ -204,7 +191,8 @@ Llongyfarchiadau am pasio eich prawf.
 I paratoi ar gyfer eich prawf nesaf, mae'n bwysig deall mwy am y rhesymau nad ydych wedi bod yn llwyddiannus y tro hwn.
 `;
     break;
-  default: template = `
+  default:
+    template = `
 ^# Canlyniad: Llwyddiannus\n
 ^Math o brawf: ${testType} (categori {{transformCategory category}})\n
 ^Canolfan profi: {{location}}\n
@@ -227,7 +215,7 @@ Er mwyn parhau i wella, mae'n bwysig deall unrhyw camgymeriadau a wnaethoch.
  */
 export const failResultTemplate = (testType: string, categorySwitch: TestCategory, thirdAttempt?: boolean): string => {
   let template: string;
-  switch(categorySwitch) {
+  switch (categorySwitch) {
   case TestCategory.ADI3:
   case TestCategory.SC:
     template = `
@@ -285,7 +273,8 @@ We're sorry that you were unsuccessful this time.
 To prepare for your next test, it’s important to understand more about your result this time.
 `;
     break;
-  default: template = `
+  default:
+    template = `
 ^# Result: Unsuccessful\n
 ^Test type: ${testType} (category {{transformCategory category}})\n
 ^Test centre: {{location}}\n

@@ -41,7 +41,6 @@ export async function sendNotification(
   }
 
   try {
-    console.log('conductedLanguage | sendNotification:', conductedLanguage);
     renderedText = getRenderedText(testOutcome, notificationPersonalisation, conductedLanguage);
   } catch (textError) {
     console.error('Error preparing rendered text', textError);
