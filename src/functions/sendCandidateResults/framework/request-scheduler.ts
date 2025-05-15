@@ -197,6 +197,7 @@ export class RequestScheduler implements IRequestScheduler {
           this.notifyClient,
           testResult?.communicationPreferences?.conductedLanguage === 'Cymraeg' ? Language.WELSH : Language.ENGLISH,
           getTestOutcome(testResult.activityCode),
+          true,
         );
       });
     }
