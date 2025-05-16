@@ -122,7 +122,6 @@ import {
 } from '../templates/info-for-new-drivers';
 import {ecoTemplate, ecoWelshTemplate} from '../templates/eco';
 import {lineBreakTemplate} from '../templates/lineBreakTemplate';
-import { padiTemplate } from '../templates/padi';
 
 // ADI2
 export const passEnglishAdi2 = `
@@ -743,15 +742,10 @@ export function subjectMapper(category: TestCategory, language: Language) {
  * @param testOutcome
  * @param category
  * @param language
- * @param padi
  * @param previousAttempts
  */
 // eslint-disable-next-line max-len
-export function templateMapper(testOutcome: TestOutcome, category: TestCategory, language: Language, padi: boolean, previousAttempts?: number) {
-
-  // if padi flag, stop evaluation and send padi template
-  if (padi) return padiTemplate;
-
+export function templateMapper(testOutcome: TestOutcome, category: TestCategory, language: Language, previousAttempts?: number) {
   const testType= getCategoryType(category);
   let previousAttemptsText: string = '';
   if (isADI3Category(category) && testOutcome === 'fail') {
