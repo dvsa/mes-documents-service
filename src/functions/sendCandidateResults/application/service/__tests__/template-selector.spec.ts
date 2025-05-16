@@ -82,89 +82,89 @@ describe('Subject Mapper', () => {
 describe('Template Mapper', () => {
   // CatAmod1
   it('should return the correct template for a pass in English for A Mod 1', () => {
-    const template = templateMapper(TestOutcome.PASS, TestCategory.EUA1M1, Language.ENGLISH, false);
+    const template = templateMapper(TestOutcome.PASS, TestCategory.EUA1M1, Language.ENGLISH);
     expect(template).toContain('Driving test reference number');
   });
 
   it('should return the correct template for a fail in English for A Mod 1', () => {
-    const template = templateMapper(TestOutcome.FAIL, TestCategory.EUA1M1, Language.ENGLISH, false);
+    const template = templateMapper(TestOutcome.FAIL, TestCategory.EUA1M1, Language.ENGLISH);
     expect(template).toContain('Driving test reference number');
   });
 
   // CatAmod2
   it('should return the correct template for a pass in English for A Mod 2', () => {
-    const template = templateMapper(TestOutcome.PASS, TestCategory.EUA1M2, Language.ENGLISH, false);
+    const template = templateMapper(TestOutcome.PASS, TestCategory.EUA1M2, Language.ENGLISH);
     expect(template).toContain('Driving test reference number');
   });
 
   it('should return the correct template for a fail in English for A Mod 2', () => {
-    const template = templateMapper(TestOutcome.FAIL, TestCategory.EUA1M2, Language.ENGLISH, false);
+    const template = templateMapper(TestOutcome.FAIL, TestCategory.EUA1M2, Language.ENGLISH);
     expect(template).toContain('Driving test reference number');
   });
 
   // ADI2
   it('should return the correct template for a pass in English for A Mod 2', () => {
-    const template = templateMapper(TestOutcome.PASS, TestCategory.ADI2, Language.ENGLISH, false);
+    const template = templateMapper(TestOutcome.PASS, TestCategory.ADI2, Language.ENGLISH);
     expect(template).toContain('Driving test reference number');
   });
 
   it('should return the correct template for a fail in English for A Mod 2', () => {
-    const template = templateMapper(TestOutcome.FAIL, TestCategory.ADI2, Language.ENGLISH, false);
+    const template = templateMapper(TestOutcome.FAIL, TestCategory.ADI2, Language.ENGLISH);
     expect(template).toContain('Driving test reference number');
   });
 
   // CatB
   it('should return the correct template for a pass in English for B', () => {
-    const template = templateMapper(TestOutcome.PASS, TestCategory.B, Language.ENGLISH, false);
+    const template = templateMapper(TestOutcome.PASS, TestCategory.B, Language.ENGLISH);
     expect(template).toContain('Driving test reference number');
   });
 
   it('should return the correct template for a fail in English for B', () => {
-    const template = templateMapper(TestOutcome.FAIL, TestCategory.B, Language.ENGLISH, false);
+    const template = templateMapper(TestOutcome.FAIL, TestCategory.B, Language.ENGLISH);
     expect(template).toContain('Driving test reference number');
   });
 
   // Vocational
   it('should return the correct template for a pass in English for Vocational tests', () => {
-    const template = templateMapper(TestOutcome.PASS, TestCategory.C, Language.ENGLISH, false);
+    const template = templateMapper(TestOutcome.PASS, TestCategory.C, Language.ENGLISH);
     expect(template).toContain('Driving test reference number');
   });
 
   it('should return the correct template for a fail in English for Vocational tests', () => {
-    const template = templateMapper(TestOutcome.FAIL, TestCategory.C, Language.ENGLISH, false);
+    const template = templateMapper(TestOutcome.FAIL, TestCategory.C, Language.ENGLISH);
     expect(template).toContain('Driving test reference number');
   });
 
   // Manoeuvre
   it('should return the correct template for a pass in English for Manoeuvre tests', () => {
-    const template = templateMapper(TestOutcome.PASS, TestCategory.CM, Language.ENGLISH, false);
+    const template = templateMapper(TestOutcome.PASS, TestCategory.CM, Language.ENGLISH);
     expect(template).toContain('Driver CPC part 3a (off-road exercises) test');
   });
 
   it('should return the correct template for a fail in English for Manoeuvre tests', () => {
-    const template = templateMapper(TestOutcome.FAIL, TestCategory.CM, Language.ENGLISH, false);
+    const template = templateMapper(TestOutcome.FAIL, TestCategory.CM, Language.ENGLISH);
     expect(template).toContain('Driver CPC part 3a (off-road exercises) test');
   });
 
   // Cpc
   it('should return the correct template for a pass in English for CPC tests', () => {
-    const template = templateMapper(TestOutcome.PASS, TestCategory.CCPC, Language.ENGLISH, false);
+    const template = templateMapper(TestOutcome.PASS, TestCategory.CCPC, Language.ENGLISH);
     expect(template).toContain('Driver CPC part 4 (practical demonstration) test');
   });
 
   it('should return the correct template for a fail in English for CPC tests', () => {
-    const template = templateMapper(TestOutcome.FAIL, TestCategory.CCPC, Language.ENGLISH, false);
+    const template = templateMapper(TestOutcome.FAIL, TestCategory.CCPC, Language.ENGLISH);
     expect(template).toContain('Driver CPC part 4 (practical demonstration) test');
   });
 
   // Home
   it('should return the correct template for a pass in English for Home tests', () => {
-    const template = templateMapper(TestOutcome.PASS, TestCategory.F, Language.ENGLISH, false);
+    const template = templateMapper(TestOutcome.PASS, TestCategory.F, Language.ENGLISH);
     expect(template).toContain('Driving test reference number');
   });
 
   it('should return the correct template for a fail in English for Home tests', () => {
-    const template = templateMapper(TestOutcome.FAIL, TestCategory.F, Language.ENGLISH, false);
+    const template = templateMapper(TestOutcome.FAIL, TestCategory.F, Language.ENGLISH);
     expect(template).toContain('Driving test reference number');
   });
 
