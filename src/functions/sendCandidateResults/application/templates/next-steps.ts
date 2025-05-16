@@ -503,7 +503,7 @@ You now need to pass your motorcycle module 2 (on-road) test.
 
 You or your motorcycle instructor need to book your motorcycle module 2 test if it’s not already been booked. If you do it yourself, book at {{displayUrlNextSteps communicationMethod "www.gov.uk/book-driving-test" "https://www.gov.uk/book-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-1-test&utm_content=pass" false}}.
 
-When you take the on-road test, you must use:
+When you take the off-road test, you must use:
 
 - the same subcategory as the licence you’re applying for
 - a vehicle with the same type of transmission (manual, automatic or semi-automatic) that you used this time
@@ -522,7 +522,7 @@ Os ydych chi’n uwchraddio’ch trwydded trwy {{displayUrlNextSteps communicati
 
 Mae angen i chi neu’ch hyfforddwr beic modur archebu prawf modiwl 2 eich beic modur os nad yw eisoes wedi’i archebu. Os ydych yn trefnu eich hun, ewch i {{displayUrlNextSteps communicationMethod "www.gov.uk/book-driving-test" "https://www.gov.uk/book-driving-test?utm_source=dvsa&utm_medium=email&utm_campaign=motorcycle-module-1-test&utm_content=pass" false}}.
 
-Pan fyddwch chi'n sefyll y prawf oddi ar y ffordd, bydd rhaid i chi ddefnyddio:
+Pan fyddwch yn cymryd y prawf oddi ar y ffordd, bydd rhaid i chi ddefnyddio:
 
 - yr un is-gategori â’r drwydded yr ydych yn gwneud cais amdani
 - cerbyd gyda'r un math o drawsyriant (â llaw, awtomatig neu led-awtomatig) a ddefnyddiwyd gennych y tro hwn
