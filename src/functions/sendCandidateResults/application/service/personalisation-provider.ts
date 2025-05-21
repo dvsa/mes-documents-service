@@ -24,7 +24,7 @@ import { formatApplicationReference } from '@dvsa/mes-microservice-common/domain
 import * as moment from 'moment';
 import 'moment/locale/cy';
 import { TestResultSchemasUnion } from '@dvsa/mes-test-schema/categories';
-import {isBikeCategory, shouldDisplayEmergencyLabel} from './category-provider';
+import { isBikeCategory } from './category-provider';
 
 export interface IPersonalisationProvider {
 
@@ -181,12 +181,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     }
   }
 
-  modifyCompetencyLabel = (label: string, category: CategoryCode): string => {
-    if (label === englishCompetencyLabels.controlledStop) {
-      if (shouldDisplayEmergencyLabel(category)) {
-        return modifiedEnglishCompetencyLabels.controlledStop;
-      }
-    }
+  private modifyCompetencyLabel = (label: string, category: CategoryCode): string => {
     if (isBikeCategory(category)) {
       switch (label) {
       case englishCompetencyLabels.moveOffControl:
