@@ -3,18 +3,6 @@ import {CategoryCode} from '@dvsa/mes-test-schema/categories/common';
 import {TestType} from '../../domain/template-id.model';
 import {CategoryType} from '../../domain/category-type';
 
-
-export function shouldDisplayEmergencyLabel(category: CategoryCode) {
-  return [
-    TestCategory.B,
-    TestCategory.ADI2,
-    TestCategory.H,
-    TestCategory.F,
-    TestCategory.G,
-    TestCategory.K,
-  ].includes(category as TestCategory);
-}
-
 /**
  * Determine if test was performed on a bike for labeling
  * @param category
@@ -115,8 +103,7 @@ export function getCategorySubject(category: TestCategory): CategoryType {
   case TestCategory.DCPC:
     result = CategoryType.CPC;
     break;
-  default:
-    result = CategoryType.DRIVING;
+  default: result = CategoryType.DRIVING;
   }
   return result;
 }
