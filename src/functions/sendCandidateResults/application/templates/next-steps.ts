@@ -97,7 +97,7 @@ Your test will be cancelled and you’ll lose your fee if you do not bring these
 
 ## If you lose your part 3a certificate
 
-You need to get a replacement certificate if you lose yours. It costs £15.
+You need to get a replacement certificate if you lose yours.
 
 {{displayUrlNextSteps communicationMethod "Find out how to replace a lost certificate" "https://www.gov.uk/become-lorry-bus-driver/driver-cpc-part-3a-off-road-test?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-3a-test&utm_content=pass"}}
 
@@ -128,7 +128,7 @@ Bydd eich prawf yn cael ei ganslo a byddwch yn colli eich taliad os na fyddwch y
 
 ## Os collwch eich tystysgrif rhan 3a
 
-Mae angen i chi gael tystysgrif arall os byddwch yn colli'ch un chi. Mae'n costio £15.
+Mae angen i chi gael tystysgrif arall os byddwch yn colli'ch un chi.
 
 {{displayUrlNextSteps communicationMethod "Darganfyddwch sut i ddisodli tystysgrif goll" "https://www.gov.uk/become-lorry-bus-driver/driver-cpc-part-3a-off-road-test?utm_source=dvsa&utm_medium=email&utm_campaign=vocational-3a-test&utm_content=pass"}}
 
