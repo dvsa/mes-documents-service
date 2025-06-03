@@ -92,7 +92,7 @@ export const getCustomPropertiesCatADI3 = (
       get(testData, 'riskManagement.score', 0) +
       get(testData, 'teachingLearningStrategies.score', 0)
     ) || DEFAULT_SCORE,
-    studentLevel: studentValues[testData?.lessonAndTheme?.studentLevel as StudentLevel],
+    studentLevel: studentValues[testData?.lessonAndTheme?.studentLevel as StudentLevel] || 'Level not set',
     lessonThemes: testData?.lessonAndTheme?.lessonThemes
       ?.map((theme) => lessonThemeValues[theme])
       .concat(get(testData, 'lessonAndTheme.other', ''))
