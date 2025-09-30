@@ -30,7 +30,7 @@
   "dependencies": {
     "@aws-sdk/client-secrets-manager": "^3.529.0",
     "@dvsa/mes-microservice-common": "1.2.0",
-    "axios": "^1.8.4",
+    "axios": "^1.12.2",
     "bottleneck": "^2.19.5",
     "handlebars": "^4.7.8",
     "inversify": "6.0.2",
@@ -66,7 +66,7 @@
     "serverless-offline-http-mock": "1.0.0",
     "serverless-webpack": "^5.13.0",
     "sinon": "^17.0.1",
-    "snyk": "^1.1248.0",
+    "snyk": "^1.1297.3",
     "sonar-scanner": "^3.1.0",
     "source-map-support": "^0.5.21",
     "ts-loader": "^9.5.1",
