@@ -66,7 +66,7 @@ const catBEnglishPassRenderedText = '\n' +
     '\n' +
     'Every customer is important to us. We’d like your feedback about taking this test. We’ll use it to keep improving our services. \n' +
     '\n' +
-    '^Start the survey now - it takes about 5 minutes: https://www.smartsurvey.co.uk/s/yourdrivingtest\n' +
+    '^Start the survey now - it takes about 5 minutes: https://survey.dvsa.gov.uk/jfe/form/SV_0NF3OJBlhZa5GpU\n' +
     '\n' +
     '---\n' +
     '\n' +
@@ -190,7 +190,7 @@ const catBEnglishFailRenderedText = '\n' +
     '\n' +
     'Every customer is important to us. We’d like your feedback about taking this test. We’ll use it to keep improving our services. \n' +
     '\n' +
-    '^Start the survey now - it takes about 5 minutes: https://www.smartsurvey.co.uk/s/yourdrivingtest\n' +
+    '^Start the survey now - it takes about 5 minutes: https://survey.dvsa.gov.uk/jfe/form/SV_0NF3OJBlhZa5GpU\n' +
     '\n' +
     '---\n' +
     '\n' +
