@@ -16,7 +16,7 @@ export const testExperienceSurveyTemplate = `
 
 Every customer is important to us. We’d like your feedback about taking this test. We’ll use it to keep improving our services. 
 
-{{displayUrlTestExperience communicationMethod "Start the survey now - it takes about 5 minutes" "https://www.smartsurvey.co.uk/s/yourdrivingtest"}}
+{{displayUrlTestExperience communicationMethod "Start the survey now - it takes about 5 minutes" "https://survey.dvsa.gov.uk/jfe/form/SV_0NF3OJBlhZa5GpU"}}
 
 ---
 
@@ -27,7 +27,7 @@ export const testExperienceSurveyWelshTemplate = `
 
 Mae pob cwsmer yn bwysig i ni. Fyddwn yn hoffi clywed eich adborth am cymryd y prawf hwn. Mi fyddwn yn ei defnyddio ar gyfer wella ein gwasanaethau. 
 
-{{displayUrlTestExperience communicationMethod "Dechreuwch yr arolwg nawr - mae'n cymryd tua 5 munud" "https://www.smartsurvey.co.uk/s/yourdrivingtest"}}
+{{displayUrlTestExperience communicationMethod "Dechreuwch yr arolwg nawr - mae'n cymryd tua 5 munud" "https://survey.dvsa.gov.uk/jfe/form/SV_0NF3OJBlhZa5GpU"}}
  
 ---
 
@@ -38,7 +38,7 @@ export const testExperienceSurveyRidingTemplate = `
 
 Every customer is important to us. We’d like your feedback about taking this test. We’ll use it to keep improving our services. 
 
-{{displayUrlTestExperience communicationMethod "Start the survey now - it takes about 5 minutes" "https://www.smartsurvey.co.uk/s/RiderCandidateCSAT"}}
+{{displayUrlTestExperience communicationMethod "Start the survey now - it takes about 5 minutes" "https://survey.dvsa.gov.uk/jfe/form/SV_7UQu2j5BKTqaWhg"}}
 
 ---
 
@@ -49,7 +49,7 @@ export const testExperienceSurveyRidingWelshTemplate = `
 
 Mae pob cwsmer yn bwysig i ni. Fyddwn yn hoffi clywed eich adborth am cymryd y prawf hwn. Mi fyddwn yn ei defnyddio ar gyfer wella ein gwasanaethau. 
 
-{{displayUrlTestExperience communicationMethod "Dechreuwch yr arolwg nawr - mae'n cymryd tua 5 munud" "https://www.smartsurvey.co.uk/s/RiderCandidateCSAT"}}
+{{displayUrlTestExperience communicationMethod "Dechreuwch yr arolwg nawr - mae'n cymryd tua 5 munud" "https://survey.dvsa.gov.uk/jfe/form/SV_7UQu2j5BKTqaWhg"}}
 
 ---
 
@@ -60,7 +60,7 @@ export const testExperienceSurveyTemplate3b = `
 
 Every customer is important to us. We’d like your feedback about taking this test. We’ll use it to keep improving our services. 
 
-{{displayUrlTestExperience communicationMethod "Start the survey now - it takes about 5 minutes" "https://www.smartsurvey.co.uk/s/VocationalCandidateCSAT"}}
+{{displayUrlTestExperience communicationMethod "Start the survey now - it takes about 5 minutes" "https://survey.dvsa.gov.uk/jfe/form/SV_0oFNA5Vqw2DSm2O"}}
 
 ---
 
@@ -71,7 +71,7 @@ export const testExperienceSurveyWelshTemplate3b = `
 
 Mae pob cwsmer yn bwysig i ni. Fyddwn yn hoffi clywed eich adborth am cymryd y prawf hwn. Mi fyddwn yn ei defnyddio ar gyfer wella ein gwasanaethau. 
 
-{{displayUrlTestExperience communicationMethod "Dechreuwch yr arolwg nawr - mae'n cymryd tua 5 munud" "https://www.smartsurvey.co.uk/s/VocationalCandidateCSAT"}}
+{{displayUrlTestExperience communicationMethod "Dechreuwch yr arolwg nawr - mae'n cymryd tua 5 munud" "https://survey.dvsa.gov.uk/jfe/form/SV_0oFNA5Vqw2DSm2O"}}
 
 ---
 
