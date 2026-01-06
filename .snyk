@@ -10,14 +10,9 @@ version: v1.25.0
 
 # ignores vulnerabilities until expiry date; change duration by modifying expiry date
 ignore:
-  SNYK-JS-AXIOS-6032459:
+  SNYK-JS-JWS-14188253:
     - '*':
         reason: Remediation not yet available
-        expires: 2023-12-31T09:01:15.119Z
-        created: 2022-10-25T16:20:15.122Z
-  SNYK-JS-AXIOS-6124857:
-    - '*':
-        reason: Remediation not yet available
-        expires: 2024-03-30T09:01:15.119Z
-        created: 2023-12-15T00:00:00.000Z
+        expires: 2026-02-06T14:51:17.122Z
+        created: 2026-01-06T14:51:17.122Z
 patch: {}
