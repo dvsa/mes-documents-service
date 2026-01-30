@@ -78,7 +78,7 @@ describe('personalisation-provider', () => {
 
       const result = personalisationProvider.getPersonalisationDetails(completedCatBTest);
 
-      expect(result.applicationReference).toBe(12345671011);
+      expect(result.applicationReference).toBe('12345671011');
       expect(result.category).toBe('B');
       expect(result.date).toBe('31 July 2019');
       expect(result.location).toBe('Test Centre 001');

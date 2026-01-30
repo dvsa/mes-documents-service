@@ -2,7 +2,7 @@ import { PersonalisationDetails } from '../../../domain/personalisation.model';
 import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 
 const commonCandidateDetails = {
-  applicationReference: 12345678901,
+  applicationReference: '12345678901',
   date: '25 December 2024',
   candidateName: 'Miss driving candidate',
   location: 'Example Test Centre',

@@ -12,7 +12,7 @@ export enum PositionText {
 }
 
 export interface Personalisation {
-  applicationReference: number;
+  applicationReference: string;
   category: TestCategory;
   date: string;
   location: string;
