@@ -14,7 +14,7 @@ export class NextUploadBatchMock implements INextUploadBatch {
     for (let i = 0 ; i < batchSize; i = i + 1) {
       const result: TestResultSchemasUnion = cloneDeep(completedCatBTest);
       result.journalData.applicationReference.applicationId =
-      result.journalData.applicationReference.applicationId + 1;
+        (result.journalData.applicationReference.applicationId ?? 0) + 1;
       data.push(result);
     }
 

@@ -20,7 +20,10 @@ import {
   modifiedEnglishCompetencyLabels,
   welshCompetencyLabels,
 } from '../../domain/competencies';
-import { formatApplicationReference } from '@dvsa/mes-microservice-common/domain/tars';
+import {
+  formatApplicationReference,
+  getFormattedApplicationReference,
+} from '@dvsa/mes-microservice-common/domain/tars';
 import * as moment from 'moment';
 import 'moment/locale/cy';
 import { TestResultSchemasUnion } from '@dvsa/mes-test-schema/categories';
@@ -97,7 +100,7 @@ export class PersonalisationProvider implements IPersonalisationProvider {
     const provisionalLicenceProvided = get(testresult, 'passCompletion.provisionalLicenceProvided', false);
 
     return <Personalisation>{
-      applicationReference: formatApplicationReference(get(testresult, 'journalData.applicationReference')),
+      applicationReference: getFormattedApplicationReference(get(testresult, 'journalData.applicationReference')),
       category: testresult.category,
       date: this.formatDate(
         get(testresult, 'journalData.testSlotAttributes.start'),

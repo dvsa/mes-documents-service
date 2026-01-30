@@ -3,7 +3,9 @@ import { debug, error, warn } from '@dvsa/mes-microservice-common/application/ut
 import { get } from 'lodash';
 import { inject, injectable } from 'inversify';
 import { TestResultSchemasUnion } from '@dvsa/mes-test-schema/categories';
-import { formatApplicationReference } from '@dvsa/mes-microservice-common/domain/tars';
+import {
+  getFormattedApplicationReference,
+} from '@dvsa/mes-microservice-common/domain/tars';
 import { TestCategory } from '@dvsa/mes-test-schema/category-definitions/common/test-category';
 import { CommunicationMethod, TestResultCommonSchema } from '@dvsa/mes-test-schema/categories/common';
 
@@ -80,7 +82,17 @@ export class RequestScheduler implements IRequestScheduler {
 
   scheduleRequests(testResults: TestResultSchemasUnion[]): Promise<void>[] {
     return testResults.map((testResult: TestResultSchemasUnion) => {
-      const applicationReference = formatApplicationReference(testResult.journalData.applicationReference);
+      const applicationReference = getFormattedApplicationReference(testResult.journalData.applicationReference);
+
+      const updateReference =
+        testResult.journalData.applicationReference.bookingReference
+          ? testResult.journalData.testSlotAttributes.slotId?.toString()
+          : getFormattedApplicationReference(testResult.journalData.applicationReference) ?? '';
+
+      if (!updateReference) {
+        throw new Error('updateReference is required');
+      }
+
 
       return this.limiter
         .schedule(
@@ -96,10 +108,10 @@ export class RequestScheduler implements IRequestScheduler {
             }),
           ]))
         .then(async () => {
-          debug('SendNotifyRequest success - calling update status', applicationReference);
+          debug('SendNotifyRequest success - calling update status', updateReference);
 
           await this.statusUpdater.updateStatus({
-            applicationReference,
+            applicationReference: updateReference,
             outcomePayload: {
               interface: NOTIFY_INTERFACE,
               state: ProcessingStatus.ACCEPTED,
@@ -110,15 +122,15 @@ export class RequestScheduler implements IRequestScheduler {
           });
         })
         .catch(async (err) => {
-          error('SendNotifyRequest failure - calling update status', applicationReference, err);
+          error('SendNotifyRequest failure - calling update status', updateReference, err);
 
           await this.statusUpdater.updateStatus({
-            applicationReference,
+            applicationReference: updateReference,
             outcomePayload: {
               interface: NOTIFY_INTERFACE,
               state: ProcessingStatus.FAILED,
               staff_number: testResult.journalData.examiner.staffNumber,
-              retry_count: this.retryCountByApplicationRef[applicationReference] || 0,
+              retry_count: this.retryCountByApplicationRef[updateReference] || 0,
               error_message: err.message,
             },
           });
@@ -127,7 +139,7 @@ export class RequestScheduler implements IRequestScheduler {
   }
 
   private sendNotifyRequest(testResult: TestResultSchemasUnion): Promise<any> {
-    const appRef = formatApplicationReference(testResult.journalData?.applicationReference).toString();
+    const appRef = getFormattedApplicationReference(testResult.journalData?.applicationReference);
 
     if (!testResult.communicationPreferences) {
       warn('Notify request rejected: Missing communicationPreferences', appRef);
@@ -182,7 +194,7 @@ export class RequestScheduler implements IRequestScheduler {
       const recipients: string[] = (process.env.PADI_EMAIL || '').split(',');
       const personalisation: PersonalisationDetails =
         this.personalisationProvider.getPersonalisationDetails(testResult);
-      const appRef: string = formatApplicationReference(testResult.journalData.applicationReference).toString();
+      const appRef: string = getFormattedApplicationReference(testResult.journalData.applicationReference);
 
       debug('Sending Email to PADI', appRef);
 
