@@ -58,7 +58,7 @@ describe('RequestScheduler', () => {
 
     setTimeout(() => {
       expect(statusUpdater.updateStatus).toHaveBeenCalledWith({
-        applicationReference: 12345672011,
+        applicationReference: '12345672011',
         outcomePayload: {
           interface: NOTIFY_INTERFACE,
           state: ProcessingStatus.ACCEPTED,
@@ -80,7 +80,7 @@ describe('RequestScheduler', () => {
 
     setTimeout(() => {
       expect(statusUpdater.updateStatus).toHaveBeenCalledWith({
-        applicationReference: 12345672011,
+        applicationReference: '12345672011',
         outcomePayload: {
           interface: NOTIFY_INTERFACE,
           state: ProcessingStatus.FAILED,
@@ -102,7 +102,7 @@ describe('RequestScheduler', () => {
 
     setTimeout(() => {
       expect(statusUpdater.updateStatus).toHaveBeenCalledWith({
-        applicationReference: 12345672011,
+        applicationReference: '12345672011',
         outcomePayload: {
           interface: NOTIFY_INTERFACE,
           state: ProcessingStatus.FAILED,
@@ -124,7 +124,7 @@ describe('RequestScheduler', () => {
 
     setTimeout(() => {
       expect(statusUpdater.updateStatus).toHaveBeenCalledWith({
-        applicationReference: 12345672011,
+        applicationReference: '12345672011',
         outcomePayload: {
           interface: NOTIFY_INTERFACE,
           state: ProcessingStatus.FAILED,
