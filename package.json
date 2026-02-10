@@ -30,7 +30,7 @@
   "dependencies": {
     "@aws-sdk/client-secrets-manager": "^3.899.0",
     "@dvsa/mes-microservice-common": "1.2.4",
-    "axios": "^1.12.2",
+    "axios": "^1.13.5",
     "bottleneck": "^2.19.5",
     "handlebars": "^4.7.8",
     "inversify": "6.1.6",
