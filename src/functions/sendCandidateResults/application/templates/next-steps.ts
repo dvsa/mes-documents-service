@@ -137,9 +137,7 @@ Mae angen i chi gael tystysgrif arall os byddwch yn colli'ch un chi.
 export const nextStepsADI2FailTemplate = `
 # What to do next
 
-Get a registered trainer to help you prepare for your next attempt at the ADI part 2 test if you have not done so already.
-
-{{displayUrlNextSteps communicationMethod "Find driving instructor training courses" "https://www.gov.uk/find-driving-instructor-training?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=unsuccessful"}}
+Get an appropriate trainer to help you prepare for your next attempt at the ADI part 2 test if you have not done so already.
 
 ---
 `;
@@ -157,11 +155,9 @@ Cael hyfforddwr cofrestredig i'ch helpu i baratoi ar gyfer eich ymgais nesaf ar 
 export const nextStepsAdi2PassTemplate = `
 # What to do next
 
-## 1. Get a registered trainer
+## 1. Get an appropriate trainer
 
-Get a registered trainer to help you prepare for the ADI part 3 (instructional ability) test if you have not done so already.
-
-{{displayUrlNextSteps communicationMethod "Find driving instructor training courses" "https://www.gov.uk/find-driving-instructor-training?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=pass"}}
+Get an appropriate trainer to help you prepare for the ADI part 3 (instructional ability) test if you have not done so already.
 
 ## 2. Study the national standards
 
@@ -241,11 +237,9 @@ Rhaid i chi archebu'r prawf ADI rhan 3 o fewn 2 flynedd i'r dyddiad y gwnaethoch
 export const nextStepsAdi3FirstOrSecondFailTemplate = `
 # What to do next
 
-## 1. Get a registered trainer
+## 1. Get an appropriate trainer
 
-Get a registered trainer to help you prepare for your next attempt if you do not already have one.
-
-{{displayUrlNextSteps communicationMethod "Find driving instructor training courses" "https://www.gov.uk/find-driving-instructor-training?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=unsuccesful-1st-2nd"}} 
+Get an appropriate trainer to help you prepare for your next attempt if you do not already have one.
 
 ## 2. Study the national standards
 
@@ -387,11 +381,9 @@ Rhaid i chi wneud cais am eich tystysgrif o fewn 12 mis i basio’r prawf, neu b
 export const nextStepsScFirstOrSecondTemplate = `
 # What to do next
 
-## 1. Get a registered trainer
+## 1. Get an appropriate trainer
 
-Get a registered trainer to help you prepare for your next attempt if you do not already have one.
-
-{{displayUrlNextSteps communicationMethod "Find driving instructor training courses" "https://www.gov.uk/find-driving-instructor-training?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=unsuccesful-1st-2nd"}}
+Get an appropriate trainer to help you prepare for your next attempt if you do not already have one.
 
 ## 2. Study the national standards
 
