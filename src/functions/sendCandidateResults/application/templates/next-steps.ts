@@ -145,7 +145,7 @@ Get an appropriate trainer to help you prepare for your next attempt at the ADI 
 export const nextStepsAdi2WelshFailTemplate = `
 # Beth i wneud nesaf
 
-Cael hyfforddwr cofrestredig i'ch helpu i baratoi ar gyfer eich ymgais nesaf ar y prawf ADI rhan 2 os nad ydych wedi gwneud hynny yn barod.
+Cael hyfforddwr addas i'ch helpu i baratoi ar gyfer eich ymgais nesaf ar y prawf ADI rhan 2 os nad ydych wedi gwneud hynny yn barod.
 
 {{displayUrlNextSteps communicationMethod "Darganfod gyrsiau hyfforddi gyrru" "https://www.gov.uk/find-driving-instructor-training?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=unsuccessful"}}
 
@@ -195,9 +195,9 @@ You must book the ADI part 3 test within 2 years of the date you passed the ADI 
 export const nextStepsAdi2WelshPassTemplate = `
 # Beth i wneud nesaf
 
-##1. Cael hyfforddwr cofrestredig
+##1. Cael hyfforddwr addas
 
-Cael hyfforddwr cofrestredig i'ch helpu i baratoi ar gyfer eich ymgais nesaf ar y prawf ADI rhan 3 os nad ydych wedi gwneud hynny yn barod.
+Cael hyfforddwr i'ch helpu i baratoi ar gyfer eich ymgais nesaf ar y prawf ADI rhan 3 (gallu addysgu) os nad ydych wedi gwneud hynny yn barod.
 
 {{displayUrlNextSteps communicationMethod "Darganfod gyrsiau hyfforddi gyrru" "https://www.gov.uk/find-driving-instructor-training?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-2-test&utm_content=pass"}}
 
@@ -269,9 +269,9 @@ If you chose the ‘extra training’ option (option 2) when you applied for you
 export const nextStepsAdi3FirstOrSecondWelshFailTemplate = `
 # Beth i wneud nesaf
 
-## 1. Cael hyfforddwr cofrestredig
+## 1. Cael hyfforddwr addas
 
-Cael hyfforddwr cofrestredig i'ch helpu i baratoi ar gyfer eich ymgais nesaf ar y prawf ADI rhan 2 os nad ydych wedi gwneud hynny yn barod.
+Cael hyfforddwr addas i'ch helpu i baratoi ar gyfer eich ymgais nesaf os nad oes gennych chi un yn barod.
 
 {{displayUrlNextSteps communicationMethod "Darganfod gyrsiau hyfforddi gyrru" "https://www.gov.uk/find-driving-instructor-training?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=unsuccesful-1st-2nd"}}
 
@@ -407,9 +407,9 @@ These documents set out:
 export const nextStepsScFirstOrSecondWelshTemplate = `
 # Beth i wneud nesaf
  
-## 1. Cael hyfforddwr cofrestredig
+## 1. Cael hyfforddwr addas
  
-Cael hyfforddwr cofrestredig i'ch helpu i baratoi ar gyfer eich ymgais nesaf ar y prawf ADI rhan 2 os nad ydych wedi gwneud hynny yn barod.
+Cael hyfforddwr addas i'ch helpu i baratoi ar gyfer eich ymgais nesaf os nad oes gennych chi un yn barod.
  
 {{displayUrlNextSteps communicationMethod "Darganfod gyrsiau hyfforddi gyrru" "https://www.gov.uk/find-driving-instructor-training?utm_source=dvsa&utm_medium=email&utm_campaign=adi-part-3-test&utm_content=unsuccesful-1st-2nd"}}
  
